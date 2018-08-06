@@ -4,7 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { MailService } from './mail.service';
+// import { MailService } from './mail.service';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { MailService } from './mail.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [MailService
+  providers: [
   ],
   bootstrap: [AppComponent]
 })

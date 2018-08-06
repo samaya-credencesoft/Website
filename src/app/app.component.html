@@ -51,7 +51,7 @@
               Contact Us
             </a>
           </li>
-          <li class="button-container">
+          <!-- <li class="button-container">
             <a href="https://dashboard-los.appspot.com/" target="_blank" class="btn btn-danger btn-round">
               Employee Login
             </a>
@@ -60,7 +60,7 @@
             <a href="https://sourcing-application.appspot.com/" target="_blank" class="btn btn-danger btn-round">
               Apply Loan
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -311,8 +311,7 @@
 
               <div class="col-md-6">
 
-                <!-- <form class="form" (ngSubmit)="careerApply()"> -->
-                <!-- <form action="https://mailthis.to/skr.bglr@gmail.com" method="POST" encType="multipart/form-data">
+                <form class="form" (ngSubmit)="careerApply()">
                   <div class="card-content">
                     <div class="input-group">
                       <span class="input-group-addon">
@@ -336,35 +335,22 @@
                     </div>
 
                     <div class="form-group form-file-upload">
-                    <input type="file" id="inputFile2" multiple="" (change)="fileEvent($event)" [(ngModel)]="resume"  name="resume">
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="material-icons">attach_file</i>
-                      </span>
-                      <input type="text" readonly="" class="form-control" placeholder="Upload Your Resume">
+                      <input type="file" id="inputFile2" multiple="" (change)="fileEvent($event)" [(ngModel)]="resume" name="resume">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="material-icons">attach_file</i>
+                        </span>
+                        <input type="text" readonly="" class="form-control" placeholder="Upload Your Resume">
+                      </div>
                     </div>
-                  </div>
 
                   </div>
                   <div class="modal-footer text-center" type="submit">
                     <a href="#" class="btn btn-danger btn-round">Apply</a>
                   </div>
-                </form> -->
-
-
-                <form action="https://mailthis.to/subhakanta.rout899@gmail.com" method="POST" encType="multipart/form-data">
-                  <h3>Contact Form (example)</h3>
-                  <!-- Name -->
-                  <input type="email" name="name" placeholder="Your name">
-                  <!-- Email -->
-                  <input type="email" name="email" placeholder="you@mail.com">
-                  <!-- Phone Number -->
-                  <input type="text" name="phone" placeholder="+1 (255) 555-5555">
-                  <!-- Textarea (Message) -->
-                                 
-                  <!-- Submit Button -->
-                  <input type="submit" name="submit" value="Submit Form" class="btn btn-primary">
                 </form>
+
+
 
 
               </div>

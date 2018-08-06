@@ -1,7 +1,7 @@
 import { MailObject } from './mailobject';
 import { Component } from '@angular/core';
 import { Message } from 'primeng/components/common/api';
-import { MailService } from './mail.service';
+// import { MailService } from './mail.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent {
   model= new MailObject();
   msgs: Message[] = [];
 
-  constructor(public mailService: MailService) {
+  constructor() {
     // this.mailObject = new MailObject();
     
 }
@@ -29,24 +29,24 @@ filedata:any;
 
   careerApply() {
     
-    this.mailService.sentMail(this.model)
-    .subscribe(response => 
-      {
-      if (response.status === 201) {
-        this.msgs.push({
-          severity: "success",
-          detail: "ok"
-        });
-        // this.refresh();
-      } else {
+  //   this.mailService.sentMail(this.model)
+  //   .subscribe(response => 
+  //     {
+  //     if (response.status === 201) {
+  //       this.msgs.push({
+  //         severity: "success",
+  //         detail: "ok"
+  //       });
+  //       // this.refresh();
+  //     } else {
         
-        this.msgs.push({
-          severity: "error",
-          summary: "failed"
-        });
-      }
-    }
-  );
+  //       this.msgs.push({
+  //         severity: "error",
+  //         summary: "failed"
+  //       });
+  //     }
+  //   }
+  // );
 
   // this.mailService.sentMail(this.model)
   // console.log(this.model);
