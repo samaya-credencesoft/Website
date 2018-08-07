@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Message } from 'primeng/components/common/api';
 // import { MailService } from './mail.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Http, Headers, Response, URLSearchParams } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +18,29 @@ export class AppComponent {
   model= new MailObject();
   msgs: Message[] = [];
 
-  constructor() {
-    // this.mailObject = new MailObject();
-    
-}
+  constructor(private http: Http) { }
+
+  sendEmail() {
+
+    let url = `https://us-central1-csoft-notification-service.cloudfunctions.net/httpEmail`
+    let params: URLSearchParams = new URLSearchParams();
+    let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+
+    params.set('to', 'samaya.muduli@gmail.com');
+    params.set('from', 'you@yoursupercoolapp.com');
+    params.set('subject', 'test-email');
+    params.set('content', 'Hello World');
+
+    return this.http.post(url, params, headers)
+                    .toPromise()
+                    .then( res => {
+                      console.log(res)
+                    })
+                    .catch(err => {
+                      console.log(err)
+                    })
+
+  }
 
 filedata:any;
     fileEvent(event){

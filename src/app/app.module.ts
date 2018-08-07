@@ -4,12 +4,14 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { SendEmailComponent } from './send-email/send-email.component';
 // import { MailService } from './mail.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SendEmailComponent
   ],
   imports: [
     BrowserModule,
