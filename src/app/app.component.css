@@ -13,3 +13,17 @@
     
 }
 
+/* .g-recaptcha {
+    transform:scale(0.95);
+    -webkit-transform: scale(0.95);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+} */
+
+.captcha {
+    text-align: center;
+}
+
+.g-recaptcha {
+    display: inline-block;
+}
