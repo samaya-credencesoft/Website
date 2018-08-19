@@ -304,51 +304,54 @@
 
               <div class="col-md-6">
 
-                <form class="form" (ngSubmit)="careerApply()">
+                <form class="form"  (ngSubmit)="careerApply()"   #applyForm="ngForm" enctype="multipart/form-data" >
                   <div class="card-content">
                     <div class="input-group">
                       <span class="input-group-addon">
                         <i class="material-icons">face</i>
                       </span>
-                      <input type="text" class="form-control" placeholder="Name" name="name">
+                      <input type="text"  class="form-control"  placeholder="Name" required [formControl]="candidateName" [(ngModel)]="name">
+                      <div *ngIf="candidateName.invalid && (candidateName.dirty || candidateName.touched)" class="alert alert-danger">
+                      <div *ngIf="candidateName.errors.required"> Name is required. </div>
+                      <div *ngIf="candidateName.invalid">Name must be at least 4 characters long.</div>
                     </div>
 
+                    </div>
                     <div class="input-group">
                       <span class="input-group-addon">
                         <i class="material-icons">email</i>
                       </span>
-                      <input type="email" class="form-control" placeholder="Email" name="email">
+                      <input type="email"  class="form-control" placeholder="Email" required [formControl]="candidateEmail" [(ngModel)]="email" ngModel email="true">
+                      <div *ngIf="candidateEmail.invalid && (candidateEmail.dirty || candidateEmail.touched)" class="alert alert-danger">
+                          <div *ngIf="candidateEmail.errors.required"> Email is required. </div>
+                          <div *ngIf="candidateEmail.invalid">Email must be in correct format.</div>
+                        </div>
                     </div>
-
                     <div class="input-group">
                       <span class="input-group-addon">
                         <i class="material-icons">phone</i>
                       </span>
-                      <input type="text" class="form-control" placeholder="Mobile Number" name="phone">
+                      <input type="text"  class="form-control" placeholder="Mobile Number (10 digits)"  required  pattern="[0-9]{10}" required 
+                      [formControl]="candidatePhone" [(ngModel)]="phone">
+                      <div *ngIf="candidatePhone.invalid && (candidatePhone.dirty || candidatePhone.touched)" class="alert alert-danger">
+                          <div *ngIf="candidatePhone.errors.required"> Mobile/Phone No is required. </div>
+                          <div *ngIf="candidatePhone.invalid">10 digits Mobile Number.</div>
+                        </div>
                     </div>
-
                     <div class="form-group form-file-upload">
-                      <input type="file" id="inputFile2" multiple="" (change)="fileEvent($event)" [(ngModel)]="resume" name="resume">
+                      <input type="file"  (change)="fileChange($event)" accept=".pdf,.doc,.docx">
                       <div class="input-group">
                         <span class="input-group-addon">
                           <i class="material-icons">attach_file</i>
                         </span>
-                        <input type="text" readonly="" class="form-control" placeholder="Upload Your Resume">
+                        <input type="text" readonly="" class="form-control"  required  name="path" class="form-control" placeholder="Upload Your Resume"  >
                       </div>
                     </div>
-
-                  </div>
-                  <div class="modal-footer text-center" type="submit">
-                    <a href="#" class="btn btn-danger btn-round">Apply</a>
-                  </div>
+                  </div> 
+                  <button class="modal-footer text-center" type="submit" class="btn btn-danger btn-round" >Apply</button>
                 </form>
-
-
-
-
               </div>
             </div>
-
             <div class="col-2">
               <div class="card card-plain card-blog">
                 <h5 class="card-description">
@@ -358,7 +361,7 @@
                   <br>
                   <br>
                   <b>*</b> Previous programming knowledge in any programming language such as Java.
-                  <br>Understanding of HTML and web design Understanding dynamic behaviour of web pages and form controls/events
+                  <br><b>*</b> Understanding of HTML and web design Understanding dynamic behaviour of web pages and form controls/events
                   .
                   <br>
                   <b>*</b> Able to understand the business requirement and converting it to technology terms/implementation
@@ -367,8 +370,8 @@
                   <b>*</b> Any relational database such as MySQL,Oracle . Our current project is based on the below technology
                   .
                   <br>
-                  <b>*</b> Web : HTML JavaScript Application Programming : Java Spring Database: MySQL Source Control and Version
-                  Control: GitHub Nexus Build and Deploy : Docker Maven Google Cloud
+                  <b>*</b> Web : HTML JavaScript Application Programming <br> <b>*</b>Java,Spring Boot <br><b>*</b>Database: MySQL <br><b>*</b>Source Control and Version
+                  Control: GitHub,Nexus <br> <b>*</b>Build and Deploy : Docker Maven Google Cloud
                 </h5>
               </div>
             </div>
@@ -410,10 +413,10 @@
               </div>
 
               <div class="card-content">
-                <h4 class="card-title">Mr. Samaya Muduli</h4>
+                <h4 class="card-title">Mr. Samaya Kumar Muduli</h4>
                 <h6 class="category text-muted">founder & director.</h6>
                 <p class="card-description">
-                  Java / J2EE / Integration
+                 System Architect,Application Developer
                 </p>
                 <!-- <div class="footer">
               <a href="#pablo" class="btn btn-just-icon btn-simple btn-twitter">
@@ -486,6 +489,7 @@
               </div>
             </div>
           </div>
+          <!-- 
 
           <div class="col-md-3">
             <div class="card card-profile card-plain">
@@ -502,7 +506,7 @@
                 <p class="card-description">
                   Demo
                 </p>
-                <!-- <div class="footer">
+                <div class="footer">
               <a href="#pablo" class="btn btn-just-icon btn-simple btn-google">
                 <i class="fa fa-google"></i>
               </a>
@@ -512,10 +516,10 @@
               <a href="#pablo" class="btn btn-just-icon btn-simple btn-dribbble">
                 <i class="fa fa-dribbble"></i>
               </a>
-            </div> -->
+            </div> 
               </div>
             </div>
-          </div>
+          </div>-->
 
           <!-- <div class="col-md-3">
           <div class="card card-profile card-plain">
@@ -546,8 +550,6 @@
             </div>
           </div>
         </div> -->
-
-
         </div>
       </div>
     </div>
@@ -591,7 +593,7 @@
               <h4 class="info-title">Give us a Call or Mail</h4>
               <p>
                 +6421548329
-                <br> contact@credencesoft.co.nz
+                <br> samaya.muduli@credencesoft.co.nz
                 <br> Mon - Fri, 9am - 5pm
               </p>
             </div>
@@ -644,10 +646,7 @@
       </div>
     </div>
   </div>
-  <button (click)="sendEmail()">Send Email via Cloud Function</button>
   <!--     *********    CONTACT US END      *********      -->
-
-
   <footer class="footer">
     <div class="container">
       <div class="copyright pull-center">

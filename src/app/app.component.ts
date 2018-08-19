@@ -1,85 +1,88 @@
 import { MailObject } from './mailobject';
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { Message } from 'primeng/components/common/api';
-// import { MailService } from './mail.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Http, Headers, Response, URLSearchParams } from '@angular/http';
+import {
+  FormControl, FormGroup, NgForm , Validator, Validators, EmailValidator 
+} from '@angular/forms';
+import { HttpClient, HttpParams, HttpEvent } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
+import { Candidate } from './candidate';
+const API_URL = 'http://localhost:8080';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit  {
   title = 'app';
 
   mailObject: MailObject;
-  model= new MailObject();
+  model = new MailObject();
   msgs: Message[] = [];
-
-  constructor(private http: Http) { }
-
-  sendEmail() {
-
-    let url = `https://us-central1-csoft-notification-service.cloudfunctions.net/httpEmail`
-    let params: URLSearchParams = new URLSearchParams();
-    let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-
-    params.set('to', 'samaya.muduli@gmail.com');
-    params.set('from', 'you@yoursupercoolapp.com');
-    params.set('subject', 'test-email');
-    params.set('content', 'Hello World');
-
-    return this.http.post(url, params, headers)
-                    .toPromise()
-                    .then( res => {
-                      console.log(res)
-                    })
-                    .catch(err => {
-                      console.log(err)
-                    })
-
+  resume: File;
+  formData: FormData;
+  candidate: Candidate;
+  candidateName: FormControl = new FormControl();
+  candidateEmail: FormControl = new FormControl();
+  candidatePhone: FormControl = new FormControl();
+  path: FormControl = new FormControl();
+  filename: string;
+  email: string;
+  phone: string;
+  name: string;
+  position: string;
+  applyForm: FormGroup ;
+  constructor(private http: HttpClient) {
+    this.candidate = new Candidate();
   }
-
-filedata:any;
-    fileEvent(event){
-        this.filedata=event.target.files[0];
-        console.log(event);
-    }
-
+  ngOnInit(): void {
+    this.applyForm = new FormGroup({
+      'candidateName': new FormControl(this.candidateName , [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      'candidateEmail': new FormControl(this.candidateEmail, [
+        Validators.required,
+        Validators.email
+       ]),
+      'candidatePhone': new FormControl(this.candidatePhone, [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10)
+      ])
+    });
+    console.log(this.applyForm.errors);
+  }
   careerApply() {
-    
-  //   this.mailService.sentMail(this.model)
-  //   .subscribe(response => 
-  //     {
-  //     if (response.status === 201) {
-  //       this.msgs.push({
-  //         severity: "success",
-  //         detail: "ok"
-  //       });
-  //       // this.refresh();
-  //     } else {
-        
-  //       this.msgs.push({
-  //         severity: "error",
-  //         summary: "failed"
-  //       });
-  //     }
-  //   }
-  // );
-
-  // this.mailService.sentMail(this.model)
-  // console.log(this.model);
+    console.log('Printing Candidate Before' + this.candidate) ;
+      
+        console.log(this.email);
+        this.candidate.name = this.name;
+        this.candidate.email = this.email;
+        this.candidate.mobile = this.phone;
+        this.candidate.position = 'Front End Developer';
+        console.log(this.candidate);
+      this.http
+        .post<any>(API_URL + '/api/email/contact', this.candidate)
+        .subscribe(response => {
+          console.log(response);
+        });
+      this.http
+        .post<any>(API_URL + '/api/email/attachment', this.formData)
+        .subscribe(response => {
+          console.log(response);
+        });
   }
-
-  // apply() {
-
-  // }
-
+  fileChange(event): void {
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file = fileList[0];
+      this.formData = new FormData();
+      this.candidate.filename = file.name;
+      this.formData.append('file', file, file.name);
+      console.log(this.formData);
+    }
+  }
 }
-
-
-
-
-export const API_URL = 'http://localhost:8080/mail/send';
