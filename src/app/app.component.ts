@@ -70,7 +70,7 @@ export class AppComponent implements OnInit  {
           console.log(response);
         });
       this.http
-        .post<any>(API_URL + '/api/email/attachment', this.formData)
+        .post<any>(API_URL + '/api/file/fileUploadCloud', this.formData)
         .subscribe(response => {
           console.log(response);
         });
