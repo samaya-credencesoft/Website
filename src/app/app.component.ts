@@ -8,7 +8,8 @@ import { HttpClient, HttpParams, HttpEvent } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 import { Candidate } from './candidate';
-const API_URL = 'http://localhost:8080';
+//const API_URL = 'http://localhost:8080';
+const API_URL = 'https://booking-api-csoft.appspot.com';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,6 @@ const API_URL = 'http://localhost:8080';
 })
 export class AppComponent implements OnInit  {
   title = 'app';
-
   mailObject: MailObject;
   model = new MailObject();
   msgs: Message[] = [];
@@ -33,6 +33,8 @@ export class AppComponent implements OnInit  {
   phone: string;
   name: string;
   position: string;
+  resumeUploadConfirmation: boolean ;
+  detailsSubmitted : boolean ;
   applyForm: FormGroup ;
   constructor(private http: HttpClient) {
     this.candidate = new Candidate();
@@ -57,22 +59,26 @@ export class AppComponent implements OnInit  {
   }
   careerApply() {
     console.log('Printing Candidate Before' + this.candidate) ;
-      
         console.log(this.email);
         this.candidate.name = this.name;
         this.candidate.email = this.email;
         this.candidate.mobile = this.phone;
         this.candidate.position = 'Front End Developer';
         console.log(this.candidate);
-      this.http
-        .post<any>(API_URL + '/api/email/contact', this.candidate)
-        .subscribe(response => {
-          console.log(response);
-        });
-      this.http
+        this.http
         .post<any>(API_URL + '/api/file/fileUploadCloud', this.formData)
         .subscribe(response => {
           console.log(response);
+          if (response == true) {
+            this.resumeUploadConfirmation = true;
+          }
+        });
+      this.http
+        .post<any>(API_URL + '/api/email/contact', this.candidate)
+        .subscribe(response => {
+          if (response == true) {
+            this.detailsSubmitted = true;
+          }
         });
   }
   fileChange(event): void {
@@ -84,5 +90,10 @@ export class AppComponent implements OnInit  {
       this.formData.append('file', file, file.name);
       console.log(this.formData);
     }
+  }
+  onClose(): void {
+    setTimeout(() => {
+      window.location.reload();
+    }, 4000);
   }
 }

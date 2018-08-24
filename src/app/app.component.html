@@ -305,6 +305,13 @@
               <div class="col-md-6">
 
                 <form class="form"  (ngSubmit)="careerApply()"   #applyForm="ngForm" enctype="multipart/form-data" >
+                  
+                      <h5 *ngIf="detailsSubmitted" >
+                       <div class="alert alert-success alert-dismissible">
+                      <a class="close" data-dismiss="alert" aria-label="close" (click)="onClose()">&times;</a>
+                      <strong>Thank you &nbsp; {{name}} for your details.We will be in touch shortly.</strong>
+                  </div>
+                </h5>
                   <div class="card-content">
                     <div class="input-group">
                       <span class="input-group-addon">
@@ -315,7 +322,6 @@
                       <div *ngIf="candidateName.errors.required"> Name is required. </div>
                       <div *ngIf="candidateName.invalid">Name must be at least 4 characters long.</div>
                     </div>
-
                     </div>
                     <div class="input-group">
                       <span class="input-group-addon">
@@ -349,6 +355,7 @@
                     </div>
                   </div> 
                   <button class="modal-footer text-center" type="submit" class="btn btn-danger btn-round" >Apply</button>
+
                 </form>
               </div>
             </div>
