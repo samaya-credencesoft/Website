@@ -7,7 +7,7 @@ import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/aut
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'landing/demos',
+    redirectTo: 'landing/home',
     pathMatch: 'full'
   },
   {
@@ -34,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash:true})],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

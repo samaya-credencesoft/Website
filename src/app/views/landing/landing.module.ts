@@ -4,7 +4,7 @@ import { WINDOW_PROVIDERS } from './helpers/window.helpers';
 import { NgModule } from '@angular/core';
 // import { NgForm } from "@angular/forms";
 import { CommonModule } from '@angular/common';
-import { NguCarouselModule } from "@ngu/carousel";
+import { NguCarouselModule } from '@ngu/carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingV1Component } from './landing-v1/landing-v1.component';
@@ -55,6 +55,7 @@ import { BlogDetailsComponent } from './components/blog-details/blog-details.com
 import { BlogDetailsPageComponent } from './blog-details-page/blog-details-page.component';
 import { IntroElevenComponent } from './components/intro-eleven/intro-eleven.component';
 import { LandingV11Component } from './landing-v11/landing-v11.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -113,6 +114,7 @@ import { LandingV11Component } from './landing-v11/landing-v11.component';
     BlogDetailsPageComponent,
     IntroElevenComponent,
     LandingV11Component,
+    HomeComponent
 
   ],
   providers: [WINDOW_PROVIDERS]
