@@ -43,8 +43,8 @@ const routes: Routes = [
   }
   ,
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'v7',
+    component: LandingV7Component
   },
 
    {
@@ -72,7 +72,7 @@ const routes: Routes = [
    {
     path: 'demos',
     component: DemosComponent
-  } 
+  }
   ,
   {
     path: 'home',

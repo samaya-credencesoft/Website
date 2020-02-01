@@ -56,6 +56,7 @@ import { BlogDetailsPageComponent } from './blog-details-page/blog-details-page.
 import { IntroElevenComponent } from './components/intro-eleven/intro-eleven.component';
 import { LandingV11Component } from './landing-v11/landing-v11.component';
 import { HomeComponent } from './home/home.component';
+import { WhyBookoneComponent } from './components/why-bookone/why-bookone.component';
 
 @NgModule({
   imports: [
@@ -114,6 +115,7 @@ import { HomeComponent } from './home/home.component';
     BlogDetailsPageComponent,
     IntroElevenComponent,
     LandingV11Component,
+    WhyBookoneComponent,
     HomeComponent
 
   ],

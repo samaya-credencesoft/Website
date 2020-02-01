@@ -1,47 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { NguCarouselConfig } from "@ngu/carousel";
+import { NguCarouselConfig } from '@ngu/carousel';
 @Component({
-  selector: "app-services-caurosel",
-  templateUrl: "./services-caurosel.component.html",
-  styleUrls: ["./services-caurosel.component.scss"]
+  selector: 'app-services-caurosel',
+  templateUrl: './services-caurosel.component.html',
+  styleUrls: ['./services-caurosel.component.scss']
 })
 export class ServicesCauroselComponent implements OnInit {
   public carouselTileItems: Array<any> = [
     {
-      icon: "./assets/images/landing/services/service1.svg",
-      text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
-    vitae dignissimos, sapiente est atque tenetur`,
-      title: "Service One"
+      icon: './assets/images/landing/services/services3.svg',
+      text: `Specialised & Dedicated team for Property & Hotel On-boarding.`,
+      title: 'Guest Booking'
     },
     {
-      icon: "./assets/images/landing/services/services14.svg",
+      icon: './assets/images/landing/services/services4.svg',
       text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
     vitae dignissimos, sapiente est atque tenetur`,
-      title: "Service Two"
+      title: 'Setup'
     },
     {
-      icon: "./assets/images/landing/services/services15.svg",
+      icon: './assets/images/landing/services/services5.svg',
       text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
     vitae dignissimos, sapiente est atque tenetur`,
-      title: "Service Three"
+      title: 'Manage Rates & Availability'
     },
     {
-      icon: "./assets/images/landing/services/services16.svg",
+      icon: './assets/images/landing/services/services6.svg',
       text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
     vitae dignissimos, sapiente est atque tenetur`,
-      title: "Service Four"
+      title: 'Booking Management'
     },
     {
-      icon: "./assets/images/landing/services/services9.svg",
+      icon: './assets/images/landing/services/services7.svg',
       text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
     vitae dignissimos, sapiente est atque tenetur`,
-      title: "Service Five"
+      title: 'Revenue Menegement'
     },
     {
-      icon: "./assets/images/landing/services/services6.svg",
+      icon: './assets/images/landing/services/services8.svg',
       text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
     vitae dignissimos, sapiente est atque tenetur`,
-      title: "Service Six"
+      title: 'Room Management'
     }
   ];
   public carouselTiles = {
@@ -62,7 +61,7 @@ export class ServicesCauroselComponent implements OnInit {
     load: 2,
     velocity: 0,
     touch: true,
-    easing: "cubic-bezier(0, 0, 0.2, 1)"
+    easing: 'cubic-bezier(0, 0, 0.2, 1)'
   };
   constructor() {}
 
