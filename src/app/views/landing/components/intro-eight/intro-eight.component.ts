@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intro-eight.component.scss']
 })
 export class IntroEightComponent implements OnInit {
-
+  pageName: string;
+  pageSubTitle: string;
   constructor() { }
 
   ngOnInit() {
+    this.pageName = 'Page Name';
+    this.pageSubTitle = 'This is SubTitle';
   }
 
 }

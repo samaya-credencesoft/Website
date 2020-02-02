@@ -57,6 +57,15 @@ import { IntroElevenComponent } from './components/intro-eleven/intro-eleven.com
 import { LandingV11Component } from './landing-v11/landing-v11.component';
 import { HomeComponent } from './home/home.component';
 import { WhyBookoneComponent } from './components/why-bookone/why-bookone.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { CompanyComponent } from './company/company.component';
+import { BlogComponent } from './blog/blog.component';
+import { ContactComponent } from './contact/contact.component';
+import { FaqComponent } from './faq/faq.component';
+import { PricingFilterComponent } from './components/pricing-filter/pricing-filter.component';
+import { DynamicPricingComponent } from './components/dynamic-pricing/dynamic-pricing.component';
+import { AboutCredencesoftComponent } from './components/about-credencesoft/about-credencesoft.component';
+import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 
 @NgModule({
   imports: [
@@ -116,7 +125,16 @@ import { WhyBookoneComponent } from './components/why-bookone/why-bookone.compon
     IntroElevenComponent,
     LandingV11Component,
     WhyBookoneComponent,
-    HomeComponent
+    PricingFilterComponent,
+    DynamicPricingComponent,
+    AboutCredencesoftComponent,
+    ContactDetailsComponent,
+    HomeComponent,
+    PricingComponent,
+    CompanyComponent,
+    BlogComponent,
+    ContactComponent,
+    FaqComponent
 
   ],
   providers: [WINDOW_PROVIDERS]

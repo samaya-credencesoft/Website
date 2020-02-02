@@ -24,18 +24,18 @@
 
             <ul class="navbar-nav ml-auto flex-nowrap">
                 <li class="nav-item" (click)="hidemenu()">
-                    <a [routerLink]="['landing/home']" routerLinkActive="router-link-active"  class="nav-link m-2 menu-item nav-active">Home</a>
+                    <a routerLink="/landing/home" routerLinkActive="router-link-active"  class="nav-link m-2 menu-item nav-active">Home</a>
                 </li>
                 <li (click)="hidemenu()" class="nav-item">
-                    <a [routerLink]="['landing/features']" routerLinkActive="router-link-active"  class="nav-link m-2 menu-item nav-active">Features</a>
+                    <a routerLink="/landing/pricing" routerLinkActive="router-link-active"  class="nav-link m-2 menu-item nav-active">Pricing</a>
                 </li>
                 <li (click)="hidemenu()" class="nav-item">
-                    <a href="#" scrollTo="services-wrap" class="nav-link m-2 menu-item">Services</a>
+                    <a routerLink="/landing/company" routerLinkActive="router-link-active" class="nav-link m-2 menu-item">Company</a>
                 </li>
-                <!-- drop down menu start -->
+                <!-- drop down menu start 
                 <li class="nav-item">
-                    <a class="nav-link m-2 menu-item">Other Sections</a>
-                    <!-- First  Drop Down -->
+                    <a class="nav-link m-2 menu-item">Other Sections</a>-->
+                    <!-- First  Drop Down 
                     <ul>
                         <li (click)="hidemenu()" class="nav-item">
                             <a href="#" scrollTo="teams-wrap" class="  menu-item">Team</a>
@@ -48,20 +48,20 @@
                         </li>
                     
                     </ul>
-                </li>
+                </li>-->
                 <!-- drop down menu end -->
                 <li (click)="hidemenu()" class="nav-item">
-                    <a href="#" scrollTo="works-wrap" class="nav-link m-2 menu-item">Works</a>
+                    <a routerLink="/landing/blog" routerLinkActive="router-link-active" class="nav-link m-2 menu-item">Blog</a>
                 </li>
                 <li (click)="hidemenu()" class="nav-item">
-                    <a href="#" scrollTo="pricing-wrap" class="nav-link m-2 menu-item">Pricing</a>
+                    <a routerLink="/landing/faqs" routerLinkActive="router-link-active" class="nav-link m-2 menu-item">FAQs</a>
                 </li>
 
 
 
 
                 <li (click)="hidemenu()" class="nav-item">
-                    <a href="#" scrollTo="contacts-wrap" class="nav-link m-2 menu-item">Contact Us</a>
+                    <a routerLink='/landing/contact' routerLinkActive="router-link-active" class="nav-link m-2 menu-item">Contact Us</a>
                 </li>
             </ul>
             <!-- <ul class="navbar-nav ml-auto flex-nowrap">

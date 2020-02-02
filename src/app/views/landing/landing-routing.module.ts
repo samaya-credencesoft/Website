@@ -15,6 +15,11 @@ import { LandingV10Component } from './landing-v10/landing-v10.component';
 import { DemosComponent } from './components/demos/demos.component';
 import { LandingV11Component } from './landing-v11/landing-v11.component';
 import { HomeComponent } from './home/home.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { CompanyComponent } from './company/company.component';
+import { BlogComponent } from './blog/blog.component';
+import { ContactComponent } from './contact/contact.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
   {
@@ -76,8 +81,30 @@ const routes: Routes = [
   ,
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent, data: {title: 'Home'}
   },
+  
+  {
+    path: 'pricing',
+    component: PricingComponent, data: {title: 'Pricing'}
+  },
+  {
+    path: 'company',
+    component: CompanyComponent, data: {title: 'Company'}
+  },
+  {
+    path: 'blog',
+    component: BlogComponent, data: {title: 'Blog'}
+  },
+  {
+    path: 'contact',
+    component: ContactComponent, data: {title: 'Contact'}
+  },
+  {
+    path: 'faqs',
+    component: FaqComponent, data: {title: 'FAQs'}
+  }
+
 ];
 
 @NgModule({
