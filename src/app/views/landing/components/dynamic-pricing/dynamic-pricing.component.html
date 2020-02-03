@@ -1,5 +1,57 @@
 <section id="pricing-wrap" class="pricing-one-wrap p-t-b-80">
   <div class="container">
+    <div class="row mb-5">
+        <div class="col-sm-12 col-md-12 col-lg-12  text-center">
+            <div class="card-title" >
+                <select class="btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <option class="dropdown-menu" href="#">Select Country</option>
+                    <option class="dropdown-item" href="#">India</option>
+                    <option class="dropdown-item" href="#">New Zealand</option>
+                    <option class="dropdown-item" href="#">Bangladesh</option>
+                 </select>
+                
+                
+                 <select class="btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <option class="dropdown-menu" href="#">Select Property Size</option>
+                  <option class="dropdown-item" href="#">1 to 3 rooms Vila </option>
+                        <option class="dropdown-item" href="#">4 to 9 rooms guest house</option>
+                        <option class="dropdown-item" href="#">10 to 20 rooms property</option>
+                        <option class="dropdown-item" href="#">21 to 30 rooms property</option>
+                        <option class="dropdown-item" href="#">31 to 50 rooms property</option>
+                        <option class="dropdown-item" href="#">51 to 100 rooms property</option>
+                        <option class="dropdown-item" href="#">100+ rooms property</option>
+                </select><span> or </span>
+                <input type="text" name="noOfRoom" class="m-1 btn btn-secondary btn-xl" placeholder="No of Rooms">
+                <button (click)="viewPrice()" type="button" class="btn btn-raised ripple btn-secondary m-1 btn-xl">View Price</button>
+               
+            </div>
+        </div>
+       
+    </div>
+    <div class="row mb-5">
+        <div class="col-sm-12 col-md-12 col-lg-12  text-center">
+            <div class="card service-three--hover">
+                <div class="card-body">
+                    <p class="text-12 font-weight-700 text-muted mt-3">Choose Module</p>
+
+                    <h2 class="display-3 font-weight-bold mt-4">bookone</h2>
+
+                    <p class="text-muted mt-4">3 Projects</p> <mat-slide-toggle
+                        class="m-1"
+                        [checked]="checked">
+                      Slide me!
+                    </mat-slide-toggle>
+                    <p class="text-mute"><strike>1 Initial Concept Included</strike></p>
+                    <p class="text-mute"><strike>Logo Transparency</strike></p>
+                    <p class="text-muted">High Resolution</p>
+                    <button class="btn btn-outline-info mt-4 mb-4">CHOOSE THE PLAN</button>
+
+                </div>
+            </div>
+        </div>
+       
+    </div>
       <div class="row">
           <!-- <div class="col-md-12 section-header mb-5">
               <h2 class="font-weight-bold">Choose a Plan</h2>
@@ -9,14 +61,14 @@
           <div class="col-sm-6 col-md-6 col-lg-3 mb-lg-0  mb-4  pricing-single-wrap">
               <div class="card  o-hidden">
                   <div class="card-header  text-center p-3 mb-2">
-                      <h3 class="card-title font-weight-bold mb-2 text-uppercase">Website</h3>
-                      <p class="text-uppercase mb-0">A complete transaction website to book rooms, view booking details, policies, Guest Review, Contact etc.</p>
+                      <h3 class="card-title font-weight-bold mb-2 text-uppercase">Monthly Subscription</h3>
+                      <p class="text-uppercase mb-0">Base Price</p>
                   </div>
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
                           <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>49</span>.00
+                                  class="text-30 font-weight-normal">$</sup>{{this.monthlyPrice}}</span>.00
                           <span>/Month</span>
                       </p>
                       <div class="offer-lists mb-4">
@@ -41,15 +93,17 @@
           <!-- end of card -->
           <div class="col-sm-6 col-md-6 col-lg-3 mb-lg-0  mb-4  pricing-single-wrap">
               <div class="card  o-hidden">
-                  <div class="card-header text-center p-3 mb-2 bg-gradient text-white">
-                      <h3 class="card-title text-white font-weight-bold mb-2 text-uppercase">Bookone</h3>
-                      <p class="text-uppercase mb-0">User Account Setup, Hotel & Room Setup, Manage Booking, Payment, Expense, Rates & Availability.</p>
+                  <div class="card-header text-center p-3 mb-2">
+                      <h3 class="card-title font-weight-bold mb-2 text-uppercase">Half Yearly Subscription</h3>
+                      <p class="text-uppercase mb-0">5% Discount</p>
                   </div>
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
+                        <span class="p-1 text-muted">${{this.halfyearlyPrice}}.00</span>
                           <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>79</span>.00
+                                  class="text-30 font-weight-normal">$</sup>{{this.halfyearlyPrice-5%halfyearlyPrice
+                                }}</span>.00
                           <span>/Month</span>
                       </p>
                       <div class="offer-lists mb-4">
@@ -73,15 +127,16 @@
           <!-- end of card -->
           <div class="col-sm-6 col-md-6 col-lg-3 mb-lg-0 mb-md-0 mb-sm-0 mb-4  pricing-single-wrap">
               <div class="card  o-hidden">
-                  <div class="card-header text-center p-3 mb-2 ">
-                      <h3 class="card-title font-weight-bold mb-2 text-uppercase">CHANNEL MANAGER</h3>
-                      <p class="text-uppercase mb-0">Global Distribution of inventory across multiple OTAs integrated with BookOne.</p>
+                  <div class="card-header text-center p-3 mb-2  bg-gradient text-white">
+                      <h3 class="card-title text-white font-weight-bold mb-2 text-uppercase">Yearly Subscription</h3>
+                      <p class="text-uppercase mb-0">10% Discount</p>
                   </div>
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
+                        <span class="p-1 text-muted">${{this.yearlyPrice}}.00</span>
                           <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>149</span>.00
+                                  class="text-30 font-weight-normal">$</sup>{{this.yearlyPrice-10%yearlyPrice}}</span>.00
                           <span>/Month</span>
                       </p>
                       <div class="offer-lists mb-4">
@@ -106,16 +161,15 @@
           <div class="col-sm-6 col-md-6 col-lg-3 mb-lg-0 mb-md-0 mb-sm-0   pricing-single-wrap">
               <div class="card  o-hidden">
                   <div class="card-header text-center p-3 mb-2">
-                      <h3 class="card-title font-weight-bold mb-2 text-uppercase">Master Hotelier</h3>
-                      <p class="text-uppercase mb-0">Preferred by ambitious business owners and Revenue Managers looking to maximise revenue through an Intelligent and Integrated product suite.
-
+                      <h3 class="card-title font-weight-bold mb-2 text-uppercase">2 Years Subscription</h3>
+                      <p class="text-uppercase mb-0">15% Discount
                       </p>
                   </div>
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
-                          <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>160</span>.00
+                        <span class="p-1 text-muted">${{this.twoYearlyPrice}}.00</span>
+                          <span class="money text-shadow  text-45 font-weight-bold"><sup class="text-30 font-weight-normal">$</sup>{{this.twoYearlyPrice-15%twoYearlyPrice}}</span>.00
                           <span>/Month</span>
                       </p>
                       <div class="offer-lists mb-4">

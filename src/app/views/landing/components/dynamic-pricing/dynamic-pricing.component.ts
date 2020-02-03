@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DynamicPricingComponent implements OnInit {
 
+  basePrice = 39.00;
+  monthlyPrice: any;
+  halfyearlyPrice: any;
+  yearlyPrice: any;
+  twoYearlyPrice: any;
+  checked = true;
   constructor() { }
 
   ngOnInit() {
+    this.viewPrice();
   }
 
+  viewPrice() {
+    this.monthlyPrice = this.basePrice;
+    this.halfyearlyPrice = this.monthlyPrice;
+    this.yearlyPrice = this.monthlyPrice ;
+    this.twoYearlyPrice = this.monthlyPrice ;
+  }
 }
