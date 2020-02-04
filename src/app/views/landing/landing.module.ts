@@ -66,14 +66,12 @@ import { PricingFilterComponent } from './components/pricing-filter/pricing-filt
 import { DynamicPricingComponent } from './components/dynamic-pricing/dynamic-pricing.component';
 import { AboutCredencesoftComponent } from './components/about-credencesoft/about-credencesoft.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   imports: [
     CommonModule,
     LandingRoutingModule,
     NguCarouselModule,
     NgbModule,
-    MatSlideToggleModule,
 
     FormsModule
   ],

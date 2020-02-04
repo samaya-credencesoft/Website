@@ -70,10 +70,10 @@ const routes: Routes = [
     path: 'v11',
     component: LandingV11Component
   },
-  {
-    path: 'blog-details',
-    component: BlogDetailsPageComponent
-  },
+  // {
+  //   path: 'blog-details',
+  //   component: BlogDetailsPageComponent
+  // },
    {
     path: 'demos',
     component: DemosComponent
@@ -83,7 +83,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent, data: {title: 'Home'}
   },
-  
+
   {
     path: 'pricing',
     component: PricingComponent, data: {title: 'Pricing'}
@@ -97,6 +97,10 @@ const routes: Routes = [
     component: BlogComponent, data: {title: 'Blog'}
   },
   {
+    path: 'blog/:slug',
+    component: BlogDetailsPageComponent
+  },
+  {
     path: 'contact',
     component: ContactComponent, data: {title: 'Contact'}
   },
@@ -104,6 +108,7 @@ const routes: Routes = [
     path: 'faqs',
     component: FaqComponent, data: {title: 'FAQs'}
   }
+
 
 ];
 
