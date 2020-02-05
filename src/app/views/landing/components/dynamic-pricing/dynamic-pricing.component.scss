@@ -1,0 +1,26 @@
+.switch.default-switch label input[type=checkbox]:checked + .lever {
+    background-color: #4DCCBF;
+}
+.switch.default-switch label input[type=checkbox]:checked + .lever:after {
+    background-color: #2BBBAD;
+}.switch.round label .lever {
+    width: 54px;
+    height: 34px;
+    border-radius: 10em;
+}
+.switch.round label .lever:after {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    left: 4px;
+    top: 4px;
+}
+.solution-container.active {
+    background: linear-gradient(-29deg, #c10f41, #233b88) !important;
+}
+.solution-container.active  h2 {
+    color: #fff !important;
+}
+.solution-container.active i {
+    -webkit-text-fill-color: #fff;
+}

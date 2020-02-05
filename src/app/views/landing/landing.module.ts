@@ -66,6 +66,7 @@ import { PricingFilterComponent } from './components/pricing-filter/pricing-filt
 import { DynamicPricingComponent } from './components/dynamic-pricing/dynamic-pricing.component';
 import { AboutCredencesoftComponent } from './components/about-credencesoft/about-credencesoft.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
+import { OurFeaturesComponent } from './components/our-features/our-features.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -128,6 +129,7 @@ import { ContactDetailsComponent } from './components/contact-details/contact-de
     DynamicPricingComponent,
     AboutCredencesoftComponent,
     ContactDetailsComponent,
+    OurFeaturesComponent,
     HomeComponent,
     PricingComponent,
     CompanyComponent,
