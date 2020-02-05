@@ -9,7 +9,7 @@ import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 })
 export class DynamicPricingComponent implements OnInit {
   currency = '$';
-  country = '';
+  country = 'USD';
   propertySize = 2;
   noOfRoom = 1;
 
