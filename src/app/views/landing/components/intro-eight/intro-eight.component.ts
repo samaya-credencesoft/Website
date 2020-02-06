@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-intro-eight',
@@ -8,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class IntroEightComponent implements OnInit {
   pageName: string;
   pageSubTitle: string;
-  constructor() { }
+  constructor( public titleService: Title) { }
 
   ngOnInit() {
-    this.pageName = 'Page Name';
-    this.pageSubTitle = 'This is SubTitle';
+    const appTitle = this.titleService.getTitle();
+    this.pageName = appTitle;
+    this.pageSubTitle = '';
   }
 
 }

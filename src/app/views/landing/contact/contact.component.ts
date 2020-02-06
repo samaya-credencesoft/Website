@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  
-
   backgroundColor = 'landing-gradient-purple-indigo';
   showCustomizer = false;
   constructor() { }

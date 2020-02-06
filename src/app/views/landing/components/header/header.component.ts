@@ -5,25 +5,27 @@ import {
   HostBinding,
   Inject,
   Input
-} from "@angular/core";
-import {DOCUMENT} from "@angular/common";
-import {WINDOW_PROVIDERS, WINDOW} from "../../helpers/window.helpers";
+} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {WINDOW_PROVIDERS, WINDOW} from '../../helpers/window.helpers';
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isFixed;
-  public isCollapsed = true;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(WINDOW) private window: Window
   ) {}
+  isFixed;
+  public isCollapsed = true;
+
+  @HostBinding('class.menu-opened') menuOpened = false;
 
   ngOnInit() {}
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     const offset =
       this.window.pageYOffset ||
@@ -36,8 +38,6 @@ export class HeaderComponent implements OnInit {
       this.isFixed = false;
     }
   }
-
-  @HostBinding("class.menu-opened") menuOpened = false;
 
   toggleMenu() {
     this.menuOpened = !this.menuOpened;

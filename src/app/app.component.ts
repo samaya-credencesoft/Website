@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute  } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { filter, map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'bookone pms';
-  constructor(private router: Router) {}
+  title = 'Bookone PMS';
+  constructor(private router: Router,
+    public titleService: Title,
+    private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.router.events.subscribe(evt => {
@@ -16,6 +21,24 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+
+    const appTitle = this.titleService.getTitle();
+    this.router
+      .events.pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => {
+          let child = this.activatedRoute.firstChild;
+          while (child.firstChild) {
+            child = child.firstChild;
+          }
+          if (child.snapshot.data['title']) {
+            return child.snapshot.data['title'];
+          }
+          return appTitle;
+        })
+      ).subscribe((ttl: string) => {
+        this.titleService.setTitle(ttl);
+      });
   }
   // onActivate(event) {
   //   window.scroll(0, 0);

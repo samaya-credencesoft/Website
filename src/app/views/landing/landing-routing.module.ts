@@ -81,7 +81,7 @@ const routes: Routes = [
   ,
   {
     path: 'home',
-    component: HomeComponent, data: {title: 'Home'}
+    component: HomeComponent, data: {title: 'Home | Bookone PMS'}
   },
 
   {
@@ -90,7 +90,7 @@ const routes: Routes = [
   },
   {
     path: 'company',
-    component: CompanyComponent, data: {title: 'Company'}
+    component: CompanyComponent, data: {title: 'About Us'}
   },
   {
     path: 'blog',
@@ -102,7 +102,7 @@ const routes: Routes = [
   },
   {
     path: 'contact',
-    component: ContactComponent, data: {title: 'Contact'}
+    component: ContactComponent, data: {title: 'Contact Us'}
   },
   {
     path: 'faqs',
