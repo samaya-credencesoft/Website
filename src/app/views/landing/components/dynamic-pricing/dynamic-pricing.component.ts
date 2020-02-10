@@ -138,11 +138,11 @@ Analyticscheck() {
 RoomMcheck() {
   if (this.RoomMChecked !== false) {
     this.RoomMChecked = false;
-    // this.subscriptionCount--;
+    this.subscriptionCount--;
     this.basePrice = this.basePrice - this.RoomMPrice;
   } else {
     this.RoomMChecked = true;
-    // this.subscriptionCount++;
+    this.subscriptionCount++;
     this.basePrice = this.basePrice + this.RoomMPrice;
   }
   this.viewPrice();
@@ -174,11 +174,11 @@ CRMcheck() {
 MUcheck() {
   if (this.MUChecked !== false) {
     this.MUChecked = false;
-    // this.subscriptionCount--;
+    this.subscriptionCount--;
     this.basePrice = this.basePrice - this.MUPrice;
   } else {
     this.MUChecked = true;
-    // this.subscriptionCount++;
+    this.subscriptionCount++;
     this.basePrice = this.basePrice + this.MUPrice;
   }
   this.viewPrice();
@@ -186,11 +186,11 @@ MUcheck() {
 OPIcheck() {
   if (this.OPIChecked !== false) {
     this.OPIChecked = false;
-    // this.subscriptionCount--;
+    this.subscriptionCount--;
     this.basePrice = this.basePrice - this.OPIPrice;
   } else {
     this.OPIChecked = true;
-    // this.subscriptionCount++;
+    this.subscriptionCount++;
     this.basePrice = this.basePrice + this.OPIPrice;
   }
   this.viewPrice();

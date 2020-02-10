@@ -38,7 +38,7 @@
             <p class="text-center"></p>
         </div> -->
               <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="HWChecked" (click)="HWcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Hotel Info
+            <div *ngIf ="HWChecked" (click)="HWcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Hotel Website" ngbPopover="Hotel Info
               Contact
               Photo Gallery
               Hotel Policies
@@ -52,7 +52,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Hotel Website</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!HWChecked" (click)="HWcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Hotel Info
+            <div *ngIf ="!HWChecked" (click)="HWcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Hotel Website" ngbPopover="Hotel Info
               Contact
               Photo Gallery
               Hotel Policies
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div  *ngIf ="BEChecked" (click)="BEcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Instant Availability Check through hotel website, 
+            <div  *ngIf ="BEChecked" (click)="BEcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Booking Engine" ngbPopover="Instant Availability Check through hotel website, 
                   Make a reservation, 
                   Online payment, 
                   Reservation Confirmation At Hotel Website 
@@ -78,7 +78,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Booking Engine</h2>
                 <p class="card-text"></p>
             </div>
-            <div  *ngIf ="!BEChecked" (click)="BEcheck()" class="card p-4 mb-4 solution-container" placement="bottom" ngbTooltip="Instant Availability Check through hotel website, 
+            <div  *ngIf ="!BEChecked" (click)="BEcheck()" class="card p-4 mb-4 solution-container"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Booking Engine" ngbPopover="Instant Availability Check through hotel website, 
                   Make a reservation, 
                   Online payment, 
                   Reservation Confirmation At Hotel Website 
@@ -90,7 +90,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div  *ngIf ="BMChecked" (click)="BMcheck()"  class="card p-4 mb-4 solution-container active"  placement="bottom" ngbTooltip="Add Remove Guest
+            <div  *ngIf ="BMChecked" (click)="BMcheck()"  class="card p-4 mb-4 solution-container active"    triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Booking Management" ngbPopover="Add Remove Guest
                   Date Change
                   Room Change
                   Send Payement Link
@@ -103,7 +103,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Booking Management</h2>
                 <p class="card-text"></p>
             </div>
-            <div  *ngIf ="!BMChecked" (click)="BMcheck()"  class="card p-4 mb-4 solution-container "  placement="bottom" ngbTooltip="Add Remove Guest
+            <div  *ngIf ="!BMChecked" (click)="BMcheck()"  class="card p-4 mb-4 solution-container "    triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Booking Management" ngbPopover="Add Remove Guest
                   Date Change
                   Room Change
                   Send Payement Link
@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="CMChecked" (click)="CMcheck()"  class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Connectivity to Major Onilne Travel Agencies
+            <div *ngIf ="CMChecked" (click)="CMcheck()"  class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Channel Management" ngbPopover="Connectivity to Major Onilne Travel Agencies
                   Property Setup
                   Room Setup
                   Real Time Availability Synchronisation
@@ -127,7 +127,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Channel Management</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!CMChecked" (click)="CMcheck()"  class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Connectivity to Major Onilne Travel Agencies
+            <div *ngIf ="!CMChecked" (click)="CMcheck()"  class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Channel Management" ngbPopover="Connectivity to Major Onilne Travel Agencies
                   Property Setup
                   Room Setup
                   Real Time Availability Synchronisation
@@ -138,7 +138,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="RevenueMChecked" (click)="RevenueMcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Income and Expense
+            <div *ngIf ="RevenueMChecked" (click)="RevenueMcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Revenue Management" ngbPopover="Income and Expense
                   GST Invoice
                   Monthly Reporting
                   Yearly Reporting
@@ -147,7 +147,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Revenue Management</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!RevenueMChecked" (click)="RevenueMcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Income and Expense
+            <div *ngIf ="!RevenueMChecked" (click)="RevenueMcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Revenue Management" ngbPopover="Income and Expense
             GST Invoice
             Monthly Reporting
             Yearly Reporting
@@ -159,7 +159,7 @@
         </div>
   
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="AnalyticsChecked" (click)="Analyticscheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Guest Analytics
+            <div *ngIf ="AnalyticsChecked" (click)="Analyticscheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Analytics" ngbPopover="Guest Analytics
                   Average Room Rent
                   Monthly Sales Comparision
                   Monthly Sales Comapred to Prebvious Year Month
@@ -171,7 +171,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Analytics</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!AnalyticsChecked" (click)="Analyticscheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Guest Analytics
+            <div *ngIf ="!AnalyticsChecked" (click)="Analyticscheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Analytics" ngbPopover="Guest Analytics
                   Average Room Rent
                   Monthly Sales Comparision
                   Monthly Sales Comapred to Prebvious Year Month
@@ -185,7 +185,7 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="RoomMChecked" (click)="RoomMcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Room Allocation
+            <div *ngIf ="RoomMChecked" (click)="RoomMcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Room Management" ngbPopover="Room Allocation
                   Room Release
                   Room Dashboard Weekly View
                   Room Dashboard Daily View
@@ -194,7 +194,7 @@
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Room Management</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!RoomMChecked" (click)="RoomMcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Room Allocation
+            <div *ngIf ="!RoomMChecked" (click)="RoomMcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Room Management" ngbPopover="Room Allocation
                   Room Release
                   Room Dashboard Weekly View
                   Room Dashboard Daily View
@@ -205,55 +205,55 @@
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="MAChecked" (click)="MAcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="iOS and Android Mobile App Managing the PMS">
+            <div *ngIf ="MAChecked" (click)="MAcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Mobile App" ngbPopover="iOS and Android Mobile App Managing the PMS">
                 <i class="eva eva-smartphone-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Mobile App</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!MAChecked" (click)="MAcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="iOS and Android Mobile App Managing the PMS">
+            <div *ngIf ="!MAChecked" (click)="MAcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Mobile App" ngbPopover="iOS and Android Mobile App Managing the PMS">
                 <i class="eva eva-smartphone-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Mobile App</h2>
                 <p class="card-text"></p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="CRMChecked" (click)="CRMcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Guest Relationship Management, Guest Preferences, Guest Behaviour, Expericence, Offers & Loyalty">
+            <div *ngIf ="CRMChecked" (click)="CRMcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="CRM" ngbPopover="Guest Relationship Management, Guest Preferences, Guest Behaviour, Expericence, Offers & Loyalty">
                 <i class="eva eva-people-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">CRM</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!CRMChecked" (click)="CRMcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Guest Relationship Management, Guest Preferences, Guest Behaviour, Expericence, Offers & Loyalty">
+            <div *ngIf ="!CRMChecked" (click)="CRMcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="CRM" ngbPopover="Guest Relationship Management, Guest Preferences, Guest Behaviour, Expericence, Offers & Loyalty">
                 <i class="eva eva-people-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">CRM</h2>
                 <p class="card-text"></p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="MUChecked" (click)="MUcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Extra User and user management">
+            <div *ngIf ="MUChecked" (click)="MUcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Multi User Setup" ngbPopover="Extra User and user management">
                 <i class="eva eva-person-add-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Multi User Setup</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!MUChecked" (click)="MUcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Extra User and user management">
+            <div *ngIf ="!MUChecked" (click)="MUcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Multi User Setup" ngbPopover="Extra User and user management">
                 <i class="eva eva-person-add-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Multi User Setup</h2>
                 <p class="card-text"></p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="OPIChecked" (click)="OPIcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="Integration with Major Payment Gateways such as Stripe, Paypal, Paymark.">
+            <div *ngIf ="OPIChecked" (click)="OPIcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Online Payment Integration" ngbPopover="Integration with Major Payment Gateways such as Stripe, Paypal, Paymark.">
                 <i class="eva eva-credit-card-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Online Payment Integration</h2>
                 <p class="card-text"></p>
             </div>
-            <div *ngIf ="!OPIChecked" (click)="OPIcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="Integration with Major Payment Gateways such as Stripe, Paypal, Paymark.">
+            <div *ngIf ="!OPIChecked" (click)="OPIcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Online Payment Integration" ngbPopover="Integration with Major Payment Gateways such as Stripe, Paypal, Paymark.">
                 <i class="eva eva-credit-card-outline text-50"></i>
                 <h2 class="font-weight-bold card-title mb-2 mt-2">Online Payment Integration</h2>
                 <p class="card-text"></p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3 text-center">
-            <div *ngIf ="HMAChecked" (click)="HMAcheck()" class="card p-4 mb-4 solution-container active" placement="bottom" ngbTooltip="iOS and Android Mobile App for Hotel or Group 
+            <div *ngIf ="HMAChecked" (click)="HMAcheck()" class="card p-4 mb-4 solution-container active"   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Hotel Mobile App" ngbPopover="iOS and Android Mobile App for Hotel or Group 
             Hotel Info
             Contact
             Photo Gallery
@@ -270,7 +270,7 @@
                  
                 </p>
             </div>
-            <div *ngIf ="!HMAChecked" (click)="HMAcheck()" class="card p-4 mb-4 solution-container " placement="bottom" ngbTooltip="iOS and Android Mobile App for Hotel or Group 
+            <div *ngIf ="!HMAChecked" (click)="HMAcheck()" class="card p-4 mb-4 solution-container "   triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="Hotel Mobile App" ngbPopover="iOS and Android Mobile App for Hotel or Group 
             Hotel Info
             Contact
             Photo Gallery
@@ -289,7 +289,7 @@
             </div>
         </div>
   
-   <!-- <button type="button" class="btn btn-outline-secondary btn-xl " placement="right" ngbTooltip="iOS and Android Mobile App for Hotel or Group 
+   <!-- <button type="button" class="btn btn-outline-secondary btn-xl " placement="right" triggers="mouseenter:mouseleave" popoverClass="my-custom-class" popoverTitle="T" ngbPopover="iOS and Android Mobile App for Hotel or Group 
                   Hotel Info
                   Contact
                   Photo Gallery

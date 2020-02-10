@@ -3,12 +3,12 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-white">
-                    <h1 class="mt-4 text-white">  {{post.data.title}}</h1>
+                <div class="col-md-12 text-white" *ngFor="let post of posts">
+                    <h1 class="mt-4 text-white">  {{post.title.rendered}}</h1>
 
 
                     <p class="lead text-white">
-                        by  {{post.data.author.first_name}} {{post.data.author.last_name}}
+                        by  {{post.author.first_name}} {{post.author.last_name}}
                     </p>
 
                 </div>
@@ -23,7 +23,7 @@
 
             <div class="col-lg-8">
 
-                <div class="post-body" [innerHTML]="post.data.body"></div>
+                <div class="post-body" [innerHTML]="post.content.rendered"></div>
                 <hr>
                 <!-- <div *ngIf="post.meta.previous_post"><a [routerLink]="post.meta.previous_post"><</a></div>
                 <div *ngIf="post.meta.next_post"><a [routerLink]="post.meta.next_post">></a></div> -->

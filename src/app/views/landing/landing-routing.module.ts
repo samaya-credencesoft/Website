@@ -97,7 +97,7 @@ const routes: Routes = [
     component: BlogComponent, data: {title: 'Blog'}
   },
   {
-    path: 'blog/:slug',
+    path: 'blog/:id',
     component: BlogDetailsPageComponent
   },
   {

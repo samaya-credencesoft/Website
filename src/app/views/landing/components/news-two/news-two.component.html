@@ -12,19 +12,19 @@
             <div class="col-md-6 col-sm-12 mb-lg-0 mb-md-0  mb-4"  *ngFor="let post of posts">
                 <div class="card text-left  o-hidden">
                     <div class="card_img_left w-40 float-left">
-                       <a [routerLink]="[post.slug]"><img class="img-responsive" src="{{post.featured_image}}" alt="Card image"></a> 
+                       <a [routerLink]="[post.id]"><img class="img-responsive" src="{{post.featured_image}}" alt="Card image"></a> 
                     </div>
 
                     <div class="card_right_content w-60 p-3 float-right">
                         <div class="pt-3 pb-4">
-                            <h3 class="m-0 text-capitalize font-weight-bold">{{post.title}}</h3>
-                            <h5 class="font-weight-light text-uppercase">by bookone</h5>
+                            <h3 class="m-0 text-capitalize font-weight-bold" [innerHTML]='post.title.rendered'></h3>
+                            <h5 class="font-weight-light text-uppercase">by {{post.author}}</h5>
                         </div>
 
-                        <div class="font-weight-light pb-3" [innerHTML]="post.summary">
+                        <div class="font-weight-light pb-3" [innerHTML]='post.excerpt.rendered'>
                             
 
-                            <a [routerLink]="[post.slug]" class="btn  btn-gradient half-button">Read More</a>
+                            <a [routerLink]="[post.id]" class="btn  btn-gradient half-button">Read More</a>
                         </div>
 
 
@@ -32,10 +32,10 @@
                 </div>
             </div>
             <!-- end of col -->
-            <div class="col-md-6 col-sm-12 mb-lg-0 mb-md-0  mb-0">
+            <div class="col-md-6 col-sm-12 mb-lg-0 mb-md-0  mb-4">
                 <div class="card text-left  o-hidden">
                     <div class="card_img_left w-40 float-left">
-                        <img class=" img-responsive" src="https://www.bookonepms.com/wp-content/uploads/2019/09/features-1.png" alt="Card image">
+                        <img class=" img-responsive" src="https://blog.bookonepms.com/wp-content/uploads/2019/09/features-1.png" alt="Card image">
                     </div>
 
                     <div class="card_right_content w-60 p-3 float-right">
