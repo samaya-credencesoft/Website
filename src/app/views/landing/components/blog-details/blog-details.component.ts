@@ -13,7 +13,7 @@ import { WpApiPosts } from 'wp-api-angular';
 })
 export class BlogDetailsComponent implements OnInit {
   @Input() token;
- private posts = [];
+ posts = [];
 
   // id: number;
 

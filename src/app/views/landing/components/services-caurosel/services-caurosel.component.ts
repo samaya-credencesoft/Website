@@ -14,32 +14,43 @@ export class ServicesCauroselComponent implements OnInit {
     },
     {
       icon: './assets/images/landing/services/services4.svg',
-      text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
-    vitae dignissimos, sapiente est atque tenetur`,
+      text: `User Account Setup.
+      Property, Room Setup.
+      Local Tax / Tax Slabs Setup.`,
       title: 'Setup'
     },
     {
       icon: './assets/images/landing/services/services5.svg',
-      text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
-    vitae dignissimos, sapiente est atque tenetur`,
+      text: `Setting Up Rates.
+      Setting Up Availability.
+      Realtime Update of Rates & Availability.`,
       title: 'Manage Rates & Availability'
     },
     {
       icon: './assets/images/landing/services/services6.svg',
-      text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
-    vitae dignissimos, sapiente est atque tenetur`,
+      text: `New Booking , Payment Link.
+      Check-In, Service, Check-Out.
+      Invoice, Notification at Each Stage of Booking.`,
       title: 'Booking Management'
     },
     {
       icon: './assets/images/landing/services/services7.svg',
-      text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
-    vitae dignissimos, sapiente est atque tenetur`,
-      title: 'Revenue Menegement'
+      text: `Create/ Update/ Manage Payment.
+      Process Payment, Reporting.
+      Sending Payment Link.
+      Notification.
+      Manage Expense Hotel/ Booking.
+      Create/ Update Expense.
+      Grouping & Reporting.`,
+      title: 'Revenue Management'
     },
     {
       icon: './assets/images/landing/services/services8.svg',
-      text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus
-    vitae dignissimos, sapiente est atque tenetur`,
+      text: `Manage Rooms
+      Check Available Rooms
+      Monthly Room View
+      Room Allocation
+      Instant Room Status`,
       title: 'Room Management'
     }
   ];
