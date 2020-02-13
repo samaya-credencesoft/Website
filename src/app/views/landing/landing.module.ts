@@ -73,7 +73,6 @@ import { OurFeaturesComponent } from './components/our-features/our-features.com
     LandingRoutingModule,
     NguCarouselModule,
     NgbModule,
-
     FormsModule
   ],
   declarations: [
