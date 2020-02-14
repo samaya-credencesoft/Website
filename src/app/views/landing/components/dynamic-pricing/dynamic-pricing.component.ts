@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
+import { CurrencyService } from 'src/app/services/currency.service';
+
 
 @Component({
   selector: 'app-dynamic-pricing',
@@ -12,7 +14,7 @@ export class DynamicPricingComponent implements OnInit {
   country = 'USD';
   propertySize = 2;
   noOfRoom = 1;
-
+  rates= [];
 
   HWChecked = false;
   BEChecked = true;
@@ -52,17 +54,30 @@ export class DynamicPricingComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
  basePrice =  4 ;
 
+
+
   monthlyPrice: any;
   halfyearlyPrice: any;
   yearlyPrice: any;
   twoYearlyPrice: any;
   checked = true;
-  constructor() { }
+  Currency:  any;
+  constructor(private currencyService: CurrencyService) { }
 
   ngOnInit() {
     this.viewPrice();
-
+this.setCurrencyRate();
   }
+setCurrencyRate() {
+    this.currencyService.getCurrencyRate()
+      .subscribe(response => { 
+        this.Currency = response.body;
+      console.log('currency : ' + JSON.stringify( response.body.quotes ));
+      this.rates = this.Currency.quotes;
+    });
+    console.log('data ' + JSON.stringify(this.rates));
+  }
+
 HWcheck() {
   if (this.HWChecked !== false) {
     this.HWChecked = false;
