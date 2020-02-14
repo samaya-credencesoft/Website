@@ -13,7 +13,7 @@ import {
   WpApiStaticLoader
 } from 'wp-api-angular';
 import { from } from 'rxjs';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
 }
@@ -24,7 +24,7 @@ export function WpApiLoaderFactory(http: Http) {
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
-
+    NgSelectModule,
     AppRoutingModule,
     WpApiModule.forRoot({ // <---
       provide: WpApiLoader,
