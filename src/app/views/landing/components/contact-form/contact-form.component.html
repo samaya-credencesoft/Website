@@ -19,21 +19,21 @@
                 </div>
 
 
-                <form class="row form" #contactForm=ngForm (ngSubmit)="submitForm(contactForm)" role="form">
+                <form >
                     <div class="form-group mb-4 col-md-6">
                         <label for="">
                             <i class="eva eva-person-outline"></i>
                         </label>
-                        <input type="text" name="Name" id="" class="form-control" placeholder="Your Name" required
-                            ngModel>
+                        <input matInput placeholder="Name"  
+                        [formControl]="name" />
 
                     </div>
                     <div class="form-group mb-4 col-md-6">
                         <label for="">
                             <i class="eva eva-email-outline"></i>
                         </label>
-                        <input type="email" required name='email' email ngModel class="form-control"
-                            placeholder="Your email" aria-describedby="helpId">
+                        <input matInput placeholder="Email"   
+                        [formControl]="fromEmail"/>
 
                     </div>
                     <div class="form-group mb-4 col-md-12">
@@ -42,7 +42,15 @@
                         </label>
                         <!-- <input type="text" required name='subject' ngModel class="form-control"
                             placeholder="Your subject here" aria-describedby="helpId"> -->
-                            
+                           
+                            <select [formControl]="subject" [(ngModel)]="serviceName" required>
+                                <option
+                                *ngFor="let service of serviceType"
+                                [value]="service.name"
+                              >
+                                {{ service.value }}
+                              </option>
+                            </select>
 
                     </div>
 
@@ -51,20 +59,39 @@
                         <label for="">
                             <i class="eva eva-edit-outline"></i>
                         </label>
-                        <textarea class="form-control" placeholder="Your message here" required name='message' ngModel
-                            rows="5"></textarea>
+                        <textarea
+                        matInput
+                        #input
+                        maxlength="200"
+                        placeholder="Message"
+                        [formControl]="message"
+                        class="form-control"
+                      ></textarea>
 
 
                     </div>
 
                     <div class="form-group  col-md-12">
                         <button type="submit" [disabled]='!contactForm.valid'
-                            class="btn btn-block half-button form-submit-button btn-large btn-gradient">Send
+                            class="btn btn-block half-button form-submit-button btn-large btn-gradient" (click) ="send()" *ngIf="!emailSuccess">Send
                             message
                         </button>
 
                     </div>
 
+
+                    <div class="row mb30" *ngIf="emailSuccess">
+                      <div
+                        class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 section-title text-center"
+                      >
+                        <span class="section-divider mb15"></span>
+                        <p class="no-margin scaleReveal">
+                          <b
+                            >We have received your email, will get in touch soon.</b
+                          >
+                        </p>
+                      </div>
+                  </div>   
 
 
                 </form>

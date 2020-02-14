@@ -33,20 +33,21 @@ export class ContactFormComponent implements OnInit {
     {name: 'Others', value: 'Others'},
   ];
 
-  private formValues = {
-    'email': null,
-    'name': null,
-    'subject': null,
-    'message': null,
+  // private formValues = {
+  //   'email': null,
+  //   'name': null,
+  //   'subject': null,
+  //   'message': null,
 
-  };
+  // };
 
  staticAlertClosed: true;
   error = null;
   success: any = null;
+  formValues: any;
 
   constructor(private http: HttpClient) { }
-  
+
   subject: FormControl = new FormControl();
   name: FormControl = new FormControl();
   fromEmail: FormControl = new FormControl();
@@ -55,6 +56,7 @@ export class ContactFormComponent implements OnInit {
   serviceName: string ;
   email: Email ;
   emailSuccess: Boolean ;
+  
   form = new FormGroup({
     subject: new FormControl(),
     name: new FormControl(),
