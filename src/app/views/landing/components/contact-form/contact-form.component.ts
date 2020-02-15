@@ -20,10 +20,53 @@ export class ContactFormComponent implements OnInit {
  staticAlertClosed: true;
   error = null;
   success: any = null;
+  HWmarked = false;
+  HWCheckbox = false;
+
+  BEmarked = false;
+  BECheckbox = false;
+
+  BMmarked = false;
+  BMCheckbox = false;
+
+  CMmarked = false;
+  CMCheckbox = false;
+
+  RMmarked = false;
+  RMCheckbox = false;
+
+  Amarked = false;
+  ACheckbox = false;
+
+  RoomMmarked = false;
+  RoomMCheckbox = false;
+
+  BOMAmarked = false;
+  BOMACheckbox = false;
+
+  CRMmarked = false;
+  CRMCheckbox = false;
+
+  HMAmarked = false;
+  HMACheckbox = true;
+
+  OPImarked = false;
+  OPICheckbox = false;
+
+  MUmarked = false;
+  MUCheckbox = false;
+
+
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {}
-
+  toggleVisibilityHW(e){
+    this.HWmarked= e.target.checked;
+  }
+  toggleVisibilityHW(e){
+    this.BEmarked= e.target.checked;
+  }
 
   submitForm(form: NgForm) {
     const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
@@ -31,6 +74,7 @@ export class ContactFormComponent implements OnInit {
     // const API_URL = 'http://localhost:8080';
 
     this.formValues.email = form.value.email;
+    this.formValues.toemail = this.TO_EMAIL;
     this.formValues.name = form.value.name;
     this.formValues.subject = form.value.subject;
     this.formValues.message = form.value.message;

@@ -35,7 +35,6 @@
                       </label>
                       <input type="email" required name='email' email ngModel class="form-control"
                           placeholder="Your email" aria-describedby="helpId">
-
                   </div>
                   <div class="form-group mb-4 col-md-12">
                       <label for="">
@@ -56,8 +55,91 @@
                         </select>
 
                   </div>
-
-                  <div class="form-group mb-4 col-md-12">
+                  <div  class="form-group  col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="HWCheckbox"  data-md-icheck (change)="toggleVisibilityHW($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Hotel Website  </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="BECheckbox"  data-md-icheck (change)="toggleVisibilityBE($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Booking Engine </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="BMCheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Booking Management</li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="CMCheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Channel Management</li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="RMCheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Revenue Management</li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="ACheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Analytics </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="RoomMCheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Room Management </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="BOMACheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">BookOne Mobile App</li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="CRMCheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">CRM </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="OPICheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Online Payment Integration </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="MUCheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Multi User Setup </li>
+                  </div>
+                  <div  class="form-group col-md-12">
+                    <label for="">
+                          <!-- <i class="eva eva-edit-outline"></i> -->
+                          <input class="form-control"  type="checkbox" [(ngModel)]="HMACheckbox"  data-md-icheck (change)="toggleVisibility($event)" aria-describedby="helpId">
+                      </label>
+                      <li class="form-control">Hotel Mobile App </li>
+                  </div>
+                  <div class="form-group col-md-12">
 
                       <label for="">
                           <i class="eva eva-edit-outline"></i>

@@ -11,7 +11,7 @@ import { CurrencyService } from 'src/app/services/currency.service';
 })
 export class DynamicPricingComponent implements OnInit {
   currency = '$';
-  country = 'USD';
+  country = 'US';
   propertySize = 2;
   noOfRoom = 1;
   rates= [];
@@ -70,6 +70,10 @@ export class DynamicPricingComponent implements OnInit {
   ngOnInit() {
     this.viewPrice();
 // this.setCurrencyRate();
+  }
+
+  getUserLocation(){
+    
   }
 setCurrencyRate() {
     this.currencyService.getCurrencyRate()
