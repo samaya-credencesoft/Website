@@ -9,14 +9,14 @@
             <div class="card-title" >
                 <select (change)="onCountryChange()" class="btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" [(ngModel)]="country"  type="number" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 
-                    <option class="dropdown-menu" value="USD">Select Country</option>
-                    <option class="dropdown-item" value="USD">USA</option>
-                    <option class="dropdown-item" value="INR">India</option>
-                    <option class="dropdown-item" value="NZD">New Zealand</option>
-                    <option class="dropdown-item" value="EUR">Europe</option>
-                    <option class="dropdown-item" value="GBP">England</option>
-                    <option class="dropdown-item" value="AUD">Australia</option>
-                    <option class="dropdown-item" value="BDT">Bangladesh</option>
+                    <option class="dropdown-menu" value="">Select Country</option>
+                    <option class="dropdown-item" value="US">USA</option>
+                    <option class="dropdown-item" value="IN">India</option>
+                    <option class="dropdown-item" value="NZ">New Zealand</option>
+                    <option class="dropdown-item" value="EU">Europe</option>
+                    <option class="dropdown-item" value="UK">England</option>
+                    <option class="dropdown-item" value="AU">Australia</option>
+                    <option class="dropdown-item" value="BD">Bangladesh</option>
                  </select>
                 
                 
@@ -328,7 +328,7 @@
 
                       <p class="card-text  mb-2">
                           <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>{{(this.monthlyPrice - ((this.discountAmount /100)*monthlyPrice)) * this.noOfRoom | number : '1.2-2'}}</span>
+                                  class="text-30 font-weight-normal">{{ this.symbol }}</sup>{{(this.monthlyPrice - ((this.discountAmount /100)*monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</span>
                           <span>/Month x 1</span>
                       </p>
                       <div class="offer-lists mb-4">
@@ -337,7 +337,7 @@
 
                               <!-- <li class="list-group-item p-1 ">or $1599 one time</li> -->
                               <li class="list-group-item p-1 ">Total Discount: {{this.discountAmount}}%</li>
-                              <li class="list-group-item p-1 ">Total: ${{(this.monthlyPrice - ((this.discountAmount /100)*monthlyPrice)) * this.noOfRoom | number : '1.2-2'}}/Month</li>
+                              <li class="list-group-item p-1 ">Total: {{ this.symbol }}{{(this.monthlyPrice - ((this.discountAmount /100)*monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}/Month</li>
 
                               <li class="list-group-item p-1 text-muted"></li>
                               <li class="list-group-item p-1 text-muted"></li>
@@ -360,9 +360,9 @@
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
-                        <span class="p-1 text-muted">${{(this.monthlyPrice - (( this.discountAmount  / 100) * monthlyPrice)) * this.noOfRoom | number : '1.2-2'}} </span>
+                        <span class="p-1 text-muted">{{ this.symbol }}{{(this.monthlyPrice - (( this.discountAmount  / 100) * monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}} </span>
                           <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>{{(this.monthlyPrice - (((this.halfYearlyDiscount +  this.discountAmount ) / 100) * monthlyPrice)) * this.noOfRoom | number : '1.2-2'}}</span>
+                                  class="text-30 font-weight-normal">{{ this.symbol }}</sup>{{(this.monthlyPrice - (((this.halfYearlyDiscount +  this.discountAmount ) / 100) * monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</span>
                           <span>/Month x 6</span> 
                       </p>
                       <div class="offer-lists mb-4">
@@ -370,7 +370,7 @@
                           <ul class="list-group  list-group-flush">
                               <!-- <li class="list-group-item p-1 ">PER MONTH FOR 10 ROOMS</li> -->
                               <li class="list-group-item p-1 ">Total Discount: {{this.discountAmount + this. halfYearlyDiscount}}%</li>
-                              <li class="list-group-item p-1 ">Total: ${{(this.halfyearlyPrice - (((this.halfYearlyDiscount +  this.discountAmount ) / 100) * halfyearlyPrice)) * this.noOfRoom | number : '1.2-2'}}</li>
+                              <li class="list-group-item p-1 ">Total: {{ this.symbol }}{{(this.halfyearlyPrice - (((this.halfYearlyDiscount +  this.discountAmount ) / 100) * halfyearlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</li>
 
                               <li class="list-group-item p-1 text-muted"></li>
                               <li class="list-group-item p-1 text-muted"></li>
@@ -393,9 +393,9 @@
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
-                        <span class="p-1 text-muted">${{(this.monthlyPrice - (((this.subscriptionCount + this.propertySize) / 100)*monthlyPrice)) * this.noOfRoom | number : '1.2-2'}} </span>
+                        <span class="p-1 text-muted">{{ this.symbol }}{{(this.monthlyPrice - (((this.subscriptionCount + this.propertySize) / 100)*monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}} </span>
                           <span class="money text-shadow  text-45 font-weight-bold"><sup
-                                  class="text-30 font-weight-normal">$</sup>{{(this.monthlyPrice - (((this.yearlyDiscount +  this.discountAmount ) / 100)*monthlyPrice)) * this.noOfRoom | number : '1.2-2'}}</span>
+                                  class="text-30 font-weight-normal">{{ this.symbol }}</sup>{{(this.monthlyPrice - (((this.yearlyDiscount +  this.discountAmount ) / 100)*monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</span>
                           <span>/Month x 12</span>
                       </p>
                       <div class="offer-lists mb-4">
@@ -403,7 +403,7 @@
                           <ul class="list-group  list-group-flush">
                               <!-- <li class="list-group-item p-1 ">10 Users access</li> -->
                               <li class="list-group-item p-1 ">Total Discount: {{this.discountAmount + this. yearlyDiscount}}%</li>
-                              <li class="list-group-item p-1 ">Total: ${{(this.yearlyPrice - (((this.yearlyDiscount +  this.discountAmount ) / 100)*yearlyPrice)) * this.noOfRoom | number : '1.2-2'}}</li>
+                              <li class="list-group-item p-1 ">Total: {{ this.symbol }}{{(this.yearlyPrice - (((this.yearlyDiscount +  this.discountAmount ) / 100)*yearlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</li>
 
                               <li class="list-group-item p-1 text-muted"></li>
                               <li class="list-group-item p-1 text-muted"></li>
@@ -427,8 +427,8 @@
                   <div class="card-body pt-0 text-center">
 
                       <p class="card-text  mb-2">
-                        <span class="p-1 text-muted">${{(this.monthlyPrice - (( this.discountAmount / 100)*monthlyPrice)) * this.noOfRoom | number : '1.2-2'}} </span>
-                          <span class="money text-shadow  text-45 font-weight-bold"><sup class="text-30 font-weight-normal">$</sup>{{(this.monthlyPrice - (((this.twoYearDiscount + this.discountAmount ) / 100)*monthlyPrice)) * this.noOfRoom | number : '1.2-2'}}</span>
+                        <span class="p-1 text-muted">{{ this.symbol }}{{(this.monthlyPrice - (( this.discountAmount / 100)*monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}} </span>
+                          <span class="money text-shadow  text-45 font-weight-bold"><sup class="text-30 font-weight-normal">{{ this.symbol }}</sup>{{(this.monthlyPrice - (((this.twoYearDiscount + this.discountAmount ) / 100)*monthlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</span>
                           <span>/Month x 24</span>
                       </p>
                       <div class="offer-lists mb-4">
@@ -436,7 +436,7 @@
                           <ul class="list-group  list-group-flush">
                               <!-- <li class="list-group-item p-1 ">Customized Solution</li> -->
                               <li class="list-group-item p-1 ">Total Discount: {{this.discountAmount + this.twoYearDiscount}}%</li>
-                              <li class="list-group-item p-1 ">Total: ${{(this.twoYearlyPrice - (((this.twoYearDiscount + this.discountAmount ) / 100)*twoYearlyPrice)) * this.noOfRoom | number : '1.2-2'}}</li>
+                              <li class="list-group-item p-1 ">Total: {{ this.symbol }}{{(this.twoYearlyPrice - (((this.twoYearDiscount + this.discountAmount ) / 100)*twoYearlyPrice)) * this.noOfRoom * this.cRate | number : '1.2-2'}}</li>
 
                               <li class="list-group-item p-1 text-muted"></li>
                               <li class="list-group-item p-1 text-muted"></li>

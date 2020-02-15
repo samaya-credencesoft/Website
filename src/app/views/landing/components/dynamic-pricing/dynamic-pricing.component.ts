@@ -15,6 +15,9 @@ export class DynamicPricingComponent implements OnInit {
   propertySize = 2;
   noOfRoom = 1;
   rates= [];
+ symbol = '$';
+  cRate= 1;
+
 
   HWChecked = false;
   BEChecked = true;
@@ -66,7 +69,7 @@ export class DynamicPricingComponent implements OnInit {
 
   ngOnInit() {
     this.viewPrice();
-this.setCurrencyRate();
+// this.setCurrencyRate();
   }
 setCurrencyRate() {
     this.currencyService.getCurrencyRate()
@@ -225,6 +228,31 @@ HMAcheck() {
 onCountryChange() {
   // this.monthlyPrice =  Number(this.basePrice) *  Number(this.country);
   // this.viewPrice();
+   if (this.country== 'BD') { 
+     this.symbol ='৳';
+     this.cRate = 84.47;
+    }else if(this.country== 'IN') {
+      this.symbol ='₹';
+      this.cRate = 71.44;
+    } else if(this.country== 'US'){
+      this.symbol = '$';
+      this.cRate = 1;
+    }else if(this.country== 'AU'){
+      this.symbol = '$';
+      this.cRate = 1.49;
+    }else if(this.country== 'EU'){
+      this.symbol = '€'
+      this.cRate = 0.92;
+    }else if(this.country== 'UK'){
+      this.symbol = '£';
+      this.cRate = 0.76;
+    }else if(this.country== 'NZ'){
+      this.symbol = '$';
+      this.cRate = 1.55;
+    }else if(this.country== 'CA'){
+      this.symbol = '$';
+      this.cRate = 1.33;
+    };
 }
 onPropertyChange() {
   this.discountAmount = Number(this.propertySize) + Number(this.subscriptionCount);
