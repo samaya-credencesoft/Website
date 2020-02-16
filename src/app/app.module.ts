@@ -26,10 +26,11 @@ export function WpApiLoaderFactory(http: Http) {
     BrowserAnimationsModule,
     NgSelectModule,
     AppRoutingModule,
+
     WpApiModule.forRoot({ // <---
       provide: WpApiLoader,
       useFactory: (WpApiLoaderFactory),
-      deps: [Http]
+      deps: [ Http ]
     })
 
   ],
