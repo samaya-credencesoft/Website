@@ -16,9 +16,9 @@ export class DynamicPricingComponent implements OnInit {
   country = 'US';
   propertySize = 2;
   noOfRoom = 1;
-  rates= [];
- symbol = '$';
-  cRate= 1;
+  rates = [];
+  symbol = '$';
+  cRate = 1;
 
 
   HWChecked = false;
@@ -34,7 +34,7 @@ export class DynamicPricingComponent implements OnInit {
   OPIChecked = false;
   HMAChecked = false;
 
-  selectedSubscriptionArray : string[];
+  selectedSubscriptionArray: string[];
 
   subscriptionCount = 1;
   discountAmount = 0;
@@ -70,11 +70,10 @@ export class DynamicPricingComponent implements OnInit {
   checked = true;
   Currency:  any;
 
-  submitData : SubmitData;
+  submitData: SubmitData;
 
   constructor(private currencyService: CurrencyService,
-    private router : Router) 
-  { 
+    private router: Router) {
     this.submitData = new SubmitData();
   }
 
@@ -83,12 +82,12 @@ export class DynamicPricingComponent implements OnInit {
 // this.setCurrencyRate();
   }
 
-  getUserLocation(){
-    
+  getUserLocation() {
+
   }
 setCurrencyRate() {
     this.currencyService.getCurrencyRate()
-      .subscribe(response => { 
+      .subscribe(response => {
         this.Currency = response.body;
       console.log('currency : ' + JSON.stringify( response.body.quotes ));
       this.rates = this.Currency.quotes;
@@ -243,31 +242,31 @@ HMAcheck() {
 onCountryChange() {
   // this.monthlyPrice =  Number(this.basePrice) *  Number(this.country);
   // this.viewPrice();
-   if (this.country== 'BD') { 
-     this.symbol ='৳';
+   if (this.country === 'BD') {
+     this.symbol = '৳';
      this.cRate = 84.47;
-    }else if(this.country== 'IN') {
-      this.symbol ='₹';
+    } else if (this.country === 'IN') {
+      this.symbol = '₹';
       this.cRate = 71.44;
-    } else if(this.country== 'US'){
+    } else if (this.country === 'US') {
       this.symbol = '$';
       this.cRate = 1;
-    }else if(this.country== 'AU'){
+    } else if (this.country === 'AU') {
       this.symbol = '$';
       this.cRate = 1.49;
-    }else if(this.country== 'EU'){
+    } else if (this.country === 'EU') {
       this.symbol = '€'
       this.cRate = 0.92;
-    }else if(this.country== 'UK'){
+    } else if (this.country === 'UK') {
       this.symbol = '£';
       this.cRate = 0.76;
-    }else if(this.country== 'NZ'){
+    } else if (this.country === 'NZ') {
       this.symbol = '$';
       this.cRate = 1.55;
-    }else if(this.country== 'CA'){
+    } else if (this.country === 'CA') {
       this.symbol = '$';
       this.cRate = 1.33;
-    };
+    }
 }
 onPropertyChange() {
   this.discountAmount = Number(this.propertySize) + Number(this.subscriptionCount);
@@ -284,86 +283,85 @@ onRoomChange() {
     this.twoYearlyPrice = this.monthlyPrice * 24;
     console.log('discount ' + this.discountAmount + ' s ' + this.subscriptionCount + ' room ' + this.noOfRoom + ' p ' + this.propertySize);
   }
+selectedSubscription() {
+  this.selectedSubscriptionArray = [];
+  this.submitData.country = this.country;
+  this.submitData.noOfRoom = this.noOfRoom;
+  this.submitData.propertySize = this.propertySize;
 
-  on2YearSubscription()
-  {
-    this.selectedSubscriptionArray = [];
+  if (this.HWChecked === true) {
+    this.selectedSubscriptionArray.push('Hotel Website');
+  }
 
-    this.submitData.country = this.country;
-    this.submitData.noOfRoom = this.noOfRoom;
-    this.submitData.propertySize = this.propertySize;
+  if (this.BEChecked === true) {
+    this.selectedSubscriptionArray.push('Booking Engine');
+  }
 
-    
-    if(this.HWChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Hotel Website");
+  if (this.BMChecked === true) {
+    this.selectedSubscriptionArray.push('Booking Management');
+  }
+
+  if (this.CMChecked === true) {
+    this.selectedSubscriptionArray.push('Channel Management');
+  }
+
+
+  if (this.HMAChecked === true) {
+    this.selectedSubscriptionArray.push('Hotel Mobile App');
+  }
+
+  if (this.OPIChecked === true) {
+    this.selectedSubscriptionArray.push('Online Payment Integration');
+  }
+
+  if (this.MUChecked === true) {
+    this.selectedSubscriptionArray.push('Multi User Setup');
+  }
+
+  if (this.CRMChecked === true) {
+    this.selectedSubscriptionArray.push('CRM');
+  }
+
+  if (this.MAChecked === true) {
+    this.selectedSubscriptionArray.push('Bookone Mobile App');
+  }
+
+  if (this.RoomMChecked === true) {
+    this.selectedSubscriptionArray.push('Room Management');
+  }
+
+  if (this.AnalyticsChecked === true) {
+    this.selectedSubscriptionArray.push('Analytics');
+  }
+
+  if (this.RevenueMChecked === true) {
+    this.selectedSubscriptionArray.push('Revenue Management');
+  }
+
+  this.submitData.SubscriptionArray = this.selectedSubscriptionArray;
+
+
+  const navigationExtras: NavigationExtras = {
+    queryParams: {
+        object: JSON.stringify(this.submitData),
     }
-
-    if(this.BEChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Booking Engine");
-    }
-
-    if(this.BMChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Booking Management");
-    }
-
-    if(this.CMChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Channel Management");
-    }
-
-
-    if(this.HMAChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Hotel Mobile App");
-    }
-
-    if(this.OPIChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Online Payment Integration");
-    }
-
-    if(this.MUChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Multi User Setup");
-    }
-
-    if(this.CRMChecked === true)
-    {
-      this.selectedSubscriptionArray.push("CRM");
-    }
-
-    if(this.MAChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Bookone Mobile App");
-    }
-
-    if(this.RoomMChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Room Management");
-    }
-
-    if(this.AnalyticsChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Analytics");
-    }
-
-    if(this.RevenueMChecked === true)
-    {
-      this.selectedSubscriptionArray.push("Revenue Management");
-    }
-
-    this.submitData.SubscriptionArray = this.selectedSubscriptionArray;
-
-
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          object: JSON.stringify(this.submitData),
-      }
-    };
-    this.router.navigate(['/landing/contact'], navigationExtras);
-   
+  };
+  this.router.navigate(['/landing/contact'], navigationExtras);
+}
+  onmonthlySubscription() {
+    this.submitData.onmonthly = true;
+this.selectedSubscription();
+  }
+  onhalfYearSubscription() {
+    this.submitData.onhalfYear = true;
+this.selectedSubscription();
+  }
+  onYearSubscription() {
+    this.submitData.onYear = true;
+this.selectedSubscription();
+  }
+  on2YearSubscription() {
+    this.submitData.on2Year = true;
+this.selectedSubscription();
   }
 }

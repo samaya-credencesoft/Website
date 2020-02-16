@@ -1,11 +1,12 @@
 
 export class SubmitData {
-   
-    country : string;
-    propertySize : number;
-    noOfRoom : number;
-
+    country: string;
+    propertySize: number;
+    noOfRoom: number;
     SubscriptionArray: string[];
-
-    isPricing : boolean;
+    isPricing: boolean;
+    onmonthly: boolean;
+    onhalfYear: boolean;
+    onYear: boolean;
+    on2Year: boolean;
 }

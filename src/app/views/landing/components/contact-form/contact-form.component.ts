@@ -13,13 +13,7 @@ export interface Email {
   message: string;
 
 }
-export interface ServiceList {
-  fromEmail: string;
-  toEmail: string;
-  subject: string;
-  message: string;
 
-}
 
 @Component({
   selector: 'app-contact-form',
@@ -54,23 +48,48 @@ export class ContactFormComponent implements OnInit {
   error = null;
   success: any = null;
 
-  submitData : SubmitData;
-  subjects : string[];
- 
-  
+  submitData: SubmitData;
+  subjects: string[];
+  term: string;
+  country: string;
+  noOfRoom: number;
+  propertySize: string;
+
+
 
   constructor(private http: HttpClient,
-    private acRoute : ActivatedRoute)
-  { 
+    private acRoute: ActivatedRoute) {
     this.submitData = new SubmitData();
     this.acRoute.queryParams.subscribe(params => {
 
-      if(params["object"] != undefined)
-      {
-        this.submitData = JSON.parse(params["object"]);
-                         
+      if (params['object'] != undefined) {
+        this.submitData = JSON.parse(params['object']);
+
         this.subscriptions = this.submitData.SubscriptionArray;
-        this.subjects =["BookOne Demo Request"];
+        this.subjects = ['BookOne Demo Request'];
+        if (this.submitData.onmonthly === true) {
+          this.term = 'Monthly';
+        } else if (this.submitData.onhalfYear === true) {
+          this.term = 'Half Yearly';
+        } else if (this.submitData.onYear === true) {
+          this.term = 'Yearly';
+        } else if (this.submitData.on2Year === true) {
+          this.term = '2 Year';
+        } else { this.term = 'Monthly'; }
+      this.country = this.submitData.country;
+      this.noOfRoom = this.submitData.noOfRoom;
+      if (this.submitData.propertySize === 2) {
+        this.propertySize = '1 to 10 rooms';
+      }if (this.submitData.propertySize === 5) {
+        this.propertySize = '11 to 20 rooms';
+      }if (this.submitData.propertySize === 10) {
+        this.propertySize = '21 to 40 rooms';
+      }if (this.submitData.propertySize === 15) {
+        this.propertySize = '41 to 100 rooms';
+      }
+      if (this.submitData.propertySize === 20) {
+        this.propertySize = '100+ rooms';
+      }
       }
      });
   }
@@ -102,8 +121,8 @@ export class ContactFormComponent implements OnInit {
 
   submitForm(form: NgForm) {
     console.log(JSON.stringify(this.subscriptions));
-    const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
-    // const TO_EMAIL = 'abir.sayeed@gmail.com';
+    // const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
+    const TO_EMAIL = 'abir.sayeed@gmail.com';
     const API_URL = 'https://booking-api-csoft.appspot.com/';
     // const API_URL = 'http://localhost:8080';
 
@@ -113,7 +132,7 @@ export class ContactFormComponent implements OnInit {
     // this.email.subject = form.value.subject;
     this.serviceName = '' + this.subscriptions;
     // tslint:disable-next-line: max-line-length
-    this.email.message = 'Name: ' + this.name + '\nEmail: ' + form.value.email + ' \nSelected Subscriptions: ' + this.serviceName + ' \nMessage: ' + form.value.message + '. \n*****this message is sent from BookOnePMS Website.******';
+    this.email.message = 'Name: ' + this.name + '\nEmail: ' + form.value.email + ' \nSelected Subscriptions: ' + this.serviceName + ' \nSubscriptions Term: ' + this.term + ' \nCountry: ' + this.country + ' \nProperty Size: ' + this.propertySize + ' \nNo Of Rooms: ' + this.noOfRoom + ' \nMessage: ' + form.value.message + '. \n*****this message is sent from BookOnePMS Website.******';
 
     console.log(this.subscriptions + ' ' + this.name);
     this.email.subject = '' + this.subjects ;
