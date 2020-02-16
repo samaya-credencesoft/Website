@@ -28,7 +28,7 @@
                     <option class="dropdown-item" value="15">41 to 100 rooms</option>
                     <option class="dropdown-item" value="20">100+ rooms</option>
                 </select>
-                <input matInput (change)="onRoomChange()" type="number" [(ngModel)]="noOfRoom" class="col-md-6 col-lg-3 m-1 btn btn-secondary btn-xl" placeholder="No of Rooms" placement="top" ngbTooltip="No of Rooms">
+                <input matInput (change)="onRoomChange()" type="number" min="1" max="200" [(ngModel)]="noOfRoom" [formControl]="noOfRoomControl" class="col-md-6 col-lg-3 m-1 btn btn-secondary btn-xl formControl" placeholder="No of Rooms" placement="top" ngbTooltip="No of Rooms">
                 <!-- <button (click)="viewPrice()" type="button" class="btn btn-raised ripple btn-secondary m-1 btn-xl">View Price</button> -->
                
             </div>

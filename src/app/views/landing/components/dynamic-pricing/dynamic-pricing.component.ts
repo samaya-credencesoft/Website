@@ -4,6 +4,8 @@ import { CurrencyService } from 'src/app/services/currency.service';
 import { SubmitData } from './submitData';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
+import { constructor } from 'jquery';
 
 @Component({
   selector: 'app-dynamic-pricing',
@@ -76,6 +78,8 @@ export class DynamicPricingComponent implements OnInit {
     private router: Router) {
     this.submitData = new SubmitData();
   }
+  noOfRoomControl: FormControl = new FormControl('', [Validators.max(200), Validators.min(0)]);
+
 
   ngOnInit() {
     this.viewPrice();
@@ -270,9 +274,31 @@ onCountryChange() {
 }
 onPropertyChange() {
   this.discountAmount = Number(this.propertySize) + Number(this.subscriptionCount);
+  if(this.propertySize==2){
+    this.noOfRoom= 1;
+  }if(this.propertySize==5){
+    this.noOfRoom= 11;
+  }if(this.propertySize==10){
+    this.noOfRoom= 21;
+  }if(this.propertySize==15){
+    this.noOfRoom= 41;
+  }if(this.propertySize==20){
+    this.noOfRoom= 101;
+  }
 }
 onRoomChange() {
   // this.basePrice = this.basePrice * this.noOfRoom;
+  if(this.noOfRoom>=1 && this.noOfRoom <= 10){
+    this.propertySize= 2;
+  }if(this.noOfRoom>=11 && this.noOfRoom <= 20){
+    this.propertySize= 5;
+  }if(this.noOfRoom>=21 && this.noOfRoom <= 40){
+    this.propertySize= 10;
+  }if(this.noOfRoom>=41 && this.noOfRoom <= 100){
+    this.propertySize= 15;
+  }if(this.noOfRoom>=101){
+    this.propertySize= 20;
+  }
 }
 
   viewPrice() {
