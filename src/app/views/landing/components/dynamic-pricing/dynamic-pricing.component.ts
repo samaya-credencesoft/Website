@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { CurrencyService } from 'src/app/services/currency.service';
-
+import { SubmitData } from './submitData';
+import { NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dynamic-pricing',
@@ -31,6 +33,8 @@ export class DynamicPricingComponent implements OnInit {
   MUChecked = false;
   OPIChecked = false;
   HMAChecked = false;
+
+  selectedSubscriptionArray : string[];
 
   subscriptionCount = 1;
   discountAmount = 0;
@@ -65,7 +69,14 @@ export class DynamicPricingComponent implements OnInit {
   twoYearlyPrice: any;
   checked = true;
   Currency:  any;
-  constructor(private currencyService: CurrencyService) { }
+
+  submitData : SubmitData;
+
+  constructor(private currencyService: CurrencyService,
+    private router : Router) 
+  { 
+    this.submitData = new SubmitData();
+  }
 
   ngOnInit() {
     this.viewPrice();
@@ -272,5 +283,87 @@ onRoomChange() {
     this.yearlyPrice = this.monthlyPrice * 12 ;
     this.twoYearlyPrice = this.monthlyPrice * 24;
     console.log('discount ' + this.discountAmount + ' s ' + this.subscriptionCount + ' room ' + this.noOfRoom + ' p ' + this.propertySize);
+  }
+
+  on2YearSubscription()
+  {
+    this.selectedSubscriptionArray = [];
+
+    this.submitData.country = this.country;
+    this.submitData.noOfRoom = this.noOfRoom;
+    this.submitData.propertySize = this.propertySize;
+
+    
+    if(this.HWChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Hotel Website");
+    }
+
+    if(this.BEChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Booking Engine");
+    }
+
+    if(this.BMChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Booking Management");
+    }
+
+    if(this.CMChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Channel Management");
+    }
+
+
+    if(this.HMAChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Hotel Mobile App");
+    }
+
+    if(this.OPIChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Online Payment Integration");
+    }
+
+    if(this.MUChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Multi User Setup");
+    }
+
+    if(this.CRMChecked === true)
+    {
+      this.selectedSubscriptionArray.push("CRM");
+    }
+
+    if(this.MAChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Bookone Mobile App");
+    }
+
+    if(this.RoomMChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Room Management");
+    }
+
+    if(this.AnalyticsChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Analytics");
+    }
+
+    if(this.RevenueMChecked === true)
+    {
+      this.selectedSubscriptionArray.push("Revenue Management");
+    }
+
+    this.submitData.SubscriptionArray = this.selectedSubscriptionArray;
+
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          object: JSON.stringify(this.submitData),
+      }
+    };
+    this.router.navigate(['/landing/contact'], navigationExtras);
+   
   }
 }

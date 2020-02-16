@@ -2,6 +2,9 @@ import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from "@angular/router";
+import { SubmitData } from '../dynamic-pricing/submitData';
+
 export interface Email {
 
   fromEmail: string;
@@ -50,50 +53,34 @@ export class ContactFormComponent implements OnInit {
  staticAlertClosed: true;
   error = null;
   success: any = null;
-  // HWmarked = false;
-  // HWCheckbox = false;
 
-  // BEmarked = false;
-  // BECheckbox = false;
+  submitData : SubmitData;
+  subjects : string[];
+ 
+  
 
-  // BMmarked = false;
-  // BMCheckbox = false;
+  constructor(private http: HttpClient,
+    private acRoute : ActivatedRoute)
+  { 
+    this.submitData = new SubmitData();
+    this.acRoute.queryParams.subscribe(params => {
 
-  // CMmarked = false;
-  // CMCheckbox = false;
-
-  // RMmarked = false;
-  // RMCheckbox = false;
-
-  // Amarked = false;
-  // ACheckbox = false;
-
-  // RoomMmarked = false;
-  // RoomMCheckbox = false;
-
-  // BOMAmarked = false;
-  // BOMACheckbox = false;
-
-  // CRMmarked = false;
-  // CRMCheckbox = false;
-
-  // HMAmarked = false;
-  // HMACheckbox = true;
-
-  // OPImarked = false;
-  // OPICheckbox = false;
-
-  // MUmarked = false;
-  // MUCheckbox = false;
-
-  constructor(private http: HttpClient) { }
+      if(params["object"] != undefined)
+      {
+        this.submitData = JSON.parse(params["object"]);
+                         
+        this.subscriptions = this.submitData.SubscriptionArray;
+        this.subjects =["BookOne Demo Request"];
+      }
+     });
+  }
   subject: FormControl = new FormControl();
   // name: FormControl = new FormControl();
   fromEmail: FormControl = new FormControl();
   toEmail: FormControl = new FormControl();
   message: FormControl = new FormControl();
   serviceName: string ;
-  subscriptions: string ;
+  subscriptions: string [];
   name: string;
   email: Email ;
   emailSuccess: Boolean ;
@@ -114,6 +101,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   submitForm(form: NgForm) {
+    console.log(JSON.stringify(this.subscriptions));
     const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
     const API_URL = 'https://booking-api-csoft.appspot.com/';
@@ -128,7 +116,7 @@ export class ContactFormComponent implements OnInit {
     this.email.message = 'Name: ' + this.name + '\nEmail: ' + form.value.email + ' \nSelected Subscriptions: ' + this.serviceName + ' \nMessage: ' + form.value.message + '. \n*****this message is sent from BookOnePMS Website.******';
 
     console.log(this.subscriptions + ' ' + this.name);
-    this.email.subject = '' + this.subject ;
+    this.email.subject = '' + this.subjects ;
     console.log('form data ' + JSON.stringify(this.email));
     //  this.success = true;
    this.http.post<Email>(API_URL + 'api/website/sendEmailFromWebSite', this.email ).

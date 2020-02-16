@@ -46,7 +46,7 @@
                           <label for="">
                               <i class="eva eva-edit-2-outline"></i>
                           </label>
-                        <select  class="form-control select" name="subject"  [formControl]="subject"   [(ngModel)]="subject" required multiple>
+                        <select  class="form-control select" name="subject"  [formControl]="subject"   [(ngModel)]="subjects" required multiple>
                             <option
                             *ngFor="let service of serviceType"
                             [value]="service.name"
