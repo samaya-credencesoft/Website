@@ -7,7 +7,7 @@
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12  text-center">
             <div class="card-title" >
-                <select (change)="onCountryChange()" class="btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" [(ngModel)]="country"  type="number" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <select (change)="onCountryChange()" class="col-md-6 col-lg-3 btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" [(ngModel)]="country"  type="number" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 
                     <option class="dropdown-menu" value="US">Select Country</option>
                     <option class="dropdown-item" value="US">USA</option>
@@ -20,7 +20,7 @@
                  </select>
                 
                 
-                 <select (change)="onPropertyChange()" class="btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" [(ngModel)]="propertySize" type="number" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 <select (change)="onPropertyChange()" class="col-md-6 col-lg-3 btn btn-raised ripple btn-secondary btn-xl dropdown-toggle m-1" [(ngModel)]="propertySize" type="number" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <option class="dropdown-menu" value="0">Select Property Size</option>
                     <option class="dropdown-item" value="2">1 to 10 rooms</option>
                     <option class="dropdown-item" value="5">11 to 20 rooms</option>
@@ -28,7 +28,7 @@
                     <option class="dropdown-item" value="15">41 to 100 rooms</option>
                     <option class="dropdown-item" value="20">100+ rooms</option>
                 </select>
-                <input (change)="onRoomChange()" type="number" [(ngModel)]="noOfRoom" class="m-1 btn btn-secondary btn-xl" placeholder="No of Rooms" placement="top" ngbTooltip="No of Rooms">
+                <input matInput (change)="onRoomChange()" type="number" [(ngModel)]="noOfRoom" class="col-md-6 col-lg-3 m-1 btn btn-secondary btn-xl" placeholder="No of Rooms" placement="top" ngbTooltip="No of Rooms">
                 <!-- <button (click)="viewPrice()" type="button" class="btn btn-raised ripple btn-secondary m-1 btn-xl">View Price</button> -->
                
             </div>
