@@ -16,7 +16,7 @@ export class NewsComponent implements OnInit {
   constructor( private wpApiService: WPAPIService ) {
   }
   ngOnInit() {
-    this.wpApiService.posts('per_page=3').subscribe(posts => {this.posts = posts; });
+    this.wpApiService.posts('per_page=12').subscribe(posts => {this.posts = posts; });
   }
   // getMedia(id){
   //   this.wpApi.get(id)
