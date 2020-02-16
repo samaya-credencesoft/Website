@@ -49,7 +49,7 @@ import { LandingV9Component } from './landing-v9/landing-v9.component';
 import { IntroTenComponent } from './components/intro-ten/intro-ten.component';
 import { LandingV10Component } from './landing-v10/landing-v10.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DemosComponent } from './components/demos/demos.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
 import { BlogDetailsPageComponent } from './blog-details-page/blog-details-page.component';
@@ -67,13 +67,27 @@ import { DynamicPricingComponent } from './components/dynamic-pricing/dynamic-pr
 import { AboutCredencesoftComponent } from './components/about-credencesoft/about-credencesoft.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 import { OurFeaturesComponent } from './components/our-features/our-features.component';
+import {
+  MatCheckboxModule,
+  MatInputModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatFormFieldModule
+} from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
     LandingRoutingModule,
     NguCarouselModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatFormFieldModule
   ],
   declarations: [
     LandingV1Component,
@@ -137,7 +151,11 @@ import { OurFeaturesComponent } from './components/our-features/our-features.com
     FaqComponent
 
   ],
-  providers: [WINDOW_PROVIDERS]
+  providers: [WINDOW_PROVIDERS],
+  exports: [
+    FormsModule,
+  ]
+
 
   // exports: ScrollToDirective
 })
