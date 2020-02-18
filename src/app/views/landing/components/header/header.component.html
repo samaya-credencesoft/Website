@@ -8,17 +8,18 @@
             <!-- <a class="navbar-brand d-none d-lg-inline-block" href="#">
     Navbar 6
   </a> -->
-            <a class="navbar-brand-two mx-auto  d-inline-block" href="#">
-                <img src="assets/images/landing/lOGO_d/logo_white.png" alt="logo">
-            </a>
-            <div class="w-100 text-right">
+           
+            <div class="w-100 text-left">
                 <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
       <span class="navbar-toggler-icon">
 <i class="eva eva-menu-outline text-30 text-white"></i>
       </span>
 
     </button>
-            </div>
+            </div> 
+            <a class="navbar-brand-two mx-auto  d-inline-block" href="#">
+                <img src="assets/images/landing/lOGO_d/logo_white.png" alt="logo">
+            </a>
         </div>
         <div class="collapse  navbar-collapse flex-grow-1 text-right" id="collapseExample" [ngbCollapse]="isCollapsed">
 

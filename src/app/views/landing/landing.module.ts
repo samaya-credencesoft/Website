@@ -74,6 +74,8 @@ import {
   MatRadioModule,
   MatFormFieldModule
 } from '@angular/material';
+import { CallToActionComponent } from './components/call-to-action/call-to-action.component';
+import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
 
 @NgModule({
   imports: [
@@ -148,7 +150,9 @@ import {
     CompanyComponent,
     BlogComponent,
     ContactComponent,
-    FaqComponent
+    FaqComponent,
+    CallToActionComponent,
+    SubscribeEmailComponent
 
   ],
   providers: [WINDOW_PROVIDERS],
