@@ -19,11 +19,11 @@
                             <p [innerHTML]='post.excerpt.rendered'>
                             </p>
 
-                            <a routerLink="/landing/blog/{{post.slug}}" (click)="getPost()"  class="btn  btn-gradient half-button">Read More</a>
+                            <a routerLink="/landing/blog/{{post.slug}}"   class="btn  btn-gradient half-button">Read More</a>
                         </div>
                         <div class="p-1 text-left card-footer font-weight-light">
-                            <span class="mr-2"><i class="eva eva-message-circle-outline text-white mr-1"></i>12 </span>
-                            <span class="mr-2"><i class="eva eva-calendar-outline text-white mr-1"></i>{{post.date}}</span>
+                            <!-- <span class="mr-2"><i class="eva eva-message-circle-outline text-white mr-1"></i>12 </span> -->
+                            <span class="mr-2"><i class="eva eva-calendar-outline text-white mr-1"></i>{{post.date | date:'short' }}</span>
                             <span class=""><i class="eva eva-person-outline text-white mr-1"></i>{{post._embedded['author'][0].name}}</span>
                         </div>
                     </div>
