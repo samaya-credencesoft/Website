@@ -20,6 +20,7 @@ import { CompanyComponent } from './company/company.component';
 import { BlogComponent } from './blog/blog.component';
 import { ContactComponent } from './contact/contact.component';
 import { FaqComponent } from './faq/faq.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {
@@ -107,6 +108,10 @@ const routes: Routes = [
   {
     path: 'faqs',
     component: FaqComponent, data: {title: 'FAQs'}
+  },
+  {
+    path: 'privacy',
+    component: PrivacyPolicyComponent, data: {title: 'Privacy Policy'}
   }
 
 

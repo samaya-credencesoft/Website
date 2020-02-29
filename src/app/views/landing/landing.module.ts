@@ -76,6 +76,8 @@ import {
 } from '@angular/material';
 import { CallToActionComponent } from './components/call-to-action/call-to-action.component';
 import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   imports: [
@@ -89,7 +91,7 @@ import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   declarations: [
     LandingV1Component,
@@ -152,7 +154,9 @@ import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-
     ContactComponent,
     FaqComponent,
     CallToActionComponent,
-    SubscribeEmailComponent
+    SubscribeEmailComponent,
+    PrivacyComponent,
+    PrivacyPolicyComponent
 
   ],
   providers: [WINDOW_PROVIDERS],
