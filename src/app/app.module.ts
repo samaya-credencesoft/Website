@@ -17,6 +17,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
 }
+import { CookieLawModule } from 'angular2-cookie-law';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,8 +32,8 @@ export function WpApiLoaderFactory(http: Http) {
       provide: WpApiLoader,
       useFactory: (WpApiLoaderFactory),
       deps: [ Http ]
-    })
-
+    }),
+    CookieLawModule
   ],
   providers: [
     Title,
