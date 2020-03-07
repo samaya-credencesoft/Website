@@ -123,7 +123,7 @@ export class ContactFormComponent implements OnInit {
     console.log(JSON.stringify(this.subscriptions));
     const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
-    const API_URL = 'https://booking-api-csoft.appspot.com/';
+    const API_URL = 'https://api.bookonepms.com:8443/api-bookone/';
     // const API_URL = 'http://localhost:8080';
 
     this.email.fromEmail = form.value.email;
