@@ -18,6 +18,7 @@ export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
 }
 import { CookieLawModule } from 'angular2-cookie-law';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -38,6 +39,7 @@ import { CookieLawModule } from 'angular2-cookie-law';
   providers: [
     Title,
 
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
   ],
   bootstrap: [AppComponent]
 })
