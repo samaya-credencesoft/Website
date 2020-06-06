@@ -1,9 +1,9 @@
 // solid Colors
 $sky-blue: rgb(115, 103, 240) !default;
 $blue: #263db5 !default;
-$indigo: #6610f2 !default;
-$purple: #663399 !default;
-$purple-light: #7566b5 !default;
+$indigo: #2a1f61 !default;
+$purple: #221950 !default;
+$purple-light: #463697 !default;
 $pink: #e83e8c !default;
 $red: #d22346 !default;
 $orange: #e97d23 !default;
@@ -17,13 +17,13 @@ $solid-colors: (
   "brown": #4e3634,
   "teal": #20c997,
   "green": #27ae60,
-  "midnight-blue": #0c0c3c,
-  "indigo": #3f51b5,
+  "midnight-blue": #221950,
+  "indigo": #2a1f61,
   "indigo-light": #7d71d3,
   "indigo-deep": #5252d4,
   "indigo-ocean": #8a2be2,
   "dark-purple": #322740,
-  "purple": #663399,
+  "purple": #221950,
   "pink": #cb3066,
   "pink-light": #ff1493,
   "red": #f44336,
@@ -37,9 +37,18 @@ $solid-colors: (
 );
 // Gradient colors
 $gradient-colors: (
+  
+  // gradient-purple-indigo: (
+  //   "start-color": #663399,
+  //   "end-color": #33214b
+  // ),
+  gradient-secondary: (
+    "start-color": #f9a35a,
+    "end-color": #309dba
+  ),
   gradient-purple-indigo: (
-    "start-color": #663399,
-    "end-color": #33214b
+    "start-color": #291b58,
+    "end-color": #221950
   ),
   gradient-blue-red: (
     "start-color": rgb(193, 15, 65),
