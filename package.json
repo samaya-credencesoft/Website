@@ -16,7 +16,7 @@
     "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.2.7",
     "@angular/compiler": "^8.2.7",
-    "@angular/core": "^8.2.7",
+    "@angular/core": "^10.2.5",
     "@angular/flex-layout": "^9.0.0-beta.28",
     "@angular/forms": "^8.2.7",
     "@angular/http": "^7.2.16",
@@ -47,12 +47,13 @@
     "popper.js": "^1.15.0",
     "rxjs": "^6.5.4",
     "save": "^2.4.0",
+    "update": "^0.7.4",
     "wp-api-angular": "^3.0.0-beta8",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.5",
-    "@angular/cli": "^8.3.5",
+    "@angular/cli": "^10.2.1",
     "@angular/compiler-cli": "^8.2.7",
     "@angular/language-service": "^8.2.7",
     "@types/jasmine": "~3.4.0",
