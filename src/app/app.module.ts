@@ -1,30 +1,30 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  WpApiModule,
-  WpApiLoader,
-  WpApiStaticLoader
-} from 'wp-api-angular';
-import { from } from 'rxjs';
+import { SharedModule } from 'src/shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { WpApiLoader, WpApiModule, WpApiStaticLoader } from 'wp-api-angular';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { Http } from '@angular/http';
+import { RouterModule } from '@angular/router';
+
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
 }
-import { CookieLawModule } from 'angular2-cookie-law';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     SharedModule,
     HttpClientModule,
+    RouterModule,
     BrowserAnimationsModule,
     NgSelectModule,
     AppRoutingModule,
@@ -34,16 +34,15 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
       useFactory: (WpApiLoaderFactory),
       deps: [ Http ]
     }),
-    CookieLawModule
+    // CookieLawModule
   ],
-  providers: [
-    Title,
 
-    {provide: LocationStrategy, useClass: HashLocationStrategy},
-  ],
+  providers: [Title,
+
+    {provide: LocationStrategy, useClass: HashLocationStrategy},],
+    schemas: [
+      CUSTOM_ELEMENTS_SCHEMA
+    ],
   bootstrap: [AppComponent]
 })
-
-export class AppModule {
-
-}
+export class AppModule { }

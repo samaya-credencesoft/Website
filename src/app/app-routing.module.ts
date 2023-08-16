@@ -1,8 +1,7 @@
-import { LandingLayoutComponent } from './shared/components/layouts/landing-layout/landing-layout.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthLayoutComponent } from 'src/shared/components/layouts/auth-layout/auth-layout.component';
+import { LandingLayoutComponent } from 'src/shared/components/layouts/landing-layout/landing-layout.component';
 
 const routes: Routes = [
   {
@@ -16,7 +15,8 @@ const routes: Routes = [
     children: [
       {
         path: 'sessions',
-        loadChildren: './views/sessions/sessions.module#SessionsModule'
+
+        loadChildren: () => import("./views/sessions/sessions.module").then(module => module.SessionsModule)
       }
     ]
   },
@@ -26,7 +26,8 @@ const routes: Routes = [
     children: [
       {
         path: 'landing',
-        loadChildren: './views/landing/landing.module#LandingModule'
+        loadChildren: () => import( './views/landing/landing.module').then(x => x.LandingModule)
+
       }
     ]
   },
@@ -34,7 +35,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
