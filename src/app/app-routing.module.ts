@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthLayoutComponent } from 'src/shared/components/layouts/auth-layout/auth-layout.component';
-import { LandingLayoutComponent } from 'src/shared/components/layouts/landing-layout/landing-layout.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AuthLayoutComponent } from "src/shared/components/layouts/auth-layout/auth-layout.component";
+import { LandingLayoutComponent } from "src/shared/components/layouts/landing-layout/landing-layout.component";
+// import { SessionReponse } from '../../services/session.response';
+
 
 const routes: Routes = [
   {
