@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
-import { CurrencyService } from 'src/app/services/currency.service';
+// import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
+// import { CurrencyService } from 'src/app/services/currency.service';
 import { SubmitData } from './submitData';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { constructor } from 'jquery';
+import { SharedAnimations } from 'src/shared/animations/shared-animations';
+import { CurrencyService } from 'src/services/currency.service';
+// import { constructor } from 'jquery';
 
 @Component({
   selector: 'app-dynamic-pricing',
@@ -13,6 +15,7 @@ import { constructor } from 'jquery';
   styleUrls: ['./dynamic-pricing.component.scss'],
   animations: [SharedAnimations]
 })
+// @Pipe({ name: 'convertToSpaces' })
 export class DynamicPricingComponent implements OnInit {
   currency = '$';
   country = 'US';

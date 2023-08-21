@@ -72,7 +72,8 @@ import { CallToActionComponent } from './components/call-to-action/call-to-actio
 import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-
+import { ConvertToSpacesPipe } from 'src/services/spaces.pipe';
+// import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -95,6 +96,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     Works2Component,
     WorksCarouselComponent,
     ServicesComponent,
+    ConvertToSpacesPipe ,
     ServicesCauroselComponent,
     TestimonialComponent,
     TestimonialCauroselComponent,

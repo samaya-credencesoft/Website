@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import {map, take} from 'rxjs/operators';
-import { WPAPIService } from 'src/app/services/wpapi.service';
+import { WPAPIService } from 'src/services/wpapi.service';
+// import { WPAPIService } from 'src/services/wpapi.service';
+// import { WPAPIService } from 'src/app/services/wpapi.service';
 // import { butterService } from 'src/app/services/butter-cms.service';
 @Component({
   selector: 'app-blog-details',

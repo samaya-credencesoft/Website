@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WPAPIService } from 'src/app/services/wpapi.service';
+// import { WPAPIService } from 'src/app/services/wpapi.service';
 import { subscribeOn } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { WPAPIService } from 'src/services/wpapi.service';
 
 @Component({
   selector: 'app-news',
