@@ -25,6 +25,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "src/assets/styles/app/_app.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -87,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/styles/app/_app.scss",
               "src/styles.css"
             ],
             "scripts": []
