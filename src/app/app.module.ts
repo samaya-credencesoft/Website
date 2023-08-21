@@ -2,7 +2,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
+import {  AppRoutes, AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { Http } from '@angular/http';
 
 import { CookieLawModule } from 'angular2-cookie-law';
+import { RouterModule } from '@angular/router';
 
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
@@ -28,8 +29,7 @@ export function WpApiLoaderFactory(http: Http) {
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     NgSelectModule,
-    AppRoutingModule,
-
+    RouterModule.forRoot(AppRoutes,{ scrollPositionRestoration: 'enabled' }),
     WpApiModule.forRoot({ // <---
       provide: WpApiLoader,
       useFactory: (WpApiLoaderFactory),

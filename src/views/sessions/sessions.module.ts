@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SessionsRoutingModule } from './sessions-routing.module';
@@ -11,6 +11,7 @@ import { ForgotComponent } from './forgot/forgot.component';
     CommonModule,
     SessionsRoutingModule
   ],
-  declarations: [SignupComponent, SigninComponent, ForgotComponent]
+  declarations: [SignupComponent, SigninComponent, ForgotComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class SessionsModule { }
