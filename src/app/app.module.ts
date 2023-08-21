@@ -11,7 +11,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { WpApiLoader, WpApiModule, WpApiStaticLoader } from 'wp-api-angular';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { Http } from '@angular/http';
-import { RouterModule } from '@angular/router';
+
+import { CookieLawModule } from 'angular2-cookie-law';
 
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
@@ -24,7 +25,7 @@ export function WpApiLoaderFactory(http: Http) {
     BrowserModule,
     SharedModule,
     HttpClientModule,
-    RouterModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     NgSelectModule,
     AppRoutingModule,
@@ -34,7 +35,7 @@ export function WpApiLoaderFactory(http: Http) {
       useFactory: (WpApiLoaderFactory),
       deps: [ Http ]
     }),
-    // CookieLawModule
+    CookieLawModule
   ],
 
   providers: [Title,

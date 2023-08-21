@@ -1,9 +1,7 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AuthLayoutComponent } from "src/shared/components/layouts/auth-layout/auth-layout.component";
-import { LandingLayoutComponent } from "src/shared/components/layouts/landing-layout/landing-layout.component";
-// import { SessionReponse } from '../../services/session.response';
-
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthLayoutComponent } from 'src/shared/components/layouts/auth-layout/auth-layout.component';
+import { LandingLayoutComponent } from 'src/shared/components/layouts/landing-layout/landing-layout.component';
 
 const routes: Routes = [
   {
@@ -11,28 +9,28 @@ const routes: Routes = [
     redirectTo: 'landing/home',
     pathMatch: 'full'
   },
-  {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: 'sessions',
+  // {
+  //   path: '',
+  //   component: AuthLayoutComponent,
+  //   children: [
+  //     {
+  //       path: 'sessions',
 
-        loadChildren: () => import("./views/sessions/sessions.module").then(module => module.SessionsModule)
-      }
-    ]
-  },
-  {
-    path: '',
-    component: LandingLayoutComponent,
-    children: [
-      {
-        path: 'landing',
-        loadChildren: () => import( './views/landing/landing.module').then(x => x.LandingModule)
+  //       loadChildren: () => import("./views/sessions/sessions.module").then(module => module.SessionsModule)
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '',
+  //   component: LandingLayoutComponent,
+  //   children: [
+  //     {
+  //       path: 'landing',
+  //       loadChildren: () => import( './src/views/landing/landing.module.ts').then(x => x.LandingModule)
 
-      }
-    ]
-  },
+  //     }
+  //   ]
+  // },
 
 ];
 
