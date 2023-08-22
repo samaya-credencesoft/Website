@@ -104,6 +104,7 @@ import { ConvertToSpacesPipe } from 'src/services/spaces.pipe';
     TestimonialCauroselComponent,
     PricingOneComponent,
     ContactFormComponent,
+    DynamicPricingComponent,
     FooterComponent,
     LandingV2Component,
     FeaturesComponent,
