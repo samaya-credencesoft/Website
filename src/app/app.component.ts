@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router,
     public titleService: Title,
     private activatedRoute: ActivatedRoute,
-    private meta:Meta) {}
+   ) {}
 
   ngOnInit() {
 
@@ -21,15 +21,6 @@ export class AppComponent implements OnInit {
     // ....
     // SEO metadata
     // this.title.setTitle(this.course.description);
-    this.meta.updateTag({name: 'description', content: "dfghjkl"});
-
-    // Twitter metadata
-    this.meta.updateTag({name: 'twitter:card', content: 'summary'});
-    this.meta.updateTag({name: 'twitter:site', content: '@AngularUniv'});
-    this.meta.updateTag({name: 'twitter:title', content: "dfghjkl"});
-    this.meta.updateTag({name: 'twitter:description', content: "dfghjkl"});
-    this.meta.updateTag({name: 'twitter:text:description', content:"dfghjkl"});
-    this.meta.updateTag({name: 'twitter:image', content: 'https://avatars3.githubusercontent.com/u/16628445?v=3&s=200'});
 
 
     const appTitle = this.titleService.getTitle();

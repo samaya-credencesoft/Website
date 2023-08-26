@@ -13,7 +13,7 @@ export class PricingComponent implements OnInit {
   backgroundColor = 'landing-gradient-purple-indigo';
   showCustomizer = false;
   constructor(private meta:Meta) {
-    this.meta.updateTag({name: 'description', content: "sinkan"});
+    this.meta.updateTag({name: 'description', content: "Indulge in a remarkable stay at BookOne PMS where exceptional comfort meets affordability."});
 
     // Twitter metadata
     this.meta.updateTag({name: 'twitter:card', content: 'subha'});
