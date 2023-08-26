@@ -1,11 +1,11 @@
+import { LandingLayoutComponent } from './shared/components/layouts/landing-layout/landing-layout.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthLayoutComponent } from 'src/shared/components/layouts/auth-layout/auth-layout.component';
-import { LandingLayoutComponent } from 'src/shared/components/layouts/landing-layout/landing-layout.component';
-import { LandingModule } from 'src/views/landing/landing.module';
-import { SessionsModule } from 'src/views/sessions/sessions.module';
+import { Routes, RouterModule } from '@angular/router';
 
-export const AppRoutes: Routes =  [
+import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
+import { LandingModule } from './views/landing/landing.module';
+import { SessionsModule } from './views/sessions/sessions.module';
+export const AppRoutes: Routes  = [
   {
     path: '',
     redirectTo: 'landing/home',
@@ -17,11 +17,7 @@ export const AppRoutes: Routes =  [
     children: [
       {
         path: 'sessions',
-
-        // loadChildren: () => import(".views/sessions/sessions.module").then(module => SessionsModule)
-        // loadChildren: () => import('./src/views/sessions/sessions.module').then(m => m.SessionsModule)
         loadChildren: ()=> SessionsModule }
-
     ]
   },
   {
@@ -30,12 +26,15 @@ export const AppRoutes: Routes =  [
     children: [
       {
         path: 'landing',
-        // loadChildren: () => import( './src/views/landing/landing.module.ts').then(x => x.LandingModule)
         loadChildren: ()=> LandingModule }
+
     ]
   },
 
 ];
 
-
+@NgModule({
+  imports: [RouterModule.forRoot(AppRoutes)],
+  exports: [RouterModule]
+})
 export class AppRoutingModule { }

@@ -1,36 +1,37 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { BrowserModule, Title, TransferState } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {  AppRoutes, AppRoutingModule } from './app-routing.module';
+import { AppRoutes, AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { Http } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from 'src/shared/shared.module';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { WpApiLoader, WpApiModule, WpApiStaticLoader } from 'wp-api-angular';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 import { Http } from '@angular/http';
-
-import { CookieLawModule } from 'angular2-cookie-law';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { TransferHttpCacheModule } from '@nguniversal/common';
+import {
+  WpApiModule,
+  WpApiLoader,
+  WpApiStaticLoader
+} from 'wp-api-angular';
 
+import { NgSelectModule } from '@ng-select/ng-select';
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
 }
+import { CookieLawModule } from 'angular2-cookie-law';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+import { RouterModule } from '@angular/router';
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     SharedModule,
     HttpClientModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
-    TransferHttpCacheModule,
     NgSelectModule,
+    TransferHttpCacheModule,
+    AppRoutingModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     RouterModule.forRoot(AppRoutes,{ scrollPositionRestoration: 'enabled' }),
     WpApiModule.forRoot({ // <---
       provide: WpApiLoader,
@@ -39,16 +40,14 @@ export function WpApiLoaderFactory(http: Http) {
     }),
     CookieLawModule
   ],
+  providers: [
+    Title,
 
-  providers: [Title,
-    { provide: 'LOCALSTORAGE', useFactory: getLocalStorage },
-    {provide: LocationStrategy, useClass: PathLocationStrategy},],
-    schemas: [
-      CUSTOM_ELEMENTS_SCHEMA
-    ],
+    {provide: LocationStrategy, useClass: PathLocationStrategy},
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
-export function getLocalStorage() {
-  return (typeof window !== "undefined") ? window.localStorage : null;
+
+export class AppModule {
+
 }

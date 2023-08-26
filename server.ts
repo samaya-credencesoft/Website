@@ -1,22 +1,38 @@
-import 'zone.js/node';
+import { environment } from './src/environments/environment';
 
-import { APP_BASE_HREF } from '@angular/common';
+import 'node_modules/zone.js/dist/zone.js';
+import 'localstorage-polyfill'
+// import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { existsSync } from 'fs';
-import { join } from 'path';
-
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { AppServerModule } from './src/main.server';
+import { APP_BASE_HREF } from '@angular/common';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
+  const domino = require('domino');
+  const CircularJSON = require('circular-json');
+  const obj=CircularJSON.stringify(Object)
   const distFolder = join(process.cwd(), 'dist/demoSSR/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+  const win = domino.createWindow(indexHtml).toString();
+  (global as any).self = global;
+global['self'] = win;
+global['document'] = win.document;
+
+global['IDBIndex'] = win.IDBIndex
+global['document'] = win.document
+global['navigator'] = win.navigator
+global['getComputedStyle'] = win.getComputedStyle;
+global['Event'] = null;
+global['localStorage'] = localStorage;
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/main/modules/express-engine)
   server.engine('html', ngExpressEngine({
-    bootstrap: AppServerModule,
+    bootstrap: AppServerModule
   }));
 
   server.set('view engine', 'html');
@@ -38,7 +54,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 4000;
+  const port = process.env['PORT'] || 4200;
 
   // Start up the Node server
   const server = app();
@@ -46,6 +62,7 @@ function run(): void {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
+
 
 // Webpack will replace 'require' with '__webpack_require__'
 // '__non_webpack_require__' is a proxy to Node 'require'

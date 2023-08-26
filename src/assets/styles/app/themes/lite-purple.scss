@@ -76,8 +76,8 @@ $theme-colors: (
   gray-900: $gray-900,
   dark: $dark
 ) !default;
-@import "node_modules/bootstrap/scss/bootstrap.scss";
-
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "~eva-icons/style/eva-icons.css";
 
 // @import "../bootstrap-rtl.scss";
 @import "../globals/globals.scss";

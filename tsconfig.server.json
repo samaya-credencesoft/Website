@@ -3,8 +3,10 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "outDir": "./out-tsc/server",
+    "module": "commonjs",
     "types": [
-      "node"
+      "node",
+
     ]
   },
   "files": [
