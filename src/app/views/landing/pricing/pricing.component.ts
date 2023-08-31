@@ -15,13 +15,28 @@ export class PricingComponent implements OnInit {
   constructor(private meta:Meta) {
     this.meta.updateTag({name: 'description', content: "Indulge in a remarkable stay at BookOne PMS where exceptional comfort meets affordability."});
 
+
+
+    // Facebook metadata
+    this.meta.updateTag({property: 'og:title', content: 'BookonePMS Pricing'});
+    this.meta.updateTag({property: 'og:site', content: '@AngularUniv'});
+    this.meta.updateTag({property: 'og:title', content: "dfghjkl"});
+    this.meta.updateTag({property: 'og:description', content: "dfghjkl"});
+    this.meta.updateTag({property: 'og:text:description', content:"dfghjkl"});
+    this.meta.updateTag({property: 'og:image', content: 'https://uat.bookonepms.com/assets/images/pricing.jpg'})
+
+
+
     // Twitter metadata
     this.meta.updateTag({name: 'twitter:card', content: 'subha'});
     this.meta.updateTag({name: 'twitter:site', content: '@AngularUniv'});
-    this.meta.updateTag({name: 'twitter:title', content: "dfghjkl"});
+    this.meta.updateTag({name: 'twitter:title', content: "BookonePMS Pricing"});
     this.meta.updateTag({name: 'twitter:description', content: "dfghjkl"});
     this.meta.updateTag({name: 'twitter:text:description', content:"dfghjkl"});
-    this.meta.updateTag({name: 'twitter:image', content: 'https://avatars3.githubusercontent.com/u/16628445?v=3&s=200'});
+    this.meta.updateTag({name: 'twitter:image', content: 'https://uat.bookonepms.com/assets/images/pricing.jpg'});
+
+
+
   }
 
   ngOnInit() {
