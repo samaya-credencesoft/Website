@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class CompanyComponent implements OnInit {
 
 
+  pagename = 'Company';
 
   backgroundColor = 'landing-gradient-purple-indigo';
   showCustomizer = false;

@@ -18,22 +18,22 @@ export class PricingComponent implements OnInit {
 
 
     // Facebook metadata
-    this.meta.updateTag({property: 'og:title', content: 'BookonePMS Pricing'});
+    this.meta.updateTag({property: 'og:title', content: 'Affordable Pricing Plans for BookOnePMS | BookonePMS'});
     this.meta.updateTag({property: 'og:site', content: '@AngularUniv'});
-    this.meta.updateTag({property: 'og:title', content: "BookonePMS Pricing"});
-    this.meta.updateTag({property: 'og:description', content: "Discover unbeatable value with our competitive pricing that caters to your budget while ensuring top-notch quality and service."});
+    this.meta.updateTag({property: 'og:title', content: "Affordable Pricing Plans for BookOnePMS | BookonePMS"});
+    this.meta.updateTag({property: 'og:description', content: "Explore our range of flexible and budget-friendly pricing plans for BookOnePMS, tailored to suit your specific needs."});
     this.meta.updateTag({property: 'og:text:description', content:"dfghjkl"});
-    this.meta.updateTag({property: 'og:image', content: 'https://uat.bookonepms.com/assets/images/pricing.jpg'})
+    this.meta.updateTag({property: 'og:image', content: 'https://uat.bookonepms.com/assets/images/pricing.png'})
 
 
 
     // Twitter metadata
     this.meta.updateTag({name: 'twitter:card', content: 'subha'});
     this.meta.updateTag({name: 'twitter:site', content: '@AngularUniv'});
-    this.meta.updateTag({name: 'twitter:title', content: "BookonePMS Pricing"});
-    this.meta.updateTag({name: 'twitter:description', content: "Discover unbeatable value with our competitive pricing that caters to your budget while ensuring top-notch quality and service."});
+    this.meta.updateTag({name: 'twitter:title', content: "Affordable Pricing Plans for BookOnePMS | BookonePMS"});
+    this.meta.updateTag({name: 'twitter:description', content: "Explore our range of flexible and budget-friendly pricing plans for BookOnePMS, tailored to suit your specific needs."});
     this.meta.updateTag({name: 'twitter:text:description', content:"dfghjkl"});
-    this.meta.updateTag({name: 'twitter:image', content: 'https://uat.bookonepms.com/assets/images/pricing.jpg'});
+    this.meta.updateTag({name: 'twitter:image', content: 'https://uat.bookonepms.com/assets/images/pricing.png'});
 
 
 
