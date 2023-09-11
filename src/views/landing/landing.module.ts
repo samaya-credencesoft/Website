@@ -73,6 +73,7 @@ import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { ConvertToSpacesPipe } from 'src/services/spaces.pipe';
+import { NumberCounterComponent } from './number-counter/number-counter.component';
 
 // import { MatFormFieldModule, MatInputModule, MatRadioModule, MatSelectModule } from '@angular/material';
 // import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
@@ -155,7 +156,8 @@ import { ConvertToSpacesPipe } from 'src/services/spaces.pipe';
     CallToActionComponent,
     SubscribeEmailComponent,
     PrivacyComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    NumberCounterComponent
 
   ],
   providers: [WINDOW_PROVIDERS],
