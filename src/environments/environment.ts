@@ -2,8 +2,32 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// export const environment = {
+//   production: false
+// };
 export const environment = {
-  production: false
+
+  appIdCustomer: 'BookOneCustomerApp',
+  sessionAppId: 'BOOKONE_MOBILE_APP_CUSTOMER',
+  production: true,
+  appId: 'TheHotelMate',
+  spaceId:'99i7n5tw4eq0',
+  accessToken:'q0iVR3edz6GByDVpTdYxTwOsL2yhXA2aApPWKw_7mYk',
+  nzAPIUrl: 'https://api.bookonelocal.in/api-bookone',
+  inAPIUrl: 'https://api.bookonelocal.in/api-bookone',
+  apiScheduler: 'https://api.bookonelocal.in/api-scheduler',
+  apiUrlAddress: 'https://api.bookonelocal.in/api-address',
+  apiUrlPromotion: 'https://api.bookonelocal.in/promotion-api',
+  apiLms: 'https://api.bookonelocal.in/api-lms',
+  parentOrganisationId: 1,
+  dashboardUrl: 'https://app.bookonelocal.in',
+  appUrl: 'https://thehotelmate.com',
+  androidAppUrl: 'https://play.google.com/store/apps/details?id=nz.co.bookonelocal.customer',
+  iosAppUrl: 'https://apps.apple.com/us/app/bookone-local/id1528910778',
+  country: 'in',
+  googleKey: 'AIzaSyBYGJ1SMIW5BIny9Af7eoozmgSGZShhUuE',
+
+  callbackUrl: 'http://localhost:4200/booking-complete?ReferenceNumber='
 };
 
 /*

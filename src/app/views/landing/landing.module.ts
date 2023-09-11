@@ -1,9 +1,12 @@
+import { OnboardingThankyouFormComponent } from './onboarding-thankyou-form/onboarding-thankyou-form.component';
+import { OnboardingRoomdetailsFormComponent } from './onboarding-roomdetails-form/onboarding-roomdetails-form.component';
+import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted-form/onboardingform-submitted-form.component';
 
 import { ScrollToDirective } from './helpers/scrollTo.directives';
 import { WINDOW_PROVIDERS } from './helpers/window.helpers';
 import { NgModule } from '@angular/core';
 // import { NgForm } from "@angular/forms";
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NguCarouselModule } from '@ngu/carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingRoutingModule } from './landing-routing.module';
@@ -46,6 +49,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderWhiteComponent } from './components/header-white/header-white.component';
 import { IntroNineComponent } from './components/intro-nine/intro-nine.component';
 import { LandingV9Component } from './landing-v9/landing-v9.component';
+// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+
 import { IntroTenComponent } from './components/intro-ten/intro-ten.component';
 import { LandingV10Component } from './landing-v10/landing-v10.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -78,6 +83,11 @@ import { CallToActionComponent } from './components/call-to-action/call-to-actio
 import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { TokenStorage } from 'src/token.storage';
+
+
 
 @NgModule({
   imports: [
@@ -85,10 +95,12 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     LandingRoutingModule,
     NguCarouselModule,
     NgbModule,
-    FormsModule,
+GooglePlaceModule,
     ReactiveFormsModule,
     MatCheckboxModule,
     MatInputModule,
+
+    FormsModule,
     MatSelectModule,
     MatRadioModule,
     MatFormFieldModule,
@@ -131,6 +143,10 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     LandingV8Component,
     HeaderComponent,
     ScrollToDirective,
+    OnboardingCouponcodeFormComponent,
+    OnboardingformSubmittedFormComponent,
+    OnboardingRoomdetailsFormComponent,
+    OnboardingThankyouFormComponent,
     HeaderWhiteComponent,
     IntroNineComponent,
     LandingV9Component,
@@ -159,7 +175,9 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     PrivacyPolicyComponent
 
   ],
-  providers: [WINDOW_PROVIDERS],
+  providers: [WINDOW_PROVIDERS,
+    DatePipe,
+    ],
   exports: [
     FormsModule,
   ]

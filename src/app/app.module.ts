@@ -21,6 +21,8 @@ export function WpApiLoaderFactory(http: Http) {
 import { CookieLawModule } from 'angular2-cookie-law';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { TokenStorage } from 'src/token.storage';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -29,6 +31,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     BrowserAnimationsModule,
     NgSelectModule,
+    GooglePlaceModule,
     TransferHttpCacheModule,
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -42,7 +45,7 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [
     Title,
-
+TokenStorage,
     {provide: LocationStrategy, useClass: PathLocationStrategy},
   ],
   bootstrap: [AppComponent]

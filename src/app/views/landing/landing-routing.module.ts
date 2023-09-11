@@ -21,6 +21,9 @@ import { BlogComponent } from './blog/blog.component';
 import { ContactComponent } from './contact/contact.component';
 import { FaqComponent } from './faq/faq.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
+import { OnboardingThankyouFormComponent } from './onboarding-thankyou-form/onboarding-thankyou-form.component';
+import { OnboardingRoomdetailsFormComponent } from './onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 
 const routes: Routes = [
   {
@@ -84,7 +87,15 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent, data: {title: 'Home | Bookone PMS'}
   },
-
+  {
+    path: 'onbord',
+    component: OnboardingCouponcodeFormComponent, data: {title: 'onbord'}
+  },
+  {
+  path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
+  {
+    path: 'onboardingThankyou-form',component: OnboardingThankyouFormComponent, }, 
+    {path: 'onboardingRoomdetails-form',component: OnboardingRoomdetailsFormComponent, },
   {
     path: 'pricing',
     component: PricingComponent, data: {title: 'Pricing'}
