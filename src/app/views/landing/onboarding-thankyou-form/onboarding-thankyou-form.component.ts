@@ -42,6 +42,8 @@ export class OnboardingThankyouFormComponent {
   options: any = {
     componentRestrictions: { country: 'IN' }
   }
+
+  backgroundColor = 'landing-gradient-purple-indigo';
   bookingCity: string;
   // businessUser: BusinessUser;
   subType = "All";

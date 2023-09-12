@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./onboardingform-submitted-form.component.scss']
 })
 export class OnboardingformSubmittedFormComponent {
-
+  backgroundColor = 'landing-gradient-purple-indigo';
 }
