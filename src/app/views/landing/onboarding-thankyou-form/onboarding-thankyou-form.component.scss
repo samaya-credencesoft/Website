@@ -1,9 +1,9 @@
 $elSet: 3;
 $elCount: $elSet * 2;
-$orange-light: #9ED28D;
-$yellow: #9ED28D;
-$blue-light: #9ED28D;
-$blue: #9ED28D;
+$orange-light: #221950;
+$yellow: #221950;
+$blue-light: #221950;
+$blue: #221950;
 $smooth: cubic-bezier(0, 0.72, 0.58, 1);
 
 .bar {
@@ -149,7 +149,7 @@ $smooth: cubic-bezier(0, 0.72, 0.58, 1);
 }
 
 .command {
- 
+
   letter-spacing: 1px;
   margin: 30px auto auto;
   animation: fade 1s ease infinite;
@@ -198,7 +198,7 @@ body {
   padding: 0;
   margin-top: 10px;
   border-radius: 10px;
-  border: 0.5px solid #9ED28D;
+  border: 0.5px solid #221950;
   background: #FFF;
 
   overflow-y: auto;
@@ -228,14 +228,14 @@ body {
 .thankyoupara {
   color: #000;
             text-align: center;
-         
+
             font-size: 20px;
             font-weight: 400; margin-top: 30px; margin-bottom: 30px;
 }
 
 .prevbutton {
   border-radius: 25px;margin-right: 30px;
-            background: #9ED28D;width: 226px;
+            background: #221950;width: 226px;
             padding: 5px 80px 4px 79px; border: none; margin-bottom: 50px; color: #FFF;
             text-align: center;
 
@@ -245,7 +245,7 @@ body {
 
 .nextbutton {
   border-radius: 25px;margin-right: 30px;
-            background: #9ED28D;width: 226px;
+            background: #221950;width: 226px;
             padding: 5px 80px 4px 79px; border: none; margin-bottom: 50px; color: #FFF;
             text-align: center;
 
@@ -298,7 +298,7 @@ body {
   .thankyoupara {
     color: #000;
               text-align: center;
-         
+
               font-size: 15px;
               font-weight: 400; margin-top: 30px; margin-bottom: 30px;
   }
@@ -308,20 +308,20 @@ body {
 
   .prevbutton {
     border-radius: 25px;margin-left: 30px;
-              background: #9ED28D;width: 226px;
+              background: #221950;width: 226px;
               padding: 5px 80px 4px 79px; border: none; margin-bottom: 50px; color: #FFF;
               text-align: center;
-  
+
               font-size: 20px;
               font-weight: 700;
   }
-  
+
   .nextbutton {
     border-radius: 25px;margin-left: 30px;
-              background: #9ED28D;width: 226px;
+              background: #221950;width: 226px;
               padding: 5px 80px 4px 79px; border: none; margin-bottom: 50px; color: #FFF;
               text-align: center;
-  
+
               font-size: 20px;
               font-weight: 700;
   }
