@@ -44,7 +44,7 @@ export class EnquiryForm {
 
 export class OnboardingRoomdetailsFormComponent {
   productLine : any;
-
+  backgroundColor = 'landing-gradient-purple-indigo';
   amenities = false;
   isCardClicked = false;
   isCardClicked1 = false;
