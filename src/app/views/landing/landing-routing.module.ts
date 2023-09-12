@@ -24,6 +24,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
 import { OnboardingThankyouFormComponent } from './onboarding-thankyou-form/onboarding-thankyou-form.component';
 import { OnboardingRoomdetailsFormComponent } from './onboarding-roomdetails-form/onboarding-roomdetails-form.component';
+import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted-form/onboardingform-submitted-form.component';
 
 const routes: Routes = [
   {
@@ -99,6 +100,10 @@ const routes: Routes = [
   {
     path: 'pricing',
     component: PricingComponent, data: {title: 'Pricing'}
+  },
+  {
+    path: 'submitted-form',
+    component: OnboardingformSubmittedFormComponent,
   },
   {
     path: 'company',
