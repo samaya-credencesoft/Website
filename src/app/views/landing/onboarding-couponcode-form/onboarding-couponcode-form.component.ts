@@ -19,6 +19,11 @@ export class OnboardingCouponcodeFormComponent {
   isPopupVisible: boolean = false;
   hidediv : boolean = true;
   dropdownOptions: string[] = ['Facebook', 'Instagram', 'WhatsApp', 'Website', 'Others'];
+  pagename = 'Onboarding-couponcode-form';
+
+  backgroundColor = 'landing-gradient-purple-indigo';
+  showCustomizer = false;
+
   // selectedOption: string = '';
   isDropdownOpen: boolean = false;
   nameControl: FormControl = new FormControl([Validators.required]);
@@ -88,12 +93,24 @@ if (this.campainId == null ||this.campainId == '' || this.campainId == undefined
 }
   }
 
+
+
   ngOnInit(): void {
     let businessSlug = this.routerone.snapshot.params['onboardingCouponcode-form'];
     // console.log("dfghjk"+this.campainId)
     // console.log("dfghjk"+this.coupon)
 
+
   }
+
+  changeBg(colorName) {
+    this.backgroundColor = 'landing-' + colorName;
+  }
+  toggleCustomizer() {
+    this.showCustomizer = !this.showCustomizer;
+
+  }
+
 
 getBusinessLeadById(){
   this.listingService.getBusinessLeadByBusinessLeadId(this.campainId).subscribe(data => {
@@ -117,7 +134,7 @@ getBusinessLeadById(){
     'One stop solution';
     const ogImage = 'https://thehotelmate.com/assets/images/formimg.jpg';
     const ogSiteName = 'Maximize your property bookings through the Hotelmate | The Hotel Mate';
-    const ogUrl = 'https://thehotelmate.com/onboardingCouponcode-form';
+    const ogUrl = 'https://uat.bookonepms.com/onboardingCouponcode-form';
   // const ogSiteName = '';
   this.setTitle(title);
   this.metaService.updateTag({ name: "title", content: title });

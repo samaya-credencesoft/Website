@@ -95,7 +95,7 @@ import { TokenStorage } from 'src/token.storage';
     LandingRoutingModule,
     NguCarouselModule,
     NgbModule,
-GooglePlaceModule,
+    GooglePlaceModule,
     ReactiveFormsModule,
     MatCheckboxModule,
     MatInputModule,

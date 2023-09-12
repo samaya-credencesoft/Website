@@ -94,8 +94,8 @@ const routes: Routes = [
   {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {
-    path: 'onboardingThankyou-form',component: OnboardingThankyouFormComponent, }, 
-    {path: 'onboardingRoomdetails-form',component: OnboardingRoomdetailsFormComponent, },
+    path: 'onboardingThankyou-form',component: OnboardingThankyouFormComponent,},
+    {path: 'onboardingRoomdetails-form',component: OnboardingRoomdetailsFormComponent,},
   {
     path: 'pricing',
     component: PricingComponent, data: {title: 'Pricing'}
