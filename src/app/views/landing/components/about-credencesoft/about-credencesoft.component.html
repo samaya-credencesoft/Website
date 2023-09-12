@@ -120,44 +120,59 @@
         >
       </div>
     </div>
-    <section>
-      <div class="client-count-wrp mt-100">
-        <div class="container">
-          <h2 class="head-line display-3 pb-4 text-center">
-            Our Happy Clients
-          </h2>
-          <div class="client-count-wrp-inner">
-            <div class="cards">
-              <h4>{{ projectcount + "+" }}</h4>
-              <p class="count">Properties</p>
-            </div>
-            <!--card-->
-            <div class="cards">
-              <h4>{{ accuratecount + "+" }}</h4>
-              <!--concat % sign-->
-              <p class="count">Happy Clients</p>
-            </div>
-            <!--card-->
-            <!-- <div class="cards">
-               <h4>{{clientcount}}</h4>
-                <p>Clients</p>
-              </div> -->
-
-            <!--card-->
-            <div class="cards">
-
-              <h4>{{ customerfeedback + " % " }}</h4>
-
-              <p class="count">Satisfaied Clients</p>
-
-            </div>
-
-            <!--card-->
+  </div>
+  <section style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-left: 20px; margin-right: 20px;">
+    <div class="client-count-wrp mt-100">
+      <div >
+        <h2 class="head-line display-3 pb-4 text-center" >
+          Our Services
+        </h2>
+        <div class="client-count-wrp-inner" style="display: flex; flex-wrap: wrap; margin-left: 20px; margin-right: 20px;">
+          <div class="cards" style="background-color: #221950; padding: 50px; border-radius: 30px; width: 300px; text-align: center;">
+            <img src="/assets/images/building.png" style="height: 100px;" />
+            <h4 style="color: #fff;">{{ projectcount + "+" }}</h4>
+            <p class="count" style="color: #fff; font-weight: 600;">No. of Properties</p>
+          </div>
+          <!--card-->
+          <div class="cards" style="background-color: #221950; padding: 50px; border-radius: 30px; width: 300px; text-align: center;">
+            <img src="/assets/images/featurespms.png" style="height: 100px;"  />
+            <h4 style="color: #fff;">{{ accuratecount + "+" }}</h4>
+            <!--concat % sign-->
+            <p class="count" style="color: #fff; font-weight: 600;">No. of Special Features</p>
           </div>
 
+          <div class="cards" style="background-color: #221950; padding: 50px; border-radius: 30px; width: 300px; text-align: center;">
+            <img src="/assets/images/otapms.png" style="height: 100px;"  />
+
+            <h4 style="color: #fff;">{{ clientcount + "+" }}</h4>
+            <!--concat % sign-->
+            <p class="count" style="color: #fff; font-weight: 600;">No. of OTA</p>
+          </div>
+
+          <!--card-->
+          <!-- <div class="cards">
+             <h4>{{clientcount}}</h4>
+              <p>Clients</p>
+            </div> -->
+
+          <!--card-->
+          <div class="cards" style="background-color: #221950; padding: 50px; border-radius: 30px; width: 300px; text-align: center;">
+            <img src="/assets/images/subscription.png" style="height: 100px;"  />
+
+
+            <h4 style="color: #fff;">{{ customerfeedback + " + " }}</h4>
+
+            <p class="count" style="color: #fff; font-weight: 600;">No. of Subscriptions</p>
+
+          </div>
+
+          <!--card-->
         </div>
 
       </div>
-    </section>
-  </div>
+
+    </div>
+  </section>
+
 </section>
+

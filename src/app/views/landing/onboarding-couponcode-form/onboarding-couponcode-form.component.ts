@@ -126,14 +126,14 @@ getBusinessLeadById(){
 
     const description =
     'One stop solution';
-    const title = 'Maximize your property bookings through the Hotelmate  | The Hotel Mate';
+    const title = 'Maximize your property bookings through the Bookone PMS  | Bookone PMS';
     const keywords =
     'One stop solution';
-    const ogTitle = 'Maximize your property bookings through the Hotelmate | The Hotel Mate';
+    const ogTitle = 'Maximize your property bookings through the Bookone PMS | Bookone PMS';
     const ogDescription =
     'One stop solution';
-    const ogImage = 'https://thehotelmate.com/assets/images/formimg.jpg';
-    const ogSiteName = 'Maximize your property bookings through the Hotelmate | The Hotel Mate';
+    const ogImage = 'https://uat.bookonepms.com/assets/images/formimg.jpg';
+    const ogSiteName = 'Maximize your property bookings through the Bookone PMS | Bookone PMS';
     const ogUrl = 'https://uat.bookonepms.com/onboardingCouponcode-form';
   // const ogSiteName = '';
   this.setTitle(title);
