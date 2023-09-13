@@ -13,7 +13,7 @@
 
   "ecs_cluster_name": "bookone-pms",
   "ecs_cluster_arn": "arn:aws:ecs:ap-south-1:153432822124:cluster/bookone-pms",
-  "ecs_service_name": "webui-prod",
+  "ecs_service_name": "webui-prod2",
   "ecs_service_arn": "arn:aws:ecs:ap-south-1:153432822124:service/bookone-pms/webui-prod",
   "ecs_task_def_name": "b1pms-webui-prod",
   "main_container_name": "main_container",
