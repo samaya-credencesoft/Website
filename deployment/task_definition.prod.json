@@ -11,7 +11,7 @@
   ],
   "family": "b1pms-webui-prod",
   "cpu": "2048",
-  "memory": "4096",
+  "memory": "5120",
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["EC2", "FARGATE"],
   "executionRoleArn": "arn:aws:iam::153432822124:role/ecsTaskExecutionRole"
