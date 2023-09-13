@@ -196,8 +196,8 @@ getBusinessLeadById(){
 // console.log( JSON.stringify(this.businessLineDTO));
 this.businessLineDTO.businessType ="Accommodation",
 this.businessLineDTO.organisationId = 1,
-this.businessLineDTO.propertyId = 443
-// this.businessLineDTO.propertyId = 107
+// this.businessLineDTO.propertyId = 443
+this.businessLineDTO.propertyId = 107
 if(this.campainId != null && this.campainId != undefined){
 this.businessLineDTO.id =this.campainId;
 
