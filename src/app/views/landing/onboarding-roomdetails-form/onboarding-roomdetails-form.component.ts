@@ -266,7 +266,7 @@ next(){
   this.businessleadDto.productLines = this.productLine;
 
   this.businessleadDto.id = this.businessLead.id;
-  this.businessleadDto.managerEmailAddress ="support@thehotelmate.com"
+  this.businessleadDto.managerEmailAddress ="info@bookonepms.com"
   this.token.saveLeads(this.businessleadDto);
   this.listingService.saveBusinessLeads(this.businessleadDto).subscribe(data => {
   this.businessLead = data.body;
