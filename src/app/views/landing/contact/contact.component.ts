@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit {
     this.meta.updateTag({property: 'og:title', content: "Get in Touch with BookOnePMS | BookonePMS"});
     this.meta.updateTag({property: 'og:description', content: "Have questions or need assistance? Contact the BookOnePMS team for expert support and solutions tailored to your property management needs."});
     this.meta.updateTag({property: 'og:text:description', content:"dfghjkl"});
-    this.meta.updateTag({property: 'og:image', content: 'https://uat.bookonepms.com/assets/images/contactlogo.png'})
+    this.meta.updateTag({property: 'og:image', content: 'https://bookonepms.com/assets/images/contactlogo.png'})
 
 
 
@@ -31,7 +31,7 @@ export class ContactComponent implements OnInit {
     this.meta.updateTag({name: 'twitter:title', content: "Get in Touch with BookOnePMS | BookonePMS"});
     this.meta.updateTag({name: 'twitter:description', content: "Have questions or need assistance? Contact the BookOnePMS team for expert support and solutions tailored to your property management needs."});
     this.meta.updateTag({name: 'twitter:text:description', content:"dfghjkl"});
-    this.meta.updateTag({name: 'twitter:image', content: 'https://uat.bookonepms.com/assets/images/contactlogo.png'});
+    this.meta.updateTag({name: 'twitter:image', content: 'https://bookonepms.com/assets/images/contactlogo.png'});
 
 
 
