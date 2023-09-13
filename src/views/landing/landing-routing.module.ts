@@ -88,9 +88,8 @@ const routes: Routes = [
     component: HomeComponent, data: {title: 'Home | Bookone PMS'}
   },
   {
-    path: 'onbord',
-    component: OnboardingCouponcodeFormComponent, data: {title: 'onbord'}
-  },
+    path: 'onboard',
+    component: OnboardingCouponcodeFormComponent },
   {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {

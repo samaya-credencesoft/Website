@@ -8,7 +8,7 @@ import { SessionsModule } from './views/sessions/sessions.module';
 export const AppRoutes: Routes  = [
   {
     path: '',
-    redirectTo: 'landing/home',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -25,7 +25,7 @@ export const AppRoutes: Routes  = [
     component: LandingLayoutComponent,
     children: [
       {
-        path: 'landing',
+        path: '',
         loadChildren: ()=> LandingModule }
 
     ]

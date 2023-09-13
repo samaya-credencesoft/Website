@@ -221,14 +221,14 @@ this.listingService.saveBusinessLeads(this.businessLineDTO).subscribe(data => {
     // Assuming you have a dynamic campaignId value
   const dynamicCampaignId = this.campainId;
 
-  this.router.navigate(['/landing/onboardingThankyou-form'], {
+  this.router.navigate(['/onboardingThankyou-form'], {
     queryParams: { campaignId: dynamicCampaignId },
     skipLocationChange: true
   });
   // this.router.navigate([url]);
       // this.router.navigate(decodeURIComponent["/onboardingThankyou-form?campainId="+this.campainId]);
     } else {
-      this.router.navigate(['/landing/onboardingThankyou-form']);
+      this.router.navigate(['/onboardingThankyou-form']);
     }
   })
 
