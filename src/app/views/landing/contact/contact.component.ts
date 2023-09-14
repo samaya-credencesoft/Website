@@ -21,7 +21,9 @@ export class ContactComponent implements OnInit {
     this.meta.updateTag({property: 'og:title', content: "Get in Touch with BookOnePMS | BookonePMS"});
     this.meta.updateTag({property: 'og:description', content: "Have questions or need assistance? Contact the BookOnePMS team for expert support and solutions tailored to your property management needs."});
     this.meta.updateTag({property: 'og:text:description', content:"dfghjkl"});
-    this.meta.updateTag({property: 'og:image:width', content: 'https://bookonepms.com/assets/images/contactlogo.png'})
+    this.meta.updateTag({property: 'og:image:width', content: '1200'}),
+    this.meta.updateTag({property: 'og:image:height', content: '630'}),
+   this.meta.updateTag({property: 'og:image', content: 'https://bookonepms.com/assets/images/contactlogo.png'})
 
 
 
