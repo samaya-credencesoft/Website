@@ -11,6 +11,16 @@ export class ContactComponent implements OnInit {
   backgroundColor = 'landing-gradient-purple-indigo';
   showCustomizer = false;
   constructor(private meta:Meta) {
+   this.updateTag();
+
+
+  }
+
+
+  ngOnInit() {
+  }
+
+  updateTag(){
     this.meta.updateTag({name: 'description', content: "Indulge in a remarkable stay at BookOne PMS where exceptional comfort meets affordability."});
 
 
@@ -35,14 +45,7 @@ export class ContactComponent implements OnInit {
     this.meta.updateTag({name: 'twitter:text:description', content:"dfghjkl"});
     this.meta.updateTag({name: 'twitter:image', content: 'https://bookonepms.com/assets/images/contactlogo.png'});
 
-
-
   }
-
-
-  ngOnInit() {
-  }
-
   changeBg(colorName) {
     this.backgroundColor = 'landing-' + colorName;
   }
