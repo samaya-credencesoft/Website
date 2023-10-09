@@ -57,3 +57,25 @@
 .xyz{
   background-color: #292763;
 }
+.zigzag-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.zigzag-item {
+  width: 48%; /* Adjust the width as needed */
+  margin-bottom: 20px;
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.zigzag-item:nth-child(odd) {
+  transform: translateY(30px);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
