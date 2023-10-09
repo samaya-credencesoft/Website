@@ -1,6 +1,6 @@
-<nav id="home-header" [ngClass]="{'header-fixed': isFixed}" class="navbar navbar-expand-lg text-16 ">
+<nav id="home-header" [ngClass]="{'header-fixed': isFixed}" class="navbar navbar-expand-lg text-16 xyz">
     <div class="container">
-
+<!-- xyz -->
 
         <div class="d-flex flex-grow-1 mobile_menu">
             <span class="w-100 d-lg-none d-block">
@@ -68,6 +68,10 @@
                 <li (click)="hidemenu()" class="nav-item">
                   <a routerLink='/onboard' routerLinkActive="router-link-active" class="nav-link m-2 menu-item">Add Listing</a>
               </li>
+
+              <li (click)="hidemenu()" class="nav-item">
+                <a routerLink='/bookoneconnect' routerLinkActive="router-link-active" class="nav-link m-2 menu-item">BookOne Connect</a>
+            </li>
 
                 <li (click)="hidemenu()" class="nav-item">
 

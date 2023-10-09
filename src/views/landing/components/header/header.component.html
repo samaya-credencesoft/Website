@@ -1,4 +1,4 @@
-<nav id="home-header" [ngClass]="{'header-fixed': isFixed}" class="navbar navbar-expand-lg text-16 ">
+<nav id="home-header" [ngClass]="{'header-fixed': isFixed}" class="navbar navbar-expand-lg text-16  ">
     <div class="container">
 
 
@@ -8,7 +8,7 @@
             <!-- <a class="navbar-brand d-none d-lg-inline-block" href="#">
     Navbar 6
   </a> -->
-           
+
             <div class="w-100 text-left">
                 <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
       <span class="navbar-toggler-icon">
@@ -16,7 +16,7 @@
       </span>
 
     </button>
-            </div> 
+            </div>
             <a class="navbar-brand-two mx-auto  d-inline-block" href="#">
                 <img src="assets/images/landing/lOGO_d/logo_white.png" alt="logo">
             </a>
@@ -33,10 +33,10 @@
                 <li (click)="hidemenu()" class="nav-item">
                     <a routerLink="/landing/company" routerLinkActive="router-link-active" class="nav-link m-2 menu-item">Company</a>
                 </li>
-                <!-- drop down menu start 
+                <!-- drop down menu start
                 <li class="nav-item">
                     <a class="nav-link m-2 menu-item">Other Sections</a>-->
-                    <!-- First  Drop Down 
+                    <!-- First  Drop Down
                     <ul>
                         <li (click)="hidemenu()" class="nav-item">
                             <a href="#" scrollTo="teams-wrap" class="  menu-item">Team</a>
@@ -47,7 +47,7 @@
                         <li (click)="hidemenu()" class="nav-item">
                             <a href="#" scrollTo="extra-feature-wrap" class="  menu-item">Extra features</a>
                         </li>
-                    
+
                     </ul>
                 </li>-->
                 <!-- drop down menu end -->
@@ -65,10 +65,14 @@
                     <a routerLink='/landing/contact' routerLinkActive="router-link-active" class="nav-link m-2 menu-item">Contact Us</a>
                 </li>
                 <li (click)="hidemenu()" class="nav-item">
+                  <a routerLink='/landing/book-one-connect' routerLinkActive="router-link-active" class="nav-link m-2 menu-item">BookOne Connect</a>
+              </li>
 
-                <a id="" class="btn btn-warning btn-lg pl-5 pr-5 pb-2 mt-2 mb-4 text-uppercase 
+                <li (click)="hidemenu()" class="nav-item">
+
+                <a id="" class="btn btn-warning btn-lg pl-5 pr-5 pb-2 mt-2 mb-4 text-uppercase
  button" href="https://app.bookonelocal.in/" role="button">Sign in</a>
-                </li> 
+                </li>
             </ul>
             <!-- <ul class="navbar-nav ml-auto flex-nowrap">
                 <li class="nav-item" (click)="hidemenu()">

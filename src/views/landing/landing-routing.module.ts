@@ -24,6 +24,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { OnboardingCouponcodeFormComponent } from 'src/app/views/landing/onboarding-couponcode-form/onboarding-couponcode-form.component';
 import { OnboardingThankyouFormComponent } from 'src/app/views/landing/onboarding-thankyou-form/onboarding-thankyou-form.component';
 import { OnboardingRoomdetailsFormComponent } from 'src/app/views/landing/onboarding-roomdetails-form/onboarding-roomdetails-form.component';
+import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 
 const routes: Routes = [
   {
@@ -120,6 +121,11 @@ const routes: Routes = [
     path: 'faqs',
     component: FaqComponent, data: {title: 'FAQs'}
   },
+  {
+    path: 'book-one-connect',
+    component: BookOneConnectComponent, data: {title: 'BookOne Connect'}
+  },
+
   {
     path: 'privacy',
     component: PrivacyPolicyComponent, data: {title: 'Privacy Policy'}

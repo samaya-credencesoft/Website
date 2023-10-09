@@ -86,6 +86,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { TokenStorage } from 'src/token.storage';
+import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 
 
 
@@ -128,6 +129,7 @@ import { TokenStorage } from 'src/token.storage';
     TeamComponent,
     NewsComponent,
     FaqsComponent,
+    BookOneConnectComponent,
     NewsTwoComponent,
     IntroThreeComponent,
     LandingV3Component,
@@ -169,6 +171,7 @@ import { TokenStorage } from 'src/token.storage';
     BlogComponent,
     ContactComponent,
     FaqComponent,
+
     CallToActionComponent,
     SubscribeEmailComponent,
     PrivacyComponent,
