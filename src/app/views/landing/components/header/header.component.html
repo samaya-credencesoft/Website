@@ -1,5 +1,5 @@
 <nav id="home-header" [ngClass]="{'header-fixed': isFixed}" class="navbar navbar-expand-lg text-16 xyz">
-    <div class="container">
+    <div class="container-fluid">
 <!-- xyz -->
 
         <div class="d-flex flex-grow-1 mobile_menu">
@@ -21,7 +21,7 @@
                 <img src="assets/images/landing/lOGO_d/logo_white.png" alt="logo">
             </a>
         </div>
-        <div class="collapse  navbar-collapse flex-grow-1 text-right" id="collapseExample" [ngbCollapse]="isCollapsed">
+        <div class="collapse  navbar-collapse flex-grow-1 text-right" id="collapseExample" [ngbCollapse]="isCollapsed" style="padding-top: 20px;">
 
             <ul class="navbar-nav ml-auto flex-nowrap">
                 <li class="nav-item" (click)="hidemenu()">

@@ -79,3 +79,51 @@ img {
   height: auto;
 }
 
+@media (max-width: 768px) {
+  /* Styles for mobile devices */
+
+  .col-1 {
+    display: none;
+  }
+
+  .col-3 {
+    padding-top: 0;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Styles for mobile devices */
+
+  .cardClickable {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .imgcol {
+    text-align: center;
+  }
+
+  .textcol {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+.image-text-container {
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Vertically align content */
+}
+
+/* Style for the image */
+.image-text-container img {
+  height: 20px;
+  margin-right: 10px; /* Add some spacing between the image and text */
+}
+
