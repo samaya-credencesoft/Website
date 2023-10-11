@@ -127,3 +127,276 @@ img {
   margin-right: 10px; /* Add some spacing between the image and text */
 }
 
+@media (min-width: 768px) {
+  .col-6 {
+    width: 50%;
+  }
+  .textcol {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  /* Styles for tablet view and below (up to 768px width) */
+  .sdfg {
+    // display: none !important;
+    width: 350px  }
+    .textcol-viw-10{
+      width: 350px
+     }
+.viw{
+  width: 350px !important
+}
+.textcol-viw-8{
+  margin-left: -16px !important
+}
+.textcol-viw-6{
+  margin-left: -16px !important
+
+}
+.textcol-viw{
+  margin-left: -14px !important
+
+}
+.textcol-viw-3{
+  margin-left: -42px !important
+}
+.challeng{
+  display: none !important;
+}
+.desktop_view_challen{
+  display: none !important;
+}
+// .cont-pg{
+//   width: 100px !important;
+//   text-align: center !important;
+//   padding-left: 20px !important;
+// }
+
+.image-text-container{
+  padding-left: 110px;
+}
+
+.light-firstone{
+  background-color: #292763 !important;
+}
+.mobile_view_header{
+  display: block !important;
+  color: #292763;
+  font-size: 40px;
+  font-weight: 700;
+  font-family: Inter;
+}
+.colimginn{
+  font-size: 30px !important;
+}
+    }
+
+
+
+
+
+    @media (max-width: 992px) {
+      /* Media query for phone and tablet views (max-width: 992px) */
+      .right-image-wrap {
+        background: linear-gradient(124deg, rgba(41, 39, 99, 0.9) 55.7%, rgba(41, 39, 99, 0) 70.98%);
+      }
+    }
+
+
+.textcol-viw{
+  font-weight: 700;
+  font-size: 19px;
+  padding: 10px;
+  background-color: #6798c8;
+  text-align: left;
+  margin-top: 20px;
+  height: 50px;
+  margin-bottom: -10px;
+  display: initial;
+  margin-left: -10px;
+
+}
+
+.textcol-viw-1{
+  text-align: center;
+  font-size: 13px;
+  text-align: left;
+  text-align: justify;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+}
+
+.textcol-viw-3{
+  font-weight: 700;
+  font-size: 19px;
+  padding: 10px;
+  background-color: #6798c8;
+  text-align: left;
+  margin-top: 20px;
+  height: 50px;
+  margin-bottom: -10px;
+  display: initial;
+  margin-left: -10px;
+
+}
+.textcol-viw-4{
+  text-align: center;
+  font-size: 13px;
+  text-align: left;
+  text-align: justify;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+}
+
+.textcol-viw-5{
+  text-align: center;
+  font-size: 13px;
+  text-align: left;
+  text-align: justify;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+}
+
+.textcol-viw-6{
+  font-weight: 700;
+  font-size: 19px;
+  padding: 10px;
+  background-color: #6798c8;
+  text-align: left;
+  margin-top: 20px;
+  height: 50px;
+  margin-bottom: -10px;
+  display: initial;
+  margin-left: -10px;
+
+}
+.textcol-viw-7{
+  text-align: justify;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+.textcol-viw-8{
+  font-weight: 700;
+  font-size: 19px;
+  padding: 10px;
+  background-color: #6798c8;
+  text-align: left;
+  margin-top: 20px;
+  height: 50px;
+  margin-bottom: -10px;
+  display: initial;
+  margin-left: -10px;
+
+}
+.textcol-viw-9 {
+  height: 80px;
+    text-align: justify;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 15px;
+}
+
+.textcol-viw-10{
+  font-weight: 700;
+  font-size: 19px;
+  padding: 10px;
+  background-color: #6798c8;
+  text-align: left;
+  margin-top: 20px;
+  height: 50px;
+  margin-bottom: -10px;
+  display: initial;
+  margin-left: -10px;
+}
+
+/* Default styles for larger screens */
+.cardClickable-viw {
+  margin-left: 20px;
+}
+
+.textcol-viw-10 {
+  font-weight: 700;
+  font-size: 19px;
+  padding: 10px;
+  background-color: #6798c8;
+  text-align: left;
+  margin-top: 20px;
+  height: 50px;
+  margin-bottom: -10px;
+  display: initial;
+  margin-left: -10px;
+}
+
+.textcol-viw-9 {
+  height: 80px;
+  text-align: justify;
+  font-size: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-top: 15px;
+}
+
+/* Media query for tablets (portrait) */
+@media screen and (max-width: 768px) {
+  .cardClickable-viw {
+    margin-left: 10px; /* Adjust the margin for smaller screens */
+  }
+
+  .textcol-viw-10 {
+    font-size: 16px; /* Adjust the font size for smaller screens */
+    height: 40px; /* Adjust the height for smaller screens */
+  }
+
+  .textcol-viw-9 {
+    font-size: 16px; /* Adjust the font size for smaller screens */
+  }
+
+  /* Add further adjustments for tablet view as needed */
+}
+
+/* Media query for phones */
+@media screen and (max-width: 576px) {
+  .cardClickable-viw {
+    margin-left: 10px; /* Adjust the margin for smaller screens */
+  }
+
+  .textcol-viw-10 {
+    font-size: 14px; /* Adjust the font size for smaller screens */
+    height: 30px; /* Adjust the height for smaller screens */
+  }
+
+  .textcol-viw-9 {
+    font-size: 14px; /* Adjust the font size for smaller screens */
+    height: 60px; /* Adjust the height for smaller screens */
+    padding-top: 10px;
+  }
+
+  /* Add further adjustments for phone view as needed */
+}
+
+.light-firstone{
+  background: linear-gradient( 124deg, rgba(41, 39, 99, 0.9) 55.7%, rgba(41, 39, 99, 0) 70.98% );
+  height: auto;
+}
+.mobile_view_header{
+  display: none;
+}
+.desktop_view_challen{
+  display: block;
+}
+
+
+
+
+
