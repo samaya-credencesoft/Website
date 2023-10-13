@@ -74,10 +74,10 @@
   transform: translateY(30px);
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+// img {
+//   max-width: 100%;
+//   height: auto;
+// }
 
 @media (max-width: 768px) {
   /* Styles for mobile devices */
@@ -395,8 +395,18 @@ img {
 .desktop_view_challen{
   display: block;
 }
+.card_style_google{
+  margin-bottom: 40px;
+}
+.fgd{
+  display: block;
+}
+@media(max-width:500px){
+  .fgd{
+    display: none !important;
+  }
 
-
+}
 
 
 
