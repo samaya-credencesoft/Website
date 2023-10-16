@@ -230,6 +230,10 @@
   .mob-page-footer {
     display: none;
   }
+
+  .mob-page-footer1 {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -323,6 +327,9 @@
       }
 
       .mob-page-footer {
+        display: none;
+      }
+      .mob-page-footer1 {
         display: none;
       }
     }
