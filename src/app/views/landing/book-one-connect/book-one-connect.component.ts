@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BlogPostService } from 'src/services/blog-post.service';
 
 @Component({
   selector: 'app-book-one-connect',
@@ -8,7 +10,13 @@ import { Component } from '@angular/core';
 export class BookOneConnectComponent {
   backgroundColor: string;
   showCustomizer: boolean;
+  constructor(private contentfulService: BlogPostService,){
+
+  }
+  blogPosts$ : Observable<any> | undefined;
+
   ngOnInit() {
+    this.blogPosts$ = this.contentfulService.getAllEntries();
   }
 
   changeBg(colorName) {
