@@ -74,6 +74,67 @@
   transform: translateY(30px);
 }
 
+.page-footer {
+  background: url(/assets/images/Rectangle-4.png) no-repeat;
+    width: auto;
+    height: 406px;
+    color: white;
+    font-size: 17px;
+    margin: 0;
+    margin-top: 100px;
+    border-radius: 0px 1191px 0px 273px;
+    margin-bottom: 100px;
+}
+
+.cardClickable2a {
+  border-radius: 25px;
+        border: 1px solid #000000;
+        background: linear-gradient(
+          180deg,
+          #020045 0%,
+          rgba(2, 0, 69, 0) 100%
+        );
+        text-align: left;
+        margin-top: 20px;
+        height: 147px;
+    width: 156px;
+}
+
+.textcol2a {
+  text-align: center; 
+  font-weight: 700; 
+  font-size: 13px
+}
+
+.imgcol {
+  display: flex;
+  justify-content: center;
+}
+
+.textcol2a {
+  text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.minicard {
+  padding-left: 114px;
+}
+
+// .footer-support {
+//   margin-top: -36px;
+//     width: 300px;
+//     height: 265px;
+//     margin-left: 202px;
+// }
+
+// .footer-support1 {
+
+//     width: 300px;
+//     height: 265px;
+
+// }
+
 // img {
 //   max-width: 100%;
 //   height: auto;
@@ -136,6 +197,40 @@
   }
 }
 
+@media (min-width: 1100px){
+  .footer-support {
+    margin-top: -36px;
+      width: 300px;
+      height: 265px;
+      margin-left: 120px;
+  }
+  
+  .footer-support1 {
+  
+    width: 360px;
+    height: 265px;
+
+  
+  }
+
+  .connect2 {
+    padding-left: 150px;
+    padding-right: 65px;
+  }
+
+  .minicard {
+    padding-left: 114px;
+    margin-top: -13px;
+  }
+
+  .tab-page-footer {
+    display: none;
+  }
+  
+  .mob-page-footer {
+    display: none;
+  }
+}
 
 @media (max-width: 768px) {
   /* Styles for tablet view and below (up to 768px width) */
@@ -201,6 +296,34 @@
       /* Media query for phone and tablet views (max-width: 992px) */
       .right-image-wrap {
         background: linear-gradient(124deg, rgba(41, 39, 99, 0.9) 55.7%, rgba(41, 39, 99, 0) 70.98%);
+      }
+
+      .page-footer {
+        display: none;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1099px) {
+      .tab-page-footer {
+        background: url(/assets/images/Rectangle-4.png) no-repeat;
+    width: auto;
+    height: 362px;
+    border-radius: 0px 1000px 0px 100px;
+    margin-top: 84px;
+    margin-bottom: 157px;
+      }
+
+      .footer-support11a {
+        height: 200px;
+        width: 238px;
+      }
+
+      .footer-support11 {
+        margin-top: -55px;
+      }
+
+      .mob-page-footer {
+        display: none;
       }
     }
 
@@ -361,6 +484,17 @@
   .textcol-viw-9 {
     font-size: 16px; /* Adjust the font size for smaller screens */
   }
+  .tab-page-footer {
+    display: none;
+  }
+
+  .mob-page-footer {
+    background: url(/assets/images/Rectangle-4.png) no-repeat;
+    width: 323px;
+    height: 286px;
+    border-radius: 0px 200px 0px 34px;
+    margin-top: 48px;
+  }
 
   /* Add further adjustments for tablet view as needed */
 }
@@ -381,6 +515,8 @@
     height: 60px; /* Adjust the height for smaller screens */
     padding-top: 10px;
   }
+
+ 
 
   /* Add further adjustments for phone view as needed */
 }
