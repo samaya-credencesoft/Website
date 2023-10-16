@@ -21,9 +21,9 @@ export class BookOneConnectComponent {
     this.meta.updateTag({property: 'og:title', content: 'BookOne Connect | BookonePMS'});
     this.meta.updateTag({property: 'og:site', content: '@AngularUniv'});
     this.meta.updateTag({property: 'og:title', content: "BookOne Connect | BookonePMS"});
-    this.meta.updateTag({property: 'og:description', content: "BOOKONE Connect is a connectivity solution provided by BOOKONE that allows hotels to integrate their property management system (PMS) with various distribution channels and online travel agencies (OTAs)."});
+    this.meta.updateTag({property: 'og:description', content: "BookOne connect a connectivity partner for hoteliers."});
     this.meta.updateTag({property: 'og:text:description', content:"dfghjkl"});
-    this.meta.updateTag({property: 'og:image', content: 'https://bookonepms.com/assets/images/pricing.png'})
+    this.meta.updateTag({property: 'og:image', content: 'https://bookonepms.com/assets/images/connect.jpg'})
 
 
 
@@ -31,9 +31,9 @@ export class BookOneConnectComponent {
     this.meta.updateTag({name: 'twitter:card', content: 'subha'});
     this.meta.updateTag({name: 'twitter:site', content: '@AngularUniv'});
     this.meta.updateTag({name: 'twitter:title', content: "BookOne Connect | BookonePMS"});
-    this.meta.updateTag({name: 'twitter:description', content: "BOOKONE Connect is a connectivity solution provided by BOOKONE that allows hotels to integrate their property management system (PMS) with various distribution channels and online travel agencies (OTAs)."});
+    this.meta.updateTag({name: 'twitter:description', content: "BookOne connect a connectivity partner for hoteliers."});
     this.meta.updateTag({name: 'twitter:text:description', content:"dfghjkl"});
-    this.meta.updateTag({name: 'twitter:image', content: 'https://bookonepms.com/assets/images/pricing.png'});
+    this.meta.updateTag({name: 'twitter:image', content: 'https://bookonepms.com/assets/images/connect.jpg'});
   }
   blogPosts$ : Observable<any> | undefined;
 
