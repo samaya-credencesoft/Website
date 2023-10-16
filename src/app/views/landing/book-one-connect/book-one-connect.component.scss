@@ -76,7 +76,7 @@
 
 .page-footer {
   background: url(/assets/images/Rectangle-4.png) no-repeat;
-    width: auto;
+  width: 97%;
     height: 406px;
     color: white;
     font-size: 17px;
@@ -120,6 +120,8 @@
 .minicard {
   padding-left: 114px;
 }
+
+
 
 // .footer-support {
 //   margin-top: -36px;
@@ -173,7 +175,7 @@
     font-size: 16px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   body {
     font-size: 16px;
   }
@@ -189,7 +191,7 @@
   margin-right: 10px; /* Add some spacing between the image and text */
 }
 
-@media (min-width: 768px) {
+@media (min-width: 767px) {
   .col-6 {
     width: 50%;
   }
@@ -226,13 +228,14 @@
 
   .tab-page-footer {
     display: none;
+
   }
   
   .mob-page-footer {
     display: none;
   }
 
-  .mob-page-footer1 {
+  .mob-page {
     display: none;
   }
   .mobile_view_header{
@@ -314,10 +317,10 @@
       }
     }
 
-    @media (min-width: 768px) and (max-width: 1099px) {
+    @media (min-width: 767px) and (max-width: 1099px) {
       .tab-page-footer {
         background: url(/assets/images/Rectangle-4.png) no-repeat;
-    width: auto;
+        width: 97%;
     height: 362px;
     border-radius: 0px 1000px 0px 100px;
     margin-top: 84px;
@@ -336,7 +339,7 @@
       .mob-page-footer {
         display: none;
       }
-      .mob-page-footer1 {
+      .mob-page {
         display: none;
       }
       .mobile_view_header{
@@ -491,7 +494,7 @@
 }
 
 /* Media query for tablets (portrait) */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .cardClickable-viw {
     margin-left: 10px; /* Adjust the margin for smaller screens */
   }
@@ -515,8 +518,27 @@
     border-radius: 0px 200px 0px 34px;
     margin-top: 48px;
     margin-left: 28px;
+    margin-bottom: 174px;
   }
 
+  .cardClickable2a {
+    border-radius: 25px;
+    border: 1px solid #000000;
+    background: linear-gradient(180deg, #020045 0%, rgba(2, 0, 69, 0) 100%);
+    text-align: left;
+    margin-top: 20px;
+    height: 147px;
+    width: 113px;
+    padding: 5px;
+    margin-left: 6px;
+}
+
+.textcol2a {
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff !important;
+}
   /* Add further adjustments for tablet view as needed */
 }
 
