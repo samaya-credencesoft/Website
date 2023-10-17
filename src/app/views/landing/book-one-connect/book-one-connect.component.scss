@@ -101,8 +101,8 @@
 }
 
 .textcol2a {
-  text-align: center; 
-  font-weight: 700; 
+  text-align: center;
+  font-weight: 700;
   font-size: 13px
 }
 
@@ -211,13 +211,13 @@
       height: 265px;
       margin-left: 120px;
   }
-  
+
   .footer-support1 {
-  
+
     width: 360px;
     height: 265px;
 
-  
+
   }
 
   .connect2 {
@@ -234,7 +234,7 @@
     display: none;
 
   }
-  
+
   .mob-page-footer {
     display: none;
   }
@@ -567,7 +567,7 @@
     padding-top: 10px;
   }
 
- 
+
 
   /* Add further adjustments for phone view as needed */
 }
@@ -592,7 +592,13 @@
   .fgd{
     display: none !important;
   }
+  .fluidone{
+    height: 309px !important;
+  }
 
+}
+.fluidone{
+  height: 367px;
 }
 
 
