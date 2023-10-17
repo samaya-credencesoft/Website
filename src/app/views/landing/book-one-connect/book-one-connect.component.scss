@@ -101,8 +101,8 @@
 }
 
 .textcol2a {
-  text-align: center; 
-  font-weight: 700; 
+  text-align: center;
+  font-weight: 700;
   font-size: 13px
 }
 
@@ -211,13 +211,13 @@
       height: 265px;
       margin-left: 120px;
   }
-  
+
   .footer-support1 {
-  
+
     width: 360px;
     height: 265px;
 
-  
+
   }
 
   .connect2 {
@@ -234,7 +234,7 @@
     display: none;
 
   }
-  
+
   .mob-page-footer {
     display: none;
   }
@@ -246,6 +246,10 @@
     display: none;
   }
   .mobile_view_header1{
+    display: none;
+  }
+
+  .tab-zig-section {
     display: none;
   }
 }
@@ -319,6 +323,10 @@
       .page-footer {
         display: none;
       }
+
+      .zig-section {
+        display: none;
+      }
     }
 
     @media (min-width: 767px) and (max-width: 1099px) {
@@ -351,6 +359,22 @@
       }
       .mobile_view_header1{
         display: none;
+      }
+      .zig-section {
+        display: none;
+      }
+
+      .tab-zig-itemA {
+        display: grid;
+        grid-template-columns: auto auto;
+        // grid-gap: 20px;
+    
+      }
+
+      .tab-zig-item {
+        margin-left: 10px;
+        margin-right: 14px;
+        margin-bottom: 10px;
       }
     }
 
@@ -543,6 +567,18 @@
   font-size: 13px;
   color: #fff !important;
 }
+
+.zig-section {
+  display: none;
+}
+
+.tab-zig-item {
+  margin: auto !important;
+  display: flex !important;
+}
+
+
+
   /* Add further adjustments for tablet view as needed */
 }
 
@@ -563,7 +599,7 @@
     padding-top: 10px;
   }
 
- 
+
 
   /* Add further adjustments for phone view as needed */
 }
@@ -588,7 +624,13 @@
   .fgd{
     display: none !important;
   }
+  .fluidone{
+    height: 309px !important;
+  }
 
+}
+.fluidone{
+  height: 367px;
 }
 
 
