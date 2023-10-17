@@ -367,7 +367,14 @@
       .tab-zig-itemA {
         display: grid;
         grid-template-columns: auto auto;
+        // grid-gap: 20px;
     
+      }
+
+      .tab-zig-item {
+        margin-left: 10px;
+        margin-right: 14px;
+        margin-bottom: 10px;
       }
     }
 
