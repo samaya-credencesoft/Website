@@ -156,6 +156,10 @@
   h1 {
     font-size: 30px;
   }
+
+  .zig-section {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -513,11 +517,11 @@
 
   .mob-page-footer {
     background: url(/assets/images/Rectangle-4.png) no-repeat;
-    width: 323px;
+    width: 342px;
     height: 286px;
     border-radius: 0px 200px 0px 34px;
     margin-top: 48px;
-    margin-left: 28px;
+    margin-left: 5px;
     margin-bottom: 174px;
   }
 
@@ -530,7 +534,7 @@
     height: 147px;
     width: 113px;
     padding: 5px;
-    margin-left: 6px;
+    margin-left: 3px;
 }
 
 .textcol2a {
