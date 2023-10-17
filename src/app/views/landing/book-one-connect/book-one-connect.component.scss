@@ -363,6 +363,12 @@
       .zig-section {
         display: none;
       }
+
+      .tab-zig-itemA {
+        display: grid;
+        grid-template-columns: auto auto;
+    
+      }
     }
 
 
@@ -558,6 +564,14 @@
 .zig-section {
   display: none;
 }
+
+.tab-zig-item {
+  margin: auto !important;
+  display: flex !important;
+}
+
+
+
   /* Add further adjustments for tablet view as needed */
 }
 
