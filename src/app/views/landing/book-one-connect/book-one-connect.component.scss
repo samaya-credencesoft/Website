@@ -334,6 +334,10 @@
     }
 
     @media (min-width: 767px) and (max-width: 1099px) {
+      .fluidone{
+        height: 367px;
+      }
+
       .tab-page-footer {
         background: url(/assets/images/Rectangle-4.png) no-repeat;
         width: 97%;
@@ -383,6 +387,10 @@
       .font-weight-bold {
         padding-top: 40px;
       }
+
+      .fluidone {
+        height: 296px;
+    }
     }
 
 
@@ -636,9 +644,7 @@
   }
 
 }
-.fluidone{
-  height: 367px;
-}
+
 
 
 
