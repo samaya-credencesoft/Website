@@ -101,8 +101,8 @@
 }
 
 .textcol2a {
-  text-align: center; 
-  font-weight: 700; 
+  text-align: center;
+  font-weight: 700;
   font-size: 13px
 }
 
@@ -156,6 +156,10 @@
   h1 {
     font-size: 30px;
   }
+
+  .zig-section {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -207,13 +211,13 @@
       height: 265px;
       margin-left: 120px;
   }
-  
+
   .footer-support1 {
-  
+
     width: 360px;
     height: 265px;
 
-  
+
   }
 
   .connect2 {
@@ -230,7 +234,7 @@
     display: none;
 
   }
-  
+
   .mob-page-footer {
     display: none;
   }
@@ -243,6 +247,14 @@
   }
   .mobile_view_header1{
     display: none;
+  }
+
+  .tab-zig-section {
+    display: none;
+  }
+
+  .font-weight-bold {
+    padding-top: 50px;
   }
 }
 
@@ -315,9 +327,17 @@
       .page-footer {
         display: none;
       }
+
+      .zig-section {
+        display: none;
+      }
     }
 
     @media (min-width: 767px) and (max-width: 1099px) {
+      .fluidone{
+        height: 367px;
+      }
+
       .tab-page-footer {
         background: url(/assets/images/Rectangle-4.png) no-repeat;
         width: 97%;
@@ -348,6 +368,29 @@
       .mobile_view_header1{
         display: none;
       }
+      .zig-section {
+        display: none;
+      }
+
+      .tab-zig-itemA {
+        display: grid;
+        grid-template-columns: auto auto;
+        // grid-gap: 20px;
+    
+      }
+
+      .tab-zig-item {
+        margin-left: 10px;
+        margin-right: 14px;
+        margin-bottom: 10px;
+      }
+      .font-weight-bold {
+        padding-top: 40px;
+      }
+
+      .fluidone {
+        height: 296px;
+    }
     }
 
 
@@ -513,11 +556,11 @@
 
   .mob-page-footer {
     background: url(/assets/images/Rectangle-4.png) no-repeat;
-    width: 323px;
+    width: 366px;
     height: 286px;
     border-radius: 0px 200px 0px 34px;
     margin-top: 48px;
-    margin-left: 28px;
+    margin-left: 5px;
     margin-bottom: 174px;
   }
 
@@ -530,7 +573,7 @@
     height: 147px;
     width: 113px;
     padding: 5px;
-    margin-left: 6px;
+    margin-left: 3px;
 }
 
 .textcol2a {
@@ -539,6 +582,18 @@
   font-size: 13px;
   color: #fff !important;
 }
+
+.zig-section {
+  display: none;
+}
+
+.tab-zig-item {
+  margin: auto !important;
+  display: flex !important;
+}
+
+
+
   /* Add further adjustments for tablet view as needed */
 }
 
@@ -559,7 +614,7 @@
     padding-top: 10px;
   }
 
- 
+
 
   /* Add further adjustments for phone view as needed */
 }
@@ -584,8 +639,12 @@
   .fgd{
     display: none !important;
   }
+  .fluidone{
+    height: 309px !important;
+  }
 
 }
+
 
 
 
