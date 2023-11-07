@@ -99,15 +99,15 @@ const routes: Routes = [
 
   {
     path: 'pricing',
-    component: PricingComponent, data: {title: 'Pricing'}
+    component: PricingComponent, data: {title: 'Pricing | Bookone PMS'}
   },
   {
     path: 'company',
-    component: CompanyComponent, data: {title: 'About Us'}
+    component: CompanyComponent, data: {title: 'About Us | Bookone PMS'}
   },
   {
     path: 'blog',
-    component: BlogComponent, data: {title: 'Blog'}
+    component: BlogComponent, data: {title: 'Blog | Bookone PMS'}
   },
   {
     path: 'blog/:id',
@@ -115,20 +115,20 @@ const routes: Routes = [
   },
   {
     path: 'contact',
-    component: ContactComponent, data: {title: 'Contact Us'}
+    component: ContactComponent, data: {title: 'Contact Us | Bookone PMS'}
   },
   {
     path: 'faqs',
-    component: FaqComponent, data: {title: 'FAQs'}
+    component: FaqComponent, data: {title: 'FAQs | Bookone PMS'}
   },
   {
     path: 'book-one-connect',
-    component: BookOneConnectComponent, data: {title: 'BookOne Connect'}
+    component: BookOneConnectComponent, data: {title: 'BookOne Connect | Bookone PMS'}
   },
 
   {
     path: 'privacy',
-    component: PrivacyPolicyComponent, data: {title: 'Privacy Policy'}
+    component: PrivacyPolicyComponent, data: {title: 'Privacy Policy | Bookone PMS'}
   }
 
 
