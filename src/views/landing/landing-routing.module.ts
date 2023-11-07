@@ -90,7 +90,7 @@ const routes: Routes = [
   },
   {
     path: 'onboard',
-    component: OnboardingCouponcodeFormComponent },
+    component: OnboardingCouponcodeFormComponent,data: {title: 'Onboard | Bookone PMS'} },
   {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {
