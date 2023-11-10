@@ -17,7 +17,7 @@
 
 <body>
   <app-header></app-header>
-  <div class="main-wrapper">
+  <div class="main-wrapper" style="margin-top: 7rem;">
     <div class="block-space bg-white ml-4 mr-4 mt-5">
       <div class="container text-center" style="text-align: center;">
         <h1 class="title" style="margin-top: 20px; ">{{businessUser.name}}</h1>
@@ -46,7 +46,7 @@
       </div>
       <div class="container-fluid px-5 booknow">
         <button type="button"(click)="navigateToSection('accmd')"
-          style="background-color: #9AC852; padding:15px 25px; border-radius:35px; margin-top: -50px;">
+          style="background-color: #271a55; padding:15px 25px; border-radius:35px; margin-top: -50px;">
           <h4 style="color: #F2F1F1;">BOOK NOW!</h4>
         </button>
       </div>
@@ -396,7 +396,7 @@
           </div>
           <div class="col-12 my-2 text-center">
             <button type="button mt-4"
-              style="background-color: #9AC852; color: #F8FFF5; padding: 15px; border-radius: 25px;"
+              style="background-color: #271a55; color: #F8FFF5; padding: 15px; border-radius: 25px;"
               (click)="checkingAvailability(); navigateToSection('accmd');">
               Check Availability
             </button>
@@ -642,7 +642,7 @@
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
                             <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
                             <div class="row btn "
-                              style="width: 120px;height: 49.71px;background-color: #9AC852; color:white; border-radius: 35px;justify-content: space-around;">
+                              style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
                               <div style="font-size: large;">{{counterb}}</div>
                               <div style="font-size: 20px" (click)="increament(breakfastservice)">+</div>
@@ -679,7 +679,7 @@
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
                             <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
                             <div class="row btn "
-                              style="width: 120px;height: 49.71px;background-color: #9AC852; color:white; border-radius: 35px;justify-content: space-around;">
+                              style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementL(lunchservice)">-</div>
                               <div style="font-size: large;">{{counterl}}</div>
                               <div style="font-size: 20px" (click)="increamentL(lunchservice)">+</div>
@@ -716,7 +716,7 @@
                           <div class="row nowrap countersm" style="padding: 30px;justify-content: space-between;">
                             <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
                             <div class="row btn "
-                              style="width: 120px;height: 49.71px;background-color: #9AC852; color:white; border-radius: 35px;justify-content: space-around;">
+                              style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementD(dinnerservice)">-</div>
                               <div style="font-size: large;">{{counterd}}</div>
                               <div style="font-size: 20px" (click)="increamentD(dinnerservice)">+</div>
@@ -920,7 +920,7 @@
                   </div>
                 </div>
               </div>
-                <button type="button mt-4" style="position: relative; float: right; background-color: #9AC852; color: #F8FFF5; padding:15px; border-radius:25px; margin-top:15px; width: 40%; align-self: flex-end;" (click)="checkingAvailability(); navigateToSection('accmd');">
+                <button type="button mt-4" style="position: relative; float: right; background-color: #271a55; color: #F8FFF5; padding:15px; border-radius:25px; margin-top:15px; width: 40%; align-self: flex-end;" (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
             </form>
@@ -1070,7 +1070,7 @@
                             </div>
                             <div style="text-align: center;">
                               <button class="btn text-white"
-                                style="padding: 10px;background: #9AC852;border-radius: 35px; margin-top: 15px;"
+                                style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
                                 (click)="open(content, room, room.name)">See
                                 More Details</button>
                             </div>
@@ -1126,7 +1126,7 @@
                                         : "1.2-2"}}</span>
                                 </div>
 
-                                <div style="color: #9AC852; font-weight: 600;" *ngIf="
+                                <div style="color: #271a55; font-weight: 600;" *ngIf="
                                 hasPercentage(
                                   room.roomOnlyPrice,
                                   plan.amount
@@ -1156,7 +1156,7 @@
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
                               bookRoomNow(); checkingAvailability1();
-                            " style="width: 159.45px;height: 49.71px;background: #9AC852;border-radius: 35px; ">
+                            " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
 
@@ -1209,7 +1209,7 @@
                                         : "symbol"
                                         : "1.2-2"}}</span>
                                 </div>
-                                <div style="color: #9AC852;font-weight: 600;" *ngIf="
+                                <div style="color: #271a55;font-weight: 600;" *ngIf="
                                 hasPercentage(
                                   room.roomOnlyPrice,
                                   plan.amount
@@ -1239,7 +1239,7 @@
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
                         bookRoomNow();  checkingAvailability1();
-                      " style="width: 159.45px;height: 49.71px;background: #9AC852;border-radius: 35px; ">
+                      " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
 
@@ -1378,7 +1378,7 @@
                             </div>
                             <div style="text-align: center;">
                               <button class="btn text-white"
-                                style="padding: 10px;background: #9AC852;border-radius: 35px; margin-top: 15px;"
+                                style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
                                 (click)="open(content, room, room.name)">See
                                 More Details</button>
                             </div>
@@ -1434,7 +1434,7 @@
                                     : "1.2-2"}}</span>
                                 </div>
 
-                                <div style="color: #9AC852;font-weight: 600; " *ngIf="
+                                <div style="color: #271a55;font-weight: 600; " *ngIf="
                                 hasPercentage(
                                   room.roomOnlyPrice,
                                   plan.amount
@@ -1464,7 +1464,7 @@
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
                               bookRoomNow()
-                            " style="width: 159.45px;height: 49.71px;background: #9AC852;border-radius: 35px; ">
+                            " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
 
@@ -1517,7 +1517,7 @@
                                         : "symbol"
                                         : "1.2-2"}}</span>
                                 </div>
-                                <div style="color: #9AC852;font-weight: 600; " *ngIf="
+                                <div style="color: #271a55;font-weight: 600; " *ngIf="
                                 hasPercentage(
                                   room.roomOnlyPrice,
                                   plan.amount
@@ -1547,7 +1547,7 @@
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
                         bookRoomNow()
-                      " style="width: 159.45px;height: 49.71px;background: #9AC852;border-radius: 35px; ">
+                      " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
 
@@ -1781,13 +1781,13 @@
                 </div>
                 <div class="row" style="justify-content: center !important;padding: 15px;">
                   <button class="btn mt-2 paybtn" style="width: 178px;
-                    background-color:#9AC852 ;border-radius: 35px;color: white;
+                    background-color:#271a55 ;border-radius: 35px;color: white;
                      " *ngIf="showDiv===true" (click)="navigate()"><span style="font-family: 'Arial';
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;">Payments >> </span> </button>
                   <button class="btn mt-2" style="width: 178px;
-                    background-color:#9AC852 ;border-radius: 35px;color: white;
+                    background-color:#271a55 ;border-radius: 35px;color: white;
                      " *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
                     font-style: normal;
                     font-weight: 500;
@@ -1882,7 +1882,7 @@
                   <div class="row" style="padding:10px; justify-content: space-between;">
                     <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
                     <div class="row btn "
-                      style="width: 120px;height: 49.71px;background-color: #9AC852; color:white; border-radius: 35px;justify-content: space-around;">
+                      style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
                       <div style="font-size: large;">{{counterb}}</div>
                       <div style="font-size: 20px" (click)="increament(breakfastservice)">+</div>
@@ -1912,7 +1912,7 @@
                   <div class="row" style="padding:10px; justify-content: space-between;">
                     <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
                     <div class="row btn "
-                      style="width: 120px;height: 49.71px;background-color: #9AC852; color:white; border-radius: 35px;justify-content: space-around;">
+                      style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;" (click)="decrementL(lunchservice)">-</div>
                       <div style="font-size: large;">{{counterl}}</div>
                       <div style="font-size: 20px;" (click)="increamentL(lunchservice)">+</div>
@@ -1942,7 +1942,7 @@
                   <div class="row" style="padding:10px; justify-content: space-between;">
                     <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
                     <div class="row btn "
-                      style="width: 120px;height: 49.71px;background-color: #9AC852; color:white; border-radius: 35px;justify-content: space-around;">
+                      style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;"(click)="decrementD(dinnerservice)">-</div>
                       <div style="font-size: large;">{{counterd}}</div>
                       <div style="font-size: 20px;"(click)="increamentD(dinnerservice)">+</div>
@@ -2093,7 +2093,7 @@
             </div>
         </div>
         <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'
-          style="position: relative; float: right; background-color: #9AC852; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
+          style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
           Submit
         </button>
         </form>

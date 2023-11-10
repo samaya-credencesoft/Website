@@ -1,9 +1,9 @@
-import { Components } from './../../model/components';
-import { Template } from './../../model/template';
+// import { Components } from './../../model/components';
+// import { Template } from './../../model/template';
 
 
 import { Router } from "@angular/router";
-import { Customer } from "./../../model/customer";
+// import { Customer } from "./../../model/customer";
 import {
   Component,
   OnInit,
@@ -59,6 +59,9 @@ import { Msg } from 'src/app/model/msg';
 import { Logger } from 'src/services/logger.service';
 import { suburbList } from 'src/app/data/cityList.data';
 import { PropertyServiceDTO } from 'src/app/model/PropertyServices';
+import { Components } from "src/app/model/components";
+import { Template } from "src/app/model/template";
+import { Customer } from "src/app/model/customer";
 
 declare var Stripe: any;
 

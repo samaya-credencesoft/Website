@@ -74,6 +74,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { ConvertToSpacesPipe } from 'src/services/spaces.pipe';
 import { NumberCounterComponent } from './number-counter/number-counter.component';
+import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
 
 // import { MatFormFieldModule, MatInputModule, MatRadioModule, MatSelectModule } from '@angular/material';
 // import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
@@ -106,6 +107,7 @@ import { NumberCounterComponent } from './number-counter/number-counter.componen
     PricingOneComponent,
     ContactFormComponent,
     DynamicPricingComponent,
+    BookingComponent,
     FooterComponent,
     LandingV2Component,
     FeaturesComponent,

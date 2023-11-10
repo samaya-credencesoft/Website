@@ -89,6 +89,7 @@ import { TokenStorage } from 'src/token.storage';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { BookingComponent } from './Booking/Booking.component';
 
 
 
@@ -156,6 +157,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     HeaderWhiteComponent,
     IntroNineComponent,
     LandingV9Component,
+    BookingComponent,
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,
