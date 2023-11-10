@@ -67,6 +67,7 @@ export const environment = {
  googleKey: 'AIzaSyBYGJ1SMIW5BIny9Af7eoozmgSGZShhUuE', 
   appIdCustomer: 'BookOneCustomerApp', 
   sessionAppId: 'BOOKONE_MOBILE_APP_CUSTOMER', 
+  callbackUrl: 'https://thehotelmate.com/booking-complete?ReferenceNumber='
   // callbackUrl: 'https://uat.thehotelmate.com/booking-complete?ReferenceNumber='
 };
 

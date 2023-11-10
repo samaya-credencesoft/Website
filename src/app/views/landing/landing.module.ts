@@ -87,6 +87,8 @@ import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { TokenStorage } from 'src/token.storage';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
+import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 
@@ -98,9 +100,10 @@ import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/
     NgbModule,
     GooglePlaceModule,
     ReactiveFormsModule,
+    NgbModule,
     MatCheckboxModule,
     MatInputModule,
-
+    SlickCarouselModule,
     FormsModule,
     MatSelectModule,
     MatRadioModule,
@@ -120,6 +123,7 @@ import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/
     PricingOneComponent,
     ContactFormComponent,
     FooterComponent,
+    ListingDetailOneComponent,
     LandingV2Component,
     FeaturesComponent,
     FeaturesTwoComponent,

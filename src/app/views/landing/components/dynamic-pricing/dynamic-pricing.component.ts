@@ -5,7 +5,7 @@ import { SubmitData } from './submitData';
 import { NavigationExtras } from '@angular/router';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { constructor } from 'jquery';
+// import { constructor } from 'jquery';
 
 @Component({
   selector: 'app-dynamic-pricing',

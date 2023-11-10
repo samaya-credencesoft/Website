@@ -10,6 +10,8 @@ import { environment } from 'src/environments/environment';
 import { BusinessLineDTO } from '../model/businessLeadsDto';
 import { API_URL_IN, API_URL_NZ } from 'src/app/app.component';
 import { City } from 'src/model/address-setup/city';
+import { BusinessUser } from 'src/app/model/user';
+import { GoogleReview } from 'src/app/model/googleReview';
 // import { City } from 'src/model/city';
 
 @Injectable({
@@ -37,7 +39,29 @@ export class ListingService {
       this.API_URL = API_URL_IN;
     }
   }
-
+  findPropertyBySEOName(seoFriendlyName: string) {
+    this.setApi();
+    return this.http.get<BusinessUser>(
+      this.API_URL +
+        '/api/website/findByPropertyBySEOFriendlyName/' +
+        seoFriendlyName,
+      { observe: 'response' }
+    );
+  }
+  getAllReview(propertyId: number) {
+    this.setApi();
+    return this.http.get<GoogleReview[]>(
+      this.API_URL + '/api/website/getGoogleReviews?PropertyId=' + propertyId,
+      { observe: 'response' }
+    );
+  }
+  findByPropertyId(id: number) {
+    this.setApi();
+    return this.http.get<BusinessUser>(
+      this.API_URL + '/api/website/findByPropertyId/' + id,
+      { observe: 'response' }
+    );
+  }
   runCampaign(campaignId:number,businessServiceId:string) {
     return this.http.get<any>(environment.apiUrlPromotion+ '/api/campaign/runCampaign/'+campaignId+'/businessLeadId/'+businessServiceId , { observe: 'response' });
    }

@@ -22,7 +22,9 @@ import { CookieLawModule } from 'angular2-cookie-law';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TokenStorage } from 'src/token.storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -30,7 +32,9 @@ import { TokenStorage } from 'src/token.storage';
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SlickCarouselModule,
     NgSelectModule,
+    NgbModule,
     GooglePlaceModule,
     TransferHttpCacheModule,
     AppRoutingModule,

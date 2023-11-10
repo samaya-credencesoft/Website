@@ -9,6 +9,10 @@ import { Injectable } from '@angular/core';
 // import { BusinessUser } from './model/user';
 import { BusinessLineDTO } from './model/businessLeadsDto';
 import { Address } from './model/address';
+import { PropertyServiceDTO } from './app/model/PropertyServices';
+import { Room } from './app/model/room';
+import { Booking } from './app/model/booking';
+import { BusinessUser } from './app/model/user';
 // import { String } from 'cypress/types/lodash';
 
 const SELECTED_COUNTRY = 'selectedCountry';
@@ -48,6 +52,19 @@ export class TokenStorage {
   clearAll() {
   localStorage.clear();
   }
+   // PROPERTY_SERVICE_DATA
+   public saveServiceData(propertyServiceDTO: PropertyServiceDTO[]) {
+    localStorage.removeItem(PROPERTY_SERVICE_DATA);
+      if (propertyServiceDTO !== null || propertyServiceDTO !== undefined) {
+      localStorage.setItem(
+          PROPERTY_SERVICE_DATA,
+          JSON.stringify(propertyServiceDTO)
+        );
+      } else {
+      localStorage.setItem(PROPERTY_SERVICE_DATA, '{}');
+      }
+    }
+
   clearBusiness() {
   localStorage.removeItem(BUSINESS_SERVICE);
     // window.localStorage.removeItem(BOOKSLOTDATA);
@@ -57,7 +74,17 @@ export class TokenStorage {
   clearCountry() {
   localStorage.removeItem(COUNTRY);
   }
-
+  public getBookingData(): Booking {
+    return JSON.parse(localStorage.getItem(BOOKINGDATA) as string);
+  }
+  public saveProperty(property: BusinessUser) {
+    localStorage.removeItem(PROPERTY_DETAILS);
+      if (property !== null) {
+      localStorage.setItem(PROPERTY_DETAILS, JSON.stringify(property));
+      } else {
+      localStorage.setItem(PROPERTY_DETAILS,  '{}');
+      }
+    }
   public saveCountry(Country:any) {
   localStorage.removeItem(COUNTRY);
     if (Country !== null || Country !== undefined) {
@@ -66,6 +93,18 @@ export class TokenStorage {
     localStorage.setItem(COUNTRY,  '{}');
     }
   }
+  public getProperty(): BusinessUser {
+    return JSON.parse(localStorage.getItem(PROPERTY_DETAILS) as string);
+  }
+    // Booking
+    public saveBookingData(booking: Booking) {
+      localStorage.removeItem(BOOKINGDATA);
+        if (booking !== null || booking !== undefined) {
+        localStorage.setItem(BOOKINGDATA, JSON.stringify(booking));
+        } else {
+        localStorage.setItem(BOOKINGDATA,  '{}');
+        }
+      }
   public saveCity(city:any) {
   localStorage.removeItem(CITY);
     if (city !== null || city !== undefined) {
@@ -74,8 +113,14 @@ export class TokenStorage {
     localStorage.setItem(CITY,  '{}');
     }
   }
+  public getServiceData(): PropertyServiceDTO[] {
+    return JSON.parse(localStorage.getItem(PROPERTY_SERVICE_DATA) as string);
+  }
   public getCity() {
     return localStorage.getItem(CITY);
+  }
+  public getRoomsData(): Room[] {
+    return JSON.parse(localStorage.getItem(ROOMSDATA) as string);
   }
   public getCountry() {
     return localStorage.getItem(COUNTRY);

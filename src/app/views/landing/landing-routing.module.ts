@@ -26,6 +26,7 @@ import { OnboardingThankyouFormComponent } from './onboarding-thankyou-form/onbo
 import { OnboardingRoomdetailsFormComponent } from './onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted-form/onboardingform-submitted-form.component';
 import { BookOneConnectComponent } from './book-one-connect/book-one-connect.component';
+import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 const routes: Routes = [
   {
     path: 'v1',
@@ -129,7 +130,19 @@ const routes: Routes = [
     path: 'bookoneconnect',
     component: BookOneConnectComponent, data: {title: 'BookOne Connect'}
   },
+  {
+    path: ":detail",
+    component: ListingDetailOneComponent,
+  },
+  {
+    path: "detail",
+    component: ListingDetailOneComponent,
+  },
 
+  {
+    path: 'listing-one',
+    component: ListingDetailOneComponent, data: {title: 'BookOne Connect'}
+  },
   {
     path: 'privacy',
     component: PrivacyPolicyComponent, data: {title: 'Privacy Policy'}
