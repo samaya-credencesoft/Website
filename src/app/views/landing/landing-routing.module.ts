@@ -141,8 +141,12 @@ const routes: Routes = [
     component: ListingDetailOneComponent,
   },
   {
-    path: "detail",
+    path: "detail/bookingSource/:id",
     component: ListingDetailOneComponent,
+  },
+  {
+    path: 'detail',
+    component: ListingDetailOneComponent, data: {title: 'detail'}
   },
 
   {
