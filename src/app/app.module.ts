@@ -13,7 +13,7 @@ import {
   WpApiLoader,
   WpApiStaticLoader
 } from 'wp-api-angular';
-
+import { AgmCoreModule } from '@agm/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http, 'https://blog.bookonepms.com/wp-json/wp/v2/', '');
@@ -25,6 +25,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TokenStorage } from 'src/token.storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -36,6 +37,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgSelectModule,
     NgbModule,
     GooglePlaceModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleKey
+    }),
     TransferHttpCacheModule,
     AppRoutingModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

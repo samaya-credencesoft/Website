@@ -92,7 +92,9 @@ import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.c
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 import { BookingComponent } from './Booking/Booking.component';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -108,6 +110,7 @@ import { BookingComponent } from './Booking/Booking.component';
     CheckoutModule,
     MatCheckboxModule,
     MatInputModule,
+    AgmCoreModule.forRoot({ apiKey: environment.googleKey }),
     SlickCarouselModule,
     FormsModule,
     MatSelectModule,
