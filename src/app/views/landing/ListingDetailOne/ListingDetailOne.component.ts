@@ -1157,7 +1157,7 @@ this.booking.totalAmount =
       this.phone +
       ' \nMessage: ' +
       this.message +
-      '. \n*****This enquiry is showing from The Hotel Mate Website******';
+      '. \n*****This enquiry is showing from Bookone PMS Website******';
 
     Logger.log(this.subscriptions + ' ' + this.name);
     this.email.subject = '' + this.subject;
@@ -1211,12 +1211,12 @@ this.booking.totalAmount =
    }
     let title =
       this.businessUser.name +
-      ' | The Hotel Mate' +
+      ' | Bookone PMS' +
       ' | Contact No: +91-8328818871';
 
     let ogTitle =
       this.businessUser.name +
-      ' | The Hotel Mate' +
+      ' | Bookone PMS' +
       ' | Contact No: +91-8328818871';
 
    if(this.businessUser.businessDescription !=null && this.businessUser.businessDescription !=undefined){
