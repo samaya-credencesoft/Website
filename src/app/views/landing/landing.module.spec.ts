@@ -1,4 +1,6 @@
-import { LandingModule } from './landing.module';
+// import { LandingModule } from './landing.module';
+
+import { LandingModule } from "src/views/landing/landing.module";
 
 describe('LandingModule', () => {
   let landingModule: LandingModule;

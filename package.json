@@ -27,6 +27,7 @@
     "@angular/http": "^7.2.16",
     "@angular/localize": "^9.0.1",
     "@angular/material": "^8.2.3",
+    "paytm-blink-checkout-angular": "0.0.2",
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/platform-server": "^15.2.9",

@@ -85,11 +85,14 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { CheckoutModule } from 'paytm-blink-checkout-angular';
 import { TokenStorage } from 'src/token.storage';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
+// import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
+import { RouterModule, Routes } from '@angular/router';
+import { BookingComponent } from './Booking/Booking.component';
 
 
 
@@ -102,6 +105,7 @@ import { BookingComponent } from 'src/app/views/landing/Booking/Booking.componen
     GooglePlaceModule,
     ReactiveFormsModule,
     NgbModule,
+    CheckoutModule,
     MatCheckboxModule,
     MatInputModule,
     SlickCarouselModule,
@@ -135,6 +139,7 @@ import { BookingComponent } from 'src/app/views/landing/Booking/Booking.componen
     NewsComponent,
     FaqsComponent,
     BookOneConnectComponent,
+    BookingComponent,
     NewsTwoComponent,
     IntroThreeComponent,
     LandingV3Component,
@@ -157,7 +162,7 @@ import { BookingComponent } from 'src/app/views/landing/Booking/Booking.componen
     HeaderWhiteComponent,
     IntroNineComponent,
     LandingV9Component,
-    BookingComponent,
+
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,

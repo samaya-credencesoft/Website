@@ -26,6 +26,7 @@ import { OnboardingThankyouFormComponent } from 'src/app/views/landing/onboardin
 import { OnboardingRoomdetailsFormComponent } from 'src/app/views/landing/onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 // import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
+// import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
 
 const routes: Routes = [
   {
@@ -127,6 +128,7 @@ const routes: Routes = [
     path: 'book-one-connect',
     component: BookOneConnectComponent, data: {title: 'BookOne Connect | Bookone PMS'}
   },
+
 
   {
     path: 'privacy',

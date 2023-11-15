@@ -9,10 +9,14 @@ import { Injectable } from '@angular/core';
 // import { BusinessUser } from './model/user';
 import { BusinessLineDTO } from './model/businessLeadsDto';
 import { Address } from './model/address';
-import { PropertyServiceDTO } from './app/model/PropertyServices';
-import { Room } from './app/model/room';
+// import { PropertyServiceDTO } from './app/model/PropertyServices';
+// import { Room } from './app/model/room';
 import { Booking } from './app/model/booking';
+// import { BusinessUser } from './app/model/user';
+import { Payment } from './app/model/payment';
+import { PropertyServiceDTO } from './app/model/PropertyServices';
 import { BusinessUser } from './app/model/user';
+import { Room } from './app/model/room';
 // import { String } from 'cypress/types/lodash';
 
 const SELECTED_COUNTRY = 'selectedCountry';
@@ -64,7 +68,12 @@ export class TokenStorage {
       localStorage.setItem(PROPERTY_SERVICE_DATA, '{}');
       }
     }
-
+    public getPropertyData(): BusinessUser {
+      return JSON.parse(localStorage.getItem(PROPERTY) as string);
+    }
+    public getPaymentData(): Payment {
+      return JSON.parse(localStorage.getItem(PAYMENT) as string);
+    }
   clearBusiness() {
   localStorage.removeItem(BUSINESS_SERVICE);
     // window.localStorage.removeItem(BOOKSLOTDATA);

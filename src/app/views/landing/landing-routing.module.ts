@@ -28,6 +28,7 @@ import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted
 import { BookOneConnectComponent } from './book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 import { BookingComponent } from './Booking/Booking.component';
+// import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
     path: 'v1',
@@ -132,6 +133,10 @@ const routes: Routes = [
     component: BookOneConnectComponent, data: {title: 'BookOne Connect'}
   },
   {
+    path: 'booking',
+    component: BookingComponent, data: {title: 'booking'}
+  },
+  {
     path: ":detail",
     component: ListingDetailOneComponent,
   },
@@ -144,10 +149,8 @@ const routes: Routes = [
     path: 'listing-one',
     component: ListingDetailOneComponent, data: {title: 'BookOne Connect'}
   },
-  {
-    path: 'booking',
-    component: BookingComponent, data: {title: 'booking checkout'}
-  },
+
+
   {
     path: 'privacy',
     component: PrivacyPolicyComponent, data: {title: 'Privacy Policy'}
