@@ -2116,7 +2116,7 @@ this.booking.totalAmount =
     //   ) {
     //     this.router.navigate(["/add-service"]);
     //   } else {
-    this.router.navigate(['/booking-checkout']);
+    this.router.navigate(['booking-checkout']);
     // }
   }
   opendate() {

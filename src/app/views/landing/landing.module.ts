@@ -89,7 +89,7 @@ import { TokenStorage } from 'src/token.storage';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { BookingComponent } from './Booking/Booking.component';
+import { BookingComponent } from 'src/app/views/landing/Booking/Booking.component';
 
 
 
