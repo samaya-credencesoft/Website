@@ -18,7 +18,7 @@ RUN npm install --force
 # This assumes the "demoSSR:server" script exists in your package.json
 # RUN npm run demoSSR:server
 
-RUN mpm build:ssr
+RUN ng build
 
 # Expose the port
 EXPOSE 4200
