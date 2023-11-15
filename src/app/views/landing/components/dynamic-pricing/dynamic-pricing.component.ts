@@ -372,7 +372,7 @@ selectedSubscription() {
         object: JSON.stringify(this.submitData),
     }
   };
-  this.router.navigate(['/landing/contact'], navigationExtras);
+  this.router.navigate(['/contact'], navigationExtras);
 }
   onmonthlySubscription() {
     this.submitData.onmonthly = true;
