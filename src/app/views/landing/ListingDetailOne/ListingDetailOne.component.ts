@@ -1226,7 +1226,7 @@ this.booking.totalAmount =
    }
 
     let ogImage = this.businessUser.logoUrl;
-    let ogUrl = 'https://thehotelmate.com/' + this.businessUser.seoFriendlyName;
+    let ogUrl = 'https://bookonepms.com/' + this.businessUser.seoFriendlyName;
     let ogSiteName = '';
     this.metaService.updateTag({ name: 'title', content: title });
     this.titleService.setTitle(title);
