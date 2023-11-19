@@ -18,8 +18,8 @@ env:
   # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_ACCESS_KEY_ID: AKIATSU4EZC2YCCIZP7W
   AWS_SECRET_ACCESS_KEY: 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
-  stack_name: bookone-api
-  service_name: api-promotion-java
+  stack_name: bookone_webui
+  service_name: pms_website
   jenkins_username: admin
   jenkins_pass: 11c81c2a3820391c65504e1fc41472616f
   jenkins_url: https://build.naymkhan.com
