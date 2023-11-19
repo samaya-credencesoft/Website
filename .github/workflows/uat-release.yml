@@ -18,7 +18,11 @@ env:
   # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_ACCESS_KEY_ID: AKIATSU4EZC2YCCIZP7W
   AWS_SECRET_ACCESS_KEY: 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
-
+  stack_name: bookone-api
+  service_name: api-promotion-java
+  jenkins_username: admin
+  jenkins_pass: 11c81c2a3820391c65504e1fc41472616f
+  jenkins_url: https://build.naymkhan.com
 
 
 permissions:
@@ -61,6 +65,20 @@ jobs:
           docker build --build-arg CONFIGURATION=test -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: delete container, image, pull image and start container
+        id: update-container
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$jenkins_username:$jenkins_pass" -d "service_name=$service_name&stack_name=$stack_name" "$jenkins_url/job/update-service/buildWithParameters")
+      
+          if [ "$response" -eq 201 ]; then
+            echo "Success! The response code is $response."
+            # Add additional steps for success case, if needed
+          else
+            echo "Failed! The response code is $response."
+            exit 1  # This will mark the GitHub Actions as failed
+            # You can add additional steps for failure case, if needed
+          fi
 
       # - name: Fill in the new image ID in the Amazon ECS task definition
       #   id: task-def
