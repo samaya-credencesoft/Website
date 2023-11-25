@@ -1940,6 +1940,7 @@ this.booking.totalAmount =
   }
 
   onPlanSelected(plan, room) {
+
     // console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // console.log("room"+JSON.stringify(room))
     this.booking.roomType = room.name;
@@ -2091,11 +2092,11 @@ this.booking.totalAmount =
     // this.toDate = undefined;
     // this.booking.fromDate = undefined;
     // this.booking.toDate = undefined;
-    document.getElementById("contentOne").scrollIntoView();
+    // document.getElementById("contentOne").scrollIntoView();
     Logger.log(JSON.stringify(this.booking));
     Logger.log(JSON.stringify(this.checkAvailabilityStatusHide));
     this.changeDetectorRefs.detectChanges();
-    // this.checkingAvailability();
+    this.checkingAvailability1();
   }
   getWhatsappShareUrl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
@@ -2754,6 +2755,7 @@ this.booking.totalAmount =
       );
   }
     checkingAvailability1() {
+      debugger
     this.isSuccess = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
