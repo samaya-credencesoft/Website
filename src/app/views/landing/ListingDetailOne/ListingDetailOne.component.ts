@@ -1940,6 +1940,9 @@ this.booking.totalAmount =
   }
 
   onPlanSelected(plan, room) {
+    // console.log("ftgyhjkl"+JSON.stringify(this.booking))
+    // console.log("room"+JSON.stringify(room))
+    this.booking.roomType = room.name;
     // console.log("sdfghjkl"+ JSON.stringify(plan))
     this.showDiv = true;
     this.div = true;
@@ -2299,6 +2302,7 @@ this.booking.totalAmount =
     // this.router.navigate(['/add-service-odt']);
   }
   onRoomBook(roomId, index) {
+    // console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // this.checkAvailabilityStatus = false;
     this.selectedIndex = index;
     // this.getPlan(roomId);
