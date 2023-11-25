@@ -2755,7 +2755,7 @@ this.booking.totalAmount =
       );
   }
     checkingAvailability1() {
-      debugger
+      // debugger
     this.isSuccess = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
