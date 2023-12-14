@@ -1410,7 +1410,7 @@ this.booking.totalAmount =
         this.mileSecondToNGBDate(this.booking.toDate).day
       );
       this.noOfrooms = this.booking.noOfRooms;
-
+      this.getDiffDate(this.toDate, this.fromDate);
       this.checkingAvailability();
 
       if (
