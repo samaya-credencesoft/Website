@@ -1,0 +1,68 @@
+name: Release IN Prod
+
+on: [workflow_dispatch]
+
+env:
+  AWS_REGION: ap-south-1 
+  ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/pms_website
+  AWS_ACCESS_KEY_ID: AKIA5IYYURWEROEEBAFM
+  AWS_SECRET_ACCESS_KEY: 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
+
+  service_name: pms_website
+  jenkins_username: ''
+  jenkins_pass: ''
+  jenkins_url: https://build.bookonelocal.in
+  job_name: run_webui
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: bookone-subha
+          fetch-depth: 1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          # IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: latest
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          docker build --build-arg CONFIGURATION=mumbai -t $ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # - name: update server
+      #   id: update-server
+      #   run: |
+      #     response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$jenkins_username:$jenkins_pass" -d "service_to_update=$service_name" "$jenkins_url/job/$job_name/buildWithParameters")
+      #     if [ "$response" -eq 201 ]; then
+      #       echo "Success! The response code is $response."
+      #     else
+      #       echo "Failed! The response code is $response."
+            exit 1 
+          fi
+     
