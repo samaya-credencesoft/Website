@@ -84,21 +84,21 @@ export class ListingDetailOneComponent implements OnInit {
   fromEmail: string;
   email: Email;
   adultno: any;
-  dynamicCity:string;
-  dynamicStreetName:string
-  dynamicLocality:string;
-  propertyServiceListData:any[]=[];
-  dynamicCountryName:string
-  dynamicStreetNumber:string
-  description:string;
-  ogDescription:string;
-  subject= "Hotel details page Enquiry";
+  dynamicCity: string;
+  dynamicStreetName: string
+  dynamicLocality: string;
+  propertyServiceListData: any[] = [];
+  dynamicCountryName: string
+  dynamicStreetNumber: string
+  description: string;
+  ogDescription: string;
+  subject = "Hotel details page Enquiry";
   propertyname: string;
   message: string;
   serviceName: string;
   subscriptions: string[];
   successMessage: boolean = false;
-  div:boolean=true;
+  div: boolean = true;
   childno: any;
   success: any = null;
   subjectControl: FormControl = new FormControl();
@@ -106,13 +106,13 @@ export class ListingDetailOneComponent implements OnInit {
   fromEmailControl: FormControl = new FormControl([
     Validators.required,
     Validators.pattern[
-      "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/"
+    "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/"
     ],
   ]);
   phoneControl: FormControl = new FormControl([
     Validators.required,
     Validators.pattern[
-      '+(9[976]d|8[987530]d|6[987]d|5[90]d|42d|3[875]d|2[98654321]d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)d{1,14}$'
+    '+(9[976]d|8[987530]d|6[987]d|5[90]d|42d|3[875]d|2[98654321]d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)d{1,14}$'
     ],
   ]);
   messageControl: FormControl = new FormControl();
@@ -161,7 +161,7 @@ export class ListingDetailOneComponent implements OnInit {
   loader: boolean;
 
   serviceSelected: any;
-
+  ghcPlanCode: string | null = null;
   prepareDay = 0;
   prepareHour = 0;
   prepareMinute = 0;
@@ -175,6 +175,7 @@ export class ListingDetailOneComponent implements OnInit {
 
   roomsone: Room[];
   availableRooms: Room[];
+  roomWithGHCPlan: Room[];
   facilities: BusinessUser[];
   roomAvailability = false;
   dayOneTrip: boolean;
@@ -402,7 +403,7 @@ export class ListingDetailOneComponent implements OnInit {
     centerMode: true,
     centerPadding: '0%',
     slidesToShow: 2,
-    margin:20,
+    margin: 20,
     dots: false,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -550,12 +551,14 @@ export class ListingDetailOneComponent implements OnInit {
   distance: PropertyServiceDTO;
   isRestaurant: PropertyServiceDTO;
   DistanceRailway: PropertyServiceDTO;
-  counterb=0;
-  counterl=0;
-  counterd=0;
-  breakfastservice:any;
+  counterb = 0;
+  counterl = 0;
+  counterd = 0;
+  breakfastservice: any;
   lunchservice: any;
   dinnerservice: any;
+  activeForGoogleHotelCenter: boolean = false;
+
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -593,48 +596,48 @@ export class ListingDetailOneComponent implements OnInit {
     // this.updateTag();
     this.bookingMinDate = calendar.getToday();
     this.oneDayFromDate = calendar.getToday();
-if(this.token.getBookingCity() !== null){
+    if (this.token.getBookingCity() !== null) {
 
- if ( this.token.getBookingCity() != null && this.token.getBookingCity() != undefined) {
-  this.propertyId = this.token.getBookingCity();
- }
- if(this.hotelID !=null && this.hotelID != undefined){
-  this.propertyId = this.hotelID
- }
- this.fromDate = this.calendar.getToday();
- this.todayDate = calendar.getToday();
- this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
- this.adults = 1;
- this.children = 0;
- this.noOfrooms = 1;
- this.rooms = 1;
+      if (this.token.getBookingCity() != null && this.token.getBookingCity() != undefined) {
+        this.propertyId = this.token.getBookingCity();
+      }
+      if (this.hotelID != null && this.hotelID != undefined) {
+        this.propertyId = this.hotelID
+      }
+      this.fromDate = this.calendar.getToday();
+      this.todayDate = calendar.getToday();
+      this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
+      this.adults = 1;
+      this.children = 0;
+      this.noOfrooms = 1;
+      this.rooms = 1;
 
- if (this.hotelID !=null && this.hotelID !=undefined) {
-  this.getPropertyDetailsById(this.hotelID);
- }
- if (this.token.getServiceData() !== null) {
-  this.addServiceList = this.token.getServiceData();
-  this.totalExtraAmount = 0;
-  this.totalTaxAmount = 0;
-  this.totalBeforeTaxAmount = 0;
-  this.addServiceList.forEach((element) => {
-    this.totalExtraAmount = this.totalExtraAmount + element.afterTaxAmount;
-    this.totalTaxAmount = this.totalTaxAmount + element.taxAmount;
-    this.totalBeforeTaxAmount =
-      this.totalBeforeTaxAmount + element.beforeTaxAmount;
-
-
-
-  });
-
-}
-this.booking.totalAmount =
-  this.booking.beforeTaxAmount +
-  this.totalExtraAmount +
-  this.booking.taxAmount;
+      if (this.hotelID != null && this.hotelID != undefined) {
+        this.getPropertyDetailsById(this.hotelID);
+      }
+      if (this.token.getServiceData() !== null) {
+        this.addServiceList = this.token.getServiceData();
+        this.totalExtraAmount = 0;
+        this.totalTaxAmount = 0;
+        this.totalBeforeTaxAmount = 0;
+        this.addServiceList.forEach((element) => {
+          this.totalExtraAmount = this.totalExtraAmount + element.afterTaxAmount;
+          this.totalTaxAmount = this.totalTaxAmount + element.taxAmount;
+          this.totalBeforeTaxAmount =
+            this.totalBeforeTaxAmount + element.beforeTaxAmount;
 
 
-}
+
+        });
+
+      }
+      this.booking.totalAmount =
+        this.booking.beforeTaxAmount +
+        this.totalExtraAmount +
+        this.booking.taxAmount;
+
+
+    }
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     if (this.token?.getRoomsData() !== null && this.token?.getRoomsData() !== undefined) {
       this.availableRooms = this.token?.getRoomsData();
@@ -674,7 +677,12 @@ this.booking.totalAmount =
       this.div = true;
     }
     this.routerone.params.subscribe((params) => {
-      let id = this.routerone.snapshot.params['id'];
+      let uriId = this.routerone.snapshot.params['id'];
+      if(uriId != undefined && uriId != null && uriId == "GoogleHotelCenter" ){
+        this.activeForGoogleHotelCenter = true;
+      } else{
+        this.activeForGoogleHotelCenter = false;
+      }
     });
 
     this.acRoute.queryParams.subscribe((params) => {
@@ -788,15 +796,15 @@ this.booking.totalAmount =
   }
   // showhide(){
 
-  decrementL(lunchservice){
+  decrementL(lunchservice) {
 
-    if(this.counterl>0){
-    this.counterl--;
+    if (this.counterl > 0) {
+      this.counterl--;
     }
     // console.log("count"+this.counterl )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = lunchservice;
-    this.serviceDto.count = this.counterl ;
+    this.serviceDto.count = this.counterl;
 
     this.serviceDto.organisationId = this.businessUser.organisationId;
     this.serviceDto.logoUrl = this.businessUser.logoUrl;
@@ -815,7 +823,7 @@ this.booking.totalAmount =
     if (this.addServiceList.some((data) => data.name === lunchservice.name) === true) {
       let service = this.addServiceList.find((data) => data.name === lunchservice.name);
       let i = this.addServiceList.indexOf(service);
-      this.addServiceList[i].count =this.serviceDto.count;
+      this.addServiceList[i].count = this.serviceDto.count;
       if (
         this.addServiceList[i].servicePrice === 0 ||
         this.addServiceList[i].servicePrice === undefined
@@ -851,11 +859,11 @@ this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount;
-      this.token.saveServiceData(this.addServiceList);
+    this.token.saveServiceData(this.addServiceList);
   }
 
-  hidediv(){
-    this.div=false;
+  hidediv() {
+    this.div = false;
   }
 
   slickCarouselConfig = {
@@ -893,19 +901,19 @@ this.booking.totalAmount =
       },
     ],
   };
-   toggleRowStyles() {
+  toggleRowStyles() {
     this.showAll = !this.showAll;
   }
 
-  decrementb(breakfastservice){
+  decrementb(breakfastservice) {
 
-    if(this.counterb>0){
-    this.counterb--;
+    if (this.counterb > 0) {
+      this.counterb--;
     }
     // console.log("count"+this.counterb )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = breakfastservice;
-    this.serviceDto.count = this.counterb ;
+    this.serviceDto.count = this.counterb;
 
     this.serviceDto.organisationId = this.businessUser.organisationId;
     this.serviceDto.logoUrl = this.businessUser.logoUrl;
@@ -924,7 +932,7 @@ this.booking.totalAmount =
     if (this.addServiceList.some((data) => data.name === breakfastservice.name) === true) {
       let service = this.addServiceList.find((data) => data.name === breakfastservice.name);
       let i = this.addServiceList.indexOf(service);
-      this.addServiceList[i].count =this.serviceDto.count;
+      this.addServiceList[i].count = this.serviceDto.count;
       if (
         this.addServiceList[i].servicePrice === 0 ||
         this.addServiceList[i].servicePrice === undefined
@@ -960,17 +968,17 @@ this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount;
-      this.token.saveServiceData(this.addServiceList);
+    this.token.saveServiceData(this.addServiceList);
   }
-  decrementD(dinnerservice){
+  decrementD(dinnerservice) {
 
-    if(this.counterd>0){
-    this.counterd--;
+    if (this.counterd > 0) {
+      this.counterd--;
     }
     // console.log("count"+this.counterd )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = dinnerservice;
-    this.serviceDto.count = this.counterd ;
+    this.serviceDto.count = this.counterd;
 
     this.serviceDto.organisationId = this.businessUser.organisationId;
     this.serviceDto.logoUrl = this.businessUser.logoUrl;
@@ -989,7 +997,7 @@ this.booking.totalAmount =
     if (this.addServiceList.some((data) => data.name === dinnerservice.name) === true) {
       let service = this.addServiceList.find((data) => data.name === dinnerservice.name);
       let i = this.addServiceList.indexOf(service);
-      this.addServiceList[i].count =this.serviceDto.count;
+      this.addServiceList[i].count = this.serviceDto.count;
       if (
         this.addServiceList[i].servicePrice === 0 ||
         this.addServiceList[i].servicePrice === undefined
@@ -1025,21 +1033,21 @@ this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount;
-      this.token.saveServiceData(this.addServiceList);
+    this.token.saveServiceData(this.addServiceList);
   }
 
   // }
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
   backClicked() {
     this.locationBack.back();
   }
   navigateToSection(elementId: string): void {
 
-      this.viewportScroller.scrollToAnchor(elementId);
-}
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
   reset() {
-    this.booking={} as Booking;
+    this.booking = {} as Booking;
     this.showDiv = false;
   }
   public setTitle(newTitle: string) {
@@ -1149,7 +1157,7 @@ this.booking.totalAmount =
     this.propertyname = this.businessUser.seoFriendlyName;
     // tslint:disable-next-line: max-line-length
     this.email.message =
- '\nPropertyName: ' +
+      '\nPropertyName: ' +
       this.businessUser.name +
       '\nEmail: ' +
       this.fromEmail +
@@ -1204,11 +1212,11 @@ this.booking.totalAmount =
   updateTag() {
     let keywords = this.businessUser?.address?.city;
 
-   if(this.businessUser.businessDescription !=null && this.businessUser.businessDescription !=undefined){
-    this.description = this.businessUser.businessDescription;
-   }else{
-     this.description = "Contact No: +91-8328818871";
-   }
+    if (this.businessUser.businessDescription != null && this.businessUser.businessDescription != undefined) {
+      this.description = this.businessUser.businessDescription;
+    } else {
+      this.description = "Contact No: +91-8328818871";
+    }
     let title =
       this.businessUser.name +
       ' | Bookone PMS' +
@@ -1219,11 +1227,11 @@ this.booking.totalAmount =
       ' | Bookone PMS' +
       ' | Contact No: +91-8328818871';
 
-   if(this.businessUser.businessDescription !=null && this.businessUser.businessDescription !=undefined){
-    this.ogDescription = this.businessUser.businessDescription;
-   }else{
-     this.ogDescription = "Contact No: +91-8328818871";
-   }
+    if (this.businessUser.businessDescription != null && this.businessUser.businessDescription != undefined) {
+      this.ogDescription = this.businessUser.businessDescription;
+    } else {
+      this.ogDescription = "Contact No: +91-8328818871";
+    }
 
     let ogImage = this.businessUser.logoUrl;
     let ogUrl = 'https://bookonepms.com/' + this.businessUser.seoFriendlyName;
@@ -1306,7 +1314,7 @@ this.booking.totalAmount =
           this.startDate.getMonth(),
           this.startDate.getDate()
         )) /
-        (1000 * 60 * 60 * 24)
+      (1000 * 60 * 60 * 24)
     );
   }
   toggleRoomsAndOccupancy() {
@@ -1323,142 +1331,142 @@ this.booking.totalAmount =
     try {
       this.loader = true;
       const data = await this.listingService?.findByPropertyId(id).toPromise();
-     if (data.status === 200) {
-      this.businessUser = data.body;
+      if (data.status === 200) {
+        this.businessUser = data.body;
 
-      this.policies = this.businessUser.businessServiceDtoList.filter(
-        (ele) => ele.name === 'Accommodation'
-      );
-
-      this.businessUser.propertyServicesList.forEach(ele => {
-
-        if (ele.id !=null && ele.id != undefined) {
-          this.propertyServiceListData.push(ele)
-        }
-      });
-
-      this.updateTag();
-      this.token.saveProperty(this.businessUser);
-
-      if (this.urlLocation !== undefined && this.urlLocation !== null) {
-        this.triggerEventService.newEvent(this.urlLocation);
-      }
-
-      this.dangerousUrl =
-        'https://siteminder-git-main-rekha-credencesoft.vercel.app/propertyId/' +
-        this.businessUser.id;
-      this.trustedURL = this.sanitizer.bypassSecurityTrustResourceUrl(
-        this.dangerousUrl
-      );
-      this.currency = this.businessUser.localCurrency.toUpperCase();
-      this.businessTypeName = this.businessUser.businessType;
-
-      if (this.token.getBookingCity() !== null) {
-        this.bookingCity = this.token.getBookingCity();
-      } else {
-        this.token.saveBookingCity(this.bookingCity);
-      }
-
-      this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
-        (data) => data.name === this.businessUser.businessType
-      );
-
-      if (this.businessUser.primaryColor !== undefined) {
-        this.changeTheme(
-          this.businessUser.primaryColor,
-          this.businessUser.secondaryColor,
-          this.businessUser.tertiaryColor
+        this.policies = this.businessUser.businessServiceDtoList.filter(
+          (ele) => ele.name === 'Accommodation'
         );
-      }
 
-      this.maxSelectRoom = this.businessUser.numberOfRooms;
-      this.maxOccupancy = this.businessUser.maximumOccupancy;
+        this.businessUser.propertyServicesList.forEach(ele => {
 
-      this.selectHotelBooking = true;
+          if (ele.id != null && ele.id != undefined) {
+            this.propertyServiceListData.push(ele)
+          }
+        });
 
-      let dateString =
-        this.checkinYear + '-' + this.checkinMonth + '-' + this.checkinDay;
-      let checkedinday = new Date(dateString);
+        this.updateTag();
+        this.token.saveProperty(this.businessUser);
 
-      let checkedOutday = new Date(checkedinday);
-      let day = Number(checkedOutday.getDate()) + Number(this.nights);
-      checkedOutday.setDate(day);
+        if (this.urlLocation !== undefined && this.urlLocation !== null) {
+          this.triggerEventService.newEvent(this.urlLocation);
+        }
 
-      this.booking.fromDate = this.getDateFormatYearMonthDay(
-        checkedinday.getDate(),
-        checkedinday.getMonth() + 1,
-        checkedinday.getFullYear()
-      );
-      this.booking.toDate = this.getDateFormatYearMonthDay(
-        checkedOutday.getDate(),
-        checkedOutday.getMonth() + 1,
-        checkedOutday.getFullYear()
-      );
+        this.dangerousUrl =
+          'https://siteminder-git-main-rekha-credencesoft.vercel.app/propertyId/' +
+          this.businessUser.id;
+        this.trustedURL = this.sanitizer.bypassSecurityTrustResourceUrl(
+          this.dangerousUrl
+        );
+        this.currency = this.businessUser.localCurrency.toUpperCase();
+        this.businessTypeName = this.businessUser.businessType;
 
-      this.booking.noOfRooms = 1;
-      this.booking.noOfPersons = 1;
-      this.booking.noOfChildren = 1;
+        if (this.token.getBookingCity() !== null) {
+          this.bookingCity = this.token.getBookingCity();
+        } else {
+          this.token.saveBookingCity(this.bookingCity);
+        }
 
-      this.fromDate = new NgbDate(
-        this.mileSecondToNGBDate(this.booking.fromDate).year,
-        this.mileSecondToNGBDate(this.booking.fromDate).month,
-        this.mileSecondToNGBDate(this.booking.fromDate).day
-      );
-      this.toDate = new NgbDate(
-        this.mileSecondToNGBDate(this.booking.toDate).year,
-        this.mileSecondToNGBDate(this.booking.toDate).month,
-        this.mileSecondToNGBDate(this.booking.toDate).day
-      );
-      this.noOfrooms = this.booking.noOfRooms;
-      this.getDiffDate(this.toDate, this.fromDate);
-      this.checkingAvailability();
+        this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
+          (data) => data.name === this.businessUser.businessType
+        );
 
-      if (
-        this.booking.taxPercentage != null &&
-        this.booking.taxPercentage != undefined
-      ) {
-        this.taxPercentage = this.booking.taxPercentage;
+        if (this.businessUser.primaryColor !== undefined) {
+          this.changeTheme(
+            this.businessUser.primaryColor,
+            this.businessUser.secondaryColor,
+            this.businessUser.tertiaryColor
+          );
+        }
+
+        this.maxSelectRoom = this.businessUser.numberOfRooms;
+        this.maxOccupancy = this.businessUser.maximumOccupancy;
+
+        this.selectHotelBooking = true;
+
+        let dateString =
+          this.checkinYear + '-' + this.checkinMonth + '-' + this.checkinDay;
+        let checkedinday = new Date(dateString);
+
+        let checkedOutday = new Date(checkedinday);
+        let day = Number(checkedOutday.getDate()) + Number(this.nights);
+        checkedOutday.setDate(day);
+
+        this.booking.fromDate = this.getDateFormatYearMonthDay(
+          checkedinday.getDate(),
+          checkedinday.getMonth() + 1,
+          checkedinday.getFullYear()
+        );
+        this.booking.toDate = this.getDateFormatYearMonthDay(
+          checkedOutday.getDate(),
+          checkedOutday.getMonth() + 1,
+          checkedOutday.getFullYear()
+        );
+
+        this.booking.noOfRooms = 1;
+        this.booking.noOfPersons = 1;
+        this.booking.noOfChildren = 1;
+
+        this.fromDate = new NgbDate(
+          this.mileSecondToNGBDate(this.booking.fromDate).year,
+          this.mileSecondToNGBDate(this.booking.fromDate).month,
+          this.mileSecondToNGBDate(this.booking.fromDate).day
+        );
+        this.toDate = new NgbDate(
+          this.mileSecondToNGBDate(this.booking.toDate).year,
+          this.mileSecondToNGBDate(this.booking.toDate).month,
+          this.mileSecondToNGBDate(this.booking.toDate).day
+        );
+        this.noOfrooms = this.booking.noOfRooms;
+        this.getDiffDate(this.toDate, this.fromDate);
+        this.checkingAvailability();
+
+        if (
+          this.booking.taxPercentage != null &&
+          this.booking.taxPercentage != undefined
+        ) {
+          this.taxPercentage = this.booking.taxPercentage;
+        } else {
+          this.taxPercentage = 0;
+        }
+
+        if (
+          this.businessServiceDto !== undefined &&
+          this.businessServiceDto.maxLeadTime !== undefined
+        ) {
+          const maxLead = new Date(0, 0, 0, 0, this.businessServiceDto.maxLeadTime, 0);
+          this.leadMaxDay = Math.floor(this.businessServiceDto.maxLeadTime / 1440);
+          this.leadMaxMin = maxLead.getMinutes();
+          this.leadMaxHour = maxLead.getHours();
+        }
+
+        if (
+          this.businessServiceDto !== undefined &&
+          this.businessServiceDto.minLeadTime !== undefined
+        ) {
+          const minLead = new Date(0, 0, 0, 0, this.businessServiceDto.minLeadTime, 0);
+          // Do something with minLead?
+        }
+
+        if (
+          this.businessServiceDto !== undefined &&
+          this.businessServiceDto.stdPrepTime !== undefined
+        ) {
+          const prep = new Date(0, 0, 0, 0, this.businessServiceDto.stdPrepTime, 0);
+          this.prepareDay = Math.floor(this.businessServiceDto.maxLeadTime / 1440);
+          this.prepareHour = prep.getHours();
+          this.prepareMinute = prep.getMinutes();
+        }
+
+        this.booking.propertyId = this.businessUser.id;
+        this.lat = parseFloat(this.businessUser.latitude);
+        this.lng = parseFloat(this.businessUser.longitude);
+
+        this.loader = false;
+        this.changeDetectorRefs.detectChanges();
       } else {
-        this.taxPercentage = 0;
+        this.router.navigate(["/404"]);
       }
-
-      if (
-        this.businessServiceDto !== undefined &&
-        this.businessServiceDto.maxLeadTime !== undefined
-      ) {
-        const maxLead = new Date(0, 0, 0, 0, this.businessServiceDto.maxLeadTime, 0);
-        this.leadMaxDay = Math.floor(this.businessServiceDto.maxLeadTime / 1440);
-        this.leadMaxMin = maxLead.getMinutes();
-        this.leadMaxHour = maxLead.getHours();
-      }
-
-      if (
-        this.businessServiceDto !== undefined &&
-        this.businessServiceDto.minLeadTime !== undefined
-      ) {
-        const minLead = new Date(0, 0, 0, 0, this.businessServiceDto.minLeadTime, 0);
-        // Do something with minLead?
-      }
-
-      if (
-        this.businessServiceDto !== undefined &&
-        this.businessServiceDto.stdPrepTime !== undefined
-      ) {
-        const prep = new Date(0, 0, 0, 0, this.businessServiceDto.stdPrepTime, 0);
-        this.prepareDay = Math.floor(this.businessServiceDto.maxLeadTime / 1440);
-        this.prepareHour = prep.getHours();
-        this.prepareMinute = prep.getMinutes();
-      }
-
-      this.booking.propertyId = this.businessUser.id;
-      this.lat = parseFloat(this.businessUser.latitude);
-      this.lng = parseFloat(this.businessUser.longitude);
-
-      this.loader = false;
-      this.changeDetectorRefs.detectChanges();
-     } else {
-      this.router.navigate(["/404"]);
-     }
     } catch (error) {
       this.loader = false;
       // Handle the error appropriately, if needed.
@@ -1471,7 +1479,7 @@ this.booking.totalAmount =
     // console.log("count"+this.counterb )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = breakfastservice;
-    this.serviceDto.count = this.counterb ;
+    this.serviceDto.count = this.counterb;
 
     this.serviceDto.organisationId = this.businessUser.organisationId;
     this.serviceDto.logoUrl = this.businessUser.logoUrl;
@@ -1490,7 +1498,7 @@ this.booking.totalAmount =
     if (this.addServiceList.some((data) => data.name === breakfastservice.name) === true) {
       let service = this.addServiceList.find((data) => data.name === breakfastservice.name);
       let i = this.addServiceList.indexOf(service);
-      this.addServiceList[i].count =this.serviceDto.count;
+      this.addServiceList[i].count = this.serviceDto.count;
       if (
         this.addServiceList[i].servicePrice === 0 ||
         this.addServiceList[i].servicePrice === undefined
@@ -1526,7 +1534,7 @@ this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount;
-      this.token.saveServiceData(this.addServiceList);
+    this.token.saveServiceData(this.addServiceList);
   }
   increamentL(lunchservice) {
 
@@ -1534,7 +1542,7 @@ this.booking.totalAmount =
     // console.log("count"+this.counterl )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = lunchservice;
-    this.serviceDto.count = this.counterl ;
+    this.serviceDto.count = this.counterl;
 
     this.serviceDto.organisationId = this.businessUser.organisationId;
     this.serviceDto.logoUrl = this.businessUser.logoUrl;
@@ -1553,7 +1561,7 @@ this.booking.totalAmount =
     if (this.addServiceList.some((data) => data.name === lunchservice.name) === true) {
       let service = this.addServiceList.find((data) => data.name === lunchservice.name);
       let i = this.addServiceList.indexOf(service);
-      this.addServiceList[i].count =this.serviceDto.count;
+      this.addServiceList[i].count = this.serviceDto.count;
       if (
         this.addServiceList[i].servicePrice === 0 ||
         this.addServiceList[i].servicePrice === undefined
@@ -1589,7 +1597,7 @@ this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount;
-      this.token.saveServiceData(this.addServiceList);
+    this.token.saveServiceData(this.addServiceList);
   }
   increamentD(dinnerservice) {
 
@@ -1597,7 +1605,7 @@ this.booking.totalAmount =
     // console.log("count"+this.counterd )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = dinnerservice;
-    this.serviceDto.count = this.counterd ;
+    this.serviceDto.count = this.counterd;
 
     this.serviceDto.organisationId = this.businessUser.organisationId;
     this.serviceDto.logoUrl = this.businessUser.logoUrl;
@@ -1616,7 +1624,7 @@ this.booking.totalAmount =
     if (this.addServiceList.some((data) => data.name === dinnerservice.name) === true) {
       let service = this.addServiceList.find((data) => data.name === dinnerservice.name);
       let i = this.addServiceList.indexOf(service);
-      this.addServiceList[i].count =this.serviceDto.count;
+      this.addServiceList[i].count = this.serviceDto.count;
       if (
         this.addServiceList[i].servicePrice === 0 ||
         this.addServiceList[i].servicePrice === undefined
@@ -1652,7 +1660,7 @@ this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount;
-      this.token.saveServiceData(this.addServiceList);
+    this.token.saveServiceData(this.addServiceList);
   }
 
 
@@ -1667,7 +1675,7 @@ this.booking.totalAmount =
           //   )
           this.businessUser.propertyServicesList.forEach(ele => {
 
-            if (ele.id !=null && ele.id != undefined) {
+            if (ele.id != null && ele.id != undefined) {
               this.propertyServiceListData.push(ele)
             }
           });
@@ -2010,7 +2018,7 @@ this.booking.totalAmount =
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
               if (
-                element2.maxAmount > this.booking.roomPrice  &&
+                element2.maxAmount > this.booking.roomPrice &&
                 element2.minAmount < this.booking.roomPrice
               ) {
                 this.taxPercentage = element2.percentage;
@@ -2101,14 +2109,14 @@ this.booking.totalAmount =
   getWhatsappShareUrl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = "919082741973";
-    this.dynamicText =this.businessUser.name;
-    this.dynamicCity =this.businessUser?.address?.city
+    this.dynamicText = this.businessUser.name;
+    this.dynamicCity = this.businessUser?.address?.city
     this.dynamicStreetName = this.businessUser.address?.streetName;
     this.dynamicLocality = this.businessUser.address?.locality;
     this.dynamicStreetNumber = this.businessUser.address?.streetNumber;
-    this.dynamicCountryName=this.businessUser.address?.country;
+    this.dynamicCountryName = this.businessUser.address?.country;
     // The recipient's phone number (optional)
-    const message = "*This is an Enquiry from :* The HotelMate Website" + '\nHotel Name: ' +this.dynamicText+ '\nAddress: ' +this.dynamicStreetNumber + ',' +this.dynamicStreetName+","+this.dynamicLocality +"," +this.dynamicCity+ ',' +this.dynamicCountryName;  // The dynamic text you want to include
+    const message = "*This is an Enquiry from :* The HotelMate Website" + '\nHotel Name: ' + this.dynamicText + '\nAddress: ' + this.dynamicStreetNumber + ',' + this.dynamicStreetName + "," + this.dynamicLocality + "," + this.dynamicCity + ',' + this.dynamicCountryName;  // The dynamic text you want to include
 
     return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
   }
@@ -2422,7 +2430,7 @@ this.booking.totalAmount =
 
     return `${day1}-${month1}-${year}`;
   }
-  oneDayTripShow() {}
+  oneDayTripShow() { }
 
   checkingAvailability() {
     this.isSuccess = true;
@@ -2440,16 +2448,14 @@ this.booking.totalAmount =
     this.checkAvailabilityStatusHide = false;
     this.booking.propertyId = this.businessUser.id;
 
-    if (this.fromDate.day != null && this.fromDate.month != null && this.fromDate.year != null)
-    {
+    if (this.fromDate.day != null && this.fromDate.month != null && this.fromDate.year != null) {
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         this.fromDate.day,
         this.fromDate.month,
         this.fromDate.year
       );
     }
-    else
-    {
+    else {
       let currentDate = new Date();
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         currentDate.getDate(),
@@ -2458,16 +2464,14 @@ this.booking.totalAmount =
       );
     }
 
-    if (this.toDate.day != null && this.toDate.month != null && this.toDate.year != null)
-    {
+    if (this.toDate.day != null && this.toDate.month != null && this.toDate.year != null) {
       this.booking.toDate = this.getDateFormatYearMonthDay(
         this.toDate.day,
         this.toDate.month,
         this.toDate.year
       );
     }
-    else
-    {
+    else {
       let currentDate = new Date();
       currentDate.setDate(currentDate.getDate() + 1);
       this.booking.toDate = this.getDateFormatYearMonthDay(
@@ -2515,13 +2519,13 @@ this.booking.totalAmount =
                 if (element.name == 'Pet Friendly') {
                   this.pet = element;
                 }
-                if (element.name == 'Air-Condition'){
+                if (element.name == 'Air-Condition') {
                   this.ac = element;
                 }
-                if (element.name == 'Wifi'){
+                if (element.name == 'Wifi') {
                   this.wifi = element;
                 }
-                if (element.name == 'Flat TV'){
+                if (element.name == 'Flat TV') {
                   this.tv = element;
                 }
               });
@@ -2533,51 +2537,75 @@ this.booking.totalAmount =
               }
             });
           }
+
+          // this.availableRooms.forEach((room1) => {
+          //   room1.ratesAndAvailabilityDtos.forEach((room2) => {
+          //     room2.roomRatePlans.forEach((plan) => {
+          //       console.log('my plan is ', plan);
+          //       if (plan.code === "GHC") {
+          //         // If GHC plan is found, store its code and break out of the loop
+          //         this.isGhcPlanExist = true;
+          //         console.log('plan code is ', plan.code);
+          //       }
+          //     });
+          //   });
+          // });
+          this.roomWithGHCPlan = [];
+          this.availableRooms?.forEach((event) => {
+            event?.ratesAndAvailabilityDtos?.forEach((event2) => {
+              event2?.roomRatePlans?.forEach((plan) => {
+                if (plan?.code === "GHC") {
+                  this.roomWithGHCPlan?.push(event);
+                }
+              });
+            });
+          });
+
           if (
             facilities !== null &&
             facilities !== undefined
-          ){
-          facilities.forEach((fac) => {
-            // console.log("Image url: "+fac.imageUrl)
-                if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
-                  this.breakfast = fac;
-                }
-                if (fac.name == 'Laundry') {
-                  this.laundry = fac;
-                }
-                if (fac.name == 'Pick Up') {
-                  this.pickup = fac;
-                }
-                if (fac.name == 'Late Check-Out') {
-                  this.checkout = fac;
-                }
-                if (fac.name == 'Drop Off') {
-                  this.dropoff = fac;
-                }
-                if(fac.name == 'Lunch') {
-                  this.lunch = fac;
-                }
-                if(fac.name == 'Dinner') {
-                  this.dinner = fac;
-                }
-                if(fac.serviceType == 'Distance') {
-                  this.distance = fac;
+          ) {
+            facilities.forEach((fac) => {
+              // console.log("Image url: "+fac.imageUrl)
+              if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
+                this.breakfast = fac;
+              }
+              if (fac.name == 'Laundry') {
+                this.laundry = fac;
+              }
+              if (fac.name == 'Pick Up') {
+                this.pickup = fac;
+              }
+              if (fac.name == 'Late Check-Out') {
+                this.checkout = fac;
+              }
+              if (fac.name == 'Drop Off') {
+                this.dropoff = fac;
+              }
+              if (fac.name == 'Lunch') {
+                this.lunch = fac;
+              }
+              if (fac.name == 'Dinner') {
+                this.dinner = fac;
+              }
+              if (fac.serviceType == 'Distance') {
+                this.distance = fac;
 
-                }
-                if(fac.serviceType == 'RestaurantHotel') {
-                  this.isRestaurant = fac;
+              }
+              if (fac.serviceType == 'RestaurantHotel') {
+                this.isRestaurant = fac;
 
-                }
-                if(fac.serviceType == 'DistanceRailway') {
-                  this.DistanceRailway = fac;
+              }
+              if (fac.serviceType == 'DistanceRailway') {
+                this.DistanceRailway = fac;
 
-                }
+              }
 
-                if(fac.name == 'BreakFast, Lunch, Dinner') {
-                  this.bld = fac;
-                }
+              if (fac.name == 'BreakFast, Lunch, Dinner') {
+                this.bld = fac;
+              }
             });
-        }
+          }
           this.checkAvailabilityStatus = response.body.available;
           this.booking.bookingAmount = response.body.bookingAmount;
           // this.booking.extraPersonCharge = response.body.extraPersonCharge;
@@ -2754,8 +2782,8 @@ this.booking.totalAmount =
         }
       );
   }
-    checkingAvailability1() {
-      // debugger
+  checkingAvailability1() {
+    // debugger
     this.isSuccess = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
@@ -2771,16 +2799,14 @@ this.booking.totalAmount =
     this.checkAvailabilityStatusHide = false;
     this.booking.propertyId = this.businessUser.id;
 
-    if (this.fromDate.day != null && this.fromDate.month != null && this.fromDate.year != null)
-    {
+    if (this.fromDate.day != null && this.fromDate.month != null && this.fromDate.year != null) {
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         this.fromDate.day,
         this.fromDate.month,
         this.fromDate.year
       );
     }
-    else
-    {
+    else {
       let currentDate = new Date();
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         currentDate.getDate(),
@@ -2789,16 +2815,14 @@ this.booking.totalAmount =
       );
     }
 
-    if (this.toDate.day != null && this.toDate.month != null && this.toDate.year != null)
-    {
+    if (this.toDate.day != null && this.toDate.month != null && this.toDate.year != null) {
       this.booking.toDate = this.getDateFormatYearMonthDay(
         this.toDate.day,
         this.toDate.month,
         this.toDate.year
       );
     }
-    else
-    {
+    else {
       let currentDate = new Date();
       currentDate.setDate(currentDate.getDate() + 1);
       this.booking.toDate = this.getDateFormatYearMonthDay(
@@ -2836,17 +2860,17 @@ this.booking.totalAmount =
               room?.ratesAndAvailabilityDtos?.forEach((ele) => {
                 ele.roomRatePlans?.forEach((e) => {
                   // console.log(JSON.stringify(e.propertyServicesList));
-                  if(e.name === this.booking.roomRatePlanName){
+                  if (e.name === this.booking.roomRatePlanName) {
                     this.planpropertyServiceList = e.propertyServicesList;
                     this.planpropertyServiceList?.forEach((service) => {
-                      if(service.name == 'Breakfast' || 'Breakfast (Adult)') {
+                      if (service.name == 'Breakfast' || 'Breakfast (Adult)') {
                         this.breakfastservice = service;
 
                       }
-                      if(service.name == 'Lunch') {
+                      if (service.name == 'Lunch') {
                         this.lunchservice = service;
                       }
-                      if(service.name == 'Dinner') {
+                      if (service.name == 'Dinner') {
                         this.dinnerservice = service;
                       }
                       // if (service.name != 'Breakfast' || 'Breakfast (Adult)' || 'Lunch' || 'Dinner') {
@@ -2872,13 +2896,13 @@ this.booking.totalAmount =
                 if (element.name == 'Pet Friendly') {
                   this.pet = element;
                 }
-                if (element.name == 'Air-Condition'){
+                if (element.name == 'Air-Condition') {
                   this.ac = element;
                 }
-                if (element.name == 'Wifi'){
+                if (element.name == 'Wifi') {
                   this.wifi = element;
                 }
-                if (element.name == 'Flat TV'){
+                if (element.name == 'Flat TV') {
                   this.tv = element;
                 }
               });
@@ -2893,48 +2917,48 @@ this.booking.totalAmount =
           if (
             facilities !== null &&
             facilities !== undefined
-          ){
-          facilities.forEach((fac) => {
-            // console.log("Image url: "+fac.imageUrl)
-                if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
-                  this.breakfast = fac;
-                }
-                if (fac.name == 'Laundry') {
-                  this.laundry = fac;
-                }
-                if (fac.name == 'Pick Up') {
-                  this.pickup = fac;
-                }
-                if (fac.name == 'Late Check-Out') {
-                  this.checkout = fac;
-                }
-                if (fac.name == 'Drop Off') {
-                  this.dropoff = fac;
-                }
-                if(fac.name == 'Lunch') {
-                  this.lunch = fac;
-                }
-                if(fac.name == 'Dinner') {
-                  this.dinner = fac;
-                }
-                if(fac.serviceType == 'Distance') {
-                  this.distance = fac;
+          ) {
+            facilities.forEach((fac) => {
+              // console.log("Image url: "+fac.imageUrl)
+              if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
+                this.breakfast = fac;
+              }
+              if (fac.name == 'Laundry') {
+                this.laundry = fac;
+              }
+              if (fac.name == 'Pick Up') {
+                this.pickup = fac;
+              }
+              if (fac.name == 'Late Check-Out') {
+                this.checkout = fac;
+              }
+              if (fac.name == 'Drop Off') {
+                this.dropoff = fac;
+              }
+              if (fac.name == 'Lunch') {
+                this.lunch = fac;
+              }
+              if (fac.name == 'Dinner') {
+                this.dinner = fac;
+              }
+              if (fac.serviceType == 'Distance') {
+                this.distance = fac;
 
-                }
-                if(fac.serviceType == 'RestaurantHotel') {
-                  this.isRestaurant = fac;
+              }
+              if (fac.serviceType == 'RestaurantHotel') {
+                this.isRestaurant = fac;
 
-                }
-                if(fac.serviceType == 'DistanceRailway') {
-                  this.DistanceRailway = fac;
+              }
+              if (fac.serviceType == 'DistanceRailway') {
+                this.DistanceRailway = fac;
 
-                }
+              }
 
-                if(fac.name == 'BreakFast, Lunch, Dinner') {
-                  this.bld = fac;
-                }
+              if (fac.name == 'BreakFast, Lunch, Dinner') {
+                this.bld = fac;
+              }
             });
-        }
+          }
           this.checkAvailabilityStatus = response.body.available;
           this.booking.bookingAmount = response.body.bookingAmount;
           // this.booking.extraPersonCharge = response.body.extraPersonCharge;
