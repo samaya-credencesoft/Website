@@ -15,6 +15,7 @@ export class RoomRatePlans {
   roomId: number;
   status: string;
   propertyServicesList: any[];
+  otaPlanList:any[];
 
   constructor() {}
 }
