@@ -558,6 +558,7 @@ export class ListingDetailOneComponent implements OnInit {
   lunchservice: any;
   dinnerservice: any;
   activeForGoogleHotelCenter: boolean = false;
+  isDiabled: boolean;
 
   constructor(
     private listingService: ListingService,
@@ -2551,15 +2552,66 @@ export class ListingDetailOneComponent implements OnInit {
           //   });
           // });
           this.roomWithGHCPlan = [];
+          let ghcPlan = new RoomRatePlans;
           this.availableRooms?.forEach((event) => {
             event?.ratesAndAvailabilityDtos?.forEach((event2) => {
               event2?.roomRatePlans?.forEach((plan) => {
-                if (plan?.code === "GHC") {
+                if (plan?.code === "GHC" && this.activeForGoogleHotelCenter === true) {
+                  if(plan.otaPlanList != null && plan?.otaPlanList != undefined && plan?.otaPlanList?.length > 0){
+                    plan.otaPlanList.forEach(element =>{
+                      if(element?.otaName === "GHC" && this.activeForGoogleHotelCenter === true){
+                        plan.amount = element?.price;
+                      }
+                    })
+                  }
+                  // if(plan.otaPlanList != null && plan?.otaPlanList != undefined && plan?.otaPlanList?.length > 0){
+                    //  plan.otaPlanList.forEach(element =>{
+                      // if(element?.otaName === "GHC" && this.activeForGoogleHotelCenter === true){
+                          // plan.amount = element?.price;
+                      // };
+                    //  });
+                  // };
+                  event2.roomRatePlans = [];
+                  ghcPlan = plan;
+                  event2.roomRatePlans.push(ghcPlan);
                   this.roomWithGHCPlan?.push(event);
                 }
+                console.log('my data is with plan',JSON.stringify(this.roomWithGHCPlan));
               });
             });
           });
+
+          // this.availableRooms?.forEach((des) => {
+          //   des?.ratesAndAvailabilityDtos?.forEach((des2) => {
+          //     console.log('my data is ', des2);
+          //       if((des2.stopSellOBE === null) || (des2.stopSellOBE === true)){
+          //                this.isDiabled = false;
+          //       }else{
+          //         this.isDiabled = true;
+          //       }        
+          //   });
+          // });
+
+
+          // this.availableRooms?.forEach((des) => {
+            // des?.ratesAndAvailabilityDtos?.filter((des2) => {
+              // console.log('my data is ', des2);
+              // return des2.stopSellOBE !== true;
+            // });
+          // 
+            // this.isDiabled = !des?.ratesAndAvailabilityDtos || des?.ratesAndAvailabilityDtos.length === 0;
+          // });
+          // 
+
+          this.availableRooms?.forEach((des) => {
+            const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some((des2) => {
+              console.log('my data is ', des2);
+              return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
+            });
+                    
+            this.isDiabled = !hasAvailableRooms;
+          });
+          
 
           if (
             facilities !== null &&

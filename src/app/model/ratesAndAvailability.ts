@@ -24,6 +24,7 @@ export class RatesAndAvailability {
   propertyName: string;
   updateType: string;
   roomRatePlans: RoomRatePlans[];
+  stopSellOBE:boolean;
   constructor() {
    }
 }
