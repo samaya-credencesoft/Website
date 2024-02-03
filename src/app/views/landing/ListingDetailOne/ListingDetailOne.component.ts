@@ -2559,7 +2559,7 @@ export class ListingDetailOneComponent implements OnInit {
                 if (plan?.code === "GHC" && this.activeForGoogleHotelCenter === true) {
                   if(plan.otaPlanList != null && plan?.otaPlanList != undefined && plan?.otaPlanList?.length > 0){
                     plan.otaPlanList.forEach(element =>{
-                      if(element?.otaName === "GHC" && this.activeForGoogleHotelCenter === true){
+                      if(element?.otaName === "GHC"){
                         plan.amount = element?.price;
                       }
                     })
@@ -2576,7 +2576,6 @@ export class ListingDetailOneComponent implements OnInit {
                   event2.roomRatePlans.push(ghcPlan);
                   this.roomWithGHCPlan?.push(event);
                 }
-                console.log('my data is with plan',JSON.stringify(this.roomWithGHCPlan));
               });
             });
           });
@@ -2591,21 +2590,11 @@ export class ListingDetailOneComponent implements OnInit {
           //       }        
           //   });
           // });
-
-
-          // this.availableRooms?.forEach((des) => {
-            // des?.ratesAndAvailabilityDtos?.filter((des2) => {
-              // console.log('my data is ', des2);
-              // return des2.stopSellOBE !== true;
-            // });
-          // 
-            // this.isDiabled = !des?.ratesAndAvailabilityDtos || des?.ratesAndAvailabilityDtos.length === 0;
-          // });
-          // 
+      
 
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some((des2) => {
-              console.log('my data is ', des2);
+            
               return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
             });
                     
