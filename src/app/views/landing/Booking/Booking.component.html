@@ -196,8 +196,10 @@
                     <td>{{booking.roomPrice| currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
                   <tr>
-                    <td>Total Room Price:</td>
-                    <td>{{booking.roomPrice * DiffDate * booking.noOfRooms | currency: currency:"symbol":"1.2-2"}}</td>
+                    <!-- <td>Total Room Price:</td> -->
+                    <!-- <td>{{booking.roomPrice * DiffDate * booking.noOfRooms | currency: currency:"symbol":"1.2-2"}}</td> -->
+                    <td>Total Net Amount:</td>
+                    <td>{{booking.netAmount | currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
                   <tr *ngIf="booking.extraPersonCharge >0">
                     <td>Extra Person charges:</td>

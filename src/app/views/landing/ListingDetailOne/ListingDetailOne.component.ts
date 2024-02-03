@@ -559,6 +559,8 @@ export class ListingDetailOneComponent implements OnInit {
   dinnerservice: any;
   activeForGoogleHotelCenter: boolean = false;
   isDiabled: boolean;
+  planPrice: any;
+  totalplanPrice: any;
 
   constructor(
     private listingService: ListingService,
@@ -2580,6 +2582,22 @@ export class ListingDetailOneComponent implements OnInit {
             });
           });
 
+          this.planPrice = [];
+          this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
+            e.roomRatePlans.forEach((element) => {
+              element.otaPlanList.forEach((element2) => {
+                this.planPrice.push(element2.price);
+                this.totalplanPrice = this.planPrice.reduce(
+                  (accumulator, currentValue) => accumulator + currentValue,
+                  0
+                );
+                // console.log(
+                //   'ota price is equa;' + JSON.stringify(this.planPrice)
+                // );
+              });
+            });
+          });
+
           // this.availableRooms?.forEach((des) => {
           //   des?.ratesAndAvailabilityDtos?.forEach((des2) => {
           //     console.log('my data is ', des2);
@@ -2955,6 +2973,72 @@ export class ListingDetailOneComponent implements OnInit {
               }
             });
           }
+
+          this.roomWithGHCPlan = [];
+          let ghcPlan = new RoomRatePlans();
+          this.availableRooms?.forEach((event) => {
+            event?.ratesAndAvailabilityDtos?.forEach((event2) => {
+              event2?.roomRatePlans?.forEach((plan) => {
+                if (
+                  plan?.code === 'GHC' &&
+                  this.activeForGoogleHotelCenter === true
+                ) {
+                  if (
+                    plan?.otaPlanList != null &&
+                    plan?.otaPlanList != undefined &&
+                    plan?.otaPlanList?.length > 0
+                  ) {
+                    plan.otaPlanList.forEach((element) => {
+                      if (element?.otaName === 'GHC') {
+                        plan.amount = element?.price;
+                      }
+                    });
+                  }
+                  event2.roomRatePlans = [];
+                  ghcPlan = plan;
+                  event2.roomRatePlans.push(ghcPlan);
+                  this.roomWithGHCPlan?.push(event);
+                }
+              });
+            });
+          });
+          this.planPrice = [];
+if(this.activeForGoogleHotelCenter === true){
+  this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
+    e.roomRatePlans.forEach((element) => {
+      element.otaPlanList.forEach((element2) => {
+        this.planPrice.push(element2.price);
+        this.totalplanPrice = this.planPrice.reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          0
+        );
+        this.bookingCity = this.planPrice[0]?.toString();
+        this.token.saveBookingCity(this.bookingCity)
+
+       this.booking.roomPrice = this.totalplanPrice;
+       this.booking.netAmount = this.booking.roomPrice * this.noOfrooms +
+       this.booking.extraPersonCharge +
+       this.booking.extraChildCharge;
+       this.token.saveBookingData(this.booking);
+
+
+      });
+    });
+  });
+}
+          this.availableRooms?.forEach((des) => {
+            const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
+              (des2) => {
+                // console.log('my data is ', des2);
+                return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
+              }
+            );
+
+            this.isDiabled = !hasAvailableRooms;
+          });
+
+
+
           if (
             facilities !== null &&
             facilities !== undefined
