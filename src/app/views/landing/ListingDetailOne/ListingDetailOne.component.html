@@ -2112,14 +2112,21 @@
                        <thead>
 
                          <tr>
-                           <th style="color: black;padding-left: 6px !important;">Date</th>
-                           <th style="color: black; padding-left: 6px !important;">INR</th>
+                           <th style="color: black;padding-left: 6px !important;" *ngIf=" daterangefilter && daterangefilter.length  ">Date</th>
+                           <th style="color: black;padding-left: 6px !important;" *ngIf="!daterangefilter || !daterangefilter.length">Room Price</th>
+
+                           <th style="color: black; padding-left: 6px !important;" *ngIf=" daterangefilter && daterangefilter.length  ">INR</th>
+                           <th style="color: black;padding-left: 6px !important;" *ngIf="!daterangefilter || !daterangefilter.length">₹{{this.booking.roomPrice  | number:'1.2-2'}}</th>
+
                          </tr>
                        </thead>
                        <tbody style="color: black; border: none;">
                          <tr *ngFor="let item of daterangefilter; let i = index">
-                           <td style="color: black;padding:5px">{{ item }}</td>
-                           <td style="color: black;padding:5px " *ngFor="let price of [planPrice[i]]">₹{{ price | number:'1.2-2' }}</td>
+                           <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
+                           <td style="color: black;padding:5px " *ngFor="let price of [planPrice[i]]">
+<div  *ngIf="daterangefilter && daterangefilter.length  ">  ₹{{ price | number:'1.2-2' }}</div>
+</td>
+
                          </tr>
                          <tr >
                            <td style="color: black;padding:5px">Tax and service charges</td>
