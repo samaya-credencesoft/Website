@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="pt-5" *ngIf="!bookingConfirmed && !isEnquiry">
   <div class="container-fluid pt-5"
     style="background-color: #f8feee; border-bottom-left-radius: 40%; border-bottom-right-radius: 40%;padding-bottom: 1.5rem;">
@@ -191,19 +190,20 @@
                     <td>No of Rooms:</td>
                     <td>{{ booking.noOfRooms }}</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>Price Per Night:</td>
                     <td>{{booking.roomPrice| currency: currency:"symbol":"1.2-2"}}</td>
-                  </tr>
+                  </tr> -->
                   <tr>
-                    <td>Total Room Price:</td>
-                    <td>{{booking.roomPrice * DiffDate * booking.noOfRooms | currency: currency:"symbol":"1.2-2"}}</td>
+                    <td>Total Net Amount:</td>
+                    <td>{{booking.netAmount | currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
+
                   <tr *ngIf="booking.extraPersonCharge >0">
                     <td>Extra Person charges:</td>
                     <td>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
-                  <tr *ngIf=" booking.extraChildCharge >0">
+                  <tr *ngIf="booking.extraChildCharge >0">
                     <td>Extra Child charges:</td>
                     <td>{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
@@ -250,9 +250,9 @@
         </div>
         <div class="d-flex justify-content-center mb-4">
           <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
-            (click)="submitForm()" style="background-color: #271a55;font-size: 20px; padding-right: 65px; padding-left: 65px;">Enquiry Now</button>
+            (click)="submitForm()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Enquiry Now</button>
             <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true"
-            (click)="payAndCheckout()" style="background-color: #271a55;font-size: 20px; padding-right: 65px; padding-left: 65px;">Book Now</button>
+            (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay Now</button>
         </div>
       </div>
     </div>

@@ -3081,3 +3081,53 @@ height: 100%;
 .faq-answers li{
   list-style: disc;
 }
+.modal_dilog_test {
+  position: absolute;
+  z-index: 1050; /* Ensure the modal appears above other content */
+}
+
+.hover-trigger:hover + .modal_dilog_test {
+  display: block; /* Show the modal when the span is hovered over */
+}
+.tooltip {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.payment-breakups{
+
+  position: absolute;
+    margin-left: 1018px;
+    margin-top: 214px;
+    z-index: 1;
+}
+// .hover-trigger:hover + .payment-breakups {
+//   display: block;
+// }
+@media(max-width:1293px){
+  .payment-breakups{
+
+    position: absolute;
+      margin-left: 1018px;
+      margin-top: 214px;
+      z-index: 1;
+  }
+}
+@media (min-width:500px) and (max-width:1024px){
+  .payment-breakups{
+    position: absolute;
+    margin-top: 619px;
+    margin-left: 272px;
+    z-index: 1;
+  }
+}
+@media(max-width:500px){
+  .payment-breakups{
+    position: absolute;
+    margin-left: -5px;
+    margin-top: 516px;
+    z-index: 1;
+
+  }
+}

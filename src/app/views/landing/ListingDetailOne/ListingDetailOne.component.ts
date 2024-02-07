@@ -17,7 +17,7 @@ import {
   NgbDateStruct,
   NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
-import { Location, ViewportScroller } from '@angular/common';
+import { DatePipe, Location, ViewportScroller } from '@angular/common';
 import { Booking } from 'src/app/model/booking';
 import { BusinessServiceDtoList } from 'src/app/model/businessServiceDtoList';
 import { DateModel } from 'src/app/model/dateModel';
@@ -555,10 +555,14 @@ export class ListingDetailOneComponent implements OnInit {
   counterl = 0;
   counterd = 0;
   breakfastservice: any;
+  planPrice: any;
+  totalplanPrice: any;
   lunchservice: any;
   dinnerservice: any;
   activeForGoogleHotelCenter: boolean = false;
   isDiabled: boolean;
+  daterange: any;
+  daterangefilter: any;
 
   constructor(
     private listingService: ListingService,
@@ -596,6 +600,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.details = new Details();
     // this.updateTag();
     this.bookingMinDate = calendar.getToday();
+
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
 
@@ -2449,14 +2454,17 @@ export class ListingDetailOneComponent implements OnInit {
     this.checkAvailabilityStatusHide = false;
     this.booking.propertyId = this.businessUser.id;
 
-    if (this.fromDate.day != null && this.fromDate.month != null && this.fromDate.year != null) {
+    if (
+      this.fromDate.day != null &&
+      this.fromDate.month != null &&
+      this.fromDate.year != null
+    ) {
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         this.fromDate.day,
         this.fromDate.month,
         this.fromDate.year
       );
-    }
-    else {
+    } else {
       let currentDate = new Date();
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         currentDate.getDate(),
@@ -2465,14 +2473,17 @@ export class ListingDetailOneComponent implements OnInit {
       );
     }
 
-    if (this.toDate.day != null && this.toDate.month != null && this.toDate.year != null) {
+    if (
+      this.toDate.day != null &&
+      this.toDate.month != null &&
+      this.toDate.year != null
+    ) {
       this.booking.toDate = this.getDateFormatYearMonthDay(
         this.toDate.day,
         this.toDate.month,
         this.toDate.year
       );
-    }
-    else {
+    } else {
       let currentDate = new Date();
       currentDate.setDate(currentDate.getDate() + 1);
       this.booking.toDate = this.getDateFormatYearMonthDay(
@@ -2501,6 +2512,7 @@ export class ListingDetailOneComponent implements OnInit {
         (response) => {
           this.loaderHotelBooking = false;
           this.availableRooms = response.body.roomList;
+
           let facilities = this.businessUser.propertyServicesList;
           if (
             this.availableRooms !== null &&
@@ -2538,39 +2550,50 @@ export class ListingDetailOneComponent implements OnInit {
               }
             });
           }
-
-          // this.availableRooms.forEach((room1) => {
-          //   room1.ratesAndAvailabilityDtos.forEach((room2) => {
-          //     room2.roomRatePlans.forEach((plan) => {
-          //       console.log('my plan is ', plan);
-          //       if (plan.code === "GHC") {
-          //         // If GHC plan is found, store its code and break out of the loop
-          //         this.isGhcPlanExist = true;
-          //         console.log('plan code is ', plan.code);
-          //       }
-          //     });
-          //   });
-          // });
           this.roomWithGHCPlan = [];
-          let ghcPlan = new RoomRatePlans;
+          let ghcPlan = new RoomRatePlans();
+          this.daterange = [];
+          this.daterangefilter = []
           this.availableRooms?.forEach((event) => {
             event?.ratesAndAvailabilityDtos?.forEach((event2) => {
+
+
               event2?.roomRatePlans?.forEach((plan) => {
-                if (plan?.code === "GHC" && this.activeForGoogleHotelCenter === true) {
-                  if(plan.otaPlanList != null && plan?.otaPlanList != undefined && plan?.otaPlanList?.length > 0){
-                    plan.otaPlanList.forEach(element =>{
-                      if(element?.otaName === "GHC"){
+                if (
+                  plan?.code === 'GHC' &&
+                  this.activeForGoogleHotelCenter === true
+                ) {
+                  if (
+                    plan?.otaPlanList != null &&
+                    plan?.otaPlanList != undefined &&
+                    plan?.otaPlanList?.length > 0
+                  ) {
+
+                    plan.otaPlanList.forEach((element) => {
+                      if (element?.otaName === 'GHC') {
                         plan.amount = element?.price;
+
+              this.daterange.push(event2.date);
+
+
+              // Convert timestamps to formatted dates
+              const datePipe = new DatePipe('en-US');
+              this.daterange.forEach(timestamp => {
+                let formattedDate = datePipe.transform(new Date(timestamp), 'yyyy-MM-dd');
+                const inputDate = new Date(timestamp);
+                  // formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                 formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });// Adjust the format as needed
+                this.daterangefilter.push(formattedDate);
+              });
+
+              // Log the array of formatted dates
+
                       }
-                    })
+                    });
                   }
-                  // if(plan.otaPlanList != null && plan?.otaPlanList != undefined && plan?.otaPlanList?.length > 0){
-                    //  plan.otaPlanList.forEach(element =>{
-                      // if(element?.otaName === "GHC" && this.activeForGoogleHotelCenter === true){
-                          // plan.amount = element?.price;
-                      // };
-                    //  });
-                  // };
+                  this.daterangefilter =Array.from(new Set(this.daterangefilter));
+                  // console.log(JSON.stringify(this.daterangefilter));
+
                   event2.roomRatePlans = [];
                   ghcPlan = plan;
                   event2.roomRatePlans.push(ghcPlan);
@@ -2579,33 +2602,33 @@ export class ListingDetailOneComponent implements OnInit {
               });
             });
           });
-
-          // this.availableRooms?.forEach((des) => {
-          //   des?.ratesAndAvailabilityDtos?.forEach((des2) => {
-          //     console.log('my data is ', des2);
-          //       if((des2.stopSellOBE === null) || (des2.stopSellOBE === true)){
-          //                this.isDiabled = false;
-          //       }else{
-          //         this.isDiabled = true;
-          //       }        
-          //   });
-          // });
-      
-
-          this.availableRooms?.forEach((des) => {
-            const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some((des2) => {
-            
-              return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
+          this.planPrice = [];
+          this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
+            e.roomRatePlans.forEach((element) => {
+              element.otaPlanList.forEach((element2) => {
+                this.planPrice.push(element2.price);
+                this.totalplanPrice = this.planPrice.reduce(
+                  (accumulator, currentValue) => accumulator + currentValue,
+                  0
+                );
+                // console.log(
+                //   'ota price is equa;' + JSON.stringify(this.planPrice)
+                // );
+              });
             });
-                    
+          });
+          this.availableRooms?.forEach((des) => {
+            const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
+              (des2) => {
+                // console.log('my data is ', des2);
+                return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
+              }
+            );
+
             this.isDiabled = !hasAvailableRooms;
           });
-          
 
-          if (
-            facilities !== null &&
-            facilities !== undefined
-          ) {
+          if (facilities !== null && facilities !== undefined) {
             facilities.forEach((fac) => {
               // console.log("Image url: "+fac.imageUrl)
               if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
@@ -2631,15 +2654,12 @@ export class ListingDetailOneComponent implements OnInit {
               }
               if (fac.serviceType == 'Distance') {
                 this.distance = fac;
-
               }
               if (fac.serviceType == 'RestaurantHotel') {
                 this.isRestaurant = fac;
-
               }
               if (fac.serviceType == 'DistanceRailway') {
                 this.DistanceRailway = fac;
-
               }
 
               if (fac.name == 'BreakFast, Lunch, Dinner') {
@@ -2824,7 +2844,6 @@ export class ListingDetailOneComponent implements OnInit {
       );
   }
   checkingAvailability1() {
-    // debugger
     this.isSuccess = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
@@ -2840,14 +2859,17 @@ export class ListingDetailOneComponent implements OnInit {
     this.checkAvailabilityStatusHide = false;
     this.booking.propertyId = this.businessUser.id;
 
-    if (this.fromDate.day != null && this.fromDate.month != null && this.fromDate.year != null) {
+    if (
+      this.fromDate.day != null &&
+      this.fromDate.month != null &&
+      this.fromDate.year != null
+    ) {
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         this.fromDate.day,
         this.fromDate.month,
         this.fromDate.year
       );
-    }
-    else {
+    } else {
       let currentDate = new Date();
       this.booking.fromDate = this.getDateFormatYearMonthDay(
         currentDate.getDate(),
@@ -2856,14 +2878,17 @@ export class ListingDetailOneComponent implements OnInit {
       );
     }
 
-    if (this.toDate.day != null && this.toDate.month != null && this.toDate.year != null) {
+    if (
+      this.toDate.day != null &&
+      this.toDate.month != null &&
+      this.toDate.year != null
+    ) {
       this.booking.toDate = this.getDateFormatYearMonthDay(
         this.toDate.day,
         this.toDate.month,
         this.toDate.year
       );
-    }
-    else {
+    } else {
       let currentDate = new Date();
       currentDate.setDate(currentDate.getDate() + 1);
       this.booking.toDate = this.getDateFormatYearMonthDay(
@@ -2906,7 +2931,6 @@ export class ListingDetailOneComponent implements OnInit {
                     this.planpropertyServiceList?.forEach((service) => {
                       if (service.name == 'Breakfast' || 'Breakfast (Adult)') {
                         this.breakfastservice = service;
-
                       }
                       if (service.name == 'Lunch') {
                         this.lunchservice = service;
@@ -2918,12 +2942,10 @@ export class ListingDetailOneComponent implements OnInit {
                       //   this.addServiceList = [];
                       //   console.log("dfghjkljhgvg" + JSON.stringify(this.addServiceList))
                       // }
-
-
-                    })
+                    });
                   }
-                })
-              })
+                });
+              });
               room?.roomFacilities?.forEach((element) => {
                 if (element.name == 'Bar') {
                   this.bar = element;
@@ -2955,10 +2977,87 @@ export class ListingDetailOneComponent implements OnInit {
               }
             });
           }
-          if (
-            facilities !== null &&
-            facilities !== undefined
-          ) {
+          this.roomWithGHCPlan = [];
+          let ghcPlan = new RoomRatePlans();
+          this.daterange = [];
+          this.daterangefilter = []
+          this.availableRooms?.forEach((event) => {
+            event?.ratesAndAvailabilityDtos?.forEach((event2) => {
+              event2?.roomRatePlans?.forEach((plan) => {
+                if (
+                  plan?.code === 'GHC' &&
+                  this.activeForGoogleHotelCenter === true
+                ) {
+                  if (
+                    plan?.otaPlanList != null &&
+                    plan?.otaPlanList != undefined &&
+                    plan?.otaPlanList?.length > 0
+                  ) {
+                    plan.otaPlanList.forEach((element) => {
+                      if (element?.otaName === 'GHC') {
+                        plan.amount = element?.price;
+                        this.daterange.push(event2.date);
+
+
+                        // Convert timestamps to formatted dates
+                        const datePipe = new DatePipe('en-US');
+                        this.daterange.forEach(timestamp => {
+                          let formattedDate = datePipe.transform(new Date(timestamp), 'yyyy-MM-dd');
+                          const inputDate = new Date(timestamp);
+                            // formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                           formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });// Adjust the format as needed
+                          this.daterangefilter.push(formattedDate);
+                        });
+                        this.daterangefilter =Array.from(new Set(this.daterangefilter));
+                        // console.log(JSON.stringify(this.daterangefilter));
+
+                      }
+                    });
+                  }
+                  event2.roomRatePlans = [];
+                  ghcPlan = plan;
+                  event2.roomRatePlans.push(ghcPlan);
+                  this.roomWithGHCPlan?.push(event);
+                }
+              });
+            });
+          });
+          this.planPrice = [];
+if(this.activeForGoogleHotelCenter === true){
+  this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
+    e.roomRatePlans.forEach((element) => {
+      element.otaPlanList.forEach((element2) => {
+        this.planPrice.push(element2.price);
+        this.totalplanPrice = this.planPrice.reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          0
+        );
+        this.bookingCity = this.planPrice[0]?.toString();
+        this.token.saveBookingCity(this.bookingCity)
+
+       this.booking.roomPrice = this.totalplanPrice;
+       this.booking.netAmount = this.booking.roomPrice * this.noOfrooms +
+       this.booking.extraPersonCharge +
+       this.booking.extraChildCharge;
+       this.token.saveBookingData(this.booking);
+
+
+      });
+    });
+  });
+}
+          this.availableRooms?.forEach((des) => {
+            const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
+              (des2) => {
+                // console.log('my data is ', des2);
+                return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
+              }
+            );
+
+            this.isDiabled = !hasAvailableRooms;
+          });
+
+          if (facilities !== null && facilities !== undefined) {
             facilities.forEach((fac) => {
               // console.log("Image url: "+fac.imageUrl)
               if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
@@ -2984,15 +3083,12 @@ export class ListingDetailOneComponent implements OnInit {
               }
               if (fac.serviceType == 'Distance') {
                 this.distance = fac;
-
               }
               if (fac.serviceType == 'RestaurantHotel') {
                 this.isRestaurant = fac;
-
               }
               if (fac.serviceType == 'DistanceRailway') {
                 this.DistanceRailway = fac;
-
               }
 
               if (fac.name == 'BreakFast, Lunch, Dinner') {
