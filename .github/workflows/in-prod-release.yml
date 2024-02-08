@@ -9,9 +9,9 @@ env:
   AWS_SECRET_ACCESS_KEY: XGa1NiMwP2PPvDJMY3yk65kSmP5iEqRm62kGMHAm
 
   service_name: pms_website
-  jenkins_username: ''
-  jenkins_pass: ''
-  jenkins_url: https://build.bookonelocal.in
+  jenkins_username: admin
+  jenkins_pass: 11137f86106c215ac79cbf0077b785b72b
+  jenkins_url: https://build.bookone.io
   job_name: run_webui
 
 permissions:
