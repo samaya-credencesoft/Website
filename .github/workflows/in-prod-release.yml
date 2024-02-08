@@ -11,7 +11,7 @@ env:
   service_name: pms_website
   jenkins_username: admin
   jenkins_pass: 11137f86106c215ac79cbf0077b785b72b
-  jenkins_url: https://build.bookone.io
+  jenkins_url: https://build.bookonelocal.in
   job_name: run_webui
 
 permissions:
