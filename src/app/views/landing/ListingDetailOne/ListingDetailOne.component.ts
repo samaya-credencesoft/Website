@@ -691,6 +691,10 @@ export class ListingDetailOneComponent implements OnInit {
       }
     });
 
+    if ( this.activeForGoogleHotelCenter === true) {
+      this.showDiv = false
+    }
+
     this.acRoute.queryParams.subscribe((params) => {
       if (params['BookingEngine'] !== undefined) {
         this.urlLocation = params['BookingEngine'];
@@ -2439,6 +2443,11 @@ export class ListingDetailOneComponent implements OnInit {
   oneDayTripShow() { }
 
   checkingAvailability() {
+
+    if(this.activeForGoogleHotelCenter === true){
+      this.showDiv = false
+      }
+
     this.isSuccess = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';

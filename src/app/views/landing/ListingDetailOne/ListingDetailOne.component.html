@@ -2128,6 +2128,16 @@
 </td>
 
                          </tr>
+                         <tr *ngIf="booking.extraPersonCharge >0" >
+                          <td style="color: black;padding:5px">Extra Person charges</td>
+                             <td style="color: black;padding:5px " >
+                              <span>
+                                {{
+                                booking.extraPersonCharge
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                           </td>
+                        </tr>
                          <tr >
                            <td style="color: black;padding:5px">Tax and service charges</td>
                            <td style="color: black;padding:5px " >
@@ -2143,7 +2153,7 @@
 
                          <tr >
                            <td style="color: black;padding:5px"><strong>Total Amount(inclusive Tax)</strong></td>
-                           <td style="color: black;padding:5px " ><strong>{{booking.roomPrice +  ((this.booking.netAmount *
+                           <td style="color: black;padding:5px " ><strong>{{booking.roomPrice +  booking.extraPersonCharge + ((this.booking.netAmount *
                              this.booking.taxPercentage) /
                              100) | currency: currency:"symbol":"1.2-2"}}</strong>
                            </td>
