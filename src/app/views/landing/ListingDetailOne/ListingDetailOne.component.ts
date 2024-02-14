@@ -2615,11 +2615,13 @@ export class ListingDetailOneComponent implements OnInit {
           this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
-                this.planPrice.push(element2.price);
+                if(element2.otaName ==='GHC'){
+                  this.planPrice.push(element2.price);
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
                 );
+                }
                 // console.log(
                 //   'ota price is equa;' + JSON.stringify(this.planPrice)
                 // );
@@ -3032,29 +3034,32 @@ export class ListingDetailOneComponent implements OnInit {
             });
           });
           this.planPrice = [];
-if(this.activeForGoogleHotelCenter === true){
-  this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
-    e.roomRatePlans.forEach((element) => {
-      element.otaPlanList.forEach((element2) => {
-        this.planPrice.push(element2.price);
-        this.totalplanPrice = this.planPrice.reduce(
-          (accumulator, currentValue) => accumulator + currentValue,
-          0
-        );
-        this.bookingCity = this.planPrice[0]?.toString();
-        this.token.saveBookingCity(this.bookingCity)
+          if(this.activeForGoogleHotelCenter === true){
+            this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
+              e.roomRatePlans.forEach((element) => {
+                element.otaPlanList.forEach((element2) => {
+                  if(element2.otaName ==='GHC'){
+                  this.planPrice.push(element2.price);
+                  this.totalplanPrice = this.planPrice.reduce(
+                    (accumulator, currentValue) => accumulator + currentValue,
+                    0
+                  );
+                  }
+                  this.bookingCity = this.planPrice[0]?.toString();
+                  this.token.saveBookingCity(this.bookingCity)
 
-       this.booking.roomPrice = this.totalplanPrice;
-       this.booking.netAmount = this.booking.roomPrice * this.noOfrooms +
-       this.booking.extraPersonCharge +
-       this.booking.extraChildCharge;
-       this.token.saveBookingData(this.booking);
+                 this.booking.roomPrice = this.totalplanPrice;
+
+                 this.booking.netAmount = this.booking.roomPrice * this.noOfrooms +
+                 this.booking.extraPersonCharge +
+                 this.booking.extraChildCharge;
+                 this.token.saveBookingData(this.booking);
 
 
-      });
-    });
-  });
-}
+                });
+              });
+            });
+          }
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
               (des2) => {
