@@ -9,7 +9,7 @@ RUN npm install -g @angular/cli
 # Copy the entire directory into the container
 COPY . .
 
-WORKDIR /app/pms-webui
+# WORKDIR /app/pms-webui
 
 # Install the app's dependencies
 RUN npm install --force
@@ -20,10 +20,10 @@ RUN npm install --force
 # This assumes the "demoSSR:server" script exists in your package.json
 # RUN npm run demoSSR:server
 
-RUN ng build
+# RUN ng build
 # RUN node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=${CONFIGURATION}
 
-RUN npm run build:ssr
+# RUN npm run build:ssr
 
 
 # Start the server
