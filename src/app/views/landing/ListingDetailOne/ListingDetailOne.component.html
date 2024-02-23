@@ -2,10 +2,10 @@
 <html lang="en">
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
-<a [href]="getWhatsappShareUrl()" class="float" target="_blank">
+<a [href]="getWhatsappShareUrl()" class="float" target="_blank" *ngIf="isHeaderVisible === true">
 <i class="fa fa-whatsapp my-float"></i>
 </a>
-<a href="tel:+918328818871" class="float-two" target="_blank">
+<a href="tel:+918328818871" class="float-two" target="_blank" *ngIf="isHeaderVisible === true">
   <i class="fa fa-phone my-float-one"></i>
   </a>
 
