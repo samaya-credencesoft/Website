@@ -563,7 +563,7 @@ export class ListingDetailOneComponent implements OnInit {
   isDiabled: boolean;
   daterange: any;
   daterangefilter: any;
-
+  isHeaderVisible:boolean = false
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -1343,7 +1343,7 @@ export class ListingDetailOneComponent implements OnInit {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
-
+this.isHeaderVisible = true;
         this.policies = this.businessUser.businessServiceDtoList.filter(
           (ele) => ele.name === 'Accommodation'
         );
