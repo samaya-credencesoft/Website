@@ -9,7 +9,7 @@
     "test": "ng test",
     "dev:ssr": "ng run demoSSR:serve-ssr",
     "serve:ssr": "node dist/demoSSR/server/main.js",
-    "build:ssr": "ng build && ng run demoSSR:server",
+    "build:ssr": "ng run demoSSR:server",
     "prerender": "ng run demoSSR:prerender",
     "serve:prerender": "http-server -c-1 dist/demoSSR/browser",
     "postinstall": "ngcc",
