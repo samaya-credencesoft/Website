@@ -1,33 +1,35 @@
-FROM node:18-alpine
+# Use official Node.js image as base
+FROM node:18-alpine AS build
 
-# Set the working directory to /app
-WORKDIR /app/pms-webui
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
+# Copy package.json and package-lock.json to container
+COPY package*.json ./
 
-# Copy the entire directory into the container
-COPY . .
-
-# WORKDIR /app/pms-webui
-
-# Install the app's dependencies
+# Install dependencies
 RUN npm install --force
 
-# Build the app
-# RUN ng build
+# Copy the rest of the application
+COPY . .
 
-# This assumes the "demoSSR:server" script exists in your package.json
-# RUN npm run demoSSR:server
+# Build the Angular app for production with SSR
+RUN npm run build 
+RUN npm run build:ssr
 
-# RUN ng build
-# RUN node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=${CONFIGURATION}
+# Stage 2: Use a small image for production
+FROM node:18-alpine
 
-# RUN npm run build:ssr
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
+# Copy the built Angular app from the previous stage
+COPY --from=build /usr/src/app/dist /usr/src/app/dist
 
-# Start the server
-CMD npm run serve:ssr
-
-# Expose the port
+# Expose the port the app runs on
 EXPOSE 4200
+
+# Define the command to run the app
+# CMD ["node", "dist/server/main.js"]
+CMD node dist/demoSSR/server/main.js
+# CMD npm run  serve:ssr
