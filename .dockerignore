@@ -1,6 +1,6 @@
 .angular
 node_modules
-# dist
+dist
 tmp
 logs
 *.log
