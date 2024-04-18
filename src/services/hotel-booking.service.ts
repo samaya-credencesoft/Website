@@ -1,35 +1,19 @@
-// import { TokenStorage } from 'src/app/token.storage';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {  Injectable } from '@angular/core';
-import { API_URL_IN, API_URL_NZ, API_URL_PROMOTION, APP_ID } from 'src/app/app.component';
-import { MessageDto } from 'src/app/model/MessageDto';
-import { PropertyServiceDTO } from 'src/app/model/PropertyServices';
-import { Booking } from 'src/app/model/booking';
-import { Customer } from 'src/app/model/customer';
-import { EnquiryDto } from 'src/app/model/enquiry';
-import { Msg } from 'src/app/model/msg';
-import { Payment } from 'src/app/model/payment';
-import { Room } from 'src/app/model/room';
-import { WhatsappDto } from 'src/app/model/whatsappDto';
-import { environment } from 'src/environments/environment';
-import { TokenStorage } from 'src/token.storage';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import {
-//   APP_ID,
-//   API_URL_NZ,
-//   API_URL_IN,
-//   API_URL_PROMOTION,
-// } from '../app.component';
-// import { Room } from '../model/room';
-// import { Booking } from '../model/booking';
-// import { Msg } from '../model/msg';
-// import { Payment } from '../model/payment';
-// import { MessageDto } from '../model/MessageDto';
-// import { Customer } from '../model/customer';
-// import { PropertyServiceDTO } from '../model/PropertyServices';
-// import { EnquiryDto } from '../model/enquiry';
-// import { environment } from 'src/environments/environment';
-// import { WhatsappDto } from '../model/whatsappDto';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {  Injectable } from "@angular/core";
+import { API_URL_IN, API_URL_IO, API_URL_NZ, API_URL_PROMOTION, APP_ID } from "src/app/app.component";
+import { MessageDto } from "src/app/model/MessageDto";
+import { PropertyServiceDTO } from "src/app/model/PropertyServices";
+import { Booking } from "src/app/model/booking";
+import { Customer } from "src/app/model/customer";
+import { EnquiryDto } from "src/app/model/enquiry";
+import { externalReservationDtoList } from "src/app/model/externalReservation";
+import { Msg } from "src/app/model/msg";
+import { Payment } from "src/app/model/payment";
+import { Room } from "src/app/model/room";
+import { WhatsappDto } from "src/app/model/whatsappDto";
+import { environment } from "src/environments/environment";
+import { TokenStorage } from "src/token.storage";
+
 
 @Injectable({
   providedIn: 'root',
@@ -90,53 +74,61 @@ export class HotelBookingService {
   addServicesToBooking(services: PropertyServiceDTO[], bookingId: number) {
     this.setApi();
     return this.http.post<PropertyServiceDTO[]>(
-      this.API_URL + '/api/website/add/services/' + bookingId,
+      this.API_URL + '/api/thm/add/services/' + bookingId,
       services,
       { observe: 'response' }
     );
   }
   findAllSuburbByCities(city: string) {
-    return this.http.get<any[]>(this.API_URL + '/api/website/allSuburbByCities?city=' + city, { observe: 'response' });
+    return this.http.get<any[]>(this.API_URL + '/api/thm/allSuburbByCities?city=' + city, { observe: 'response' });
   }
   getCustomerDetailsByEmail(email: string) {
     this.setApi();
     return this.http.get<Customer>(
-      this.API_URL + '/api/website/email/' + email + '/',
+      this.API_URL + '/api/thm/email/' + email + '/',
       { observe: 'response' }
     );
   }
   getCustomerDetailsByMobile(mobile: string) {
     this.setApi();
     return this.http.get<Customer>(
-      this.API_URL + '/api/website/mobile/' + mobile,
+      this.API_URL + '/api/thm/mobile/' + mobile,
       { observe: 'response' }
     );
   }
   getBookingConfirmation(bookingId: string) {
     this.setApi();
     return this.http.get<Booking>(
-      this.API_URL + '/api/website/confirm?BookingId=' + bookingId,
+      this.API_URL + '/api/thm/confirm?BookingId=' + bookingId,
       { observe: 'response' }
     );
   }
   getRoomDetailsByPropertyId(propertyId: number) {
     this.setApi();
     return this.http.get<Room[]>(
-      this.API_URL + '/api/website/findAllRoomsByPropertyId/' + propertyId,
+      this.API_URL + '/api/thm/findAllRoomsByPropertyId/' + propertyId,
       { observe: 'response' }
     );
   }
   createBooking(booking: Booking) {
     this.setApi();
     return this.http.post<Booking>(
-      this.API_URL + '/api/website/booking',
+      "https://testconnect.bookone.io/hotelmate" + '/api/thm/booking',
       booking,
+      { observe: 'response' }
+    );
+  }
+  externalReservation(externalReservation: externalReservationDtoList[]) {
+    this.setApi();
+    return this.http.post<any[]>(
+      'https://testapi.bookonelocal.co.nz/channel-integration'+ '/api/external/reservation/',
+      externalReservation,
       { observe: 'response' }
     );
   }
   checkAvailability(booking: any) {
     return this.http.post<any>(
-      this.API_URL + '/api/website/checkAvailability',
+      this.API_URL + '/api/thm/checkAvailability',
       booking,
       { observe: 'response' }
     );
@@ -151,7 +143,7 @@ export class HotelBookingService {
     this.setApi();
     return this.http.get<any>(
       this.API_URL +
-      '/api/website/checkAvailability/' +
+      '/api/thm/checkAvailability/' +
       propertyId +
       '?fromDate=' +
       fromDate +
@@ -172,7 +164,7 @@ export class HotelBookingService {
     this.setApi();
     return this.http.get<any[]>(
       this.API_URL +
-      '/api/website/getAllRoomsByDate?PropertyId=' +
+      '/api/thm/getAllRoomsByDate?PropertyId=' +
       propertyId +
       '&FromDate=' +
       fromDate +
@@ -184,7 +176,7 @@ export class HotelBookingService {
   sendTextMessage(message: Msg) {
     this.setApi();
     return this.http.post<Msg>(
-      this.API_URL + '/api/website/message/send',
+      environment.apiUrlBookone + '/api/website/message/send',
       message,
       { observe: 'response' }
     );
@@ -193,7 +185,7 @@ export class HotelBookingService {
     this.setApi();
     return this.http.get<any>(
       this.API_URL +
-      '/api/website/findBookingByIdAndEmail?BookingReferenceNumber=' +
+      '/api/thm/findBookingByIdAndEmail?BookingReferenceNumber=' +
       bookingNumber +
       '&BookingEmail=' +
       bookingEmail,
@@ -204,7 +196,7 @@ export class HotelBookingService {
     this.setApi();
     return this.http.get<any>(
       this.API_URL +
-      '/api/website/findBookingByIdAndEmail?BookingReferenceNumber=' +
+      '/api/thm/findBookingByIdAndEmail?BookingReferenceNumber=' +
       RefferenceNumber,
       { observe: 'response' }
     );
@@ -213,7 +205,7 @@ export class HotelBookingService {
     this.setApi();
     return this.http.get<any[]>(
       this.API_URL +
-      '/api/website/property/' +
+      '/api/thm/property/' +
       propertyId +
       '/room/' +
       roomId +
@@ -223,7 +215,28 @@ export class HotelBookingService {
   }
   paymentIntent(paymentDetails: Payment) {
     return this.http.post<Payment>(
-      this.API_URL + '/api/website/paymentIntent',
+      "https://testconnect.bookone.io/hotelmate" + '/api/thm/paymentIntent',
+      paymentDetails,
+      { observe: 'response' }
+    );
+  }
+  paymentIntentHdfc(paymentDetails: Payment) {
+    return this.http.post<Payment>(
+      API_URL_IO  + '/hdfc/api/hdfc/paymentIntent',
+      paymentDetails,
+      { observe: 'response' }
+    );
+  }
+  paymentIntentPhonepe(paymentDetails: Payment) {
+    return this.http.post<Payment>(
+      'https://payment.bookone.io/phonepe/api/phonepe/paymentIntent',
+      paymentDetails,
+      { observe: 'response' }
+    );
+  }
+  paymentIntentRayzorpay(paymentDetails: Payment) {
+    return this.http.post<Payment>(
+      'https://payment.bookone.io/razorpay/api/razorpay/paymentIntent',
       paymentDetails,
       { observe: 'response' }
     );
@@ -231,7 +244,7 @@ export class HotelBookingService {
   processPayment(paymentDetails: Payment) {
     this.setApi();
     return this.http.post<Payment>(
-      this.API_URL + '/api/website/processPayment',
+     "https://testconnect.bookone.io/hotelmate" + '/api/thm/processPayment',
       paymentDetails,
       { observe: 'response' }
     );
@@ -239,7 +252,7 @@ export class HotelBookingService {
   savePayment(paymentDetails: Payment) {
     this.setApi();
     return this.http.post<Payment>(
-      this.API_URL + '/api/website/savePayment',
+      this.API_URL + '/api/thm/savePayment',
       paymentDetails,
       { observe: 'response' }
     );
@@ -247,8 +260,8 @@ export class HotelBookingService {
   getPaymentByReffId(ref: string) {
     this.setApi();
     return this.http.get<Payment[]>(
-      this.API_URL +
-      '/api/website/findPaymentByReferenceNumber/' + ref,
+      "https://testconnect.bookone.io/hotelmate" +
+      '/api/thm/findPaymentByReferenceNumber/' + ref,
       { observe: 'response' }
     );
   }
@@ -272,7 +285,7 @@ export class HotelBookingService {
   emailEnquire(enquiry: EnquiryDto) {
     this.setApi();
     return this.http.post<EnquiryDto>(
-      this.API_URL + '/api/email/enquire',
+      environment.apiUrlBookone + '/api/email/enquire',
       enquiry,
       { observe: 'response' }
     );

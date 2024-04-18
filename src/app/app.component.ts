@@ -56,6 +56,7 @@ export const APP_ID = environment.appId;
 export const dashboardUrl = environment.dashboardUrl;
 export const ANDROID_APP_URL = environment.androidAppUrl;
 export const IOS_APP_URL = environment.iosAppUrl;
+export const API_URL_IO  = environment.hdfcAPIUrl;
 export const SMS_NUMBER = '+1 956 903 2629';
 
 // export const Version = environment.appVersion;
