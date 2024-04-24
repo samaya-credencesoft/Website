@@ -561,6 +561,7 @@ export class ListingDetailOneComponent implements OnInit {
   dinnerservice: any;
   activeForGoogleHotelCenter: boolean = false;
   isDiabled: boolean;
+  showStaticContent: boolean = false;
   daterange: any;
   daterangefilter: any;
   isHeaderVisible:boolean = false
@@ -1343,6 +1344,7 @@ export class ListingDetailOneComponent implements OnInit {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.showStaticContent = true;
 this.isHeaderVisible = true;
         this.policies = this.businessUser.businessServiceDtoList.filter(
           (ele) => ele.name === 'Accommodation'
@@ -1681,6 +1683,7 @@ this.isHeaderVisible = true;
       (data) => {
         if (data.status === 200) {
           this.businessUser = data.body;
+          this.showStaticContent = true
           // this.businessUser.businessServiceDtoList.filter(ele =>
           //   )
           this.businessUser.propertyServicesList.forEach(ele => {

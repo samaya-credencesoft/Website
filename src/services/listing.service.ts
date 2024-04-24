@@ -183,7 +183,7 @@ export class ListingService {
   findByPropertyId(id: number) {
     this.setApi();
     return this.http.get<BusinessUser>(
-      environment.apiUrlBookone + '/api/website/findByPropertyId/' + id,
+    this.API_URL+ '/api/thm/findByPropertyId/' + id,
       { observe: 'response' }
     );
   }

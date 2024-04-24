@@ -46,6 +46,8 @@ import { Logger } from 'src/services/logger.service';
 import { Template } from "src/app/model/template";
 import { Components } from "src/app/model/components";
 import { Customer } from "src/app/model/customer";
+import { EnquiryForm } from "../onboarding-roomdetails-form/onboarding-roomdetails-form.component";
+import { PropertyEnquiryDto } from "src/model/propertyEnquiryDto";
 
 declare var Stripe: any;
 
@@ -174,7 +176,9 @@ export class BookingComponent implements OnInit {
   value: any;
   availableRooms: Room[];
   pet: string;
-
+  propertyenquiryone:PropertyEnquiryDto
+  equitycreatedData: any;
+  success: EnquiryForm;
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -183,6 +187,7 @@ export class BookingComponent implements OnInit {
     private datePipe: DatePipe,
     private listingService: ListingService,
     private router: Router,
+    private http: HttpClient,
     private hotelBookingService: HotelBookingService
   ) {
     this.message = new MessageDto();
@@ -207,6 +212,7 @@ export class BookingComponent implements OnInit {
     this.components = [];
     this.components2 = []
     this.language = new Language();
+    this.propertyenquiryone = new PropertyEnquiryDto();
     this.payment = new Payment();
     this.mobileWallet = new MobileWallet();
     this.bankAccount = new BankAccount();
@@ -277,6 +283,7 @@ export class BookingComponent implements OnInit {
       this.booking.netAmount - this.booking.discountAmount;
 
     this.getPropertyDetails(this.booking.propertyId);
+
     this.payment.expYear = "";
     this.payment.expMonth = "";
 
@@ -1888,6 +1895,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.roomPrice=this.booking.roomPrice;
     this.enquiryForm.externalSite="Website";
+    this.enquiryForm.source = "The Hotel Mate"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
@@ -1953,6 +1961,8 @@ export class BookingComponent implements OnInit {
     this.paymentLoader = true;
 
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
+      this.equitycreatedData = response.body;
+// console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       this.isEnquiry = true;
       this.paymentLoader = false;
       this.paymentLoader = false;
@@ -1960,7 +1970,7 @@ export class BookingComponent implements OnInit {
       this.submitButtonDisable = true;
       this.bookingConfirmed = true;
       this.enquiryNo = "THM-"+response.body.enquiryId;
-
+      this.propertyenquiryemails()
       this.hotelBookingService.emailEnquire(this.enquiryForm).subscribe((response) => {
         this.paymentLoader = false;
 
@@ -1972,8 +1982,94 @@ export class BookingComponent implements OnInit {
     }, error => {
       this.paymentLoader = false;
     });
+    this.sendenquirytoproperty(this.enquiryForm)
     this.sendWhatsappMessageToCustomer();
     this.sendWhatsappMessageToPropertyOwner();
+  }
+  propertyenquiryemails(){
+    // console.log(this.equitycreatedData.enquiryId)
+        this.propertyenquiryone.customerName = this.enquiryForm.fromName;
+          this.propertyenquiryone.propertyEnquiryId =this.equitycreatedData.enquiryId;
+          this.propertyenquiryone.propertyId = this.businessUser.id ;
+          this.propertyenquiryone.propertyName = this.businessUser.name;
+          this.propertyenquiryone.propertyLandPhone =this.businessUser.mobile;
+          this.propertyenquiryone.propertyMobile = this.businessUser.mobile;
+
+
+
+           this.http
+           .post<EnquiryForm>('https://api.bookonelocal.in/api-lms/api/v1/propertyEnquiry', this.propertyenquiryone)
+           .subscribe((response) => {
+             this.success = response;
+             Logger.log('sent ' + response);
+
+             // this.name = '';
+             // this.fromEmail = '';
+             // this.phone = '';
+             // this.subject = '';
+
+             // this.accommodationType = '';
+             // this.noOfPerson = 0;
+             // this.noOfRooms = 0;
+             // this.noOfChildren = 0;
+             // this.noOfPets = 0;
+             // this.location = '';
+             // this.alternativeLocation = '';
+             // this.phone = '';
+             // this.email = '';
+             // this.checkInDate = '';
+             // this.checkOutDate = '';
+             // this.foodOptions = '';
+             // this.dietaryRequirement = '';
+             // this.min = 0;
+             // this.max = 0;
+             // this.specialNotes = '';
+
+            //  this.enquiryForm = new EnquiryForm();
+            //  this.successMessage = true;
+           });
+
+
+       }
+  sendenquirytoproperty(enquiryForm){
+    this.enquiryForm.fromEmail = "support@thehotelmate.com";
+this.enquiryForm.phone = '';
+this.enquiryForm.email = '',
+this.enquiryForm.roomPrice = this.booking.totalAmount
+   this.enquiryForm.toEmail = this.businessUser.email
+    this.http.post<EnquiryForm>(environment.apiUrlBookone + '/api/email/enquire', this.enquiryForm)
+    .subscribe((response) => {
+      this.success = response;
+      Logger.log('sent ' + response);
+
+      // this.name = '';
+      // this.fromEmail = '';
+      // this.phone = '';
+      // this.subject = '';
+
+      // this.accommodationType = '';
+      // this.noOfPerson = 0;
+      // this.noOfRooms = 0;
+      // this.noOfChildren = 0;
+      // this.noOfPets = 0;
+      // this.location = '';
+      // this.alternativeLocation = '';
+      // this.phone = '';
+      // this.email = '';
+      // this.checkInDate = '';
+      // this.checkOutDate = '';
+      // this.foodOptions = '';
+      // this.dietaryRequirement = '';
+      // this.min = 0;
+      // this.max = 0;
+      // this.specialNotes = '';
+
+      // this.enquiryForm = new EnquiryForm();
+      // this.successMessage = true;
+    });
+
+  //  this.propertyenquiryemails(enquiryForm);
+
   }
   sendWhatsappMessageToCustomer(){
   this.whatsappForm.messaging_product = 'whatsapp';
