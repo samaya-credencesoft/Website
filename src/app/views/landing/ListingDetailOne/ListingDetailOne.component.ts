@@ -2113,7 +2113,7 @@ this.isHeaderVisible = true;
     // this.toDate = undefined;
     // this.booking.fromDate = undefined;
     // this.booking.toDate = undefined;
-    // document.getElementById("contentOne").scrollIntoView();
+    document.getElementById("contentOne").scrollIntoView();
     Logger.log(JSON.stringify(this.booking));
     Logger.log(JSON.stringify(this.checkAvailabilityStatusHide));
     this.changeDetectorRefs.detectChanges();
