@@ -28,8 +28,9 @@ COPY --from=build /usr/src/app/dist /usr/src/app/dist
 
 # Expose the port the app runs on
 EXPOSE 4200
+EXPOSE 9229
 
 # Define the command to run the app
 # CMD ["node", "dist/server/main.js"]
-CMD node dist/demoSSR/server/main.js
+CMD node --inspact=127.0.0.1:9229 dist/demoSSR/server/main.js
 # CMD npm run  serve:ssr
