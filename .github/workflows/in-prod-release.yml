@@ -5,8 +5,8 @@ on: [workflow_dispatch]
 env:
   AWS_REGION: ap-south-1
   ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/pms_website
-  AWS_ACCESS_KEY_ID: AKIA5IYYURWEROEEBAFM
-  AWS_SECRET_ACCESS_KEY: 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
+  # AWS_ACCESS_KEY_ID:
+  # AWS_SECRET_ACCESS_KEY:
 
   service_name: pms_website
   jenkins_username: webui_updater
@@ -30,12 +30,18 @@ jobs:
           ref: release-india-prod
           fetch-depth: 1
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: ${{ env.AWS_REGION }}
+
+      - id: configure-aws-credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ap-south-1
+          role-arn: arn:aws:iam::912195358089:role/bookone-india-deployment-role
 
       - name: Login to Amazon ECR
         id: login-ecr
