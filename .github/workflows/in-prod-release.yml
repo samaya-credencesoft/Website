@@ -37,10 +37,11 @@ jobs:
       #     aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
       #     aws-region: ${{ env.AWS_REGION }}
 
-      - id: configure-aws-credentials
+      - name: Configure AWS credentials
+        id: configure-aws-credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ap-south-1
+          # aws-region: ap-south-1
           role-to-assume: arn:aws:iam::912195358089:role/bookone-india-deployment-role
 
       - name: Login to Amazon ECR
