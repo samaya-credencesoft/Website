@@ -3,7 +3,7 @@ name: Release IN Prod
 on: [workflow_dispatch]
 
 env:
-  AWS_REGION: ap-south-1 
+  AWS_REGION: ap-south-1
   ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/pms_website
   AWS_ACCESS_KEY_ID: AKIA5IYYURWEROEEBAFM
   AWS_SECRET_ACCESS_KEY: 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
@@ -13,7 +13,7 @@ env:
   jenkins_pass: 11cf70018c7b7fefd113bfe68a5dbf52ba
   jenkins_url: https://build.bookonelocal.in
   job_name: run_webui
-  
+
 permissions:
   contents: read
 
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: bookone-subha
+          ref: release-india-prod
           fetch-depth: 1
 
       - name: Configure AWS credentials
@@ -65,4 +65,3 @@ jobs:
             echo "Failed! The response code is $response."
             exit 1 
           fi
-     
