@@ -32,5 +32,6 @@ EXPOSE 9229
 
 # Define the command to run the app
 # CMD ["node", "dist/server/main.js"]
-CMD node --inspact=127.0.0.1:9229 dist/demoSSR/server/main.js
+# CMD node dist/demoSSR/server/main.js
+CMD node --inspect=0.0.0.0:9229 dist/demoSSR/server/main.js
 # CMD npm run  serve:ssr
