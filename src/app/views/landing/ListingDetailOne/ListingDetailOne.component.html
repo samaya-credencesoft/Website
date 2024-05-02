@@ -21,6 +21,8 @@
     <div class="block-space bg-white ml-4 mr-4 mt-5">
       <div class="container text-center" style="text-align: center;" >
         <h1 class="title" style="margin-top: 20px; ">{{businessUser?.name}}</h1>
+
+        
         <!-- <div class="justify-content-center">
          <p class="heading2" style="text-transform: capitalize" *ngIf="businessUser.address">
               {{businessUser.address.streetNumber? businessUser.address.streetNumber + ', ' : '' }}
@@ -31,7 +33,7 @@
               {{businessUser.address.city? businessUser.address.state + ', ' : '' }}
               {{businessUser.address.country? businessUser.address.country : '' }}</p>
             </div> -->
-              <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px;" *ngIf="showStaticContent === true">
+              <!-- <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px;" *ngIf="showStaticContent === true">
                 <li><a href="tel:+918328818871"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-8328818871</span></a>
                     </li>
@@ -39,10 +41,10 @@
                   <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-9004129369</span></a>
                     </li>
                 <li style="margin-top: -2px;"><a [href]="getWhatsappShareUrl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
-                  <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."></span></a>
+                  <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."></span></a> -->
                   <!-- +91-9082741973 -->
-                    </li>
-              </ul>
+                    <!-- </li>
+              </ul> -->
       </div>
       <div class="container-fluid px-5 booknow" *ngIf="isHeaderVisible === true">
         <button type="button"(click)="navigateToSection('accmd')"
@@ -50,6 +52,313 @@
           <h4 style="color: #F2F1F1;">BOOK NOW!</h4>
         </button>
       </div>
+                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #505050; border-radius: 50px;" *ngIf="availableRooms?.length >=0 && availability ==true">
+            <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
+              <div class="container">
+                <div class="row" style="justify-content: space-evenly;">
+                  <div class="col-lg-6 ">
+                    <div id="autocomplete-container">
+                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: white;">Check
+                        In</label>
+                      <input #dpFromDate3 type="text" class="date-input form-control input-field-resize2" style="border: none;"
+                        placeholder="Check-in" name="dpFromDate3" [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
+                        (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" required
+                        (click)="datepicker3.toggle()" autocomplete="off" />
+                      <div class="form-group " style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize" ngbDatepicker
+                          #datepicker3="ngbDatepicker" [autoClose]="true" (dateSelect)="onDateSelection($event)"
+                          [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
+                          [minDate]="toDate" />
+                        <ng-template #t1 let-date let-focused="focused">
+                          <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                            (mouseleave)="hoveredDate = null">
+                            {{ date.day }}
+                          </span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: white;">Check
+                        Out</label>
+                      <input #dpToDate3 type="text" class="date-input form-control input-field-resize2" placeholder="Check-out"
+                        name="dpToDate3" [value]="formatter.format(toDate) | date: 'EEE, MMM d'" style="border: none;"
+                        (input)="toDate = validateInput(toDate, dpToDate3.value)" required (click)="datepicker3.toggle()"
+                        autocomplete="off" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div data-visible="accommodation,flights" class="guests">
+                      <div data-component="index/guest-errors" data-id="main" data-view-id="accommodation" role="alert"></div>
+                      <div (click)="toggleRoomsAndOccupancy()"
+                        style="padding-bottom:9px;padding-top: 0px!important;">
+                        <label for="room" class="label_heading1" style="margin-bottom:0px!important;color: white;">Rooms & Guests</label>
+                        <div class="col-12 bg-white" style="border: none;line-height: 30px;padding: 10px;border-radius: 0.25rem;box-shadow: none;">
+                          <label class="text-default "
+                            style="font-size: 15px; margin: 0; padding: 0;color: lightgray !important; ">
+                            <span class="guests_count">
+                              <span data-adults-count="">{{ adults }} adults</span>
+                              <span data-visible="accommodation">
+                                &nbsp;·&nbsp;
+                                <span data-children-count="">{{ children }} children</span>
+                              </span>
+                              <span data-visible="accommodation">
+                                &nbsp;·&nbsp;
+                                <span data-room-count="">{{ rooms }} room</span>
+                              </span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="list-holder" role="region" aria-label="Rooms and occupancy"
+                        *ngIf="roomsAndOccupancy === true">
+                        <div class="item business-text p-4" (clickOutside)="toggleRoomsAndOccupancy()">
+                          <div class="row">
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                              <button class="btn btn-default btn-sm" (click)="toggleRoomsAndOccupancy()">
+                                X
+                              </button>
+                            </div>
+                          </div>
+                          <div class="clearfix" data-render="">
+                            <div class="group_field1 group_field-adults">
+                              <div class="row stepper" data-component="InputStepper">
+                                <div class="col-6 stepper_title-wrapper">
+                                  <label class="stepper_title text-default" for="group_adults">Adults</label>
+                                </div>
+                                <div class="col-6">
+                                  <input style="display: none" type="number" class="stepper_input"
+                                    data-ref="input-stepper-field" id="group_adults" name="group_adults" min="1" max="30"
+                                    value="2" data-group-adults-count="" [(ngModel)]="adults" />
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="adults = adults - 1"
+                                    [disabled]="adults <= 1">
+                                    <span class="button_text">−</span>
+                                  </button>
+                                  <span class="stepper_display text-default" aria-hidden="true">{{ adults }}</span>
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="adult()"
+                                    [disabled]="adults >= 30">
+                                    <span class="button_text">+</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="group_field1 group-children">
+                              <div class="row stepper" data-component="InputStepper">
+                                <div class="col-6 stepper_title-wrapper">
+                                  <label class="stepper_title text-default" for="group_children">Children</label>
+                                </div>
+                                <div class="col-6">
+                                  <input style="display: none" type="number" class="stepper_input"
+                                    data-ref="input-stepper-field" id="group_adults" name="group_adults" min="1" max="30"
+                                    value="2" data-group-adults-count="" />
+                                  <button class="btn btn-outline-default btn-sm" type="button"
+                                    (click)="children = children - 1" [disabled]="children <= 0">
+                                    <span class="button_text">−</span>
+                                  </button>
+                                  <span class="stepper_display text-default" aria-hidden="true">{{ children }}</span>
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="child()"
+                                    [disabled]="children >= 30">
+                                    <span class="button_text">+</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="group_field1 group_field-rooms">
+                              <div class="row stepper" data-component="InputStepper">
+                                <div class="col-6 stepper_title-wrapper">
+                                  <label class="stepper_title text-default" for="no_rooms">Rooms</label>
+                                </div>
+                                <div class="col-6">
+                                  <input style="display: none" type="number" class="stepper_input"
+                                    data-ref="input-stepper-field" id="group_adults" name="group_adults" min="1" max="30"
+                                    value="2" data-group-adults-count="" />
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="rooms = rooms - 1"
+                                    [disabled]="rooms <= 1">
+                                    <span class="button_text">−</span>
+                                  </button>
+                                  <span class="stepper_display text-default" aria-hidden="true">{{ rooms }}</span>
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="rooms = rooms + 1"
+                                    [disabled]="rooms >= 30">
+                                    <span class="button_text">+</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <button type="button mt-4" style="position: relative; float: right; background-color: #271a55; color: #F8FFF5; padding:15px; border-radius:25px; margin-top:27px; width: 40%; align-self: self-start;" (click)="checkingAvailability(); navigateToSection('accmd');">
+                  Check Availability
+                </button>
+            </form>
+          </div>
+          <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
+            <h3 class="room-text-edit">Travel Dates and Guests</h3>
+            <div class="row p-2" style="justify-content: space-evenly;">
+              <div class="col-12 my-2" style="background-color: #d9d9d9;">
+                <div class="row">
+                  <div class="col-2 p-1"><img src="assets/images/uil_calender.svg" alt="" style="width: 50px;height: 50px;"></div>
+                  <div class="col-10 main-search-input-item main_search location">
+                    <div id="autocomplete-container" style="margin-top: -4px;">
+                      <div class="row p-1" style="justify-content: normal;">
+                        <div class="col-6">
+                          <label for="" class="label_heading" style="padding-top:0px;margin-bottom:0px!important;">Check In</label>
+                          <input #dpFromDate2 type="text" class="col-12 date-input form-control input-field-resize" placeholder="Check-in"
+                          name="dpFromDate2" [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
+                          (input)="fromDate = validateInput(fromDate, dpFromDate2.value)" required (click)="datepicker2.toggle()"
+                          autocomplete="off" style="background-color: #d9d9d9; color:#808080;" />
+                        </div>
+                        <div class="col-6">
+                          <label for="" class="label_heading" style="padding-top:0px;margin-bottom:0px!important;">Check Out</label>
+                          <input #dpToDate2 type="text" class="col-12 date-input form-control input-field-resize" placeholder="Check-out"
+                                name="dpToDate2" [value]="formatter.format(toDate) | date: 'EEE, MMM d'"
+                                (input)="toDate = validateInput(toDate, dpToDate2.value)" required (click)="datepicker2.toggle()" autocomplete="off"
+                                style="background-color: #d9d9d9; color:#808080;" />
+                        </div>
+                      </div>
+                      <div class="form-group " style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize" ngbDatepicker #datepicker2="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t"
+                          outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [minDate]="todayDate" />
+                        <ng-template #t let-date let-focused="focused">
+                          <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                            (mouseleave)="hoveredDate = null" style="color:#808080">
+                            {{ date.day }}
+                          </span>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 my-2" style="background-color: #d9d9d9;">
+                <div class="row">
+                  <div class="col-2 p-1"><img src="assets/images/bi_person.svg" alt="" style="width: 50px;height: 50px;"></div>
+                  <div class="col-10 main-search-input-item main_search">
+                    <div data-visible="accommodation,flights" class="input-group guests">
+                      <div data-component="index/guest-errors" data-id="main" data-view-id="accommodation" role="alert"></div>
+                      <div class="input-box" (click)="toggleRoomsAndOccupancy()"
+                        style="padding-bottom:9px;padding-top: 0px!important; margin-top: -4px; background-color: #d9d9d9;">
+                        <label for="" style="margin-bottom:0px!important">Rooms & Guests</label> <br>
+                        <label class="text-default "
+                          style="font-size: 14px; margin: 0; padding: 0;color: #808080 !important; ">
+                          <span class="guests_count">
+                            <span data-adults-count="" class="text-nowrap">{{ adults }} adults</span>
+                            <span data-visible="accommodation">
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              <span data-children-count="" class="text-nowrap">{{ children }} children</span>
+                            </span>
+                            <span data-visible="accommodation">
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              <span data-room-count="" class="text-nowrap">{{ rooms }} room</span>
+                            </span>
+                          </span>
+                        </label>
+                      </div>
+    
+                      <div class="list-holder roomsAndOccupancy" role="region" aria-label="Rooms and occupancy"
+                        *ngIf="roomsAndOccupancy === true">
+                        <div class="item business-text p-4" (clickOutside)="toggleRoomsAndOccupancy()">
+                          <div class="row">
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                              <button class="btn btn-default btn-sm" (click)="toggleRoomsAndOccupancy()">
+                                X
+                              </button>
+                            </div>
+                          </div>
+                          <div class="clearfix" data-render="">
+                            <div class="group_field group_field-adults">
+                              <div class="row stepper" data-component="InputStepper">
+                                <div class="col-6 stepper_title-wrapper">
+                                  <label class="stepper_title text-default" for="group_adults">Adults</label>
+                                </div>
+                                <div class="col-6">
+                                  <input style="display: none" type="number" class="stepper_input" data-ref="input-stepper-field"
+                                    id="group_adults" name="group_adults" min="1" max="30" value="2" data-group-adults-count=""
+                                    [(ngModel)]="adults" />
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="adults = adults - 1"
+                                    [disabled]="adults <= 1">
+                                    <span class="button_text">−</span>
+                                  </button>
+                                  <span class="stepper_display text-default" aria-hidden="true">{{ adults }}</span>
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="adults = adults + 1"
+                                    [disabled]="adults >= 30">
+                                    <span class="button_text">+</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="group_field group-children">
+                              <div class="row stepper" data-component="InputStepper">
+                                <div class="col-6 stepper_title-wrapper">
+                                  <label class="stepper_title text-default" for="group_children">Children</label>
+                                </div>
+                                <div class="col-6">
+                                  <input style="display: none" type="number" class="stepper_input" data-ref="input-stepper-field"
+                                    id="group_adults" name="group_adults" min="1" max="30" value="2" data-group-adults-count="" />
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="children = children - 1"
+                                    [disabled]="children <= 0">
+                                    <span class="button_text">−</span>
+                                  </button>
+                                  <span class="stepper_display text-default" aria-hidden="true">{{ children }}</span>
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="children = children + 1"
+                                    [disabled]="children >= 30">
+                                    <span class="button_text">+</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="group_field group_field-rooms">
+                              <div class="row stepper" data-component="InputStepper">
+                                <div class="col-6 stepper_title-wrapper">
+                                  <label class="stepper_title text-default" for="no_rooms">Rooms</label>
+                                </div>
+                                <div class="col-6">
+                                  <input style="display: none" type="number" class="stepper_input" data-ref="input-stepper-field"
+                                    id="group_adults" name="group_adults" min="1" max="30" value="2" data-group-adults-count="" />
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="rooms = rooms - 1"
+                                    [disabled]="rooms <= 1">
+                                    <span class="button_text">−</span>
+                                  </button>
+                                  <span class="stepper_display text-default" aria-hidden="true">{{ rooms }}</span>
+                                  <button class="btn btn-outline-default btn-sm" type="button" (click)="rooms = rooms + 1"
+                                    [disabled]="rooms >= 30">
+                                    <span class="button_text">+</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 my-2 text-center">
+                <button type="button mt-4"
+                  style="background-color: #271a55; color: #F8FFF5; padding: 15px; border-radius: 25px;"
+                  (click)="checkingAvailability(); navigateToSection('accmd');">
+                  Check Availability
+                </button>
+              </div>
+            </div>
+          </div>
+    
       <div class="mt-5" style="margin-bottom: 30px;">
         <div class="row mt-5" style="padding-top: 50px;">
           <div class="col-lg-2" *ngIf="isHeaderVisible === true" >
@@ -249,7 +558,7 @@
             {{showAll? "Less": "All"}}</a>
         </p>
       </div>
-      <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
+      <!-- <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
         <h3 class="room-text-edit">Travel Dates and Guests</h3>
         <div class="row p-2" style="justify-content: space-evenly;">
           <div class="col-12 my-2" style="background-color: #d9d9d9;">
@@ -402,7 +711,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="container-fluid d-flex justify-content-center" *ngIf="bar || pub || swimming || pet || breakfast" style="background-color:#F8FFF5; border-radius: 40px; padding: 10px;">
         <div class="container-fluid">
           <div class="row" style="padding: 35px;">
@@ -503,7 +812,6 @@
         </div>
       </div> -->
     </div>
-
     <div class="bg-white ml-4 mr-4 mt-2">
       <div class="container-fluid">
         <div class="row">
@@ -549,6 +857,8 @@
             </div>
           </main>
           </div>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-center align-items-center roomform nodisplaysm">
             <div class="cardsm col my-2" id="mealplanssm" *ngIf="breakfast || lunch || dinner">
               <h3 class="room-text-edit">Food Highlights</h3>
               <div class="card nodisplaylg" style="border-top: 2px solid rgba(0, 0, 0, 0.5); border-top-left-radius: 0; border-top-right-radius: 0;" *ngIf="breakfast || lunch || dinner">
@@ -772,8 +1082,9 @@
                 </ngx-slick-carousel>
               </div>
             </div>
+
           </div>
-          <div class="col-lg-6 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #505050; border-radius: 50px;" *ngIf="availableRooms?.length >=0 && availability ==true">
+          <!-- <div class="col-lg-6 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #505050; border-radius: 50px;" *ngIf="availableRooms?.length >=0 && availability ==true">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly; flex-flow: column;">
               <div class="container">
                 <div class="row" style="justify-content: space-evenly;">
@@ -924,7 +1235,7 @@
                   Check Availability
                 </button>
             </form>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="col mt-4">
           <h3>Location of {{businessUser.name}}</h3>
@@ -1069,6 +1380,7 @@
                                   </div>
                                 </div>
                               </div>
+                              
                               <div style="text-align: center;">
                                 <button class="btn text-white"
                                   style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
@@ -1689,11 +2001,12 @@
                                 </div>
                               </div>
                             </div>
+                           
                             <div style="text-align: center;">
                               <button class="btn text-white"
                                 style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
                                 (click)="open(content, room, room.name)">See
-                                More Details</button>
+                                More Detail</button>
                             </div>
                           </div>
                         </div>
@@ -2880,10 +3193,10 @@
                     <div class="clearfix"></div>
                   </div>
                 </div>
-                <div class="col-12" *ngIf="modalData.description">
+                <!-- <div class="col-12" *ngIf="modalData.description">
                   <h6 class="text_heading_font_size">Description</h6>
                   <div class="mt-2" [innerHtml]="modalData.description"></div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="col-12 p-4" *ngIf="modalData.roomFacilities?.length">
@@ -3200,3 +3513,33 @@
 </body>
 </html>
 <!-- <router-outlet></router-outlet> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
