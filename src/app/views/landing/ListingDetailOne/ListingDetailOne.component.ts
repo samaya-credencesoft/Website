@@ -74,6 +74,12 @@ export interface Email {
   encapsulation: ViewEncapsulation.None,
 })
 export class ListingDetailOneComponent implements OnInit {
+  isPopupVisible = true; // Initially show the popup
+
+  closePopup() {
+    this.isPopupVisible = false;
+  }
+
   lat = 0;
   lng = 0;
   staticAlertClosed: true;
@@ -88,6 +94,7 @@ export class ListingDetailOneComponent implements OnInit {
   dynamicStreetName: string
   dynamicLocality: string;
   propertyServiceListData: any[] = [];
+  otaNames: string[] = [];
   dynamicCountryName: string
   dynamicStreetNumber: string
   description: string;
@@ -117,6 +124,7 @@ export class ListingDetailOneComponent implements OnInit {
   ]);
   messageControl: FormControl = new FormControl();
   propertyControl: FormControl = new FormControl();
+  otaPlans: { otaName: string, price: number }[] = [];
 
   emailSuccess: Boolean;
 
@@ -2531,6 +2539,7 @@ this.isHeaderVisible = true;
             this.availableRooms !== undefined
           ) {
             this.availableRooms.forEach((room) => {
+              
               room?.roomFacilities?.forEach((element) => {
                 if (element.name == 'Bar') {
                   this.bar = element;
@@ -2571,6 +2580,13 @@ this.isHeaderVisible = true;
 
 
               event2?.roomRatePlans?.forEach((plan) => {
+               
+                plan.otaPlanList.forEach((otaPlan) => {
+                  const otaName = otaPlan.otaName;
+                  const price = otaPlan.price;
+                  this.otaPlans.push({ otaName, price }); // Push otaPlan object into the array
+                });
+                
                 if (
                   plan?.code === 'GHC' &&
                   this.activeForGoogleHotelCenter === true
@@ -2582,6 +2598,7 @@ this.isHeaderVisible = true;
                   ) {
 
                     plan.otaPlanList.forEach((element) => {
+                     
                       if (element?.otaName === 'GHC') {
                         plan.amount = element?.price;
 
@@ -2724,6 +2741,8 @@ this.isHeaderVisible = true;
   contentDialog(contentDialog: any) {
     throw new Error('Method not implemented.');
   }
+
+  
 
   allDtosNull(): boolean {
     return this.availableRooms?.every(
