@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
   showListItems: boolean = false; // For your existing toggle functionality
-  isOpened = true; // Initially open (for the vertical navbar)
+  isdone = true; 
 
   toggleListItems() {
     this.showListItems = !this.showListItems;
   }
 
   closeNavbar(): void {
-    this.isOpened = false; // Hides the vertical navbar
+    this.isdone = false; // Hides the vertical navbar
   }
 
   constructor() { }

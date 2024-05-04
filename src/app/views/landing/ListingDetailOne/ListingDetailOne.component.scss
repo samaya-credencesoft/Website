@@ -3113,6 +3113,8 @@ height: 100%;
 
   }
 }
+
+
 @media(min-width:873px){
   .mobile-one{
     display: none;
@@ -3161,14 +3163,21 @@ height: 100%;
   left: 20px; /* Adjust as needed */
   background-color: #ffffff;
   width: 300px;
-  padding: 20px;
   border: 1px solid #cccccc;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+.ota{
+  background-color: #25d366;
+  color: #fff;
+  padding :20px;
+}
 
 .popup-content {
-  text-align: left;  /* Left alignment instead of center */
+  text-align: left;
+  padding-top: 10px;
+  
+    /* Left alignment instead of center */
 }
 
 .popup-content h4 {  /* Changed styling for Book Direct text */
@@ -3182,6 +3191,7 @@ height: 100%;
 }
 
 .popup-content td {
+  padding-top: 10px;
   font-weight: bold;
   font-size: 1.1rem;  /* Increase font size for price */
 }

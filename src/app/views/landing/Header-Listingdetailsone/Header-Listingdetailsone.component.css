@@ -5,7 +5,10 @@
 * ==========================================
 *
 */
-
+.close-btn{
+  float: right;
+  width: 30px;
+}
 .vertical-nav {
   min-width: 17rem;
   width: 17rem;

@@ -50,6 +50,7 @@ import { HeaderWhiteComponent } from './components/header-white/header-white.com
 import { IntroNineComponent } from './components/intro-nine/intro-nine.component';
 import { LandingV9Component } from './landing-v9/landing-v9.component';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { SideNavComponent } from './side-nav/side-nav.component';
 
 import { IntroTenComponent } from './components/intro-ten/intro-ten.component';
 import { LandingV10Component } from './landing-v10/landing-v10.component';
@@ -188,6 +189,7 @@ import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-boo
     ContactComponent,
     FaqComponent,
     HeaderListingdetailsoneComponent,
+    SideNavComponent,
     ManageBookingsLoginComponent,
 
     CallToActionComponent,
