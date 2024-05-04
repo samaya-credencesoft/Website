@@ -16,6 +16,31 @@
 </head>
 
 <body>
+  <nav style="position: fixed;">
+    <button class="menu-button">Menu</button>
+  </nav>
+
+  <app-Header-Listingdetailsone> </app-Header-Listingdetailsone>
+  
+  <div  style="width: 100%; ">
+    <img   src="assets/images/BookOne Website Bannerr.png" style="height: 350px; width: 100%;  ">
+  </div>
+
+  
+  
+
+
+  <!-- <nav class="sidebar">
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/rates">Rates and Availability</a></li>
+      <li><a routerLink="/about">About Us</a></li>
+      <li><a routerLink="/terms">Terms & Conditions</a></li>
+      <li><a routerLink="/privacy">Privacy Policy</a></li>
+      <li><a routerLink="/payment">Payment Terms</a></li>
+      <li><a routerLink="/manage">Manage Bookings</a></li>
+    </ul>
+  </nav> -->
   <!-- <app-header *ngIf="isHeaderVisible === true"></app-header> -->
   <div class="main-wrapper" style="margin-top: 7rem;" *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined )  ">
     <div class="block-space bg-white ml-4 mr-4 mt-5">
@@ -1712,10 +1737,10 @@
 
 
 
-                            <div style="padding-top: 20px;justify-content: center;">
+                            <div style="padding-top: 20px;justify-content: center; margin-left: 250px;">
                               <h6 class="text_heading_font_size">Description</h6>
 
-                              <div class="mt-2" [innerHTML]="room.description">
+                              <div class="mt-2" style="padding-right: 235px;" [innerHTML]="room.description">
                                 </div>
                           </div>
                             

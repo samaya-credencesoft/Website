@@ -95,6 +95,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 import { BookingComponent } from './Booking/Booking.component';
 import { environment } from 'src/environments/environment';
+import { HeaderListingdetailsoneComponent } from './Header-Listingdetailsone/Header-Listingdetailsone.component';
+import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-bookings-login.component';
 
 
 
@@ -185,6 +187,8 @@ import { environment } from 'src/environments/environment';
     BlogComponent,
     ContactComponent,
     FaqComponent,
+    HeaderListingdetailsoneComponent,
+    ManageBookingsLoginComponent,
 
     CallToActionComponent,
     SubscribeEmailComponent,
