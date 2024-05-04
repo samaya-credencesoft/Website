@@ -16,15 +16,21 @@
 </head>
 
 <body>
-  <nav style="position: fixed;">
-    <button class="menu-button">Menu</button>
-    <div class="container text-center" style="text-align: center;" >
-      <span class="title" style="margin-top: 15px;text-align: left; color: fff; ">{{businessUser?.name}}</span>
+ 
+    <nav class="navbar navbar-dark " style="height: 100px; background-color: #1e1f20;">
+      
+      <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+    <div class="container " style="text-align: left;" >
+      <span class="title" style="margin-top: 15px;text-align: left; color: #fff ">{{businessUser?.name}}</span>
     </div>
 
   </nav>
 
-  <app-Header-Listingdetailsone> </app-Header-Listingdetailsone>
+  <app-Header-Listingdetailsone *ngIf="showListingDetails"> </app-Header-Listingdetailsone>
   
   <div  style="width: 100%; ">
     <img   src="assets/images/BookOne Website Bannerr.png">
@@ -1740,14 +1746,23 @@
 
 
 
+                             <!-- desktop view -->
+                            <div  class="desktopone" >
+                              <h6 class="text_heading_font_size" style="padding-left: 30px;">Description</h6>
 
-                            <div style="padding-top: 20px;justify-content: center;">
-                              <h6 class="text_heading_font_size">Description</h6>
-
-                              <div class="mt-2" [innerHTML]="room.description">
+                              <div class="mt-2"  [innerHTML]="room.description">
                                 </div>
                           </div>
-                            
+                                    <!-- mobile view  --> 
+                                                                   
+                          <div  class="mobile-one ">
+                            <h6 class="text_heading_font_size">Description</h6>
+
+                            <div class="mt-2"  [innerHTML]="room.description">
+                              </div>
+                        </div> 
+
+                             
 
 
 

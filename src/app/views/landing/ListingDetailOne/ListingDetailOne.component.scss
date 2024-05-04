@@ -897,7 +897,7 @@ top: 6335px;
     }
 }
 .text_heading_font_size{
-width: 200px;
+// width: 200px;
 height: 29px;
 top: 15px;
 
@@ -3104,6 +3104,23 @@ height: 100%;
 // .hover-trigger:hover + .payment-breakups {
 //   display: block;
 // }
+@media(max-width:872px){
+  .desktopone{
+    display: none;
+    padding-top: 20px;
+    justify-content: center;
+    margin-left: 250px;
+
+  }
+}
+@media(min-width:873px){
+  .mobile-one{
+    display: none;
+    padding-top: 20px;
+    justify-content: center;
+    margin-left: 250px;
+  }
+}
 @media(max-width:1293px){
   .payment-breakups{
 

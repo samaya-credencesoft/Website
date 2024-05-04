@@ -74,6 +74,11 @@ export interface Email {
   encapsulation: ViewEncapsulation.None,
 })
 export class ListingDetailOneComponent implements OnInit {
+
+  showListingDetails: boolean = false;
+  toggleListingDetails() {
+    this.showListingDetails = !this.showListingDetails;
+  }
   isPopupVisible = true; // Initially show the popup
 
   closePopup() {
