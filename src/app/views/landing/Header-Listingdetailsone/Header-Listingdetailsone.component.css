@@ -12,12 +12,22 @@
 .vertical-nav {
   min-width: 17rem;
   width: 17rem;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   background-color: #3b3c3c;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.4s;
+  z-index: 1000;
+}
+hr {
+  border: none; /* Remove default border */
+  border-top: 1px solid #ccc; /* Add a thin gray line at the top */
+  height: 0; /* Set height to 0 to avoid extra space */
+  margin: 5px 0; /* Add some margin for spacing */
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .nav-item-li{

@@ -17,22 +17,22 @@
 
 <body>
  
-    <nav class="navbar navbar-dark " style="height: 100px; background-color: #1e1f20;">
+    <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;">
       
       <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       
-    <div class="container " style="text-align: left;" >
-      <span class="title" style="margin-top: 15px;text-align: left; color: #fff ">{{businessUser?.name}}</span>
+    <div class="container">
+      <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; ">{{businessUser?.name}}</span>
     </div>
 
   </nav>
 
   <app-Header-Listingdetailsone *ngIf="showListingDetails"> </app-Header-Listingdetailsone>
   
-  <div  style="width: 100%; ">
+  <div  style="width: 100%; margin-top: 7px;">
     <img   src="assets/images/BookOne Website Bannerr.png">
   </div>
 
@@ -52,8 +52,8 @@
     </ul>
   </nav> -->
   <!-- <app-header *ngIf="isHeaderVisible === true"></app-header> -->
-  <div class="main-wrapper" style="margin-top: 7rem;" *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined )  ">
-    <div class="block-space bg-white ml-4 mr-4 mt-5">
+  <div class="main-wrapper" *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined )  ">
+    <div class="block-space bg-white ml-4 mr-4 mt-3">
 
       <div class="container-fluid px-5 booknow" *ngIf="isHeaderVisible === true">
         <button type="button"(click)="navigateToSection('accmd')"
@@ -381,9 +381,9 @@
 
 
 
-          <div class="container text-center" style="text-align: center;" >
+          <!-- <div class="container text-center" style="text-align: center;" >
             <h1 class="title" style="margin-top: 20px; ">{{businessUser?.name}}</h1>
-    
+     -->
             
             <!-- <div class="justify-content-center">
              <p class="heading2" style="text-transform: capitalize" *ngIf="businessUser.address">
@@ -407,10 +407,10 @@
                       <!-- +91-9082741973 -->
                         <!-- </li>
                   </ul> -->
-          </div>
+          <!-- </div> -->
     
       <div class="mt-5" style="margin-bottom: 30px;">
-        <div class="row mt-5" style="padding-top: 50px;">
+        <div class="row mt-5" style="padding-top: 20px;">
           <div class="col-lg-2" *ngIf="isHeaderVisible === true" >
             <img src="assets/images/left shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-right">
           </div>
@@ -485,7 +485,7 @@
           </ngx-slick-carousel>
         </div>
     </ng-template>
-        <div class="container d-flex justify-content-center" style="padding-top: 50px; padding-bottom: 30px;" *ngIf="isRestaurant || distance || DistanceRailway ">
+        <div class="container d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px;" *ngIf="isRestaurant || distance || DistanceRailway ">
           <ul class="pointers">
             <li style="list-style-type: disc; margin-right: 30px;" *ngIf="isRestaurant">{{isRestaurant.name}}</li>
             <li style="list-style-type: disc; margin-right: 30px;" *ngIf="distance">{{distance.name}}</li>
@@ -3595,8 +3595,10 @@
 
   <!-- HTML -->
   
-  <div class="popup-container" *ngIf="isPopupVisible" style="float: left;">
+  <div class="popup-container" *ngIf="isPopupVisible" style="float: left;z-index: 1000;">
     <div class="popup-content" >
+      <span class="close-icon" style="position: absolute; top: 10px; right: 10px;"><button (click)="closePopup()">&#10006;</button>
+      </span>
       <div class="ota" >OTA Prices</div>
       <!-- <span class="close-icon" style="position: absolute; top: 10px; right: 10px;"><button (click)="closePopup()">&#10006;</button>
       </span> -->
@@ -3608,7 +3610,7 @@
         </div>   -->
         <table>
             <tr *ngFor="let otaPlan of otaPlans">
-              <td>{{ otaPlan.otaName }} : </td>
+              <td style="padding-left: 20px;">{{ otaPlan.otaName }} : </td>
               <td>{{ otaPlan.price }}</td>
             </tr>
         </table>
