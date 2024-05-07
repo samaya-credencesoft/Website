@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
   showListItems: boolean = false; // For your existing toggle functionality
-  isdone = true; 
+  isdone : boolean = true; 
 
   toggleListItems() {
     this.showListItems = !this.showListItems;
