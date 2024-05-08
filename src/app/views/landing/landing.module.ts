@@ -98,6 +98,7 @@ import { BookingComponent } from './Booking/Booking.component';
 import { environment } from 'src/environments/environment';
 import { HeaderListingdetailsoneComponent } from './Header-Listingdetailsone/Header-Listingdetailsone.component';
 import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-bookings-login.component';
+import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
 
 
 
@@ -191,6 +192,7 @@ import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-boo
     HeaderListingdetailsoneComponent,
     SideNavComponent,
     ManageBookingsLoginComponent,
+    LoginCancelPageComponent,
 
     CallToActionComponent,
     SubscribeEmailComponent,
