@@ -76,8 +76,10 @@ export interface Email {
 export class ListingDetailOneComponent implements OnInit {
 
   showListingDetails: boolean = false;
+  website: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
+   
   }
   isPopupVisible = true; // Initially show the popup
 
