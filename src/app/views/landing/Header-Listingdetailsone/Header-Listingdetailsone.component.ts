@@ -11,12 +11,17 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   @Input()
   businessUser:any;
   showListingDetails: boolean = false;
+  website: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
+    this.website = this.businessUser.website;
+    console.log('new link is',this.website);
   }
   toggleListItems() {
     this.showListItems = !this.showListItems;
+  
+
   }
 
   closeNavbar(): void {
@@ -26,5 +31,10 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.website = this.businessUser.website;
+    console.log('new link is',this.website);
+  }
+  navigate(){
+   
   }
 }
