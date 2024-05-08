@@ -3,18 +3,18 @@
   <button class="close-btn" (click)="closeNavbar()">
     <i class="fa fa-times"></i> </button>
   <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
-    <li class="nav-item-li">
+    <li class="nav-item-li" (click)="navigate(businessUser?.website)">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Home
             </a>
     </li><hr>
-    <li class="nav-item-li">
+    <!-- <li class="nav-item-li">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Rates and Availability
             </a>
-    </li><hr>
+    </li><hr> -->
     <li class="nav-item-li">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
@@ -49,46 +49,17 @@
   </ul>
 </div>
 
-<!-- <div class="container" style="background-color: #bbb;">
-  <div class="row">
-    <div class="col-md-6 sign-in">
-      <h2>Sign In</h2>
-      <form >
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" formControlName="email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" formControlName="password" required>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe">
-          <label class="form-check-label" for="rememberMe">Keep me logged in</label>
-        </div>
-        <button type="submit" class="btn btn-primary">SIGN IN</button>
-        <a routerLink="/forgot-password">Forgot password?</a>
-        <br>
-        <a routerLink="/create-password">Don't have password? Click on Create Password and we will generate for you</a>
-      </form>
-    </div>
-    <div class="col-md-6 cancel-booking">
-      <h2>Cancel Booking</h2>
-      <form >
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" formControlName="email" required>
-        </div>
-        <div class="form-group">
-          <label for="bookingNo">Itinerary or Booking No</label>
-          <input type="text" class="form-control" id="bookingNo" formControlName="bookingNo" required>
-        </div>
-        <button type="submit" class="btn btn-danger">CANCEL BOOKING</button>
-      </form>
-    </div>
+<nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
+  <div class="container">
+    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <img   src="assets/images/nav-toggle.png">
+    </button>
+    <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; ">{{businessUser?.name}}</span>
   </div>
-</div> -->
-<!-- End vertical navbar -->
 
+</nav>
 
-<!-- Page content holder -->
+<div  style="width: 100%; margin-top: 7px;">
+  <img   src="assets/images/BookOne Website Bannerr.png">
+</div>
+

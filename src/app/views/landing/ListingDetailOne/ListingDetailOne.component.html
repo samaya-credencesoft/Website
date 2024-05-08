@@ -17,7 +17,7 @@
 
 <body>
  
-    <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
+    <!-- <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
     <div class="container">
       <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <img   src="assets/images/nav-toggle.png">
@@ -25,13 +25,13 @@
       <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; ">{{businessUser?.name}}</span>
     </div>
 
-  </nav>
+  </nav> -->
 
-  <app-Header-Listingdetailsone *ngIf="showListingDetails"> </app-Header-Listingdetailsone>
+  <app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
   
-  <div  style="width: 100%; margin-top: 7px;">
+  <!-- <div  style="width: 100%; margin-top: 7px;">
     <img   src="assets/images/BookOne Website Bannerr.png">
-  </div>
+  </div> -->
 
   
   
