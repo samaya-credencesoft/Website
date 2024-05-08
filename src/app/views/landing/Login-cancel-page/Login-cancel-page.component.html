@@ -8,50 +8,48 @@
 
 </nav>
 
-<div  style="width: 100%; height: 450px; margin-bottom: 20px;">
-  <img   src="assets/images/BookOne Website Bannerr.png">
-</div>
+  <img   src="assets/images/BookOne Website Bannerr.png" style="margin-bottom: 15px;">
 
 
 
 
 
-<div class="container" style="background-color: #bbb;">
+<div class="container" style="background-color: #bbb; width: 100%; height: 400px; margin-bottom: 20px;">
   <div class="row">
     <div class="col-md-6 sign-in">
-      <h2>Sign In</h2>
-      <form >
+      <h4 style="padding-top: 20px;">Sign In</h4>
+      <form ><div style="background-color: #ffff;padding: 20px;">
         <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" formControlName="email" required>
+          <input type="email" class="form-control" id="email" formControlName="email" required placeholder="Email address">
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" formControlName="password" required>
-        </div>
+          <input type="password" class="form-control" id="password" formControlName="password" required placeholder="Password">
+        </div><hr style="border-top: 2px solid #141319; margin-bottom: 15px; margin-top: 15px;">
         <div class="form-check">
           <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe">
           <label class="form-check-label" for="rememberMe">Keep me logged in</label>
         </div>
-        <button type="submit" class="btn btn-primary">SIGN IN</button>
-        <a routerLink="/forgot-password">Forgot password?</a>
+        <div style="padding: 5px;">
+        <button type="submit"  class="btn-sign-in">SIGN IN</button>
+        <button type="submit" class="btn-create-pwd">CREATE PASSWORD</button>
+        </div>
+<br>
+        <a routerLink="/forgot-password" style="text-decoration: underline; margin-top: 4px;">Forgot password?</a>
         <br>
-        <a routerLink="/create-password">Don't have password? Click on Create Password and we will generate for you</a>
-      </form>
+        <a routerLink="/create-password">Don't have password? Click on <span style="text-decoration: underline;">Create Password</span> and we will generate for you.</a>
+     </div> </form>
     </div>
     <div class="col-md-6 cancel-booking">
-      <h2>Cancel Booking</h2>
-      <form >
+      <h4 style="padding-top: 20px;">Cancel Booking</h4>
+      <form ><div style="background-color: #ffff;padding: 20px;">
         <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" formControlName="email" required>
+          <input type="email" class="form-control" id="email" formControlName="email" required placeholder="Email address">
         </div>
         <div class="form-group">
-          <label for="bookingNo">Itinerary or Booking No</label>
-          <input type="text" class="form-control" id="bookingNo" formControlName="bookingNo" required>
-        </div>
-        <button type="submit" class="btn btn-danger">CANCEL BOOKING</button>
-      </form>
+          <input type="text" class="form-control" id="bookingNo" formControlName="bookingNo" required placeholder="Itinerary or Booking No">
+        </div><hr style="border-top: 2px solid #141319; margin-bottom: 15px; margin-top: 15px;">
+        <button type="submit" class="btn-cancel">CANCEL BOOKING</button>
+      </div></form>
     </div>
   </div>
 </div>

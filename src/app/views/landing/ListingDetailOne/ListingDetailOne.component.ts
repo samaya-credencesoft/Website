@@ -81,11 +81,11 @@ export class ListingDetailOneComponent implements OnInit {
     this.showListingDetails = !this.showListingDetails;
    
   }
-  isPopupVisible = true; // Initially show the popup
+  // isPopupVisible = true; // Initially show the popup
 
-  closePopup() {
-    this.isPopupVisible = false;
-  }
+  // closePopup() {
+  //   this.isPopupVisible = false;
+  // }
 
   lat = 0;
   lng = 0;
