@@ -2,8 +2,10 @@
 <div class="vertical-nav "  id="sidebar" *ngIf="isdone">
   <button class="close-btn" (click)="closeNavbar()">
     <i class="fa fa-times"></i> </button>
+    
   <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
     <li class="nav-item-li" >
+      <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
       <a href="{{ this.website }}" class="nav-link" style="color: #fff !important;">
                 <i></i>
                 Home
@@ -15,7 +17,7 @@
                 Rates and Availability
             </a>
     </li><hr> -->
-    <li class="nav-item-li">
+    <li class="nav-item-li" *ngIf="ispresent">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 About Us
@@ -51,11 +53,16 @@
 
 
 <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
-  <div class="container">
-    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+  <div class="container-div">
+    <!-- desktopview -->
+    <button class="navbar-toggler" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <img   src="assets/images/nav-toggle.png">
     </button>
-    <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; ">{{businessUser?.name}}</span>
+    <!-- mobileview -->
+    <!-- <button class="navbar-togglermb" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <img  src="assets/images/nav-toggle.png">
+    </button> -->
+    <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; margin-left: 20px;">{{businessUser?.name}}</span>
   </div>
 
 </nav>

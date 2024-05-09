@@ -17,6 +17,9 @@ import { Payment } from './app/model/payment';
 import { PropertyServiceDTO } from './app/model/PropertyServices';
 import { BusinessUser } from './app/model/user';
 import { Room } from './app/model/room';
+import { Router } from "@angular/router";
+import { BusinessService } from './app/model/businessService';
+import { Property } from './app/model/property';
 // import { String } from 'cypress/types/lodash';
 
 const SELECTED_COUNTRY = 'selectedCountry';
@@ -27,13 +30,16 @@ const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
 const BOOKINGCITY = 'bookingCity';
 const CITY = 'city';
+const ORGANIZATION_ID = "OrganizationId";
 const BUSINESS_SERVICE = 'businessservice';
 const businessTypeGroupListDATA = 'businessTypeGroupList';
 const businessTypeListDATA = 'businessTypeList';
 const PROPERTY_SERVICE_DATA = 'PROPERTY_SERVICE_DATA';
 const PAYMENT = 'payment';
 const PAYMENT2 = 'payment2';
-
+const ROLES = "Roles";
+const ROOM_TYPES = "RoomDetails";
+const PROPERTY_ID = "PropertyId";
 const PROPERTY = 'property';
 const ROOMSDATA = 'roomsData';
 const COUNTRY = 'country';
@@ -49,10 +55,43 @@ const LOGIN_EMAIL = 'loginemail';
 const LOGIN_PASSWORD = 'loginpassword';
 const USER_ID = 'UserId';
 const USER_NAME = 'UserName';
+const REQUEST_HANDLE = "requestvalue";
 
 @Injectable()
 export class TokenStorage {
-  constructor() {}
+  constructor(private router: Router) {}
+  public setItem(key, value) {
+    value = JSON.stringify(value);
+    window.sessionStorage.setItem(key, value);
+    return true;
+  }
+
+  public getItem(key) {
+    const value = window.sessionStorage.getItem(key);
+    try {
+      return JSON.parse(value);
+    } catch (e) {
+      return null;
+    }
+  }
+  public saveUserName(token: string) {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(USER_NAME, token);
+  }
+
+  public saveBusinessService(services: BusinessService[]) {
+    window.sessionStorage.removeItem(BUSINESS_SERVICE);
+    if (services !== null || services !== undefined) {
+      window.sessionStorage.setItem(BUSINESS_SERVICE, JSON.stringify(services));
+    } else {
+      window.sessionStorage.setItem(BUSINESS_SERVICE, null);
+    }
+  }
+
+  public saveRole(roles: string[]) {
+    window.sessionStorage.removeItem(ROLES);
+    window.sessionStorage.setItem(ROLES, JSON.stringify(roles));
+  }
   clearAll() {
   localStorage.clear();
   }
@@ -74,6 +113,12 @@ export class TokenStorage {
     public getPaymentData(): Payment {
       return JSON.parse(localStorage.getItem(PAYMENT) as string);
     }
+
+    public checkRequestDialog(): string {
+      return JSON.parse(sessionStorage.getItem(REQUEST_HANDLE));
+    }
+
+    
   clearBusiness() {
   localStorage.removeItem(BUSINESS_SERVICE);
     // window.localStorage.removeItem(BOOKSLOTDATA);
@@ -144,6 +189,7 @@ export class TokenStorage {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_ID);
   localStorage.removeItem(CUSTOMER);
+  window.sessionStorage.removeItem(REQUEST_HANDLE);
     //window.localStorage.clear();
   }
 
@@ -238,6 +284,35 @@ export class TokenStorage {
   }
   public getAdress(): Address {
     return JSON.parse(localStorage.getItem(ADDRESS_DETAILS) as string);
+  }
+  public saveOrganizationId(organizationId: number) {
+    window.sessionStorage.removeItem(ORGANIZATION_ID);
+    window.sessionStorage.setItem(ORGANIZATION_ID, organizationId.toString());
+  }
+
+  public saveRoomTypes(roomTypes: Room[]) {
+    // Logger.log(roomTypes);
+    window.sessionStorage.removeItem(ROOM_TYPES);
+    if (roomTypes !== null || roomTypes !== undefined) {
+      window.sessionStorage.setItem(ROOM_TYPES, JSON.stringify(roomTypes));
+    } else {
+      window.sessionStorage.setItem(ROOM_TYPES, null);
+    }
+  }
+  public getRole(): string {
+    return sessionStorage.getItem(ROLES);
+  }
+  public getRoomTypes(): Room[] {
+    return JSON.parse(sessionStorage.getItem(ROOM_TYPES));
+  }
+  public savePropertyId(propertyId: number) {
+    // Logger.log(`User ID Inside Token Stoarge` + propertyId);
+    window.sessionStorage.removeItem(PROPERTY_ID);
+    if (propertyId != null) {
+      window.sessionStorage.setItem(PROPERTY_ID, propertyId.toString());
+    } else {
+      window.sessionStorage.setItem(PROPERTY_ID, null);
+    }
   }
 
   // public saveProperty(property: BusinessUser) {

@@ -1,25 +1,14 @@
-// import { Room } from 'src/app/model/room';
-// import { Address } from './address';
-// import { BusinessServiceDtoList } from './businessServiceDtoList';
-// import { SubscriptionList } from './subscriptionList';
-// import { MobileWallet } from './mobileWallet';
-// import { TaxDetails } from './TaxDetails';
 import { Address } from 'src/model/address';
-import { PropertyServiceDTO } from './PropertyServices';
-import { SubscriptionList } from './subscriptionList';
 import { BusinessServiceDtoList } from './businessServiceDtoList';
-import { Room } from './room';
-import { MobileWallet } from './mobileWallet';
-import { TaxDetails } from './TaxDetails';
+import { SubscriptionList } from './subscriptionList';
 
-export class BusinessUser {
+export class BusinessProperties {
   name: string;
   id: number;
   businessDescription: string;
   businessShortDescription: string;
   businessName: string;
   businessType: string;
-  businessSubtype: string;
   businessTypeGroup: string;
   email: string;
   firstName: string;
@@ -30,7 +19,6 @@ export class BusinessUser {
   organisationId: number;
   userStatus: string;
   username: string;
-  numberOfRooms: number;
   password: string;
   confirmPassword: string;
   dashboardUrl: string;
@@ -42,17 +30,6 @@ export class BusinessUser {
   twitter: string;
   gstNumber: string;
   imageUrl: string;
-  bookOneRating: number;
-  minimumRoooPrice: number;
-  imageList: [
-    {
-      description: string;
-      id: string;
-      mainImage: true;
-      name: string;
-      url: string;
-    }
-  ];
   longitude: string;
   latitude: string;
   seoFriendlyName: string;
@@ -66,34 +43,38 @@ export class BusinessUser {
   minimumOccupancy: number;
   mobile: string;
   noOfFloor: number;
-  noOfBookOneReview: number;
   noOfRoomType: number;
   placeId: string;
-  paymentGateway: string;
   paymentGatewayApiKey: string;
   paymentGatewayApiToken: string;
-  paymentGatewayPublicKey: string;
   priceFortNight: number;
   priceMonthly: number;
   pricePerNight: number;
   pricePerWeek: number;
   propertyBarCode: string;
   propertyStatus: string;
+  property:any;
   shortName: string;
   slogan: string;
   subscriptionList: SubscriptionList[];
   website: string;
-  whatsApp: string;
   businessServiceDtoList: BusinessServiceDtoList[];
-  roomList: Room[];
-  bankAccount: any;
-  mobileWallet: MobileWallet;
-  property: any;
-
-  taxDetails: TaxDetails[];
-  propertyServicesList: PropertyServiceDTO[];
-  primaryColor: string;
-  secondaryColor: string;
-  tertiaryColor: string;
+  taxDetails:  [
+    {
+      country: string,
+      name: string,
+      percentage: number,
+      state: string,
+      taxAmount: number,
+      taxSlabsList: [
+        {
+          maxAmount: number,
+          minAmount: number,
+          percentage: number
+        }
+      ],
+      taxableAmount: number
+    }
+  ];
   constructor() {}
 }

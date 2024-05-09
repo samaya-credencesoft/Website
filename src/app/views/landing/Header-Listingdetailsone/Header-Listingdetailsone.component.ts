@@ -12,11 +12,22 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   businessUser:any;
   showListingDetails: boolean = false;
   website: string;
+  logoUrl: string;
+  
+  
+  propertyname: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
     this.website = this.businessUser.website;
+  
+    this.propertyname = this.businessUser.seoFriendlyName;
+    this.logoUrl=this.businessUser.logoUrl;
+    console.log(this.logoUrl);
     console.log('new link is',this.website);
+    console.log('new link is',this.propertyname);
+    
+   
   }
   toggleListItems() {
     this.showListItems = !this.showListItems;
