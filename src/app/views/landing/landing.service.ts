@@ -17,4 +17,10 @@ getCurrentAndFutureBookings(propertyId: number) {
   );
 }
 
+findByPropertyId(id: string) {
+  return this.http.get<any>(API_URL + "/api/thm/findByPropertyId/" + id, {
+    observe: "response",
+  });
+}
+
 }
