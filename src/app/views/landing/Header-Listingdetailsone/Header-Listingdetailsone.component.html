@@ -2,10 +2,10 @@
 <div class="vertical-nav "  id="sidebar" *ngIf="isdone">
   <button class="close-btn" (click)="closeNavbar()">
     <i class="fa fa-times"></i> </button>
-    
+    <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
+ 
   <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
-    <li class="nav-item-li" >
-      <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
+    <li class="nav-item-li" *ngIf="website">
       <a href="{{ this.website }}" class="nav-link" style="color: #fff !important;">
                 <i></i>
                 Home
@@ -17,25 +17,25 @@
                 Rates and Availability
             </a>
     </li><hr> -->
-    <li class="nav-item-li" *ngIf="ispresent">
+    <li class="nav-item-li" *ngIf="website">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 About Us
             </a>
     </li><hr>
-    <li class="nav-item-li">
+    <li class="nav-item-li" *ngIf="website">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Terms & Conditions
             </a>
     </li><hr>
-    <li class="nav-item-li">
+    <li class="nav-item-li" *ngIf="website">
       <a href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Privacy Policy
             </a>
     </li><hr>
-    <li class="nav-item-li">
+    <li class="nav-item-li" *ngIf="website">
       <a href="#" class="nav-link  "  style="color: #fff !important;">
                 <i></i>
                 Payment Terms
