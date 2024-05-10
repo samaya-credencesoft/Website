@@ -29,6 +29,7 @@ import { BookOneConnectComponent } from './book-one-connect/book-one-connect.com
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 import { BookingComponent } from './Booking/Booking.component';
 import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
+import { LoginDetailsComponent } from './login-details/login-details.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -82,6 +83,10 @@ const routes: Routes = [
   {
     path: 'login-cancel-page',
     component: LoginCancelPageComponent
+  },
+  {
+    path:'login-details',
+    component:LoginDetailsComponent
   },
 
   // {

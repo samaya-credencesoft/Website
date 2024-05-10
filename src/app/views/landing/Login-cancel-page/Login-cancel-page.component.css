@@ -7,9 +7,10 @@
     background-color: #221950;
     color: #fff;
     font-size: small;
-    width: 230px;
+    width: 235px;
     border-radius: 5px;
     margin-top: 3px;
+    height: 25px;
 }
 .btn-create-pwd{
     background-color: #221950;

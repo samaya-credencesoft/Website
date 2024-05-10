@@ -23,6 +23,7 @@ import { ApplicationUser } from './user';
 import { Validators, UntypedFormControl, FormGroup, FormControl } from "@angular/forms";
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
+
 const TOKEN_PREFIX = "Bearer ";
 
 @Component({
@@ -35,6 +36,8 @@ export class LoginCancelPageComponent implements OnInit {
   passwordd :UntypedFormControl = new UntypedFormControl();
   
   // email: string;
+   returnUrl: string;
+
   emial:string;
   password: string;
   public isModuleLoading: Boolean = false;
@@ -91,6 +94,7 @@ export class LoginCancelPageComponent implements OnInit {
     console.log('data is',this.propertyname);
     // this.contactEmail = CONT_EMAIL;
     // this.contactMobile = const CONT_MOBILE;
+    this.businessUser = history.state.businessUser;
 
     this.signinForm = new FormGroup({
       username: new FormControl("", Validators.required),
@@ -116,169 +120,178 @@ export class LoginCancelPageComponent implements OnInit {
     this.msgs = [];
     Logger.log("this.model : " + JSON.stringify(this.model));
     this.jwtAuthService.login(this.model).subscribe( response => {
-        this.loader = false;
-        if (
-          response.body.property !== undefined &&
-          response.body.property !== null &&
-          response.body.property.propertyStatus != null &&
-          response.body.property.propertyStatus != undefined &&
-          response.body.property.propertyStatus === "INACTIVE"
-        ) {
-          this.msgs = [];
-          this.msgs.push({
-            severity: "error",
-            summary:
-              "Your current subscription has expired, please pay your subscription fee to reactive your account.",
-          });
-        } else {
-          if (response.body && response.body.token && response.body.userId) {
+      this.router.navigate([this.returnUrl || "/login-details"]);
+    },
+    (error) => {
+        // Your existing error handling code
+    });
+}
 
-            this.token.saveUserName(this.model.username);
+  //       this.loader = false;
+  //       if (
+  //         response.body.property !== undefined &&
+  //         response.body.property !== null &&
+  //         response.body.property.propertyStatus != null &&
+  //         response.body.property.propertyStatus != undefined &&
+  //         response.body.property.propertyStatus === "INACTIVE"
+  //       ) {
+  //         this.msgs = [];
+  //         this.msgs.push({
+  //           severity: "error",
+  //           summary:
+  //             "Your current subscription has expired, please pay your subscription fee to reactive your account.",
+  //         });
+  //       } else {
+  //         if (response.body && response.body.token && response.body.userId) {
 
-            this.token.saveToken(TOKEN_PREFIX + response.body.token);
-            this.token.saveUserId(response.body.userId);
-            this.token.saveBusinessService(response.body.businessServiceDtos);
-            this.token.saveRole(response.body.roles);
-            if (response.body.organisationId != null) {
-              this.token.saveOrganizationId(response.body.organisationId);
-            } else {
-              this.token.saveOrganizationId(0);
-            }
+  //           this.token.saveUserName(this.model.username);
 
-            if (
-              response.body.property !== undefined &&
-              response.body.property !== null
-            ) {
+  //           this.token.saveToken(TOKEN_PREFIX + response.body.token);
+  //           this.token.saveUserId(response.body.userId);
+  //           this.token.saveBusinessService(response.body.businessServiceDtos);
+  //           this.token.saveRole(response.body.roles);
+  //           if (response.body.organisationId != null) {
+  //             this.token.saveOrganizationId(response.body.organisationId);
+  //           } else {
+  //             this.token.saveOrganizationId(0);
+  //           }
 
-              this.token.saveRoomTypes(response.body.rooms);
-              if (response.body.roles.length > 0) {
-                response.body.roles.forEach((item, index) => {
-                  if (this.checkUserType.isAdmin(item) == true) {
-                    this.property.name = "ADMIN";
-                    // this.property.imageUrl = DEFAULT_LOGO;
-                    // this.token.saveProperty(this.property);
+  //           if (
+  //             response.body.property !== undefined &&
+  //             response.body.property !== null
+  //           ) {
 
-                    if (this.checkUserType.isHotelAdmin(item) == true) {
-                      //   this.token.saveOnBoardingUserId(resp.body.userId);
-                      this.token.savePropertyId(response.body.property.id);
-                      this.token.saveProperty(response.body.property);
-                    }
-                  } else {
-                    //    this.token.saveOnBoardingUserId(resp.body.userId);
-                    this.token.savePropertyId(response.body.property.id);
-                    this.token.saveProperty(response.body.property);
-                  }
-                });
-              } else {
-                //   this.token.saveOnBoardingUserId(resp.body.userId);
-                this.token.saveProperty(response.body.property);
-                this.token.savePropertyId(response.body.property.id);
-              }
-            } else {
-              if (response.body.roles.length > 0) {
-                response.body.roles.forEach((item, index) => {
-                  if (this.checkUserType.isAdmin(item) == true) {
-                    this.property.name = "ADMIN";
-                  }
-                });
-              }
-              // this.property.imageUrl = DEFAULT_LOGO;
-              // this.token.saveProperty(this.property);
-            }
-            if (this.token.getRole() == "ORG_ADMIN") {
-              this.router.navigate(["/bookone/su-dashboard"]);
-            }
-            this.loader = false;
-          }
-          const returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
+  //             this.token.saveRoomTypes(response.body.rooms);
+  //             if (response.body.roles.length > 0) {
+  //               response.body.roles.forEach((item, index) => {
+  //                 if (this.checkUserType.isAdmin(item) == true) {
+  //                   this.property.name = "ADMIN";
+  //                   // this.property.imageUrl = DEFAULT_LOGO;
+  //                   // this.token.saveProperty(this.property);
 
-          if (
-            this.token.getProperty().noOfRoomType != null &&
-            this.token.getProperty().noOfRoomType != undefined
-          ) {
-            this.noOfRoomType = this.token.getProperty().noOfRoomType;
-          } else {
-            this.noOfRoomType = 1;
-          }
+  //                   if (this.checkUserType.isHotelAdmin(item) == true) {
+  //                     //   this.token.saveOnBoardingUserId(resp.body.userId);
+  //                     this.token.savePropertyId(response.body.property.id);
+  //                     this.token.saveProperty(response.body.property);
+  //                   }
+  //                 } else {
+  //                   //    this.token.saveOnBoardingUserId(resp.body.userId);
+  //                   this.token.savePropertyId(response.body.property.id);
+  //                   this.token.saveProperty(response.body.property);
+  //                 }
+  //               });
+  //             } else {
+  //               //   this.token.saveOnBoardingUserId(resp.body.userId);
+  //               this.token.saveProperty(response.body.property);
+  //               this.token.savePropertyId(response.body.property.id);
+  //             }
+  //           } else {
+  //             if (response.body.roles.length > 0) {
+  //               response.body.roles.forEach((item, index) => {
+  //                 if (this.checkUserType.isAdmin(item) == true) {
+  //                   this.property.name = "ADMIN";
+  //                 }
+  //               });
+  //             }
+  //             // this.property.imageUrl = DEFAULT_LOGO;
+  //             // this.token.saveProperty(this.property);
+  //           }
+  //           if (this.token.getRole() == "ORG_ADMIN") {
+  //             this.router.navigate(["/bookone/su-dashboard"]);
+  //           }
+  //           this.loader = false;
+  //         }
+  //         const returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
+  //         this.router.navigate([returnUrl || "/login-details"]);
 
-          if (
-            this.token.getProperty() != null &&
-            this.token.getProperty().businessType !== undefined &&
-            this.token.getProperty().businessType.toLocaleLowerCase() !==
-              "accommodation"
-          ) {
-            if (this.token.getProperty().propertyStatus != "COMPLETED") {
-              this.router.navigate([
-                returnUrl || "/onboarding/on-boarding-property/0/0/0",
-              ]);
-            } else {
-              if (this.token.getProperty().plan === "Business Starter") {
-                this.router.navigate([
-                  returnUrl || "/master-service/business-dashboard/profile",
-                ]);
-              } else {
-                if(this.token.getProperty() != null &&
-                this.token.getProperty().businessType !== undefined &&
-                this.token.getProperty().businessType.toLocaleLowerCase() ==
-                  "cafes" ||
-                  this.token.getProperty() != null &&
-                  this.token.getProperty().businessType !== undefined &&
-                  this.token.getProperty().businessType.toLocaleLowerCase() ==
-                    "restaurants")
-                {
-                  this.router.navigate([returnUrl || "/order/order-dashboard"]);
-                }
-                else
-                {
-                  this.router.navigate([returnUrl || "/master-service/home"]);
-                }
-              }
-            }
-          } else if (
-            this.token.getProperty() != null &&
-            this.token.getProperty().businessType !== undefined &&
-            this.token.getProperty().businessType.toLocaleLowerCase() ==
-              "accommodation"
-          ) {
-            if (this.token.getProperty().propertyStatus != "COMPLETED") {
-              this.router.navigate([
-                returnUrl || "/onboarding/on-boarding-property/0/0/0",
-              ]);
-            }
-            // &&  this.token.getRoomTypes() != undefined &&  this.token.getRoomTypes().length < this.noOfRoomType
-            else if (
-              this.token.getProperty().propertyStatus === "COMPLETED" &&
-              this.token.getRoomTypes() == null
-            ) {
-              this.router.navigate([returnUrl || "/onboarding/room"]);
-            } else {
-              this.router.navigate([returnUrl || "/bookone/dashboard"]);
-            }
-          } else {
-            if (this.token.getRole() === "ORG_ADMIN") {
-              this.router.navigate([returnUrl || "/bookone/org-dashboard"]);
-            } else {
-              this.router.navigate([returnUrl || "/bookone/su-dashboard"]);
-            }
-          }
-        }
-      },
-      (error) => {
-        if (error.status === 401) {
-          this.msgs = [];
-          this.msgs.push({
-            severity: "error",
-            summary: "Invalid Username or Password.",
-          });
-        } else {
-          this.msgs.push({
-            severity: "error",
-            summary: "Please try again later.",
-          });
-        }
-      }
-    );
-  }
+
+  //         if (
+  //           this.token.getProperty().noOfRoomType != null &&
+  //           this.token.getProperty().noOfRoomType != undefined
+  //         ) {
+  //           this.noOfRoomType = this.token.getProperty().noOfRoomType;
+  //         } else {
+  //           this.noOfRoomType = 1;
+  //         }
+
+  //         if (
+  //           this.token.getProperty() != null &&
+  //           this.token.getProperty().businessType !== undefined &&
+  //           this.token.getProperty().businessType.toLocaleLowerCase() !==
+  //             "accommodation"
+  //         ) {
+  //           if (this.token.getProperty().propertyStatus != "COMPLETED") {
+  //             this.router.navigate([
+  //               returnUrl || "/onboarding/on-boarding-property/0/0/0",
+  //             ]);
+  //           } else {
+  //             if (this.token.getProperty().plan === "Business Starter") {
+  //               this.router.navigate([
+  //                 returnUrl || "/master-service/business-dashboard/profile",
+  //               ]);
+  //             } else {
+  //               if(this.token.getProperty() != null &&
+  //               this.token.getProperty().businessType !== undefined &&
+  //               this.token.getProperty().businessType.toLocaleLowerCase() ==
+  //                 "cafes" ||
+  //                 this.token.getProperty() != null &&
+  //                 this.token.getProperty().businessType !== undefined &&
+  //                 this.token.getProperty().businessType.toLocaleLowerCase() ==
+  //                   "restaurants")
+  //               {
+  //                 this.router.navigate([returnUrl || "/order/order-dashboard"]);
+  //               }
+  //               else
+  //               {
+  //                 this.router.navigate([returnUrl || "/master-service/home"]);
+  //               }
+  //             }
+  //           }
+  //         } else if (
+  //           this.token.getProperty() != null &&
+  //           this.token.getProperty().businessType !== undefined &&
+  //           this.token.getProperty().businessType.toLocaleLowerCase() ==
+  //             "accommodation"
+  //         ) {
+  //           if (this.token.getProperty().propertyStatus != "COMPLETED") {
+  //             this.router.navigate([
+  //               returnUrl || "/onboarding/on-boarding-property/0/0/0",
+  //             ]);
+  //           }
+  //           // &&  this.token.getRoomTypes() != undefined &&  this.token.getRoomTypes().length < this.noOfRoomType
+  //           else if (
+  //             this.token.getProperty().propertyStatus === "COMPLETED" &&
+  //             this.token.getRoomTypes() == null
+  //           ) {
+  //             this.router.navigate([returnUrl || "/onboarding/room"]);
+  //           } else {
+  //             this.router.navigate([returnUrl || "/bookone/dashboard"]);
+  //           }
+  //         } else {
+  //           if (this.token.getRole() === "ORG_ADMIN") {
+  //             this.router.navigate([returnUrl || "/bookone/org-dashboard"]);
+  //           } else {
+  //             this.router.navigate([returnUrl || "/bookone/su-dashboard"]);
+  //           }
+  //         }
+  //       }
+  //     },
+  //     (error) => {
+  //       if (error.status === 401) {
+  //         this.msgs = [];
+  //         this.msgs.push({
+  //           severity: "error",
+  //           summary: "Invalid Username or Password.",
+  //         });
+  //       } else {
+  //         this.msgs.push({
+  //           severity: "error",
+  //           summary: "Please try again later.",
+  //         });
+  //       }
+  //     }
+  //   );
+  // }
 
 
 }

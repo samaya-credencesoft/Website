@@ -1,52 +1,51 @@
 <!-- Vertical navbar -->
+
 <div class="vertical-nav "  id="sidebar" *ngIf="isdone">
   <button class="close-btn" (click)="closeNavbar()">
     <i class="fa fa-times"></i> </button>
-    <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
+
  
   <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
-    <li class="nav-item-li" *ngIf="website">
-      <a href="{{ this.website }}" class="nav-link" style="color: #fff !important;">
+    <li class="nav-item-li" >
+      <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
+      <a  *ngIf="businessUser.website" href="{{ this.website }}" class="nav-link" style="color: #fff !important;">
                 <i></i>
                 Home
             </a>
     </li><hr>
-    <!-- <li class="nav-item-li">
-      <a href="#" class="nav-link  " style="color: #fff !important;">
-                <i></i>
-                Rates and Availability
-            </a>
-    </li><hr> -->
-    <li class="nav-item-li" *ngIf="website">
-      <a href="#" class="nav-link  " style="color: #fff !important;">
+ 
+    <li class="nav-item-li" >
+      <a  *ngIf="businessUser.website" href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 About Us
             </a>
     </li><hr>
-    <li class="nav-item-li" *ngIf="website">
-      <a href="#" class="nav-link  " style="color: #fff !important;">
+    <li class="nav-item-li">
+      <a  *ngIf="businessUser.website" href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Terms & Conditions
             </a>
     </li><hr>
-    <li class="nav-item-li" *ngIf="website">
-      <a href="#" class="nav-link  " style="color: #fff !important;">
+    <li class="nav-item-li">
+      <a *ngIf="businessUser.website" href="#" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Privacy Policy
             </a>
     </li><hr>
-    <li class="nav-item-li" *ngIf="website">
-      <a href="#" class="nav-link  "  style="color: #fff !important;">
+    <li class="nav-item-li">
+      <a *ngIf="businessUser.website" href="#" class="nav-link  "  style="color: #fff !important;">
                 <i></i>
                 Payment Terms
             </a>
     </li><hr>
     <li class="nav-item-li">
-      <a  routerLink="/login-cancel-page" class="nav-link" style="color: #fff !important;">
-                <i></i>
-                Manage Bookings
-            </a>
-    </li><hr>
+      <a routerLink="/login-cancel-page" [state]="{ businessUser: businessUser }" class="nav-link" style="color: #fff !important;">
+          <i></i>
+          Manage Bookings
+      </a>
+  </li>
+  <hr>
+  
 
   </ul>
 </div>
@@ -54,14 +53,11 @@
 
 <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
   <div class="container-div">
-    <!-- desktopview -->
+    
     <button class="navbar-toggler" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <img   src="assets/images/nav-toggle.png">
     </button>
-    <!-- mobileview -->
-    <!-- <button class="navbar-togglermb" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <img  src="assets/images/nav-toggle.png">
-    </button> -->
+    
     <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; margin-left: 20px;">{{businessUser?.name}}</span>
   </div>
 

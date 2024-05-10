@@ -98,7 +98,7 @@ table {
   
   @media (min-width: 768px) {
     .responsive-box {
-      width: 60%; /* Adjust width for medium screens */
+      width: 60%; 
     }
   }
   
