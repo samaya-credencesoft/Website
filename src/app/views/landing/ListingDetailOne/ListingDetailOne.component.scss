@@ -333,9 +333,7 @@ margin-top: 16px;
   .pointers{
     justify-content: flex-start !important;
   }
-  .title{
-    font-size: 30px;
-  }
+  
   img[src="assets/images/downarrow.svg"]{
     rotate: 270deg;
     height: 30px;
@@ -899,8 +897,8 @@ top: 6335px;
 
 // width: 363px;
 height: 29px;
-left: 17px;
 top: 15px;
+
 
 font-family: 'Montserrat',sans-serif !important;
 font-style: normal !important;
@@ -3104,6 +3102,25 @@ height: 100%;
 // .hover-trigger:hover + .payment-breakups {
 //   display: block;
 // }
+@media(max-width:872px){
+  .desktopone{
+    display: none;
+    padding-top: 20px;
+    justify-content: center;
+    margin-left: 250px;
+
+  }
+}
+
+
+@media(min-width:873px){
+  .mobile-one{
+    display: none;
+    padding-top: 20px;
+    justify-content: center;
+    margin-left: 250px;
+  }
+}
 @media(max-width:1293px){
   .payment-breakups{
 

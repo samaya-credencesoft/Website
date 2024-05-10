@@ -58,13 +58,13 @@
           <h4 style="color: #F2F1F1;">BOOK NOW!</h4>
         </button>
       </div>
-                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #505050; border-radius: 50px;" *ngIf="availableRooms?.length >=0 && availability ==true">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
               <div class="container">
                 <div class="row" style="justify-content: space-evenly;">
                   <div class="col-lg-6 ">
                     <div id="autocomplete-container">
-                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">Check
+                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: white;">Check
                         In</label>
                       <input #dpFromDate3 type="text" class="date-input form-control input-field-resize2" style="border: none;"
                         placeholder="Check-in" name="dpFromDate3" [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
@@ -87,7 +87,7 @@
                   </div>
                   <div class="col-lg-6">
                     <div id="autocomplete-container">
-                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">Check
+                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: white;">Check
                         Out</label>
                       <input #dpToDate3 type="text" class="date-input form-control input-field-resize2" placeholder="Check-out"
                         name="dpToDate3" [value]="formatter.format(toDate) | date: 'EEE, MMM d'" style="border: none;"
@@ -104,8 +104,8 @@
                       <div data-component="index/guest-errors" data-id="main" data-view-id="accommodation" role="alert"></div>
                       <div (click)="toggleRoomsAndOccupancy()"
                         style="padding-bottom:9px;padding-top: 0px!important;">
-                        <label for="room" class="label_heading1" style="margin-bottom:0px!important;color: black;">Rooms & Guests</label>
-                        <div class="col-12 bg-white" style="border: none;padding: 6px;border-radius: 0.25rem;box-shadow: none;">
+                        <label for="room" class="label_heading1" style="margin-bottom:0px!important;color: white;">Rooms & Guests</label>
+                        <div class="col-12 bg-white" style="border: none;line-height: 30px;padding: 10px;border-radius: 0.25rem;box-shadow: none;">
                           <label class="text-default "
                             style="font-size: 15px; margin: 0; padding: 0;color: lightgray !important; ">
                             <span class="guests_count">
@@ -205,7 +205,7 @@
                   </div>
                 </div>
               </div>
-                <button type="button mt-4" style="position: relative; float: right; background-color: #271a55; color: #F8FFF5; padding:9px; border-radius:25px; margin-top:20px; width: 40%; align-self: self-start;" (click)="checkingAvailability(); navigateToSection('accmd');">
+                <button type="button mt-4" style="position: relative; float: right; background-color: #271a55; color: #F8FFF5; padding:15px; border-radius:25px; margin-top:27px; width: 40%; align-self: self-start;" (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
             </form>
