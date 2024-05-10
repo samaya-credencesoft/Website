@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BusinessUser } from 'src/app/model/user';
 import { TokenStorage } from 'src/token.storage';
 
@@ -23,6 +23,9 @@ import { ApplicationUser } from './user';
 import { Validators, UntypedFormControl, FormGroup, FormControl } from "@angular/forms";
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Booking } from 'src/app/model/booking';
+import { LandingService } from '../landing.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 const TOKEN_PREFIX = "Bearer ";
 
@@ -34,11 +37,16 @@ const TOKEN_PREFIX = "Bearer ";
 export class LoginCancelPageComponent implements OnInit {
   emailt :UntypedFormControl = new UntypedFormControl();
   passwordd :UntypedFormControl = new UntypedFormControl();
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  dataSource = new MatTableDataSource();
   
   // email: string;
    returnUrl: string;
+   bookings: Booking[] = [];
+   bookPaginator: MatPaginator;
 
   emial:string;
+  propertyId: number;
   password: string;
   public isModuleLoading: Boolean = false;
   private moduleLoaderSub: Subscription;
@@ -77,7 +85,10 @@ export class LoginCancelPageComponent implements OnInit {
     
   }
   constructor(
+    private loginService:LandingService,
  private router: Router,
+ 
+ private changeDetectorRefs: ChangeDetectorRef,
     private jwtAuthService: JwtAuthService,
    
     private route: ActivatedRoute,
@@ -116,11 +127,23 @@ export class LoginCancelPageComponent implements OnInit {
   }
 
   signIn() {
-    
+   
+      this.bookings = [];
+    this.loginService
+      .getCurrentAndFutureBookings(this.propertyId)
+      .subscribe((data) => {
+        this.bookings = data.body;
+        console.log('booking is',this.bookings);
+        this.dataSource = new MatTableDataSource(this.bookings);
+        this.dataSource.paginator = this.bookPaginator;
+        this.dataSource.sort = this.sort;
+        this.changeDetectorRefs.detectChanges();
+      });
+   
     this.msgs = [];
     Logger.log("this.model : " + JSON.stringify(this.model));
     this.jwtAuthService.login(this.model).subscribe( response => {
-      this.router.navigate([this.returnUrl || "/login-details"]);
+      this.router.navigate([this.returnUrl || "/login-details"],{ state: { businessUser: this.businessUser } });
     },
     (error) => {
         // Your existing error handling code

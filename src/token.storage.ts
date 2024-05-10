@@ -117,7 +117,9 @@ export class TokenStorage {
     public checkRequestDialog(): string {
       return JSON.parse(sessionStorage.getItem(REQUEST_HANDLE));
     }
-
+    public getPropertyId(): string {
+      return sessionStorage.getItem(PROPERTY_ID);
+    }
     
   clearBusiness() {
   localStorage.removeItem(BUSINESS_SERVICE);
