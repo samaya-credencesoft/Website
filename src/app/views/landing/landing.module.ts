@@ -50,6 +50,7 @@ import { HeaderWhiteComponent } from './components/header-white/header-white.com
 import { IntroNineComponent } from './components/intro-nine/intro-nine.component';
 import { LandingV9Component } from './landing-v9/landing-v9.component';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { SideNavComponent } from './side-nav/side-nav.component';
 
 import { IntroTenComponent } from './components/intro-ten/intro-ten.component';
 import { LandingV10Component } from './landing-v10/landing-v10.component';
@@ -95,6 +96,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 import { BookingComponent } from './Booking/Booking.component';
 import { environment } from 'src/environments/environment';
+import { HeaderListingdetailsoneComponent } from './Header-Listingdetailsone/Header-Listingdetailsone.component';
+import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-bookings-login.component';
+import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
+import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
 
 
 
@@ -185,6 +190,10 @@ import { environment } from 'src/environments/environment';
     BlogComponent,
     ContactComponent,
     FaqComponent,
+    HeaderListingdetailsoneComponent,
+    SideNavComponent,
+    ManageBookingsLoginComponent,
+    LoginCancelPageComponent,
 
     CallToActionComponent,
     SubscribeEmailComponent,

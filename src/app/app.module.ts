@@ -26,9 +26,12 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { TokenStorage } from 'src/token.storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth/auth.service';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     SharedModule,
     HttpClientModule,
@@ -53,6 +56,7 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     Title,
+    AuthService,
 TokenStorage,
     {provide: LocationStrategy, useClass: PathLocationStrategy},
   ],
