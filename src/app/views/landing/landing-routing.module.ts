@@ -30,6 +30,8 @@ import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.c
 import { BookingComponent } from './Booking/Booking.component';
 import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
 import { LoginDetailsComponent } from './login-details/login-details.component';
+import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
+import { ManageEnquiryComponent } from './manage-enquiry/manage-enquiry.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -87,6 +89,14 @@ const routes: Routes = [
   {
     path:'login-details',
     component:LoginDetailsComponent
+  },
+  {
+    path:'manage-bookings',
+    component:ManageBookingsComponent
+  },
+  {
+    path:'manage-enuiry',
+    component:ManageEnquiryComponent
   },
 
   // {

@@ -132,3 +132,7 @@ body {
   padding: 10px;
   margin-left: 78px;
 }
+
+@media(max-width:500px){
+  
+}

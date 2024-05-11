@@ -99,6 +99,7 @@ import { environment } from 'src/environments/environment';
 import { HeaderListingdetailsoneComponent } from './Header-Listingdetailsone/Header-Listingdetailsone.component';
 import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-bookings-login.component';
 import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
+import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
 
 
 
