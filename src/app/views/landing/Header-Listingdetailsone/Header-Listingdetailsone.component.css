@@ -34,7 +34,9 @@
 }
 .close-btn{
   float: right;
-  width: 30px;
+  width: 15px;
+  background-color: transparent;
+  margin-right: 10px;
 }
 .vertical-nav {
   min-width: 17rem;
@@ -103,6 +105,7 @@ hr {
 * ==========================================
 *
 */
+
 
 body {
   background: #3b3c3c;

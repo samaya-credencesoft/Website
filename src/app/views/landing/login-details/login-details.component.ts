@@ -52,5 +52,7 @@ export class LoginDetailsComponent implements OnInit {
         this.changeDetectorRefs.detectChanges();
       });
     }
+
+    
   
 }

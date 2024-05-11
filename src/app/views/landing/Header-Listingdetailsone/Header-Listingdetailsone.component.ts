@@ -11,6 +11,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   isdone : boolean = false; 
   @Input()
   businessUser:any;
+  socialmedialist:any;
   showListingDetails: boolean = false;
   website: string;
   logoUrl: string;
@@ -21,11 +22,14 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
     this.website = this.businessUser.website;
-  
+  this.businessUser.socialMediaLinks.forEach(element => {
+    this.socialmedialist=element
+  });
     this.propertyname = this.businessUser.seoFriendlyName;
     this.logoUrl=this.businessUser.logoUrl;
     console.log(this.logoUrl);
     console.log('new link is',this.website);
+    console.log('new link is hello world',this.socialmedialist);
     console.log('new link is',this.propertyname);
     
    
