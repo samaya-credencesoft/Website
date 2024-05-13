@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 // import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,6 +13,8 @@ import { timestamp } from 'rxjs';
 import { TokenStorage } from 'src/token.storage';
 import { ListingService } from 'src/services/listing.service';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
+import { Payment } from 'src/app/model/payment';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-enquiry',
   templateUrl: './enquiry.component.html',
@@ -23,7 +25,7 @@ export class EnquiryComponent implements OnInit {
   verifyOption = "sms";
   verificationCode: string ='';
   loader = false;
-
+  payment: Payment;
   message: MessageDto;
   selectedTab: string = 'booking';
   phoneNumber: string = '';
@@ -65,16 +67,18 @@ export class EnquiryComponent implements OnInit {
   mobile: string = '';
   bookingId: string = '';
   nodatafound: boolean = false;
+  cardPaymentAvailable: boolean;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
+  private changeDetectorRefs: ChangeDetectorRef,
   private calendar: NgbCalendar,
   private hotelBookingService: HotelBookingService,
   private datePipe: DatePipe,
   private router: Router,
   ){
     this.message = new MessageDto();
-
+    this.payment = new Payment();
     if(this.phoneNumber == undefined){
       this.phoneNumber = '';
     }
@@ -241,6 +245,130 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     }
   }
 
+  PayViaUpi(){
+
+  }
+  payAndCheckout() {
+
+    this.payment.callbackUrl = environment.callbackUrl + this.booking.propertyReservationNumber + "&BookingEngine=true";
+
+
+      this.payment.paymentMode = "UPI";
+      this.payment.status = "NotPaid";
+      this.payment.businessServiceName = "Accommodation";
+      this.payment.firstName = this.booking.firstName;
+      this.payment.lastName = this.booking.lastName;
+      this.payment.name = this.booking.firstName + " " + this.booking.lastName;
+
+      this.payment.email = this.booking.email;
+      // this.payment.businessEmail = this.businessUser.email;
+      // this.payment.currency = this.businessUser.localCurrency;
+      // this.payment.propertyId = this.businessUser.id;
+      this.booking.taxAmount = ((this.booking.netAmount * this.booking.taxPercentage) / 100);
+      // this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+      // this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
+      this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      this.payment.referenceNumber = new Date().getTime().toString();
+      this.payment.deliveryChargeAmount = 0;
+      this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );
+      // Logger.log("this.payment "+ JSON.stringify(this.payment));
+      // this.token.saveBookingData(this.booking);
+      // this.token.savePaymentData(this.payment);
+
+      this.payment.callbackUrl = environment.callbackUrl;
+
+      this.processPaymentPayTM(this.payment);
+      // this.processPaymentPayTM(this.payment);
+
+      this.cardPaymentAvailable = true;
+
+  }
+  processPaymentPayTM(payment: Payment) {
+    this.paymentLoader = true;
+    this.changeDetectorRefs.detectChanges();
+
+    this.hotelBookingService.processPayment(payment).subscribe(
+      (response) => {
+        if (response.status === 200) {
+          if (response.body.failureMessage !== null) {
+            this.paymentLoader = false;
+            this.isSuccess = false;
+            // this.headerTitle = "Error!";
+            // this.bodyMessage =
+            //   "Unable to process payment" +
+            //   " Code: " +
+            //   response.body.failureMessage;
+            // this.showDanger(this.contentDialog);
+
+            this.changeDetectorRefs.detectChanges();
+          } else {
+            this.paymentLoader = false;
+            this.payment = response.body;
+            //for post booking create
+
+            this.paymentIntentPayTm(this.payment);
+
+            // for pre booking create
+
+            // this.addServiceToBooking(this.booking);
+          }
+        } else {
+          this.paymentLoader = false;
+          this.isSuccess = false;
+          // this.headerTitle = "Error!";
+          // this.bodyMessage = "Payment Failed! Code: " + response.status;
+          // this.showDanger(this.contentDialog);
+          this.changeDetectorRefs.detectChanges();
+        }
+      },
+      (error) => {
+        this.paymentLoader = false;
+        this.isSuccess = false;
+        // this.headerTitle = "Error!";
+        // this.bodyMessage = "Payment Failed! Code: " + error.status;
+        // this.showDanger(this.contentDialog);
+        this.changeDetectorRefs.detectChanges();
+      }
+    );
+  }
+  showSuccess(content) {
+    // this.alertType = "success";
+    // this.showAlert = true;
+  }
+  showWarning(content) {
+    // this.alertType = "warning";
+    // this.showAlert = true;
+    setTimeout(() => {
+      // this.showAlert = false;
+      this.changeDetectorRefs.detectChanges();
+    }, 3000);
+  }
+  showDanger(content) {
+    // this.alertType = "danger";
+    // this.showAlert = true;
+    setTimeout(() => {
+      // this.showAlert = false;
+      this.changeDetectorRefs.detectChanges();
+    }, 3000);
+  }
+  paymentIntentPayTm(payment: Payment) {
+    this.paymentLoader = true;
+
+    this.hotelBookingService.paymentIntent(payment).subscribe((response) => {
+      this.paymentLoader = false;
+      if (response.status === 200) {
+        this.payment = response.body;
+        this.token.saveBookingData(this.booking);
+        this.token.savePaymentData(this.payment);
+        // this.token.savePropertyData(this.businessUser);
+
+        this.router.navigate(["/checkout"]);
+      }
+    });
+  }
 
 
 
