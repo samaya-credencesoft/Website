@@ -42,9 +42,15 @@
         {{booking?.bookingStatus}}<br>
         Booking ID : {{booking?.propertyReservationNumber}}
       </div>
-      <div class="col" *ngFor="let externalsite of externalSites">
-        <span *ngIf="booking?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
-        <span *ngIf="booking?.externalSite != externalsite.externalSiteName">{{booking?.externalSite}}</span>
+      <div class="col" >
+      <div *ngIf="(booking?.externalSite === 'The Hotel Mate' || booking?.externalSite === 'Easemytrip')" >
+        <div *ngFor="let externalsite of externalSites">      
+             <span *ngIf="booking?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
+        </div>
+      </div>
+      <div>    
+          <span *ngIf="(booking?.externalSite != 'The Hotel Mate' && booking?.externalSite != 'Easemytrip')">{{booking?.externalSite}}</span>
+      </div>
       </div>
     </div>
 

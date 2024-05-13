@@ -41,9 +41,10 @@ export class CancelBookingComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  externalSites:any[] = [
-    {"externalSiteName":"The Hotel Mate","logo":"https://bookonelocal.in/cdn/2023-12-12-111128535-The_Hotel_Mate_Logo (2).png"}
-  ]
+  externalSites: any[] = [
+    { externalSiteName: "The Hotel Mate", logo: "https://bookonelocal.in/cdn/2023-12-12-111128535-The_Hotel_Mate_Logo (2).png" },
+    { externalSiteName: "Easemytrip", logo: "https://bookonelocal.in/cdn/2023-12-01-080647948-emt-logo.png" }
+  ];
 
   ngOnInit() {
     this.businessUser = history.state.businessUser;
@@ -60,12 +61,12 @@ export class CancelBookingComponent implements OnInit {
       .getCurrentAndFutureBookings(this.propertyId)
       .subscribe((data) => {
         this.bookings = data.body;
-        this.bookings.forEach((booking) => {
-        console.log('booking is',this.bookings);
-        });
-        this.dataSource = new MatTableDataSource(this.bookings);
-        this.dataSource.paginator = this.bookPaginator;
-        this.dataSource.sort = this.sort;
+        // this.bookings.forEach((booking) => {
+        // console.log('booking is',this.bookings);
+        // });
+        // this.dataSource = new MatTableDataSource(this.bookings);
+        // this.dataSource.paginator = this.bookPaginator;
+        // this.dataSource.sort = this.sort;
         this.changeDetectorRefs.detectChanges();
       });
     }
