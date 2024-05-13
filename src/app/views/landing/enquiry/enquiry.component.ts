@@ -15,6 +15,8 @@ import { ListingService } from 'src/services/listing.service';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { Payment } from 'src/app/model/payment';
 import { environment } from 'src/environments/environment';
+import { BusinessUser } from 'src/app/model/user';
+import { BusinessService } from 'src/services/business.service';
 @Component({
   selector: 'app-enquiry',
   templateUrl: './enquiry.component.html',
@@ -25,13 +27,14 @@ export class EnquiryComponent implements OnInit {
   verifyOption = "sms";
   verificationCode: string ='';
   loader = false;
+  totalTaxAmount: number = 0;
   payment: Payment;
   message: MessageDto;
   selectedTab: string = 'booking';
   phoneNumber: string = '';
   OTPNumber: string = '';
   paymentLoader: boolean = false;
-
+  contentDialog: any;
   selectedTabdefault: boolean = true;
   isPhoneNumberValid: boolean = false;
   isOTPNumberValid: boolean = false;
@@ -52,14 +55,19 @@ export class EnquiryComponent implements OnInit {
   verifiedPending: boolean = false;
   verified = false;
   isVerified=false
+  businessUser: BusinessUser;
   verifySuccessMessage: boolean = false;
   isSuccess: boolean;
   verificationSend = false;
   sendBtn = "Send";
   lookup = false;
+  showAlert: boolean = false;
+  alertType: string;
   bookingstatus: string;
   fromdate: any;
   Todate: any;
+  headerTitle: string;
+  bodyMessage: string;
   createdDate: any;
   selectedOption: string = 'EmailRadio';
   selectedOptionenquiry: string = 'emailRadio1';
@@ -68,9 +76,16 @@ export class EnquiryComponent implements OnInit {
   bookingId: string = '';
   nodatafound: boolean = false;
   cardPaymentAvailable: boolean;
+  totalBeforeTaxAmount: number;
+  propertyDetials: any;
+  propertyid: any;
+  localCurrency: any;
+  businessEmail: any;
+  businessUserEmail: any;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
+  private businessService: BusinessService,
   private changeDetectorRefs: ChangeDetectorRef,
   private calendar: NgbCalendar,
   private hotelBookingService: HotelBookingService,
@@ -79,6 +94,7 @@ constructor(private token: TokenStorage,
   ){
     this.message = new MessageDto();
     this.payment = new Payment();
+    this.businessUser = new BusinessUser();
     if(this.phoneNumber == undefined){
       this.phoneNumber = '';
     }
@@ -245,12 +261,33 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     }
   }
 
-  PayViaUpi(){
-
+  PayViaUpi(item){
+    this.booking = item
+    let itemName = item.businessName
+    const itemNameWithoutQuotes = itemName.replace(/^"(.*)"$/, '$1');
+    this.getPropertiesBySearch(itemNameWithoutQuotes)
   }
+  async getPropertiesBySearch(propertyName) {
+    this.businessUser.name = propertyName;
+    try {
+        const data = await this.businessService.getBusinessBySearch(this.businessUser).toPromise();
+        console.log("details " + JSON.stringify(data.body));
+        this.propertyDetials = data.body;
+        this.propertyDetials.forEach(element => {
+            console.log("fghjk" + element.id);
+            this.propertyid = element.id;
+            this.localCurrency = element.localCurrency;
+            this.businessUserEmail = element.email;
+        });
+    } catch (error) {
+        console.error("Error fetching properties:", error);
+    }
+    this.payAndCheckout();
+}
+
   payAndCheckout() {
 
-    this.payment.callbackUrl = environment.callbackUrl + this.booking.propertyReservationNumber + "&BookingEngine=true";
+    this.payment.callbackUrl = environment.callbackUrl + this.booking?.propertyReservationNumber + "&BookingEngine=true";
 
 
       this.payment.paymentMode = "UPI";
@@ -259,14 +296,14 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.payment.firstName = this.booking.firstName;
       this.payment.lastName = this.booking.lastName;
       this.payment.name = this.booking.firstName + " " + this.booking.lastName;
-
+console.log("business email"+ this.businessEmail)
       this.payment.email = this.booking.email;
-      // this.payment.businessEmail = this.businessUser.email;
-      // this.payment.currency = this.businessUser.localCurrency;
-      // this.payment.propertyId = this.businessUser.id;
+      this.payment.businessEmail = this.businessUserEmail
+      this.payment.currency = this.localCurrency
+      this.payment.propertyId = this.propertyid;
       this.booking.taxAmount = ((this.booking.netAmount * this.booking.taxPercentage) / 100);
-      // this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
-      // this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
+      this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+      this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
       this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
       this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
       this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
@@ -275,8 +312,8 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );
       // Logger.log("this.payment "+ JSON.stringify(this.payment));
-      // this.token.saveBookingData(this.booking);
-      // this.token.savePaymentData(this.payment);
+      this.token.saveBookingData(this.booking);
+      this.token.savePaymentData(this.payment);
 
       this.payment.callbackUrl = environment.callbackUrl;
 
@@ -296,12 +333,12 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
           if (response.body.failureMessage !== null) {
             this.paymentLoader = false;
             this.isSuccess = false;
-            // this.headerTitle = "Error!";
-            // this.bodyMessage =
-            //   "Unable to process payment" +
-            //   " Code: " +
-            //   response.body.failureMessage;
-            // this.showDanger(this.contentDialog);
+            this.headerTitle = "Error!";
+            this.bodyMessage =
+              "Unable to process payment" +
+              " Code: " +
+              response.body.failureMessage;
+            this.showDanger(this.contentDialog);
 
             this.changeDetectorRefs.detectChanges();
           } else {
@@ -318,39 +355,39 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         } else {
           this.paymentLoader = false;
           this.isSuccess = false;
-          // this.headerTitle = "Error!";
-          // this.bodyMessage = "Payment Failed! Code: " + response.status;
-          // this.showDanger(this.contentDialog);
+          this.headerTitle = "Error!";
+          this.bodyMessage = "Payment Failed! Code: " + response.status;
+          this.showDanger(this.contentDialog);
           this.changeDetectorRefs.detectChanges();
         }
       },
       (error) => {
         this.paymentLoader = false;
         this.isSuccess = false;
-        // this.headerTitle = "Error!";
-        // this.bodyMessage = "Payment Failed! Code: " + error.status;
-        // this.showDanger(this.contentDialog);
+        this.headerTitle = "Error!";
+        this.bodyMessage = "Payment Failed! Code: " + error.status;
+        this.showDanger(this.contentDialog);
         this.changeDetectorRefs.detectChanges();
       }
     );
   }
   showSuccess(content) {
-    // this.alertType = "success";
-    // this.showAlert = true;
+    this.alertType = "success";
+    this.showAlert = true;
   }
   showWarning(content) {
-    // this.alertType = "warning";
-    // this.showAlert = true;
+    this.alertType = "warning";
+    this.showAlert = true;
     setTimeout(() => {
-      // this.showAlert = false;
+      this.showAlert = false;
       this.changeDetectorRefs.detectChanges();
     }, 3000);
   }
   showDanger(content) {
-    // this.alertType = "danger";
-    // this.showAlert = true;
+    this.alertType = "danger";
+    this.showAlert = true;
     setTimeout(() => {
-      // this.showAlert = false;
+      this.showAlert = false;
       this.changeDetectorRefs.detectChanges();
     }, 3000);
   }
@@ -363,7 +400,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         this.payment = response.body;
         this.token.saveBookingData(this.booking);
         this.token.savePaymentData(this.payment);
-        // this.token.savePropertyData(this.businessUser);
+        this.token.savePropertyData(this.businessUser);
 
         this.router.navigate(["/checkout"]);
       }
