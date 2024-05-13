@@ -104,6 +104,7 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
 import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { LoginDetailsComponent } from './login-details/login-details.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
@@ -181,6 +182,7 @@ EnquiryComponent,
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,
+    CheckoutComponent,
     BlogDetailsComponent,
     BlogDetailsPageComponent,
     IntroElevenComponent,
