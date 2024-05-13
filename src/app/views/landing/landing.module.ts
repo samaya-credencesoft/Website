@@ -100,6 +100,9 @@ import { HeaderListingdetailsoneComponent } from './Header-Listingdetailsone/Hea
 import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-bookings-login.component';
 import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
 import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
+import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
+
 
 
 
@@ -137,7 +140,7 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     ContactFormComponent,
     FooterComponent,
     ListingDetailOneComponent,
-    LandingV2Component,
+   LandingV2Component,
     FeaturesComponent,
     FeaturesTwoComponent,
     BestComponent,
@@ -167,10 +170,11 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     OnboardingformSubmittedFormComponent,
     OnboardingRoomdetailsFormComponent,
     OnboardingThankyouFormComponent,
+    NotificationHandlingComponent,
     HeaderWhiteComponent,
     IntroNineComponent,
     LandingV9Component,
-
+EnquiryComponent,
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,

@@ -4,7 +4,7 @@
   <button class="close-btn" (click)="closeNavbar()">
    <img src="/assets/images/x-mark.png"> </button>
 
- 
+
   <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
     <li class="nav-item-li" >
       <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
@@ -15,8 +15,8 @@
     </li>
     <div>
 <hr *ngIf="businessUser.website">
-    </div> 
-  
+    </div>
+
     <li class="nav-item-li" >
       <a  *ngIf="businessUser.website && (socialmedialist.aboutUs !== null && socialmedialist.aboutUs !== undefined && socialmedialist.aboutUs !== ''  ) " href="{{socialmedialist.aboutUs}}" class="nav-link  " style="color: #fff !important;">
                 <i></i>
@@ -53,7 +53,7 @@
     <div *ngIf="businessUser.website && (socialmedialist.paymentTerms !== null && socialmedialist.paymentTerms !== undefined && socialmedialist.paymentTerms !== ''  ) ">
       <hr>
     </div>
-    <!-- <li class="nav-item-li">
+    <li class="nav-item-li">
       <a routerLink="/login-cancel-page" [state]="{ businessUser: businessUser }" class="nav-link" style="color: #fff !important;">
           <i></i>
           Manage Property
@@ -61,32 +61,30 @@
   </li>
   <hr>
     <li class="nav-item-li">
-      <a routerLink="/manage-bookings"  class="nav-link" style="color: #fff !important;">
+      <a routerLink="/history"  class="nav-link" style="color: #fff !important;">
           <i></i>
           Manage Bookings
       </a>
   </li>
   <hr>
   <li class="nav-item-li">
-    <a routerLink="/manage-enuiry" class="nav-link" style="color: #fff !important;">
+    <a routerLink="/manage-enquiry" class="nav-link" style="color: #fff !important;">
         <i></i>
         Manage Enquiry
     </a>
 </li>
-<hr> -->
-
-
+<hr>
   </ul>
 </div>
 
 
-<nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
+<nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;">
   <div class="container-div">
-    
+
     <button class="navbar-toggler" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <img   src="assets/images/nav-toggle.png">
     </button>
-    
+
     <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; margin-left: 20px;">{{businessUser?.name}}</span>
   </div>
 

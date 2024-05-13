@@ -33,6 +33,8 @@ import { LoginDetailsComponent } from './login-details/login-details.component';
 import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
 import { ManageEnquiryComponent } from './manage-enquiry/manage-enquiry.component';
 import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
+import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -122,6 +124,10 @@ const routes: Routes = [
     component: OnboardingCouponcodeFormComponent, data: {title: 'onboard'}
   },
   {
+    path: 'history',component: NotificationHandlingComponent,},
+    {
+      path: 'manage-enquiry',component: EnquiryComponent,},
+  {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {
     path: 'onboardingThankyou-form',component: OnboardingThankyouFormComponent,},
@@ -170,6 +176,7 @@ const routes: Routes = [
     path: "detail/bookingSource/:id",
     component: ListingDetailOneComponent,
   },
+
   {
     path: 'detail',
     component: ListingDetailOneComponent, data: {title: 'detail'}
