@@ -90,5 +90,7 @@ export class Booking {
   roomTariffBeforeDiscount: number;
   totalBookingAmount: number;
   totalRoomTariffBeforeDiscount: number;
+length: any;
+paymentStatus: any;
   constructor() {}
 }

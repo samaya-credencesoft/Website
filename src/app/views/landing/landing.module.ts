@@ -78,7 +78,8 @@ import {
   MatInputModule,
   MatSelectModule,
   MatRadioModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatTableModule
 } from '@angular/material';
 import { CallToActionComponent } from './components/call-to-action/call-to-action.component';
 import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
@@ -102,7 +103,7 @@ import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.
 import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
 import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
-
+import { LoginDetailsComponent } from './login-details/login-details.component';
 
 
 
@@ -124,6 +125,7 @@ import { EnquiryComponent } from './enquiry/enquiry.component';
     MatSelectModule,
     MatRadioModule,
     MatFormFieldModule,
+    MatTableModule,
   ],
   declarations: [
     LandingV1Component,
@@ -175,6 +177,7 @@ import { EnquiryComponent } from './enquiry/enquiry.component';
     IntroNineComponent,
     LandingV9Component,
 EnquiryComponent,
+    LoginDetailsComponent,
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,

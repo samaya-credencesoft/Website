@@ -76,7 +76,7 @@
             </button> -->
           </div>
           <br />
-          <a
+          <!-- <a
             routerLink="/forgot-password"
             style="text-decoration: underline; margin-top: 4px;"
             >Forgot password?</a
@@ -86,32 +86,37 @@
             >Don't have password? Click on
             <span style="text-decoration: underline;">Create Password</span> and
             we will generate for you.</a
-          >
+          > -->
         </div>
       </form>
     </div>
     <div class="col-md-6 cancel-booking">
       <h4 style="padding-top: 20px;">Cancel Booking</h4>
-      <form>
+      <form [formGroup]="signinForm" (ngSubmit)="cancel()">
         <div style="background-color: #ffff; padding: 20px;">
           <div class="form-group">
             <input
               type="email"
               class="form-control"
               id="email"
-              formControlName="email"
+              type="email"
+              id="username"
+              name="username"
+              [(ngModel)]="model.username"
+              formControlName="username"
               required
               placeholder="Email address"
             />
           </div>
           <div class="form-group">
             <input
-              type="text"
+              type="password"
               class="form-control"
-              id="bookingNo"
-              formControlName="bookingNo"
+              id="password"
+              [(ngModel)]="model.password"
+              formControlName="password"
               required
-              placeholder="Itinerary or Booking No"
+              placeholder="Password"
             />
           </div>
           <hr

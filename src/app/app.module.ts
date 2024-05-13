@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { TransferHttpCacheModule } from '@nguniversal/common';
+
 import {
   WpApiModule,
   WpApiLoader,
@@ -28,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth/auth.service';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -39,6 +41,7 @@ import { CommonModule } from '@angular/common';
     SlickCarouselModule,
     NgSelectModule,
     NgbModule,
+    MatTableModule,
     GooglePlaceModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleKey

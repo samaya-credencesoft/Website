@@ -127,6 +127,23 @@ export class LoginCancelPageComponent implements OnInit {
     });
 }
 
+
+
+
+
+
+cancel() {
+    
+  this.msgs = [];
+  Logger.log("this.model : " + JSON.stringify(this.model));
+  this.jwtAuthService.login(this.model).subscribe( response => {
+    this.router.navigate([this.returnUrl || "/cancel-booking"],{ state: { businessUser: this.businessUser } });
+  },
+  (error) => {
+      // Your existing error handling code
+  });
+}
+
   //       this.loader = false;
   //       if (
   //         response.body.property !== undefined &&
