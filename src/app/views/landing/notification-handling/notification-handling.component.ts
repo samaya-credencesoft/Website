@@ -12,6 +12,8 @@ import { timestamp } from 'rxjs';
 import { TokenStorage } from 'src/token.storage';
 import { ListingService } from 'src/services/listing.service';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
+import { CancelService } from '../cancel.service';
+import { Cancel } from '../cancel';
 // import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
@@ -66,6 +68,8 @@ export class NotificationHandlingComponent {
   mobile: string = '';
   bookingId: string = '';
   nodatafound: boolean = false;
+  cancelBookingId: any;
+  cancelId: any;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -73,8 +77,10 @@ constructor(private token: TokenStorage,
   private hotelBookingService: HotelBookingService,
   private datePipe: DatePipe,
   private router: Router,
+  private cancelService:CancelService,
   ){
     this.message = new MessageDto();
+    this.cancelId = new Cancel();
 
     if(this.phoneNumber == undefined){
       this.phoneNumber = '';
@@ -295,12 +301,29 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   }
 
 
+  shouldShowCancelButton(item: any): boolean {
+    const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID'];
+    return !invalidStatuses.includes(item.bookingStatus);
+  }
+
+  cancelBooking(id:number){
+    this.cancelService.cancel(id).subscribe(res =>{
+        console.log('cancel is',res)
+    })
+  }
+
+
 
   async getbookingsbyemail() {
     try {
       const data = await this.listing.findPropertiesByemail(this.email).toPromise();
 
       this.bookings = data.body;
+      this.bookings.forEach(ele=>{
+        this.cancelId = ele;
+        console.log('cancel is',this.cancelId);
+      })
+  
 
       if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
         this.verificationSuccess = true;
