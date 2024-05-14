@@ -1,3 +1,5 @@
+// import { CheckoutModule } from 'paytm-blink-checkout-angular';
+import { CheckoutComponent } from './views/landing/checkout/checkout.component';
 import { BrowserModule, Title, TransferState } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,12 +36,13 @@ import { MatTableModule } from '@angular/material';
   declarations: [AppComponent],
   imports: [
     CommonModule,
-    BrowserModule,
+
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
     SlickCarouselModule,
     NgSelectModule,
+
     NgbModule,
     MatTableModule,
     GooglePlaceModule,

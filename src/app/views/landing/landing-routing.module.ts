@@ -36,6 +36,7 @@ import { CancelBookingComponent } from './cancel-booking/cancel-booking.componen
 import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -126,6 +127,8 @@ const routes: Routes = [
   },
   {
     path: 'history',component: NotificationHandlingComponent,},
+    {
+      path: 'history',component: BookingCompleteComponent,},
     {
       path: 'manage-enquiry',component: EnquiryComponent,},
       {

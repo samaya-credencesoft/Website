@@ -74,6 +74,9 @@ export class TokenStorage {
       return null;
     }
   }
+  public getPayment2Data(): Payment {
+    return JSON.parse(localStorage.getItem(PAYMENT2) as string);
+  }
   public saveUserName(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(USER_NAME, token);
@@ -120,7 +123,7 @@ export class TokenStorage {
     public getPropertyId(): string {
       return sessionStorage.getItem(PROPERTY_ID);
     }
-    
+
   clearBusiness() {
   localStorage.removeItem(BUSINESS_SERVICE);
     // window.localStorage.removeItem(BOOKSLOTDATA);

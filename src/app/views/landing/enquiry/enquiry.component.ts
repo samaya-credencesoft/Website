@@ -296,7 +296,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.payment.firstName = this.booking.firstName;
       this.payment.lastName = this.booking.lastName;
       this.payment.name = this.booking.firstName + " " + this.booking.lastName;
-console.log("business email"+ this.businessEmail)
+console.log("business email"+ this.businessUserEmail)
       this.payment.email = this.booking.email;
       this.payment.businessEmail = this.businessUserEmail
       this.payment.currency = this.localCurrency
@@ -391,20 +391,27 @@ console.log("business email"+ this.businessEmail)
       this.changeDetectorRefs.detectChanges();
     }, 3000);
   }
-  paymentIntentPayTm(payment: Payment) {
-    this.paymentLoader = true;
+  async paymentIntentPayTm(payment: Payment) {
+    try {
+      this.paymentLoader = true;
 
-    this.hotelBookingService.paymentIntent(payment).subscribe((response) => {
-      this.paymentLoader = false;
+      const response = await this.hotelBookingService.paymentIntent(payment).toPromise();
+
       if (response.status === 200) {
         this.payment = response.body;
         this.token.saveBookingData(this.booking);
         this.token.savePaymentData(this.payment);
-        this.token.savePropertyData(this.businessUser);
+        this.token.savePropertyData(this.propertyDetials);
 
         this.router.navigate(["/checkout"]);
       }
-    });
+    } catch (error) {
+      // Handle errors here
+    } finally {
+      this.paymentLoader = false;
+
+  }
+
   }
 
 

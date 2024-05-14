@@ -87,7 +87,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { CheckoutModule } from 'paytm-blink-checkout-angular';
+// import { CheckoutModule } from 'paytm-blink-checkout-angular';
 import { TokenStorage } from 'src/token.storage';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
@@ -105,6 +105,9 @@ import { NotificationHandlingComponent } from './notification-handling/notificat
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { LoginDetailsComponent } from './login-details/login-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
+import { CheckoutModule } from 'paytm-blink-checkout-angular';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -154,6 +157,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     FaqsComponent,
     BookOneConnectComponent,
     BookingComponent,
+    BookingCompleteComponent,
     NewsTwoComponent,
     IntroThreeComponent,
     LandingV3Component,
