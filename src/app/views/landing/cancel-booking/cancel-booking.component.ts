@@ -10,6 +10,8 @@ import { Route } from '@angular/router';
 import { MatTable , MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { CancelServiceService } from '../cancel-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cancel-booking',
@@ -30,6 +32,9 @@ export class CancelBookingComponent implements OnInit {
   propertyId: number;
   @Input()
   businessUser:BusinessUser;
+  bookingService: any;
+  loader: boolean;
+  dialogRef: any;
   
 
 
@@ -41,10 +46,10 @@ export class CancelBookingComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  externalSites: any[] = [
+  externalSites:any[] = [
     { externalSiteName: "The Hotel Mate", logo: "https://bookonelocal.in/cdn/2023-12-12-111128535-The_Hotel_Mate_Logo (2).png" },
-    { externalSiteName: "Easemytrip", logo: "https://bookonelocal.in/cdn/2023-12-01-080647948-emt-logo.png" }
-  ];
+    { externalSiteName: "Easemytrip", logo: "https://bookonelocal.in/cdn/2023-12-01-080647948-emt-logo.png" },
+  ]
 
   ngOnInit() {
     this.businessUser = history.state.businessUser;
@@ -61,16 +66,55 @@ export class CancelBookingComponent implements OnInit {
       .getCurrentAndFutureBookings(this.propertyId)
       .subscribe((data) => {
         this.bookings = data.body;
-        // this.bookings.forEach((booking) => {
-        // console.log('booking is',this.bookings);
-        // });
-        // this.dataSource = new MatTableDataSource(this.bookings);
-        // this.dataSource.paginator = this.bookPaginator;
-        // this.dataSource.sort = this.sort;
+        this.bookings.forEach((booking) => {
+        console.log('booking is',this.bookings);
+        });
+        this.dataSource = new MatTableDataSource(this.bookings);
+        this.dataSource.paginator = this.bookPaginator;
+        this.dataSource.sort = this.sort;
         this.changeDetectorRefs.detectChanges();
       });
     }
 
+
+
+    cancel(row) {
+      this.bookingService.cancel(row.id).subscribe(
+        (response) => {
+          if (response.status === 200) {
+  
+            this.openSuccessSnackBar(
+              "Booking cancelled succcessfully"
+            );
+            // if (row.roomDetails != null && row.roomDetails != undefined && row.roomDetails.length > 0)
+            // {
+            //   this.roomRealese(row);
+            // }
+            this.createAuditReport(row);
+          }
+        },
+        (error) => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 417) {
+              this.loader = false;
+              // this.openErrorSnackBar(
+              //   'Cancellation Error,Please check booking status ,only confirmed booking can be cancelled'
+              // );
+  
+              this.dialogRef.close({ event: "417" });
+            }
+          }
+        }
+      );
+  
+
+  
+
     
   
-}
+}createAuditReport(row: any) {
+    throw new Error('Method not implemented.');
+  }
+  openSuccessSnackBar(arg0: string) {
+    throw new Error('Method not implemented.');
+  }}

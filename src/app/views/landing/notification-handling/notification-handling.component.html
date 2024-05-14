@@ -285,6 +285,8 @@
                           {{item.mobile}}<br>
 
                         </p>
+                        <button *ngIf="shouldShowCancelButton(item)" style="background-color: #271a55; color: #FFF;" (click)="cancelBooking(item.id)">Cancel</button>
+
                       </div>
 
                     </div>
