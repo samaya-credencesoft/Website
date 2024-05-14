@@ -221,7 +221,7 @@ export class BookingCompleteComponent implements OnInit {
   }
   createBookingPayTM() {
     this.booking.modeOfPayment = this.payment.paymentMode;
-    this.booking.externalSite = 'The Hotel Mate';
+    this.booking.externalSite = 'Bookone Booking Engine';
     this.booking.businessName = this.businessUser.name;
     this.booking.businessEmail = this.businessUser.email;
     this.booking.roomBooking = true;
