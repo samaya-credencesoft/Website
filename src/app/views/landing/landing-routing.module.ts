@@ -128,7 +128,9 @@ const routes: Routes = [
   {
     path: 'history',component: NotificationHandlingComponent,},
     {
-      path: 'history',component: BookingCompleteComponent,},
+      path: 'booking-complete',
+      component: BookingCompleteComponent,
+    },
     {
       path: 'manage-enquiry',component: EnquiryComponent,},
       {
