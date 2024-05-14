@@ -146,7 +146,7 @@
                       style="border-radius: 30px; border: 0.5px solid #271a55; margin-top: -20px; background: #FFF;"
                       class="form-control" placeholder="Search your booking by Email" required />
                     <span class="sorting-arrow">
-                      <img src="assets/images/Searchnotification.png" (click)="getbookingsbyenquiryemail()" style="width: 35px; height: 35px;" alt="" />
+                      <img src="assets/images/Searchnotification.png" (click)="getbookingsbyenquiryemail()" style="width: 23px; height: 23px;" alt="" />
                     </span>
                   </div>
 
@@ -173,7 +173,7 @@
                       class="form-control" placeholder="Search your booking by Mobile number" required />
                     <span class="sorting-arrow">
                       <img src="assets/images/Searchnotification.png"
-                      style="width: 35px; height: 35px;"
+                      style="width: 23px; height: 23px;"
                       (click)="getbookingsbymobileNumber2()"
                       alt="" />
                     </span>
@@ -199,7 +199,7 @@
                       class="form-control" placeholder="Search your booking by Enquiry Id" required />
                     <span class="sorting-arrow">
                       <img src="assets/images/Searchnotification.png"
-                      style="width: 35px; height: 35px;"
+                      style="width: 23px; height: 23px;"
                       (click)="getbookingsbybookingIdenquiry()"  alt="" />
                     </span>
                   </div>
@@ -263,16 +263,16 @@
                         <p style="font-size: 13px; margin-left: 18px;
                           margin-bottom: 24px;">
                           <b style="
-                            font-weight: 700;">Checkin Date:</b> <br>
+                            font-weight: 700;color: #000;">Checkin Date:</b> <br>
                           {{item.fromDate }} <br>
                           <b style="
-                            font-weight: 700;">Created Date:</b> <br>
+                            font-weight: 700;color: #000;">Created Date:</b> <br>
                           {{item?.createdDate}} <br>
                           <!-- <b style="
                             font-weight: 700;">Location:</b> <br>
                           {{item?.customerAddress}}<br> -->
                           <b style="
-                            font-weight: 700;">Phone Number:</b> <br>
+                            font-weight: 700;color: #000;">Phone Number:</b> <br>
                           {{item.mobile}}<br>
                         </p>
                       </div>
@@ -280,13 +280,13 @@
                         <p style="font-size: 13px;
                         margin-bottom: 24px;margin-left: -17px;">
                           <b style="
-                          font-weight: 700;">Checkout Date:</b> <br>
+                          font-weight: 700;color: #000;">Checkout Date:</b> <br>
                           {{item.toDate}}<br>
                           <b style="
-                          font-weight: 700;">Status:</b> <br>
+                          font-weight: 700;color: #000;">Status:</b> <br>
                           {{item?.bookingStatus}} <br>
                           <b style="
-                          font-weight: 700;">Email:</b> <br>
+                          font-weight: 700;color: #000;">Email:</b> <br>
                           {{item?.email}}<br>
                           <button style="background-color: #271a55;color:white;float: right;margin-bottom: 10px;margin-right: 33px;margin-top: 5px;    padding: 7px;
                           border-radius: 22px;" (click)="PayViaUpi(item)">Pay Now</button>
@@ -335,16 +335,16 @@
                       <p style="font-size: 13px; margin-left: 18px;
                         margin-bottom: 24px;">
                         <b style="
-                          font-weight: 700;">Checkin Date:</b> <br>
+                          font-weight: 700;color:#000">Checkin Date:</b> <br>
                         {{bookings?.fromDate }} <br>
                         <b style="
-                          font-weight: 700;">Created Date:</b> <br>
+                          font-weight: 700;color:#000">Created Date:</b> <br>
                         {{bookings?.createdDate}} <br>
                         <!-- <b style="
                           font-weight: 700;">Location:</b> <br>
                         {{bookings.customerAddress}}<br> -->
                         <b style="
-                          font-weight: 700;">Phone Number:</b> <br>
+                          font-weight: 700;color:#000">Phone Number:</b> <br>
                         {{bookings?.mobile}}<br>
                       </p>
                     </div>
@@ -352,13 +352,13 @@
                       <p style="font-size: 13px;
                       margin-bottom: 24px; margin-left: -17px;">
                         <b style="
-                        font-weight: 700;">Checkout Date:</b> <br>
+                        font-weight: 700;color:#000">Checkout Date:</b> <br>
                         {{bookings?.toDate}}<br>
                         <b style="
-                        font-weight: 700;">Status:</b> <br>
+                        font-weight: 700;color:#000">Status:</b> <br>
                         {{bookings?.bookingStatus}} <br>
                         <b style="
-                        font-weight: 700;">Email:</b> <br>
+                        font-weight: 700;color:#000">Email:</b> <br>
                         {{bookings?.email}}<br>
                         <button style="background-color: #271a55;color:white;    padding: 7px;
                         border-radius: 22px;">Pay Now</button>
