@@ -7,7 +7,7 @@
 
   <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
     <li class="nav-item-li" >
-      <img *ngIf="businessUser.logoUrl" [src]="businessUser.logoUrl" alt="Logo"  class="rounded-circle">
+      <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="rounded-circle" >
       <a  *ngIf="businessUser.website" href="{{ this.website }}" class="nav-link" style="color: #fff !important;">
                 <i></i>
                 Home
@@ -18,39 +18,39 @@
     </div>
 
     <li class="nav-item-li" >
-      <a  *ngIf="businessUser.website && (socialmedialist.aboutUs !== null && socialmedialist.aboutUs !== undefined && socialmedialist.aboutUs !== ''  ) " href="{{socialmedialist.aboutUs}}" class="nav-link  " style="color: #fff !important;">
+      <a  *ngIf="businessUser.website && (socialmedialist?.aboutUs !== null && socialmedialist?.aboutUs !== undefined && socialmedialist?.aboutUs !== ''  ) " href="{{socialmedialist?.aboutUs}}" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 About Us
             </a>
     </li>
-    <div *ngIf="businessUser.website && (socialmedialist.aboutUs !== null && socialmedialist.aboutUs !== undefined && socialmedialist.aboutUs !== ''  ) ">
+    <div *ngIf="businessUser.website && (socialmedialist?.aboutUs !== null && socialmedialist?.aboutUs !== undefined && socialmedialist?.aboutUs !== ''  ) ">
       <hr>
     </div>
     <li class="nav-item-li">
-      <a  *ngIf="businessUser.website && (socialmedialist.termsAndConditions !== null && socialmedialist.termsAndConditions !== undefined && socialmedialist.termsAndConditions !== ''  ) " href="{{socialmedialist.termsAndConditions}}" class="nav-link  " style="color: #fff !important;">
+      <a  *ngIf="businessUser.website && (socialmedialist?.termsAndConditions !== null && socialmedialist?.termsAndConditions !== undefined && socialmedialist?.termsAndConditions !== ''  ) " href="{{socialmedialist?.termsAndConditions}}" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Terms & Conditions
             </a>
     </li>
-    <div *ngIf="businessUser.website && (socialmedialist.termsAndConditions !== null && socialmedialist.termsAndConditions !== undefined && socialmedialist.termsAndConditions !== ''  ) ">
+    <div *ngIf="businessUser.website && (socialmedialist?.termsAndConditions !== null && socialmedialist?.termsAndConditions !== undefined && socialmedialist?.termsAndConditions !== ''  ) ">
       <hr>
     </div>
     <li class="nav-item-li">
-      <a *ngIf="businessUser.website && (socialmedialist.privacyPolicy !== null && socialmedialist.privacyPolicy !== undefined && socialmedialist.privacyPolicy !== ''  ) " href="{{socialmedialist.privacyPolicy}}" class="nav-link  " style="color: #fff !important;">
+      <a *ngIf="businessUser.website && (socialmedialist?.privacyPolicy !== null && socialmedialist?.privacyPolicy !== undefined && socialmedialist?.privacyPolicy !== ''  ) " href="{{socialmedialist?.privacyPolicy}}" class="nav-link  " style="color: #fff !important;">
                 <i></i>
                 Privacy Policy
             </a>
     </li>
-    <div *ngIf="businessUser.website && (socialmedialist.privacyPolicy !== null && socialmedialist.privacyPolicy !== undefined && socialmedialist.privacyPolicy !== ''  ) ">
+    <div *ngIf="businessUser.website && (socialmedialist?.privacyPolicy !== null && socialmedialist?.privacyPolicy !== undefined && socialmedialist?.privacyPolicy !== ''  ) ">
       <hr>
     </div>
     <li class="nav-item-li">
-      <a *ngIf="businessUser.website && (socialmedialist.paymentTerms !== null && socialmedialist.paymentTerms !== undefined && socialmedialist.paymentTerms !== ''  ) " href="{{socialmedialist.paymentTerms}}" class="nav-link  "  style="color: #fff !important;">
+      <a *ngIf="businessUser.website && (socialmedialist?.paymentTerms !== null && socialmedialist?.paymentTerms !== undefined && socialmedialist?.paymentTerms !== ''  ) " href="{{socialmedialist?.paymentTerms}}" class="nav-link  "  style="color: #fff !important;">
                 <i></i>
                 Payment Terms
             </a>
     </li>
-    <div *ngIf="businessUser.website && (socialmedialist.paymentTerms !== null && socialmedialist.paymentTerms !== undefined && socialmedialist.paymentTerms !== ''  ) ">
+    <div *ngIf="businessUser.website && (socialmedialist?.paymentTerms !== null && socialmedialist?.paymentTerms !== undefined && socialmedialist?.paymentTerms !== ''  ) ">
       <hr>
     </div>
     <li class="nav-item-li">
@@ -79,7 +79,7 @@
 
 
 <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;">
-  <div class="container-div">
+  <div class="container-div" style="display:flex">
 
     <button class="navbar-toggler" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <img   src="assets/images/nav-toggle.png">
