@@ -55,7 +55,7 @@
         </div>
       </div>
       <div>    
-          <span *ngIf="(booking?.externalSite != 'The Hotel Mate' && booking?.externalSite != 'Easemytrip')">{{booking?.externalSite}}</span>
+          <span *ngIf="(booking?.externalSite != 'The Hotel Mate' && booking?.externalSite != 'Easemytrip' && booking?.externalSite != 'GOBIBO,MMT' && booking?.externalSite != 'Agoda' && booking?.externalSite != 'Yatra' && booking?.externalSite != 'Booking.com' && booking?.externalSite != 'Expedia' && booking?.externalSite != 'SiteMinder' && booking?.externalSite != 'BookOne Connect' && booking?.externalSite != 'Google Hotel Ads' && booking?.externalSite != 'Airbnb' && booking?.externalSite != 'Trivago' && booking?.externalSite != 'Clear trip' && booking?.externalSite != 'OYO' && booking?.externalSite != 'Via.com' && booking?.externalSite != 'Travel Guru' && booking?.externalSite != 'IRCTC' && booking?.externalSite != 'Hotels.com' && booking?.externalSite != 'BookingJini' && booking?.externalSite != 'Fab' && booking?.externalSite != 'Treebo' && booking?.externalSite != 'Go Room Go' && booking?.externalSite != 'Pie Rooms' )">{{booking?.externalSite}}</span>
       </div>
       </div>
 
@@ -64,7 +64,7 @@
 
 
       <div class="col" >
-        <button>Cancel</button>
+        <button (click)="cancelBooking(booking.id)">Cancel</button>
       </div>
     </div>
 
