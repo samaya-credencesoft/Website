@@ -39,7 +39,10 @@ export class LoginDetailsComponent implements OnInit {
   businessUser:BusinessUser;
   id: any;
   
-
+  isInvalidStatus(status: string): boolean {
+    const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID'];
+    return invalidStatuses.includes(status.toUpperCase()); // Ensure case-insensitive check
+  }
 
   
 

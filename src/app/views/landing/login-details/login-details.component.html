@@ -64,7 +64,7 @@
 
 
       <div class="col" >
-        <button (click)="cancelBooking(booking.id)">Cancel</button>
+        <button *ngIf="booking?.bookingStatus && !isInvalidStatus(booking.bookingStatus)" style="background-color: #271a55; color: #FFF;" (click)="cancelBooking(booking.id)">Cancel</button>
       </div>
     </div>
 
