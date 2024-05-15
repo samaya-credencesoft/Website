@@ -247,7 +247,7 @@
                     <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
                       <div style="color: #fff;
                         font-weight: 700; "> {{item?.firstName}}{{item?.lastName}} </div>
-                     <div style="color: #FFF;"> {{item.businessName}} </div>
+                     <div style="color: #FFF;"> {{item.propertyName}} </div>
 
                     </div>
 
@@ -288,9 +288,29 @@
                           <b style="
                           font-weight: 700;color: #000;">Email:</b> <br>
                           {{item?.email}}<br>
-                          <button style="background-color: #271a55;color:white;float: right;margin-bottom: 10px;margin-right: 33px;margin-top: 5px;    padding: 7px;
-                          border-radius: 22px;" (click)="PayViaUpi(item)">Pay Now</button>
-                        </p>
+                          <div style="border-radius: 30px 0px 30px 30px;
+                          border: -10.5px solid #fff;
+                          background: #271a55;
+                          display: inline-flex;
+                          flex-direction: column;
+                          justify-content: center;
+                          align-items: flex-start;
+                          padding: 10px 85px 11px 38px;
+                          margin-top: -17px; float: right;
+                          margin-bottom: -6px;
+                      ">
+          
+                            <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                              <div style="color: #fff;
+                              font-weight: 700; " (click)="PayViaUpi(item)">
+                        Pay Now
+      
+                             </div>
+                            </div>
+          
+                          </div>
+      
+                      
                       </div>
 
                     </div>
@@ -319,7 +339,7 @@
                     <div style="color: #fff;
                     font-weight: 700; "> {{bookings?.firstName }} {{bookings?.lastName}} </div>
                     <div style="color: #FFF;">
-                    {{bookings?.businessName}} </div>
+                    {{bookings?.propertyName}} </div>
 
                   </div>
 

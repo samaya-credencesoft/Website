@@ -219,7 +219,8 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   async getbookingsbybookingIdenquiry() {
 
     try {
-      const data = await this.listing.findPropertiesBybookingId(this.bookingId).toPromise();
+      const data = await this.listing.findPropertiesBybookingId
+      (this.bookingId).toPromise();
 
       this.bookings = data.body;
 
@@ -264,7 +265,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
 
   PayViaUpi(item){
     this.booking = item
-    let itemName = item.businessName
+    let itemName = item.propertyName
     const itemNameWithoutQuotes = itemName.replace(/^"(.*)"$/, '$1');
     this.getPropertiesBySearch(itemNameWithoutQuotes)
   }
