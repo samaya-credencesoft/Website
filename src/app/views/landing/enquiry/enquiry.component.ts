@@ -82,6 +82,7 @@ export class EnquiryComponent implements OnInit {
   localCurrency: any;
   businessEmail: any;
   businessUserEmail: any;
+  pathString: any;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -567,7 +568,7 @@ console.log("business email"+ this.businessUserEmail)
       this.bookingstatus = 'ENQUIRY';
 
       // Assuming this.listing.findPropertiesByemailenquiry returns a Promise
-      const data = await this.listing.findPropertiesByemailenquiry(this.email, this.bookingstatus).toPromise();
+      const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
 
