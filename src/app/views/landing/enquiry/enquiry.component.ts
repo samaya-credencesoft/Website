@@ -188,7 +188,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.bookingstatus = 'ENQUIRY';
 
 
-      const data = await this.listing.findPropertiesByMobilenumberenquiry(this.phoneNumber, this.bookingstatus).toPromise();
+      const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
       this.verificationSuccessenquiry = true;

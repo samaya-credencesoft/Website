@@ -147,6 +147,16 @@ export class ListingService {
       { observe: 'response' }
     );
   }
+
+  
+  findPropertiesByMobilenumberenquiryLms(phone) {
+    this.setApi();
+    return this.http.get<any>(
+      API_URL_LMS +
+      '/api/v1/accommodationEnquiry/getBySearchCriteria' + '?phone=' + phone,
+      { observe: 'response' }
+    );
+  }
   
 
   findPropertiesBybookingIdenquiry(bookingId:string,bookingStatus:string) {
