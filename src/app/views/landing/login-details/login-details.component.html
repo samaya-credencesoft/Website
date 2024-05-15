@@ -64,7 +64,7 @@
               </div>
             </div>
             <div class="col-md-6 text-right">
-              <button *ngIf="booking?.bookingStatus && !isInvalidStatus(booking.bookingStatus)" class="btn btn-danger" (click)="cancelBooking(booking.id)">Cancel</button>
+              <button *ngIf="booking?.bookingStatus && !isInvalidStatus(booking.bookingStatus)" class="btn btn-danger" (click)="cancelBooking(booking.id)" style="background-color: #221950; border-color: #221950;">Cancel</button>
             </div>
           </div>
         </div>
