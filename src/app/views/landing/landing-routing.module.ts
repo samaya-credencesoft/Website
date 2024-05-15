@@ -88,11 +88,11 @@ const routes: Routes = [
     component: LandingV11Component
   },
   {
-    path: 'login-cancel-page',
+    path: 'manage-property',
     component: LoginCancelPageComponent
   },
   {
-    path:'login-details',
+    path:'manage-property-details',
     component:LoginDetailsComponent
   },
   {

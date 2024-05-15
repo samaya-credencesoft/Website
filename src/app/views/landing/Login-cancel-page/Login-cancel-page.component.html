@@ -9,8 +9,8 @@
 
 <div class="container sign-in-container" style="background-color: #fff; border-radius: 5px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
   <div class="row">
-    <div class="col-md-12">
-      <h4 style="text-align: center; padding-top: 20px;">Sign In</h4>
+    <div class="col-md-8 offset-md-2">
+      <h4 class="text-center mb-4">Sign In</h4>
 
       <form [formGroup]="signinForm" (ngSubmit)="signIn()">
         <div class="form-group">
@@ -37,7 +37,7 @@
           />
         </div>
 
-        <hr style="border-top: 2px solid #ddd; margin-bottom: 15px; margin-top: 15px;" />
+        <hr class="my-4" />
 
         <div class="form-group form-check">
           <input

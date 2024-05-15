@@ -120,7 +120,7 @@ export class LoginCancelPageComponent implements OnInit {
     this.msgs = [];
     Logger.log("this.model : " + JSON.stringify(this.model));
     this.jwtAuthService.login(this.model).subscribe( response => {
-      this.router.navigate([this.returnUrl || "/login-details"],{ state: { businessUser: this.businessUser } });
+      this.router.navigate([this.returnUrl || "/manage-property-details"],{ state: { businessUser: this.businessUser } });
     },
     (error) => {
         // Your existing error handling code
