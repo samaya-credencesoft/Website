@@ -1,13 +1,14 @@
 import { TaxDetails } from "src/app/model/TaxDetails";
 import { BusinessServiceType } from "src/app/model/businessServicetype";
-import { ClosedDays } from "src/app/model/closedDays";
-import { OpenDays } from "src/app/model/openDays";
+// import { ClosedDays } from "src/app/model/closedDays";
+// import { OpenDays } from "src/app/model/openDays";
+// import { OpenDays } from "src/app/model/openDays";
 import { ServiceCharge } from "src/app/model/serviceCharge";
 
 export class BusinessService {
   id: number;
-  closedDays: ClosedDays[];
-  openDays: OpenDays[];
+  // closedDays: ClosedDays[];
+  // openDays: OpenDays[];
   name: string;
   description: string;
   propertyId: number;
@@ -43,8 +44,8 @@ export class BusinessService {
   fontAwesomeUrl: string;
   imageUrl: string;
   serviceChargePercentage: number;
-  serviceOpenList: OpenDays[];
-  serviceCloseList: ClosedDays[];
+  // serviceOpenList: OpenDays[];
+  // serviceCloseList: ClosedDays[];
   twentyFourHoursCheckOut:boolean;
   taxDetails: TaxDetails[];
   priceInclusiveOfTax: boolean;
