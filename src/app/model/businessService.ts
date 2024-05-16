@@ -1,17 +1,17 @@
-import { TaxDetails } from "./TaxDetails";
-import { BusinessServiceType } from "./businessServicetype";
-import { ClosedDays } from "./closeddays";
-import { OpenDays } from "./opendays";
-import { ServiceCharge } from "./serviceCharge";
+import { TaxDetails } from './TaxDetails';
+import { BusinessServiceType } from './businessServicetype';
+// import { ClosedDays } from "./closeddays";
+// import { OpenDays } from "./opendays";
+import { ServiceCharge } from './serviceCharge';
 
 export class BusinessService {
   id: number;
-  closedDays: ClosedDays[];
-  openDays: OpenDays[];
+  // closedDays: ClosedDays[];
+  // openDays: OpenDays[];
   name: string;
   description: string;
   propertyId: number;
-  instantBooking:boolean;
+  instantBooking: boolean;
   maxLeadTime: number;
   minLeadTime: number;
   stdPrepTime: number;
@@ -21,7 +21,7 @@ export class BusinessService {
   brandName: string;
   brandSlogan: string;
   policy: string;
-  terms:string;
+  terms: string;
   sendInstantConfirmation: boolean;
   organisationId: number;
   businessLocationName: string;
@@ -43,9 +43,9 @@ export class BusinessService {
   fontAwesomeUrl: string;
   imageUrl: string;
   serviceChargePercentage: number;
-  serviceOpenList: OpenDays[];
-  serviceCloseList: ClosedDays[];
-  twentyFourHoursCheckOut:boolean;
+  // serviceOpenList: OpenDays[];
+  // serviceCloseList: ClosedDays[];
+  twentyFourHoursCheckOut: boolean;
   taxDetails: TaxDetails[];
   priceInclusiveOfTax: boolean;
   active: boolean;
@@ -59,5 +59,5 @@ export class BusinessService {
   phoneNumber: string;
   includeService: boolean;
 
-  constructor() { }
+  constructor() {}
 }
