@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-Header-Listingdetailsone',
@@ -40,11 +41,17 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
   closeNavbar(): void {
     this.isdone = false; // Hides the vertical navbar
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private location: Location,
+  ) { }
 
   ngOnInit() {
     this.website = this.businessUser.website;
