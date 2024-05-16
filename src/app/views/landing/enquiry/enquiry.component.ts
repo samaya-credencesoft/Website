@@ -200,9 +200,9 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.verificationSuccessenquiry = true;
 
       for (const element of this.bookings) {
-        const fromDate = new Date(element.fromDate);
-        const formattedFromDate = `${fromDate.getDate()} ${fromDate.toLocaleString('default', { month: 'long' })} ${fromDate.getFullYear()}`;
-        element.fromDate = formattedFromDate;
+        const createdDate = new Date(element.createdDate);
+        const formattedFromDate = `${createdDate.getDate()} ${createdDate.toLocaleString('default', { month: 'long' })} ${createdDate.getFullYear()}`;
+        element.createdDate = formattedFromDate;
 
         if (element.toDate !== null && element.toDate !== undefined) {
           const toDate = new Date(element.toDate);
@@ -238,14 +238,14 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         console.log('my booking data is',JSON.stringify(this.bookingEnquiry));
 
 
-          this.fromdate =  this.bookingEnquiry.fromDate;
-          const date = new Date(this.fromdate);
+          this.createdDate =  this.bookingEnquiry.createdDate;
+          const date = new Date(this.createdDate);
           const day = date.getDate();
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
           console.log(formattedDate);
-          this.bookingEnquiry.fromDate = formattedDate;
+          this.bookingEnquiry.createdDate = formattedDate;
 
           if ( this.bookingEnquiry.toDate !== null &&  this.bookingEnquiry.toDate !== undefined) {
             this.Todate =  this.bookingEnquiry.toDate;
@@ -537,14 +537,14 @@ console.log("business email"+ this.businessUserEmail)
         this.verificationSuccess = true;
 
         this.bookings.forEach(async (element) => {
-          this.fromdate = element.fromDate;
-          const date = new Date(this.fromdate);
+          this.createdDate = element.createdDate;
+          const date = new Date(this.createdDate);
           const day = date.getDate();
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
           console.log(formattedDate);
-          element.fromDate = formattedDate;
+          element.createdDate = formattedDate;
 
           if (element.toDate !== null && element.toDate !== undefined) {
             this.Todate = element.toDate;
@@ -585,16 +585,16 @@ console.log("business email"+ this.businessUserEmail)
       this.bookings = data.body;
 
       for (const element of this.bookings) {
-        this.fromdate = element.fromDate;
+        this.createdDate = element.createdDate;
 
-        const date = new Date(this.fromdate);
+        const date = new Date(this.createdDate);
         const day = date.getDate();
         const month = date.toLocaleString('default', { month: 'long' });
         const year = date.getFullYear();
         const formattedDate = `${day} ${month} ${year}`;
 
         console.log(formattedDate);
-        element.fromDate = formattedDate;
+        element.createdDate = formattedDate;
 
         if (element.toDate !== null && element.toDate !== undefined) {
           this.Todate = element.toDate;
