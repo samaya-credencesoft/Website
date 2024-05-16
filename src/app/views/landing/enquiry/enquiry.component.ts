@@ -83,6 +83,8 @@ export class EnquiryComponent implements OnInit {
   businessEmail: any;
   businessUserEmail: any;
   pathString: any;
+  enquiryId: number;
+  bookingEnquiry: any;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -135,6 +137,7 @@ search() {
 
 resetBookings() {
   this.bookings = null;
+  this.bookingEnquiry = null;
 if (this.bookings?.length === 0 || this.bookings === null ) {
   console.log(`Searching for Bookings: ${this.bookings}`);
     this.nodatafound = false;
@@ -191,6 +194,9 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      this.bookings.forEach(ele=>{
+        this.enquiryId = ele;
+      })
       this.verificationSuccessenquiry = true;
 
       for (const element of this.bookings) {
@@ -217,49 +223,54 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   }
 
   async getbookingsbybookingIdenquiry() {
+    this.bookingEnquiry = null;
 
     try {
-      const data = await this.listing.findPropertiesBybookingId
-      (this.bookingId).toPromise();
+      const data = await this.listing.findPropertiesBybookingIdLms
+      (Number(this.bookingId)).toPromise();
 
-      this.bookings = data.body;
+      this.bookingEnquiry = data.body;
+      console.log('dataaaaaa is',this.bookingEnquiry);
 
-      if (this.bookings !== null && this.bookings !== undefined && this.bookings.length !== 0) {
+      if (this.bookingEnquiry !== null && this.bookingEnquiry !== undefined && this.bookingEnquiry.length !== 0) {
         this.verificationenquirySuccess2= true;
 
+        console.log('my booking data is',JSON.stringify(this.bookingEnquiry));
 
-          this.fromdate =  this.bookings.fromDate;
+
+          this.fromdate =  this.bookingEnquiry.fromDate;
           const date = new Date(this.fromdate);
           const day = date.getDate();
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
           console.log(formattedDate);
-          this.bookings.fromDate = formattedDate;
+          this.bookingEnquiry.fromDate = formattedDate;
 
-          if ( this.bookings.toDate !== null &&  this.bookings.toDate !== undefined) {
-            this.Todate =  this.bookings.toDate;
+          if ( this.bookingEnquiry.toDate !== null &&  this.bookingEnquiry.toDate !== undefined) {
+            this.Todate =  this.bookingEnquiry.toDate;
             const date1 = new Date(this.Todate);
             const day1 = date1.getDate();
             const month1 = date1.toLocaleString('default', { month: 'long' });
             const year1 = date1.getFullYear();
             const formattedDate1 = `${day1} ${month1} ${year1}`;
-            this.bookings.toDate = formattedDate1;
+            this.bookingEnquiry.toDate = formattedDate1;
           }
 
       }
 
-      if (this.bookings === null || this.bookings.bookingStatus != "ENQUIRY") {
+      if (this.bookingEnquiry === null || this.bookingEnquiry.status != "ENQUIRY") {
         this.nodatafound = true;
       } else {
         this.nodatafound = false;
-        // Handle the case when bookings are found
       }
 
-      console.log("Bookings: " + JSON.stringify(this.bookings));
+
+      console.log("Bookings: " + JSON.stringify('hello my data is',this.bookingEnquiry));
     } catch (error) {
       // Handle errors here
       console.error(error);
+      this.nodatafound = true;
     }
   }
 
@@ -453,7 +464,7 @@ console.log("business email"+ this.businessUserEmail)
 
       }
 
-      if (this.bookings === null || this.bookings.bookingStatus === 'ENQUIRY') {
+      if (this.bookings === null || this.bookings.status === 'ENQUIRY') {
         this.nodatafound = true;
       } else {
         this.nodatafound = false;
