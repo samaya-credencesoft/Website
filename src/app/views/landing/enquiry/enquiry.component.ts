@@ -82,6 +82,7 @@ export class EnquiryComponent implements OnInit {
   localCurrency: any;
   businessEmail: any;
   businessUserEmail: any;
+  pathString: any;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -187,7 +188,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.bookingstatus = 'ENQUIRY';
 
 
-      const data = await this.listing.findPropertiesByMobilenumberenquiry(this.phoneNumber, this.bookingstatus).toPromise();
+      const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
       this.verificationSuccessenquiry = true;
@@ -218,7 +219,8 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   async getbookingsbybookingIdenquiry() {
 
     try {
-      const data = await this.listing.findPropertiesBybookingId(this.bookingId).toPromise();
+      const data = await this.listing.findPropertiesBybookingId
+      (this.bookingId).toPromise();
 
       this.bookings = data.body;
 
@@ -263,7 +265,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
 
   PayViaUpi(item){
     this.booking = item
-    let itemName = item.businessName
+    let itemName = item.propertyName
     const itemNameWithoutQuotes = itemName.replace(/^"(.*)"$/, '$1');
     this.getPropertiesBySearch(itemNameWithoutQuotes)
   }
@@ -567,7 +569,7 @@ console.log("business email"+ this.businessUserEmail)
       this.bookingstatus = 'ENQUIRY';
 
       // Assuming this.listing.findPropertiesByemailenquiry returns a Promise
-      const data = await this.listing.findPropertiesByemailenquiry(this.email, this.bookingstatus).toPromise();
+      const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
 

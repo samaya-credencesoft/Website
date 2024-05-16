@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
 export const PARENTS_ORGANIZATION_ID = environment.parentOrganisationId;
 // export const HOME_ADDRESS = environment.homeAddress;
 export const API_URL = environment.apiUrl;
+export const API_URL_LMS = environment.apiLms;
 
 
 export const BUSINESS_TYPE_SOFTWARE_CONSULTING = "Software Consulting Services";
