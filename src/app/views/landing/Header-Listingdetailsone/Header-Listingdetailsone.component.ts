@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TokenStorage } from 'src/token.storage';
+import { BusinessUser } from 'src/app/model/user';
 
 @Component({
   selector: 'app-Header-Listingdetailsone',
@@ -10,18 +11,18 @@ import { TokenStorage } from 'src/token.storage';
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
   showListItems: boolean = false; // For your existing toggle functionality
-  isdone : boolean = false; 
+  isdone : boolean = false;
   @Input()
   businessUser:any;
   socialmedialist:any;
   showListingDetails: boolean = false;
   website: string;
   logoUrl: string;
-  
-  
-  
+
+
+
   propertyname: string;
-  propertydetails: import("c:/Users/sinka/OneDrive/Documents/GitHub/Website/src/app/model/user").BusinessUser;
+  propertydetails:BusinessUser;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
@@ -35,12 +36,12 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     console.log('new link is',this.website);
     console.log('new link is hello world',this.socialmedialist);
     console.log('new link is',this.propertyname);
-    
-   
+
+
   }
   toggleListItems() {
     this.showListItems = !this.showListItems;
-  
+
 
   }
 
@@ -65,6 +66,6 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     console.log('new link is',this.website);
   }
   navigate(){
-   
+
   }
 }
