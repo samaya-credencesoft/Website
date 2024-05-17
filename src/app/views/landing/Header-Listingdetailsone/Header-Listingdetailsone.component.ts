@@ -18,6 +18,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   logoUrl: string;
   
   
+  
   propertyname: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
@@ -46,7 +47,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   }
 
   closeNavbar(): void {
-    this.isdone = false; // Hides the vertical navbar
+    this.isdone = true; // Hides the vertical navbar
   }
 
   constructor(private router: Router,

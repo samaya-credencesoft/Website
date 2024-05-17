@@ -1,141 +1,191 @@
-/*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
-/* @media (max-width: 872px){
-  .navbar-togglermb{
-   display: flex;
-   align-items: center;
-  } */
-  /* .logo{
-    width: 100px;
-    height: 50px;
-    margin-right: 10px;
-  } */
-  
-/*   
-  @media (max-width: 872px){
-    .navbar-toggler{
-     display: none;
-     
-    }
-   
-    
-    } */
-
-.rounded-circle{
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin-left: 40px;
-}
-.close-btn{
-  float: right;
-  width: 15px;
-  background-color: transparent;
-  margin-right: 10px;
-}
 .vertical-nav {
-  min-width: 17rem;
-  width: 17rem;
+  width: 250px;
   height: 100vh;
+  background-color: #1e1f20;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #3b3c3c;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-  
-  transition: left 0.3s ease;
-  z-index: 1000; 
-}
-hr {
-  border: none; /* Remove default border */
-  border-top: 1px solid #ccc; /* Add a thin gray line at the top */
-  height: 0; /* Set height to 0 to avoid extra space */
-  margin: 5px 0; /* Add some margin for spacing */
-  margin-left: 10px;
-  margin-right: 10px;
+  overflow-y: auto;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
-.nav-item-li{
-  color: #000 !important;
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: auto;
+  display: block;
 }
 
-.page-content {
-  width: calc(100% - 17rem);
-  margin-left: 17rem;
-  transition: all 0.4s;
+.close-btn img {
+  width: 24px;
+  height: 24px;
 }
 
-/* for toggle behavior */
-
-#sidebar.active {
-  margin-left: -17rem;
-}
-
-#content.active {
-  width: 100%;
+.nav-menu {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-/* @media (max-width: 768px) {
-  #sidebar {
-    margin-left: -17rem;
-  }
-  #sidebar.active {
-    margin-left: 0;
-  }
-  #content {
-    width: 100%;
-    margin: 0;
-  }
-  #content.active {
-    margin-left: 17rem;
-    width: calc(100% - 17rem);
-  }
-} */
-
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSE
-* ==========================================
-*
-*/
-
-
-body {
-  background: #3b3c3c;
-  background: -webkit-linear-gradient(to right, #599fd9, #c2e59c);
-  background: linear-gradient(to right, #599fd9, #c2e59c);
-  min-height: 100vh;
-  overflow-x: hidden;
+.nav-item {
+  margin: 15px 0;
+  text-align: center;
 }
 
-.separator {
-  margin: 3rem 0;
-  border-bottom: 1px dashed #fff;
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background 0.3s ease;
 }
 
-.text-uppercase {
-  letter-spacing: 0.1em;
+.nav-link:hover {
+  background-color: #343536;
 }
 
-.text-gray {
-  color: #ffffff;
+.nav-link i {
+  margin-right: 10px;
 }
 
-.rounded-circle{
-  width: 100px;
-  height: 100px;
+.logo {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  padding: 10px;
-  margin-left: 78px;
+  margin-bottom: 10px;
 }
 
-@media(max-width:500px){
-  
+hr {
+  border: 0.5px solid #343536;
+  margin: 0 20px;
 }
+
+.content {
+  padding: 20px;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .vertical-nav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: none;
+  }
+
+  .close-btn {
+    display: none;
+  }
+
+  .nav-link {
+    justify-content: center;
+  }
+}
+
+  .top-navbar {
+    height: 80px;
+    background-color: #1e1f20;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .container-div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .navbar-toggler img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .title-nav {
+    color: #fff;
+    margin-right: auto;
+    font-size: 1.5em;
+    padding-bottom: 10px;
+  }
+
+  .back-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    padding: 10px;
+  }
+
+  .back-button i {
+    font-size: 1.5em;
+  }
+
+  @media (max-width: 768px) {
+    .top-navbar {
+      height: 60px;
+      padding: 0 10px;
+    }
+
+    .title-nav {
+      font-size: 1.2em;
+    }
+
+    .navbar-toggler img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .back-button i {
+      font-size: 1.2em;
+    }
+  }
+
+
+
+
+
+  .banner-container {
+    width: 100%;
+    margin-top: 90px; /* Adjust this value based on your fixed navbar height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .banner-container {
+      margin-top: 70px; /* Adjust this value for smaller screens if needed */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .banner-container {
+      margin-top: 60px; /* Adjust this value for even smaller screens if needed */
+    }
+  }
