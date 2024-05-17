@@ -47,7 +47,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   }
 
   closeNavbar(): void {
-    this.isdone = true; // Hides the vertical navbar
+    this.isdone = false; // Hides the vertical navbar
   }
 
   constructor(private router: Router,

@@ -18,11 +18,12 @@
   padding: 10px;
   margin-left: auto;
   display: block;
+  margin-top: 50px;
 }
 
 .close-btn img {
-  width: 24px;
-  height: 24px;
+  width: 15px;
+  height: 15px;
 }
 
 .nav-menu {
@@ -74,15 +75,14 @@ hr {
 @media (max-width: 768px) {
   .vertical-nav {
     width: 100%;
-    height: auto;
-    position: relative;
+    height: 200vh;
+    position: fixed;
     box-shadow: none;
+    z-index: 2000;
+    margin-top: -70px;
   }
 
-  .close-btn {
-    display: none;
-  }
-
+ 
   .nav-link {
     justify-content: center;
   }
