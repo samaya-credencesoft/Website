@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { TokenStorage } from 'src/token.storage';
 
 @Component({
   selector: 'app-Header-Listingdetailsone',
@@ -20,6 +21,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   
   
   propertyname: string;
+  propertydetails: import("c:/Users/sinka/OneDrive/Documents/GitHub/Website/src/app/model/user").BusinessUser;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
@@ -52,7 +54,11 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   constructor(private router: Router,
     private location: Location,
-  ) { }
+    private token:TokenStorage,
+  ) {
+    // this.propertydetails = this.token.getProperty();
+    // console.log("propertydata="+ JSON.stringify(this.propertydetails))
+   }
 
   ngOnInit() {
     this.website = this.businessUser.website;
