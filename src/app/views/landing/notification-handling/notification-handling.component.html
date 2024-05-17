@@ -1,9 +1,11 @@
+
+
+<app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
 <div class="main-wrapper">
 
   <div>
-    <div class="container-fluid mb-3 pt-5"
-      style="background-color: #341c59; border-bottom-left-radius: 70%; border-bottom-right-radius: 70%;padding-bottom: 2rem;">
-      <h2 class="enquiryh2" style="text-align: center; font-weight: 600 !important;color:#fff">Booking History</h2>
+    <div class="container-fluid mb-3 pt-5">
+      <h2 class="enquiryh2" style="text-align: center; font-weight: 600 !important;color:#000000">Booking History</h2>
       <br>
     </div>
 <!--
@@ -306,7 +308,7 @@
 
                     </div>
 
-                    <div style="border-radius: 30px 0px 30px 30px;
+                    <div *ngIf="shouldShowCancelButton(item)" style="border-radius: 30px 0px 30px 30px;
                     border: -10.5px solid #fff;
                     background: #271a55;
                     display: inline-flex;
@@ -317,7 +319,7 @@
                     margin-top: -28px; float: right;
                 ">
     
-                      <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                      <div style="text-align: center; font-size: 13px; margin-bottom: 4px;" (click)="cancelBooking(item.id)">
                         <div style="color: #fff;
                         font-weight: 700; ">
                   Cancel

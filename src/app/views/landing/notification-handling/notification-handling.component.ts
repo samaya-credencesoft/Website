@@ -1,6 +1,6 @@
 import { finalize } from 'rxjs/operators';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
 import { MessageDto } from 'src/app/model/MessageDto';
 import { Booking } from 'src/app/model/booking';
 
@@ -14,6 +14,7 @@ import { ListingService } from 'src/services/listing.service';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { CancelService } from '../cancel.service';
 import { Cancel } from '../cancel';
+import { BusinessUser } from 'src/app/model/user';
 // import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
@@ -22,6 +23,9 @@ import { Cancel } from '../cancel';
   styleUrls: ['./notification-handling.component.scss']
 })
 export class NotificationHandlingComponent {
+
+  @Input()
+  businessUser:BusinessUser;
 
   verifyOption = "sms";
   verificationCode: string ='';
@@ -72,6 +76,7 @@ export class NotificationHandlingComponent {
   cancelId: any;
 
 constructor(private token: TokenStorage,
+  private route: ActivatedRoute,
   private listing:ListingService,
   private calendar: NgbCalendar,
   private hotelBookingService: HotelBookingService,
@@ -87,6 +92,8 @@ constructor(private token: TokenStorage,
     }
 }
 ngonInit(){
+
+  
 this.tab3();
 
 }

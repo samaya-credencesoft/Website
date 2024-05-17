@@ -1,11 +1,15 @@
-<nav class="navbar navbar-dark" style="height: 80px; background-color: #1e1f20;">
+<!-- <nav class="navbar navbar-dark" style="height: 80px; background-color: #1e1f20;">
   <div class="container-div">
     <span class="title-nav-title" style="font-size: 1.2rem; color: #fff; padding: 10px 20px;">
       {{ businessUser?.name }}  </span>
   </div>
-</nav>
+</nav> -->
 
-<img src="assets/images/BookOne Website Bannerr.png" alt="BookOne Website Banner" style="width: 100%; margin-bottom: 15px;" />
+<!-- <img src="assets/images/BookOne Website Bannerr.png" alt="BookOne Website Banner" style="width: 100%; margin-bottom: 15px;" /> -->
+<app-Header-Listingdetailsone  [businessUser]="businessUser"
+
+
+> </app-Header-Listingdetailsone>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +51,7 @@
           />
         </div>
 
-        <hr class="my-4" />
+        <!-- <hr class="my-4" /> -->
 
         <div class="form-group form-check">
           <input

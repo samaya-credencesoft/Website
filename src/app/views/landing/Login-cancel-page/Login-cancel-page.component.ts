@@ -11,6 +11,7 @@ import {
   RouteConfigLoadEnd,
   NavigationExtras,
 } from "@angular/router";
+// import { Location } from '@angular/common';
 import { Property } from 'src/app/model/property';
 import { CheckUserType } from 'src/app/model/checkUserType';
 // import { HOME_ADDRESS } from 'src/app/app.component';
@@ -77,6 +78,7 @@ export class LoginCancelPageComponent implements OnInit {
     
   }
   constructor(
+    // private location: Location,
  private router: Router,
     private jwtAuthService: JwtAuthService,
    
@@ -114,6 +116,9 @@ export class LoginCancelPageComponent implements OnInit {
       }
     });
   }
+  // goBack(): void {
+  //   this.location.back();
+  // }
 
   signIn() {
     

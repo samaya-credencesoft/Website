@@ -92,5 +92,6 @@ export class Booking {
   totalRoomTariffBeforeDiscount: number;
 length: any;
 paymentStatus: any;
+enquiryId:number;
   constructor() {}
 }

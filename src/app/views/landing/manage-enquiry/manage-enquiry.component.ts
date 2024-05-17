@@ -1,6 +1,6 @@
 import { finalize } from 'rxjs/operators';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, NgModule,OnInit } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
 import { MessageDto } from 'src/app/model/MessageDto';
 import { Booking } from 'src/app/model/booking';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
@@ -12,13 +12,31 @@ import { SMS_NUMBER } from 'src/app/app.component';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe, formatDate } from '@angular/common';
 import { timestamp } from 'rxjs';
+import { BusinessUser } from 'src/app/model/user';
+import { HeaderListingdetailsoneComponent } from '../Header-Listingdetailsone/Header-Listingdetailsone.component';
 // import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 @Component({
   selector: 'app-manage-enquiry',
   templateUrl: './manage-enquiry.component.html',
   styleUrls: ['./manage-enquiry.component.css']
 })
+
+
+
+// @NgModule({
+//   declarations: [
+    
+//     HeaderListingdetailsoneComponent // Add the component here
+//   ],
+//   imports: [
+    
+//   ]
+// })
+
 export class ManageEnquiryComponent {
+
+
+  @Input() businessUser: string;
   verifyOption = "sms";
   verificationCode: string ='';
   loader = false;
@@ -69,6 +87,7 @@ export class ManageEnquiryComponent {
     private calendar: NgbCalendar,
     private hotelBookingService: HotelBookingService,
     private datePipe: DatePipe,
+    private  route: ActivatedRoute,
     private router: Router,){
       this.message = new MessageDto();
   
@@ -77,6 +96,7 @@ export class ManageEnquiryComponent {
       }
   }
   ngonInit(){
+    this.businessUser = history.state.businessUser;
   this.tab3();
   
   }

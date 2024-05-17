@@ -1,95 +1,91 @@
 <!-- Vertical navbar -->
 
-<div class="vertical-nav "  id="sidebar" *ngIf="isdone">
-  <button class="close-btn" (click)="closeNavbar()">
-   <img src="/assets/images/x-mark.png"> </button>
-
-
-  <ul class="  mb-0-men-hed" style="margin-top: 30px;padding: 0px;">
-    <li class="nav-item-li" >
-      <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="rounded-circle" >
-      <a  *ngIf="businessUser.website" href="{{ this.website }}" class="nav-link" style="color: #fff !important;">
-                <i></i>
-                Home </a>
-    </li>
-    <div>
-<hr *ngIf="businessUser.website">
-    </div>
-
-    <li class="nav-item-li" >
-      <a  *ngIf="businessUser.website && (socialmedialist?.aboutUs !== null && socialmedialist?.aboutUs !== undefined && socialmedialist?.aboutUs !== ''  ) " href="{{socialmedialist?.aboutUs}}" class="nav-link  " style="color: #fff !important;">
-                <i></i>
-                About Us
-            </a>
-    </li>
-    <div *ngIf="businessUser.website && (socialmedialist?.aboutUs !== null && socialmedialist?.aboutUs !== undefined && socialmedialist?.aboutUs !== ''  ) ">
-      <hr>
-    </div>
-    <li class="nav-item-li">
-      <a  *ngIf="businessUser.website && (socialmedialist?.termsAndConditions !== null && socialmedialist?.termsAndConditions !== undefined && socialmedialist?.termsAndConditions !== ''  ) " href="{{socialmedialist?.termsAndConditions}}" class="nav-link  " style="color: #fff !important;">
-                <i></i>
-                Terms & Conditions
-            </a>
-    </li>
-    <div *ngIf="businessUser.website && (socialmedialist?.termsAndConditions !== null && socialmedialist?.termsAndConditions !== undefined && socialmedialist?.termsAndConditions !== ''  ) ">
-      <hr>
-    </div>
-    <li class="nav-item-li">
-      <a *ngIf="businessUser.website && (socialmedialist?.privacyPolicy !== null && socialmedialist?.privacyPolicy !== undefined && socialmedialist?.privacyPolicy !== ''  ) " href="{{socialmedialist?.privacyPolicy}}" class="nav-link  " style="color: #fff !important;">
-                <i></i>
-                Privacy Policy
-            </a>
-    </li>
-    <div *ngIf="businessUser.website && (socialmedialist?.privacyPolicy !== null && socialmedialist?.privacyPolicy !== undefined && socialmedialist?.privacyPolicy !== ''  ) ">
-      <hr>
-    </div>
-    <li class="nav-item-li">
-      <a *ngIf="businessUser.website && (socialmedialist?.paymentTerms !== null && socialmedialist?.paymentTerms !== undefined && socialmedialist?.paymentTerms !== ''  ) " href="{{socialmedialist?.paymentTerms}}" class="nav-link  "  style="color: #fff !important;">
-                <i></i>
-                Payment Terms
-            </a>
-    </li>
-    <div *ngIf="businessUser.website && (socialmedialist?.paymentTerms !== null && socialmedialist?.paymentTerms !== undefined && socialmedialist?.paymentTerms !== ''  ) ">
-      <hr>
-    </div>
-    <li class="nav-item-li">
-      <a routerLink="/manage-property" [state]="{ businessUser: businessUser }" class="nav-link" style="color: #fff !important;">
-          <i></i>
-          Manage Property
+<!-- Vertical Navbar -->
+<div class="vertical-nav" id="sidebar" *ngIf="isdone">
+  <div>
+    <button class="close-btn" (click)="closeNavbar()">
+      <img src="/assets/images/x-mark.png" alt="Close">
+    </button>
+  </div>
+ 
+  
+  <ul class="nav-menu" style="margin-top: -17px;">
+    <li class="nav-item">
+      <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="logo">
+      <a *ngIf="businessUser.website" href="{{ this.website }}" class="nav-link">
+        <i class="fas fa-home"></i> Home
       </a>
-  </li>
-  <hr>
-    <li class="nav-item-li">
-      <a routerLink="/history"  class="nav-link" style="color: #fff !important;">
-          <i></i>
-          Manage Bookings
+    </li>
+    <hr *ngIf="businessUser.website">
+    
+    <li class="nav-item">
+      <a *ngIf="businessUser.website && socialmedialist?.aboutUs" href="{{socialmedialist?.aboutUs}}" class="nav-link">
+        <i class="fas fa-info-circle"></i> About Us
       </a>
-  </li>
-  <hr>
-  <li class="nav-item-li">
-    <a routerLink="/manage-enquiry" class="nav-link" style="color: #fff !important;">
-        <i></i>
-        Manage Enquiry
-    </a>
-</li>
-<hr>
+    </li>
+    <hr *ngIf="businessUser.website && socialmedialist?.aboutUs">
+    
+    <li class="nav-item">
+      <a *ngIf="businessUser.website && socialmedialist?.termsAndConditions" href="{{socialmedialist?.termsAndConditions}}" class="nav-link">
+        <i class="fas fa-file-contract"></i> Terms & Conditions
+      </a>
+    </li>
+    <hr *ngIf="businessUser.website && socialmedialist?.termsAndConditions">
+    
+    <li class="nav-item">
+      <a *ngIf="businessUser.website && socialmedialist?.privacyPolicy" href="{{socialmedialist?.privacyPolicy}}" class="nav-link">
+        <i class="fas fa-user-secret"></i> Privacy Policy
+      </a>
+    </li>
+    <hr *ngIf="businessUser.website && socialmedialist?.privacyPolicy">
+    
+    <li class="nav-item">
+      <a *ngIf="businessUser.website && socialmedialist?.paymentTerms" href="{{socialmedialist?.paymentTerms}}" class="nav-link">
+        <i class="fas fa-credit-card"></i> Payment Terms
+      </a>
+    </li>
+    <hr *ngIf="businessUser.website && socialmedialist?.paymentTerms">
+    
+    <li class="nav-item">
+      <a routerLink="/manage-property" [state]="{ businessUser: businessUser }" class="nav-link">
+        <i class="fas fa-cogs"></i> Manage Property
+      </a>
+    </li>
+    <hr>
+    
+    <li class="nav-item">
+      <a routerLink="/history" class="nav-link">
+        <i class="fas fa-history"></i> Manage Bookings
+      </a>
+    </li>
+    <hr>
+    
+    <li class="nav-item">
+      <a routerLink="/manage-enquiry" class="nav-link">
+        <i class="fas fa-envelope"></i> Manage Enquiry
+      </a>
+    </li>
+    <hr>
   </ul>
 </div>
 
-
-<nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;">
-  <div class="container-div" style="display:flex">
-
-    <button class="navbar-toggler" style="margin-left: 20px;" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <img   src="assets/images/nav-toggle.png">
+<!-- Top Navbar -->
+<nav class="navbar navbar-dark top-navbar">
+  <div class="container-div">
+    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
     </button>
-
-    <span class="title-nav-title" style="margin-top: 15px;text-align: left; color: #fff;padding-bottom: 10px; margin-left: 20px;">{{businessUser?.name}}</span>
+    <span class="title-nav">{{ businessUser?.name }}</span>
+    <!-- <button class="back-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button> -->
   </div>
-
 </nav>
 
-<div  style="width: 100%; margin-top: 7px;">
-  <img   src="assets/images/BookOne Website Bannerr.png">
+<!-- Styles -->
+
+
+<div class="banner-container">
+  <img src="assets/images/BookOne Website Bannerr.png" alt="Website Banner" class="banner-image">
 </div>
 
