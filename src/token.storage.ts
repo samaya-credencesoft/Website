@@ -55,6 +55,7 @@ const LOGIN_EMAIL = 'loginemail';
 const LOGIN_PASSWORD = 'loginpassword';
 const USER_ID = 'UserId';
 const USER_NAME = 'UserName';
+const PROPERTY_URL = 'PropertyUrl';
 const REQUEST_HANDLE = "requestvalue";
 
 @Injectable()
@@ -80,6 +81,11 @@ export class TokenStorage {
   public saveUserName(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(USER_NAME, token);
+  }
+
+  public savePropertyUrl(PropertyUrl: string) {
+    window.sessionStorage.removeItem(PROPERTY_URL);
+    window.sessionStorage.setItem(PROPERTY_URL, PropertyUrl);
   }
 
   public saveBusinessService(services: BusinessService[]) {
@@ -122,6 +128,12 @@ export class TokenStorage {
     }
     public getPropertyId(): string {
       return sessionStorage.getItem(PROPERTY_ID);
+    }
+
+
+
+    public getPropertyUrl(): string {
+      return sessionStorage.getItem(PROPERTY_URL);
     }
 
   clearBusiness() {
