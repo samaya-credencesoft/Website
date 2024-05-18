@@ -12,39 +12,39 @@
   <ul class="nav-menu" style="margin-top: -17px;">
     <li class="nav-item">
       <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="logo">
-      <a *ngIf="businessUser.website" href="{{ this.website }}" class="nav-link">
+      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
         <i class="fas fa-home"></i> Home
       </a>
     </li>
-    <hr *ngIf="businessUser.website">
+    <hr *ngIf="businessUser?.website">
     
     <li class="nav-item">
-      <a *ngIf="businessUser.website && socialmedialist?.aboutUs" href="{{socialmedialist?.aboutUs}}" class="nav-link">
+      <a *ngIf="businessUser?.website && socialmedialist?.aboutUs" href="{{socialmedialist?.aboutUs}}" class="nav-link">
         <i class="fas fa-info-circle"></i> About Us
       </a>
     </li>
-    <hr *ngIf="businessUser.website && socialmedialist?.aboutUs">
+    <hr *ngIf="businessUser?.website && socialmedialist?.aboutUs">
     
     <li class="nav-item">
-      <a *ngIf="businessUser.website && socialmedialist?.termsAndConditions" href="{{socialmedialist?.termsAndConditions}}" class="nav-link">
+      <a *ngIf="businessUser?.website && socialmedialist?.termsAndConditions" href="{{socialmedialist?.termsAndConditions}}" class="nav-link">
         <i class="fas fa-file-contract"></i> Terms & Conditions
       </a>
     </li>
-    <hr *ngIf="businessUser.website && socialmedialist?.termsAndConditions">
+    <hr *ngIf="businessUser?.website && socialmedialist?.termsAndConditions">
     
     <li class="nav-item">
-      <a *ngIf="businessUser.website && socialmedialist?.privacyPolicy" href="{{socialmedialist?.privacyPolicy}}" class="nav-link">
+      <a *ngIf="businessUser?.website && socialmedialist?.privacyPolicy" href="{{socialmedialist?.privacyPolicy}}" class="nav-link">
         <i class="fas fa-user-secret"></i> Privacy Policy
       </a>
     </li>
-    <hr *ngIf="businessUser.website && socialmedialist?.privacyPolicy">
+    <hr *ngIf="businessUser?.website && socialmedialist?.privacyPolicy">
     
     <li class="nav-item">
-      <a *ngIf="businessUser.website && socialmedialist?.paymentTerms" href="{{socialmedialist?.paymentTerms}}" class="nav-link">
+      <a *ngIf="businessUser?.website && socialmedialist?.paymentTerms" href="{{socialmedialist?.paymentTerms}}" class="nav-link">
         <i class="fas fa-credit-card"></i> Payment Terms
       </a>
     </li>
-    <hr *ngIf="businessUser.website && socialmedialist?.paymentTerms">
+    <hr *ngIf="businessUser?.website && socialmedialist?.paymentTerms">
     
     <li class="nav-item">
       <a routerLink="/manage-property" [state]="{ businessUser: businessUser }" class="nav-link">
@@ -68,8 +68,10 @@
     <hr>
 
     <li class="nav-item nav-link">
-        <i class="fas fa-home" (click)="gotopropertydetail()"></i> Dashboard
-    </li>
+      <a [routerLink]="PropertyUrl" class="nav-link">
+        <i class="fas fa-home"></i> Dashboard
+    </a>
+  </li>
     <hr>
 
   </ul>

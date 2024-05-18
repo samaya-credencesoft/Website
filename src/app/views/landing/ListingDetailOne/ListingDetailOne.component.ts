@@ -607,6 +607,9 @@ export class ListingDetailOneComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private viewportScroller: ViewportScroller
   ) {
+    let currenturl = window.location.href
+    this.token.savePropertyUrl(currenturl);
+    console.log (currenturl)
     this.serviceDto = new PropertyServiceDTO();
     this.businessServiceDto = new BusinessServiceDtoList();
     this.businessService = new BusinessServiceDtoList();
