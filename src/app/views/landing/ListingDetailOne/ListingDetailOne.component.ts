@@ -79,7 +79,7 @@ export class ListingDetailOneComponent implements OnInit {
   website: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
-   
+
   }
   // isPopupVisible = true; // Initially show the popup
 
@@ -682,9 +682,15 @@ export class ListingDetailOneComponent implements OnInit {
         this.mileSecondToNGBDate(this.booking.toDate).month,
         this.mileSecondToNGBDate(this.booking.toDate).day
       );
-      this.adults = this.booking.noOfPersons;
+      if (this.booking.noOfPersons === null || this.booking.noOfPersons === undefined) {
+        this.adults = 1
+      }else{
+        this.adults = this.booking.noOfPersons;
+      }
+
       this.children = this.booking.noOfChildren;
       this.rooms = this.booking.noOfRooms;
+
       this.taxPercentage = this.booking.taxPercentage;
     } else {
       this.fromDate = this.calendar.getToday();
@@ -2549,7 +2555,7 @@ this.isHeaderVisible = true;
             this.availableRooms !== undefined
           ) {
             this.availableRooms.forEach((room) => {
-              
+
               room?.roomFacilities?.forEach((element) => {
                 if (element.name == 'Bar') {
                   this.bar = element;
@@ -2590,13 +2596,13 @@ this.isHeaderVisible = true;
 
 
               event2?.roomRatePlans?.forEach((plan) => {
-               
+
                 plan.otaPlanList.forEach((otaPlan) => {
                   const otaName = otaPlan.otaName;
                   const price = otaPlan.price;
                   this.otaPlans.push({ otaName, price }); // Push otaPlan object into the array
                 });
-                
+
                 if (
                   plan?.code === 'GHC' &&
                   this.activeForGoogleHotelCenter === true
@@ -2608,7 +2614,7 @@ this.isHeaderVisible = true;
                   ) {
 
                     plan.otaPlanList.forEach((element) => {
-                     
+
                       if (element?.otaName === 'GHC') {
                         plan.amount = element?.price;
 
@@ -2752,7 +2758,7 @@ this.isHeaderVisible = true;
     throw new Error('Method not implemented.');
   }
 
-  
+
 
   allDtosNull(): boolean {
     return this.availableRooms?.every(

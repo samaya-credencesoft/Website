@@ -27,6 +27,7 @@ export class CheckoutComponent implements OnInit {
   bookingConfirmed: boolean;
   showAlert: boolean;
   alertType: string;
+  PropertyUrl: string;
   contentDialog: any;
   DiffDate;
   currency: string;
@@ -41,7 +42,7 @@ export class CheckoutComponent implements OnInit {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
     this.payment = new Payment();
-
+    this.PropertyUrl = this.token.getPropertyUrl();
     this.booking = this.token.getBookingData();
     this.businessUser = this.token.getPropertyData();
     this.payment = this.token.getPaymentData();

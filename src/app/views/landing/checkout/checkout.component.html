@@ -16,6 +16,9 @@
 
                 </div>
                 <h5  style="color: red;" *ngIf="this.payment.transactionAmount === 0">Oops!  Payment will not happen, because the transaction amount is very low. </h5>
+                <a href="{{PropertyUrl}}">
+                   <button class="btn btn-primary" type="button">Go Back</button>
+                   </a>
             </div>
         </div>
     </div>
