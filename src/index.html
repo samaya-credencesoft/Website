@@ -49,6 +49,7 @@
 <!-- Latest compiled and minified CSS -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-xz7q8q+8Hvq9b2jkn5XbZgjx7D7fghc27bEE8e3ijFqZm+2NcA7ri2y3MIJm5hT" crossorigin="anonymous"> -->
 
+
  <link rel="icon" type="image/x-icon" href="favicon.ico">
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700" rel="stylesheet">
@@ -103,10 +104,61 @@
    right: 32% !important;
  top: 87% !important;
 }
+df-messenger {
+      z-index: 999;
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      --df-messenger-font-color: #000; /* Change text color to black */
+      --df-messenger-font-family: Google Sans;
+      /* Change chat background to green */
+      --df-messenger-chat-background: #221950;
+      --df-messenger-chat-background-image: url('assets/images/chatbot.png');
+      --df-messenger-message-user-background: #d3e3fd;
+      --df-messenger-message-bot-background: #fff;
+      /* Set custom background image */
+
+
+      /* Adjust background size and other properties as needed */
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 50px; /* Adjust the width of the widget as needed */
+      height: 50px; /* Adjust the height of the widget as needed */
+    }
+    .df-messenger .df-messenger-user-message,
+    .df-messenger .df-messenger-bot-message {
+      color: #000;
+    }
+
+
+/* message-list-wrapper{
+  background-image: url('./assets/images/chatbot.png') no-repeat center center fixed;
+} */
+
+/* .df-messenger-wrapper {
+  background: url('assets/images/chatbot.png') no-repeat center center fixed;
+  background-size: cover;
+} */
+
+
+
+
 
 </style>
 <body>
+
+  <df-messenger
+  location="asia-south1"
+  project-id="impactful-name-306810"
+  agent-id="e2f46998-246d-4046-aee3-65c992b363ea"
+  language-code="en"
+  max-query-length="-1">
+  <df-messenger-chat-bubble chat-title=""></df-messenger-chat-bubble>
+  </df-messenger>
+
   <app-root></app-root>
+
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4VZ4HG"
    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>
