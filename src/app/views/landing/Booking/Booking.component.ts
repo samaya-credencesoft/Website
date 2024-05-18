@@ -60,6 +60,7 @@ declare var window: any;
   providers: [DatePipe],
 })
 export class BookingComponent implements OnInit {
+  PropertyUrl: string;
   currency: string;
   message: MessageDto;
   enquiryForm: EnquiryDto;
@@ -190,6 +191,7 @@ export class BookingComponent implements OnInit {
     private http: HttpClient,
     private hotelBookingService: HotelBookingService
   ) {
+    
     this.message = new MessageDto();
     this.myDate = new Date();
     this.parametertype = new Para();
@@ -294,6 +296,9 @@ export class BookingComponent implements OnInit {
     if (this.booking.mobile === undefined) {
       this.booking.mobile = "";
     }
+
+    this.PropertyUrl = this.token.getPropertyUrl();
+    console.log("property url:" + this.PropertyUrl)
   }
 
   ngOnInit() {
@@ -1757,10 +1762,11 @@ export class BookingComponent implements OnInit {
     this.locationBack.back();
   }
 
-  Home() {
-    this.router.navigate(['/']);
-    this.token.clearHotelBooking();
-  }
+  // Home() {
+  //   this.router.navigate(['/']);
+  //   this.token.clearHotelBooking();
+  // }
+
 
   paymentIntent(payment: Payment) {
     this.paymentLoader = true;
