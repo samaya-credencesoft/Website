@@ -74,6 +74,7 @@ export class NotificationHandlingComponent {
   nodatafound: boolean = false;
   cancelBookingId: any;
   cancelId: any;
+  bookingdata: any;
 
 constructor(private token: TokenStorage,
   private route: ActivatedRoute,
@@ -93,7 +94,7 @@ constructor(private token: TokenStorage,
 }
 ngonInit(){
 
-  
+
 this.tab3();
 
 }
@@ -128,6 +129,9 @@ search() {
 
 resetBookings() {
   this.bookings = null;
+  this.bookingdata = null;
+  console.log('Searching for Bookings:' + this.bookings);
+
 if (this.bookings?.length === 0 || this.bookings === null ) {
   console.log(`Searching for Bookings: ${this.bookings}`);
     this.nodatafound = false;
@@ -266,41 +270,41 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     try {
       const data = await this.listing.findPropertiesBybookingId(this.bookingId).toPromise();
 
-      this.bookings = data.body;
+      this.bookingdata = data.body;
 
-      if (this.bookings !== null && this.bookings !== undefined && this.bookings.length !== 0) {
+      if (this.bookingdata !== null && this.bookingdata !== undefined && this.bookingdata.length !== 0) {
         this.verificationSuccess2 = true;
 
 
-          this.fromdate =  this.bookings.fromDate;
+          this.fromdate =  this.bookingdata.fromDate;
           const date = new Date(this.fromdate);
           const day = date.getDate();
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
           console.log(formattedDate);
-          this.bookings.fromDate = formattedDate;
+          this.bookingdata.fromDate = formattedDate;
 
-          if ( this.bookings.toDate !== null &&  this.bookings.toDate !== undefined) {
-            this.Todate =  this.bookings.toDate;
+          if ( this.bookingdata.toDate !== null &&  this.bookingdata.toDate !== undefined) {
+            this.Todate =  this.bookingdata.toDate;
             const date1 = new Date(this.Todate);
             const day1 = date1.getDate();
             const month1 = date1.toLocaleString('default', { month: 'long' });
             const year1 = date1.getFullYear();
             const formattedDate1 = `${day1} ${month1} ${year1}`;
-            this.bookings.toDate = formattedDate1;
+            this.bookingdata.toDate = formattedDate1;
           }
 
       }
 
-      if (this.bookings === null || this.bookings.bookingStatus === 'ENQUIRY') {
+      if (this.bookingdata === null || this.bookingdata.bookingStatus === 'ENQUIRY') {
         this.nodatafound = true;
       } else {
         this.nodatafound = false;
         // Handle the case when bookings are found
       }
 
-      console.log("Bookings: " + JSON.stringify(this.bookings));
+      console.log("Bookings: " + JSON.stringify(this.bookingdata));
     } catch (error) {
       // Handle errors here
       console.error(error);
@@ -330,7 +334,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         this.cancelId = ele;
         console.log('cancel is',this.cancelId);
       })
-  
+
 
       if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
         this.verificationSuccess = true;
