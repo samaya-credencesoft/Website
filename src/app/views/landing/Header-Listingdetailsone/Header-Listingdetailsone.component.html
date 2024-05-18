@@ -12,6 +12,7 @@
   <ul class="nav-menu" style="margin-top: -17px;">
 
     <li class="nav-item">
+      <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="logo">
       <a  href="{{PropertyUrl}}" class="nav-link">
         <i class="fas fa-home"></i> Dashboard
     </a>
@@ -19,7 +20,6 @@
     <hr>
     
     <li class="nav-item">
-      <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="logo">
       <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
         <i class="fas fa-home"></i> Home
       </a>
