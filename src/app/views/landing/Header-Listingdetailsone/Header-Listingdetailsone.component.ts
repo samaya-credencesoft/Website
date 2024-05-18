@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { TokenStorage } from 'src/token.storage';
+import { BusinessUser } from 'src/app/model/user';
 
 @Component({
   selector: 'app-Header-Listingdetailsone',
@@ -9,17 +11,18 @@ import { Location } from '@angular/common';
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
   showListItems: boolean = false; // For your existing toggle functionality
-  isdone : boolean = false; 
+  isdone : boolean = false;
   @Input()
   businessUser:any;
   socialmedialist:any;
   showListingDetails: boolean = false;
   website: string;
   logoUrl: string;
-  
-  
-  
+
+
+
   propertyname: string;
+  propertydetails:BusinessUser;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
@@ -33,12 +36,12 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     console.log('new link is',this.website);
     console.log('new link is hello world',this.socialmedialist);
     console.log('new link is',this.propertyname);
-    
-   
+
+
   }
   toggleListItems() {
     this.showListItems = !this.showListItems;
-  
+
 
   }
 
@@ -52,13 +55,17 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   constructor(private router: Router,
     private location: Location,
-  ) { }
+    private token:TokenStorage,
+  ) {
+    // this.propertydetails = this.token.getProperty();
+    // console.log("propertydata="+ JSON.stringify(this.propertydetails))
+   }
 
   ngOnInit() {
     this.website = this.businessUser.website;
     console.log('new link is',this.website);
   }
   navigate(){
-   
+
   }
 }

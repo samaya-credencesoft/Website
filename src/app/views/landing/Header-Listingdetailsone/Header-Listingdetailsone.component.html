@@ -66,16 +66,22 @@
       </a>
     </li>
     <hr>
+
+    <li class="nav-item nav-link">
+        <i class="fas fa-home" (click)="gotopropertydetail()"></i> Dashboard
+    </li>
+    <hr>
+
   </ul>
 </div>
 
 <!-- Top Navbar -->
 <nav class="navbar navbar-dark top-navbar">
   <div class="container-div">
-    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="margin-left: 15px; margin-right: 10px;">
       <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
     </button>
-    <span class="title-nav">{{ businessUser?.name }}</span>
+    <span class="title-nav" style="padding-bottom: 1px;">{{ businessUser?.name }}</span>
     <!-- <button class="back-button" (click)="goBack()">
       <i class="fas fa-arrow-left"></i>
     </button> -->
