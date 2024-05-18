@@ -313,7 +313,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
 
 
   shouldShowCancelButton(item: any): boolean {
-    const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID'];
+    const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID', 'NO_SHOW'];
     return !invalidStatuses.includes(item.bookingStatus);
   }
 
