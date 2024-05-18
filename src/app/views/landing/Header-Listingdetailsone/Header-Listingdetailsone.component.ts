@@ -23,6 +23,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   propertyname: string;
   propertydetails:BusinessUser;
+  PropertyUrl: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
@@ -47,7 +48,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   // gotopropertydetail() {
   //   let PropertyUrl = this.token.getPropertyUrl();
   //   console.log(PropertyUrl);
-  
+
   //   if (PropertyUrl.startsWith('http://') || PropertyUrl.startsWith('https://')) {
   //     console.error("Property URL should be a relative path, not a full URL");
   //   } else {
@@ -69,7 +70,8 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   ) {
     // this.propertydetails = this.token.getProperty();
     // console.log("propertydata="+ JSON.stringify(this.propertydetails))
-    let PropertyUrl = this.token.getPropertyUrl();
+    this.PropertyUrl = this.token.getPropertyUrl();
+    console.log("property url:" + this.PropertyUrl)
    }
 
   ngOnInit() {

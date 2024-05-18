@@ -7,8 +7,8 @@
       <img src="/assets/images/x-mark.png" alt="Close">
     </button>
   </div>
- 
-  
+
+
   <ul class="nav-menu" style="margin-top: -17px;">
     <li class="nav-item">
       <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="logo">
@@ -17,49 +17,49 @@
       </a>
     </li>
     <hr *ngIf="businessUser?.website">
-    
+
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.aboutUs" href="{{socialmedialist?.aboutUs}}" class="nav-link">
         <i class="fas fa-info-circle"></i> About Us
       </a>
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.aboutUs">
-    
+
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.termsAndConditions" href="{{socialmedialist?.termsAndConditions}}" class="nav-link">
         <i class="fas fa-file-contract"></i> Terms & Conditions
       </a>
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.termsAndConditions">
-    
+
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.privacyPolicy" href="{{socialmedialist?.privacyPolicy}}" class="nav-link">
         <i class="fas fa-user-secret"></i> Privacy Policy
       </a>
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.privacyPolicy">
-    
+
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.paymentTerms" href="{{socialmedialist?.paymentTerms}}" class="nav-link">
         <i class="fas fa-credit-card"></i> Payment Terms
       </a>
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.paymentTerms">
-    
+
     <li class="nav-item">
       <a routerLink="/manage-property" [state]="{ businessUser: businessUser }" class="nav-link">
         <i class="fas fa-cogs"></i> Manage Property
       </a>
     </li>
     <hr>
-    
+
     <li class="nav-item">
       <a routerLink="/history" class="nav-link">
         <i class="fas fa-history"></i> Manage Bookings
       </a>
     </li>
     <hr>
-    
+
     <li class="nav-item">
       <a routerLink="/manage-enquiry" class="nav-link">
         <i class="fas fa-envelope"></i> Manage Enquiry
@@ -67,8 +67,8 @@
     </li>
     <hr>
 
-    <li class="nav-item nav-link">
-      <a [routerLink]="PropertyUrl" class="nav-link">
+    <li class="nav-item">
+      <a  href="{{PropertyUrl}}" class="nav-link">
         <i class="fas fa-home"></i> Dashboard
     </a>
   </li>
