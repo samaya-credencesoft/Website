@@ -112,12 +112,23 @@ df-messenger {
       --df-messenger-font-color: #000; /* Change text color to black */
       --df-messenger-font-family: Google Sans;
       /* Change chat background to green */
-      --df-messenger-chat-background: #221950;
-      --df-messenger-chat-background-image: url('assets/images/chatbot.png');
-      --df-messenger-message-user-background: #d3e3fd;
-      --df-messenger-message-bot-background: #fff;
-      /* Set custom background image */
+      --df-messenger-chat-background: #fff;
+      --df-messenger-titlebar-background:#F69A36;
 
+      /* --df-messenger-chat-background-image: url('assets/images/chatbot.png'); */
+      /* --df-messenger-chat-background: url('assets/images/chatbot.png') no-repeat center center fixed; */
+      --df-messenger-chat-background:  url('assets/images/chatbot.png')no-repeat; /* Adjust width and height as needed */
+      --df-messenger-message-user-font-color:#fff;
+      --df-messenger-message-user-background: #F69A36;
+      --df-messenger-send-icon-color:#221950;
+      --df-messenger-message-bot-background: #221950;
+      --df-messenger-message-bot-font-color:hsla(31, 91%, 82%, 0.982);
+      --df-messenger-chat-scroll-button-font-color:#fff;
+      --df-messenger-chat-scroll-button-background:#221950;
+      --df-messenger-chat-bubble-background:#F69A36;
+      /* Set custom background image */
+--df-messenger-chips-background:#221950;
+--df-messenger-chips-font-color:#fff;
 
       /* Adjust background size and other properties as needed */
       background-size: contain;
@@ -125,11 +136,24 @@ df-messenger {
       width: 50px; /* Adjust the width of the widget as needed */
       height: 50px; /* Adjust the height of the widget as needed */
     }
+    .chip{
+      background-color: #000;
+    }
+    .df-chat-message-list .df-chat-message-payload a {
+    background-color: #000;
+}
+    .message.user-message{
+      color: #fff;
+    }
     .df-messenger .df-messenger-user-message,
     .df-messenger .df-messenger-bot-message {
-      color: #000;
+      color: #fff;
     }
+    #message-list{
+      background-image: url('./assets/images/chatbot.png') no-repeat center center fixed;
+      --df-messenger-chat-background-image: url('assets/images/chatbot.png');
 
+    }
 
 /* message-list-wrapper{
   background-image: url('./assets/images/chatbot.png') no-repeat center center fixed;
@@ -147,13 +171,8 @@ df-messenger {
 </style>
 <body>
 
-  <df-messenger
-  location="asia-south1"
-  project-id="impactful-name-306810"
-  agent-id="e2f46998-246d-4046-aee3-65c992b363ea"
-  language-code="en"
-  max-query-length="-1">
-  <df-messenger-chat-bubble chat-title=""></df-messenger-chat-bubble>
+  <df-messenger  location="asia-south1" project-id="impactful-name-306810" agent-id="e2f46998-246d-4046-aee3-65c992b363ea" language-code="en" max-query-length="-1" >
+    <df-messenger-chat-bubble chat-title=""></df-messenger-chat-bubble>
   </df-messenger>
 
   <app-root></app-root>
