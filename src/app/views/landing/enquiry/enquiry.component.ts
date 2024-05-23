@@ -194,6 +194,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
       })
@@ -583,6 +584,7 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
 
       for (const element of this.bookings) {
         this.createdDate = element.createdDate;
