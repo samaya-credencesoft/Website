@@ -217,8 +217,6 @@
             </div>
           </div>
 
-
-
           <div class="container">
             <div id="verificationSuccessText" *ngIf="verificationSuccessenquiry">
               <div class="row">
@@ -527,6 +525,14 @@
           </div>
 
         </ng-container>
+        <!-- <div>
+          <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+          <span>{{ currentPage }} / {{ totalPages }}</span>
+          <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+        </div> -->
+
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="pageNumber">
+        </ngb-pagination>
       </div>
 
     </div>

@@ -17,11 +17,17 @@ import { Payment } from 'src/app/model/payment';
 import { environment } from 'src/environments/environment';
 import { BusinessUser } from 'src/app/model/user';
 import { BusinessService } from 'src/services/business.service';
+
+export interface PaginationInterface {
+  serial: number;
+  value: number;
+} 
 @Component({
   selector: 'app-enquiry',
   templateUrl: './enquiry.component.html',
   styleUrls: ['./enquiry.component.scss']
 })
+
 export class EnquiryComponent implements OnInit {
 
   verifyOption = "sms";
@@ -85,6 +91,15 @@ export class EnquiryComponent implements OnInit {
   pathString: any;
   enquiryId: number;
   bookingEnquiry: any;
+  currentPage = 0;
+  pageSize = 10;
+  totalPages: number;
+  paginatedBookings: any[] = [];
+  page: number;
+  pageNumber: number;
+  noOfPage: number;
+  noOfPageList: PaginationInterface[];
+  serialNo: number;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -103,6 +118,9 @@ constructor(private token: TokenStorage,
     }
 }
 ngOnInit(){
+  this.serialNo = 0;
+  this.pageNumber = 0;
+  this.pageSize = 10;
   this.tab3();
 
   }
@@ -194,6 +212,10 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      this.pageNumber = this.bookings.length;
+      this.totalPages = this.pageNumber / this.pageSize;
+      console.log('page is',this.pageNumber);
+      console.log('total page is',this.totalPages);
       this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
@@ -223,6 +245,8 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     }
   }
 
+
+  
   async getbookingsbybookingIdenquiry() {
     this.bookingEnquiry = null;
 
@@ -429,10 +453,6 @@ console.log("business email"+ this.businessUserEmail)
   }
 
 
-
-
-
-
   async getbookingsbybookingId() {
 
     try {
@@ -584,6 +604,8 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
+      this.pageNumber = this.bookings.length;
+      this.totalPages = this.pageNumber / this.pageSize;
       this.bookings.reverse();
 
       for (const element of this.bookings) {
