@@ -95,6 +95,18 @@ export class EnquiryComponent implements OnInit {
   roomRatePlanName: any;
   externalSite: any;
   
+  currentPage = 1;
+  pageSize = 6;
+  // totalPages: number;
+  paginatedBookings: any[] = [];
+  page: number;
+  pageNumber: number;
+  noOfPage: number;
+  // noOfPageList: PaginationInterface[];
+  serialNo: number;
+  paginatedData: any[] = [];
+  totalPagess: number;
+  id: number;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -153,6 +165,7 @@ ngOnInit(){
   }
   
 
+
 searchenquiry() {
   if (this.selectedOptionenquiry === 'email') {
 
@@ -171,10 +184,10 @@ searchenquiry() {
   })
 }
 
-cancelBooking(enquiryId:number){
+enquiryStatusVoid(enquiryId:number){
 
 
-  this.cancelService.cancel(enquiryId).subscribe(res =>{
+  this.cancelService.enquiryStatusVoid(enquiryId).subscribe(res =>{
       console.log('cancel is',res)
   })
 }
@@ -195,6 +208,7 @@ search() {
 
 resetBookings() {
   this.bookings = null;
+  this.paginatedData = null;
   this.bookingEnquiry = null;
 if (this.bookings?.length === 0 || this.bookings === null ) {
   console.log(`Searching for Bookings: ${this.bookings}`);
@@ -252,15 +266,21 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
-      console.log ("gfhjk",this.bookings )
+      console.log ("my data is",this.bookings )
       this.bookings.forEach(ele=>{
         this.roomType = ele.roomType;
         this.roomRatePlanName = ele.roomRatePlanName;
         this.externalSite = ele.externalSite;
-        console.log('roomtype is',this.roomType);
+        this.enquiryId = ele.enquiryId;
+        console.log('enquiryId is',this.enquiryId);
         console.log('externalSite is',this.externalSite);
       })
 
+      this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
+      this.totalPagess = this.bookings.length;
+      console.log('page is',this.pageNumber);
+      console.log('total page is',this.totalPagess);
+      this.updatePaginatedData();
       this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
@@ -290,53 +310,72 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     }
   }
 
+  updatePaginatedData(){
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    console.log('starting index',startIndex)
+    console.log('endIndex index',endIndex)
+    this.paginatedData = this.bookings.slice(startIndex, endIndex);
+    console.log('total Data is',this.paginatedData);
+  }
+
+  changePage(page: number) {
+    if (page > 0 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.updatePaginatedData();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.totalPagess / this.pageSize);
+  }
+
+  
   async getbookingsbybookingIdenquiry() {
     this.bookingEnquiry = null;
 
     try {
-      const data = await this.listing.findPropertiesBybookingIdLms
-      (Number(this.bookingId)).toPromise();
-
+      const data = await this.listing.findPropertiesBybookingIdLms(Number(this.bookingId)).toPromise();
       this.bookingEnquiry = data.body;
-      console.log('dataaaaaa is',this.bookingEnquiry);
+      console.log('dataaaaaa is', this.bookingEnquiry);
 
       if (this.bookingEnquiry !== null && this.bookingEnquiry !== undefined && this.bookingEnquiry.length !== 0) {
-        this.verificationenquirySuccess2= true;
+        this.verificationenquirySuccess2 = true;
 
-        console.log('my booking data is',JSON.stringify(this.bookingEnquiry));
+        console.log('my booking data is', JSON.stringify(this.bookingEnquiry));
 
+        this.createdDate = this.bookingEnquiry.createdDate;
+        const date = new Date(this.createdDate);
+        const day = date.getDate();
+        const month = date.toLocaleString('default', { month: 'long' });
+        const year = date.getFullYear();
+        const formattedDate = `${day} ${month} ${year}`;
+        console.log(formattedDate);
+        this.bookingEnquiry.createdDate = formattedDate;
 
-          this.createdDate =  this.bookingEnquiry.createdDate;
-          const date = new Date(this.createdDate);
-          const day = date.getDate();
-          const month = date.toLocaleString('default', { month: 'long' });
-          const year = date.getFullYear();
-          const formattedDate = `${day} ${month} ${year}`;
-          console.log(formattedDate);
-          this.bookingEnquiry.createdDate = formattedDate;
+        if (this.bookingEnquiry.toDate !== null && this.bookingEnquiry.toDate !== undefined) {
+          this.Todate = this.bookingEnquiry.toDate;
+          const date1 = new Date(this.Todate);
+          const day1 = date1.getDate();
+          const month1 = date1.toLocaleString('default', { month: 'long' });
+          const year1 = date1.getFullYear();
+          const formattedDate1 = `${day1} ${month1} ${year1}`;
+          this.bookingEnquiry.toDate = formattedDate1;
+        }
 
-          if ( this.bookingEnquiry.toDate !== null &&  this.bookingEnquiry.toDate !== undefined) {
-            this.Todate =  this.bookingEnquiry.toDate;
-            const date1 = new Date(this.Todate);
-            const day1 = date1.getDate();
-            const month1 = date1.toLocaleString('default', { month: 'long' });
-            const year1 = date1.getFullYear();
-            const formattedDate1 = `${day1} ${month1} ${year1}`;
-            this.bookingEnquiry.toDate = formattedDate1;
-          }
-
-      }
-
-      if (this.bookingEnquiry === null || this.bookingEnquiry.status != "ENQUIRY") {
         this.nodatafound = true;
       } else {
         this.nodatafound = false;
       }
 
+      if (this.bookingEnquiry === null || this.bookingEnquiry.status !== "ENQUIRY") {
+        this.nodatafound = false;
+      } else {
+        this.nodatafound = true;
+      }
 
-      console.log("Bookings: " + JSON.stringify('hello my data is',this.bookingEnquiry));
+      console.log("Bookings: " + JSON.stringify('hello my data is', this.bookingEnquiry));
     } catch (error) {
-      // Handle errors here
       console.error(error);
       this.nodatafound = true;
     }
@@ -652,7 +691,11 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
-      console.log("emaildetails",data.body );
+      this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
+      this.totalPagess = this.bookings.length;
+      console.log('pageNumber is',this.pageNumber);
+      console.log('total page is',this.totalPagess);
+      this.updatePaginatedData();
       this.bookings.reverse();
 
       for (const element of this.bookings) {

@@ -64,70 +64,14 @@
 
             </div>
 
-            <!-- <div class="radiosection">
-              <div class="row justify-content-center">
-
-                <div class="col-12" style="text-align: center;">
-                  <strong class="gridradio-a">Search by:</strong> <br>
-                </div>
-
-                <div class="gridradio">
-                  <input type="radio" id="emailRadio" name="contactType" [(ngModel)]="selectedOption" value="email">
-                  <label class="radio-container" for="emailRadio">Email</label>
-                </div>
-
-                <div class="gridradio">
-                  <input type="radio" id="mobileRadio" name="contactType" [(ngModel)]="selectedOption" value="mobile">
-                  <label class="radio-container" for="mobileRadio">Mobile</label>
-                </div>
-
-                <div class="gridradio">
-                  <input type="radio" id="bookingIdRadio" name="contactType" [(ngModel)]="selectedOption"
-                    value="bookingId">
-                  <label class="radio-container" for="bookingIdRadio">Booking ID</label>
-                </div>
-
-
-              </div>
-            </div> -->
+           
 
             <div class="row">
               <div class="col-lg-12">
                 <div class="form-group mb-4">
-                  <!-- <input type="text" [(ngModel)]="phoneNumber" (ng2TelOutput)="getNumber($event)"
-                    (input)="validatePhoneNumber()" id="phoneInput"
-                    style="border-radius: 30px; border: 0.5px solid #271a55; margin-top: -80px; background: #FFF;"
-                    class="form-control" placeholder="Search your booking by phone number" required /> -->
-
-
-
-
-
-
-                  <!-- <span class="sorting-arrow" *ngIf="buttonremove">
-                    <button id="sendOTPButton" class="btn btn-primary" [disabled]="!isPhoneNumberValid"
-                    (click)="checkCustomer()"
-                      style="border-radius: 30px;
-                      border: 1px solid #D5E8B8;
-                      background: #271a55; color: #FFF;font-weight: 700; padding: 5px;padding-left: 13px; padding-right: 13px;">
-                      Send OTP
-                    </button>
-                  </span> -->
+             
                 </div>
-                <!-- <div id="otpInput" *ngIf="showOTPInput">
-                  <input style="border-radius: 30px; border: 0.5px solid #271a55;  background: #FFF;" type="text"
-                    id="otpCode" class="form-control" [(ngModel)]="verificationCode"  placeholder="Enter your OTP" />
-                  <span class="sorting-arrow2">
-                    <button id="verifyOTPButton" class="btn btn-primary"
-                    *ngIf="!isVerified"
-                    (click)="validateOTPNumber();varificationSend()"
-                      style="border-radius: 30px;
-                      border: 1px solid #D5E8B8;
-                      background: #271a55; color: #FFF;font-weight: 700; padding: 5px;padding-left: 20px; padding-right: 20px;">
-                      Verify
-                    </button>
-                  </span>
-                </div> -->
+             
               </div>
             </div>
 
@@ -231,7 +175,7 @@
                 </div>
               </div>
               <div class="row" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
-                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of bookings">
+                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of paginatedData">
 
                   <div style="border-radius: 30px 30px 30px 0px;
                   border: 0.5px solid #fff;
@@ -640,7 +584,7 @@
                 </div>
               </div>
               <div class="row" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
-                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of bookings">
+                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of paginatedData">
 
                   <div style="border-radius: 30px 30px 30px 0px;
                     border: 0.5px solid #fff;
@@ -799,6 +743,11 @@
           </div>
 
         </ng-container>
+        <div *ngIf="paginatedData?.length > 0" class="allignment">
+          <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+          <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+          <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>
+        </div>
       </div>
 
     </div>

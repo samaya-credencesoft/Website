@@ -385,8 +385,12 @@
 
 
 
-
-
+          <a [href]="getWhatsappShareUrl()" class="float" target="_blank" *ngIf="isHeaderVisible === false">
+            <i class="fa fa-whatsapp my-float"></i>
+            </a>
+            <a href="tel:+918328818871" class="float-two" target="_blank" *ngIf="isHeaderVisible === false">
+              <i class="fa fa-phone my-float-one"></i>
+              </a>
 
 
 
@@ -1529,7 +1533,7 @@
                       selectedRoomAvailableNumber =
                         room.noOfRooms;
                       checkAvailabilityStatus = true;
-                      checkingAvailability1(); bookRoomNow();  document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
+                      checkingAvailability1(); bookRoomNow();  document.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });
                     " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                   BOOK NOW</button>
                               </div>
@@ -2312,7 +2316,7 @@
             <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
               <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
                   ">
-                <span id="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
+                <span class="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
                   Booking Summary</span>
                 <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
                   <div class="col-md-6" *ngIf="showDiv===true">
@@ -2598,7 +2602,7 @@
             <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
               <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
                   ">
-                <span id="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
+                <span class="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
                   Booking Summary</span>
                 <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
                   <div class="col-md-6" *ngIf="showDiv===true">

@@ -126,6 +126,16 @@ export class HotelBookingService {
       { observe: 'response' }
     );
   }
+
+  findBooking(booking: Booking) {
+    this.setApi();
+    return this.http.post<Booking[]>(
+      this.API_URL + '/api/website/findBookings',
+      booking,
+      { observe: 'response' }
+    );
+  }
+
   checkAvailability(booking: any) {
     return this.http.post<any>(
       this.API_URL + '/api/thm/checkAvailability',

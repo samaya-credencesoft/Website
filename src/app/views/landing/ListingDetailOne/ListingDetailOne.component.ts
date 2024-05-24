@@ -2145,6 +2145,13 @@ this.isHeaderVisible = true;
     this.changeDetectorRefs.detectChanges();
     this.checkingAvailability1();
   }
+
+
+  const  = document.getElementsByClassName("booking-summary")[0];
+if (bookingSummaryElement) {
+  bookingSummaryElement.scrollIntoView();
+}
+
   getWhatsappShareUrl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = "919082741973";
