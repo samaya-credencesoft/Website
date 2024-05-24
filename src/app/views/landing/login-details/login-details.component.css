@@ -11,7 +11,14 @@ table {
   th {
     background-color: #ddd;
   }
+  .search-alignment{
+  margin-top: -14px;
+    margin-left: -20px;
+  }
   
+  .search-button-data{
+    margin-left:-10px;
+  }
 
   nav > .nav.nav-tabs{
 
