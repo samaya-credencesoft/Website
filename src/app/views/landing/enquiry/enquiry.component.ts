@@ -106,6 +106,7 @@ export class EnquiryComponent implements OnInit {
   serialNo: number;
   paginatedData: any[] = [];
   totalPagess: number;
+  id: number;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -183,10 +184,10 @@ searchenquiry() {
   })
 }
 
-cancelBooking(enquiryId:number){
+enquiryStatusVoid(enquiryId:number){
 
 
-  this.cancelService.cancel(enquiryId).subscribe(res =>{
+  this.cancelService.enquiryStatusVoid(enquiryId).subscribe(res =>{
       console.log('cancel is',res)
   })
 }
@@ -265,12 +266,13 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
-      console.log ("gfhjk",this.bookings )
+      console.log ("my data is",this.bookings )
       this.bookings.forEach(ele=>{
         this.roomType = ele.roomType;
         this.roomRatePlanName = ele.roomRatePlanName;
         this.externalSite = ele.externalSite;
-        console.log('roomtype is',this.roomType);
+        this.enquiryId = ele.enquiryId;
+        console.log('enquiryId is',this.enquiryId);
         console.log('externalSite is',this.externalSite);
       })
 

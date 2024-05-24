@@ -14,7 +14,6 @@ import { CancelService } from '../cancel.service';
 import { Cancel } from '../cancel';
 import { ListingService } from 'src/services/listing.service';
 
-
 @Component({
   selector: 'app-login-details',
   templateUrl: './login-details.component.html',

@@ -279,6 +279,10 @@
                              </div>
                             </div>
 
+                            <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                              <button class="btn btn-danger" (click)="enquiryStatusVoid(booking?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</button>
+                            </div>
+
                           </div>
 
 
@@ -369,6 +373,10 @@
                       Pay Now
 
                            </div>
+                          </div>
+
+                          <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                            <button class="btn btn-danger" (click)="enquiryStatusVoid(booking?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</button>
                           </div>
 
                         </div>
@@ -462,6 +470,10 @@
                            </div>
                           </div>
 
+                          <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                            <button class="btn btn-danger" (click)="enquiryStatusVoid(booking?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</button>
+                          </div>
+
                         </div>
 
                     </div>
@@ -499,7 +511,7 @@
         </ng-container>
         <div *ngIf="paginatedData?.length > 0" class="allignment">
           <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-          <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+          <span>{{ currentPage }} of {{ totalPages() }}</span>
           <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>
         </div>
       </div>
