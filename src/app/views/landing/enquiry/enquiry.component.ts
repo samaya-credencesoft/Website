@@ -691,7 +691,7 @@ console.log("business email"+ this.businessUserEmail)
       this.bookings = data.body;
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
-      console.log('page is',this.pageNumber);
+      console.log('pageNumber is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
       this.bookings.reverse();

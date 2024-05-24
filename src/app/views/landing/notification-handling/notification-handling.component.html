@@ -231,7 +231,7 @@
                 </div>
               </div>
               <div class="row" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
-                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of bookings">
+                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of paginatedData">
 
                   <div style="border-radius: 30px 30px 30px 0px;
                   border: 0.5px solid #fff;
@@ -640,7 +640,7 @@
                 </div>
               </div>
               <div class="row" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
-                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of bookings">
+                <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of paginatedData">
 
                   <div style="border-radius: 30px 30px 30px 0px;
                     border: 0.5px solid #fff;
@@ -799,6 +799,11 @@
           </div>
 
         </ng-container>
+        <div *ngIf="paginatedData?.length > 0" class="allignment">
+          <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+          <span>Page {{ currentPage }} of {{ totalPages() }}</span>
+          <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>
+        </div>
       </div>
 
     </div>
