@@ -96,7 +96,7 @@ export class EnquiryComponent implements OnInit {
   externalSite: any;
   
   currentPage = 1;
-  pageSize = 10;
+  pageSize = 6;
   // totalPages: number;
   paginatedBookings: any[] = [];
   page: number;
@@ -691,9 +691,11 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
-      console.log("emaildetails",data.body );
-      this.pageNumber = this.bookings.length;
-      this.totalPagess = this.pageNumber / this.pageSize;
+      this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
+      this.totalPagess = this.bookings.length;
+      console.log('page is',this.pageNumber);
+      console.log('total page is',this.totalPagess);
+      this.updatePaginatedData();
       this.bookings.reverse();
 
       for (const element of this.bookings) {
