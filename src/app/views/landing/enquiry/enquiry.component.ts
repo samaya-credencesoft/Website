@@ -294,49 +294,47 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     this.bookingEnquiry = null;
 
     try {
-      const data = await this.listing.findPropertiesBybookingIdLms
-      (Number(this.bookingId)).toPromise();
-
+      const data = await this.listing.findPropertiesBybookingIdLms(Number(this.bookingId)).toPromise();
       this.bookingEnquiry = data.body;
-      console.log('dataaaaaa is',this.bookingEnquiry);
+      console.log('dataaaaaa is', this.bookingEnquiry);
 
       if (this.bookingEnquiry !== null && this.bookingEnquiry !== undefined && this.bookingEnquiry.length !== 0) {
-        this.verificationenquirySuccess2= true;
+        this.verificationenquirySuccess2 = true;
 
-        console.log('my booking data is',JSON.stringify(this.bookingEnquiry));
+        console.log('my booking data is', JSON.stringify(this.bookingEnquiry));
 
+        this.createdDate = this.bookingEnquiry.createdDate;
+        const date = new Date(this.createdDate);
+        const day = date.getDate();
+        const month = date.toLocaleString('default', { month: 'long' });
+        const year = date.getFullYear();
+        const formattedDate = `${day} ${month} ${year}`;
+        console.log(formattedDate);
+        this.bookingEnquiry.createdDate = formattedDate;
 
-          this.createdDate =  this.bookingEnquiry.createdDate;
-          const date = new Date(this.createdDate);
-          const day = date.getDate();
-          const month = date.toLocaleString('default', { month: 'long' });
-          const year = date.getFullYear();
-          const formattedDate = `${day} ${month} ${year}`;
-          console.log(formattedDate);
-          this.bookingEnquiry.createdDate = formattedDate;
+        if (this.bookingEnquiry.toDate !== null && this.bookingEnquiry.toDate !== undefined) {
+          this.Todate = this.bookingEnquiry.toDate;
+          const date1 = new Date(this.Todate);
+          const day1 = date1.getDate();
+          const month1 = date1.toLocaleString('default', { month: 'long' });
+          const year1 = date1.getFullYear();
+          const formattedDate1 = `${day1} ${month1} ${year1}`;
+          this.bookingEnquiry.toDate = formattedDate1;
+        }
 
-          if ( this.bookingEnquiry.toDate !== null &&  this.bookingEnquiry.toDate !== undefined) {
-            this.Todate =  this.bookingEnquiry.toDate;
-            const date1 = new Date(this.Todate);
-            const day1 = date1.getDate();
-            const month1 = date1.toLocaleString('default', { month: 'long' });
-            const year1 = date1.getFullYear();
-            const formattedDate1 = `${day1} ${month1} ${year1}`;
-            this.bookingEnquiry.toDate = formattedDate1;
-          }
-
-      }
-
-      if (this.bookingEnquiry === null || this.bookingEnquiry.status != "ENQUIRY") {
         this.nodatafound = true;
       } else {
         this.nodatafound = false;
       }
 
+      if (this.bookingEnquiry === null || this.bookingEnquiry.status !== "ENQUIRY") {
+        this.nodatafound = false;
+      } else {
+        this.nodatafound = true;
+      }
 
-      console.log("Bookings: " + JSON.stringify('hello my data is',this.bookingEnquiry));
+      console.log("Bookings: " + JSON.stringify('hello my data is', this.bookingEnquiry));
     } catch (error) {
-      // Handle errors here
       console.error(error);
       this.nodatafound = true;
     }
