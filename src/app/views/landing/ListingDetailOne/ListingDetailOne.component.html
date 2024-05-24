@@ -109,7 +109,7 @@
                         <label for="room" class="label_heading1" style="margin-bottom:0px!important;color: black;">Rooms & Guests</label>
                         <div class="col-12 bg-white" style="border: none;padding: 6px;border-radius: 0.25rem;box-shadow: none;">
                           <label class="text-default "
-                            style="font-size: 15px; margin: 0; padding: 0;color: lightgray !important; ">
+                            style="font-size: 15px; margin: 0; padding: 0;color: #141319 !important; ">
                             <span class="guests_count">
                               <span data-adults-count="">{{ adults }} adults</span>
                               <span data-visible="accommodation">
@@ -275,7 +275,7 @@
                         style="padding-bottom:9px;padding-top: 0px!important; margin-top: -4px; background-color: #d9d9d9;">
                         <label for="" style="margin-bottom:0px!important">Rooms & Guests</label> <br>
                         <label class="text-default "
-                          style="font-size: 14px; margin: 0; padding: 0;color: #808080 !important; ">
+                          style="font-size: 14px; margin: 0; padding: 0;color:#141319 !important; ">
                           <span class="guests_count">
                             <span data-adults-count="" class="text-nowrap">{{ adults }} adults</span>
                             <span data-visible="accommodation">
@@ -1445,7 +1445,7 @@
                               <div style="text-align: center;">
                                 <button class="btn text-white"
                                   style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
-                                  (click)="open(content, room, room.name)">See
+                                  (click)="open(content, room, room.name); document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                   More Details</button>
                               </div>
                             </div>
@@ -1513,26 +1513,26 @@
                                 100 | number: "1.2-2"
                                 }}% Discount)
                               </div>
-                                  <div>
-                                    <button class="btn text-white" (click)="
-                                onPlanSelected(plan, room);
-                                booking.roomName = rates.roomName;
-                                selectedRoomName = rates.roomName;
-                                booking.roomType = rates.roomName;
-                                maxSelectRoom = rates.noOfAvailable;
-                                maxOccupancy =
-                                  room.maximumOccupancy;
-                                onRoomBook(room.id, i);
-                                booking.roomId = room.id;
-                                selectedRoomMaximumOccupancy =
-                                  room.maximumOccupancy;
-                                selectedRoomAvailableNumber =
-                                  room.noOfRooms;
-                                checkAvailabilityStatus = true;
-                                bookRoomNow(); checkingAvailability1();
-                              " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
-                                      BOOK NOW</button>
-                                  </div>
+                              <div>
+                                <button class="btn text-white" (click)="
+                      onPlanSelected(plan, room);
+                      booking.roomName = rates.roomName;
+                      selectedRoomName = rates.roomName;
+                      booking.roomType = rates.roomName;
+                      maxSelectRoom = rates.noOfAvailable;
+                      maxOccupancy =
+                        room.maximumOccupancy;
+                      onRoomBook(room.id, i);
+                      booking.roomId = room.id;
+                      selectedRoomMaximumOccupancy =
+                        room.maximumOccupancy;
+                      selectedRoomAvailableNumber =
+                        room.noOfRooms;
+                      checkAvailabilityStatus = true;
+                      checkingAvailability1(); bookRoomNow();  document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
+                    " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                                  BOOK NOW</button>
+                              </div>
 
                                 </div>
                               </div>
@@ -1612,7 +1612,8 @@
                           selectedRoomAvailableNumber =
                             room.noOfRooms;
                           checkAvailabilityStatus = true;
-                          checkingAvailability1(); bookRoomNow();
+                          checkingAvailability1(); bookRoomNow(); 
+                          document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
                         " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                       BOOK NOW</button>
                                   </div>
@@ -1782,7 +1783,7 @@
                             <div style="text-align: center;">
                               <button class="btn text-white"
                                 style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
-                                (click)="open(content, room, room.name)">See
+                                (click)="open(content, room, room.name); document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 More Details</button>
                             </div>
                           </div>
@@ -1873,7 +1874,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow(); checkingAvailability1();
+                              bookRoomNow(); checkingAvailability1();  document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
                             " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
@@ -2098,7 +2099,7 @@
                             <div style="text-align: center;">
                               <button class="btn text-white"
                                 style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
-                                (click)="open(content, room, room.name)">See
+                                (click)="open(content, room, room.name); document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 More Detail</button>
                             </div>
                           </div>
@@ -2182,7 +2183,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow()
+                              bookRoomNow();  document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
                             " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
@@ -2311,7 +2312,7 @@
             <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
               <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
                   ">
-                <span style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
+                <span id="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
                   Booking Summary</span>
                 <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
                   <div class="col-md-6" *ngIf="showDiv===true">
@@ -2597,7 +2598,7 @@
             <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
               <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
                   ">
-                <span style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
+                <span id="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
                   Booking Summary</span>
                 <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
                   <div class="col-md-6" *ngIf="showDiv===true">

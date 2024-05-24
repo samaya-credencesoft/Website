@@ -271,8 +271,20 @@
                           {{item.roomName}}<br>
                           <b style="color: #000;
                           font-weight: 700;">Email:</b> <br>
-                          {{item.email}}<br>
-                        </p>
+                          {{item.email}}<br></p>
+
+                          <div class="col-md-6">
+                            <div  *ngIf="(item?.externalSite === 'The Hotel Mate' || item?.externalSite === 'Easemytrip' || item?.externalSite === 'GOBIBO,MMT' || item?.externalSite === 'Agoda' || item?.externalSite === 'Yatra' || item?.externalSite === 'Booking.com' || item?.externalSite === 'Expedia' || item?.externalSite === 'SiteMinder' || item?.externalSite === 'BookOne Connect' || item?.externalSite === 'Google Hotel Ads' || item?.externalSite === 'Airbnb' || item?.externalSite === 'Trivago' || item?.externalSite === 'Clear trip' || item?.externalSite === 'OYO'  || item?.externalSite === 'Via.com' || item?.externalSite === 'Travel Guru' || item?.externalSite === 'IRCTC' || item?.externalSite === 'Hotels.com' || item?.externalSite === 'BookingJini' || item?.externalSite === 'Fab'  || item?.externalSite === 'Treebo' || item?.externalSite === 'Go Room Go' || item?.externalSite === 'Pie Rooms')" >
+                              <div *ngFor="let externalsite of externalSites">      
+                                <span *ngIf="item?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
+                           </div>
+                                        </div>
+                            <div *ngIf="!item?.externalSite">
+                              <p><strong>External Site:</strong> {{ item?.externalSite }}</p>
+                            </div>
+                          </div>
+              
+                       
                       </div>
                       <div class="col-6">
                         <p style="font-size: 13px;
@@ -284,9 +296,12 @@
                         font-weight: 700;">Payable Amount:</b> <br>
                           ₹{{item.totalAmount}}<br>
                           <b style="color: #000;
+                          font-weight: 700;">Room Plan:</b> <br>
+                            {{item.roomRatePlanName}}<br>
+                          <b style="color: #000;
                         font-weight: 700;">Phone Number:</b> <br>
                           {{item.mobile}}<br>
-
+                          
                         </p>
 
 

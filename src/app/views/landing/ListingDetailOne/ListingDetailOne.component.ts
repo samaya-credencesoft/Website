@@ -1181,6 +1181,8 @@ export class ListingDetailOneComponent implements OnInit {
     this.router.navigate(['privacy']);
   }
   submitForm(form: NgForm) {
+    // debugger;
+    console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
     const TO_EMAIL = "samaya.muduli@credencesoft.co.nz";
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
@@ -1189,7 +1191,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.email.toEmail = TO_EMAIL;
     this.name = this.name;
     this.email.subject = this.subject;
-    this.propertyname = this.businessUser.seoFriendlyName;
+    this.propertyname = this.businessUser?.seoFriendlyName;
     // tslint:disable-next-line: max-line-length
     this.email.message =
       '\nPropertyName: ' +
@@ -1207,7 +1209,7 @@ export class ListingDetailOneComponent implements OnInit {
     Logger.log('form data ' + JSON.stringify(this.email));
     //  this.success = true;
     this.http
-      .post<Email>(API_URL_NZ + '/api/website/sendEmailFromWebSite', this.email)
+      .post<Email>(API_URL_NZ + '/api/thm/sendEmailFromWebSite', this.email)
       .subscribe((response) => {
         this.success = response;
         Logger.log(response);
@@ -1215,7 +1217,7 @@ export class ListingDetailOneComponent implements OnInit {
         this.fromEmail = '';
         this.phone = '';
         this.subject = '';
-        this.propertyname = '';
+        this.propertyname = this.businessUser.seoFriendlyName;
         this.message = '';
         this.successMessage = true;
       });

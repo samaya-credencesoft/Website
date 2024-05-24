@@ -1,13 +1,14 @@
-<app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
+<app-Header-Listingdetailsone [businessUser]="businessUser"> </app-Header-Listingdetailsone>
 
 <div class="main-wrapper">
 
-  <div >
+  <div>
     <div class="container-fluid mb-3 pt-5">
-      <h2 class="enquiryh2" style="text-align: center; font-weight: 600 !important;color: #000000; ">Enquiry History</h2>
+      <h2 class="enquiryh2" style="text-align: center; font-weight: 600 !important;color: #000000; ">Enquiry History
+      </h2>
       <br>
     </div>
-<!--
+    <!--
     <div class="row justify-content-center" style="margin-bottom: 20px;">
       <div class="tabs">
         <div col="6">
@@ -79,18 +80,20 @@
                   </div>
 
                   <div class="gridradio">
-                    <input type="radio" id="emailRadio1" name="contactType" [(ngModel)]="selectedOptionenquiry" (click)="resetBookings()" value="emailRadio1">
+                    <input type="radio" id="emailRadio1" name="contactType" [(ngModel)]="selectedOptionenquiry"
+                      (click)="resetBookings()" value="emailRadio1">
                     <label class="radio-container" for="emailRadio1">Email</label>
                   </div>
 
                   <div class="gridradio">
-                    <input type="radio" id="mobileRadio1" name="contactType" [(ngModel)]="selectedOptionenquiry" (click)="resetBookings()" value="mobileRadio1">
+                    <input type="radio" id="mobileRadio1" name="contactType" [(ngModel)]="selectedOptionenquiry"
+                      (click)="resetBookings()" value="mobileRadio1">
                     <label class="radio-container" for="mobileRadio1">Mobile</label>
                   </div>
 
                   <div class="gridradio">
-                    <input type="radio" id="bookingIdRadio1" name="contactType" [(ngModel)]="selectedOptionenquiry" (click)="resetBookings()"
-                      value="bookingIdRadio1">
+                    <input type="radio" id="bookingIdRadio1" name="contactType" [(ngModel)]="selectedOptionenquiry"
+                      (click)="resetBookings()" value="bookingIdRadio1">
                     <label class="radio-container" for="bookingIdRadio1">Enquiry ID</label>
                   </div>
 
@@ -137,17 +140,17 @@
 
           <div>
 
-            <div class="container" *ngIf="selectedOptionenquiry === 'emailRadio1' || selectedOptionenquiry === 'emailRadio2'">
+            <div class="container"
+              *ngIf="selectedOptionenquiry === 'emailRadio1' || selectedOptionenquiry === 'emailRadio2'">
               <div class="row justify-content-center">
                 <div class="col-md-12">
                   <div class="form-group mb-4">
-                    <input type="text"
-
-                    [(ngModel)]="email"
+                    <input type="text" [(ngModel)]="email"
                       style="border-radius: 30px; border: 0.5px solid #271a55; margin-top: -20px; background: #FFF;"
                       class="form-control" placeholder="Search your booking by Email" required />
                     <span class="sorting-arrow">
-                      <img src="assets/images/Searchnotification.png" (click)="getbookingsbyenquiryemail()" style="width: 23px; height: 23px;" alt="" />
+                      <img src="assets/images/Searchnotification.png" (click)="getbookingsbyenquiryemail()"
+                        style="width: 23px; height: 23px;" alt="" />
                     </span>
                   </div>
 
@@ -162,21 +165,18 @@
               </div>
             </div>
 
-            <div class="container" *ngIf="selectedOptionenquiry === 'mobileRadio1' || selectedOptionenquiry === 'mobileRadio2'">
+            <div class="container"
+              *ngIf="selectedOptionenquiry === 'mobileRadio1' || selectedOptionenquiry === 'mobileRadio2'">
               <div class="row justify-content-center">
                 <div class="col-md-12">
                   <div class="form-group mb-4">
-                    <input type="text"
-                    (ng2TelOutput)="getNumber($event)"
-                    (input)="validatePhoneNumber()"
-                    [(ngModel)]="phoneNumber"
+                    <input type="text" (ng2TelOutput)="getNumber($event)" (input)="validatePhoneNumber()"
+                      [(ngModel)]="phoneNumber"
                       style="border-radius: 30px; border: 0.5px solid #271a55; margin-top: -20px; background: #FFF;"
                       class="form-control" placeholder="Search your booking by Mobile number" required />
                     <span class="sorting-arrow">
-                      <img src="assets/images/Searchnotification.png"
-                      style="width: 23px; height: 23px;"
-                      (click)="getbookingsbymobileNumber2()"
-                      alt="" />
+                      <img src="assets/images/Searchnotification.png" style="width: 23px; height: 23px;"
+                        (click)="getbookingsbymobileNumber2()" alt="" />
                     </span>
                   </div>
 
@@ -191,17 +191,17 @@
               </div>
             </div>
 
-            <div class="container" *ngIf="selectedOptionenquiry === 'bookingIdRadio3' || selectedOptionenquiry === 'bookingIdRadio1'">
-              <div class="row justify-content-center" >
+            <div class="container"
+              *ngIf="selectedOptionenquiry === 'bookingIdRadio3' || selectedOptionenquiry === 'bookingIdRadio1'">
+              <div class="row justify-content-center">
                 <div class="col-md-12">
                   <div class="form-group mb-4">
                     <input type="text" [(ngModel)]="bookingId"
                       style="border-radius: 30px; border: 0.5px solid #271a55; margin-top: -20px; background: #FFF;"
                       class="form-control" placeholder="Search your booking by Enquiry Id" required />
                     <span class="sorting-arrow">
-                      <img src="assets/images/Searchnotification.png"
-                      style="width: 23px; height: 23px;"
-                      (click)="getbookingsbybookingIdenquiry()"  alt="" />
+                      <img src="assets/images/Searchnotification.png" style="width: 23px; height: 23px;"
+                        (click)="getbookingsbybookingIdenquiry()" alt="" />
                     </span>
                   </div>
 
@@ -248,7 +248,8 @@
                     <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
                       <div style="color: #fff;
                         font-weight: 700; "> {{item?.firstName}}{{item?.lastName}} </div>
-                     <div style="color: #FFF;"> {{item.propertyName}} </div>
+                      <div style="color: #FFF;"> {{item.propertyName}} </div>
+                      <div style="color: #FFF;"> Enquiry ID: {{item.enquiryId}} </div>
 
                     </div>
 
@@ -275,43 +276,58 @@
                           <b style="
                             font-weight: 700;color: #000;">Phone Number:</b> <br>
                           {{item.mobile}}<br>
+                          <b style="
+                          font-weight: 700;color:#000">Room Type:</b> <br>
+                          {{item.roomType}}<br>
+                          <b style="
+                          font-weight: 700;color:#000">Room Plan:</b> <br>
+                          {{item.roomRatePlanName}}<br>
                         </p>
-                      </div>
-                      <div class="col-7">
-                        <p style="font-size: 13px;
-                        margin-bottom: 24px;margin-left: -17px;">
-                          <b style="
-                          font-weight: 700;color: #000;">Checkout Date:</b> <br>
-                          {{item.checkOutDate}}<br>
-                          <b style="
-                          font-weight: 700;color: #000;">Status:</b> <br>
-                          {{item?.status}} <br>
-                          <b style="
-                          font-weight: 700;color: #000;">Email:</b> <br>
-                          {{item?.email}}<br>
-                          <div  *ngIf="item.propertyName !=  null && item.propertyName !=  undefined " style="border-radius: 30px 0px 30px 30px;
-                          border: -10.5px solid #fff;
-                          background: #271a55;
-                          display: inline-flex;
-                          flex-direction: column;
-                          justify-content: center;
-                          align-items: flex-start;
-                          padding: 10px 85px 11px 38px;
-                          margin-top: -17px; float: right;
-                          margin-bottom: -6px;
-                      ">
-
-                            <div style="text-align: center; font-size: 13px; margin-bottom: 4px;" >
-                              <div style="color: #fff;
-                              font-weight: 700; " (click)="PayViaUpi(item)">
-                        Pay Now
-
-                             </div>
-                            </div>
-
+                        <div class="col-md-6">
+                          <div  *ngIf="(item?.externalSite === 'The Hotel Mate' || item?.externalSite === 'Easemytrip' || item?.externalSite === 'GOBIBO,MMT' || item?.externalSite === 'Agoda' || item?.externalSite === 'Yatra' || item?.externalSite === 'Booking.com' || item?.externalSite === 'Expedia' || item?.externalSite === 'SiteMinder' || item?.externalSite === 'BookOne Connect' || item?.externalSite === 'Google Hotel Ads' || item?.externalSite === 'Airbnb' || item?.externalSite === 'Trivago' || item?.externalSite === 'Clear trip' || item?.externalSite === 'OYO'  || item?.externalSite === 'Via.com' || item?.externalSite === 'Travel Guru' || item?.externalSite === 'IRCTC' || item?.externalSite === 'Hotels.com' || item?.externalSite === 'BookingJini' || item?.externalSite === 'Fab'  || item?.externalSite === 'Treebo' || item?.externalSite === 'Go Room Go' || item?.externalSite === 'Pie Rooms')" >
+                            <div *ngFor="let externalsite of externalSites">      
+                              <span *ngIf="item?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
+                         </div>
+                                      </div>
+                          <div *ngIf="!item?.externalSite">
+                            <p><strong>External Site:</strong> {{ item?.externalSite }}</p>
                           </div>
+                        </div>
 
+                      </div>
+                      <div class="col-md-7 col-sm-12">
+                        <p style="font-size: 13px; margin-bottom: 24px;">
+                          <b style="font-weight: 700; color: #000;">Checkout Date:</b><br>
+                          {{ item.checkOutDate }}<br>
+                          <b style="font-weight: 700; color: #000;">Status:</b><br>
+                          {{ item?.status }}<br>
+                          <b style="font-weight: 700; color: #000;">Email:</b><br>
+                          {{ item?.email }}<br>
+                        </p>
 
+                        <div *ngIf="item.propertyName != null && item.propertyName != undefined" style="border-radius: 30px 0px 30px 30px;
+                                    border: -10.5px solid #fff;
+                                    background: #271a55;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: flex-start;
+                                    padding: 10px 85px 11px 38px;
+                                    margin-top: 75px;">
+
+                          <div style="text-align: center; font-size: 13px; margin-bottom: 4px; display: flex;">
+                            <button style="background-color: #fff; color: #000; font-weight: 700;width: 100px;
+                            border-radius: 10px;"
+                              (click)="PayViaUpi(item)">
+                              Pay Now
+                            </button>
+                          </div>
+                          <div style="text-align: center; font-size: 13px; margin-bottom: 4px; display: flex;">
+                            <!-- <button style="background-color: #fff; color: #000; font-weight: 700;" (click)="cancelBooking(item.enquiryId)">
+                              Void
+                            </button> -->
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -325,7 +341,9 @@
               </div>
             </div>
 
-            <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookings != null && bookings.status ==='ENQUIRY'" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
+            <div class="row justify-content-center"
+              *ngIf="verificationenquirySuccess2 && bookings != null && bookings.status ==='ENQUIRY'"
+              style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
                 <div style="border-radius: 30px 30px 30px 0px;
@@ -340,7 +358,9 @@
                     <div style="color: #fff;
                     font-weight: 700; "> {{bookings?.firstName }} {{bookings?.lastName}} </div>
                     <div style="color: #FFF;">
-                    {{bookings?.propertyName}} </div>
+                      {{bookings?.propertyName}} </div>
+                    <div style="color: #FFF;">
+                      Enquiry ID: {{bookings?.enquiryId}} </div>
 
                   </div>
 
@@ -367,7 +387,24 @@
                         <b style="
                           font-weight: 700;color:#000">Phone Number:</b> <br>
                         {{bookings?.mobile}}<br>
+                        <b style="
+                          font-weight: 700;color:#000">Room Type:</b> <br>
+                        {{bookings.roomType}}<br>
+                        <b style="
+                          font-weight: 700;color:#000">Room Plan:</b> <br>
+                        {{bookings.roomRatePlanName}}<br>
                       </p>
+                      <div class="col-md-6">
+                        <div  *ngIf="(item?.externalSite === 'The Hotel Mate' || item?.externalSite === 'Easemytrip' || item?.externalSite === 'GOBIBO,MMT' || item?.externalSite === 'Agoda' || item?.externalSite === 'Yatra' || item?.externalSite === 'Booking.com' || item?.externalSite === 'Expedia' || item?.externalSite === 'SiteMinder' || item?.externalSite === 'BookOne Connect' || item?.externalSite === 'Google Hotel Ads' || item?.externalSite === 'Airbnb' || item?.externalSite === 'Trivago' || item?.externalSite === 'Clear trip' || item?.externalSite === 'OYO'  || item?.externalSite === 'Via.com' || item?.externalSite === 'Travel Guru' || item?.externalSite === 'IRCTC' || item?.externalSite === 'Hotels.com' || item?.externalSite === 'BookingJini' || item?.externalSite === 'Fab'  || item?.externalSite === 'Treebo' || item?.externalSite === 'Go Room Go' || item?.externalSite === 'Pie Rooms')" >
+                          <div *ngFor="let externalsite of externalSites">      
+                            <span *ngIf="item?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
+                       </div>
+                                    </div>
+                        <div *ngIf="!item?.externalSite">
+                          <p><strong>External Site:</strong> {{ item?.externalSite }}</p>
+                        </div>
+                      </div>
+
                     </div>
                     <div class="col-7">
                       <p style="font-size: 13px;
@@ -381,7 +418,7 @@
                         <b style="
                         font-weight: 700;color:#000">Email:</b> <br>
                         {{bookings?.email}}<br>
-                        <div style="border-radius: 30px 0px 30px 30px;
+                      <div style="border-radius: 30px 0px 30px 30px;
                         border: -10.5px solid #fff;
                         background: #271a55;
                         display: inline-flex;
@@ -393,15 +430,16 @@
                         margin-bottom: -6px;
                     ">
 
-                          <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <div style="color: #fff;
-                            font-weight: 700; " (click)="PayViaUpi(item)">
-                      Pay Now
+                        <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                          <div style="color: #fff;
+                            font-weight: 700; width: 100px;
+    border-radius: 10px;" (click)="PayViaUpi(item)">
+                            Pay Now
 
-                           </div>
                           </div>
-
                         </div>
+
+                      </div>
 
 
                     </div>
@@ -416,7 +454,8 @@
 
             </div>
 
-            <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookingEnquiry != null" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
+            <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookingEnquiry != null"
+              style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
                 <div style="border-radius: 30px 30px 30px 0px;
@@ -431,7 +470,9 @@
                     <div style="color: #fff;
                     font-weight: 700; "> {{bookingEnquiry?.firstName }} {{bookingEnquiry?.lastName}} </div>
                     <div style="color: #FFF;">
-                    {{bookingEnquiry?.propertyName}} </div>
+                      {{bookingEnquiry?.propertyName}} </div>
+                    <div style="color: #FFF;">
+                      Enquiry ID: {{bookingEnquiry?.enquiryId}} </div>
 
                   </div>
 
@@ -458,7 +499,24 @@
                         <b style="
                           font-weight: 700;color:#000">Phone Number:</b> <br>
                         {{bookingEnquiry?.mobile}}<br>
+                        <b style="
+                          font-weight: 700;color:#000">Room Type:</b> <br>
+                        {{bookingEnquiry.roomType}}<br>
+                        <b style="
+                          font-weight: 700;color:#000">Room Plan:</b> <br>
+                        {{bookingEnquiry.roomRatePlanName}}<br>
                       </p>
+                      <div class="col-md-6">
+                        <div  *ngIf="(item?.externalSite === 'The Hotel Mate' || item?.externalSite === 'Easemytrip' || item?.externalSite === 'GOBIBO,MMT' || item?.externalSite === 'Agoda' || item?.externalSite === 'Yatra' || item?.externalSite === 'Booking.com' || item?.externalSite === 'Expedia' || item?.externalSite === 'SiteMinder' || item?.externalSite === 'BookOne Connect' || item?.externalSite === 'Google Hotel Ads' || item?.externalSite === 'Airbnb' || item?.externalSite === 'Trivago' || item?.externalSite === 'Clear trip' || item?.externalSite === 'OYO'  || item?.externalSite === 'Via.com' || item?.externalSite === 'Travel Guru' || item?.externalSite === 'IRCTC' || item?.externalSite === 'Hotels.com' || item?.externalSite === 'BookingJini' || item?.externalSite === 'Fab'  || item?.externalSite === 'Treebo' || item?.externalSite === 'Go Room Go' || item?.externalSite === 'Pie Rooms')" >
+                          <div *ngFor="let externalsite of externalSites">      
+                            <span *ngIf="item?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
+                       </div>
+                                    </div>
+                        <div *ngIf="!item?.externalSite">
+                          <p><strong>External Site:</strong> {{ item?.externalSite }}</p>
+                        </div>
+                      </div>
+
                     </div>
                     <div class="col-7">
                       <p style="font-size: 13px;
@@ -472,7 +530,7 @@
                         <b style="
                         font-weight: 700;color:#000">Email:</b> <br>
                         {{bookingEnquiry?.email}}<br>
-                        <div style="border-radius: 30px 0px 30px 30px;
+                      <div style="border-radius: 30px 0px 30px 30px;
                         border: -10.5px solid #fff;
                         background: #271a55;
                         display: inline-flex;
@@ -480,19 +538,20 @@
                         justify-content: center;
                         align-items: flex-start;
                         padding: 10px 85px 11px 38px;
-                        margin-top: -17px; float: right;
+                        margin-top: 75px; float: right;
                         margin-bottom: -6px;
                     ">
 
-                          <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <div style="color: #fff;
-                            font-weight: 700; " (click)="PayViaUpi(item)">
-                      Pay Now
+                        <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+                          <div style="color: #fff;
+                            font-weight: 700; width: 100px;
+    border-radius: 10px;" (click)="PayViaUpi(item)">
+                            Pay Now
 
-                           </div>
                           </div>
-
                         </div>
+
+                      </div>
 
                     </div>
 
@@ -517,10 +576,10 @@
                     OOOPS! <br>
                     There is no data found</h2>
                   <div class="row justify-content-center">
-                  <img src="assets/images/Saderror.png" alt="sad" class="image-custum" />
-                </div>
+                    <img src="assets/images/Saderror.png" alt="sad" class="image-custum" />
+                  </div>
                   <!-- <p>{{ card.description }}</p> -->
-              </div>
+                </div>
                 <!-- <p class="text-center"> There is no data found  </p> -->
               </div>
             </div>
