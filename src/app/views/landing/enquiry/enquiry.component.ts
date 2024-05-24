@@ -17,6 +17,9 @@ import { Payment } from 'src/app/model/payment';
 import { environment } from 'src/environments/environment';
 import { BusinessUser } from 'src/app/model/user';
 import { BusinessService } from 'src/services/business.service';
+import { CancelService } from '../cancel.service';
+import { Cancel } from '../cancel';
+
 @Component({
   selector: 'app-enquiry',
   templateUrl: './enquiry.component.html',
@@ -86,6 +89,13 @@ export class EnquiryComponent implements OnInit {
   enquiryId: number;
   bookingEnquiry: any;
 
+
+  cancelId: any;
+  roomType: any;
+  roomRatePlanName: any;
+  externalSite: any;
+  
+
 constructor(private token: TokenStorage,
   private listing:ListingService,
   private businessService: BusinessService,
@@ -94,18 +104,54 @@ constructor(private token: TokenStorage,
   private hotelBookingService: HotelBookingService,
   private datePipe: DatePipe,
   private router: Router,
+  private cancelService:CancelService,
   ){
     this.message = new MessageDto();
     this.payment = new Payment();
     this.businessUser = new BusinessUser();
+    this.cancelId = new Cancel();
     if(this.phoneNumber == undefined){
       this.phoneNumber = '';
     }
+   
+  
+  
 }
+
+  externalSites:any[] = [
+    { externalSiteName: "The Hotel Mate", logo: "https://bookonelocal.in/cdn/2023-12-12-111128535-The_Hotel_Mate_Logo (2).png" },
+    { externalSiteName: "Easemytrip", logo: "https://bookonelocal.in/cdn/2023-12-01-080647948-emt-logo.png" },
+    { externalSiteName: "GOBIBO,MMT", logo: "https://bookonelocal.in/cdn/2023-12-01-063051657-Makemytrip_logo (1).png" },
+    { externalSiteName: "Agoda", logo: "https://bookonelocal.in/cdn/2023-12-01-072538528-agoda_logo_new.png" },
+    { externalSiteName: "Yatra", logo: "https://bookonelocal.in/cdn/2023-12-01-075907997-yatra-removebg-preview.png" },
+    { externalSiteName: "Booking.com", logo: "https://bookonelocal.in/cdn/2023-12-01-081659323-booking.com_logo.png" },
+    { externalSiteName: "Expedia", logo: "https://bookonelocal.in/cdn/2023-12-12-104013814-expedia_logo_new (2).png" },
+    { externalSiteName: "SiteMinder", logo: "https://bookonelocal.in/cdn/2023-12-01-123046823-siteminder_logo.png" },
+    { externalSiteName: "BookOne Connect", logo: "https://bookonelocal.in/cdn/2023-12-12-110404816-Logo_Bookone_local.png" },
+    { externalSiteName: "Google Hotel Ads", logo: "https://bookonelocal.in/cdn/2023-12-12-111128535-The_Hotel_Mate_Logo (2).png" },
+    { externalSiteName: "Airbnb", logo: "https://bookonelocal.in/cdn/2023-12-13-082950342-Airbnb-logo.png" },
+    { externalSiteName: "Trivago", logo: "https://bookonelocal.in/cdn/2023-12-13-083356894-Trivago-logo.png" },
+    { externalSiteName: "Clear trip", logo: "https://bookonelocal.in/cdn/2023-12-13-084555101-cleartrip_logo.png" },
+    { externalSiteName: "OYO", logo: "https://bookonelocal.in/cdn/2024-01-04-081037581-oyo_logo.png" },
+    { externalSiteName: "Via.com", logo: "https://bookonelocal.in/cdn/2024-01-09-092714198-via.com_logo.png" },
+    { externalSiteName: "Travel Guru", logo: "https://bookonelocal.in/cdn/2024-01-09-101557113-travelguru_logo (2).png" },
+    { externalSiteName: "IRCTC", logo: "https://bookonelocal.in/cdn/2024-01-09-094852627-IRCTC-Symbol.png" },
+    { externalSiteName: "Hotels.com", logo: "https://bookonelocal.in/cdn/2024-01-09-095428572-Hotels.com_logo.png" },
+    { externalSiteName: "BookingJini", logo: "https://bookonelocal.in/cdn/2024-01-09-100813946-bookingjini_logo.png" },
+    { externalSiteName: "Fab", logo: "https://bookonelocal.in/cdn/2024-01-18-065632560-fab_hotels_logo (3).png" },
+    { externalSiteName: "Treebo", logo: "https://bookonelocal.in/cdn/2024-01-18-092540471-Treebo-Hotels-logo.png" },
+    { externalSiteName: "Go Room Go", logo: "https://bookonelocal.in/cdn/2024-01-27-131106600-goroomgo_logo.png" },
+    { externalSiteName: "Pie Rooms", logo: "https://bookonelocal.in/cdn/2024-04-26-064814509-pielogo.png" },
+
+
+  ]
+
+
 ngOnInit(){
-  this.tab3();
+  // this.tab3();
 
   }
+  
 
 searchenquiry() {
   if (this.selectedOptionenquiry === 'email') {
@@ -119,6 +165,18 @@ searchenquiry() {
 
     console.log(`Searching for Booking ID: ${this.bookingId}`);
   }
+  this.bookings.forEach(ele=>{
+    this.cancelId = ele;
+    console.log('cancel is',this.cancelId);
+  })
+}
+
+cancelBooking(enquiryId:number){
+
+
+  this.cancelService.cancel(enquiryId).subscribe(res =>{
+      console.log('cancel is',res)
+  })
 }
 search() {
   this.resetBookings();
@@ -194,6 +252,15 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      console.log ("gfhjk",this.bookings )
+      this.bookings.forEach(ele=>{
+        this.roomType = ele.roomType;
+        this.roomRatePlanName = ele.roomRatePlanName;
+        this.externalSite = ele.externalSite;
+        console.log('roomtype is',this.roomType);
+        console.log('externalSite is',this.externalSite);
+      })
+
       this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
@@ -486,6 +553,7 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemail(this.email).toPromise();
 
       this.bookings = data.body;
+     
 
       if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
         this.verificationSuccess = true;
@@ -584,6 +652,7 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
+      console.log("emaildetails",data.body );
       this.bookings.reverse();
 
       for (const element of this.bookings) {

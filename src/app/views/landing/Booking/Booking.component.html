@@ -57,7 +57,7 @@
             <h3 class="mb-2">Step 2: Personal Information</h3>
             <div class="row pr-md-2 p-0 m-0" style="justify-content: flex-start; ">
               <div class="col-sm-5 p-0 pr-sm-3" style="width: 80%;">
-                <h5 style="font-weight: 400 !important;">First Name</h5>
+                <h5 style="font-weight: 400 !important;">First Name*</h5>
                 <input type="text" class="form-control" placeholder="First Name" id="firstName" name="firstName" [(ngModel)]="booking.firstName"
                 #firstName="ngModel" name="firstName"required style="border-radius: 26px; height: 2.5rem; border: 1px solid rgb(133, 133, 133);">
                 <span class="text-danger" *ngIf="
@@ -68,7 +68,7 @@
                 </span>
               </div>
               <div class="col-sm-5 p-0 pr-sm-3" style="width: 80%;">
-                <h5 style="font-weight: 400 !important;">Last Name</h5>
+                <h5 style="font-weight: 400 !important;">Last Name*</h5>
                 <input type="text" class="form-control" placeholder="Last Name" id="lastName" name="lastName" [(ngModel)]="booking.lastName"
                 #lastName="ngModel" required style="border-radius: 26px; height: 2.5rem; border: 1px solid rgb(133, 133, 133);">
                 <span class="text-danger" *ngIf="
@@ -79,7 +79,7 @@
                 </span>
               </div>
             </div>
-            <h5 style="font-weight: 400 !important;">Email</h5>
+            <h5 style="font-weight: 400 !important;">Email*</h5>
             <input type="email" class="form-control" placeholder="eg: mrjames@xyz.com" style="width:80%; border-radius: 26px; height: 2.5rem; border: 1px solid rgb(133, 133, 133);"
             id="email" name="email" [(ngModel)]="booking.email" #email="ngModel" required email>
             <span class="text-danger" *ngIf="
@@ -94,7 +94,7 @@
                                         ">
               Enter a valid email
             </span>
-            <h5 style="font-weight: 400 !important;">Phone Number</h5>
+            <h5 style="font-weight: 400 !important;">Phone Number*</h5>
             <input type="tel" maxlength="10" class="form-control" placeholder="eg: 8912345678" [(ngModel)]="booking.mobile"  id="mobile" name="mobile" required style="width:80%; border-radius: 26px; height: 2.5rem; border: 1px solid rgb(133, 133, 133);">
             <span class="text-danger" *ngIf="!mobileHasError" >
               Invalid Phone number
