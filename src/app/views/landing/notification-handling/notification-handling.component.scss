@@ -90,7 +90,7 @@ label.radio-container::before {
 
 /* Style the radio button when selected */
 input[type="radio"]:checked + label.radio-container::before {
-  background-color: #271a55; /* Fill color when selected */
+  background-color: #271a55; 
 }
 
 /* Add space between div elements */
@@ -204,18 +204,15 @@ border: none;
     display: none;
   }
 
-  // .gridradio {
-
-  //   grid-gap: 1px;
-  // }
+  
 
 
 
 .gridradio {
-  /* Display radio buttons in one row in mobile view */
+ 
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
+
   align-items: center;
 }
 
@@ -240,7 +237,7 @@ border: none;
 }
 
 input[type="radio"] {
-  display: none; /* Hide the default radio button */
+  display: none; 
 }
 
 label.radio-container {
@@ -264,15 +261,6 @@ label.radio-container::before {
   border: 2px solid #271a55;
   border-radius: 50%;
 }
-// div {
-//   margin-bottom: 10px;
-// }
-}
-
-.allignment{
-  display:flex;
-  justify-content:center;
-  margin-top:20px;
 }
 
 
