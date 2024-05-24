@@ -204,7 +204,6 @@
 
                 </div>
               </div>
-              <div *ngIf="bookingEnquiry?.status !== 'void'">
               <div class="row" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
                 <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of paginatedData">
 
@@ -220,7 +219,7 @@
                       <div style="color: #fff;
                         font-weight: 700; "> {{item?.firstName}}{{item?.lastName}} </div>
                      <div style="color: #FFF;"> {{item.propertyName}} </div>
-
+                     <div style="color: #FFF;">Enquiry ID: {{item.enquiryId}} </div>
                     </div>
 
                   </div>
@@ -296,10 +295,8 @@
 
                 </div>
 
-</div>
               </div>
             </div>
-<div *ngIf="bookingEnquiry?.status !== 'void'">
             <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookings != null && bookings.status ==='ENQUIRY'" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
@@ -316,6 +313,7 @@
                     font-weight: 700; "> {{bookings?.firstName }} {{bookings?.lastName}} </div>
                     <div style="color: #FFF;">
                     {{bookings?.propertyName}} </div>
+                    <div style="color: #FFF;">Enquiry ID: {{item.enquiryId}} </div>
 
                   </div>
 
@@ -392,9 +390,7 @@
 
               </div>
 
-</div>
             </div>
-<div *ngIf="bookingEnquiry?.status !== 'void'">
             <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookingEnquiry != null" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
@@ -411,6 +407,7 @@
                     font-weight: 700; "> {{bookingEnquiry?.firstName }} {{bookingEnquiry?.lastName}} </div>
                     <div style="color: #FFF;">
                     {{bookingEnquiry?.propertyName}} </div>
+                    <div style="color: #FFF;">Enquiry ID: {{item.enquiryId}} </div>
 
                   </div>
 
@@ -488,7 +485,6 @@
 
 
             </div>
-</div>
 
           </div>
 

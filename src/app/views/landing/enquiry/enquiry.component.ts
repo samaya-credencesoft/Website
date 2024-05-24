@@ -316,7 +316,9 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     console.log('starting index',startIndex)
     console.log('endIndex index',endIndex)
     this.paginatedData = this.bookings.slice(startIndex, endIndex);
+    this.paginatedData = this.paginatedData.filter(ele => ele.status != 'Void')
     console.log('total Data is',this.paginatedData);
+
   }
 
   changePage(page: number) {
