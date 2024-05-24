@@ -95,6 +95,17 @@ export class EnquiryComponent implements OnInit {
   roomRatePlanName: any;
   externalSite: any;
   
+  currentPage = 1;
+  pageSize = 10;
+  // totalPages: number;
+  paginatedBookings: any[] = [];
+  page: number;
+  pageNumber: number;
+  noOfPage: number;
+  // noOfPageList: PaginationInterface[];
+  serialNo: number;
+  paginatedData: any[] = [];
+  totalPagess: number;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -153,6 +164,7 @@ ngOnInit(){
   }
   
 
+
 searchenquiry() {
   if (this.selectedOptionenquiry === 'email') {
 
@@ -195,6 +207,7 @@ search() {
 
 resetBookings() {
   this.bookings = null;
+  this.paginatedData = null;
   this.bookingEnquiry = null;
 if (this.bookings?.length === 0 || this.bookings === null ) {
   console.log(`Searching for Bookings: ${this.bookings}`);
@@ -261,6 +274,11 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         console.log('externalSite is',this.externalSite);
       })
 
+      this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
+      this.totalPagess = this.bookings.length;
+      console.log('page is',this.pageNumber);
+      console.log('total page is',this.totalPagess);
+      this.updatePaginatedData();
       this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
@@ -290,6 +308,27 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     }
   }
 
+  updatePaginatedData(){
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    console.log('starting index',startIndex)
+    console.log('endIndex index',endIndex)
+    this.paginatedData = this.bookings.slice(startIndex, endIndex);
+    console.log('total Data is',this.paginatedData);
+  }
+
+  changePage(page: number) {
+    if (page > 0 && page <= this.totalPages()) {
+      this.currentPage = page;
+      this.updatePaginatedData();
+    }
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.totalPagess / this.pageSize);
+  }
+
+  
   async getbookingsbybookingIdenquiry() {
     this.bookingEnquiry = null;
 
@@ -653,6 +692,8 @@ console.log("business email"+ this.businessUserEmail)
 
       this.bookings = data.body;
       console.log("emaildetails",data.body );
+      this.pageNumber = this.bookings.length;
+      this.totalPagess = this.pageNumber / this.pageSize;
       this.bookings.reverse();
 
       for (const element of this.bookings) {
