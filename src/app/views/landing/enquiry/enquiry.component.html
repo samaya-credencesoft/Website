@@ -204,6 +204,7 @@
 
                 </div>
               </div>
+              <div *ngIf="bookingEnquiry?.status !== 'void'">
               <div class="row" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
                 <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item of paginatedData">
 
@@ -295,10 +296,10 @@
 
                 </div>
 
-
+</div>
               </div>
             </div>
-
+<div *ngIf="bookingEnquiry?.status !== 'void'">
             <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookings != null && bookings.status ==='ENQUIRY'" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
@@ -391,9 +392,9 @@
 
               </div>
 
-
+</div>
             </div>
-
+<div *ngIf="bookingEnquiry?.status !== 'void'">
             <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookingEnquiry != null" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
@@ -471,7 +472,7 @@
                           </div>
 
                           <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</button>
+                            <div class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</div>
                           </div>
 
                         </div>
@@ -487,7 +488,7 @@
 
 
             </div>
-
+</div>
 
           </div>
 
