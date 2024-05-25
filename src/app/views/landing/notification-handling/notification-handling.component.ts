@@ -171,6 +171,7 @@ resetBookings() {
   this.bookings = null;
   this.paginatedData = null;
   this.bookingdata = null;
+  this.currentPage = 1;
   console.log('Searching for Bookings:' + this.bookings);
 
 if (this.bookings?.length === 0 || this.bookings === null ) {
