@@ -69,7 +69,7 @@ toDate: Date;
   id: any;
   
   isInvalidStatus(status: string): boolean {
-    const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID', 'NO_SHOW'];
+    const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID', 'NO_SHOW', 'CHECKEDIN'];
     return invalidStatuses.includes(status.toUpperCase()); // Ensure case-insensitive check
   }
 
