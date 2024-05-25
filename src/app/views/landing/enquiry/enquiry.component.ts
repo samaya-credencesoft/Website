@@ -189,13 +189,14 @@ enquiryStatusVoid(enquiryId:number){
 
   this.cancelService.enquiryStatusVoid(enquiryId).subscribe(res =>{
       console.log('cancel is',res);
-      if (this.email != null && this.email != undefined) {
-        this.getbookingsbyenquiryemail()
-      } else if (this.phoneNumber != null && this.email != undefined) {
-        this.getbookingsbymobileNumber2()
-      }else if (this.bookingId != null && this.bookingId != undefined) {
-        this.getbookingsbybookingIdenquiry()
-      }
+      // if (this.email != null && this.email != undefined) {
+      //   console.log("email is "+ this.email)
+      //   this.getbookingsbyenquiryemail()
+      // } else if (this.phoneNumber != null && this.phoneNumber != undefined) {
+      //   this.getbookingsbymobileNumber2()
+      // }else if (this.bookingId != null && this.bookingId != undefined) {
+      //   this.getbookingsbybookingIdenquiry()
+      // }
 
   })
 }
