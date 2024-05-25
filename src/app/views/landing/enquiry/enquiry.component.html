@@ -42,7 +42,7 @@
           <div class="container" *ngIf="selectedTabdefaultenquiry">
             <div class="row">
               <div class="col-lg-12">
-              
+
 
                 <div class="row justify-content-center" style="margin-bottom: 40px;">
 
@@ -462,14 +462,14 @@
 
                           <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
                             <div style="color: #fff;
-                            font-weight: 700; " (click)="PayViaUpi(item)">
+                            font-weight: 700; " (click)="PayViaUpi(bookingEnquiry)">
                       Pay Now
 
                            </div>
                           </div>
 
                           <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <div class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</div>
+                            <div class="btn btn-danger" (click)="enquiryStatusVoid(bookingEnquiry?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</div>
                           </div>
 
                         </div>
@@ -507,7 +507,7 @@
 
         </ng-container>
         <div *ngIf="paginatedData?.length > 0" class="allignment">
-          <span>Items per page:{{this.pageSize}}</span> 
+          <span>Items per page:{{this.pageSize}}</span>
           <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
           <span>Page {{ currentPage }} of {{ totalPages() }}</span>
           <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>

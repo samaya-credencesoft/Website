@@ -94,7 +94,7 @@ export class EnquiryComponent implements OnInit {
   roomType: any;
   roomRatePlanName: any;
   externalSite: any;
-  
+
   currentPage = 1;
   pageSize = 6;
   // totalPages: number;
@@ -125,9 +125,9 @@ constructor(private token: TokenStorage,
     if(this.phoneNumber == undefined){
       this.phoneNumber = '';
     }
-   
-  
-  
+
+
+
 }
 
   externalSites:any[] = [
@@ -163,7 +163,7 @@ ngOnInit(){
   // this.tab3();
 
   }
-  
+
 
 
 searchenquiry() {
@@ -188,7 +188,15 @@ enquiryStatusVoid(enquiryId:number){
 
 
   this.cancelService.enquiryStatusVoid(enquiryId).subscribe(res =>{
-      console.log('cancel is',res)
+      console.log('cancel is',res);
+      if (this.email != null && this.email != undefined) {
+        this.getbookingsbyenquiryemail()
+      } else if (this.phoneNumber != null && this.email != undefined) {
+        this.getbookingsbymobileNumber2()
+      }else if (this.bookingId != null && this.bookingId != undefined) {
+        this.getbookingsbybookingIdenquiry()
+      }
+
   })
 }
 search() {
@@ -332,7 +340,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     return Math.ceil(this.totalPagess / this.pageSize);
   }
 
-  
+
   async getbookingsbybookingIdenquiry() {
     this.bookingEnquiry = null;
 
@@ -594,7 +602,7 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemail(this.email).toPromise();
 
       this.bookings = data.body;
-     
+
 
       if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
         this.verificationSuccess = true;
