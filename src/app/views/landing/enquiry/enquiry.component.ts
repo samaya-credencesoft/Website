@@ -197,6 +197,14 @@ enquiryStatusVoid(enquiryId:number){
       // }else if (this.bookingId != null && this.bookingId != undefined) {
       //   this.getbookingsbybookingIdenquiry()
       // }
+      // console.log("jhgfg"+ this.selectedOptionenquiry)
+      if (this.selectedOptionenquiry === 'mobileRadio1') {
+        this.getbookingsbymobileNumber2();
+      }if(this.selectedOptionenquiry === 'bookingIdRadio1'){
+  this.getbookingsbybookingIdenquiry();
+      }if (this.selectedOptionenquiry === 'emailRadio1' ) {
+this.getbookingsbyenquiryemail();
+      }
 
   })
 }

@@ -7,7 +7,7 @@ import { Booking } from 'src/app/model/booking';
 import { Msg } from 'src/app/model/msg';
 import { SMS_NUMBER } from 'src/app/app.component';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe, formatDate, isPlatformBrowser } from '@angular/common';
 import { timestamp } from 'rxjs';
 import { TokenStorage } from 'src/token.storage';
 import { ListingService } from 'src/services/listing.service';
@@ -133,7 +133,7 @@ externalSites:any[] = [
 
 ngonInit(){
 
-  
+
 
 this.tab3();
 
@@ -362,6 +362,13 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   cancelBooking(id:number){
     this.cancelService.cancel(id).subscribe(res =>{
         console.log('cancel is',res)
+        if (this.selectedOption === 'MobileRadio') {
+          this.getbookingsbymobileNumber();
+        }if(this.selectedOption === 'BookingId'){
+    this.getbookingsbybookingId();
+        }if (this.selectedOption === 'EmailRadio' ) {
+this.getbookingsbyemail();
+        }
     })
   }
 

@@ -185,16 +185,14 @@ toDate: Date;
       console.log('page is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
         this.bookings.forEach(ele=>{
           this.cancelId = ele;
           console.log('cancel is',this.cancelId);
         })
-        this.dataSource = new MatTableDataSource(this.bookings);
-        this.bookings.reverse();
-        this.dataSource.paginator = this.bookPaginator;
-        this.dataSource.sort = this.sort;
-        this.changeDetectorRefs.detectChanges();
+        // this.dataSource = new MatTableDataSource(this.bookings);
+        // this.dataSource.paginator = this.bookPaginator;
+        // this.dataSource.sort = this.sort;
+        // this.changeDetectorRefs.detectChanges();
       });
     }
 
@@ -271,12 +269,12 @@ toDate: Date;
         const data = await this.listing.findPropertiesByemail(this.email).toPromise();
   
         this.bookings = data.body;
+        this.bookings.reverse();
         this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
         this.totalPagess = this.bookings.length;
         console.log('page is',this.pageNumber);
         console.log('total page is',this.totalPagess);
         this.updatePaginatedData();
-        this.bookings.reverse();
         this.bookings.forEach(ele=>{
           this.cancelId = ele;
           console.log('cancel is',this.cancelId);
