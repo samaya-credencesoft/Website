@@ -219,6 +219,7 @@ resetBookings() {
   this.bookings = null;
   this.paginatedData = null;
   this.bookingEnquiry = null;
+  this.currentPage = 1;
 if (this.bookings?.length === 0 || this.bookings === null ) {
   console.log(`Searching for Bookings: ${this.bookings}`);
     this.nodatafound = false;
@@ -276,6 +277,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
 
       this.bookings = data.body;
       this.bookings.reverse();
+      this.bookings = this.bookings.filter(ele => ele.status != 'Void')
       console.log ("my data is",this.bookings )
       this.bookings.forEach(ele=>{
         this.roomType = ele.roomType;
@@ -325,7 +327,6 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     console.log('starting index',startIndex)
     console.log('endIndex index',endIndex)
     this.paginatedData = this.bookings.slice(startIndex, endIndex);
-    this.paginatedData = this.paginatedData.filter(ele => ele.status != 'Void')
     console.log('total Data is',this.paginatedData);
 
   }
@@ -703,6 +704,7 @@ console.log("business email"+ this.businessUserEmail)
 
       this.bookings = data.body;
       this.bookings.reverse();
+      this.bookings = this.bookings.filter(ele => ele.status != 'Void')
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
       console.log('pageNumber is',this.pageNumber);

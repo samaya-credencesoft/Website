@@ -181,7 +181,7 @@
             <div class="col-md-6">
               <p><strong>Phone No.:</strong> {{ booking?.mobile}}</p>
               <p><strong>Email ID:</strong> {{ booking?.email}}</p>
-              <p><strong>Booking ID:</strong> {{ booking?.propertyReservationNumber }}</p>
+              <p><strong>Booking ID:</strong> {{ booking?.id}}</p>
             </div>
           </div>
           <div class="row">
@@ -203,6 +203,11 @@
             </div>
             <div>    
                 <span *ngIf="(booking?.externalSite != 'The Hotel Mate' && booking?.externalSite != 'Easemytrip' && booking?.externalSite != 'GOBIBO,MMT' && booking?.externalSite != 'Agoda' && booking?.externalSite != 'Yatra' && booking?.externalSite != 'Booking.com' && booking?.externalSite != 'Expedia' && booking?.externalSite != 'SiteMinder' && booking?.externalSite != 'BookOne Connect' && booking?.externalSite != 'Google Hotel Ads' && booking?.externalSite != 'Airbnb' && booking?.externalSite != 'Trivago' && booking?.externalSite != 'Clear trip' && booking?.externalSite != 'OYO' && booking?.externalSite != 'Via.com' && booking?.externalSite != 'Travel Guru' && booking?.externalSite != 'IRCTC' && booking?.externalSite != 'Hotels.com' && booking?.externalSite != 'BookingJini' && booking?.externalSite != 'Fab' && booking?.externalSite != 'Treebo' && booking?.externalSite != 'Go Room Go' && booking?.externalSite != 'Pie Rooms' )">{{booking?.externalSite}}</span>
+            </div>
+          </div>
+          <div class="row booking-actions" style="float: inline-end;">
+            <div class="col-md-6 text-right">
+              <button *ngIf="booking?.bookingStatus && !isInvalidStatus(booking.bookingStatus)" class="btn btn-danger cancel-booking-btn" (click)="cancelBooking(booking.id)" style="background-color: #221950;border-color: #221950;">Cancel</button>
             </div>
           </div>
         </div>
