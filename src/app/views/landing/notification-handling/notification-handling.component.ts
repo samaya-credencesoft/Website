@@ -371,12 +371,12 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByemail(this.email).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
       console.log('page is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.cancelId = ele;
         console.log('cancel is',this.cancelId);
@@ -429,12 +429,12 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumber( this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
       console.log('page is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
 
       if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
         this.verificationSuccess = true;

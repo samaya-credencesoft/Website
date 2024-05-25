@@ -375,7 +375,8 @@ toDate: Date;
     cancelBooking(id:number){
       this.cancelService.cancel(id).subscribe(res =>{
           console.log('cancel is',res)
-      })
+          this.bookingList();
+              })
     }
 
     

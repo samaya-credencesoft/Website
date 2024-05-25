@@ -176,9 +176,11 @@
             <div class="col-md-6">
               <p><strong>Check-In:</strong> {{ booking?.fromDate | date }}</p>
               <p><strong>Check-Out:</strong> {{ booking?.toDate | date }}</p>
+              <p><strong>Status:</strong> {{ booking?.bookingStatus }}</p>
             </div>
             <div class="col-md-6">
-              <p><strong>Status:</strong> {{ booking?.bookingStatus }}</p>
+              <p><strong>Phone No.:</strong> {{ booking?.mobile}}</p>
+              <p><strong>Email ID:</strong> {{ booking?.email}}</p>
               <p><strong>Booking ID:</strong> {{ booking?.propertyReservationNumber }}</p>
             </div>
           </div>
@@ -214,6 +216,7 @@
     </div>
   </div>
   <div *ngIf="paginatedData?.length > 0" class="allignment">
+    <span>Items per page:{{this.pageSize}}</span> 
     <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
     <span>Page {{ currentPage }} of {{ totalPages() }}</span>
     <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()">Next</button>

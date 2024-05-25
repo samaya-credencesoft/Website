@@ -327,6 +327,37 @@ table {
   }
 }
 
+.allignment{
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
+}
+
+.allignment span {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.allignment button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.allignment button:hover {
+  background-color: #45a049;
+}
+
+.allignment button[disabled] {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
+
 
 
 

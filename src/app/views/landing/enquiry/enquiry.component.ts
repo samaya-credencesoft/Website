@@ -94,7 +94,7 @@ export class EnquiryComponent implements OnInit {
   roomType: any;
   roomRatePlanName: any;
   externalSite: any;
-  
+
   currentPage = 1;
   pageSize = 6;
   // totalPages: number;
@@ -125,9 +125,9 @@ constructor(private token: TokenStorage,
     if(this.phoneNumber == undefined){
       this.phoneNumber = '';
     }
-   
-  
-  
+
+
+
 }
 
   externalSites:any[] = [
@@ -163,7 +163,7 @@ ngOnInit(){
   // this.tab3();
 
   }
-  
+
 
 
 searchenquiry() {
@@ -188,7 +188,16 @@ enquiryStatusVoid(enquiryId:number){
 
 
   this.cancelService.enquiryStatusVoid(enquiryId).subscribe(res =>{
-      console.log('cancel is',res)
+      console.log('cancel is',res);
+      // if (this.email != null && this.email != undefined) {
+      //   console.log("email is "+ this.email)
+      //   this.getbookingsbyenquiryemail()
+      // } else if (this.phoneNumber != null && this.phoneNumber != undefined) {
+      //   this.getbookingsbymobileNumber2()
+      // }else if (this.bookingId != null && this.bookingId != undefined) {
+      //   this.getbookingsbybookingIdenquiry()
+      // }
+
   })
 }
 search() {
@@ -266,6 +275,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       console.log ("my data is",this.bookings )
       this.bookings.forEach(ele=>{
         this.roomType = ele.roomType;
@@ -281,7 +291,6 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       console.log('page is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
       })
@@ -332,7 +341,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     return Math.ceil(this.totalPagess / this.pageSize);
   }
 
-  
+
   async getbookingsbybookingIdenquiry() {
     this.bookingEnquiry = null;
 
@@ -594,7 +603,7 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemail(this.email).toPromise();
 
       this.bookings = data.body;
-     
+
 
       if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
         this.verificationSuccess = true;
@@ -693,12 +702,12 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
       console.log('pageNumber is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
 
       for (const element of this.bookings) {
         this.createdDate = element.createdDate;
