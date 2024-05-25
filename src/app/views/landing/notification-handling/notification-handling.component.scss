@@ -13,7 +13,15 @@
   margin-left: 80px;
   margin-right: 80px;
 }
+.email-text{
 
+
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+
+
+}
 .custom-card {
   width: 500px;
   background-color: #271a55;
@@ -90,7 +98,7 @@ label.radio-container::before {
 
 /* Style the radio button when selected */
 input[type="radio"]:checked + label.radio-container::before {
-  background-color: #271a55; 
+  background-color: #271a55;
 }
 
 /* Add space between div elements */
@@ -204,12 +212,12 @@ border: none;
     display: none;
   }
 
-  
+
 
 
 
 .gridradio {
- 
+
   display: flex;
   flex-wrap: wrap;
 
@@ -237,7 +245,7 @@ border: none;
 }
 
 input[type="radio"] {
-  display: none; 
+  display: none;
 }
 
 label.radio-container {
