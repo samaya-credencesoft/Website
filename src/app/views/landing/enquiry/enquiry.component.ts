@@ -266,6 +266,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       const data = await this.listing.findPropertiesByMobilenumberenquiryLms(this.phoneNumber).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       console.log ("my data is",this.bookings )
       this.bookings.forEach(ele=>{
         this.roomType = ele.roomType;
@@ -281,7 +282,6 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       console.log('page is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
       })
@@ -693,12 +693,12 @@ console.log("business email"+ this.businessUserEmail)
       const data = await this.listing.findPropertiesByemailenquirylms(this.email).toPromise();
 
       this.bookings = data.body;
+      this.bookings.reverse();
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
       console.log('pageNumber is',this.pageNumber);
       console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
-      this.bookings.reverse();
 
       for (const element of this.bookings) {
         this.createdDate = element.createdDate;
