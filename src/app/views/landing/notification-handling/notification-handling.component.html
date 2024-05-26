@@ -355,6 +355,29 @@
                       </p>
                     </div>
 
+                    
+
+                  </div>
+
+                  <div *ngIf="shouldShowCancelButton(bookingdata)" style="border-radius: 30px 0px 30px 30px;
+                  border: -10.5px solid #fff;
+                  background: #271a55;
+                  display: inline-flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: flex-start;
+                  padding: 20px 92px 15px 38px;
+                  margin-top: -28px; float: right;
+              ">
+
+                    <div style="text-align: center; font-size: 13px; margin-bottom: 4px;" (click)="cancelBooking(bookingdata.id)">
+                      <div style="color: #fff;
+                      font-weight: 700; ">
+                Cancel
+
+                     </div>
+                    </div>
+
                   </div>
 
 

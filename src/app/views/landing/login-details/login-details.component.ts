@@ -187,6 +187,7 @@ toDate: Date;
       this.updatePaginatedData();
         this.bookings.forEach(ele=>{
           this.cancelId = ele;
+          
           console.log('cancel is',this.cancelId);
         })
         // this.dataSource = new MatTableDataSource(this.bookings);
@@ -379,6 +380,10 @@ toDate: Date;
               })
     }
 
-    
-  
+    cancelBookings(id:number){
+      this.cancelService.cancel(id).subscribe(res =>{
+        console.log('cancel is',res);
+        this.getbookingsbybookingId();
+            })
+    }
 }
