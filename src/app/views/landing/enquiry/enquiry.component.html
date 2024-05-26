@@ -211,7 +211,7 @@
                     border: 0.5px solid #fff;
                     background: #271a55;display: inline-flex;
 
-                    flex-direction: column;
+                    flex-direction: row;
                     justify-content: center;
                     align-items: flex-start;     padding: 4px 47px 2px 38px; margin-top: -20px;">
 
@@ -272,24 +272,29 @@
                           border: -10.5px solid #fff;
                           background: #271a55;
                           display: inline-flex;
-                          flex-direction: column;
+                          flex-direction: row;
                           justify-content: center;
                           align-items: flex-start;
-                          padding: 10px 85px 11px 38px;
-                          margin-top: -17px; float: right;
+                          padding: 15px 35px 15px 38px;
+                          margin-top: 20px; float: right;
                           margin-bottom: -6px;
                       ">
 
                             <div style="text-align: center; font-size: 13px; margin-bottom: 4px;" >
-                              <div style="color: #fff;
+                              <button style="background-color: #fff; color: #221950; width: max-content;
+                              height: 40px;
+                              border-radius: 15px; margin-right: 15px;
                               font-weight: 700; " (click)="PayViaUpi(item)">
                         Pay Now
 
-                             </div>
+                            </button>
                             </div>
 
                             <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                              <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</button>
+                              <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
+                              height: 40px;
+                              border-radius: 15px;
+                              font-weight: 700; ">Void</button>
                             </div>
 
                           </div>
@@ -313,7 +318,7 @@
                 border: 0.5px solid #fff;
                 background: #271a55;display: inline-flex;
 
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: center;
                 align-items: flex-start;     padding: 4px 47px 2px 38px; margin-top: -20px;">
 
@@ -370,7 +375,7 @@
                         border: -10.5px solid #fff;
                         background: #271a55;
                         display: inline-flex;
-                        flex-direction: column;
+                        flex-direction: row;
                         justify-content: center;
                         align-items: flex-start;
                         padding: 10px 85px 11px 38px;
@@ -378,17 +383,22 @@
                         margin-bottom: -6px;
                     ">
 
-                          <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <div style="color: #fff;
-                            font-weight: 700; " (click)="PayViaUpi(item)">
-                      Pay Now
+<div style="text-align: center; font-size: 13px; margin-bottom: 4px;" >
+  <button style="background-color: #fff; color: #221950; width: max-content;
+  height: 40px;
+  border-radius: 15px; margin-right: 15px;
+  font-weight: 700; " (click)="PayViaUpi(item)">
+Pay Now
 
-                           </div>
-                          </div>
+</button>
+</div>
 
-                          <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</button>
-                          </div>
+<div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+  <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
+  height: 40px;
+  border-radius: 15px;
+  font-weight: 700; ">Void</button>
+</div>
 
                         </div>
 
@@ -410,7 +420,7 @@
                 border: 0.5px solid #fff;
                 background: #271a55;display: inline-flex;
 
-                flex-direction: column;
+                flex-direction: row;
                 justify-content: center;
                 align-items: flex-start;     padding: 4px 47px 2px 38px; margin-top: -20px;">
 
@@ -470,25 +480,31 @@
                         border: -10.5px solid #fff;
                         background: #271a55;
                         display: inline-flex;
-                        flex-direction: column;
+                        flex-direction: row;
                         justify-content: center;
                         align-items: flex-start;
-                        padding: 10px 85px 11px 38px;
+                        padding: 20px 15px 11px 5px;
                         margin-top: -17px; float: right;
                         margin-bottom: -6px;
+                        width: 175px;
                     ">
 
-                          <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <div style="color: #fff;
-                            font-weight: 700; " (click)="PayViaUpi(bookingEnquiry)">
-                      Pay Now
+<div style="text-align: center; font-size: 13px; margin-bottom: 4px;" >
+  <button style="background-color: #fff; color: #221950; width: max-content;
+  height: 40px;
+  border-radius: 15px; margin-right: 15px;
+  font-weight: 700; " (click)="PayViaUpi(item)">
+Pay Now
 
-                           </div>
-                          </div>
+</button>
+</div>
 
-                          <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-                            <div class="btn btn-danger" (click)="enquiryStatusVoid(bookingEnquiry?.enquiryId)" style="background-color: #221950; border-color: #221950;">Void</div>
-                          </div>
+<div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
+  <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
+  height: 40px;
+  border-radius: 15px;
+  font-weight: 700; ">Void</button>
+</div>
 
                         </div>
 
