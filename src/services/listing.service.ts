@@ -143,7 +143,7 @@ export class ListingService {
     this.setApi();
     return this.http.get<any>(
       API_URL_LMS +
-      '/api/v1/accommodationEnquiry/getBySearchCriteria' + '?email=' + email,
+      '/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate' + '?email=' + email,
       { observe: 'response' }
     );
   }
@@ -153,7 +153,7 @@ export class ListingService {
     this.setApi();
     return this.http.get<any>(
       API_URL_LMS +
-      '/api/v1/accommodationEnquiry/getBySearchCriteria' + '?phone=' + phone,
+      '/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate' + '?phone=' + phone,
       { observe: 'response' }
     );
   }
