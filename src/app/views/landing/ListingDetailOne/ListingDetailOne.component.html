@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <!-- <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;"> 
+    <!-- <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;">
     <div class="container">
       <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <img   src="assets/images/nav-toggle.png">
@@ -29,14 +29,14 @@
   <app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
 
 
-  
-  
+
+
   <!-- <div  style="width: 100%; margin-top: 7px;">
     <img   src="assets/images/BookOne Website Bannerr.png">
   </div> -->
 
-  
-  
+
+
 
 
   <!-- <nav class="sidebar">
@@ -224,7 +224,7 @@
 
 
 <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-          
+
           <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
             <!-- <h3 class="room-text-edit">Travel Dates and Guests</h3> -->
             <div class="row p-2" style="justify-content: space-evenly;">
@@ -289,7 +289,7 @@
                           </span>
                         </label>
                       </div>
-    
+
                       <div class="list-holder roomsAndOccupancy" role="region" aria-label="Rooms and occupancy"
                         *ngIf="roomsAndOccupancy === true">
                         <div class="item business-text p-4" (clickOutside)="toggleRoomsAndOccupancy()">
@@ -379,11 +379,11 @@
               </div>
             </div>
           </div>
-    
+
           <!-- <div class="container text-center" style="text-align: center;" >
             <h1 class="title" style="margin-top: 20px; ">{{businessUser?.name}}</h1>
      -->
-            
+
             <!-- <div class="justify-content-center">
              <p class="heading2" style="text-transform: capitalize" *ngIf="businessUser.address">
                   {{businessUser.address.streetNumber? businessUser.address.streetNumber + ', ' : '' }}
@@ -407,7 +407,7 @@
                         <!-- </li>
                   </ul> -->
           <!-- </div> -->
-    
+
 
 
 
@@ -1447,11 +1447,11 @@
                                   </div>
                                 </div>
                               </div>
-                              
+
                               <div style="text-align: center;">
                                 <button class="btn text-white"
                                   style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
-                                  (click)="open(content, room, room.name); document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
+                                  (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                   More Details</button>
                               </div>
                             </div>
@@ -1618,8 +1618,8 @@
                           selectedRoomAvailableNumber =
                             room.noOfRooms;
                           checkAvailabilityStatus = true;
-                          checkingAvailability1(); bookRoomNow(); 
-                          document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
+                          checkingAvailability1(); bookRoomNow();
+                          document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
                         " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                       BOOK NOW</button>
                                   </div>
@@ -1771,25 +1771,25 @@
                               <div class="mt-2"  [innerHTML]="room.description">
                                 </div>
                           </div>
-                                    <!-- mobile view  --> 
-                                                                   
+                                    <!-- mobile view  -->
+
                           <div  class="mobile-one ">
                             <h6 class="text_heading_font_size">Description</h6>
 
                             <div class="mt-2"  [innerHTML]="room.description">
                               </div>
-                        </div> 
-
-                             
+                        </div>
 
 
 
 
-                            
+
+
+
                             <div style="text-align: center;">
                               <button class="btn text-white"
                                 style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
-                                (click)="open(content, room, room.name); document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
+                                (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 More Details</button>
                             </div>
                           </div>
@@ -1880,7 +1880,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow(); checkingAvailability1();  document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
+                              bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
                             " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
@@ -2101,11 +2101,11 @@
                                 </div>
                               </div>
                             </div>
-                           
+
                             <div style="text-align: center;">
                               <button class="btn text-white"
                                 style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
-                                (click)="open(content, room, room.name); document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
+                                (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 More Detail</button>
                             </div>
                           </div>
@@ -2189,7 +2189,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow();  document.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
+                              bookRoomNow();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
                             " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                     BOOK NOW</button>
                                 </div>
@@ -3615,7 +3615,7 @@
   </div>
 
   <!-- HTML -->
-  
+
   <!-- <div class="popup-container" *ngIf="isPopupVisible" style="float: left;z-index: 1000;">
     <div class="popup-content" >
       <span class="close-icon" style="position: absolute; top: 10px; right: 10px;"><button (click)="closePopup()" style="width: 25px;">&#10006;</button>
@@ -3623,7 +3623,7 @@
       <div class="ota" >OTA Prices</div> -->
       <!-- <span class="close-icon" style="position: absolute; top: 10px; right: 10px;"><button (click)="closePopup()">&#10006;</button>
       </span> -->
-     
+
       <!-- <div *ngFor="let plan of room.roomRatePlans">
         <div *ngIf="room && room.roomRatePlans">
           <p>{{plan.otaName}}</p>
@@ -3635,7 +3635,7 @@
               <td> ₹{{ otaPlan.price }}</td>
             </tr>
         </table>
-      
+
                     </div>
   </div> -->
 

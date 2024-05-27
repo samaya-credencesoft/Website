@@ -4,17 +4,17 @@ import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { Booking } from 'src/app/model/booking';
 import { Payment } from 'src/app/model/payment';
 import { BusinessUser } from 'src/app/model/user';
-// import { console } from 'src/app/services/console.service';
-// import { HotelBookingService } from 'src/app/services/hotel-booking.service';
+// import { Logger } from 'src/app/services/logger.service';
+// import { HotelBookingService } from 'src/app/services/hotel-booking.service';/
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Location, DatePipe, formatDate } from '@angular/common';
 import { environment } from 'src/environments/environment';
 // import { EnquiryForm } from '../Enquiry/Enquiry.component';
 import { API_URL_NZ, API_URL_IN } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
+import { EnquiryForm } from '../onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 import { TokenStorage } from 'src/token.storage';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
-import { EnquiryForm } from '../onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 
 @Component({
   selector: 'app-booking-complete',
@@ -171,10 +171,10 @@ export class BookingCompleteComponent implements OnInit {
   getPaymentInfoByReffId(referenceNumber){
     this.hotelBookingService.getPaymentByReffId(referenceNumber).subscribe((res) => {
       this.payment = res.body[0];
-      if (this.payment.failureCode === null && this.payment.status == 'Paid') {
+      if (this.payment?.failureCode === null && this.payment.status == 'Paid') {
         this.createBookingPayTM();
       }else{
-        console.log('create enquiry')
+        // //Logger.log('create enquiry')
         this.createEnquiry();
       }
     });
@@ -191,9 +191,9 @@ export class BookingCompleteComponent implements OnInit {
       this.hotelBookingService
         .addServicesToBooking(this.addServiceList, booking.id)
         .subscribe((serviceRes) => {
-          console.log('before Payment: ', JSON.stringify(this.payment));
+          // //Logger.log('before Payment: ', JSON.stringify(this.payment));
 
-          console.log('addServiceList ', JSON.stringify(serviceRes.body));
+          // //Logger.log('addServiceList ', JSON.stringify(serviceRes.body));
           this.payment2 = this.payment;
           this.payment2.id = undefined;
           this.payment2.paymentMode = 'UPI';
@@ -214,14 +214,14 @@ export class BookingCompleteComponent implements OnInit {
           this.hotelBookingService
             .processPayment(this.payment2)
             .subscribe((res) => {
-              console.log('Extra Payment: ', JSON.stringify(res.body));
+              // //Logger.log('Extra Payment: ', JSON.stringify(res.body));
             });
         });
     }
   }
   createBookingPayTM() {
     this.booking.modeOfPayment = this.payment.paymentMode;
-    this.booking.externalSite = 'Bookone Booking Engine';
+    this.booking.externalSite = 'The Hotel Mate';
     this.booking.businessName = this.businessUser.name;
     this.booking.businessEmail = this.businessUser.email;
     this.booking.roomBooking = true;
@@ -232,13 +232,13 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
 
-    console.log('createBooking ', JSON.stringify(this.booking));
+    //Logger.log('createBooking ', JSON.stringify(this.booking));
 
     this.paymentLoader = true;
     this.hotelBookingService
       .createBooking(this.booking)
       .subscribe((response) => {
-        //  console.log('createBooking ', JSON.stringify(response.body));
+        //  //Logger.log('createBooking ', JSON.stringify(response.body));
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
@@ -252,7 +252,7 @@ export class BookingCompleteComponent implements OnInit {
           this.paymentLoader = true;
           this.changeDetectorRefs.detectChanges();
           this.payment.status = 'Paid';
-          console.log('payment ' + JSON.stringify(this.payment));
+          //Logger.log('payment ' + JSON.stringify(this.payment));
 
           this.hotelBookingService
             .savePayment(this.payment)
@@ -295,7 +295,7 @@ export class BookingCompleteComponent implements OnInit {
 
                       this.paymentLoader = true;
 
-                      console.log("payment " + JSON.stringify(this.payment));
+                      //Logger.log("payment " + JSON.stringify(this.payment));
                       // this.paymentIntentPayTm(this.payment);
                     } else {
                       this.paymentLoader = false;
@@ -350,12 +350,12 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
 
-    console.log('createBooking ', JSON.stringify(this.booking));
+    //Logger.log('createBooking ', JSON.stringify(this.booking));
 
     this.paymentLoader = true;
 
 
-    // console.log(JSON.stringify(this.subscriptions));
+    // //Logger.log(JSON.stringify(this.subscriptions));
       const TO_EMAIL = 'subhasmitatripathy37@gmail.com';
       // const TO_EMAIL = 'abir.sayeed@gmail.com';
       const TO_NAME = 'Support - The Hotel Mate';
@@ -467,7 +467,7 @@ export class BookingCompleteComponent implements OnInit {
 
       this.enquiryForm.subject = '';
       this.setApi();
-      console.log('form data ' + JSON.stringify(this.enquiryForm));
+      //Logger.log('form data ' + JSON.stringify(this.enquiryForm));
       //  this.success = true;
       this.http
         .post<EnquiryForm>(
@@ -477,13 +477,13 @@ export class BookingCompleteComponent implements OnInit {
         .subscribe((response) => {
           this.enquiryResponse = response;
           this.successMessage = true;
-          console.log('save ' + response);
+          //Logger.log('save ' + response);
         });
       this.http
         .post<EnquiryForm>(environment.apiUrlBookone + '/api/email/enquire', this.enquiryForm)
         .subscribe((response) => {
           // this.success = response;
-          console.log('sent ' + response);
+          //Logger.log('sent ' + response);
 
 
           // this.enquiryForm = new EnquiryForm();

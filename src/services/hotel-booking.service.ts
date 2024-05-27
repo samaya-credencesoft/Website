@@ -113,7 +113,7 @@ export class HotelBookingService {
   createBooking(booking: Booking) {
     this.setApi();
     return this.http.post<Booking>(
-      "https://testconnect.bookone.io/hotelmate" + '/api/thm/booking',
+      "https://api.thehotelmate.com" + '/api/thm/booking',
       booking,
       { observe: 'response' }
     );
@@ -270,7 +270,7 @@ export class HotelBookingService {
   getPaymentByReffId(ref: string) {
     this.setApi();
     return this.http.get<Payment[]>(
-      "https://testconnect.bookone.io/hotelmate" +
+      this.API_URL +
       '/api/thm/findPaymentByReferenceNumber/' + ref,
       { observe: 'response' }
     );
