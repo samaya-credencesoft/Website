@@ -769,15 +769,17 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
-
+if (this.city != null && this.city != undefined) {
+  this.offerService.getPropertyListByCity(this.city).subscribe((res) => {
+    // this.accommodationData = res.body.filter(entry => entry.businessType === 'Accommodation');
+    // //console.log(this.accommodationData)
+    this.restaurantData = res.body.filter(
+      (entry) => entry.businessType === 'Restaurants'
+    );
+  });
+}
     // this.token.clearRoomsData();
-    this.offerService.getPropertyListByCity(this.city).subscribe((res) => {
-      // this.accommodationData = res.body.filter(entry => entry.businessType === 'Accommodation');
-      // //console.log(this.accommodationData)
-      this.restaurantData = res.body.filter(
-        (entry) => entry.businessType === 'Restaurants'
-      );
-    });
+    
 
     this.blogPosts$ = this.contentfulService.getAllEntries();
     this.email = {
