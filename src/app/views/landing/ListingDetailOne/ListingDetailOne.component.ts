@@ -779,7 +779,7 @@ if (this.city != null && this.city != undefined) {
   });
 }
     // this.token.clearRoomsData();
-    
+
 
     this.blogPosts$ = this.contentfulService.getAllEntries();
     this.email = {
@@ -1747,7 +1747,7 @@ this.isHeaderVisible = true;
 
           // this.getReview(this.businessUser.id);
           // this.getBranch(this.businessUser.id);
-          this.getCustomerReview(this.businessUser.id);
+          // this.getCustomerReview(this.businessUser.id);
 
           if (this.token.getBookingCity() !== null) {
             this.bookingCity = this.token.getBookingCity();
