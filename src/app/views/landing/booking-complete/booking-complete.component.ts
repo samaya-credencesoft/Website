@@ -25,6 +25,7 @@ export class BookingCompleteComponent implements OnInit {
   businessUser: BusinessUser;
   booking: Booking;
   payment: Payment;
+  PropertyUrl: string;
   paymentLoader: boolean;
   bookingData: any;
   isSuccess: boolean;
@@ -63,6 +64,7 @@ export class BookingCompleteComponent implements OnInit {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
     this.payment = new Payment();
+    this.PropertyUrl = this.token.getPropertyUrl();
 
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
     {
