@@ -148,7 +148,7 @@ export class ListingService {
     );
   }
 
-  
+
   findPropertiesByMobilenumberenquiryLms(phone) {
     this.setApi();
     return this.http.get<any>(
@@ -160,13 +160,13 @@ export class ListingService {
 
   findPropertiesBybookingIdLms(enquiryId: number){
     return this.http.get<any>(
-      API_URL_LMS + "/api/v1/accommodationEnquiry/" + enquiryId,
+      API_URL_LMS + "/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate/" + enquiryId,
       {
         observe: "response",
       }
     );
   }
-  
+
 
   findPropertiesBybookingIdenquiry(bookingId:string,bookingStatus:string) {
     this.setApi();
@@ -207,7 +207,7 @@ export class ListingService {
       { observe: 'response' }
     );
   }
-  
+
 
 
   findByPropertyId(id: number) {
