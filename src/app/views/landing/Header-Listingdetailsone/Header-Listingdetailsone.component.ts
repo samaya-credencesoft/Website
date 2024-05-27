@@ -33,10 +33,10 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   });
     this.propertyname = this.businessUser?.seoFriendlyName;
     this.logoUrl=this.businessUser?.logoUrl;
-    console.log(this.logoUrl);
-    console.log('new link is',this.website);
-    console.log('new link is hello world',this.socialmedialist);
-    console.log('new link is',this.propertyname);
+    //console.log(this.logoUrl);
+    //console.log('new link is',this.website);
+    //console.log('new link is hello world',this.socialmedialist);
+    //console.log('new link is',this.propertyname);
 
 
   }
@@ -47,7 +47,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   // gotopropertydetail() {
   //   let PropertyUrl = this.token.getPropertyUrl();
-  //   console.log(PropertyUrl);
+  //   //console.log(PropertyUrl);
 
   //   if (PropertyUrl.startsWith('http://') || PropertyUrl.startsWith('https://')) {
   //     console.error("Property URL should be a relative path, not a full URL");
@@ -69,14 +69,14 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     private token:TokenStorage,
   ) {
     // this.propertydetails = this.token.getProperty();
-    // console.log("propertydata="+ JSON.stringify(this.propertydetails))
+    // //console.log("propertydata="+ JSON.stringify(this.propertydetails))
     this.PropertyUrl = this.token.getPropertyUrl();
-    console.log("property url:" + this.PropertyUrl)
+    //console.log("property url:" + this.PropertyUrl)
    }
 
   ngOnInit() {
     this.website = this.businessUser?.website;
-    console.log('new link is',this.website);
+    //console.log('new link is',this.website);
   }
   navigate(){
 
