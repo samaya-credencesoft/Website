@@ -712,6 +712,7 @@ console.log("business email"+ this.businessUserEmail)
 
       this.bookings = data.body;
       this.bookings.reverse();
+      console.log('dataaaaaa is', this.bookingEnquiry);
       this.bookings = this.bookings.filter(ele => ele.status != 'Void')
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;

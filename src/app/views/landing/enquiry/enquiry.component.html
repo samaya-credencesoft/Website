@@ -312,7 +312,7 @@
 
               </div>
             </div>
-            <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookings != null && bookings.status !='Void'" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
+            <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookings != null && bookings.status !='Void' &&  bookingEnquiry === null" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
               <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
 
                 <div style="border-radius: 30px 30px 30px 0px;
@@ -328,7 +328,7 @@
                     font-weight: 700; "> {{bookings?.firstName }} {{bookings?.lastName}} </div>
                     <div style="color: #FFF;">
                     {{bookings?.propertyName}} </div>
-                    <div style="color: #FFF;">Enquiry ID: {{item.enquiryId}} </div>
+                    <div style="color: #FFF;">Enquiry ID: {{bookings?.enquiryId}} </div>
 
                   </div>
 
@@ -351,13 +351,13 @@
                         {{bookings?.createdDate}} <br>
                         <b style="
                             font-weight: 700;color: #000;">Room Type:</b> <br>
-                          {{item.roomType}}<br>
+                          {{bookings?.roomType}}<br>
                         <b style="
                           font-weight: 700;color:#000">Phone Number:</b> <br>
                         {{bookings?.phone}}<br>
                         <b style="
                           font-weight: 700;color: #000;">Source:</b> <br>
-                          {{item?.source}} <br>
+                          {{bookings?.source}} <br>
                       </p>
                     </div>
                     <div class="col-7">
@@ -389,14 +389,14 @@
   height: 40px;
   border-radius: 15px; margin-right: 15px;
   font-weight: 700; padding-left: 10px;
-    padding-right: 10px;" (click)="PayViaUpi(item)">
+    padding-right: 10px;" (click)="PayViaUpi(bookings)">
 Pay Now
 
 </button>
 </div>
 
 <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-  <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
+  <button class="btn btn-danger" (click)="enquiryStatusVoid(bookings?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
   height: 40px;
   border-radius: 15px;
   font-weight: 700; ">Void</button>
@@ -496,14 +496,14 @@ Pay Now
   height: 40px;
   border-radius: 15px; margin-right: 15px;
   font-weight: 700; padding-left: 10px;
-    padding-right: 10px;" (click)="PayViaUpi(item)">
+    padding-right: 10px;" (click)="PayViaUpi(bookingEnquiry)">
 Pay Now
 
 </button>
 </div>
 
 <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-  <button class="btn btn-danger" (click)="enquiryStatusVoid(item?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
+  <button class="btn btn-danger" (click)="enquiryStatusVoid(bookingEnquiry?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
   height: 40px;
   border-radius: 15px;
   font-weight: 700; ">Void</button>
