@@ -266,6 +266,7 @@ toDate: Date;
   
   
     async getbookingsbyemail() {
+      this.currentPage = 1;
       try {
         const data = await this.listing.findPropertiesByemail(this.email).toPromise();
   
@@ -323,6 +324,7 @@ toDate: Date;
   
   
     async getbookingsbymobileNumber() {
+      this.currentPage = 1
       try {
         const data = await this.listing.findPropertiesByMobilenumber( this.phoneNumber).toPromise();
   

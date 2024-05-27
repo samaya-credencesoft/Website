@@ -276,7 +276,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     this.getbookingsbyemail();
   }
   async getbookingsbymobileNumber2() {
-
+    this.currentPage = 1;
     try {
       this.bookingstatus = 'ENQUIRY';
 
@@ -353,6 +353,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
 
   async getbookingsbybookingIdenquiry() {
     this.bookingEnquiry = null;
+    this.currentPage = 1;
 
     try {
       const data = await this.listing.findPropertiesBybookingIdLms(Number(this.bookingId)).toPromise();
@@ -703,6 +704,7 @@ console.log("business email"+ this.businessUserEmail)
 
 
   async getbookingsbyenquiryemail() {
+    this.currentPage = 1;
     try {
       this.verificationSuccessenquiry = true;
       this.bookingstatus = 'ENQUIRY';
