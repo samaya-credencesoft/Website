@@ -90,14 +90,14 @@ toDate: Date;
     this.resetBookings();
     if (this.selectedOption === 'email') {
   
-      console.log(`Searching for email: ${this.email}`);
+      //console.log(`Searching for email: ${this.email}`);
     } else if (this.selectedOption === 'mobile') {
   
-      console.log(`Searching for mobile number: ${this.mobile}`);
+      //console.log(`Searching for mobile number: ${this.mobile}`);
     }
     else if (this.selectedOption === 'bookingId') {
   
-      console.log(`Searching for Booking ID: ${this.bookingId}`);
+      //console.log(`Searching for Booking ID: ${this.bookingId}`);
     }
   }
 
@@ -107,14 +107,14 @@ toDate: Date;
   searchenquiry() {
     if (this.selectedOptionenquiry === 'email') {
   
-      console.log(`Searching for email: ${this.email}`);
+      //console.log(`Searching for email: ${this.email}`);
     } else if (this.selectedOptionenquiry === 'mobile') {
   
-      console.log(`Searching for mobile number: ${this.mobile}`);
+      //console.log(`Searching for mobile number: ${this.mobile}`);
     }
     else if (this.selectedOptionenquiry === 'bookingId') {
   
-      console.log(`Searching for Booking ID: ${this.bookingId}`);
+      //console.log(`Searching for Booking ID: ${this.bookingId}`);
     }
   }
 
@@ -124,10 +124,10 @@ toDate: Date;
     this.paginatedData = null;
     this.bookingdata = null;
     this.currentPage = 1 ;
-    console.log('Searching for Bookings:' + this.bookings);
+    //console.log('Searching for Bookings:' + this.bookings);
   
   if (this.bookings?.length === 0 || this.bookings === null ) {
-    console.log(`Searching for Bookings: ${this.bookings}`);
+    //console.log(`Searching for Bookings: ${this.bookings}`);
       this.nodatafound = false;
     }
     this.phoneNumber ='';
@@ -182,13 +182,13 @@ toDate: Date;
         this.bookings = data.body;
         this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
-      console.log('page is',this.pageNumber);
-      console.log('total page is',this.totalPagess);
+      //console.log('page is',this.pageNumber);
+      //console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
         this.bookings.forEach(ele=>{
           this.cancelId = ele;
           
-          console.log('cancel is',this.cancelId);
+          //console.log('cancel is',this.cancelId);
         })
         // this.dataSource = new MatTableDataSource(this.bookings);
         // this.dataSource.paginator = this.bookPaginator;
@@ -200,10 +200,10 @@ toDate: Date;
     updatePaginatedData(){
       const startIndex = (this.currentPage - 1) * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      console.log('starting index',startIndex)
-      console.log('endIndex index',endIndex)
+      //console.log('starting index',startIndex)
+      //console.log('endIndex index',endIndex)
       this.paginatedData = this.bookings.slice(startIndex, endIndex);
-      // console.log('total Data is',this.paginatedData);
+      // //console.log('total Data is',this.paginatedData);
     }
   
     changePage(page: number) {
@@ -234,7 +234,7 @@ toDate: Date;
             const month = date.toLocaleString('default', { month: 'long' });
             const year = date.getFullYear();
             const formattedDate = `${day} ${month} ${year}`;
-            console.log(formattedDate);
+            //console.log(formattedDate);
             this.bookingdata.fromDate = formattedDate;
   
             if ( this.bookingdata.toDate !== null &&  this.bookingdata.toDate !== undefined) {
@@ -256,7 +256,7 @@ toDate: Date;
           // Handle the case when bookings are found
         }
   
-        console.log("Bookings: " + JSON.stringify(this.bookingdata));
+        //console.log("Bookings: " + JSON.stringify(this.bookingdata));
       } catch (error) {
         // Handle errors here
         console.error(error);
@@ -274,12 +274,12 @@ toDate: Date;
         this.bookings.reverse();
         this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
         this.totalPagess = this.bookings.length;
-        console.log('page is',this.pageNumber);
-        console.log('total page is',this.totalPagess);
+        //console.log('page is',this.pageNumber);
+        //console.log('total page is',this.totalPagess);
         this.updatePaginatedData();
         this.bookings.forEach(ele=>{
           this.cancelId = ele;
-          console.log('cancel is',this.cancelId);
+          //console.log('cancel is',this.cancelId);
         })
   
   
@@ -293,7 +293,7 @@ toDate: Date;
             const month = date.toLocaleString('default', { month: 'long' });
             const year = date.getFullYear();
             const formattedDate = `${day} ${month} ${year}`;
-            console.log(formattedDate);
+            //console.log(formattedDate);
             element.fromDate = formattedDate;
   
             if (element.toDate !== null && element.toDate !== undefined) {
@@ -315,7 +315,7 @@ toDate: Date;
           // Handle the case when bookings are found
         }
   
-        console.log("Bookings: " + JSON.stringify(this.bookings));
+        //console.log("Bookings: " + JSON.stringify(this.bookings));
       } catch (error) {
         // Handle errors here
         console.error(error);
@@ -332,8 +332,8 @@ toDate: Date;
         this.bookings.reverse();
         this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
         this.totalPagess = this.bookings.length;
-        console.log('page is',this.pageNumber);
-        console.log('total page is',this.totalPagess);
+        //console.log('page is',this.pageNumber);
+        //console.log('total page is',this.totalPagess);
         this.updatePaginatedData();
   
         if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
@@ -346,7 +346,7 @@ toDate: Date;
             const month = date.toLocaleString('default', { month: 'long' });
             const year = date.getFullYear();
             const formattedDate = `${day} ${month} ${year}`;
-            console.log(formattedDate);
+            //console.log(formattedDate);
             element.fromDate = formattedDate;
   
             if (element.toDate !== null && element.toDate !== undefined) {
@@ -368,7 +368,7 @@ toDate: Date;
           // Handle the case when bookings are found
         }
   
-        console.log("Bookings: " + JSON.stringify(this.bookings));
+        //console.log("Bookings: " + JSON.stringify(this.bookings));
       } catch (error) {
         // Handle errors here
         console.error(error);
@@ -377,14 +377,14 @@ toDate: Date;
 
     cancelBooking(id:number){
       this.cancelService.cancel(id).subscribe(res =>{
-          console.log('cancel is',res)
+          //console.log('cancel is',res)
           this.bookingList();
               })
     }
 
     cancelBookings(id:number){
       this.cancelService.cancel(id).subscribe(res =>{
-        console.log('cancel is',res);
+        //console.log('cancel is',res);
         this.getbookingsbybookingId();
             })
     }

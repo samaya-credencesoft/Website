@@ -169,18 +169,18 @@ ngOnInit(){
 searchenquiry() {
   if (this.selectedOptionenquiry === 'email') {
 
-    console.log(`Searching for email: ${this.email}`);
+    //console.log(`Searching for email: ${this.email}`);
   } else if (this.selectedOptionenquiry === 'mobile') {
 
-    console.log(`Searching for mobile number: ${this.mobile}`);
+    //console.log(`Searching for mobile number: ${this.mobile}`);
   }
   else if (this.selectedOptionenquiry === 'bookingId') {
 
-    console.log(`Searching for Booking ID: ${this.bookingId}`);
+    //console.log(`Searching for Booking ID: ${this.bookingId}`);
   }
   this.bookings.forEach(ele=>{
     this.cancelId = ele;
-    console.log('cancel is',this.cancelId);
+    //console.log('cancel is',this.cancelId);
   })
 }
 
@@ -188,16 +188,16 @@ enquiryStatusVoid(enquiryId:number){
 
 
   this.cancelService.enquiryStatusVoid(enquiryId).subscribe(res =>{
-      console.log('cancel is',res);
+      //console.log('cancel is',res);
       // if (this.email != null && this.email != undefined) {
-      //   console.log("email is "+ this.email)
+      //   //console.log("email is "+ this.email)
       //   this.getbookingsbyenquiryemail()
       // } else if (this.phoneNumber != null && this.phoneNumber != undefined) {
       //   this.getbookingsbymobileNumber2()
       // }else if (this.bookingId != null && this.bookingId != undefined) {
       //   this.getbookingsbybookingIdenquiry()
       // }
-      // console.log("jhgfg"+ this.selectedOptionenquiry)
+      // //console.log("jhgfg"+ this.selectedOptionenquiry)
       if (this.selectedOptionenquiry === 'mobileRadio1') {
         this.getbookingsbymobileNumber2();
       }if(this.selectedOptionenquiry === 'bookingIdRadio1'){
@@ -212,14 +212,14 @@ search() {
   this.resetBookings();
   if (this.selectedOption === 'email') {
 
-    console.log(`Searching for email: ${this.email}`);
+    //console.log(`Searching for email: ${this.email}`);
   } else if (this.selectedOption === 'mobile') {
 
-    console.log(`Searching for mobile number: ${this.mobile}`);
+    //console.log(`Searching for mobile number: ${this.mobile}`);
   }
   else if (this.selectedOption === 'bookingId') {
 
-    console.log(`Searching for Booking ID: ${this.bookingId}`);
+    //console.log(`Searching for Booking ID: ${this.bookingId}`);
   }
 }
 
@@ -229,7 +229,7 @@ resetBookings() {
   this.bookingEnquiry = null;
   this.currentPage = 1;
 if (this.bookings?.length === 0 || this.bookings === null ) {
-  console.log(`Searching for Bookings: ${this.bookings}`);
+  //console.log(`Searching for Bookings: ${this.bookings}`);
     this.nodatafound = false;
   }
   this.phoneNumber ='';
@@ -245,9 +245,9 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   this.isPhoneNumberValid = phoneNumberPattern.test(this.phoneNumber);
   }
   validateOTPNumber() {
-    console.log('OTPNumber:', this.OTPNumber);
+    //console.log('OTPNumber:', this.OTPNumber);
     this.isOTPNumberValid = /^\d{5}$/.test(this.OTPNumber);
-    console.log('isOTPNumberValid:', this.isOTPNumberValid);
+    //console.log('isOTPNumberValid:', this.isOTPNumberValid);
     this.verifyOTP();
   }
 
@@ -286,20 +286,20 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.bookings = data.body;
       this.bookings.reverse();
       this.bookings = this.bookings.filter(ele => ele.status != 'Void')
-      console.log ("my data is",this.bookings )
+      //console.log ("my data is",this.bookings )
       this.bookings.forEach(ele=>{
         this.roomType = ele.roomType;
         this.roomRatePlanName = ele.roomRatePlanName;
         this.externalSite = ele.externalSite;
         this.enquiryId = ele.enquiryId;
-        console.log('enquiryId is',this.enquiryId);
-        console.log('externalSite is',this.externalSite);
+        //console.log('enquiryId is',this.enquiryId);
+        //console.log('externalSite is',this.externalSite);
       })
 
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
-      console.log('page is',this.pageNumber);
-      console.log('total page is',this.totalPagess);
+      //console.log('page is',this.pageNumber);
+      //console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
       this.bookings.forEach(ele=>{
         this.enquiryId = ele;
@@ -323,7 +323,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         this.nodatafound = false;
         // Handle the case when bookings are found
       }
-      console.log("Formatted bookings:", this.bookings);
+      //console.log("Formatted bookings:", this.bookings);
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -332,10 +332,10 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
   updatePaginatedData(){
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    console.log('starting index',startIndex)
-    console.log('endIndex index',endIndex)
+    //console.log('starting index',startIndex)
+    //console.log('endIndex index',endIndex)
     this.paginatedData = this.bookings.slice(startIndex, endIndex);
-    console.log('total Data is',this.paginatedData);
+    //console.log('total Data is',this.paginatedData);
 
   }
 
@@ -358,12 +358,12 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     try {
       const data = await this.listing.findPropertiesBybookingIdLms(Number(this.bookingId)).toPromise();
       this.bookingEnquiry = data.body;
-      console.log('dataaaaaa is', this.bookingEnquiry);
+      //console.log('dataaaaaa is', this.bookingEnquiry);
 
       if (this.bookingEnquiry !== null && this.bookingEnquiry !== undefined && this.bookingEnquiry.length !== 0) {
         this.verificationenquirySuccess2 = true;
 
-        console.log('my booking data is', JSON.stringify(this.bookingEnquiry));
+        //console.log('my booking data is', JSON.stringify(this.bookingEnquiry));
 
         this.createdDate = this.bookingEnquiry.createdDate;
         const date = new Date(this.createdDate);
@@ -371,7 +371,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         const month = date.toLocaleString('default', { month: 'long' });
         const year = date.getFullYear();
         const formattedDate = `${day} ${month} ${year}`;
-        console.log(formattedDate);
+        //console.log(formattedDate);
         this.bookingEnquiry.createdDate = formattedDate;
 
         if (this.bookingEnquiry.toDate !== null && this.bookingEnquiry.toDate !== undefined) {
@@ -395,7 +395,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
         this.nodatafound = true;
       }
 
-      console.log("Bookings: " + JSON.stringify('hello my data is', this.bookingEnquiry));
+      //console.log("Bookings: " + JSON.stringify('hello my data is', this.bookingEnquiry));
     } catch (error) {
       console.error(error);
       this.nodatafound = true;
@@ -412,10 +412,10 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
     this.businessUser.name = propertyName;
     try {
         const data = await this.businessService.getBusinessBySearch(this.businessUser).toPromise();
-        console.log("details " + JSON.stringify(data.body));
+        //console.log("details " + JSON.stringify(data.body));
         this.propertyDetials = data.body;
         this.propertyDetials.forEach(element => {
-            console.log("fghjk" + element.id);
+            //console.log("fghjk" + element.id);
             this.propertyid = element.id;
             this.localCurrency = element.localCurrency;
             this.businessUserEmail = element.email;
@@ -437,7 +437,7 @@ if (this.bookings?.length === 0 || this.bookings === null ) {
       this.payment.firstName = this.booking.firstName;
       this.payment.lastName = this.booking.lastName;
       this.payment.name = this.booking.firstName + " " + this.booking.lastName;
-console.log("business email"+ this.businessUserEmail)
+//console.log("business email"+ this.businessUserEmail)
       this.payment.email = this.booking.email;
       this.payment.businessEmail = this.businessUserEmail
       this.payment.currency = this.localCurrency
@@ -577,7 +577,7 @@ console.log("business email"+ this.businessUserEmail)
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
-          console.log(formattedDate);
+          //console.log(formattedDate);
           this.bookings.fromDate = formattedDate;
 
           if ( this.bookings.toDate !== null &&  this.bookings.toDate !== undefined) {
@@ -599,7 +599,7 @@ console.log("business email"+ this.businessUserEmail)
         // Handle the case when bookings are found
       }
 
-      console.log("Bookings: " + JSON.stringify(this.bookings));
+      //console.log("Bookings: " + JSON.stringify(this.bookings));
     } catch (error) {
       // Handle errors here
       console.error(error);
@@ -625,7 +625,7 @@ console.log("business email"+ this.businessUserEmail)
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
-          console.log(formattedDate);
+          //console.log(formattedDate);
           element.fromDate = formattedDate;
 
           if (element.toDate !== null && element.toDate !== undefined) {
@@ -647,7 +647,7 @@ console.log("business email"+ this.businessUserEmail)
         // Handle the case when bookings are found
       }
 
-      console.log("Bookings: " + JSON.stringify(this.bookings));
+      //console.log("Bookings: " + JSON.stringify(this.bookings));
     } catch (error) {
       // Handle errors here
       console.error(error);
@@ -672,7 +672,7 @@ console.log("business email"+ this.businessUserEmail)
           const month = date.toLocaleString('default', { month: 'long' });
           const year = date.getFullYear();
           const formattedDate = `${day} ${month} ${year}`;
-          console.log(formattedDate);
+          //console.log(formattedDate);
           element.createdDate = formattedDate;
 
           if (element.toDate !== null && element.toDate !== undefined) {
@@ -694,7 +694,7 @@ console.log("business email"+ this.businessUserEmail)
         // Handle the case when bookings are found
       }
 
-      console.log("Bookings: " + JSON.stringify(this.bookings));
+      //console.log("Bookings: " + JSON.stringify(this.bookings));
     } catch (error) {
       // Handle errors here
       console.error(error);
@@ -714,12 +714,12 @@ console.log("business email"+ this.businessUserEmail)
 
       this.bookings = data.body;
       this.bookings.reverse();
-      console.log('dataaaaaa is', this.bookingEnquiry);
+      //console.log('dataaaaaa is', this.bookingEnquiry);
       this.bookings = this.bookings.filter(ele => ele.status != 'Void')
       this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
       this.totalPagess = this.bookings.length;
-      console.log('pageNumber is',this.pageNumber);
-      console.log('total page is',this.totalPagess);
+      //console.log('pageNumber is',this.pageNumber);
+      //console.log('total page is',this.totalPagess);
       this.updatePaginatedData();
 
       for (const element of this.bookings) {
@@ -731,7 +731,7 @@ console.log("business email"+ this.businessUserEmail)
         const year = date.getFullYear();
         const formattedDate = `${day} ${month} ${year}`;
 
-        console.log(formattedDate);
+        //console.log(formattedDate);
         element.createdDate = formattedDate;
 
         if (element.toDate !== null && element.toDate !== undefined) {
@@ -820,21 +820,21 @@ console.log("business email"+ this.businessUserEmail)
 
     this.loader = true;
 
-    // console.log('Sending request with phoneNumber:', this.phoneNumber);
+    // //console.log('Sending request with phoneNumber:', this.phoneNumber);
 
     // if (this.isPhoneNumberValid) {
     //       this.showOTPInput = true;
     //       this.buttonremove = false;
     //     }
-    // console.log('message is ' + this.message.toNumber)
-    // console.log('message is ' + this.message.phoneNumber)
+    // //console.log('message is ' + this.message.toNumber)
+    // //console.log('message is ' + this.message.phoneNumber)
 
     if (this.isPhoneNumberValid) {
           this.showOTPInput = true;
           this.buttonremove = false;
         }
 
-    console.log('Sending request with phoneNumber:', this.phoneNumber);
+    //console.log('Sending request with phoneNumber:', this.phoneNumber);
       this.message.toNumber = this.phoneNumber;
       // this.message.email = null;
 
@@ -845,7 +845,7 @@ console.log("business email"+ this.businessUserEmail)
     .subscribe(
       (response) => {
         this.loader = false;
-        console.log('Response from server:', response);
+        //console.log('Response from server:', response);
         // Logger.log("authorisationToken data", JSON.stringify(response));
         const data: any = response;
         this.message.verificationStatus = data.verificationStatus;
@@ -879,7 +879,7 @@ if (this.verifyOption == "sms") {
       this.message.email = this.email;
       this.message.toNumber = null;
     }
-    console.log("verification code is "+this.verificationCode)
+    //console.log("verification code is "+this.verificationCode)
     this.message.verificationCode = this.verificationCode;
     this.hotelBookingService.verifyAuthorisationToken(this.message).subscribe(
       (response) => {

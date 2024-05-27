@@ -74,7 +74,7 @@ export class LoginCancelPageComponent implements OnInit {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
     this.propertyname= this.propertyname;
-    console.log('data is',this.businessUser);
+    //console.log('data is',this.businessUser);
 
 
   }
@@ -96,14 +96,14 @@ export class LoginCancelPageComponent implements OnInit {
    }
 
   ngOnInit() {
-    // console.log('data is',JSON.stringify(this.businessUserdata));
+    // //console.log('data is',JSON.stringify(this.businessUserdata));
     this.businessEmail = this.businessUserdata?.email;
-    // console.log('data is one',this.businessEmail);
+    // //console.log('data is one',this.businessEmail);
 
     // this.contactEmail = CONT_EMAIL;
     // this.contactMobile = const CONT_MOBILE;
     this.businessUser = history.state.businessUser;
-// console.log("user is "+ JSON.stringify(this.businessUser))
+// //console.log("user is "+ JSON.stringify(this.businessUser))
     this.signinForm = new FormGroup({
       username: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required),

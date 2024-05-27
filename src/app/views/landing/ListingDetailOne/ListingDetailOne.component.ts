@@ -609,7 +609,7 @@ export class ListingDetailOneComponent implements OnInit {
   ) {
     let currenturl = window.location.href
     this.token.savePropertyUrl(currenturl);
-    console.log (currenturl)
+    //console.log (currenturl)
     this.serviceDto = new PropertyServiceDTO();
     this.businessServiceDto = new BusinessServiceDtoList();
     this.businessService = new BusinessServiceDtoList();
@@ -762,10 +762,10 @@ export class ListingDetailOneComponent implements OnInit {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
       }
-      // console.log(this.adults);
+      // //console.log(this.adults);
       // this.updateTag();
     });
-    // console.log("sdfgh"+this.city)
+    // //console.log("sdfgh"+this.city)
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
@@ -773,7 +773,7 @@ export class ListingDetailOneComponent implements OnInit {
     // this.token.clearRoomsData();
     this.offerService.getPropertyListByCity(this.city).subscribe((res) => {
       // this.accommodationData = res.body.filter(entry => entry.businessType === 'Accommodation');
-      // console.log(this.accommodationData)
+      // //console.log(this.accommodationData)
       this.restaurantData = res.body.filter(
         (entry) => entry.businessType === 'Restaurants'
       );
@@ -790,7 +790,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.city = this.token.getProperty()?.address?.city;
     if (this.token.getProperty() !== null) {
       this.propertyDetail = this.token.getProperty();
-      // console.log("property details are" + JSON.stringify(this.propertyDetail))
+      // //console.log("property details are" + JSON.stringify(this.propertyDetail))
     }
     if (this.token.getBookingCity() !== null) {
       this.bookingCity = this.token.getBookingCity();
@@ -836,7 +836,7 @@ export class ListingDetailOneComponent implements OnInit {
     if (this.counterl > 0) {
       this.counterl--;
     }
-    // console.log("count"+this.counterl )
+    // //console.log("count"+this.counterl )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = lunchservice;
     this.serviceDto.count = this.counterl;
@@ -880,7 +880,7 @@ export class ListingDetailOneComponent implements OnInit {
 
     this.serviceDto = new PropertyServiceDTO();
 
-    // console.log('add service:' + JSON.stringify(this.addServiceList));
+    // //console.log('add service:' + JSON.stringify(this.addServiceList));
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
@@ -945,7 +945,7 @@ export class ListingDetailOneComponent implements OnInit {
     if (this.counterb > 0) {
       this.counterb--;
     }
-    // console.log("count"+this.counterb )
+    // //console.log("count"+this.counterb )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = breakfastservice;
     this.serviceDto.count = this.counterb;
@@ -989,7 +989,7 @@ export class ListingDetailOneComponent implements OnInit {
 
     this.serviceDto = new PropertyServiceDTO();
 
-    // console.log('add service:' + JSON.stringify(this.addServiceList));
+    // //console.log('add service:' + JSON.stringify(this.addServiceList));
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
@@ -1010,7 +1010,7 @@ export class ListingDetailOneComponent implements OnInit {
     if (this.counterd > 0) {
       this.counterd--;
     }
-    // console.log("count"+this.counterd )
+    // //console.log("count"+this.counterd )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = dinnerservice;
     this.serviceDto.count = this.counterd;
@@ -1054,7 +1054,7 @@ export class ListingDetailOneComponent implements OnInit {
 
     this.serviceDto = new PropertyServiceDTO();
 
-    // console.log('add service:' + JSON.stringify(this.addServiceList));
+    // //console.log('add service:' + JSON.stringify(this.addServiceList));
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
@@ -1139,7 +1139,7 @@ export class ListingDetailOneComponent implements OnInit {
           this.availableRooms = response.body.roomList;
           this.checkAvailabilityStatus = response.body.available;
           this.booking.bookingAmount = response.body.bookingAmount;
-          // console.log("check availability");
+          // //console.log("check availability");
 
           // this.booking.extraPersonCharge = response.body.extraPersonCharge;
 
@@ -1182,7 +1182,7 @@ export class ListingDetailOneComponent implements OnInit {
   }
   submitForm(form: NgForm) {
     // debugger;
-    console.log("this is clicked");
+    //console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
     const TO_EMAIL = "samaya.muduli@credencesoft.co.nz";
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
@@ -1276,13 +1276,13 @@ export class ListingDetailOneComponent implements OnInit {
     this.metaService.updateTag({ name: 'title', content: title });
     this.titleService.setTitle(title);
     this.metaService.updateTag({ name: 'keywords', content: keywords });
-    // console.log("the hotelamate" + keywords)
+    // //console.log("the hotelamate" + keywords)
     this.metaService.updateTag({ name: 'description', content: this.description });
     this.metaService.updateTag({ name: 'robots', content: 'index,follow' });
     // fb
 
     this.metaService.updateTag({ property: 'og:title', content: ogTitle });
-    // console.log("ogTitle :" + ogTitle )
+    // //console.log("ogTitle :" + ogTitle )
     this.metaService.updateTag(
       {
         property: 'og:description',
@@ -1290,9 +1290,9 @@ export class ListingDetailOneComponent implements OnInit {
       },
       `property='og:description'`
     );
-    //  console.log("ogdescription : " +description)
+    //  //console.log("ogdescription : " +description)
     this.metaService.updateTag({ property: 'og:image', content: ogImage });
-    // console.log("ogImage : " +ogImage)
+    // //console.log("ogImage : " +ogImage)
     this.metaService.updateTag({ property: 'og:url', content: ogUrl });
     this.metaService.updateTag(
       {
@@ -1301,9 +1301,9 @@ export class ListingDetailOneComponent implements OnInit {
       },
       `property='og:site_name'`
     );
-    // console.log('site_name : ' + ogSiteName);
+    // //console.log('site_name : ' + ogSiteName);
     this.metaService.updateTag({ property: 'og:image', content: ogImage });
-    // console.log('ogImage :' + ogImage);
+    // //console.log('ogImage :' + ogImage);
 
     // twitter
     this.metaService.updateTag({ name: 'twitter:title', content: ogTitle });
@@ -1338,8 +1338,8 @@ export class ListingDetailOneComponent implements OnInit {
     this.enddate = new Date(toDate.year, toDate.month - 1, toDate.day);
 
     this.startDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
-    // console.log('this.fromDate: ', this.startDate);
-    // console.log('this.toDate: ', this.enddate);
+    // //console.log('this.fromDate: ', this.startDate);
+    // //console.log('this.toDate: ', this.enddate);
     this.DiffDate = Math.floor(
       (Date.UTC(
         this.enddate.getFullYear(),
@@ -1364,7 +1364,7 @@ export class ListingDetailOneComponent implements OnInit {
 
   async getPropertyDetailsById(id: number) {
     // debugger
-    // console.log("id isequal to" + id)
+    // //console.log("id isequal to" + id)
     try {
       this.loader = true;
       const data = await this.listingService?.findByPropertyId(id).toPromise();
@@ -1514,7 +1514,7 @@ this.isHeaderVisible = true;
   increament(breakfastservice) {
 
     this.counterb = this.counterb + 1;
-    // console.log("count"+this.counterb )
+    // //console.log("count"+this.counterb )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = breakfastservice;
     this.serviceDto.count = this.counterb;
@@ -1558,7 +1558,7 @@ this.isHeaderVisible = true;
 
     this.serviceDto = new PropertyServiceDTO();
 
-    // console.log('add service:' + JSON.stringify(this.addServiceList));
+    // //console.log('add service:' + JSON.stringify(this.addServiceList));
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
@@ -1577,7 +1577,7 @@ this.isHeaderVisible = true;
   increamentL(lunchservice) {
 
     this.counterl = this.counterl + 1;
-    // console.log("count"+this.counterl )
+    // //console.log("count"+this.counterl )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = lunchservice;
     this.serviceDto.count = this.counterl;
@@ -1621,7 +1621,7 @@ this.isHeaderVisible = true;
 
     this.serviceDto = new PropertyServiceDTO();
 
-    // console.log('add service:' + JSON.stringify(this.addServiceList));
+    // //console.log('add service:' + JSON.stringify(this.addServiceList));
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
@@ -1640,7 +1640,7 @@ this.isHeaderVisible = true;
   increamentD(dinnerservice) {
 
     this.counterd = this.counterd + 1;
-    // console.log("count"+this.counterd )
+    // //console.log("count"+this.counterd )
     this.serviceDto = new PropertyServiceDTO();
     this.serviceDto = dinnerservice;
     this.serviceDto.count = this.counterd;
@@ -1684,7 +1684,7 @@ this.isHeaderVisible = true;
 
     this.serviceDto = new PropertyServiceDTO();
 
-    // console.log('add service:' + JSON.stringify(this.addServiceList));
+    // //console.log('add service:' + JSON.stringify(this.addServiceList));
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
@@ -1719,12 +1719,12 @@ this.isHeaderVisible = true;
             }
           });
 
-          // console.log("property service list"+ JSON.stringify(this.propertyServiceListData))
+          // //console.log("property service list"+ JSON.stringify(this.propertyServiceListData))
           this.policies = this.businessUser.businessServiceDtoList.filter(
             (ele) => ele.name === 'Accommodation'
           );
           // this.policies = this.businessUser.businessServiceDtoList => this.businessUser.businessServiceDtoList.every(ele => ele.policy === null &&  ele.policy === undefined);
-          // console.log("policies are :" +JSON.stringify (this.policies))
+          // //console.log("policies are :" +JSON.stringify (this.policies))
           this.updateTag();
           this.changeDetectorRefs.detectChanges();
           this.token.saveProperty(this.businessUser);
@@ -1732,7 +1732,7 @@ this.isHeaderVisible = true;
           if (this.urlLocation !== undefined && this.urlLocation !== null) {
             this.triggerEventService.newEvent(this.urlLocation);
           }
-          // console.log("no of adults :" + this.adults)
+          // //console.log("no of adults :" + this.adults)
           this.dangerousUrl =
             'https://siteminder-git-main-rekha-credencesoft.vercel.app/propertyId/' +
             this.businessUser.id;
@@ -1790,7 +1790,7 @@ this.isHeaderVisible = true;
             this.booking.taxPercentage != undefined
           ) {
             this.taxPercentage = this.booking.taxPercentage;
-            // console.log('frodm' + this.taxPercentage);
+            // //console.log('frodm' + this.taxPercentage);
           } else {
             this.taxPercentage = 0;
           }
@@ -1955,7 +1955,7 @@ this.isHeaderVisible = true;
           //     }
           //   }
           // }
-          // console.log('response room ' + JSON.stringify(this.roomsone));
+          // //console.log('response room ' + JSON.stringify(this.roomsone));
         },
         (error) => {
           if (error instanceof HttpErrorResponse) {
@@ -1988,10 +1988,10 @@ this.isHeaderVisible = true;
 
   onPlanSelected(plan, room) {
 
-    // console.log("ftgyhjkl"+JSON.stringify(this.booking))
-    // console.log("room"+JSON.stringify(room))
+    // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
+    // //console.log("room"+JSON.stringify(room))
     this.booking.roomType = room.name;
-    // console.log("sdfghjkl"+ JSON.stringify(plan))
+    // //console.log("sdfghjkl"+ JSON.stringify(plan))
     this.showDiv = true;
     this.div = true;
     this.checkAvailabilityStatus = false;
@@ -2053,7 +2053,7 @@ this.isHeaderVisible = true;
           this.taxPercentage = element.percentage;
           this.booking.taxPercentage = this.taxPercentage;
 
-          // console.log("room price :" +this.booking.roomPrice)
+          // //console.log("room price :" +this.booking.roomPrice)
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
               if (
@@ -2357,7 +2357,7 @@ if (bookingSummaryElement) {
     // this.router.navigate(['/add-service-odt']);
   }
   onRoomBook(roomId, index) {
-    // console.log("ftgyhjkl"+JSON.stringify(this.booking))
+    // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // this.checkAvailabilityStatus = false;
     this.selectedIndex = index;
     // this.getPlan(roomId);
@@ -2590,7 +2590,7 @@ if (bookingSummaryElement) {
               });
               if (room.dayTrip == true) {
                 this.dayOneTrip = true;
-                // console.log('dayonetrip: ' + this.dayOneTrip);
+                // //console.log('dayonetrip: ' + this.dayOneTrip);
               } else {
                 this.dayOneTrip = false;
               }
@@ -2646,7 +2646,7 @@ if (bookingSummaryElement) {
                     });
                   }
                   this.daterangefilter =Array.from(new Set(this.daterangefilter));
-                  // console.log(JSON.stringify(this.daterangefilter));
+                  // //console.log(JSON.stringify(this.daterangefilter));
 
                   event2.roomRatePlans = [];
                   ghcPlan = plan;
@@ -2667,7 +2667,7 @@ if (bookingSummaryElement) {
                   0
                 );
                 }
-                // console.log(
+                // //console.log(
                 //   'ota price is equa;' + JSON.stringify(this.planPrice)
                 // );
               });
@@ -2676,7 +2676,7 @@ if (bookingSummaryElement) {
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
               (des2) => {
-                // console.log('my data is ', des2);
+                // //console.log('my data is ', des2);
                 return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
               }
             );
@@ -2686,7 +2686,7 @@ if (bookingSummaryElement) {
 
           if (facilities !== null && facilities !== undefined) {
             facilities.forEach((fac) => {
-              // console.log("Image url: "+fac.imageUrl)
+              // //console.log("Image url: "+fac.imageUrl)
               if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
                 this.breakfast = fac;
               }
@@ -2735,13 +2735,13 @@ if (bookingSummaryElement) {
               ele.ratesAndAvailabilityDtos != undefined &&
               ele.ratesAndAvailabilityDtos.length > 0
             ) {
-              // console.log("Available rooms: "+JSON.stringify(ele.ratesAndAvailabilityDtos));
+              // //console.log("Available rooms: "+JSON.stringify(ele.ratesAndAvailabilityDtos));
               this.availability = true;
             } else {
               this.allDtosNull();
             }
           });
-          // console.log('this.availability: ' + this.availability);
+          // //console.log('this.availability: ' + this.availability);
           // if (this.availableRooms === null && this.availableRooms === undefined) {
           //   this.availability =false;
           // }
@@ -2983,7 +2983,7 @@ if (bookingSummaryElement) {
             this.availableRooms.forEach((room) => {
               room?.ratesAndAvailabilityDtos?.forEach((ele) => {
                 ele.roomRatePlans?.forEach((e) => {
-                  // console.log(JSON.stringify(e.propertyServicesList));
+                  // //console.log(JSON.stringify(e.propertyServicesList));
                   if (e.name === this.booking.roomRatePlanName) {
                     this.planpropertyServiceList = e.propertyServicesList;
                     this.planpropertyServiceList?.forEach((service) => {
@@ -2998,7 +2998,7 @@ if (bookingSummaryElement) {
                       }
                       // if (service.name != 'Breakfast' || 'Breakfast (Adult)' || 'Lunch' || 'Dinner') {
                       //   this.addServiceList = [];
-                      //   console.log("dfghjkljhgvg" + JSON.stringify(this.addServiceList))
+                      //   //console.log("dfghjkljhgvg" + JSON.stringify(this.addServiceList))
                       // }
                     });
                   }
@@ -3029,7 +3029,7 @@ if (bookingSummaryElement) {
               });
               if (room.dayTrip == true) {
                 this.dayOneTrip = true;
-                // console.log('dayonetrip: ' + this.dayOneTrip);
+                // //console.log('dayonetrip: ' + this.dayOneTrip);
               } else {
                 this.dayOneTrip = false;
               }
@@ -3067,7 +3067,7 @@ if (bookingSummaryElement) {
                           this.daterangefilter.push(formattedDate);
                         });
                         this.daterangefilter =Array.from(new Set(this.daterangefilter));
-                        // console.log(JSON.stringify(this.daterangefilter));
+                        // //console.log(JSON.stringify(this.daterangefilter));
 
                       }
                     });
@@ -3110,7 +3110,7 @@ if (bookingSummaryElement) {
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
               (des2) => {
-                // console.log('my data is ', des2);
+                // //console.log('my data is ', des2);
                 return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
               }
             );
@@ -3120,7 +3120,7 @@ if (bookingSummaryElement) {
 
           if (facilities !== null && facilities !== undefined) {
             facilities.forEach((fac) => {
-              // console.log("Image url: "+fac.imageUrl)
+              // //console.log("Image url: "+fac.imageUrl)
               if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
                 this.breakfast = fac;
               }
@@ -3169,13 +3169,13 @@ if (bookingSummaryElement) {
               ele.ratesAndAvailabilityDtos != undefined &&
               ele.ratesAndAvailabilityDtos.length > 0
             ) {
-              // console.log("Available rooms: "+JSON.stringify(ele.ratesAndAvailabilityDtos));
+              // //console.log("Available rooms: "+JSON.stringify(ele.ratesAndAvailabilityDtos));
               this.availability = true;
             } else {
               this.allDtosNull();
             }
           });
-          // console.log('this.availability: ' + this.availability);
+          // //console.log('this.availability: ' + this.availability);
           // if (this.availableRooms === null && this.availableRooms === undefined) {
           //   this.availability =false;
           // }
