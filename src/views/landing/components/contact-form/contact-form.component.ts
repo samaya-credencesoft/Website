@@ -121,6 +121,8 @@ export class ContactFormComponent implements OnInit {
   }
 
   submitForm(form: NgForm) {
+
+    console.log('this is clicked ');
     console.log(JSON.stringify(this.subscriptions));
     const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
     // const TO_EMAIL = 'abir.sayeed@gmail.com';

@@ -88,6 +88,7 @@ export class BusinessUser {
   roomList: Room[];
   bankAccount: any;
   mobileWallet: MobileWallet;
+  property: any;
 
   taxDetails: TaxDetails[];
   propertyServicesList: PropertyServiceDTO[];

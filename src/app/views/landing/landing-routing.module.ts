@@ -28,6 +28,15 @@ import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted
 import { BookOneConnectComponent } from './book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
 import { BookingComponent } from './Booking/Booking.component';
+import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
+import { LoginDetailsComponent } from './login-details/login-details.component';
+import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
+import { ManageEnquiryComponent } from './manage-enquiry/manage-enquiry.component';
+import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
+import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -78,6 +87,27 @@ const routes: Routes = [
     path: 'v11',
     component: LandingV11Component
   },
+  {
+    path: 'manage-property',
+    component: LoginCancelPageComponent
+  },
+  {
+    path:'manage-property-details',
+    component:LoginDetailsComponent
+  },
+  {
+    path:'cancel-booking',
+    component:CancelBookingComponent
+  },
+  {
+    path:'manage-bookings',
+    component:ManageBookingsComponent
+  },
+  {
+    path:'manage-enuiry',
+    component:ManageEnquiryComponent
+  },
+
   // {
   //   path: 'blog-details',
   //   component: BlogDetailsPageComponent
@@ -95,6 +125,16 @@ const routes: Routes = [
     path: 'onboard',
     component: OnboardingCouponcodeFormComponent, data: {title: 'onboard'}
   },
+  {
+    path: 'history',component: NotificationHandlingComponent,},
+    {
+      path: 'booking-complete',
+      component: BookingCompleteComponent,
+    },
+    {
+      path: 'manage-enquiry',component: EnquiryComponent,},
+      {
+        path: 'checkout',component: CheckoutComponent,},
   {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {
@@ -144,6 +184,7 @@ const routes: Routes = [
     path: "detail/bookingSource/:id",
     component: ListingDetailOneComponent,
   },
+
   {
     path: 'detail',
     component: ListingDetailOneComponent, data: {title: 'detail'}
