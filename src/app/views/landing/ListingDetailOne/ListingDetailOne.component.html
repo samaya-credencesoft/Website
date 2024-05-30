@@ -2551,6 +2551,14 @@
                                 }}</span>
                            </td>
                         </tr>
+                        
+                        <tr *ngIf="booking.extraChildCharge >0" style="color:black; padding:5px">
+                          <td style="color: black;padding:5px ">Extra Child charges </td>
+                          <td style="color: black;padding:5px " ><span>{{
+                            booking.extraChildCharge
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span></td>
+                        </tr>
                          <tr >
                            <td style="color: black;padding:5px">Tax and service charges</td>
                            <td style="color: black;padding:5px " >
@@ -3060,62 +3068,67 @@
 
 
       </div>
+
       <div class="container-fluid p-4 askq" *ngIf="availableRooms?.length >=0 && availability ==true">
-        <form #contactForm=ngForm role="form"  action="">
-        <div class="form-group mb-4">
-          <p class="py-3" style="font-weight: bold;">Ask a question</p>
-          <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="!successMessage === false">
-            <span class="alert-inner--icon"><i class="fa fa-thumbs-o-up"></i></span>
-            <span class="alert-inner--text"><strong>Message Sent!</strong> Thanks for reaching us.</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
+        <form #contactForm="ngForm" role="form" (ngSubmit)="submitForm(contactForm)">
+          <div class="form-group mb-4">
+            <p class="py-3" style="font-weight: bold;">Ask a question</p>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="successMessage">
+              <span class="alert-inner--icon"><i class="fa fa-thumbs-o-up"></i></span>
+              <span class="alert-inner--text"><strong>Message Sent!</strong> Thanks for reaching us.</span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+      
             <div class="col-lg-6 p-0">
-            <div class="input-group input-group-alternative" style="border: 1px solid;">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="ni ni-user-run"></i></span>
-              </div>
-              <input type="tel" required [formControl]="phoneControl" name='phone' class="form-control"
-                placeholder="Your Phone**" aria-describedby="phone" [(ngModel)]="phone">
-                <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
-                  *ngIf="(phoneControl.touched || contactForm.submitted) && phoneControl.errors">
-                  <span *ngIf="phoneControl.errors.required" class="text-danger">* Phone is required </span>
-                  <span *ngIf="phoneControl.errors.pattern" class="text-danger">Please enter valid phone number</span>
+              <div class="input-group input-group-alternative" style="border: 1px solid;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-user-run"></i></span>
                 </div>
-            </div>
-          </div>
-          <div class="col-lg-6 p-0 mt-4">
-            <div class="input-group input-group-alternative" style="border: 1px solid;">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="ni ni-user-run"></i></span>
-              </div>
-              <input type="text" [formControl]="fromEmailControl" required name='email' [(ngModel)]="fromEmail" class="form-control"
-                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Your email**" aria-describedby="helpId"
-                style="color: #484848;">
-              <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
-                *ngIf="(fromEmailControl.touched || contactForm.submitted) && fromEmailControl.errors">
-                <span *ngIf="fromEmailControl.errors.required" class="text-danger">* Email is required </span>
-                <span *ngIf="fromEmailControl.errors.pattern" class="text-danger">Please enter valid email</span>
+                <input type="tel" [formControl]="phoneControl" required name='phone' class="form-control"
+                       placeholder="Your Phone**" aria-describedby="phone" [(ngModel)]="phone">
+                <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
+                     *ngIf="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)">
+                  <span *ngIf="phoneControl.errors?.required" class="text-danger">Phone is required</span>
+                  <span *ngIf="phoneControl.errors?.pattern" class="text-danger">Please enter valid phone number</span>
+                </div>
               </div>
             </div>
+      
+            <div class="col-lg-6 p-0 mt-4">
+              <div class="input-group input-group-alternative" style="border: 1px solid;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-user-run"></i></span>
+                </div>
+                <input type="text" [formControl]="fromEmailControl" required name='email' [(ngModel)]="fromEmail" class="form-control"
+                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Your email**" aria-describedby="helpId"
+                       style="color: #484848;">
+                <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
+                     *ngIf="fromEmailControl.invalid && (fromEmailControl.dirty || fromEmailControl.touched)">
+                  <span *ngIf="fromEmailControl.errors?.required" class="text-danger">Email is required</span>
+                  <span *ngIf="fromEmailControl.errors?.pattern" class="text-danger">Please enter valid email</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="form-group mb-4">
-          <textarea class="form-control form-control-alternative" [formControl]="messageControl" placeholder="Start Typing...**"
-            required name='message' [(ngModel)]="message" rows="4" cols="80" style="border: 1px solid; resize:none"></textarea>
+      
+          <div class="form-group mb-4">
+            <textarea class="form-control form-control-alternative" [formControl]="messageControl" placeholder="Start Typing...**"
+                      required name='message' [(ngModel)]="message" rows="4" cols="80" style="border: 1px solid; resize:none"></textarea>
             <div class="form-control-feedback pr-1 d-flex"
-              *ngIf="(messageControl.touched || contactForm.submitted) && messageControl.errors">
-              <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
+                 *ngIf="messageControl.invalid && (messageControl.dirty || messageControl.touched)">
+              <span *ngIf="messageControl.errors?.required" class="text-danger">Question is required</span>
             </div>
-        </div>
-        <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'
-          style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
-          Submit
-        </button>
-        </form>
-      </div>
-    <div *ngIf=" allDtosNull()">
+          </div>
+      
+          <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid' style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
+            Submit
+          </button>
+          </form><div></div>
+          </div>
+
+      <div *ngIf=" allDtosNull()">
       <app-enquiry-list></app-enquiry-list>
     </div>
       <ng-template #room let-modal style="max-width: 500px">
