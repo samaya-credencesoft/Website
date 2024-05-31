@@ -4,7 +4,7 @@ import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted
 
 import { ScrollToDirective } from './helpers/scrollTo.directives';
 import { WINDOW_PROVIDERS } from './helpers/window.helpers';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 // import { NgForm } from "@angular/forms";
 import { CommonModule, DatePipe } from '@angular/common';
 import { NguCarouselModule } from '@ngu/carousel';
@@ -217,6 +217,7 @@ EnquiryComponent,
   providers: [WINDOW_PROVIDERS,
     DatePipe,
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     FormsModule,
   ]

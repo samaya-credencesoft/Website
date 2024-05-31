@@ -36,6 +36,16 @@
   </div> -->
 
 
+<!-- specific-page.component.html -->
+<df-messenger
+  location="asia-south1"
+  project-id="impactful-name-306810"
+  agent-id="e2f46998-246d-4046-aee3-65c992b363ea"
+  intent="WELCOME"
+  storage-option="none"
+  language-code="en"
+  max-query-length="-1">
+</df-messenger>
 
 
 
@@ -1524,7 +1534,7 @@
                       selectedRoomAvailableNumber =
                         room.noOfRooms;
                       checkAvailabilityStatus = true;
-                      checkingAvailability1(); bookRoomNow();  document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });
+                      checkingAvailability1(); bookRoomNow();document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });
                     " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
                                   BOOK NOW</button>
                               </div>
@@ -3596,37 +3606,14 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-          </div>
+                    </div>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- HTML -->
-
-  <!-- <div class="popup-container" *ngIf="isPopupVisible" style="float: left;z-index: 1000;">
-    <div class="popup-content" >
-      <span class="close-icon" style="position: absolute; top: 10px; right: 10px;"><button (click)="closePopup()" style="width: 25px;">&#10006;</button>
-      </span>
-      <div class="ota" >OTA Prices</div> -->
-      <!-- <span class="close-icon" style="position: absolute; top: 10px; right: 10px;"><button (click)="closePopup()">&#10006;</button>
-      </span> -->
-
-      <!-- <div *ngFor="let plan of room.roomRatePlans">
-        <div *ngIf="room && room.roomRatePlans">
-          <p>{{plan.otaName}}</p>
-
-        </div>   -->
-        <!-- <table>
-            <tr *ngFor="let otaPlan of otaPlans">
-              <td style="padding-left: 20px;">{{ otaPlan.otaName }} : </td>
-              <td> ₹{{ otaPlan.price }}</td>
-            </tr>
-        </table>
-
-                    </div>
-  </div> -->
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 
 </body>
 </html>

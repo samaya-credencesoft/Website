@@ -769,6 +769,30 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+
+    window.addEventListener('df-request-sent', (event) => {
+      console.log('Request', event);
+      const propertyId = this.businessUser.id;
+      const propertyName = this.businessUser.name;
+      const currentDate = new Date();
+      const dataToSend = {
+        propertyId: propertyId,
+        propertyName:propertyName,
+        currentDate:currentDate,
+      };
+      console.log("object data is " + JSON.stringify(dataToSend));
+      fetch('https://8186-122-164-24-5.ngrok-free.app/api-thm/chatbot/dateValidation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      })
+      .then(response => response.json())
+
+      .catch(error => console.error('Error:', error));
+    });
+
 if (this.city != null && this.city != undefined) {
   this.offerService.getPropertyListByCity(this.city).subscribe((res) => {
     // this.accommodationData = res.body.filter(entry => entry.businessType === 'Accommodation');
