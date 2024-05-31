@@ -36,8 +36,8 @@ export class LoginDetailsComponent implements OnInit {
 
   cancelBookingId: any;
 
-  selectedOption: string = 'EmailRadio';
-  selectedOptionenquiry: string = 'emailRadio1';
+  selectedOption: string = '';
+  selectedOptionenquiry: string = '';
 
   selectedTabdefault: boolean = true;
   cancelId: any;

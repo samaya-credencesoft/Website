@@ -1182,7 +1182,19 @@ if (this.city != null && this.city != undefined) {
     // this.token.saveProperty(this.businessUser);
     this.router.navigate(['privacy']);
   }
+  resetFormControls() {
+    this.phoneControl.markAsPristine();
+    this.phoneControl.markAsUntouched();
+    this.fromEmailControl.markAsPristine();
+    this.fromEmailControl.markAsUntouched();
+    this.messageControl.markAsPristine();
+    this.messageControl.markAsUntouched();
+  }
+  
+ 
+
   submitForm(form: NgForm) {
+    this.resetFormControls();
     // debugger;
     //console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
@@ -2769,7 +2781,7 @@ if (bookingSummaryElement) {
     throw new Error('Method not implemented.');
   }
 
-
+  
 
   allDtosNull(): boolean {
     return this.availableRooms?.every(
