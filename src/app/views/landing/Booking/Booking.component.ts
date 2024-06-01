@@ -1,7 +1,7 @@
 // import { Components } from './../../model/components';
 // import { Template } from './../../model/template';
 
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 // import { Customer } from "./../../model/customer";
 import {
@@ -60,6 +60,7 @@ declare var window: any;
   providers: [DatePipe],
 })
 export class BookingComponent implements OnInit {
+  
   PropertyUrl: string;
   currency: string;
   message: MessageDto;
@@ -79,6 +80,8 @@ export class BookingComponent implements OnInit {
   verifyOption = "email";
   // smsOption: string = '';
   sendBtn = "Send";
+  form: FormGroup;
+  mobileHasError: boolean = true;
   submitButtonDisable: boolean = false;
   loader = false;
   verificationCode: string;
@@ -130,7 +133,6 @@ export class BookingComponent implements OnInit {
   contentDialog: any;
 
   ngbDate: any;
-  mobileHasError: boolean = true;
   taxPercentage = 0;
   subTotalAmount: number = 0;
   totalAmount: number = 0;
@@ -189,9 +191,12 @@ export class BookingComponent implements OnInit {
     private listingService: ListingService,
     private router: Router,
     private http: HttpClient,
-    private hotelBookingService: HotelBookingService
+    private hotelBookingService: HotelBookingService,
+    private fb: FormBuilder
   ) {
-    
+    this.form = this.fb.group({
+      mobile: ['', [Validators.required]]
+    });
     this.message = new MessageDto();
     this.myDate = new Date();
     this.parametertype = new Para();
@@ -345,7 +350,13 @@ export class BookingComponent implements OnInit {
       this.API_URL = API_URL_IN;
     }
   }
+  onCountryChange(event: any) {
+    console.log(event);
+  }
 
+  onNumberChange(event: any) {
+    this.mobileHasError = !this.form.controls['mobile'].valid;
+  }
   ngAfterViewInit() {
     let radios = document.querySelectorAll(".payment-tab-trigger > input");
 
@@ -2081,7 +2092,7 @@ this.enquiryForm.roomPrice = this.booking.totalAmount
   this.whatsappForm.messaging_product = 'whatsapp';
   this.whatsappForm.recipient_type ='individual';
   this.template.name = "";
-  this.template.name = "sample_reservation_enquiry";
+  this.template.name = "sample_reservation_inquiry";
   this.language.code = 'en',
   this.template.language = this.language;
   this.componentstype.type= 'header',

@@ -95,10 +95,20 @@
               Enter a valid email
             </span>
             <h5 style="font-weight: 400 !important;">Phone Number*</h5>
-            <input type="tel" maxlength="10" class="form-control" placeholder="eg: 8912345678" [(ngModel)]="booking.mobile"  id="mobile" name="mobile" required style="width:80%; border-radius: 26px; height: 2.5rem; border: 1px solid rgb(133, 133, 133);">
-            <span class="text-danger" *ngIf="!mobileHasError" >
-              Invalid Phone number
-            </span>
+            <input type="tel"
+       [(ngModel)]="booking.mobile"
+       id="mobile"
+       name="mobile"
+       required
+       [intlTelInput]="options"
+       style="width:80%; border-radius: 26px; height: 2.5rem; border: 1px solid rgb(133, 133, 133);"
+       (countryChange)="onCountryChange($event)"
+       (numberChange)="onNumberChange($event)">
+
+<span class="text-danger" *ngIf="!mobileHasError">
+  Invalid Phone number
+</span>
+
           </div>
           </form>
           <!-- Payment Information
