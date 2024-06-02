@@ -5,36 +5,37 @@ on: [workflow_dispatch]
 env:
   AWS_REGION: ap-south-1 
   ECR_REPOSITORY: 246214346933.dkr.ecr.ap-south-1.amazonaws.com/pms_website
-  AWS_ACCESS_KEY_ID: AKIATSU4EZC2YCCIZP7W
-  AWS_SECRET_ACCESS_KEY: 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
+  AWS_ROLE: arn:aws:iam::246214346933:role/bookone-uat-deployment-role 
 
   service_name: pms_website
-  jenkins_username: admin
-  jenkins_pass: 11137f86106c215ac79cbf0077b785b72b
-  jenkins_url: https://build.bookone.io
-  job_name: run_webui
+  depl_cluster_name: webui
+  deployment_variables: uat_deployment_api_credentials
+  BRANCH: release-uat
+  
+  depl_username: aa
+  depl_password: aa
+  depl_url: aa
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
-  deploy:
-    name: Deploy
+  build-and-deploy:
+    name: build-and-deploy
     runs-on: ubuntu-latest
-    environment: production
+    environment: uat
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: bookone-subha
-          fetch-depth: 1
+          ref: ${{ env.BRANCH }}
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
         with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ env.AWS_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
@@ -44,25 +45,36 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          # IMAGE_TAG: ${{ github.sha }}
           IMAGE_TAG: latest
         run: |
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build --build-arg CONFIGURATION=test -t $ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      - name: update server
-        id: update-server
+      # deployment
+      - uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        with:
+          secret-ids: ${{ env.deployment_variables }}
+          parse-json-secrets: true
+          name-transformation: none
+
+      - name: Set environment variables
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$jenkins_username:$jenkins_pass" -d "service_to_update=$service_name" "$jenkins_url/job/$job_name/buildWithParameters")
+          echo ${{ env.UAT_DEPLOYMENT_API_CREDENTIALS }}
+          echo "depl_username=${{ env.UAT_DEPLOYMENT_API_CREDENTIALS_USERNAME }}" >> $GITHUB_ENV
+          echo "depl_password=${{ env.UAT_DEPLOYMENT_API_CREDENTIALS_PASSWORD }}" >> $GITHUB_ENV
+          echo "depl_url=${{ env.UAT_DEPLOYMENT_API_CREDENTIALS_URL }}" >> $GITHUB_ENV
+
+      - name: deploy
+        id: deploy
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$depl_username:$depl_password" -d "service_to_update=$service_name" "$depl_url/job/$depl_cluster_name/buildWithParameters")
           if [ "$response" -eq 201 ]; then
             echo "Success! The response code is $response."
           else
             echo "Failed! The response code is $response."
-            exit 1 
+            exit 1
           fi
-     
