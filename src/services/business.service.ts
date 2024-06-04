@@ -56,6 +56,14 @@ export class BusinessService {
       { observe: 'response' }
     );
   }
+  getBusinessBySearch(applicationUser: BusinessUser) {
+    this.setApi();
+    return this.http.post<BusinessUser>(
+      this.API_URL + '/api/thm/findProperties',
+      applicationUser,
+      { observe: 'response' }
+    );
+  }
   getBusinessNameBySearch(search) {
     this.setApi();
     return this.http.get<any[]>(

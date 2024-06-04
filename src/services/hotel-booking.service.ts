@@ -113,7 +113,7 @@ export class HotelBookingService {
   createBooking(booking: Booking) {
     this.setApi();
     return this.http.post<Booking>(
-      "https://testconnect.bookone.io/hotelmate" + '/api/thm/booking',
+      "https://api.thehotelmate.com" + '/api/thm/booking',
       booking,
       { observe: 'response' }
     );
@@ -126,6 +126,16 @@ export class HotelBookingService {
       { observe: 'response' }
     );
   }
+
+  findBooking(booking: Booking) {
+    this.setApi();
+    return this.http.post<Booking[]>(
+      this.API_URL + '/api/website/findBookings',
+      booking,
+      { observe: 'response' }
+    );
+  }
+
   checkAvailability(booking: any) {
     return this.http.post<any>(
       this.API_URL + '/api/thm/checkAvailability',
@@ -215,7 +225,7 @@ export class HotelBookingService {
   }
   paymentIntent(paymentDetails: Payment) {
     return this.http.post<Payment>(
-      "https://testconnect.bookone.io/hotelmate" + '/api/thm/paymentIntent',
+      "https://api.thehotelmate.com" + '/api/thm/paymentIntent',
       paymentDetails,
       { observe: 'response' }
     );
@@ -244,7 +254,7 @@ export class HotelBookingService {
   processPayment(paymentDetails: Payment) {
     this.setApi();
     return this.http.post<Payment>(
-     "https://testconnect.bookone.io/hotelmate" + '/api/thm/processPayment',
+      "https://api.thehotelmate.com" + '/api/thm/processPayment',
       paymentDetails,
       { observe: 'response' }
     );
@@ -260,7 +270,7 @@ export class HotelBookingService {
   getPaymentByReffId(ref: string) {
     this.setApi();
     return this.http.get<Payment[]>(
-      "https://testconnect.bookone.io/hotelmate" +
+      this.API_URL +
       '/api/thm/findPaymentByReferenceNumber/' + ref,
       { observe: 'response' }
     );
