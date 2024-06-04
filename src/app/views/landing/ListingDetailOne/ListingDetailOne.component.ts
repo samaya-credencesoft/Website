@@ -785,7 +785,7 @@ const currentTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds
         propertyName:propertyName,
         currentDate:currentTimeString,
       };
-      fetch('https://600f-2401-4900-759d-7b84-c983-81f-134b-9e52.ngrok-free.app/api/chatbot/receive-payload', {
+      fetch('https://chatbot.uat.bookone.io/api/chatbot/receive-payload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
