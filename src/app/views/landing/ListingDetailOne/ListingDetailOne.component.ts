@@ -769,6 +769,33 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    window.addEventListener('df-request-sent', (event) => {
+      const propertyId = this.businessUser.id;
+      const propertyName = this.businessUser.name;
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+const day = String(currentDate.getDate()).padStart(2, '0');
+const hours = String(currentDate.getHours()).padStart(2, '0');
+const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+const currentTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      const dataToSend = {
+        propertyId: propertyId,
+        propertyName:propertyName,
+        currentDate:currentTimeString,
+      };
+      fetch('https://600f-2401-4900-759d-7b84-c983-81f-134b-9e52.ngrok-free.app/api/chatbot/receive-payload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      })
+      .then(response => response.json())
+      .catch(error => console.error('Error:', error));
+    });
+
 if (this.city != null && this.city != undefined) {
   this.offerService.getPropertyListByCity(this.city).subscribe((res) => {
     // this.accommodationData = res.body.filter(entry => entry.businessType === 'Accommodation');
@@ -779,7 +806,7 @@ if (this.city != null && this.city != undefined) {
   });
 }
     // this.token.clearRoomsData();
-    
+
 
     this.blogPosts$ = this.contentfulService.getAllEntries();
     this.email = {
@@ -1190,8 +1217,8 @@ if (this.city != null && this.city != undefined) {
     this.messageControl.markAsPristine();
     this.messageControl.markAsUntouched();
   }
-  
- 
+
+
 
   submitForm(form: NgForm) {
     this.resetFormControls();
@@ -2781,7 +2808,7 @@ if (bookingSummaryElement) {
     throw new Error('Method not implemented.');
   }
 
-  
+
 
   allDtosNull(): boolean {
     return this.availableRooms?.every(

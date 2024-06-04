@@ -28,7 +28,15 @@
 
   <app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
 
-
+  <df-messenger
+  location="asia-south1"
+  project-id="impactful-name-306810"
+  agent-id="e2f46998-246d-4046-aee3-65c992b363ea"
+  intent="WELCOME"
+  storage-option="none"
+  language-code="en"
+  max-query-length="-1">
+</df-messenger>
 
 
   <!-- <div  style="width: 100%; margin-top: 7px;">
@@ -213,14 +221,7 @@
             </form>
           </div>
 
-          <df-messenger
-  location="asia-south1"
-  project-id="impactful-name-306810"
-  agent-id="e2f46998-246d-4046-aee3-65c992b363ea"
-  language-code="en"
-  max-query-length="-1">
-  <df-messenger-chat-bubble chat-title=""></df-messenger-chat-bubble>
-</df-messenger>
+
 
 
 <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
@@ -2551,7 +2552,7 @@
                                 }}</span>
                            </td>
                         </tr>
-                        
+
                         <tr *ngIf="booking.extraChildCharge >0" style="color:black; padding:5px">
                           <td style="color: black;padding:5px ">Extra Child charges </td>
                           <td style="color: black;padding:5px " ><span>{{
@@ -3080,7 +3081,7 @@
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-      
+
             <div class="col-lg-6 p-0">
               <div class="input-group input-group-alternative" style="border: 1px solid;">
                 <div class="input-group-prepend">
@@ -3095,7 +3096,7 @@
                 </div>
               </div>
             </div>
-      
+
             <div class="col-lg-6 p-0 mt-4">
               <div class="input-group input-group-alternative" style="border: 1px solid;">
                 <div class="input-group-prepend">
@@ -3112,7 +3113,7 @@
               </div>
             </div>
           </div>
-      
+
           <div class="form-group mb-4">
             <textarea class="form-control form-control-alternative" [formControl]="messageControl" placeholder="Start Typing...**"
                       required name='message' [(ngModel)]="message" rows="4" cols="80" style="border: 1px solid; resize:none"></textarea>
@@ -3121,7 +3122,7 @@
               <span *ngIf="messageControl.errors?.required" class="text-danger">Question is required</span>
             </div>
           </div>
-      
+
           <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid' style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
             Submit
           </button>
