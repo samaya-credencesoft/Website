@@ -1912,7 +1912,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.roomPrice=this.booking.roomPrice;
     this.enquiryForm.externalSite="Website";
-    this.enquiryForm.source = "The Hotel Mate"
+    this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
