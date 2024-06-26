@@ -191,8 +191,8 @@
               <p><strong> Room Plan:</strong> {{ booking?.roomRatePlanName}}</p>
             </div>
             <div class="col-md-6">
-              <p><strong>Paid Amount:</strong> {{ booking?.payableAmount }}</p>
-              <p><strong>Remaining Amount:</strong> {{ (booking?.totalAmount)- (booking?.payableAmount)}}</p>
+              <p><strong>Paid Amount:</strong> {{ (booking?.payableAmount + booking?.outstandingAmount) }}</p>
+              <p><strong>Remaining Amount:</strong> {{-(booking?.outstandingAmount)}}</p>
             </div>
           </div>
           <div class="row" style="margin-left: -2px;">
