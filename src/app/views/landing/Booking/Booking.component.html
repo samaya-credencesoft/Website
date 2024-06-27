@@ -237,11 +237,11 @@
                   </tr>
                 </table>
               </div>
-              <div class="col-sm-6 text-right p-0" *ngIf="booking.roomRatePlanName === 'GHC'">
-                Room Plan: Economy
+              <div class="col-sm-6 text-left text-sm-right p-0 me-0 " *ngIf="booking.roomRatePlanName === 'GHC'">
+                Room Plan:<span class="left-mobile">Economy</span> 
               </div>
-              <div class="col-sm-6 text-right p-0" *ngIf="booking.roomRatePlanName !== 'GHC'">
-                Room Plan: {{booking.roomRatePlanName}}
+              <div class="col-sm-6 text-left text-sm-right p-0" *ngIf="booking.roomRatePlanName !== 'GHC'">
+                Room Plan: <span class="left-mobile"> {{booking.roomRatePlanName}} </span>
               </div>
             </div>
             <div class="col-sm-6 p-0">

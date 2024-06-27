@@ -356,6 +356,16 @@ form.stripe {
     form.stripe {
       width: 80vw;
     }
+   
+  }
+
+  @media  (max-width: 600px) {
+    status-view{
+      display: none;
+    }
+    .left-mobile {
+      margin-left: 50px;
+    }
   }
 
 //   stripe end
