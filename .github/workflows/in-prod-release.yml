@@ -1,75 +1,102 @@
-name: Release IN Prod
+name: Release India Prod
 
 on: [workflow_dispatch]
 
 env:
-  AWS_REGION: ap-south-1
   ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/pms_website
-  # AWS_ACCESS_KEY_ID:
-  # AWS_SECRET_ACCESS_KEY:
-
   service_name: pms_website
-  jenkins_username: webui_updater
-  jenkins_pass: 11cf70018c7b7fefd113bfe68a5dbf52ba
-  jenkins_url: https://build.bookonelocal.in
-  job_name: run_webui
+  depl_cluster_name: webui
+
+  AWS_ROLE: arn:aws:iam::912195358089:role/webui-india_prod-deployment-role
+  AWS_REGION: ap-south-1
+  deployment_variables: webui_india_prod_deployment_api_credentials
+
+  BRANCH: release-india-prod
+  depl_username: aa
+  depl_password: aa
+  depl_url: aa
 
 permissions:
   contents: read
   id-token: write
 
 jobs:
-  deploy:
-    name: Deploy
+  build:
+    name: build
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: release-india-prod
-          fetch-depth: 1
+          ref: ${{ env.BRANCH }}
 
-      # - name: Configure AWS credentials
-      #   uses: aws-actions/configure-aws-credentials@v1
-      #   with:
-      #     aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-      #     aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-      #     aws-region: ${{ env.AWS_REGION }}
-
-      - name: Configure AWS credentials
-        id: configure-aws-credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
         with:
-          aws-region: ap-south-1
-          role-to-assume: arn:aws:iam::912195358089:role/bookone-india-deployment-role
+          role-to-assume: ${{ env.AWS_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          # IMAGE_TAG: ${{ github.sha }}
-          IMAGE_TAG: latest
-        run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
-          docker build --build-arg CONFIGURATION=india-prod -t $ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "8"
 
-      # - name: update server
-      #   id: update-server
-      #   run: |
-      #     response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$jenkins_username:$jenkins_pass" -d "service_to_update=$service_name" "$jenkins_url/job/$job_name/buildWithParameters")
-      #     if [ "$response" -eq 201 ]; then
-      #       echo "Success! The response code is $response."
-      #     else
-      #       echo "Failed! The response code is $response."
-      #       exit 1 
-      #     fi
+      - name: Generate Java Jar file
+        id: generate-jar-file
+        run: |
+          mvn clean package -DskipTests
+
+      - name: Build Container Image
+        id: build-conatainer-image
+        run: |
+          docker build -t $ECR_REPOSITORY:latest .
+
+      - name: Push Container Image to ECR
+        id: upload-conatainer-image
+        run: |
+          docker push $ECR_REPOSITORY:latest
+
+  deploy:
+    needs: build
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Fetch deployment credentials from aws secrets
+        uses: aws-actions/aws-secretsmanager-get-secrets@v2
+        with:
+          secret-ids: ${{ env.deployment_variables }}
+          parse-json-secrets: true
+          name-transformation: none
+
+      - name: Set environment variables
+        run: |
+          username_var="${deployment_variables}_username"
+          password_var="${deployment_variables}_password"
+          url_var="${deployment_variables}_url"
+
+          echo "depl_username=${!username_var}" >> $GITHUB_ENV
+          echo "depl_password=${!password_var}" >> $GITHUB_ENV
+          echo "depl_url=${!url_var}" >> $GITHUB_ENV
+
+      - name: deploy
+        id: deploy
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$depl_username:$depl_password" -d "service_to_update=$service_name" "$depl_url/job/$depl_cluster_name/buildWithParameters")
+          if [ "$response" -eq 201 ]; then
+            echo "Success! The response code is $response."
+          else
+            echo "Failed! The response code is $response."
+            exit 1
+          fi
