@@ -194,6 +194,7 @@ form.stripe {
     form.stripe {
       width: 80vw;
     }
+    
   }
 
 //   stripe end
@@ -355,6 +356,26 @@ form.stripe {
   @media only screen and (max-width: 600px) {
     form.stripe {
       width: 80vw;
+    }
+   
+  }
+
+  @media  (max-width: 600px) {
+    status-view{
+      display: none;
+    }
+    .left-mobile {
+      margin-left: 50px;
+    }
+    .float-back {
+      float: right;
+    }
+    .arrowfoot {
+      margin-top: 15px;
+    }
+    .foot2 {
+      margin-top: 4px;
+ 
     }
   }
 
@@ -2077,7 +2098,7 @@ a.fancybox.tcClick.mngroominfo {
 
     .foot2 {
         margin-left: 62%;
-        margin-top: -31px;
+        // margin-top: -31px;
         font-size: 18px;
     }
 
@@ -2297,7 +2318,6 @@ a.fancybox.tcClick.mngroominfo {
 
 
     .arrowfoot {
-      margin-left: 66%;
     width: 3%;
     margin-top: 12%;
     }
@@ -2880,4 +2900,17 @@ a.fancybox.tcClick.mngroominfo {
 // }
 
 
+.arrowfoot {
+  width: 20px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-top: 10px;
+}
+
+.foot2 {
+  margin: 0; /* Remove default margin */
+  font-size: 16px; /* Adjust font size as needed */
+  color: inherit; /* Inherit color from parent */
+  margin-top: 10px;
+
+}
 

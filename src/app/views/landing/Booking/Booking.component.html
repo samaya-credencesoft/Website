@@ -237,11 +237,11 @@
                   </tr>
                 </table>
               </div>
-              <div class="col-sm-6 text-right p-0" *ngIf="booking.roomRatePlanName === 'GHC'">
-                Room Plan: Economy
+              <div class="col-sm-6 text-left text-sm-right p-0 me-0 " *ngIf="booking.roomRatePlanName === 'GHC'">
+                Room Plan:<span class="left-mobile">Economy</span> 
               </div>
-              <div class="col-sm-6 text-right p-0" *ngIf="booking.roomRatePlanName !== 'GHC'">
-                Room Plan: {{booking.roomRatePlanName}}
+              <div class="col-sm-6 text-left text-sm-right p-0" *ngIf="booking.roomRatePlanName !== 'GHC'">
+                Room Plan: <span class="left-mobile"> {{booking.roomRatePlanName}} </span>
               </div>
             </div>
             <div class="col-sm-6 p-0">
@@ -2332,12 +2332,17 @@
   </div>
 </div>
 
+<div class="float-back">
+  <a href="{{PropertyUrl}}" class="d-flex align-items-center text-decoration-none">
+    <img class="arrowfoot me-2" src="assets/images/Arrow.png" alt="Back Arrow"/>
+    <p class="foot2 mb-0">Back to dashboard</p>
+  </a>
+</div>
+
 
 <div>
-  <a href="{{PropertyUrl}}">
-  <img class="arrowfoot" src="assets/images/Arrow.png" />
-    <p  class="foot2" href="{{PropertyUrl}}">Back to dashboard</p>
-    </a>
+
+  
   <p class="foot1">
     If you have any additional questions, please feel free to reach out to us
     at <br />+918328818871/+919040443275.
