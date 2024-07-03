@@ -1,3 +1,4 @@
+import { OtaAvailability } from "./otaAvailability";
 import { RoomRatePlans } from "./roomRatePlans";
 
 export class RatesAndAvailability {
@@ -13,6 +14,7 @@ export class RatesAndAvailability {
   bookingAmount: number;
   date: string;
   totalNoRooms: number;
+  otaAvailabilityList:OtaAvailability[];
   noOfBooked: number;
   noOfAvailable: number;
   noOfOnHold: number;

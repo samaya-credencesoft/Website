@@ -578,6 +578,7 @@ export class ListingDetailOneComponent implements OnInit {
   isDiabled: boolean;
   showStaticContent: boolean = false;
   daterange: any;
+  otaAvailableRooms: number = 1;
   daterangefilter: any;
   isHeaderVisible:boolean = false
   constructor(
@@ -2717,7 +2718,18 @@ if (bookingSummaryElement) {
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
               (des2) => {
-                // //console.log('my data is ', des2);
+                des2?.otaAvailabilityList.forEach(element => {
+                if (element?.otaName ==="GHC") {
+                  this.otaAvailableRooms = element.noOfAvailable;
+                }
+                // if(this.otaAvailableRooms === 0){
+                //   this.otaAvailability = false
+                // }else{
+                //   this.otaAvailability = true
+                // }
+                });
+                // console.log('my data is ', + this.otaAvailableRooms);
+
                 return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
               }
             );
