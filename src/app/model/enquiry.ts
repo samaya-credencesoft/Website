@@ -1,3 +1,5 @@
+import { TaxDetails } from "./TaxDetails";
+
 export class EnquiryDto {
 
 
@@ -28,6 +30,7 @@ export class EnquiryDto {
   checkInDate: string;
   checkOutDate: string;
   foodOptions: string;
+  currency:string;
   dietaryRequirement: string;
   status: string;
   min: number;
@@ -51,5 +54,6 @@ export class EnquiryDto {
   beforeTaxAmount:number;
   roomId:number;
   payableAmount:number;
+  taxDetails:TaxDetails[];
   // counterName:string;
 }

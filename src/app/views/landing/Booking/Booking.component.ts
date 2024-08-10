@@ -1914,6 +1914,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
+    this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;
@@ -1921,7 +1922,8 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
-
+    this.enquiryForm.currency = this.token.getProperty().localCurrency;
+    console.log('currency is',this.enquiryForm.currency);
     this.enquiryForm.accountManager ='';
     this.enquiryForm.consultantPerson ='';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
