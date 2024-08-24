@@ -60,7 +60,7 @@
           <h4 style="color: #F2F1F1;">BOOK NOW!</h4>
         </button>
       </div> -->
-                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true"  [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
               <div class="container">
                 <div class="row" style="justify-content: space-evenly;">
@@ -215,8 +215,8 @@
 
 
           <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
-            <!-- <h3 class="room-text-edit">Travel Dates and Guests</h3> -->
-            <div class="row p-2" style="justify-content: space-evenly;">
+            <!-- <h3 class="room-text-edit">Travel Dates and Guests</h3> --> 
+            <div class="row p-2" style="justify-content: space-evenly;" [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
               <div class="col-12 my-2" style="background-color: #d9d9d9;">
                 <div class="row">
                   <div class="col-2 p-1"><img src="assets/images/uil_calender.svg" alt="" style="width: 50px;height: 50px;"></div>
@@ -401,7 +401,7 @@
 
 
 
-          <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true">
+          <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true && !businessUser?.website">
             <li><a href="tel:+918328818871"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
               <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-8328818871</span></a>
                 </li>
@@ -413,7 +413,18 @@
                   </li>
               </ul>
 
+              <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true && businessUser?.website">
 
+                <li><a href="tel:+919004129369"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                  <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">{{businessUser.mobile}}</span></a>
+                    </li>
+
+                    <li style="margin-top: -2px;"><a [href]="customerwhatsappurl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                      <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."> {{businessUser.whatsApp}}
+                    </span></a>
+                        </li>
+    
+                    </ul>
 
       <div class="mt-5" style="margin-bottom: 30px;">
         <div class="row mt-5" style="padding-top: 20px;">

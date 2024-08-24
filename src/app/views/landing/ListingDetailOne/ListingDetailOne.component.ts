@@ -2168,6 +2168,24 @@ if (bookingSummaryElement) {
 
     return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
   }
+
+
+
+  customerwhatsappurl(): string {
+    const baseUrl = "https://api.whatsapp.com/send";
+    const phoneNumber = this.businessUser.whatsApp;
+    this.dynamicText = this.businessUser.name;
+    this.dynamicCity = this.businessUser?.address?.city
+    this.dynamicStreetName = this.businessUser.address?.streetName;
+    this.dynamicLocality = this.businessUser.address?.locality;
+    this.dynamicStreetNumber = this.businessUser.address?.streetNumber;
+    this.dynamicCountryName = this.businessUser.address?.country;
+    // The recipient's phone number (optional)
+    const message = "*This is an Enquiry from :* The HotelMate Website" + '\nHotel Name: ' + this.dynamicText + '\nAddress: ' + this.dynamicStreetNumber + ',' + this.dynamicStreetName + "," + this.dynamicLocality + "," + this.dynamicCity + ',' + this.dynamicCountryName;  // The dynamic text you want to include
+
+    return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+  }
+
   navigate() {
     // if (
     //     serviceList.length > 0 &&
