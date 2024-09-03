@@ -1326,11 +1326,13 @@
           <div *ngIf="this.activeForGoogleHotelCenter == true">
             <div *ngFor="let room of roomWithGHCPlan; let i = index" style="margin-bottom:20px" >
               <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
-                <div class="card-header" [id]="'room'+[i]" data-toggle="collapse" [attr.data-target]="'#'+'collapse'+[i]">
+                <div class="card-header" [id]="'room' + [i]"
+                [attr.data-toggle]="availableRooms?.length > 1 ? 'collapse' : null"
+                [attr.data-target]="availableRooms?.length > 1 ? '#collapse' + [i] : null">
                   <div class="col-lg-12 p-0" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 "
                     style="margin-top: 4px;margin-bottom: 11px;">
                     <span class="room-text-edit1 ">{{room.name}}</span>
-                    <span style="position: relative; float: right;">
+                    <span style="position: relative; float: right;"  *ngIf="availableRooms.length > 1">
                     <img src="assets/images/downarrow.svg" height="50px" width="50px" alt="">
                     </span>
                   </div>
@@ -1640,11 +1642,13 @@
           <div *ngIf="this.activeForGoogleHotelCenter == false">
           <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" >
             <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
-              <div class="card-header" [id]="'room'+[i]" data-toggle="collapse" [attr.data-target]="'#'+'collapse'+[i]">
+              <div class="card-header" [id]="'room' + [i]"
+              [attr.data-toggle]="availableRooms?.length > 1 ? 'collapse' : null"
+              [attr.data-target]="availableRooms?.length > 1 ? '#collapse' + [i] : null">
                 <div class="col-lg-12 p-0" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 "
                   style="margin-top: 4px;margin-bottom: 11px;">
                   <span class="room-text-edit1 ">{{room.name}}</span>
-                  <span style="position: relative; float: right;">
+                  <span style="position: relative; float: right;"  *ngIf="availableRooms.length > 1">
                   <img src="assets/images/downarrow.svg" height="50px" width="50px" alt="">
                   </span>
                 </div>
