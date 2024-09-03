@@ -1326,7 +1326,7 @@
           <div *ngIf="this.activeForGoogleHotelCenter == true">
             <div *ngFor="let room of roomWithGHCPlan; let i = index" style="margin-bottom:20px" >
               <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
-                <div class="card-header">
+                <div class="card-header" [id]="'room'+[i]" data-toggle="collapse" [attr.data-target]="'#'+'collapse'+[i]">
                   <div class="col-lg-12 p-0" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 "
                     style="margin-top: 4px;margin-bottom: 11px;">
                     <span class="room-text-edit1 ">{{room.name}}</span>
@@ -1335,7 +1335,7 @@
                     </span>
                   </div>
                 </div>
-                <div >
+                <div [id]="'collapse'+[i]" class="collapse show" [attr.aria-labelledby]="'room'+[i]">
                   <div class="card-body">
                     <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
                       <div *ngIf="room.id === rates.roomId && r < 1">
@@ -1640,7 +1640,7 @@
           <div *ngIf="this.activeForGoogleHotelCenter == false">
           <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" >
             <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
-              <div class="card-header">
+              <div class="card-header" [id]="'room'+[i]" data-toggle="collapse" [attr.data-target]="'#'+'collapse'+[i]">
                 <div class="col-lg-12 p-0" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 "
                   style="margin-top: 4px;margin-bottom: 11px;">
                   <span class="room-text-edit1 ">{{room.name}}</span>
@@ -1649,7 +1649,7 @@
                   </span>
                 </div>
               </div>
-              <div >
+              <div [id]="'collapse'+[i]" class="collapse show" [attr.aria-labelledby]="'room'+[i]">
                 <div class="card-body">
                   <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
                     <div *ngIf="room.id === rates.roomId && r < 1">
@@ -1980,7 +1980,7 @@
               </div>
             </div>
             <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i>0 && this.isDiabled">
-              <div class="card-header">
+              <div class="card-header"  [id]="'room'+[i]" data-toggle="collapse" [attr.data-target]="'#'+'collapse'+[i]">
                 <div class="col-lg-12 p-0" *ngIf="room.ratesAndAvailabilityDtos?.length>0 "
                   style="margin-top: 4px;margin-bottom: 11px;">
                   <span class="room-text-edit1 ">{{room.name}}</span>
@@ -1989,7 +1989,7 @@
                   </span>
                 </div>
               </div>
-              <div >
+              <div [id]="'collapse'+[i]" class="collapse " [attr.aria-labelledby]="'room'+[i]">
                 <div class="card-body">
                   <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
                     <div *ngIf="room.id === rates.roomId && r < 1">
