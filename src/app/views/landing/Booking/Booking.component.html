@@ -10,48 +10,72 @@
         <button class="btn btn-sm btn-outline-primary m-3" (click)="backClicked()" *ngIf="!bookingConfirmed">
           Go Back
         </button>
-          <div class="mb-4 pb-4 p-3" style="border-bottom: 1px solid black; ">
-          <h1>{{businessUser.name}}</h1>
-          <h3>Step 1:</h3>
-          <h5 style="font-weight: 400 !important;">Property Amenities and Details</h5>
-          <div class="row facrow1 mr-md-4" style="justify-content: space-between;">
-            <div class="col-xl-1 col-6 p-1" *ngFor="let fac of businessUser.propertyServicesList | slice:0:6">
-              <div class="d-flex justify-content-center text-center" id="facility1"
-                *ngIf="fac.name !== null && fac.name !== undefined">
-                <div>
-                  <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
-                  <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
-                  <br>
+          <div class="mb-4 pb-4 p-3" style="border-bottom: 1px solid black;">
+            <h1>{{ businessUser.name }}</h1>
+            <h3>Step 1:</h3>
+            <h5 style="font-weight: 400 !important;">Property Amenities and Details</h5>
 
-                  <p>{{fac.name| slice:0:14}}</p>
-                </div>
-              </div>
-            </div>
-            <ng-container *ngIf="businessUser?.propertyServicesList?.length>7">
-              <div class="col-xl-1 p-1" *ngIf="!showAll">
-                <div class="d-flex justify-content-center text-center" id="facility1">
+            <div class="row facrow1 mr-md-4" style="justify-content: space-between;">
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 p-2" *ngFor="let fac of businessUser.propertyServicesList | slice:0:6">
+                <div class="d-flex justify-content-center text-center" id="facility1" *ngIf="fac.name">
                   <div>
-                    <p style="font-size: 17px;padding: 0; margin: 0;">+{{businessUser.propertyServicesList.length-7}}<br>
-                    <p>Amenities</p>
+                    <img *ngIf="!fac.imageUrl" src="assets/images/service.png" alt="icon">
+                    <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon">
+                    <br>
+                    <p>{{ fac.name | slice:0:14 }}</p>
                   </div>
                 </div>
               </div>
+
+              <ng-container *ngIf="businessUser?.propertyServicesList?.length > 6">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 p-2" *ngIf="!showAll">
+                  <div class="d-flex justify-content-center text-center" id="facility1">
+                    <div>
+                      <p style="font-size: 17px; padding: 0; margin: 0;">
+                        +{{ businessUser.propertyServicesList.length - 6 }}<br>
+                        Amenities
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 mt-2" *ngIf="showAll">
+                  <div class="row">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 p-2" *ngFor="let fac of businessUser.propertyServicesList | slice:6">
+                      <div class="d-flex justify-content-center text-center" id="facility1" *ngIf="fac.name">
+                        <div>
+                          <img *ngIf="!fac.imageUrl" src="assets/images/service.png" alt="icon">
+                          <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon">
+                          <br>
+                          <p>{{ fac.name | slice:0:14 }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 mt-2">
+                  <button class="btn btn-link" (click)="showAll = !showAll">
+                    {{ showAll ? 'Show Less' : 'Show All' }}
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+
+            <ng-container *ngIf="totalExtraAmount > 0">
+              <h5 class="mb-2" style="font-weight: 600 !important; margin-top: 20px;">Service Included</h5>
+              <label for="mealplan" class="form-label" style="width: 100%;">Confirmed Meal Option</label>
+              <select class="form-select" aria-label="Meal Options" disabled style="width:80%; border-radius: 26px; height: 2.5rem">
+                <option>
+                  <span *ngFor="let service of addServiceList; let i = index">
+                    {{ service.name }}{{ i === addServiceList.length - 1 ? '' : ', ' }}
+                  </span>
+                </option>
+              </select>
             </ng-container>
           </div>
-          <ng-container *ngIf="totalExtraAmount>0">
-            <h5 class="mb-2" style="font-weight: 600 !important;margin-top: 20px;">Service Included</h5>
-            <label for="mealplan" class="form-label" style="width: 100%;">Confirmed Meal Option</label>
-            <select class="form-select" aria-label="Meal Options" disabled style="width:80%; border-radius: 26px; height: 2.5rem">
-              <option><span *ngFor="let service of addServiceList;let i= index">{{service.name}}{{i === addServiceList.length -1 ? '' : ',&nbsp;' }}</span></option>
-            </select>
-          </ng-container>
-          <!-- <label for="bedchoice" class="form-label" style="width: 100%;">Confirm Bed Choice</label>
-          <select class="form-select" aria-label="Bed Choice" style="width:80%; border-radius: 26px; height: 2.5rem">
-            <option selected value="2beds">2 Seperate Beds</option>
-            <option value="1bed">Single Bed</option>
-            <option value="kingbed">King Sized Bed</option>
-          </select> -->
-          </div>
+
+
           <form (ngSubmit)="orderForm?.form.valid && onSubmit(orderForm)" #orderForm="ngForm" *ngIf="!bookingConfirmed">
           <div class="mb-4 pb-4 p-3" style="border-bottom: 1px solid black; ">
             <h3 class="mb-2">Step 2: Personal Information</h3>
@@ -238,7 +262,7 @@
                 </table>
               </div>
               <div class="col-sm-6 text-left text-sm-right p-0 me-0 " *ngIf="booking.roomRatePlanName === 'GHC'">
-                Room Plan:<span class="left-mobile">Economy</span> 
+                Room Plan:<span class="left-mobile">Economy</span>
               </div>
               <div class="col-sm-6 text-left text-sm-right p-0" *ngIf="booking.roomRatePlanName !== 'GHC'">
                 Room Plan: <span class="left-mobile"> {{booking.roomRatePlanName}} </span>
@@ -2342,7 +2366,7 @@
 
 <div>
 
-  
+
   <p class="foot1">
     If you have any additional questions, please feel free to reach out to us
     at <br />+918328818871/+919040443275.
