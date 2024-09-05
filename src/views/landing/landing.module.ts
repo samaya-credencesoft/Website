@@ -1,7 +1,7 @@
 
 import { ScrollToDirective } from './helpers/scrollTo.directives';
 import { WINDOW_PROVIDERS } from './helpers/window.helpers';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 // import { NgForm } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { NguCarouselModule } from '@ngu/carousel';
@@ -165,7 +165,8 @@ import { NumberCounterComponent } from './number-counter/number-counter.componen
   providers: [WINDOW_PROVIDERS],
   exports: [
     FormsModule,
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 
 
   // exports: ScrollToDirective
