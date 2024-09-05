@@ -60,7 +60,7 @@ declare var window: any;
   providers: [DatePipe],
 })
 export class BookingComponent implements OnInit {
-  
+
   PropertyUrl: string;
   currency: string;
   message: MessageDto;
@@ -1910,10 +1910,11 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.roomName=this.booking.roomName;
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice=this.booking.roomPrice;
+    this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
+    this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;
