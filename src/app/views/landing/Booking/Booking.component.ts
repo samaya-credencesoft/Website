@@ -377,7 +377,6 @@ export class BookingComponent implements OnInit {
       .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
       .subscribe((data) => {
         this.businessOfferDto = data.body;
-        console.log("this.businessOfferDto: ", data.body);
       });
   }
   applyPromoCode(offer) {
@@ -492,7 +491,6 @@ export class BookingComponent implements OnInit {
     //     this.businessUser = data.body;
     this.businessUser = this.token.getProperty();
     this.accommodationvalue = this.businessUser.businessServiceDtoList.filter(ele => ele.name === 'Accommodation');
-    console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
         this.currency = this.businessUser.localCurrency.toUpperCase();
     this.getOfferDetails();
