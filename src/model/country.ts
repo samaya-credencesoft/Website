@@ -2,19 +2,19 @@
 export interface CountryListInterFace {
   value: string;
   viewValue: string;
+  countryCode:string;
 }
 
 export class CountryList {
 
   countries: CountryListInterFace[] = [
-    { value: 'New Zeland', viewValue: 'New Zeland' },
-    { value: 'India', viewValue: 'India' },
-    { value: 'Africa', viewValue: 'Africa' },
-    { value: 'Austrilia', viewValue: 'Austrilia' },
-    { value: 'Bangladesh', viewValue: 'Bangladesh' },
-    { value: 'United Kingdom', viewValue: 'United Kingdom' },
+    { value: 'New Zeland', viewValue: 'New Zeland',countryCode:'+64' },
+    { value: 'India', viewValue: 'India' , countryCode :'+91'},
+    { value: 'South Africa', viewValue: 'South Africa' , countryCode :'+27' },
+    { value: 'Austrilia', viewValue: 'Austrilia', countryCode :'+61' },
+    { value: 'Bangladesh', viewValue: 'Bangladesh' ,countryCode:'+88' },
+    { value: 'United Kingdom', viewValue: 'United Kingdom',countryCode:'+44' },
   ];
-
 
   constructor() {
    }
