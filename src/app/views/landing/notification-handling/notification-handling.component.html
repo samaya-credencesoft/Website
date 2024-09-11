@@ -107,7 +107,11 @@
             <div class="container" *ngIf="selectedOption === 'mobile' || selectedOption === 'MobileRadio'">
               <div class="row justify-content-center">
                 <div class="col-md-12">
-                  <div class="form-group mb-4">
+                  <div class="form-group mb-4"  style="position: relative; display: flex; align-items: center;">
+                    <select [(ngModel)]="CodeNumber" style="border: none; background: transparent; padding: 10px; border-top-left-radius: 30px; border-bottom-left-radius: 30px;">
+                      <option *ngFor="let country of countryCode?.countries" [value]="country?.countryCode">{{country?.name}} {{ country?.countryCode }}</option>
+                    </select>
+
                     <input type="text"
                     (ng2TelOutput)="getNumber($event)"
                     (input)="validatePhoneNumber()"
@@ -219,11 +223,11 @@
 
                           <div class="col-md-6">
                             <div *ngIf="(bookingdata?.externalSite === 'The Hotel Mate' || bookingdata?.externalSite === 'Easemytrip' || bookingdata?.externalSite === 'GOBIBO,MMT' || bookingdata?.externalSite === 'Agoda' || bookingdata?.externalSite === 'Yatra' || bookingdata?.externalSite === 'Booking.com' || bookingdata?.externalSite === 'Expedia' || bookingdata?.externalSite === 'SiteMinder' || bookingdata?.externalSite === 'BookOne Connect' || bookingdata?.externalSite === 'Google Hotel Ads' || bookingdata?.externalSite === 'Airbnb' || bookingdata?.externalSite === 'Trivago' || bookingdata?.externalSite === 'Clear trip' || bookingdata?.externalSite === 'OYO'  || bookingdata?.externalSite === 'Via.com' || bookingdata?.externalSite === 'Travel Guru' || bookingdata?.externalSite === 'IRCTC' || bookingdata?.externalSite === 'Hotels.com' || bookingdata?.externalSite === 'BookingJini' || bookingdata?.externalSite === 'Fab'  || bookingdata?.externalSite === 'Treebo' || bookingdata?.externalSite === 'Go Room Go' || bookingdata?.externalSite === 'Pie Rooms')" >
-                              <div *ngFor="let externalsite of externalSites">      
+                              <div *ngFor="let externalsite of externalSites">
                                    <span *ngIf="bookingdata?.externalSite === externalsite.externalSiteName"><img src="{{externalsite.logo}}"  height="22px" width="62px" ></span>
                               </div>
                             </div>
-                            <div>    
+                            <div>
                                 <span *ngIf="(bookingdata?.externalSite != 'The Hotel Mate' && bookingdata?.externalSite != 'Easemytrip' && bookingdata?.externalSite != 'GOBIBO,MMT' && bookingdata?.externalSite != 'Agoda' && bookingdata?.externalSite != 'Yatra' && bookingdata?.externalSite != 'Booking.com' && bookingdata?.externalSite != 'Expedia' && bookingdata?.externalSite != 'SiteMinder' && bookingdata?.externalSite != 'BookOne Connect' && bookingdata?.externalSite != 'Google Hotel Ads' && bookingdata?.externalSite != 'Airbnb' && bookingdata?.externalSite != 'Trivago' && bookingdata?.externalSite != 'Clear trip' && bookingdata?.externalSite != 'OYO' && bookingdata?.externalSite != 'Via.com' && bookingdata?.externalSite != 'Travel Guru' && bookingdata?.externalSite != 'IRCTC' && bookingdata?.externalSite != 'Hotels.com' && bookingdata?.externalSite != 'BookingJini' && bookingdata?.externalSite != 'Fab' && bookingdata?.externalSite != 'Treebo' && bookingdata?.externalSite != 'Go Room Go' && bookingdata?.externalSite != 'Pie Rooms' )">{{bookingdata?.externalSite}}</span>
                             </div>
                           </div>
@@ -355,7 +359,7 @@
                       </p>
                     </div>
 
-                    
+
 
                   </div>
 
