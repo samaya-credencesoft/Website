@@ -71,7 +71,7 @@
                 <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
               <div class="container">
-                <div class="row" style="justify-content: space-evenly;">
+                <!-- <div class="row" style="justify-content: space-evenly;">
                   <div class="col-lg-6 ">
                     <div id="autocomplete-container">
                       <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">Check
@@ -105,7 +105,56 @@
                         autocomplete="off" />
                     </div>
                   </div>
+                </div> -->
+
+                <div class="row" style="justify-content: space-evenly;">
+
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">
+                        Check In
+                      </label>
+                      <input #dpFromDate3 type="text" class="date-input form-control input-field-resize2" style="border: none;"
+                        placeholder="Check-in" name="dpFromDate3"
+                        [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
+                        (input)="fromDate = validateInput(fromDate, dpFromDate3.value)"
+                        required (click)="datepicker3.toggle()" autocomplete="off" />
+
+                      <div class="form-group" style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize"
+                          ngbDatepicker #datepicker3="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkin')"
+                          [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
+                          [startDate]="fromDate" tabindex="-1"
+                          [minDate]="minDateForCheckIn" />
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">
+                        Check Out
+                      </label>
+                      <input #dpToDate3 type="text" class="date-input form-control input-field-resize2"
+                        placeholder="Check-out" name="dpToDate3"
+                        [value]="formatter.format(toDate) | date: 'EEE, MMM d'"
+                        style="border: none;" (input)="toDate = validateInput(toDate, dpToDate3.value)"
+                        required (click)="datepicker4.toggle()" autocomplete="off" />
+
+                      <div class="form-group" style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize"
+                          ngbDatepicker #datepicker4="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkout')"
+                          [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
+                          [startDate]="toDate" tabindex="-1"
+                          [minDate]="fromDate" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
               </div>
               <div class="container">
                 <div class="row">

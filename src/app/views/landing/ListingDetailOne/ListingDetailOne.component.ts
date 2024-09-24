@@ -807,6 +807,24 @@ if (this.city != null && this.city != undefined) {
 }
     // this.token.clearRoomsData();
 
+    const currentDate = new Date();
+    const fromDate = new NgbDate(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        currentDate.getDate()
+    );
+
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1);
+    const toDate = new NgbDate(
+        nextDate.getFullYear(),
+        nextDate.getMonth() + 1,
+        nextDate.getDate()
+    );
+
+    this.fromDate = fromDate;
+    this.toDate = toDate;
+
 
     this.blogPosts$ = this.contentfulService.getAllEntries();
     this.email = {
@@ -1376,7 +1394,7 @@ if (this.city != null && this.city != undefined) {
   //   this.router.navigate(["/blogpost"]);
   // }
   getDiffDate(toDate, fromDate) {
-    this.enddate = new Date(toDate.year, toDate.month - 1, toDate.day);
+    this.enddate = new Date(toDate?.year, toDate?.month - 1, toDate?.day);
 
     this.startDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
     // //console.log('this.fromDate: ', this.startDate);
@@ -2815,22 +2833,24 @@ if (bookingSummaryElement) {
       (dto) => dto.ratesAndAvailabilityDtos === null
     );
   }
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
+
+  onDateSelection(date: NgbDate, type: 'checkin' | 'checkout') {
+    if (type === 'checkin') {
       this.fromDate = date;
-    } else if (
-      this.fromDate &&
-      !this.toDate &&
-      date &&
-      date.after(this.fromDate)
-    ) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
+      if (this.toDate && date.after(this.toDate)) {
+        this.toDate = null;
+      }
+    } else if (type === 'checkout') {
+      if (this.fromDate && date.after(this.fromDate)) {
+        this.toDate = date;
+      } else {
+      }
     }
+
     this.getDiffDate(this.toDate, this.fromDate);
   }
+
+
 
   isHovered(date: NgbDate) {
     return (
