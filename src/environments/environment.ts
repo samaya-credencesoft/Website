@@ -29,5 +29,6 @@ export const environment = {
   country: 'in',
   googleKey: 'AIzaSyD76Ocky2MYrAcI-f9H3XbxzsrSB0TsbJI',
   // callbackUrl: 'http://localhost:4200/#/details?ReferenceNumber='
-  callbackUrl: 'https://bookonepms.com/booking-complete?ReferenceNumber='
+  // callbackUrl: 'https://bookonepms.com/booking-complete?ReferenceNumber='
+  callbackUrl: 'http://test.bookonepms.com//booking-complete?ReferenceNumber='
 };
