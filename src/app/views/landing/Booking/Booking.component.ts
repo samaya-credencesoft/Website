@@ -180,6 +180,7 @@ export class BookingComponent implements OnInit {
   propertyenquiryone:PropertyEnquiryDto
   equitycreatedData: any;
   success: EnquiryForm;
+  bookingengineurl: any;
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -233,7 +234,7 @@ export class BookingComponent implements OnInit {
 
 
     }
-
+    this.bookingengineurl = this.token.getwebsitebookingURL() 
     if (this.token.getBookingData() !== null) {
       this.bookingData = this.token.getBookingData();
       this.booking = this.bookingData;
@@ -307,7 +308,11 @@ export class BookingComponent implements OnInit {
       (entry) => entry.name === 'Accommodation'
     );
     this.accommodationData.forEach(element => {
-      this.value =element.instantBooking
+      if (this.bookingengineurl === "true") {
+        this.value = element.websiteinstantBooking;
+      } else if (this.value !== true) {
+        this.value = element.instantBooking;
+      }
     });
     this.setApi();
     this.totalExtraAmount = 0;

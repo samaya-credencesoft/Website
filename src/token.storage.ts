@@ -29,6 +29,7 @@ const CUSTOMER = 'Customer';
 const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
 const BOOKINGCITY = 'bookingCity';
+const WEBSITE_BOOKING_URL ='websitebookingURL';
 const CITY = 'city';
 const ORGANIZATION_ID = "OrganizationId";
 const BUSINESS_SERVICE = 'businessservice';
@@ -453,7 +454,22 @@ export class TokenStorage {
   localStorage.removeItem(BOOKINGCITY);
   }
 
+  public savewebsitebookingURL(websitebookingURL: string){
+    localStorage.removeItem(WEBSITE_BOOKING_URL);
+    if (websitebookingURL !== null || websitebookingURL !== undefined) {
+    localStorage.setItem(WEBSITE_BOOKING_URL, websitebookingURL);
+    } else {
+    localStorage.setItem(WEBSITE_BOOKING_URL, '{}');
+    }
+  }
 
+  public getwebsitebookingURL() {
+    return localStorage.getItem(WEBSITE_BOOKING_URL);
+  }
+
+  clearwebsitebookingURL() {
+  localStorage.removeItem(WEBSITE_BOOKING_URL);
+  }
   // public getRoomsData(): Room[] {
   //   return JSON.parse(localStorage.getItem(ROOMSDATA) as string);
   // }

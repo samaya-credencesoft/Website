@@ -619,6 +619,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.booking = new Booking();
     this.details = new Details();
     // this.updateTag();
+    this.token.clearwebsitebookingURL();
     this.bookingMinDate = calendar.getToday();
 
     this.oneDayFromDate = calendar.getToday();
@@ -724,6 +725,8 @@ export class ListingDetailOneComponent implements OnInit {
     this.acRoute.queryParams.subscribe((params) => {
       if (params['BookingEngine'] !== undefined) {
         this.urlLocation = params['BookingEngine'];
+        let websitebookingURL = "true";
+        this.token.savewebsitebookingURL(websitebookingURL)
       }
 
       if (params['hotelID'] !== undefined) {
