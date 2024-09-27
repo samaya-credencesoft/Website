@@ -182,6 +182,7 @@ export class BookingComponent implements OnInit {
   propertyenquiryone:PropertyEnquiryDto
   equitycreatedData: any;
   success: EnquiryForm;
+  bookingengineurl: any;
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -238,7 +239,7 @@ export class BookingComponent implements OnInit {
 
 
     }
-
+    this.bookingengineurl = this.token.getwebsitebookingURL() 
     if (this.token.getBookingData() !== null) {
       this.bookingData = this.token.getBookingData();
       this.booking = this.bookingData;
@@ -312,7 +313,11 @@ export class BookingComponent implements OnInit {
       (entry) => entry.name === 'Accommodation'
     );
     this.accommodationData.forEach(element => {
-      this.value =element.instantBooking
+      if (this.bookingengineurl === "true") {
+        this.value = element.websiteinstantBooking;
+      } else if (this.value !== true) {
+        this.value = element.instantBooking;
+      }
     });
     this.setApi();
     this.totalExtraAmount = 0;
@@ -859,12 +864,22 @@ export class BookingComponent implements OnInit {
       this.payment.currency = this.businessUser.localCurrency;
       this.payment.propertyId = this.businessUser.id;
       this.booking.taxAmount = ((this.booking.netAmount * this.booking.taxPercentage) / 100);
-      this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
-      this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
-      this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-      this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-      this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-      this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      if(this.businessServiceDto.advanceAmountPercentage === 100){
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount)).toFixed(2)) + Number(((this.totalTaxAmount)).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount).toFixed(2))) + Number(((this.totalBeforeTaxAmount )).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+       }else{
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+  
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+       }      
       this.payment.referenceNumber = new Date().getTime().toString();
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );

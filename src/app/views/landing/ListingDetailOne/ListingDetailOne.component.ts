@@ -77,6 +77,7 @@ export class ListingDetailOneComponent implements OnInit {
 
   showListingDetails: boolean = false;
   website: string;
+  propertyusername: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -619,6 +620,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.booking = new Booking();
     this.details = new Details();
     // this.updateTag();
+    this.token.clearwebsitebookingURL();
     this.bookingMinDate = calendar.getToday();
 
     this.oneDayFromDate = calendar.getToday();
@@ -724,6 +726,8 @@ export class ListingDetailOneComponent implements OnInit {
     this.acRoute.queryParams.subscribe((params) => {
       if (params['BookingEngine'] !== undefined) {
         this.urlLocation = params['BookingEngine'];
+        let websitebookingURL = "true";
+        this.token.savewebsitebookingURL(websitebookingURL)
       }
 
       if (params['hotelID'] !== undefined) {
@@ -771,6 +775,12 @@ export class ListingDetailOneComponent implements OnInit {
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
     window.addEventListener('df-request-sent', (event) => {
+      this.propertyusername = this.businessUser.name;
+      const chatbotElement = document.getElementById('chatbot');
+      // ... rest of your code to set chat title
+    chatbotElement.setAttribute('chat-title', this.propertyusername);
+
+    chatbotElement.setAttribute('chat-title-icon', this.businessUser.logoUrl);
       const propertyId = this.businessUser.id;
       const propertyName = this.businessUser.name;
 const currentDate = new Date();
@@ -796,7 +806,6 @@ const currentTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds
       .then(response => response.json())
       .catch(error => console.error('Error:', error));
     });
-
 if (this.city != null && this.city != undefined) {
   this.offerService.getPropertyListByCity(this.city).subscribe((res) => {
     // this.accommodationData = res.body.filter(entry => entry.businessType === 'Accommodation');
@@ -808,6 +817,24 @@ if (this.city != null && this.city != undefined) {
 }
     // this.token.clearRoomsData();
 
+
+    const currentDate = new Date();
+    const fromDate = new NgbDate(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        currentDate.getDate()
+    );
+
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(currentDate.getDate() + 1);
+    const toDate = new NgbDate(
+        nextDate.getFullYear(),
+        nextDate.getMonth() + 1,
+        nextDate.getDate()
+    );
+
+    this.fromDate = fromDate;
+    this.toDate = toDate;
 
     this.blogPosts$ = this.contentfulService.getAllEntries();
     this.email = {
@@ -1377,7 +1404,7 @@ if (this.city != null && this.city != undefined) {
   //   this.router.navigate(["/blogpost"]);
   // }
   getDiffDate(toDate, fromDate) {
-    this.enddate = new Date(toDate.year, toDate.month - 1, toDate.day);
+    this.enddate = new Date(toDate?.year, toDate?.month - 1, toDate?.day);
 
     this.startDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
     // //console.log('this.fromDate: ', this.startDate);
@@ -2208,6 +2235,24 @@ if (bookingSummaryElement) {
 
     return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
   }
+
+
+
+  customerwhatsappurl(): string {
+    const baseUrl = "https://api.whatsapp.com/send";
+    const phoneNumber = this.businessUser.whatsApp;
+    this.dynamicText = this.businessUser.name;
+    this.dynamicCity = this.businessUser?.address?.city
+    this.dynamicStreetName = this.businessUser.address?.streetName;
+    this.dynamicLocality = this.businessUser.address?.locality;
+    this.dynamicStreetNumber = this.businessUser.address?.streetNumber;
+    this.dynamicCountryName = this.businessUser.address?.country;
+    // The recipient's phone number (optional)
+    const message = "*This is an Enquiry from :* The HotelMate Website" + '\nHotel Name: ' + this.dynamicText + '\nAddress: ' + this.dynamicStreetNumber + ',' + this.dynamicStreetName + "," + this.dynamicLocality + "," + this.dynamicCity + ',' + this.dynamicCountryName;  // The dynamic text you want to include
+
+    return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+  }
+
   navigate() {
     // if (
     //     serviceList.length > 0 &&
@@ -2827,22 +2872,24 @@ if (bookingSummaryElement) {
       (dto) => dto.ratesAndAvailabilityDtos === null
     );
   }
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
+
+  onDateSelection(date: NgbDate, type: 'checkin' | 'checkout') {
+    if (type === 'checkin') {
       this.fromDate = date;
-    } else if (
-      this.fromDate &&
-      !this.toDate &&
-      date &&
-      date.after(this.fromDate)
-    ) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
+      if (this.toDate && date.after(this.toDate)) {
+        this.toDate = null;
+      }
+    } else if (type === 'checkout') {
+      if (this.fromDate && date.after(this.fromDate)) {
+        this.toDate = date;
+      } else {
+      }
     }
+
     this.getDiffDate(this.toDate, this.fromDate);
   }
+
+
 
   isHovered(date: NgbDate) {
     return (

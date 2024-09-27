@@ -16,6 +16,9 @@
 </head>
 
 <body>
+  <df-messenger  location="asia-south1" project-id="impactful-name-306810" agent-id="e2f46998-246d-4046-aee3-65c992b363ea" intent="PROPERTY" storage-option="none" language-code="en" max-query-length="-1"   >
+    <df-messenger-chat-bubble  id="chatbot" chat-subtitle="Powered by BookOne"></df-messenger-chat-bubble>
+  </df-messenger>
     <!-- <nav class="navbar navbar-dark " style="height: 80px; background-color: #1e1f20;">
     <div class="container">
       <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,10 +71,10 @@
           <h4 style="color: #F2F1F1;">BOOK NOW!</h4>
         </button>
       </div> -->
-                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true"  [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
               <div class="container">
-                <div class="row" style="justify-content: space-evenly;">
+                <!-- <div class="row" style="justify-content: space-evenly;">
                   <div class="col-lg-6 ">
                     <div id="autocomplete-container">
                       <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">Check
@@ -105,7 +108,63 @@
                         autocomplete="off" />
                     </div>
                   </div>
+                </div> -->
+
+
+
+
+
+
+                <div class="row" style="justify-content: space-evenly;">
+
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">
+                        Check In
+                      </label>
+                      <input #dpFromDate3 type="text" class="date-input form-control input-field-resize2" style="border: none;"
+                        placeholder="Check-in" name="dpFromDate3"
+                        [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
+                        (input)="fromDate = validateInput(fromDate, dpFromDate3.value)"
+                        required (click)="datepicker3.toggle()" autocomplete="off" />
+
+                      <div class="form-group" style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize"
+                          ngbDatepicker #datepicker3="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkin')"
+                          [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
+                          [startDate]="fromDate" tabindex="-1"
+                          [minDate]="minDateForCheckIn" />
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">
+                        Check Out
+                      </label>
+                      <input #dpToDate3 type="text" class="date-input form-control input-field-resize2"
+                        placeholder="Check-out" name="dpToDate3"
+                        [value]="formatter.format(toDate) | date: 'EEE, MMM d'"
+                        style="border: none;" (input)="toDate = validateInput(toDate, dpToDate3.value)"
+                        required (click)="datepicker4.toggle()" autocomplete="off" />
+
+                      <div class="form-group" style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize"
+                          ngbDatepicker #datepicker4="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkout')"
+                          [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
+                          [startDate]="toDate" tabindex="-1"
+                          [minDate]="fromDate" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+
+
               </div>
               <div class="container">
                 <div class="row">
@@ -228,7 +287,7 @@
 
           <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
             <!-- <h3 class="room-text-edit">Travel Dates and Guests</h3> -->
-            <div class="row p-2" style="justify-content: space-evenly;">
+            <div class="row p-2" style="justify-content: space-evenly;" [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
               <div class="col-12 my-2" style="background-color: #d9d9d9;">
                 <div class="row">
                   <div class="col-2 p-1"><img src="assets/images/uil_calender.svg" alt="" style="width: 50px;height: 50px;"></div>
@@ -413,7 +472,7 @@
 
 
 
-          <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true">
+          <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true && !businessUser?.website">
             <li><a href="tel:+918328818871"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
               <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-8328818871</span></a>
                 </li>
@@ -425,7 +484,18 @@
                   </li>
               </ul>
 
+              <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true && businessUser?.website">
 
+                <li><a href="tel:+919004129369"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                  <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">{{businessUser.mobile}}</span></a>
+                    </li>
+
+                    <li style="margin-top: -2px;"><a [href]="customerwhatsappurl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                      <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."> {{businessUser.whatsApp}}
+                    </span></a>
+                        </li>
+
+                    </ul>
 
       <div class="mt-5" style="margin-bottom: 30px;">
         <div class="row mt-5" style="padding-top: 20px;">

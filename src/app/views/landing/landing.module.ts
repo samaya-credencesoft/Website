@@ -220,9 +220,8 @@ EnquiryComponent,
   exports: [
     FormsModule,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
-
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   // exports: ScrollToDirective
 })
 export class LandingModule {}
