@@ -16,7 +16,7 @@ export class BusinessServiceDtoList {
   customerLocationName: string;
   canChangeBusinessAddress: boolean;
   provideBusinessAndCustomerAddress: boolean;
-
+  advanceAmountPercentage:number;
   businessTermLocation: string;
   businessTermResource: string;
 

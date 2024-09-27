@@ -9,6 +9,7 @@ import { BusinessUser } from 'src/app/model/user';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Location, DatePipe, formatDate } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { Logger } from 'src/services/logger.service';
 // import { EnquiryForm } from '../Enquiry/Enquiry.component';
 import { API_URL_NZ, API_URL_IN } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
@@ -263,46 +264,49 @@ export class BookingCompleteComponent implements OnInit {
                 // this.openSuccessSnackBar(`Payment Details Saved`);
                 this.paymentLoader = false;
 
-                this.payment.id = undefined;
-                this.payment.paymentMode = "Cash";
-                this.payment.status = "NotPaid";
-                this.booking.taxAmount =
-                  (this.booking.netAmount * this.booking.taxPercentage) / 100;
-                this.payment.taxAmount = (this.booking.taxAmount / 100) * 80;
-                this.payment.netReceivableAmount = (this.booking.netAmount /100) * 80;
-                this.payment.transactionAmount = (this.booking.totalAmount / 100) * 80 ;
-                this.payment.referenceNumber = this.booking.propertyReservationNumber;
-                this.payment.amount = (this.booking.totalAmount / 100) * 80;
-                this.booking.advanceAmount = (this.booking.totalAmount / 100) * 20;
-                this.payment.propertyId = this.bookingData.propertyId;
-                this.payment.transactionChargeAmount =
+                if (this.booking.payableAmount != this.payment.transactionAmount) {
+                  this.payment.id = undefined;
+                  this.payment.paymentMode = "Cash";
+                  this.payment.status = "NotPaid";
+                  this.booking.taxAmount =
+                    (this.booking.netAmount * this.booking.taxPercentage) / 100;
+                  this.payment.taxAmount = (this.booking.taxAmount / 100) * 80;
+                  this.payment.netReceivableAmount = (this.booking.netAmount /100) * 80;
+                  this.payment.transactionAmount = (this.booking.totalAmount / 100) * 80 ;
+                  this.payment.referenceNumber = this.booking.propertyReservationNumber;
+                  this.payment.amount = (this.booking.totalAmount / 100) * 80;
+                  this.booking.advanceAmount = (this.booking.totalAmount / 100) * 20;
+                  this.payment.propertyId = this.bookingData.propertyId;
+                  this.payment.transactionChargeAmount =
 (this.booking.totalAmount / 100)* 80;
-                this.hotelBookingService
-                  .processPayment(this.payment)
-                  .subscribe((response2) => {
-                    this.payment = response2.body;
-                    this.booking.paymentId = response2.body.id;
-                    this.booking.modeOfPayment = this.payment.paymentMode;
-                    if (this.booking.id != null) {
-                      this.submitButtonDisable = true;
-                      this.isSuccess = true;
-                      this.headerTitle = "Success!";
-                      this.bodyMessage =
-                        "Thanks for the booking .Please note the Reservation No: # " +
-                        this.booking.propertyReservationNumber +
-                        " and an email is sent with the booking details.";
+this.hotelBookingService
+.processPayment(this.payment)
+.subscribe((response2) => {
+  this.payment = response2.body;
+  this.booking.paymentId = response2.body.id;
+  this.booking.modeOfPayment = this.payment.paymentMode;
+  if (this.booking.id != null) {
+    this.submitButtonDisable = true;
+    this.isSuccess = true;
+    this.headerTitle = "Success!";
+    this.bodyMessage =
+      "Thanks for the booking .Please note the Reservation No: # " +
+      this.booking.propertyReservationNumber +
+      " and an email is sent with the booking details.";
 
-                      this.token.clearHotelBooking();
-                      // this.showSuccess(this.contentDialog);
+    this.token.clearHotelBooking();
+    // this.showSuccess(this.contentDialog);
 
-                      this.paymentLoader = true;
+    this.paymentLoader = true;
 
-                      //Logger.log("payment " + JSON.stringify(this.payment));
-                      // this.paymentIntentPayTm(this.payment);
-                    } else {
-                      this.paymentLoader = false;
-                    }
-                  });
+    Logger.log("payment " + JSON.stringify(this.payment));
+    // this.paymentIntentPayTm(this.payment);
+  } else {
+    this.paymentLoader = false;
+  }
+});
+}
+
 
                 // setTimeout(() => {
                 //   this.isSuccess = true;
