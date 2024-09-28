@@ -360,6 +360,7 @@ this.hotelBookingService
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
 
     this.enquiryForm.firstName = this.booking.firstName;
     this.enquiryForm.lastName = this.booking.lastName;
