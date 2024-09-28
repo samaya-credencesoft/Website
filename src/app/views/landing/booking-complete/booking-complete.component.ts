@@ -393,7 +393,7 @@ this.hotelBookingService
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     this.enquiryForm.planCode = this.booking.planCode;
-    this.enquiryForm.bookingReservationId = this.booking.id;
+    this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
