@@ -474,11 +474,11 @@
 
               <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true && businessUser?.website">
 
-                <li><a [href]="'tel:' + businessUser.mobile"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                <li *ngIf="businessUser?.mobile != null &&  businessUser?.mobile != undefined" ><a [href]="'tel:' + businessUser.mobile"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
                   <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">{{businessUser.mobile}}</span></a>
                     </li>
 
-                    <li style="margin-top: -2px;"><a [href]="customerwhatsappurl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                    <li style="margin-top: -2px;" *ngIf="businessUser?.whatsApp != null &&  businessUser?.whatsApp != undefined"><a [href]="customerwhatsappurl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
                       <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."> {{businessUser.whatsApp}}
                     </span></a>
                         </li>
