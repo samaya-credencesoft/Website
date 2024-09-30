@@ -17,6 +17,8 @@ import { EnquiryForm } from '../onboarding-roomdetails-form/onboarding-roomdetai
 import { TokenStorage } from 'src/token.storage';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { EnquiryDto } from 'src/app/model/enquiry';
+import { RoomDetail } from 'src/app/model/RoomDetail';
+import { externalReservationDtoList } from 'src/app/model/externalReservation';
 
 @Component({
   selector: 'app-booking-complete',
@@ -32,7 +34,9 @@ export class BookingCompleteComponent implements OnInit {
   bookingData: any;
   isSuccess: boolean;
   headerTitle: string;
+  externalReservationdto: any;
   bodyMessage: string;
+  externalReservationDtoList:externalReservationDtoList[];
   showAlert: boolean = false;
   alertType: string;
   bookingConfirmed = false;
@@ -51,6 +55,7 @@ export class BookingCompleteComponent implements OnInit {
   enquiryForm: any;
   enquiryResponse: EnquiryForm;
   successMessage: boolean;
+  reservationRoomDetails:RoomDetail[];
   API_URL: string;
   enquirySent: boolean = false;
   submitButtonDisable: boolean;
@@ -66,6 +71,7 @@ export class BookingCompleteComponent implements OnInit {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
     this.payment = new Payment();
+    this.externalReservationDtoList =[]
     this.PropertyUrl = this.token.getPropertyUrl();
 
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
@@ -252,6 +258,7 @@ export class BookingCompleteComponent implements OnInit {
           this.payment.referenceNumber = this.booking.propertyReservationNumber;
           this.payment.externalReference = this.booking.externalBookingID;
           this.addServiceToBooking(this.booking);
+          this.externalReservation(this.booking);
           this.bookingConfirmed = true;
           this.paymentLoader = true;
           this.changeDetectorRefs.detectChanges();
@@ -347,7 +354,56 @@ this.hotelBookingService
     }, 3000);
   }
 
-
+  externalReservation(booking){
+    this.reservationRoomDetails =[];
+    let roomdetailss = new RoomDetail();
+let externalreservation = new externalReservationDtoList();
+externalreservation.checkinDate = this.booking.fromDate;
+externalreservation.checkoutDate = this.booking.toDate;
+externalreservation.currency = this.booking.currency;
+externalreservation.email = this.booking.email;
+externalreservation.totalAmount = this.booking.totalAmount;
+externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
+externalreservation.channelId = "24";
+externalreservation.lastModifiedBy ='hotelmate';
+externalreservation.modeOfPayment = "Cash";
+externalreservation.otaReservationId = "THM-"+this.booking.id;
+externalreservation.propertyId = this.booking.propertyId.toString();
+externalreservation.propertyName = this.booking.businessName;
+externalreservation.firstName = this.booking.firstName
+externalreservation.lastName = this.booking.lastName;
+externalreservation.bookoneReservationId = this.booking.propertyReservationNumber;
+externalreservation.contactNumber = this.booking.mobile;
+externalreservation.propertyBusinessEmail = this.booking.businessEmail;
+// externalreservation.externalTransactionId = this.booking.paymentId.toString();
+externalreservation.createdBy = 'hotelmate';
+roomdetailss.checkinDate = this.booking.fromDate;
+roomdetailss.checkoutDate = this.booking.toDate;
+roomdetailss.noOfRooms = this.booking.noOfRooms;
+roomdetailss.noOfadult = this.booking.noOfPersons;
+roomdetailss.noOfchild = this.booking.noOfChildren;
+roomdetailss.plan = this.booking.roomRatePlanName;
+roomdetailss.roomRate = this.booking.roomPrice;
+roomdetailss.roomTypeId = this.booking.roomId.toString();
+roomdetailss.roomTypeName = this.booking.roomName;
+this.reservationRoomDetails.push(roomdetailss);
+externalreservation.roomDetails = this.reservationRoomDetails;
+externalreservation.taxAmount = this.booking.taxAmount;
+// externalreservation.lastModifiedDate = new Date().toString();
+externalreservation.noOfPerson = this.booking.noOfPersons.toString();
+externalreservation.resType ='';
+externalreservation.otaName = 'Thehotelmate.com'
+externalreservation.bookingStatus ='Confirmed';
+externalreservation.payloadType ='json';
+this.externalReservationDtoList.push(externalreservation)
+    this.hotelBookingService
+    .externalReservation(this.externalReservationDtoList)
+    .subscribe((res) => {
+     if (res.status === 200) {
+this.externalReservationdto =res.body
+     }
+    });
+  }
   accommodationEnquiryBookingData(){
     this.enquiryForm = new EnquiryDto();
 
@@ -377,7 +433,7 @@ this.hotelBookingService
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.externalSite="Website";
-    this.enquiryForm.source = "The Hotel Mate"
+    this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;

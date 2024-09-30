@@ -192,7 +192,7 @@ export class BookingComponent implements OnInit {
     private http: HttpClient,
     private hotelBookingService: HotelBookingService
   ) {
-    
+
     this.message = new MessageDto();
     this.myDate = new Date();
     this.parametertype = new Para();
@@ -234,7 +234,7 @@ export class BookingComponent implements OnInit {
 
 
     }
-    this.bookingengineurl = this.token.getwebsitebookingURL() 
+    this.bookingengineurl = this.token.getwebsitebookingURL()
     if (this.token.getBookingData() !== null) {
       this.bookingData = this.token.getBookingData();
       this.booking = this.bookingData;
@@ -865,10 +865,10 @@ export class BookingComponent implements OnInit {
         this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
         this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
         this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-  
+
         this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
         this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-       }      
+       }
       this.payment.referenceNumber = new Date().getTime().toString();
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );
@@ -1916,7 +1916,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.roomPrice=this.booking.roomPrice;
     this.enquiryForm.externalSite="Website";
-    this.enquiryForm.source = "The Hotel Mate"
+    this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
