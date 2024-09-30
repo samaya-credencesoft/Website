@@ -452,6 +452,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     this.enquiryForm.planCode = this.booking.planCode;
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
+    this.enquiryForm.bookingId = this.booking.id;
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
