@@ -13,6 +13,7 @@ export const environment = {
   apiUrlAddress: 'https://api.bookonelocal.in/api-address',
   apiUrlPromotion: 'https://api.bookonelocal.in/promotion-api',
   apiLms: 'https://api.bookonelocal.in/api-lms',
+  channelIntegration:'https://api.bookonelocal.in/channel-integration',
   apiUrlBookone: 'https://api.bookonelocal.in/api-bookone',
   // nzAPIUrl: 'https://testconnect.bookone.io/hotelmate',
   // inAPIUrl: 'https://testconnect.bookone.io/hotelmate',

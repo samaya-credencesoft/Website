@@ -121,7 +121,7 @@ export class HotelBookingService {
   externalReservation(externalReservation: externalReservationDtoList[]) {
     this.setApi();
     return this.http.post<any[]>(
-      'https://testapi.bookonelocal.co.nz/channel-integration'+ '/api/external/reservation/',
+      environment.channelIntegration+ '/api/external/reservation/',
       externalReservation,
       { observe: 'response' }
     );
