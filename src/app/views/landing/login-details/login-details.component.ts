@@ -13,6 +13,7 @@ import { MatSort } from '@angular/material/sort';
 import { CancelService } from '../cancel.service';
 import { Cancel } from '../cancel';
 import { ListingService } from 'src/services/listing.service';
+import { CountryList } from 'src/model/country';
 
 @Component({
   selector: 'app-login-details',
@@ -28,7 +29,7 @@ export class LoginDetailsComponent implements OnInit {
   bookingFilter: any;
   bookPaginator: MatPaginator;
   isOrgAdmin:boolean = false;
-  
+
   dataSource = new MatTableDataSource();
   propertyId: number;
 
@@ -67,13 +68,17 @@ toDate: Date;
   @Input()
   businessUser:BusinessUser;
   id: any;
-  
+  CodeNumber: string;
+  countryCode: CountryList;
+  propertyDetails:BusinessUser;
+
+
   isInvalidStatus(status: string): boolean {
     const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID', 'NO_SHOW', 'CHECKEDIN'];
     return invalidStatuses.includes(status.toUpperCase()); // Ensure case-insensitive check
   }
 
-  
+
 
   constructor(private loginService:LandingService,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -83,37 +88,38 @@ toDate: Date;
     private cancelService:CancelService,
   ) {
     this.cancelId = new Cancel();
+    this.countryCode = new CountryList();
    }
 
 
    search() {
     this.resetBookings();
     if (this.selectedOption === 'email') {
-  
+
       //console.log(`Searching for email: ${this.email}`);
     } else if (this.selectedOption === 'mobile') {
-  
+
       //console.log(`Searching for mobile number: ${this.mobile}`);
     }
     else if (this.selectedOption === 'bookingId') {
-  
+
       //console.log(`Searching for Booking ID: ${this.bookingId}`);
     }
   }
 
-  
+
 
 
   searchenquiry() {
     if (this.selectedOptionenquiry === 'email') {
-  
+
       //console.log(`Searching for email: ${this.email}`);
     } else if (this.selectedOptionenquiry === 'mobile') {
-  
+
       //console.log(`Searching for mobile number: ${this.mobile}`);
     }
     else if (this.selectedOptionenquiry === 'bookingId') {
-  
+
       //console.log(`Searching for Booking ID: ${this.bookingId}`);
     }
   }
@@ -125,7 +131,7 @@ toDate: Date;
     this.bookingdata = null;
     this.currentPage = 1 ;
     //console.log('Searching for Bookings:' + this.bookings);
-  
+
   if (this.bookings?.length === 0 || this.bookings === null ) {
     //console.log(`Searching for Bookings: ${this.bookings}`);
       this.nodatafound = false;
@@ -171,11 +177,12 @@ toDate: Date;
 
 
   ngOnInit() {
+    this.propertyDetails = this.token.getProperty();
     this.businessUser = history.state.businessUser;
-    
+
     this.propertyId = this.token.getProperty().id;
     this.bookingList();
-    
+    this.checkDefaultCountryCode();
   }
 
     bookingList(){
@@ -192,7 +199,7 @@ toDate: Date;
       this.updatePaginatedData();
         this.bookings.forEach(ele=>{
           this.cancelId = ele;
-          
+
           //console.log('cancel is',this.cancelId);
         })
         // this.dataSource = new MatTableDataSource(this.bookings);
@@ -210,14 +217,14 @@ toDate: Date;
       this.paginatedData = this.bookings.slice(startIndex, endIndex);
       // //console.log('total Data is',this.paginatedData);
     }
-  
+
     changePage(page: number) {
       if (page > 0 && page <= this.totalPages()) {
         this.currentPage = page;
         this.updatePaginatedData();
       }
     }
-  
+
     totalPages(): number {
       return Math.ceil(this.totalPagess / this.pageSize);
     }
@@ -226,13 +233,13 @@ toDate: Date;
 
       try {
         const data = await this.listing.findPropertiesBybookingId(this.bookingId).toPromise();
-  
+
         this.bookingdata = data.body;
-  
+
         if (this.bookingdata !== null && this.bookingdata !== undefined && this.bookingdata.length !== 0) {
           this.verificationSuccess2 = true;
-  
-  
+
+
             this.fromdate =  this.bookingdata.fromDate;
             const date = new Date(this.fromdate);
             const day = date.getDate();
@@ -241,7 +248,7 @@ toDate: Date;
             const formattedDate = `${day} ${month} ${year}`;
             //console.log(formattedDate);
             this.bookingdata.fromDate = formattedDate;
-  
+
             if ( this.bookingdata.toDate !== null &&  this.bookingdata.toDate !== undefined) {
               this.Todate =  this.bookingdata.toDate;
               const date1 = new Date(this.Todate);
@@ -251,30 +258,30 @@ toDate: Date;
               const formattedDate1 = `${day1} ${month1} ${year1}`;
               this.bookingdata.toDate = formattedDate1;
             }
-  
+
         }
-  
+
         if (this.bookingdata === null || this.bookingdata.bookingStatus === 'ENQUIRY') {
           this.nodatafound = true;
         } else {
           this.nodatafound = false;
           // Handle the case when bookings are found
         }
-  
+
         //console.log("Bookings: " + JSON.stringify(this.bookingdata));
       } catch (error) {
         // Handle errors here
         console.error(error);
       }
     }
-  
-  
-  
+
+
+
     async getbookingsbyemail() {
       this.currentPage = 1;
       try {
         const data = await this.listing.findPropertiesByemail(this.email).toPromise();
-  
+
         this.bookings = data.body;
         this.bookings.reverse();
         this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
@@ -286,11 +293,11 @@ toDate: Date;
           this.cancelId = ele;
           //console.log('cancel is',this.cancelId);
         })
-  
-  
+
+
         if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
           this.verificationSuccess = true;
-  
+
           this.bookings.forEach(async (element) => {
             this.fromdate = element.fromDate;
             const date = new Date(this.fromdate);
@@ -300,7 +307,7 @@ toDate: Date;
             const formattedDate = `${day} ${month} ${year}`;
             //console.log(formattedDate);
             element.fromDate = formattedDate;
-  
+
             if (element.toDate !== null && element.toDate !== undefined) {
               this.Todate = element.toDate;
               const date1 = new Date(this.Todate);
@@ -312,27 +319,27 @@ toDate: Date;
             }
           });
         }
-  
+
         if (this.bookings.length === 0) {
           this.nodatafound = true;
         } else {
           this.nodatafound = false;
           // Handle the case when bookings are found
         }
-  
+
         //console.log("Bookings: " + JSON.stringify(this.bookings));
       } catch (error) {
         // Handle errors here
         console.error(error);
       }
     }
-  
-  
+
+
     async getbookingsbymobileNumber() {
       this.currentPage = 1
       try {
         const data = await this.listing.findPropertiesByMobilenumber( this.phoneNumber).toPromise();
-  
+
         this.bookings = data.body;
         this.bookings.reverse();
         this.pageNumber = (this.bookings.length), (_, i) => `Item  ${i + 1}`;
@@ -340,10 +347,10 @@ toDate: Date;
         //console.log('page is',this.pageNumber);
         //console.log('total page is',this.totalPagess);
         this.updatePaginatedData();
-  
+
         if (this.bookings !== null && this.bookings !== undefined && this.bookings.length > 0) {
           this.verificationSuccess = true;
-  
+
           this.bookings.forEach(async (element) => {
             this.fromdate = element.fromDate;
             const date = new Date(this.fromdate);
@@ -353,7 +360,7 @@ toDate: Date;
             const formattedDate = `${day} ${month} ${year}`;
             //console.log(formattedDate);
             element.fromDate = formattedDate;
-  
+
             if (element.toDate !== null && element.toDate !== undefined) {
               this.Todate = element.toDate;
               const date1 = new Date(this.Todate);
@@ -365,18 +372,37 @@ toDate: Date;
             }
           });
         }
-  
+
         if (this.bookings.length === 0) {
           this.nodatafound = true;
         } else {
           this.nodatafound = false;
           // Handle the case when bookings are found
         }
-  
+
         //console.log("Bookings: " + JSON.stringify(this.bookings));
       } catch (error) {
         // Handle errors here
         console.error(error);
+      }
+    }
+
+    checkDefaultCountryCode() {
+      if (
+          this.propertyDetails?.address != undefined &&
+          this.propertyDetails?.address != null &&
+          this.propertyDetails?.address.country != null &&
+          this.propertyDetails?.address.country != undefined
+      ) {
+          let code = this.countryCode?.countries.find(
+              (data) =>
+                  data.value.toLowerCase() ===
+                  this.propertyDetails?.address?.country.toLowerCase()
+          ).countryCode;
+
+          if (code != undefined) {
+              this.CodeNumber = code;
+          }
       }
     }
 
