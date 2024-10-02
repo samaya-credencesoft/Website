@@ -215,13 +215,15 @@
                     <td>No of Rooms:</td>
                     <td>{{ booking.noOfRooms }}</td>
                   </tr>
-                  <!-- <tr>
-                    <td>Price Per Night:</td>
-                    <td>{{booking.roomPrice| currency: currency:"symbol":"1.2-2"}}</td>
-                  </tr> -->
+
                   <tr>
-                    <td>Total Net Amount:</td>
-                    <td>{{booking.netAmount | currency: currency:"symbol":"1.2-2"}}</td>
+                    <td>No of Night(s):</td>
+                    <td>{{ DiffDate }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Room Price:</td>
+                    <td>{{(booking.netAmount / DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
 
                   <tr *ngIf="booking.extraPersonCharge >0">
@@ -236,6 +238,15 @@
                     <td>Service Charge:</td>
                     <td>{{ totalExtraAmount| currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
+                  <!-- <tr>
+                    <td>Price Per Night:</td>
+                    <td>{{booking.roomPrice| currency: currency:"symbol":"1.2-2"}}</td>
+                  </tr> -->
+                  <tr>
+                    <td>Total Net Amount:</td>
+                    <td>{{booking.netAmount | currency: currency:"symbol":"1.2-2"}}</td>
+                  </tr>
+
                   <tr>
                     <td>{{ businessUser.taxDetails[0].name }} Charges:</td>
                     <td>
