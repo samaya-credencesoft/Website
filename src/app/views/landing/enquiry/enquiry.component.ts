@@ -19,6 +19,9 @@ import { BusinessUser } from 'src/app/model/user';
 import { BusinessService } from 'src/services/business.service';
 import { CancelService } from '../cancel.service';
 import { Cancel } from '../cancel';
+import { CountryList } from 'src/model/country';
+import { Property } from 'src/app/model/property';
+
 
 @Component({
   selector: 'app-enquiry',
@@ -107,6 +110,10 @@ export class EnquiryComponent implements OnInit {
   paginatedData: any[] = [];
   totalPagess: number;
   id: number;
+  countryCode: CountryList;
+   property: Property;
+  CodeNumber: string;
+  propertyDetails: BusinessUser;
 
 constructor(private token: TokenStorage,
   private listing:ListingService,
@@ -120,6 +127,7 @@ constructor(private token: TokenStorage,
   ){
     this.message = new MessageDto();
     this.payment = new Payment();
+    this.countryCode = new CountryList();
     this.businessUser = new BusinessUser();
     this.cancelId = new Cancel();
     if(this.phoneNumber == undefined){
@@ -160,10 +168,29 @@ constructor(private token: TokenStorage,
 
 
 ngOnInit(){
+  this.propertyDetails = this.token.getProperty();
   // this.tab3();
-
+  this.checkDefaultCountryCode();
   }
 
+  checkDefaultCountryCode() {
+    if (
+        this.propertyDetails?.address != undefined &&
+        this.propertyDetails?.address != null &&
+        this.propertyDetails?.address.country != null &&
+        this.propertyDetails?.address.country != undefined
+    ) {
+        let code = this.countryCode?.countries.find(
+            (data) =>
+                data.value.toLowerCase() ===
+                this.propertyDetails?.address?.country.toLowerCase()
+        ).countryCode;
+
+        if (code != undefined) {
+            this.CodeNumber = code;
+        }
+    }
+  }
 
 
 searchenquiry() {
