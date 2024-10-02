@@ -1914,7 +1914,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.roomName=this.booking.roomName;
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice=this.booking.roomPrice;
+    this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
