@@ -15,6 +15,8 @@ import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { CancelService } from '../cancel.service';
 import { Cancel } from '../cancel';
 import { BusinessUser } from 'src/app/model/user';
+import { CountryList } from 'src/model/country';
+
 // import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
@@ -80,6 +82,9 @@ export class NotificationHandlingComponent {
   pageNumber: number;
   totalPagess: number;
   paginatedData: any[] = [];
+  CodeNumber: string;
+  countryCode: CountryList;
+  propertyDetails: BusinessUser;
 
 
 constructor(private token: TokenStorage,
@@ -92,6 +97,9 @@ constructor(private token: TokenStorage,
   private cancelService:CancelService,
   ){
     this.message = new MessageDto();
+    this.countryCode = new CountryList();
+    this.propertyDetails = this.token.getProperty();
+    this.checkDefaultCountryCode();
     this.cancelId = new Cancel();
 
     if(this.phoneNumber == undefined){
@@ -137,6 +145,25 @@ ngonInit(){
 
 this.tab3();
 
+}
+
+checkDefaultCountryCode() {
+  if (
+    this.propertyDetails?.address != undefined &&
+    this.propertyDetails?.address != null &&
+    this.propertyDetails?.address.country != null &&
+    this.propertyDetails?.address.country != undefined
+  ) {
+    let code = this.countryCode?.countries.find(
+      (data) =>
+        data.value.toLowerCase() ===
+        this.propertyDetails?.address?.country.toLowerCase()
+    ).countryCode;
+
+    if (code != undefined) {
+      this.CodeNumber = code;
+    }
+  }
 }
 
 searchenquiry() {
