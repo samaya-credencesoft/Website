@@ -17,7 +17,7 @@
           <div class="row facrow1 mr-md-4" style="justify-content: space-between;">
             <div class="col-xl-1 col-6 p-1" *ngFor="let fac of businessUser.propertyServicesList | slice:0:6">
               <div class="d-flex justify-content-center text-center" id="facility1"
-                *ngIf="fac.name !== null && fac.name !== undefined">
+                *ngIf="fac.name">
                 <div>
                   <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
                   <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
@@ -27,22 +27,47 @@
                 </div>
               </div>
             </div>
-            <ng-container *ngIf="businessUser?.propertyServicesList?.length>7">
-              <div class="col-xl-1 p-1" *ngIf="!showAll">
+            <ng-container *ngIf="businessUser?.propertyServicesList?.length>6">
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 p-2" *ngIf="!showAll">
                 <div class="d-flex justify-content-center text-center" id="facility1">
                   <div>
-                    <p style="font-size: 17px;padding: 0; margin: 0;">+{{businessUser.propertyServicesList.length-7}}<br>
+                    <p style="font-size: 17px;padding: 0; margin: 0;">+{{businessUser.propertyServicesList.length-6}}<br>
                     <p>Amenities</p>
                   </div>
                 </div>
               </div>
+
+              <div class="col-12 mt-2" *ngIf="showAll">
+                <div class="row">
+                  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 p-2" *ngFor="let fac of businessUser.propertyServicesList | slice:6">
+                    <div class="d-flex justify-content-center text-center" id="facility1" *ngIf="fac.name">
+                      <div>
+                        <img *ngIf="!fac.imageUrl" src="assets/images/service.png" alt="icon">
+                        <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon">
+                        <br>
+                        <p>{{ fac.name | slice:0:14 }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mt-2">
+                <button class="btn btn-link" (click)="showAll = !showAll">
+                  {{ showAll ? 'View Less' : 'View All' }}
+                </button>
+              </div>
             </ng-container>
           </div>
-          <ng-container *ngIf="totalExtraAmount>0">
-            <h5 class="mb-2" style="font-weight: 600 !important;margin-top: 20px;">Service Included</h5>
+          <ng-container *ngIf="totalExtraAmount > 0">
+            <h5 class="mb-2" style="font-weight: 600 !important; margin-top: 20px;">Service Included</h5>
             <label for="mealplan" class="form-label" style="width: 100%;">Confirmed Meal Option</label>
             <select class="form-select" aria-label="Meal Options" disabled style="width:80%; border-radius: 26px; height: 2.5rem">
-              <option><span *ngFor="let service of addServiceList;let i= index">{{service.name}}{{i === addServiceList.length -1 ? '' : ',&nbsp;' }}</span></option>
+              <option>
+                <span *ngFor="let service of addServiceList; let i = index">
+                  {{ service.name }}{{ i === addServiceList.length - 1 ? '' : ', ' }}
+                </span>
+              </option>
             </select>
           </ng-container>
           <!-- <label for="bedchoice" class="form-label" style="width: 100%;">Confirm Bed Choice</label>
