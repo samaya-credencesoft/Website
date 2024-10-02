@@ -253,7 +253,7 @@
                       <span>{{
                         (this.booking.netAmount *
                         this.booking.taxPercentage) /
-                        100 | currency: currency:"symbol":"1.2-2"
+                        100 | currency: currency:"symbol":"1.0-0"
                         }}</span>
                ( {{this.taxPercentage}}%)</td>
                   </tr>
@@ -274,11 +274,11 @@
               <table>
                 <tr>
                   <td style="font-weight: 800;">Grand Total:</td>
-                  <td style="font-weight: 800;">{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</td>
+                  <td style="font-weight: 800;">{{booking.totalAmount | currency: currency:"symbol":"1.0-0"}}</td>
                 </tr>
                 <tr style="visibility: hidden;">
                   <td>Total Room Price:</td>
-                  <td>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</td>
+                  <td>{{booking.totalAmount | currency: currency:"symbol":"1.0-0"}}</td>
                 </tr>
               </table>
             </div>
