@@ -31,15 +31,7 @@
 
   <app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
 
-  <df-messenger
-  location="asia-south1"
-  project-id="impactful-name-306810"
-  agent-id="e2f46998-246d-4046-aee3-65c992b363ea"
-  intent="PROPERTY"
-  storage-option="none"
-  language-code="en"
-  max-query-length="-1">
-</df-messenger>
+
 
 
   <!-- <div  style="width: 100%; margin-top: 7px;">
@@ -281,10 +273,6 @@
           </div>
 
 
-
-
-<!-- <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script> -->
-
           <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
             <!-- <h3 class="room-text-edit">Travel Dates and Guests</h3> -->
             <div class="row p-2" style="justify-content: space-evenly;" [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
@@ -476,8 +464,8 @@
             <li><a href="tel:+918328818871"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
               <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-8328818871</span></a>
                 </li>
-            <li><a href="tel:+919004129369"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
-              <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-9004129369</span></a>
+            <li><a href="tel:+919040785705"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
+              <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-9040785705</span></a>
                 </li>
                 <li style="margin-top: -2px;"><a [href]="getWhatsappShareUrl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
                   <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."></span></a>
@@ -486,11 +474,11 @@
 
               <ul style="display: flex; flex-wrap: wrap; justify-content: center; padding: 0px; padding-top: 35px;" *ngIf="showStaticContent === true && businessUser?.website">
 
-                <li><a href="tel:+919004129369"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                <li *ngIf="businessUser?.mobile != null &&  businessUser?.mobile != undefined" ><a [href]="'tel:' + businessUser.mobile"><span style="color: #484848; text-decoration: underline; font-size: 14px;">
                   <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">{{businessUser.mobile}}</span></a>
                     </li>
 
-                    <li style="margin-top: -2px;"><a [href]="customerwhatsappurl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
+                    <li style="margin-top: -2px;" *ngIf="businessUser?.whatsApp != null &&  businessUser?.whatsApp != undefined"><a [href]="customerwhatsappurl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
                       <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."> {{businessUser.whatsApp}}
                     </span></a>
                         </li>
@@ -1395,7 +1383,7 @@
           </h3>
           <div *ngIf="this.activeForGoogleHotelCenter == true">
             <div *ngFor="let room of roomWithGHCPlan; let i = index" style="margin-bottom:20px" >
-              <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled &&  (otaAvailableRooms > 0 && otaAvailableRooms >= rooms)">
+              <div class="card" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
                 <div class="card-header" [id]="'room' + [i]"
                 [attr.data-toggle]="availableRooms?.length > 1 ? 'collapse' : null"
                 [attr.data-target]="availableRooms?.length > 1 ? '#collapse' + [i] : null">
@@ -1718,7 +1706,7 @@
                 <div class="col-lg-12 p-0" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 "
                   style="margin-top: 4px;margin-bottom: 11px;">
                   <span class="room-text-edit1 ">{{room.name}}</span>
-                  <span style="position: relative; float: right;"  *ngIf="availableRooms.length > 1">
+                  <span style="position: relative; float: right;" *ngIf="availableRooms.length > 1">
                   <img src="assets/images/downarrow.svg" height="50px" width="50px" alt="">
                   </span>
                 </div>
@@ -2551,7 +2539,7 @@
                       <li style="color: white !important;">
                         <b>Tax Amount ({{ this.taxPercentage }}%): </b>
                         <span style="font-weight: bolder" *ngIf="businessUser.taxDetails">
-                          <!-- {{ businessUser.taxDetails[0]?.name }} & charges -->
+                          {{ businessUser.taxDetails[0]?.name }} & charges
                           <span>{{
                             (this.booking.netAmount *
                             this.booking.taxPercentage) /
@@ -2625,14 +2613,6 @@
                                 | currency: currency:"symbol":"1.2-2"
                                 }}</span>
                            </td>
-                        </tr>
-
-                        <tr *ngIf="booking.extraChildCharge >0" style="color:black; padding:5px">
-                          <td style="color: black;padding:5px ">Extra Child charges </td>
-                          <td style="color: black;padding:5px " ><span>{{
-                            booking.extraChildCharge
-                            | currency: currency:"symbol":"1.2-2"
-                            }}</span></td>
                         </tr>
                          <tr >
                            <td style="color: black;padding:5px">Tax and service charges</td>
@@ -2837,7 +2817,7 @@
                       <li style="color: white !important;">
                         <b>Tax Amount ({{ this.taxPercentage }}%): </b>
                         <span style="font-weight: bolder" *ngIf="businessUser.taxDetails">
-                          <!-- {{ businessUser.taxDetails[0]?.name }} & charges -->
+                          {{ businessUser.taxDetails[0]?.name }} & charges
                           <span>{{
                             (this.booking.netAmount *
                             this.booking.taxPercentage) /
@@ -3143,67 +3123,62 @@
 
 
       </div>
-
       <div class="container-fluid p-4 askq" *ngIf="availableRooms?.length >=0 && availability ==true">
-        <form #contactForm="ngForm" role="form" (ngSubmit)="submitForm(contactForm)">
-          <div class="form-group mb-4">
-            <p class="py-3" style="font-weight: bold;">Ask a question</p>
-            <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="successMessage">
-              <span class="alert-inner--icon"><i class="fa fa-thumbs-o-up"></i></span>
-              <span class="alert-inner--text"><strong>Message Sent!</strong> Thanks for reaching us.</span>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-
+        <form #contactForm=ngForm role="form"  action="">
+        <div class="form-group mb-4">
+          <p class="py-3" style="font-weight: bold;">Ask a question</p>
+          <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="!successMessage === false">
+            <span class="alert-inner--icon"><i class="fa fa-thumbs-o-up"></i></span>
+            <span class="alert-inner--text"><strong>Message Sent!</strong> Thanks for reaching us.</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
             <div class="col-lg-6 p-0">
-              <div class="input-group input-group-alternative" style="border: 1px solid;">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-user-run"></i></span>
-                </div>
-                <input type="tel" [formControl]="phoneControl" required name='phone' class="form-control"
-                       placeholder="Your Phone**" aria-describedby="phone" [(ngModel)]="phone">
-                <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
-                     *ngIf="phoneControl.invalid && (phoneControl.dirty || phoneControl.touched)">
-                  <span *ngIf="phoneControl.errors?.required" class="text-danger">Phone is required</span>
-                  <span *ngIf="phoneControl.errors?.pattern" class="text-danger">Please enter valid phone number</span>
-                </div>
+            <div class="input-group input-group-alternative" style="border: 1px solid;">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-user-run"></i></span>
               </div>
-            </div>
-
-            <div class="col-lg-6 p-0 mt-4">
-              <div class="input-group input-group-alternative" style="border: 1px solid;">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-user-run"></i></span>
-                </div>
-                <input type="text" [formControl]="fromEmailControl" required name='email' [(ngModel)]="fromEmail" class="form-control"
-                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Your email**" aria-describedby="helpId"
-                       style="color: #484848;">
+              <input type="tel" required [formControl]="phoneControl" name='phone' class="form-control"
+                placeholder="Your Phone**" aria-describedby="phone" [(ngModel)]="phone">
                 <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
-                     *ngIf="fromEmailControl.invalid && (fromEmailControl.dirty || fromEmailControl.touched)">
-                  <span *ngIf="fromEmailControl.errors?.required" class="text-danger">Email is required</span>
-                  <span *ngIf="fromEmailControl.errors?.pattern" class="text-danger">Please enter valid email</span>
+                  *ngIf="(phoneControl.touched || contactForm.submitted) && phoneControl.errors">
+                  <span *ngIf="phoneControl.errors.required" class="text-danger">* Phone is required </span>
+                  <span *ngIf="phoneControl.errors.pattern" class="text-danger">Please enter valid phone number</span>
                 </div>
+            </div>
+          </div>
+          <div class="col-lg-6 p-0 mt-4">
+            <div class="input-group input-group-alternative" style="border: 1px solid;">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-user-run"></i></span>
+              </div>
+              <input type="text" [formControl]="fromEmailControl" required name='email' [(ngModel)]="fromEmail" class="form-control"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Your email**" aria-describedby="helpId"
+                style="color: #484848;">
+              <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
+                *ngIf="(fromEmailControl.touched || contactForm.submitted) && fromEmailControl.errors">
+                <span *ngIf="fromEmailControl.errors.required" class="text-danger">* Email is required </span>
+                <span *ngIf="fromEmailControl.errors.pattern" class="text-danger">Please enter valid email</span>
               </div>
             </div>
           </div>
-
-          <div class="form-group mb-4">
-            <textarea class="form-control form-control-alternative" [formControl]="messageControl" placeholder="Start Typing...**"
-                      required name='message' [(ngModel)]="message" rows="4" cols="80" style="border: 1px solid; resize:none"></textarea>
+        </div>
+        <div class="form-group mb-4">
+          <textarea class="form-control form-control-alternative" [formControl]="messageControl" placeholder="Start Typing...**"
+            required name='message' [(ngModel)]="message" rows="4" cols="80" style="border: 1px solid; resize:none"></textarea>
             <div class="form-control-feedback pr-1 d-flex"
-                 *ngIf="messageControl.invalid && (messageControl.dirty || messageControl.touched)">
-              <span *ngIf="messageControl.errors?.required" class="text-danger">Question is required</span>
+              *ngIf="(messageControl.touched || contactForm.submitted) && messageControl.errors">
+              <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
             </div>
-          </div>
-
-          <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid' style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
-            Submit
-          </button>
-          </form><div></div>
-          </div>
-
-      <div *ngIf=" allDtosNull()">
+        </div>
+        <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'
+          style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
+          Submit
+        </button>
+        </form>
+      </div>
+    <div *ngIf=" allDtosNull()">
       <app-enquiry-list></app-enquiry-list>
     </div>
       <ng-template #room let-modal style="max-width: 500px">

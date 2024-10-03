@@ -1,7 +1,7 @@
 // import { Components } from './../../model/components';
 // import { Template } from './../../model/template';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from "@angular/router";
 // import { Customer } from "./../../model/customer";
 import {
@@ -60,7 +60,6 @@ declare var window: any;
   providers: [DatePipe],
 })
 export class BookingComponent implements OnInit {
-
   PropertyUrl: string;
   currency: string;
   message: MessageDto;
@@ -80,8 +79,6 @@ export class BookingComponent implements OnInit {
   verifyOption = "email";
   // smsOption: string = '';
   sendBtn = "Send";
-  form: FormGroup;
-  mobileHasError: boolean = true;
   submitButtonDisable: boolean = false;
   loader = false;
   verificationCode: string;
@@ -133,6 +130,7 @@ export class BookingComponent implements OnInit {
   contentDialog: any;
 
   ngbDate: any;
+  mobileHasError: boolean = true;
   taxPercentage = 0;
   subTotalAmount: number = 0;
   totalAmount: number = 0;
@@ -192,12 +190,9 @@ export class BookingComponent implements OnInit {
     private listingService: ListingService,
     private router: Router,
     private http: HttpClient,
-    private hotelBookingService: HotelBookingService,
-    private fb: FormBuilder
+    private hotelBookingService: HotelBookingService
   ) {
-    this.form = this.fb.group({
-      mobile: ['', [Validators.required]]
-    });
+
     this.message = new MessageDto();
     this.myDate = new Date();
     this.parametertype = new Para();
@@ -239,7 +234,7 @@ export class BookingComponent implements OnInit {
 
 
     }
-    this.bookingengineurl = this.token.getwebsitebookingURL() 
+    this.bookingengineurl = this.token.getwebsitebookingURL()
     if (this.token.getBookingData() !== null) {
       this.bookingData = this.token.getBookingData();
       this.booking = this.bookingData;
@@ -355,13 +350,7 @@ export class BookingComponent implements OnInit {
       this.API_URL = API_URL_IN;
     }
   }
-  onCountryChange(event: any) {
-    console.log(event);
-  }
 
-  onNumberChange(event: any) {
-    this.mobileHasError = !this.form.controls['mobile'].valid;
-  }
   ngAfterViewInit() {
     let radios = document.querySelectorAll(".payment-tab-trigger > input");
 
@@ -382,6 +371,7 @@ export class BookingComponent implements OnInit {
       .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
       .subscribe((data) => {
         this.businessOfferDto = data.body;
+        console.log("this.businessOfferDto: ", data.body);
       });
   }
   applyPromoCode(offer) {
@@ -496,6 +486,7 @@ export class BookingComponent implements OnInit {
     //     this.businessUser = data.body;
     this.businessUser = this.token.getProperty();
     this.accommodationvalue = this.businessUser.businessServiceDtoList.filter(ele => ele.name === 'Accommodation');
+    console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
         this.currency = this.businessUser.localCurrency.toUpperCase();
     this.getOfferDetails();
@@ -874,10 +865,10 @@ export class BookingComponent implements OnInit {
         this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
         this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
         this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-  
+
         this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
         this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-       }      
+       }
       this.payment.referenceNumber = new Date().getTime().toString();
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );
@@ -1927,7 +1918,6 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
-    // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;

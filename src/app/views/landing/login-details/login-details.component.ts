@@ -37,8 +37,8 @@ export class LoginDetailsComponent implements OnInit {
 
   cancelBookingId: any;
 
-  selectedOption: string = '';
-  selectedOptionenquiry: string = '';
+  selectedOption: string = 'EmailRadio';
+  selectedOptionenquiry: string = 'emailRadio1';
 
   selectedTabdefault: boolean = true;
   cancelId: any;
@@ -72,7 +72,6 @@ toDate: Date;
   countryCode: CountryList;
   propertyDetails:BusinessUser;
 
-
   isInvalidStatus(status: string): boolean {
     const invalidStatuses = ['CANCELLED', 'CHECKEDOUT', 'VOID', 'NO_SHOW', 'CHECKEDIN'];
     return invalidStatuses.includes(status.toUpperCase()); // Ensure case-insensitive check
@@ -88,7 +87,6 @@ toDate: Date;
     private cancelService:CancelService,
   ) {
     this.cancelId = new Cancel();
-    this.countryCode = new CountryList();
    }
 
 
@@ -165,11 +163,6 @@ toDate: Date;
     { externalSiteName: "Treebo", logo: "https://bookonelocal.in/cdn/2024-01-18-092540471-Treebo-Hotels-logo.png" },
     { externalSiteName: "Go Room Go", logo: "https://bookonelocal.in/cdn/2024-01-27-131106600-goroomgo_logo.png" },
     { externalSiteName: "Pie Rooms", logo: "https://bookonelocal.in/cdn/2024-04-26-064814509-pielogo.png" },
-    { externalSiteName: "Brevistay", logo: "https://bookonelocal.in/cdn/2024-06-04-054210675-download.jpg" },
-    { externalSiteName: "EGlobe", logo: "https://bookonelocal.in/cdn/2024-06-04-060002163-eglobesolutions_logo.jpg" },
-    { externalSiteName: "Yatradham", logo: "https://bookonelocal.in/cdn/2024-06-04-060704195-images.png" },
-    { externalSiteName: "Trip.com", logo: "https://bookonelocal.in/cdn/2024-06-04-065129659-png-transparent-trip-com-train-travel-hotel-train-blue-text-service-removebg-preview.png" },
-    { externalSiteName: "Thrillophilia", logo: "https://bookonelocal.in/cdn/2024-06-04-073813011-0x0.png" },
 
 
   ]
