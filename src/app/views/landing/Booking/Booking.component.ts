@@ -2101,7 +2101,7 @@ this.enquiryForm.roomPrice = this.booking.totalAmount
   this.template.language = this.language;
   this.componentstype.type= 'header',
   this.parametertype.type = 'image',
-this.images.link ='https://bookonelocal.in/cdn/TheHotelMate%20Logo_LogoVerticalDark.png',
+this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
   this.parametertype.image = this.images;
   this.parameterss.push(this.parametertype);
   this.componentstype.parameters =this.parameterss;
@@ -2173,7 +2173,7 @@ this.images.link ='https://bookonelocal.in/cdn/TheHotelMate%20Logo_LogoVerticalD
     this.template.language = this.language;
     this.componentstype3.type= 'header',
     this.parametertype3.type = 'image',
-    this.images.link ='https://bookonelocal.in/cdn/TheHotelMate%20Logo_LogoVerticalDark.png',
+    this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
       this.parametertype3.image = this.images;
       this.parameterss3.push(this.parametertype3);
       this.componentstype3.parameters =this.parameterss3;
