@@ -1269,15 +1269,26 @@ if (this.city != null && this.city != undefined) {
       .subscribe((response) => {
         this.success = response;
         Logger.log(response);
-        this.name = '';
-        this.fromEmail = '';
-        this.phone = '';
-        this.subject = '';
-        this.propertyname = this.businessUser.seoFriendlyName;
-        this.message = '';
-        this.successMessage = true;
+
       });
+      this.sendemailtosupport(this.email);
   }
+  sendemailtosupport(email){
+    email.toEmail ='support@thehotelmate.com'
+   this.http
+   .post<Email>(API_URL_NZ + '/api/thm/sendEmailFromWebSite',email)
+   .subscribe((response) => {
+     this.success = response;
+     Logger.log(response);
+     this.name = '';
+     this.fromEmail = '';
+     this.phone = '';
+     this.subject = '';
+     this.propertyname = '';
+     this.message = '';
+     this.successMessage = true;
+   });
+ }
   changeTheme(primary: string, secondary: string, tertiary: string) {
     document.documentElement.style.setProperty('--primary', primary);
 
@@ -2848,7 +2859,7 @@ if (bookingSummaryElement) {
       (dto) => dto.ratesAndAvailabilityDtos === null
     );
   }
-  
+
   onDateSelection(date: NgbDate, type: 'checkin' | 'checkout') {
     if (type === 'checkin') {
       this.fromDate = date;
