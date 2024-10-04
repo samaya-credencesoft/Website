@@ -314,7 +314,7 @@
             </div>
 
             <div class="row justify-content-center" *ngIf="verificationenquirySuccess2 && bookingEnquiry != null && bookingEnquiry.status != 'Void'" style="margin-top: 70px; display: flex; flex-wrap: wrap;">
-              <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;">
+              <div class="col-12 col-md-6 col-lg-4" style="margin-top: 20px;" *ngFor="let item1 of bookingEnquiry">
 
                 <div style="border-radius: 30px 30px 30px 0px;
                 border: 0.5px solid #fff;
@@ -326,10 +326,10 @@
 
                   <div style="text-align: center; font-size: 13px; margin-bottom: 4px;">
                     <div style="color: #fff;
-                    font-weight: 700; "> {{bookingEnquiry?.firstName }} {{bookingEnquiry?.lastName}} </div>
+                    font-weight: 700; "> {{item1?.firstName }} {{item1?.lastName}} </div>
                     <div style="color: #FFF;">
-                    {{bookingEnquiry?.propertyName}} </div>
-                    <div style="color: #FFF;">Enquiry ID: {{bookingEnquiry.enquiryId}} </div>
+                    {{item1?.propertyName}} </div>
+                    <div style="color: #FFF;">Enquiry ID: {{item1.enquiryId}} </div>
 
                   </div>
 
@@ -346,19 +346,19 @@
                         margin-bottom: 24px;">
                         <b style="
                           font-weight: 700;color:#000">Checkin Date:</b> <br>
-                        {{bookingEnquiry?.checkInDate }} <br>
+                        {{item1?.checkInDate }} <br>
                         <b style="
                           font-weight: 700;color:#000">Created Date:</b> <br>
-                        {{bookingEnquiry?.createdDate}} <br>
+                        {{item1?.createdDate}} <br>
                         <b style="
                           font-weight: 700;color:#000">Room Type:</b> <br>
-                        {{bookingEnquiry?.roomType}} <br>
+                        {{item1?.roomType}} <br>
                         <b style="
                           font-weight: 700;color:#000">Phone Number:</b> <br>
-                        {{bookingEnquiry?.phone}}<br>
+                        {{item1?.phone}}<br>
                         <b style="
                           font-weight: 700;color:#000">Source:</b> <br>
-                        {{bookingEnquiry?.source}}<br>
+                        {{item1?.source}}<br>
                       </p>
                     </div>
                     <div class="col-7">
@@ -366,16 +366,16 @@
                       margin-bottom: 24px; margin-left: -17px;">
                         <b style="
                         font-weight: 700;color:#000">Checkout Date:</b> <br>
-                        {{bookingEnquiry?.checkOutDate}}<br>
+                        {{item1?.checkOutDate}}<br>
                         <b style="
                         font-weight: 700;color:#000">Status:</b> <br>
-                        {{bookingEnquiry?.status}} <br>
+                        {{item1?.status}} <br>
                         <b style="
                         font-weight: 700;color: #000;">Room Plan:</b> <br>
-                        {{bookingEnquiry ?.roomRatePlanName}} <br>
+                        {{item1 ?.roomRatePlanName}} <br>
                         <b style="
                         font-weight: 700;color:#000">Email:</b> <br>
-                        <span class="email-text">{{ bookingEnquiry?.email }}</span><br>
+                        <span class="email-text">{{ item1?.email }}</span><br>
                         <div style="border-radius: 30px 0px 30px 30px;
                         border: -10.5px solid #fff;
                         background: #271a55;
@@ -394,14 +394,14 @@
   height: 40px;
   border-radius: 15px; margin-right: 15px;
   font-weight: 700; padding-left: 10px;
-    padding-right: 10px;" (click)="PayViaUpi(bookingEnquiry)">
+    padding-right: 10px;" (click)="PayViaUpi(item1)">
 Pay Now
 
 </button>
 </div>
 
 <div  style="text-align: center; font-size: 13px; margin-bottom: 4px;">
-  <button class="btn btn-danger" (click)="enquiryStatusVoid(bookingEnquiry?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
+  <button class="btn btn-danger" (click)="enquiryStatusVoid(item1?.enquiryId)" style="background-color: #fff; color: #221950;width: max-content;
   height: 40px;
   border-radius: 15px;
   font-weight: 700; ">Void</button>

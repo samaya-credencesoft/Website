@@ -160,7 +160,7 @@ export class ListingService {
 
   findPropertiesBybookingIdLms(enquiryId: number){
     return this.http.get<any>(
-      API_URL_LMS + "/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate/" + enquiryId,
+      API_URL_LMS + "/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate" + '?enquiryId=' + enquiryId,
       {
         observe: "response",
       }
