@@ -500,10 +500,10 @@ export class BookingComponent implements OnInit {
           this.booking.taxDetails.push(element);
           this.taxPercentage = element.percentage;
           this.booking.taxPercentage = this.taxPercentage;
-          if (this.bookingCity != null && this.bookingCity != undefined) {
-            this.booking.roomPrice = Number(this.bookingCity)
+          // if (this.bookingCity != null && this.bookingCity != undefined) {
+          //   this.booking.roomPrice = Number(this.bookingCity)
 
-          }
+          // }
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
               if (
