@@ -86,7 +86,10 @@ toDate: Date;
     private listing:ListingService,
     private cancelService:CancelService,
   ) {
+    this.countryCode = new CountryList();
+    this.propertyDetails = this.token.getProperty();
     this.cancelId = new Cancel();
+    this.checkDefaultCountryCode();
    }
 
 
@@ -175,7 +178,6 @@ toDate: Date;
 
     this.propertyId = this.token.getProperty().id;
     this.bookingList();
-    this.checkDefaultCountryCode();
   }
 
     bookingList(){
@@ -209,6 +211,9 @@ toDate: Date;
       //console.log('endIndex index',endIndex)
       this.paginatedData = this.bookings.slice(startIndex, endIndex);
       // //console.log('total Data is',this.paginatedData);
+    }
+    validatePhoneNumber(){
+
     }
 
     changePage(page: number) {
