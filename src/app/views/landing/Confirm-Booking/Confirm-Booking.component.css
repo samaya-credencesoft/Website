@@ -1,0 +1,61 @@
+.confrm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height to center vertically */
+}
+
+.confirmation-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    align-items: center !important;
+
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
+}
+
+.header .btn {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.confirmation-card p {
+    font-size: 18px;
+    color: #6c757d;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .confirmation-card {
+        padding: 20px;
+    }
+
+    .header h2 {
+        font-size: 20px;
+    }
+
+    .header .btn {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .confirmation-card p {
+        font-size: 16px;
+    }
+}

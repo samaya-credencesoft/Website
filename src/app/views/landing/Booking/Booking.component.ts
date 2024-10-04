@@ -1657,7 +1657,7 @@ export class BookingComponent implements OnInit {
   }
   createBooking() {
     this.booking.modeOfPayment = this.payment.paymentMode;
-    this.booking.externalSite = "The Hotel Mate";
+    this.booking.externalSite = "Website";
     this.booking.businessName = this.businessUser.name;
     this.booking.businessEmail = this.businessUser.email;
     this.booking.roomBooking = true;
@@ -1679,7 +1679,7 @@ export class BookingComponent implements OnInit {
           this.booking = response.body;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
-
+          this.router.navigate(['/Confirm-Booking']);
           if (this.booking.id !== null) {
             this.submitButtonDisable = true;
             this.isSuccess = true;
@@ -1773,6 +1773,7 @@ export class BookingComponent implements OnInit {
       });
     }, 25000); */
   }
+  
   onGoHome() {
     this.locationBack.back();
   }

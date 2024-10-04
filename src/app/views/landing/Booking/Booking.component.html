@@ -259,9 +259,11 @@
         <div class="d-flex justify-content-center mb-4">
           <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
             (click)="submitForm()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Enquiry Now</button>
-            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true"
+            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
             (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay Now</button>
-        </div>
+            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true" 
+            (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay At Hotel</button>
+       </div>
       </div>
     </div>
   </div>
@@ -2352,3 +2354,7 @@
 
   gtag('config', 'AW-10904222935');
 </script>
+
+
+
+
