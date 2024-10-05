@@ -26,7 +26,7 @@ export const environment = {
     'https://play.google.com/store/apps/details?id=nz.co.bookonelocal.customer',
   iosAppUrl: 'https://apps.apple.com/us/app/bookone-local/id1528910778',
   country: 'in',
-  googleKey: 'AIzaSyD76Ocky2MYrAcI-f9H3XbxzsrSB0TsbJI',
+  googleKey: '',
   channelIntegration:'https://api.bookonelocal.in/channel-integration',
   // callbackUrl: 'http://localhost:4200/#/details?ReferenceNumber='
   // callbackUrl: 'http://localhost:4200/booking-complete?ReferenceNumber=',

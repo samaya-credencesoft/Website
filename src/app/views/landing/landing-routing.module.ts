@@ -32,6 +32,7 @@ import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.
 import { LoginDetailsComponent } from './login-details/login-details.component';
 import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
 import { ManageEnquiryComponent } from './manage-enquiry/manage-enquiry.component';
+import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.component';
 import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
 import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
@@ -106,6 +107,10 @@ const routes: Routes = [
   {
     path:'manage-enuiry',
     component:ManageEnquiryComponent
+  },
+  {
+    path:'Confirm-Booking',
+    component:ConfirmBookingComponent
   },
 
   // {

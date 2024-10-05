@@ -277,7 +277,7 @@
             <!-- <h3 class="room-text-edit">Travel Dates and Guests</h3> -->
             <div class="row p-2" style="justify-content: space-evenly;" [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
               <div class="col-12 my-2" style="background-color: #d9d9d9;">
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-2 p-1"><img src="assets/images/uil_calender.svg" alt="" style="width: 50px;height: 50px;"></div>
                   <div class="col-10 main-search-input-item main_search location">
                     <div id="autocomplete-container" style="margin-top: -4px;">
@@ -311,7 +311,56 @@
                       </div>
                     </div>
                   </div>
+                </div> -->
+
+                <div class="row" style="justify-content: space-evenly;">
+
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">
+                        Check In
+                      </label>
+                      <input #dpFromDate3 type="text" class="date-input form-control input-field-resize2" style="border: none;"
+                        placeholder="Check-in" name="dpFromDate3"
+                        [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
+                        (input)="fromDate = validateInput(fromDate, dpFromDate3.value)"
+                        required (click)="datepicker3.toggle()" autocomplete="off" />
+
+                      <div class="form-group" style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize"
+                          ngbDatepicker #datepicker3="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkin')"
+                          [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
+                          [startDate]="fromDate" tabindex="-1"
+                          [minDate]="minDateForCheckIn" />
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-lg-6">
+                    <div id="autocomplete-container">
+                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">
+                        Check Out
+                      </label>
+                      <input #dpToDate3 type="text" class="date-input form-control input-field-resize2"
+                        placeholder="Check-out" name="dpToDate3"
+                        [value]="formatter.format(toDate) | date: 'EEE, MMM d'"
+                        style="border: none;" (input)="toDate = validateInput(toDate, dpToDate3.value)"
+                        required (click)="datepicker4.toggle()" autocomplete="off" />
+
+                      <div class="form-group" style="height: 0px">
+                        <input name="datepicker" class="form-control input-field-resize"
+                          ngbDatepicker #datepicker4="ngbDatepicker"
+                          [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkout')"
+                          [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
+                          [startDate]="toDate" tabindex="-1"
+                          [minDate]="fromDate" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
               </div>
               <div class="col-12 my-2" style="background-color: #d9d9d9;">
                 <div class="row">
@@ -2358,7 +2407,7 @@
 
        <div class="container-fluid" *ngIf="availableRooms?.length >=0 && availability ==true">
         <div class="row">
-          <div class="col-lg-6">
+          <!-- <div class="col-lg-6">
             <div class="col">
 
             </div>
@@ -2376,7 +2425,7 @@
                   }" style="font-weight: 600; color: wheat"></agm-marker>
           </agm-map>
             </div>
-          </div>
+          </div> -->
           <div class="col-lg-6 d-flex justify-content-center align-items-center roomform"  *ngIf="showDiv===true && this.activeForGoogleHotelCenter === true">
             <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
               <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;

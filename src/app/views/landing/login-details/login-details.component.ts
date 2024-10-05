@@ -223,6 +223,26 @@ toDate: Date;
       }
     }
 
+    checkDefaultCountryCode () {
+      if (
+          this.propertyDetails?.address != undefined &&
+          this.propertyDetails?.address != null &&
+          this.propertyDetails?.address.country != null &&
+          this.propertyDetails?.address.country != undefined
+      ) {
+          let code = this.countryCode?.countries.find(
+              (data) =>
+                  data.value.toLowerCase() ===
+                  this.propertyDetails?.address?.country.toLowerCase()
+          ).countryCode;
+
+          if (code != undefined) {
+              this.CodeNumber = code;
+          }
+      }
+    }
+
+
     totalPages(): number {
       return Math.ceil(this.totalPagess / this.pageSize);
     }
@@ -385,24 +405,6 @@ toDate: Date;
       }
     }
 
-    checkDefaultCountryCode() {
-      if (
-          this.propertyDetails?.address != undefined &&
-          this.propertyDetails?.address != null &&
-          this.propertyDetails?.address.country != null &&
-          this.propertyDetails?.address.country != undefined
-      ) {
-          let code = this.countryCode?.countries.find(
-              (data) =>
-                  data.value.toLowerCase() ===
-                  this.propertyDetails?.address?.country.toLowerCase()
-          ).countryCode;
-
-          if (code != undefined) {
-              this.CodeNumber = code;
-          }
-      }
-    }
 
     cancelBooking(id:number){
       this.cancelService.cancel(id).subscribe(res =>{

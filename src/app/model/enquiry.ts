@@ -51,5 +51,7 @@ export class EnquiryDto {
   beforeTaxAmount:number;
   roomId:number;
   payableAmount:number;
+  bookingReservationId:string;
+  bookingId:number;
   // counterName:string;
 }

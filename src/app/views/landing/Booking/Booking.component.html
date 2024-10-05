@@ -215,7 +215,6 @@
                     <td>No of Rooms:</td>
                     <td>{{ booking.noOfRooms }}</td>
                   </tr>
-
                   <tr>
                     <td>No of Night(s):</td>
                     <td>{{ DiffDate }}</td>
@@ -238,14 +237,11 @@
                     <td>Service Charge:</td>
                     <td>{{ totalExtraAmount| currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
-                  <!-- <tr>
-                    <td>Price Per Night:</td>
-                    <td>{{booking.roomPrice| currency: currency:"symbol":"1.2-2"}}</td>
-                  </tr> -->
                   <tr>
                     <td>Total Net Amount:</td>
                     <td>{{booking.netAmount | currency: currency:"symbol":"1.2-2"}}</td>
                   </tr>
+
 
                   <tr>
                     <td>{{ businessUser.taxDetails[0].name }} Charges:</td>
@@ -287,9 +283,11 @@
         <div class="d-flex justify-content-center mb-4">
           <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
             (click)="submitForm()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Enquiry Now</button>
-            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true"
+            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
             (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay Now</button>
-        </div>
+            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
+            (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay At Hotel</button>
+       </div>
       </div>
     </div>
   </div>
@@ -2380,3 +2378,7 @@
 
   gtag('config', 'AW-10904222935');
 </script>
+
+
+
+
