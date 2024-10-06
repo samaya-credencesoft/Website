@@ -29,7 +29,7 @@
 
   </nav> -->
 
-  <app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
+  <app-Header-Listingdetailsone  [businessUser]="businessUser" (bookNowClicked)="onBookNowClick()"> </app-Header-Listingdetailsone>
 
 
 
@@ -1426,7 +1426,7 @@
         </div> -->
       </div>
       <div class="container-fluid mt-4" *ngIf="availableRooms?.length >=0 && availability ==true">
-        <div class="desktop_view_room">
+        <div class="desktop_view_room" id="accmd">
           <h3 class="room-text-edit" id="accmd" *ngIf="availableRooms?.length >=0 && availability ==true">Accommodation Types
           </h3>
           <div *ngIf="this.activeForGoogleHotelCenter == true">

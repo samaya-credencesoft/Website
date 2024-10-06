@@ -7,6 +7,8 @@ import {
   AfterViewInit,
   ViewEncapsulation,
   ChangeDetectorRef,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -74,7 +76,7 @@ export interface Email {
   encapsulation: ViewEncapsulation.None,
 })
 export class ListingDetailOneComponent implements OnInit {
-
+  @ViewChild('accmd') accmdSection!: ElementRef;
   showListingDetails: boolean = false;
   website: string;
   propertyusername: string;
@@ -2232,7 +2234,16 @@ if (bookingSummaryElement) {
     return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
   }
 
+  onBookNowClick() {
+    this.scrollToAccommodation();
+  }
 
+  scrollToAccommodation() {
+    const element = document.getElementById('accmd');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
