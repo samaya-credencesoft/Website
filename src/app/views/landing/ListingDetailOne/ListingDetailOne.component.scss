@@ -3155,7 +3155,18 @@ height: 100%;
 }
 
 
-
+@media (min-width:600px) {
+  .desktop_view_room{
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  .about_desktop_alignment{
+    margin-left: 60px;
+    margin-right: 60px;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+}
 
 
 

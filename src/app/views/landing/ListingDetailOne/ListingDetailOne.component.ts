@@ -417,7 +417,7 @@ export class ListingDetailOneComponent implements OnInit {
     slidesToShow: 2,
     margin: 20,
     dots: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     arrows: true,
     responsive: [
