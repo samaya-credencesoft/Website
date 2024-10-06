@@ -2909,7 +2909,7 @@
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;">Payments >> </span> </button>
-                  <button class="btn mt-2 RB" 
+                  <button class="btn mt-2 RB"
                   *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
                     font-style: normal;
                     font-weight: 500;
@@ -3718,6 +3718,7 @@
 
   </div>
 
+
   <!-- HTML -->
 
   <!-- <div class="popup-container" *ngIf="isPopupVisible" style="float: left;z-index: 1000;">
@@ -3742,7 +3743,45 @@
 
                     </div>
   </div> -->
+<footer *ngIf="websiteUrlBookingEngine === true" style="margin-top: 5cqb;background-color: #141319;color: white;padding: 20px;">
+  <div class="container-fluid">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+   <div class="row d-flex">
+    <li>
+      About Us
 
+    </li>
+    <li>
+      Privacy Policy
+    </li>
+    <li>
+      Terms of Service
+    </li>
+   </div>
+    </div>
+    <div class="col-md-4">
+    <div class="row d-flex">
+      <li class="me-3">
+        <i class="fab fa-whatsapp"  style="color: #25D366;font-size: 1.5rem;margin-right: 20px; "></i>
+
+      </li>
+      <li class="me-3">
+        <i class="fab fa-facebook" style="color: #1877F2;font-size: 1.5rem;margin-right: 20px; "></i>
+      </li>
+      <li class="me-3">
+        <i class="fab fa-instagram" style="color: #E4405F;font-size: 1.5rem;margin-right: 20px; "> </i>
+      </li>
+    </div>
+    </div>
+    <div class="col-md-4">
+Contact Us -{{this.businessUser.mobile}}
+    </div>
+  </div>
+</div>
+  </div>
+</footer>
 </body>
 </html>
 <!-- <router-outlet></router-outlet> -->

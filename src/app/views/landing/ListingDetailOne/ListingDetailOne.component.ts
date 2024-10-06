@@ -78,6 +78,7 @@ export class ListingDetailOneComponent implements OnInit {
   showListingDetails: boolean = false;
   website: string;
   propertyusername: string;
+  websiteUrlBookingEngine: boolean;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -722,6 +723,7 @@ export class ListingDetailOneComponent implements OnInit {
       if (params['BookingEngine'] !== undefined) {
         this.urlLocation = params['BookingEngine'];
         let websitebookingURL = "true";
+        this.websiteUrlBookingEngine = true
         this.token.savewebsitebookingURL(websitebookingURL)
       }
 
