@@ -1312,6 +1312,7 @@ background-color: rgba(50, 50, 93, 0.5);
     width: 33.6%;
     height: 166.66px;
     border-radius: 5px;
+    color: var(--primary);
   }
 
   .masonry-item-right {
@@ -2990,7 +2991,8 @@ height: 100%;
 .icon {
   font-size: 60px;
   animation: blink 1s infinite;
-  color: white;
+  color: var(--tertiary) !important;
+  background-color: var(--primary) !important;
 }
 
 @keyframes blink {
@@ -3032,7 +3034,7 @@ height: 100%;
   z-index: -1;
   content: '';
   display: block;
-  border: 5px solid #271a55;
+  border: 5px solid var(--primary);
 }
 
 .ribbon span {
@@ -3168,11 +3170,74 @@ height: 100%;
   }
 }
 
+.CA{
+  position: relative; 
+  float: right; 
+  background-color: var(--primary); 
+  color: var(--tertiary); 
+  padding:9px; 
+  border-radius:25px; 
+  margin-top:20px; 
+  width: 40%; 
+  align-self: self-start;
+}
+.CA1{
+  background-color: var(--primary); 
+  color: var(--tertiary); 
+  padding: 15px; 
+  border-radius: 25px;
+}
+.SVM{
+  padding: 10px;
+  background: var(--primary);
+  color: var(--tertiary);
+  border-radius: 35px; 
+  margin-top: 15px;
+}
+.VM{
+  color: var(--primary);
+  background: border-box;
+}
+.SF{
+position: relative; 
+float: right; 
+background-color: var(--primary); 
+padding:15px 25px; 
+border-radius:25px; 
+margin-top:15px; 
+margin-bottom: 20px;
+color:var(--tertiary);
+}
+.BN{
+  width: 159.45px;
+  height: 49.71px;
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+  border-radius: 35px;
+}
+.paybtn{
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+}
+.RB{
+  width: 178px;
+  background-color: var(--primary);
+  border-radius: 35px;
+  color: var(--tertiary);
+}
+button {
+  background: var(--button-primary);
+}
 
-
-
-
-
+.header {
+  background: var(--primary-gradient);
+}
+body {
+  background: var(--primary);
+}
+.footer {
+  background: var(--secondary-gradient);
+}
 
 
 

@@ -266,7 +266,7 @@
                   </div>
                 </div>
               </div>
-                <button type="button mt-4" style="position: relative; float: right; background-color: #271a55; color: #F8FFF5; padding:9px; border-radius:25px; margin-top:20px; width: 40%; align-self: self-start;" (click)="checkingAvailability(); navigateToSection('accmd');">
+                <button class="CA" type="button mt-4" (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
             </form>
@@ -468,8 +468,7 @@
                 </div>
               </div>
               <div class="col-12 my-2 text-center">
-                <button type="button mt-4"
-                  style="background-color: #271a55; color: #F8FFF5; padding: 15px; border-radius: 25px;"
+                <button class="CA1" type="button mt-4"
                   (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
@@ -1125,7 +1124,7 @@
                               currency: currency: "symbol": "1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                            <button class="privacy mx-1 VM">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
@@ -1162,7 +1161,7 @@
                               currency: currency: "symbol": "1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                            <button class="privacy mx-1 VM">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementL(lunchservice)">-</div>
@@ -1199,7 +1198,7 @@
                               currency: currency: "symbol":"1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px;justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                            <button class="privacy mx-1 VM">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementD(dinnerservice)">-</div>
@@ -1557,8 +1556,7 @@
                               </div>
 
                               <div style="text-align: center;">
-                                <button class="btn text-white"
-                                  style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
+                                <button class="btn text-white SVM"
                                   (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                   View More</button>
                               </div>
@@ -1628,7 +1626,7 @@
                                 }}% Discount)
                               </div>
                               <div>
-                                <button class="btn text-white" (click)="
+                                <button class="btn text-white BN" (click)="
                       onPlanSelected(plan, room);
                       booking.roomName = rates.roomName;
                       selectedRoomName = rates.roomName;
@@ -1643,8 +1641,7 @@
                       selectedRoomAvailableNumber =
                         room.noOfRooms;
                       checkAvailabilityStatus = true;
-                      checkingAvailability1(); bookRoomNow();  document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                    " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                      checkingAvailability1(); bookRoomNow();  document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                   BOOK NOW</button>
                               </div>
 
@@ -1727,8 +1724,7 @@
                             room.noOfRooms;
                           checkAvailabilityStatus = true;
                           checkingAvailability1(); bookRoomNow();
-                          document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                        " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                          document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                       BOOK NOW</button>
                                   </div>
 
@@ -1895,8 +1891,7 @@
 
 
                             <div style="text-align: center;">
-                              <button class="btn text-white"
-                                style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
+                              <button class="btn text-white SVM"
                                 (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 View More</button>
                             </div>
@@ -1988,8 +1983,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                            " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                              bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2074,8 +2068,7 @@
                         selectedRoomAvailableNumber =
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
-                        checkingAvailability1(); bookRoomNow();
-                      " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                        checkingAvailability1(); bookRoomNow();">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2214,8 +2207,7 @@
                             </div>
 
                             <div style="text-align: center;">
-                              <button class="btn text-white"
-                                style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
+                              <button class="btn text-white SVM"
                                 (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 More Detail</button>
                             </div>
@@ -2303,8 +2295,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                            " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                              bookRoomNow();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2389,8 +2380,7 @@
                         selectedRoomAvailableNumber =
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
-                        bookRoomNow()
-                      " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                        bookRoomNow()">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2704,9 +2694,8 @@
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;">Payments >> </span> </button>
-                  <button class="btn mt-2" style="width: 178px;
-                    background-color:#271a55 ;border-radius: 35px;color: white;
-                     " *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
+                  <button class="btn mt-2 RB"
+                  *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;" >Reset <img src="assets/images/reset.svg" alt=""> </span> </button>
@@ -2920,9 +2909,8 @@
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;">Payments >> </span> </button>
-                  <button class="btn mt-2" style="width: 178px;
-                    background-color:#271a55 ;border-radius: 35px;color: white;
-                     " *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
+                  <button class="btn mt-2 RB" 
+                  *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;" >Reset <img src="assets/images/reset.svg" alt=""> </span> </button>
@@ -3014,7 +3002,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{breakfastservice?.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                    <button class="privacy mx-1 VM">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
@@ -3044,7 +3032,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{lunchservice?.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                    <button class="privacy mx-1 VM">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;" (click)="decrementL(lunchservice)">-</div>
@@ -3074,7 +3062,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{dinnerservice.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                    <button class="privacy mx-1 VM">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;"(click)="decrementD(dinnerservice)">-</div>
@@ -3226,9 +3214,8 @@
               <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
             </div>
         </div>
-        <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'
-          style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
-          Submit
+        <button class="SF" type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>
+                    Submit
         </button>
         </form>
       </div>

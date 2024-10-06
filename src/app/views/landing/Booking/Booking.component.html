@@ -6,8 +6,8 @@
   </div>
   <div class="container-fluid">
     <div class="row ">
-      <div class="col-md-6 pt-5 p-0" style="border-right: 1px solid black ;">
-        <button class="btn btn-sm btn-outline-primary m-3" (click)="backClicked()" *ngIf="!bookingConfirmed">
+      <div class="col-md-6 pt-5 p-0">
+        <button class="btn btn-sm btn-outline-primary m-3 GB" (click)="backClicked()" *ngIf="!bookingConfirmed">
           Go Back
         </button>
           <div class="mb-4 pb-4 p-3" style="border-bottom: 1px solid black; ">
@@ -257,12 +257,12 @@
           </div>
         </div>
         <div class="d-flex justify-content-center mb-4">
-          <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
-            (click)="submitForm()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Enquiry Now</button>
-            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
-            (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay Now</button>
-            <button class="btn btn-primary text-white"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true" 
-            (click)="payAndCheckout()" style="background-color: #9AC852;font-size: 20px; padding-right: 65px; padding-left: 65px;">Pay At Hotel</button>
+          <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+            (click)="submitForm()">Enquiry Now</button>
+            <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+            (click)="payAndCheckout()">Pay Now</button>
+            <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true" 
+            (click)="payAndCheckout()">Pay At Hotel</button>
        </div>
       </div>
     </div>
