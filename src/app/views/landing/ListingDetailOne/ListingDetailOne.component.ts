@@ -84,10 +84,6 @@ export class ListingDetailOneComponent implements OnInit {
   }
   // isPopupVisible = true; // Initially show the popup
 
-  // closePopup() {
-  //   this.isPopupVisible = false;
-  // }
-
   lat = 0;
   lng = 0;
   staticAlertClosed: true;
