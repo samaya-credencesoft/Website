@@ -413,7 +413,8 @@ externalreservation.taxAmount = this.booking.taxAmount;
 // externalreservation.lastModifiedDate = new Date().toString();
 externalreservation.noOfPerson = this.booking.noOfPersons.toString();
 externalreservation.resType ='';
-externalreservation.otaName = 'Thehotelmate.com'
+externalreservation.otaBooking=false
+externalreservation.otaName = 'WebSite'
 externalreservation.bookingStatus ='Confirmed';
 externalreservation.payloadType ='json';
 this.externalReservationDtoList.push(externalreservation)

@@ -987,7 +987,7 @@
         </div>
       </div> -->
     </div>
-    <div class="bg-white ml-4 mr-4 mt-2">
+    <div class="bg-white about_desktop_alignment mt-2">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6 mt-2">
@@ -1125,7 +1125,7 @@
                               currency: currency: "symbol": "1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
+                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
@@ -1162,7 +1162,7 @@
                               currency: currency: "symbol": "1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
+                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementL(lunchservice)">-</div>
@@ -1199,7 +1199,7 @@
                               currency: currency: "symbol":"1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px;justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
+                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementD(dinnerservice)">-</div>
@@ -1427,7 +1427,7 @@
         </div> -->
       </div>
       <div class="container-fluid mt-4" *ngIf="availableRooms?.length >=0 && availability ==true">
-        <div class="col">
+        <div class="desktop_view_room">
           <h3 class="room-text-edit" id="accmd" *ngIf="availableRooms?.length >=0 && availability ==true">Accommodation Types
           </h3>
           <div *ngIf="this.activeForGoogleHotelCenter == true">
@@ -1562,7 +1562,7 @@
                                 <button class="btn text-white"
                                   style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
                                   (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
-                                  More Details</button>
+                                  View More</button>
                               </div>
                             </div>
                           </div>
@@ -1902,7 +1902,7 @@
                               <button class="btn text-white"
                                 style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
                                 (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
-                                More Details</button>
+                                View More</button>
                             </div>
                           </div>
                         </div>
@@ -2013,13 +2013,16 @@
                               <div class="card plan_cards" style="padding: 30px;">
                                 <div>
                                   <h4>{{plan.name}}</h4>
-                                  <li>
+                                  <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
+                                    {{ plan.showDetails ? 'View less' : 'View More' }}
+                                  </a>
+                                  <li *ngIf="plan.showDetails">
                                     Extra person charge :<span> {{
                                       plan.extraChargePerPerson
                                       | currency: currency:"symbol":"1.2-2"
                                       }}</span>
                                   </li>
-                                  <li>
+                                  <li *ngIf="plan.showDetails">
                                     Extra Child charge :<span> {{
                                       plan.extraChargePerChild
                                       | currency: currency:"symbol":"1.2-2"
@@ -2236,14 +2239,17 @@
                                   <h4 *ngIf="plan.name !== 'GHC'" class="planname">{{plan.name}}</h4>
                                   <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                   <h4 *ngIf="plan.name === 'GHC'">Economy</h4>
-                                  <li *ngIf="  plan.extraChargePerPerson >0">
+                                  <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
+                                    {{ plan.showDetails ? 'View less' : 'View More' }}
+                                  </a>
+                                  <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
                                     Extra person charge :<span> {{
                                       plan.extraChargePerPerson
                                       | currency: currency:"symbol":"1.2-2"
                                       }}</span>
                                   </li>
                                   <li *ngIf=" plan.extraChargePerPerson <=0"><br></li>
-                                  <li *ngIf=" plan.extraChargePerChild >0">
+                                  <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
                                     Extra Child charge :<span> {{
                                       plan.extraChargePerChild
                                       | currency: currency:"symbol":"1.2-2"
@@ -2322,13 +2328,16 @@
                               <div class="card plan_cards" style="padding: 30px;">
                                 <div>
                                   <h4>{{plan.name}}</h4>
-                                  <li>
+                                  <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
+                                    {{ plan.showDetails ? 'View less' : 'View More' }}
+                                  </a>
+                                  <li *ngIf="plan.showDetails">
                                     Extra person charge :<span> {{
                                       plan.extraChargePerPerson
                                       | currency: currency:"symbol":"1.2-2"
                                       }}</span>
                                   </li>
-                                  <li>
+                                  <li *ngIf="plan.showDetails">
                                     Extra Child charge :<span> {{
                                       plan.extraChargePerChild
                                       | currency: currency:"symbol":"1.2-2"
@@ -3009,7 +3018,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{breakfastservice?.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
+                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
@@ -3039,7 +3048,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{lunchservice?.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
+                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;" (click)="decrementL(lunchservice)">-</div>
@@ -3069,7 +3078,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{dinnerservice.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">More Details</button>
+                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;"(click)="decrementD(dinnerservice)">-</div>
