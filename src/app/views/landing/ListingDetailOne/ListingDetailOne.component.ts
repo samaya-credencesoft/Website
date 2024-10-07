@@ -1427,12 +1427,9 @@ if (this.city != null && this.city != undefined) {
     );
   }
   toggleRoomsAndOccupancy() {
-    if (this.roomsAndOccupancy === false) {
-      this.roomsAndOccupancy = true;
-    } else if (this.roomsAndOccupancy === true) {
-      this.roomsAndOccupancy = false;
-    }
+    this.roomsAndOccupancy = !this.roomsAndOccupancy;
   }
+
 
   async getPropertyDetailsById(id: number) {
     // debugger

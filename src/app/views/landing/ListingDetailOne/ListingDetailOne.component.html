@@ -66,47 +66,6 @@
                 <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true"  [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
               <div class="container">
-                <!-- <div class="row" style="justify-content: space-evenly;">
-                  <div class="col-lg-6 ">
-                    <div id="autocomplete-container">
-                      <label for="checkin" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">Check
-                        In</label>
-                      <input #dpFromDate3 type="text" class="date-input form-control input-field-resize2" style="border: none;"
-                        placeholder="Check-in" name="dpFromDate3" [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
-                        (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" required
-                        (click)="datepicker3.toggle()" autocomplete="off" />
-                      <div class="form-group " style="height: 0px">
-                        <input name="datepicker" class="form-control input-field-resize" ngbDatepicker
-                          #datepicker3="ngbDatepicker" [autoClose]="true" (dateSelect)="onDateSelection($event)"
-                          [displayMonths]="1" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
-                          [minDate]="toDate" />
-                        <ng-template #t1 let-date let-focused="focused">
-                          <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
-                            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
-                            (mouseleave)="hoveredDate = null">
-                            {{ date.day }}
-                          </span>
-                        </ng-template>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div id="autocomplete-container">
-                      <label for="checkout" class="label_heading1" style="padding-top:0px;margin-bottom:0px!important;color: black;">Check
-                        Out</label>
-                      <input #dpToDate3 type="text" class="date-input form-control input-field-resize2" placeholder="Check-out"
-                        name="dpToDate3" [value]="formatter.format(toDate) | date: 'EEE, MMM d'" style="border: none;"
-                        (input)="toDate = validateInput(toDate, dpToDate3.value)" required (click)="datepicker3.toggle()"
-                        autocomplete="off" />
-                    </div>
-                  </div>
-                </div> -->
-
-
-
-
-
-
                 <div class="row" style="justify-content: space-evenly;">
 
                   <div class="col-lg-6">
@@ -267,8 +226,8 @@
                 </div>
               </div>
 
-              <div class="button-container">
-                <button class="CA" type="button mt-4" (click)="checkingAvailability(); navigateToSection('accmd');">
+              <div class="button-container"  (click)="checkingAvailability(); navigateToSection('accmd');">
+                <button class="CA" type="button mt-4">
                   Check Availability
                 </button>
               </div>
@@ -627,8 +586,8 @@
           </div>
 
             <!-- <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left"> -->
-            <div class="col-lg-4 d-flex justify-content-center align-items-center roomform"  *ngIf="showDiv===true  && this.activeForGoogleHotelCenter === false " style="    margin-top: -195px;">
-              <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
+            <div class="col-lg-4 d-flex justify-content-center  roomform"  *ngIf="showDiv===true  && this.activeForGoogleHotelCenter === false "    >
+              <div id="contentOne" style="width: 100%;" *ngIf=" availability === true">
                 <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
                     ">
                   <span class="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
