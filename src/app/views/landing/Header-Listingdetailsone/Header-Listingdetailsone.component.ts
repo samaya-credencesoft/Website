@@ -64,6 +64,10 @@ availableRooms: any;
     this.location.back();
   }
 
+  fullControl(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
   closeNavbar(event: MouseEvent): void {
     this.isdone = false; // Hides the vertical navbar
     event.stopPropagation();
@@ -86,7 +90,12 @@ availableRooms: any;
 
   scrollToAccommodation(event: MouseEvent) {
 
-    this.bookNowClicked.emit(); // Emit the event when the button is clicked
+    this.bookNowClicked.emit(); // Emit the event for Book Now button
+    // Add your logic for scrolling to the specific section
+    const accommodationSection = document.getElementById('accommodation-section');
+    if (accommodationSection) {
+      accommodationSection.scrollIntoView({ behavior: 'smooth' });
+    }
   }
   navigate(){
 

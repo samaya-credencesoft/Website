@@ -1,7 +1,7 @@
 <!-- Vertical navbar -->
 
 <!-- Vertical Navbar -->
-<div class="vertical-nav" id="sidebar" *ngIf="isdone">
+<div class="vertical-nav" (click)="fullControl($event)" id="sidebar" *ngIf="isdone">
   <div>
     <button class="close-btn" (click)="closeNavbar($event)">
       <img src="/assets/images/x-mark.png" alt="Close">
@@ -110,10 +110,10 @@
 </div>
 
 <!-- Top Navbar -->
-<nav class="navbar navbar-dark top-navbar">
+<nav class="navbar navbar-dark top-navbar" (click)="fullControl($event)">
   <div class="container-div">
     <!-- Left Section: Logo and Business Name -->
-    <div class="left-section">
+    <div class="left-section" >
         <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo">
         <span class="title-nav">{{ businessUser?.name }}</span>
     </div>
@@ -138,7 +138,7 @@
 <!-- Styles -->
 
 
-<div class="banner-container" *ngIf="!businessUser?.website && (businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) ">
+<div (click)="fullControl($event)" class="banner-container" *ngIf="!businessUser?.website && (businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) ">
   <img src="assets/images/BookOne Website Bannerr.png" alt="Website Banner" class="banner-image">
 </div>
 
