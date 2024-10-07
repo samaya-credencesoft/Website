@@ -3,7 +3,7 @@
 <!-- Vertical Navbar -->
 <div class="vertical-nav" id="sidebar" *ngIf="isdone">
   <div>
-    <button class="close-btn" (click)="closeNavbar()">
+    <button class="close-btn" (click)="closeNavbar($event)">
       <img src="/assets/images/x-mark.png" alt="Close">
     </button>
   </div>
@@ -123,11 +123,11 @@
      display: flex;
      gap: 7px;">
 
-          <button class="blinking-unique-btn" (click)="scrollToAccommodation()">Book Now</button>
+          <button class="blinking-unique-btn" (click)="scrollToAccommodation($event)">Book Now</button>
 
 
 
-    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" (click)="toggleListingDetails($event)" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
     </button>
   </div>

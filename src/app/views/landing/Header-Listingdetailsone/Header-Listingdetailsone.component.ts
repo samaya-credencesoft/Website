@@ -25,7 +25,8 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   propertyname: string;
   propertydetails:BusinessUser;
   PropertyUrl: string;
-  toggleListingDetails() {
+  toggleListingDetails(event: MouseEvent) {
+    event.stopPropagation();
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
     this.website = this.businessUser?.website;
@@ -42,6 +43,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   }
   toggleListItems() {
+
     this.showListItems = !this.showListItems;
   }
 
@@ -61,8 +63,9 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     this.location.back();
   }
 
-  closeNavbar(): void {
+  closeNavbar(event: MouseEvent): void {
     this.isdone = false; // Hides the vertical navbar
+    event.stopPropagation();
   }
 
   constructor(private router: Router,
@@ -80,7 +83,8 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     //console.log('new link is',this.website);
   }
 
-  scrollToAccommodation() {
+  scrollToAccommodation(event: MouseEvent) {
+
     this.bookNowClicked.emit(); // Emit the event when the button is clicked
   }
   navigate(){
