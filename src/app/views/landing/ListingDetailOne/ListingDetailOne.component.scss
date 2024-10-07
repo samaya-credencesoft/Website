@@ -3258,6 +3258,12 @@ height: 100%;
     z-index: 1;
 
   }
+  .YBS{
+    margin-top: 500px;
+  }
+  .clsr{
+    margin-top: 150px;
+  }
 }
 
 @media(max-width:872px){
@@ -3276,8 +3282,15 @@ height: 100%;
     justify-content: center;
     margin-left: 250px;
   }
+  
 }
 
+
+@media(max-width:992px){
+  .clsr{
+    margin-top: 150px;
+  }
+}
 
 .margin-top{
   margin-top: 100px !important;
@@ -3319,7 +3332,7 @@ height: 100%;
   padding:9px;
   border-radius:25px;
   margin-top:20px;
-  width: 40%;
+  // width: 40%;
   align-self: self-start;
 }
 .CA1{
