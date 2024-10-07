@@ -595,8 +595,7 @@
                   <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
                     <div class="col-md-6" *ngIf="showDiv===true">
                       <ul style="padding-left:19px">
-                        <!-- <li><b>Date: </b> <span> {{booking.fromDate  | date:'EEE, MMM d, y'}} - {{booking.toDate | date:'EEE, MMM d, y'}}</span></li> -->
-                        <!-- <li><b>Number of Night(s): </b> <span> {{DiffDate}}</span></li> -->
+
                         <li style="color: white !important;">
                           <b>Room Type: </b><span>{{ booking.roomType }}</span>
                         </li>
@@ -604,37 +603,34 @@
                           <b>Room Plan: </b><span>{{ booking.roomRatePlanName }}</span>
                         </li>
 
+                        <li *ngIf="DiffDate>0 && showMoreOptions" style="color: white !important;">
+                          <b>No of Nights: </b><span>
+                            {{
+                            DiffDate
+
+                            }}
+                          </span>
+                        </li>
+
+                        <li *ngIf="booking.noOfRooms >0 && showMoreOptions" style="color: white !important;">
+                          <b>No Of Room(s): </b><span>{{ booking.noOfRooms }}</span>
+                        </li>
+
                         <li *ngIf="booking.noOfPersons > 0 && showMoreOptions" style="color: white !important;" >
                           <b>No Of Person(s): </b><span>{{ booking.noOfPersons }}</span>
                         </li>
+
+                        <li *ngIf="booking.noOfChildren >0 && showMoreOptions" style="color: white !important;">
+                          <b>No Of Child: </b><span>{{ booking.noOfChildren }}</span>
+                        </li>
+
                         <li *ngIf="booking.noOfExtraPerson >0 && showMoreOptions" style="color: white !important;">
                           <b>No Of Extra Person(s): </b><span>{{ booking.noOfExtraPerson }}</span>
                         </li>
-                        <li *ngIf=" booking.extraPersonCharge >0 && showMoreOptions" style="color: white !important;">
-                          <b>Extra Person charges: </b><span>
-                            {{
-                            booking.extraPersonCharge
-                            | currency: currency:"symbol":"1.2-2"
-                            }}</span>
-                        </li>
-                        <li *ngIf="  booking.netAmount >0 && showMoreOptions" style="color: white !important;">
-                          <b>Net Amount: </b>
-                          <span>
-                            {{
-                            booking.netAmount
-                            | currency: currency:"symbol":"1.2-2"
-                            }}
-                          </span>
-                        </li>
-                        <li style="color: white !important;" *ngIf=" totalExtraAmount >0 && showMoreOptions">
-                          <b>Total Extra Service Amount: </b>
-                          <span>
-                            {{
-                              totalExtraAmount
-                            | currency: currency:"symbol":"1.2-2"
-                            }}
-                          </span>
-                        </li>
+
+
+
+
                         <li style="color: white !important;padding-top: 10px; " *ngIf=" breakfast?.count > 0 || lunch?.count > 0 || dinner?.count > 0 && showMoreOptions">
                           <b>Extra Services Breakdowns:</b>
                         </li>
@@ -662,37 +658,7 @@
                           Dinner Service Price:
                           <span>{{dinner?.afterTaxAmount }}</span>
                         </li>
-                        <!-- <li style="color: white !important;" *ngIf="dinner.count > 0">
-                          Dinner Quantity:
-                          <span>{{dinner.afterTaxAmount * dinner.count}}</span>
-                        </li>
-                        <li style="color: white !important;" *ngIf="dinner.count > 0">
-                          Dinner Price:
-                          <span>{{dinner.afterTaxAmount * dinner.count}}</span>
-                        </li> -->
-                        <!-- <li>
-                            <b>Extra Service Amount: </b>
-                            <span>
-                              {{
-                                totalExtraAmount
-                                  | currency: currency:"symbol":"1.2-2"
-                              }}
-                            </span>
-                          </li>
-                          <li *ngIf="discountPercentage">
-                            <b>Discount: </b>{{ discountPercentage }}%
-                          </li> -->
-                        <!-- <li>
-                      <h5>Total Amount: <span>
-                          {{booking.totalAmount + totalExtraAmount | currency: currency:'symbol':'1.2-2' }} </span>
-                      </h5>
-                    </li>
-                    <li>
-                      <h5>Advance Amount: <span>
-                          {{(booking.totalAmount + totalExtraAmount)  | currency: currency:'symbol':'1.2-2' }} </span>
-                      </h5>
-                    </li> -->
-                        <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
+
                       </ul>
                       <ul style="padding-left:19px" class="nodisplaysm" *ngIf="div==true &&  totalExtraAmount == 0 && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined && showMoreOptions">
                         <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
@@ -704,29 +670,8 @@
                     </div>
                     <div class="col-md-6" *ngIf="showDiv===true">
                       <ul style="padding-left:16px">
-                        <li *ngIf="booking.noOfRooms >0 && showMoreOptions" style="color: white !important;">
-                          <b>No Of Room(s): </b><span>{{ booking.noOfRooms }}</span>
-                        </li>
-                        <li *ngIf="booking.noOfChildren >0 && showMoreOptions" style="color: white !important;">
-                          <b>No Of Child: </b><span>{{ booking.noOfChildren }}</span>
-                        </li>
-                        <li *ngIf="booking.noOfExtraChild >0 && showMoreOptions" style="color: white !important;">
-                          <b>No Of Extra Child(s): </b><span>{{ booking.noOfExtraChild }}</span>
-                        </li>
-                        <li *ngIf="booking.extraChildCharge >0 && showMoreOptions" style="color: white !important;">
-                          <b>Extra Child charges: </b><span>{{
-                            booking.extraChildCharge
-                            | currency: currency:"symbol":"1.2-2"
-                            }}</span>
-                        </li>
-                        <li *ngIf="DiffDate>0 && showMoreOptions" style="color: white !important;">
-                          <b>No of Nights: </b><span>
-                            {{
-                            DiffDate
 
-                            }}
-                          </span>
-                        </li>
+
                         <li *ngIf="booking.roomPrice >0 && showMoreOptions" style="color: white !important;">
                           <b>Room Price: </b><span>
                             {{
@@ -735,6 +680,54 @@
                             }}
                           </span>
                         </li>
+                        <li *ngIf="booking.roomPrice <0 && showMoreOptions" style="color: white !important;">
+                          <b>Room Price: </b><span>
+                            {{
+                             0
+                              | currency: currency:"symbol":"1.2-2"
+                              }}
+                          </span>
+                        </li>
+                        <li *ngIf=" booking.extraPersonCharge >0 && showMoreOptions" style="color: white !important;">
+                          <b>Extra Person charges: </b><span>
+                            {{
+                            booking.extraPersonCharge
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span>
+                        </li>
+                        <li *ngIf=" booking.extraPersonCharge <0 && showMoreOptions" style="color: white !important;">
+                          <b>Extra Person charges: </b><span>
+                            {{
+                           0
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span>
+                        </li>
+
+
+
+                        <li *ngIf="booking.extraChildCharge >0 && showMoreOptions" style="color: white !important;">
+                          <b>Extra Child charges: </b><span>{{
+                            booking.extraChildCharge
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span>
+                        </li>
+
+                        <li *ngIf="booking.extraChildCharge <0 && showMoreOptions" style="color: white !important;">
+                          <b>Extra Child charges: </b><span>{{
+                            0
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span>
+                        </li>
+                        <li *ngIf="  booking.netAmount >0 && showMoreOptions" style="color: white !important;">
+                          <b>Net Amount: </b>
+                          <span>
+                            {{
+                            booking.netAmount
+                            | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </span>
+                        </li>
+
                         <li style="color: white !important;" *ngIf="showMoreOptions">
                           <b>Tax Amount ({{ this.taxPercentage }}%): </b>
                           <span style="font-weight: bolder" *ngIf="businessUser.taxDetails ">
@@ -746,6 +739,16 @@
                               }}</span>
                           </span>
                         </li>
+                        <li style="color: white !important;" *ngIf=" totalExtraAmount >0 && showMoreOptions">
+                          <b>Total Extra Service Amount: </b>
+                          <span>
+                            {{
+                              totalExtraAmount
+                            | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </span>
+                        </li>
+
                         <li *ngIf="  booking.netAmount >0" style="color: white !important;">
                           <b>Total Amount: </b>
                           <span>
@@ -757,6 +760,12 @@
                             }}
                           </span>
                         </li>
+
+
+
+
+
+
                         <!-- <li *ngIf="discountPercentage">
                             <b>Discount Amount: </b
                             >{{
