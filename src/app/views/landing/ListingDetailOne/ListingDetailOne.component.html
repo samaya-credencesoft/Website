@@ -3743,7 +3743,7 @@
 
                     </div>
   </div> -->
-  <footer *ngIf="websiteUrlBookingEngine === true" class="custom-footer">
+  <footer *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) && websiteUrlBookingEngine === true" class="custom-footer">
     <div class="container-fluid">
       <div class="row custom-footer-row">
         <div class="col-md-4 col-sm-12 custom-footer-col text-center">
