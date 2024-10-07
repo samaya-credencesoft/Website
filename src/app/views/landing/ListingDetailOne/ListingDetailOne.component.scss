@@ -3379,12 +3379,13 @@ padding-bottom: 10px;
 .paybtn{
   background-color: var(--primary) !important;
   color: var(--tertiary) !important;
+  font-size: 18px;
 }
 .RB{
-  width: 178px;
-  background-color: var(--primary);
-  border-radius: 35px;
-  color: var(--tertiary);
+  font-size: 18px;
+  background-color: var(--primary) !important;
+  border-radius: 11px;
+  color: var(--tertiary) !important;
 }
 button {
   background: var(--button-primary);

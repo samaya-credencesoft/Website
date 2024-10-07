@@ -87,7 +87,7 @@ export class ListingDetailOneComponent implements OnInit {
 
   }
   // isPopupVisible = true; // Initially show the popup
-
+  showMoreOptions: boolean = false;
   lat = 0;
   lng = 0;
   staticAlertClosed: true;
@@ -1427,9 +1427,12 @@ if (this.city != null && this.city != undefined) {
     );
   }
   toggleRoomsAndOccupancy() {
-    this.roomsAndOccupancy = !this.roomsAndOccupancy;
+    if (this.roomsAndOccupancy === false) {
+      this.roomsAndOccupancy = true;
+    } else if (this.roomsAndOccupancy === true) {
+      this.roomsAndOccupancy = false;
+    }
   }
-
 
   async getPropertyDetailsById(id: number) {
     // debugger
