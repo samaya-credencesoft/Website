@@ -3174,7 +3174,7 @@ height: 100%;
   position: relative; 
   float: right; 
   background-color: var(--primary); 
-  color: var(--tertiary); 
+  color: var(--tertiary) !important; 
   padding:9px; 
   border-radius:25px; 
   margin-top:20px; 
@@ -3183,7 +3183,7 @@ height: 100%;
 }
 .CA1{
   background-color: var(--primary); 
-  color: var(--tertiary); 
+  color: var(--tertiary) !important; 
   padding: 15px; 
   border-radius: 25px;
 }
