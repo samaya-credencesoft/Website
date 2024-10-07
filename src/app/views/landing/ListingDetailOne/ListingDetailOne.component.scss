@@ -162,6 +162,11 @@ margin-top: 16px;
     margin-bottom: 20px;
   }
 
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .text-right {
     justify-content: center;
   }
@@ -399,6 +404,10 @@ margin-top: 16px;
 @media(min-width:800px){
   .modal_size_text{
     padding: 0px 150px;
+  }
+
+  .CA{
+   justify-content: center;
   }
 }
 .roomsAndOccupancy{
@@ -3282,7 +3291,7 @@ height: 100%;
     justify-content: center;
     margin-left: 250px;
   }
-  
+
 }
 
 
@@ -3310,6 +3319,10 @@ height: 100%;
   }
 }
 
+.button-container {
+  width: 50%;
+}
+
 .CA{
   position: relative;
   float: right;
@@ -3318,7 +3331,7 @@ height: 100%;
   padding:9px;
   border-radius:25px;
   margin-top:20px;
-  width: 40%;
+
   align-self: self-start;
 }
 .CA1{
@@ -3361,6 +3374,8 @@ border-radius:25px;
 margin-top:15px;
 margin-bottom: 20px;
 color:var(--tertiary);
+margin-bottom: -70px;
+padding-bottom: 10px;
 }
 .BN{
   width: 159.45px;

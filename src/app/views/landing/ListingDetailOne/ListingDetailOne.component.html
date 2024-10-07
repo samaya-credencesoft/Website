@@ -266,9 +266,12 @@
                   </div>
                 </div>
               </div>
+
+              <div class="button-container">
                 <button class="CA" type="button mt-4" (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
+              </div>
             </form>
           </div>
 
@@ -467,7 +470,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12 my-2 text-center">
+              <div class="col-12 my-2 button-container">
                 <button class="CA1" type="button mt-4"
                   (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
@@ -3747,7 +3750,7 @@
 
                     </div>
   </div> -->
-  <footer *ngIf="websiteUrlBookingEngine === true" class="custom-footer">
+  <footer *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) && websiteUrlBookingEngine === true" class="custom-footer">
     <div class="container-fluid">
       <div class="row custom-footer-row">
         <div class="col-md-4 col-sm-12 custom-footer-col text-center">
