@@ -26,7 +26,8 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   propertydetails:BusinessUser;
   PropertyUrl: string;
 availableRooms: any;
-  toggleListingDetails() {
+  toggleListingDetails(event: MouseEvent) {
+    event.stopPropagation();
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
     this.website = this.businessUser?.website;
@@ -43,6 +44,7 @@ availableRooms: any;
 
   }
   toggleListItems() {
+
     this.showListItems = !this.showListItems;
   }
 
@@ -62,8 +64,9 @@ availableRooms: any;
     this.location.back();
   }
 
-  closeNavbar(): void {
+  closeNavbar(event: MouseEvent): void {
     this.isdone = false; // Hides the vertical navbar
+    event.stopPropagation();
   }
 
   constructor(private router: Router,
@@ -81,7 +84,8 @@ availableRooms: any;
     //console.log('new link is',this.website);
   }
 
-  scrollToAccommodation() {
+  scrollToAccommodation(event: MouseEvent) {
+
     this.bookNowClicked.emit(); // Emit the event when the button is clicked
   }
   navigate(){
