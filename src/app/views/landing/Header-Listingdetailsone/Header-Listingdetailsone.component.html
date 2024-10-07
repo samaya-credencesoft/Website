@@ -34,12 +34,20 @@
     </li>
     <hr *ngIf="businessUser?.website"> -->
 
-    <!-- <li class="nav-item">
-      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
+    <li class="nav-item" (click)="scrollToAccommodation($event)">
+      <a  class="nav-link">
         <i class="fa-solid fa-house-chimney"></i> Rooms
       </a>
     </li>
-    <hr *ngIf="businessUser?.website"> -->
+    <hr >
+
+    <li class="nav-item">
+      <a (click)="scrollToAccommodationas($event)" class="nav-link">
+        <i class="fa-brands fa-servicestack"></i> Ammenities
+      </a>
+    </li>
+    <hr *ngIf="businessUser?.website">
+
 
     <!-- <li class="nav-item">
       <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
@@ -48,12 +56,7 @@
     </li>
     <hr *ngIf="businessUser?.website"> -->
 
-    <!-- <li class="nav-item">
-      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
-        <i class="fa-solid fa-phone"></i> Contact Us
-      </a>
-    </li>
-    <hr *ngIf="businessUser?.website"> -->
+
 
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.aboutUs" href="{{socialmedialist?.aboutUs}}" class="nav-link">
@@ -82,6 +85,12 @@
       </a>
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.paymentTerms">
+    <li class="nav-item">
+      <a *ngIf="businessUser?.mobile" href="tel:{{this.businessUser.mobile}}" class="nav-link">
+        <i class="fa-solid fa-phone"></i> Contact Us
+      </a>
+    </li>
+    <hr *ngIf="businessUser?.mobile">
 
     <!-- <li class="nav-item">
       <a routerLink="/manage-property" [state]="{ businessUser: businessUser }" class="nav-link">

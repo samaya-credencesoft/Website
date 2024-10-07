@@ -77,6 +77,7 @@ export interface Email {
 })
 export class ListingDetailOneComponent implements OnInit {
   @ViewChild('accmd') accmdSection!: ElementRef;
+  @ViewChild('ameniti') amminities!: ElementRef;
   showListingDetails: boolean = false;
   website: string;
   propertyusername: string;
@@ -2255,6 +2256,13 @@ if (bookingSummaryElement) {
     }
   }
 
+  scrollToAccommodationAmmi() {
+    const element = document.getElementById('ameniti');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = this.businessUser.whatsApp;
@@ -2583,7 +2591,7 @@ if (bookingSummaryElement) {
   oneDayTripShow() { }
 
   checkingAvailability() {
-
+this.onBookNowClick();
     if(this.activeForGoogleHotelCenter === true){
       this.showDiv = false
       }

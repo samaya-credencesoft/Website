@@ -29,7 +29,7 @@
 
   </nav> -->
 
-  <app-Header-Listingdetailsone  [businessUser]="businessUser" (bookNowClicked)="onBookNowClick()"> </app-Header-Listingdetailsone>
+  <app-Header-Listingdetailsone  [businessUser]="businessUser" (bookNowClicked)="onBookNowClick()" (scrollToAccommodationAmmi)="scrollToAccommodationAmmi()"> </app-Header-Listingdetailsone>
 
 
 
@@ -612,7 +612,7 @@
           </ngx-slick-carousel>
         </div>
     </ng-template>
-        <div class="container d-flex justify-content-center" style="padding-top: 30px; padding-bottom: 30px;" *ngIf="isRestaurant || distance || DistanceRailway ">
+        <div id="ameniti" class="container d-flex justify-content-center"   style="padding-top: 30px; padding-bottom: 30px;" *ngIf="isRestaurant || distance || DistanceRailway ">
           <ul class="pointers">
             <li style="list-style-type: disc; margin-right: 30px;" *ngIf="isRestaurant">{{isRestaurant.name}}</li>
             <li style="list-style-type: disc; margin-right: 30px;" *ngIf="distance">{{distance.name}}</li>
@@ -845,7 +845,8 @@
 
         </div>
       </div>
-      <div class="container-fluid nodisplaysm" style="background-color:#F8FFF5; border-radius: 40px; padding: 10px"  *ngIf="propertyServiceListData?.length >0 ">
+      <div >
+      <div class="container-fluid nodisplaysm" style="background-color:#F8FFF5; border-radius: 40px; padding: 10px"  *ngIf="propertyServiceListData?.length >0 " >
           <div class="row facrow2 " [ngClass]="{ 'expanded-row': showAll }">
             <div class="col-lg-1 col-6 p-2 facilityr2" *ngFor="let fac of propertyServiceListData | slice:0:6">
             <div class="d-flex justify-content-center text-center" id="facility" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
@@ -892,7 +893,7 @@
               {{showAll? "Less": "All"}}</a>
           </p>
       </div>
-      <div class="container-fluid nodisplaylg" style="background-color:#F8FFF5; border-radius: 40px; padding: 10px"  *ngIf="propertyServiceListData?.length >0 ">
+      <div class="container-fluid nodisplaylg" style="background-color:#F8FFF5; border-radius: 40px; padding: 10px"  *ngIf="propertyServiceListData?.length >0 " >
         <div class="row facrow1" [ngClass]="{ 'expanded-row': showAll }">
           <div class="col-lg-1 col-6 p-2" *ngFor="let fac of propertyServiceListData | slice:0:3">
             <div class="d-flex justify-content-center text-center" id="facilitysm"
@@ -949,6 +950,7 @@
             {{showAll? "Less": "All"}}</a>
         </p>
       </div>
+    </div>
       <!-- <div class="container-fluid mt-2 nodisplaylg" style="background-color:#F8FFF5; border-radius: 12px;" *ngIf="availableRooms?.length >=0 && availability ==true">
         <h3 class="room-text-edit">Travel Dates and Guests</h3>
         <div class="row p-2" style="justify-content: space-evenly;">

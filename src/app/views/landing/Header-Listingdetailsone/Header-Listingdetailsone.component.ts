@@ -11,6 +11,7 @@ import { BusinessUser } from 'src/app/model/user';
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
   @Output() bookNowClicked = new EventEmitter<void>();
+  @Output() scrollToAccommodationAmmi = new EventEmitter<void>();
   showListItems: boolean = false; // For your existing toggle functionality
   isdone : boolean = false;
   @Input()
@@ -97,6 +98,13 @@ availableRooms: any;
       accommodationSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+  scrollToAccommodationas(event: MouseEvent) {
+
+    this.scrollToAccommodationAmmi.emit(); // Emit the event for Book Now button
+
+  }
+
   navigate(){
 
   }
