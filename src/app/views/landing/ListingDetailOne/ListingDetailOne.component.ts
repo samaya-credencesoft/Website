@@ -780,10 +780,7 @@ export class ListingDetailOneComponent implements OnInit {
       const chatbotElement = document.getElementById('chatbot');
       // ... rest of your code to set chat title
     chatbotElement.setAttribute('chat-title', this.propertyusername);
-    this.businessUser?.socialMediaLinks.forEach(element => {
-      this.socialmedialist=element
-    });
-console.log("socialmedia",this.socialmedialist)
+
     chatbotElement.setAttribute('chat-title-icon', this.businessUser.logoUrl);
       const propertyId = this.businessUser.id;
       const propertyName = this.businessUser.name;
@@ -957,6 +954,8 @@ if (this.city != null && this.city != undefined) {
       this.booking.taxAmount;
     this.token.saveServiceData(this.addServiceList);
   }
+
+
 
   hidediv() {
     this.div = false;
@@ -1455,6 +1454,8 @@ this.isHeaderVisible = true;
           }
         });
 
+
+
         this.updateTag();
         this.token.saveProperty(this.businessUser);
 
@@ -1814,6 +1815,10 @@ this.isHeaderVisible = true;
           this.currency = this.businessUser.localCurrency.toUpperCase();
           this.getOfferList(seoName);
           this.businessTypeName = this.businessUser.businessType;
+
+          this.businessUser?.socialMediaLinks.forEach(element => {
+            this.socialmedialist=element
+          });
 
           // this.getReview(this.businessUser.id);
           // this.getBranch(this.businessUser.id);
