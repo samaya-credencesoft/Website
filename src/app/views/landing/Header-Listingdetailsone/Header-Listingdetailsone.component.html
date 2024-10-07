@@ -138,7 +138,7 @@
 <!-- Styles -->
 
 
-<div class="banner-container" *ngIf="!businessUser?.website">
+<div class="banner-container" *ngIf="!businessUser?.website && (businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) ">
   <img src="assets/images/BookOne Website Bannerr.png" alt="Website Banner" class="banner-image">
 </div>
 

@@ -25,6 +25,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   propertyname: string;
   propertydetails:BusinessUser;
   PropertyUrl: string;
+availableRooms: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
