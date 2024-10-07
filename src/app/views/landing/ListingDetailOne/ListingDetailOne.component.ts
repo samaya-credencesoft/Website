@@ -167,6 +167,7 @@ export class ListingDetailOneComponent implements OnInit {
   };
   businessUser: BusinessUser;
 
+
   data: any = [];
   details: Details;
   selectedServiceName: string;
@@ -579,7 +580,8 @@ export class ListingDetailOneComponent implements OnInit {
   showStaticContent: boolean = false;
   daterange: any;
   daterangefilter: any;
-  isHeaderVisible:boolean = false
+  isHeaderVisible:boolean = false;
+  socialmedialist:any;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -778,7 +780,10 @@ export class ListingDetailOneComponent implements OnInit {
       const chatbotElement = document.getElementById('chatbot');
       // ... rest of your code to set chat title
     chatbotElement.setAttribute('chat-title', this.propertyusername);
-
+    this.businessUser?.socialMediaLinks.forEach(element => {
+      this.socialmedialist=element
+    });
+console.log("socialmedia",this.socialmedialist)
     chatbotElement.setAttribute('chat-title-icon', this.businessUser.logoUrl);
       const propertyId = this.businessUser.id;
       const propertyName = this.businessUser.name;

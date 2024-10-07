@@ -3743,45 +3743,40 @@
 
                     </div>
   </div> -->
-<footer *ngIf="websiteUrlBookingEngine === true" style="margin-top: 50px;background-color: #141319;color: white;padding: 20px;">
-  <div class="container-fluid">
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-   <div class="row d-flex">
-    <li>
-      About Us
+  <footer *ngIf="websiteUrlBookingEngine === true" class="custom-footer">
+    <div class="container-fluid">
+      <div class="row custom-footer-row">
+        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+          <ul class="footer-links">
+            <li><img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo"></li>
+            <li *ngIf="businessUser?.website && socialmedialist?.aboutUs"><a  href="{{socialmedialist?.aboutUs}}">About Us</a></li>
+            <li *ngIf="businessUser?.website && socialmedialist?.privacyPolicy"><a href="{{socialmedialist?.privacyPolicy}}">Privacy Policy</a></li>
+            <li *ngIf="businessUser?.website && socialmedialist?.termsAndConditions"><a href="{{socialmedialist?.termsAndConditions}}">Terms of Service </a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+          <ul class="footer-socials">
+            <li class="me-3">
+              <i class="fab fa-whatsapp"></i>
+            </li>
+            <li class="me-3">
+              <i class="fab fa-facebook"></i>
+            </li>
+            <li class="me-3">
+              <i class="fab fa-instagram"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+          <a href="tel:{{this.businessUser.mobile}}" class="contact-us-link">
+            <i class="fas fa-phone-alt contact-icon"></i> Contact Us - {{this.businessUser.mobile}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    </li>
-    <li>
-      Privacy Policy
-    </li>
-    <li>
-      Terms of Service
-    </li>
-   </div>
-    </div>
-    <div class="col-md-4">
-    <div class="row d-flex">
-      <li class="me-3">
-        <i class="fab fa-whatsapp"  style="color: #25D366;font-size: 1.5rem;margin-right: 20px; "></i>
 
-      </li>
-      <li class="me-3">
-        <i class="fab fa-facebook" style="color: #1877F2;font-size: 1.5rem;margin-right: 20px; "></i>
-      </li>
-      <li class="me-3">
-        <i class="fab fa-instagram" style="color: #E4405F;font-size: 1.5rem;margin-right: 20px; "> </i>
-      </li>
-    </div>
-    </div>
-    <div class="col-md-4">
-Contact Us -{{this.businessUser.mobile}}
-    </div>
-  </div>
-</div>
-  </div>
-</footer>
 </body>
 </html>
 <!-- <router-outlet></router-outlet> -->
