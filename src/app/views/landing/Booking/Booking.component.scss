@@ -2678,7 +2678,18 @@ a.fancybox.tcClick.mngroominfo {
     margin-top: 35px;
   }
 }
-
+.GB{
+  border-right: 1px solid black ;
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+}
+.FB{
+background-color: var(--primary) !important;
+color: var(--tertiary) !important;
+font-size: 20px; 
+padding-right: 65px; 
+padding-left: 65px;
+}
 
 // @media (min-width: 900px) and (max-width: 1280px) {
 

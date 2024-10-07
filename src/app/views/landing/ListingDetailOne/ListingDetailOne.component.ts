@@ -7,6 +7,8 @@ import {
   AfterViewInit,
   ViewEncapsulation,
   ChangeDetectorRef,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -74,10 +76,11 @@ export interface Email {
   encapsulation: ViewEncapsulation.None,
 })
 export class ListingDetailOneComponent implements OnInit {
-
+  @ViewChild('accmd') accmdSection!: ElementRef;
   showListingDetails: boolean = false;
   website: string;
   propertyusername: string;
+  websiteUrlBookingEngine: boolean;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -163,6 +166,7 @@ export class ListingDetailOneComponent implements OnInit {
     address: '',
   };
   businessUser: BusinessUser;
+
 
   data: any = [];
   details: Details;
@@ -417,8 +421,8 @@ export class ListingDetailOneComponent implements OnInit {
     slidesToShow: 2,
     margin: 20,
     dots: false,
-    autoplay: false,
-    autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 6000,
     arrows: true,
     responsive: [
       {
@@ -577,7 +581,8 @@ export class ListingDetailOneComponent implements OnInit {
   daterange: any;
   otaAvailableRooms: number = 1;
   daterangefilter: any;
-  isHeaderVisible:boolean = false
+  isHeaderVisible:boolean = false;
+  socialmedialist:any;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -723,6 +728,7 @@ export class ListingDetailOneComponent implements OnInit {
       if (params['BookingEngine'] !== undefined) {
         this.urlLocation = params['BookingEngine'];
         let websitebookingURL = "true";
+        this.websiteUrlBookingEngine = true
         this.token.savewebsitebookingURL(websitebookingURL)
       }
 
@@ -966,6 +972,8 @@ if (this.city != null && this.city != undefined) {
       this.booking.taxAmount;
     this.token.saveServiceData(this.addServiceList);
   }
+
+
 
   hidediv() {
     this.div = false;
@@ -1476,6 +1484,8 @@ this.isHeaderVisible = true;
           }
         });
 
+
+
         this.updateTag();
         this.token.saveProperty(this.businessUser);
 
@@ -1835,6 +1845,10 @@ this.isHeaderVisible = true;
           this.currency = this.businessUser.localCurrency.toUpperCase();
           this.getOfferList(seoName);
           this.businessTypeName = this.businessUser.businessType;
+
+          this.businessUser?.socialMediaLinks.forEach(element => {
+            this.socialmedialist=element
+          });
 
           // this.getReview(this.businessUser.id);
           // this.getBranch(this.businessUser.id);
@@ -2260,7 +2274,16 @@ if (bookingSummaryElement) {
     return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
   }
 
+  onBookNowClick() {
+    this.scrollToAccommodation();
+  }
 
+  scrollToAccommodation() {
+    const element = document.getElementById('accmd');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";

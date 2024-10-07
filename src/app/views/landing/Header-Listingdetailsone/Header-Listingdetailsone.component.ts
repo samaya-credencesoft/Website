@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TokenStorage } from 'src/token.storage';
@@ -10,6 +10,7 @@ import { BusinessUser } from 'src/app/model/user';
   styleUrls: ['./Header-Listingdetailsone.component.css']
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
+  @Output() bookNowClicked = new EventEmitter<void>();
   showListItems: boolean = false; // For your existing toggle functionality
   isdone : boolean = false;
   @Input()
@@ -77,6 +78,10 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   ngOnInit() {
     this.website = this.businessUser?.website;
     //console.log('new link is',this.website);
+  }
+
+  scrollToAccommodation() {
+    this.bookNowClicked.emit(); // Emit the event when the button is clicked
   }
   navigate(){
 

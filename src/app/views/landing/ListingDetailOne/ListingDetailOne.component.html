@@ -29,7 +29,7 @@
 
   </nav> -->
 
-  <app-Header-Listingdetailsone  [businessUser]="businessUser"> </app-Header-Listingdetailsone>
+  <app-Header-Listingdetailsone  [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
 
 
 
@@ -266,7 +266,7 @@
                   </div>
                 </div>
               </div>
-                <button type="button mt-4" style="position: relative; float: right; background-color: #271a55; color: #F8FFF5; padding:9px; border-radius:25px; margin-top:20px; width: 40%; align-self: self-start;" (click)="checkingAvailability(); navigateToSection('accmd');">
+                <button class="CA" type="button mt-4" (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
             </form>
@@ -468,8 +468,7 @@
                 </div>
               </div>
               <div class="col-12 my-2 text-center">
-                <button type="button mt-4"
-                  style="background-color: #271a55; color: #F8FFF5; padding: 15px; border-radius: 25px;"
+                <button class="CA1" type="button mt-4"
                   (click)="checkingAvailability(); navigateToSection('accmd');">
                   Check Availability
                 </button>
@@ -536,9 +535,9 @@
 
       <div class="mt-5" style="margin-bottom: 30px;">
         <div class="row mt-5" style="padding-top: 20px;">
-          <div class="col-lg-2" *ngIf="isHeaderVisible === true" >
+          <!-- <div class="col-lg-2" *ngIf="isHeaderVisible === true" >
             <img src="assets/images/left shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-right">
-          </div>
+          </div> -->
           <div class="col-lg-8" style="margin-top: -80px;">
             <div class="row image_height nodisplaysm" *ngIf="
             businessUser !== undefined &&
@@ -623,10 +622,224 @@
 
       </div> -->
           </div>
-          <div class="col-lg-2" *ngIf="isHeaderVisible === true">
-            <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left">
 
-          </div>
+            <!-- <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left"> -->
+            <div class="col-lg-4 d-flex justify-content-center align-items-center roomform"  *ngIf="showDiv===true  && this.activeForGoogleHotelCenter === false " style="    margin-top: -195px;">
+              <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
+                <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
+                    ">
+                  <span class="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
+                    Booking Summary</span>
+                  <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
+                    <div class="col-md-6" *ngIf="showDiv===true">
+                      <ul style="padding-left:19px">
+                        <!-- <li><b>Date: </b> <span> {{booking.fromDate  | date:'EEE, MMM d, y'}} - {{booking.toDate | date:'EEE, MMM d, y'}}</span></li> -->
+                        <!-- <li><b>Number of Night(s): </b> <span> {{DiffDate}}</span></li> -->
+                        <li style="color: white !important;">
+                          <b>Room Plan: </b><span>{{ booking.roomRatePlanName }}</span>
+                        </li>
+                        <li style="color: white !important;">
+                          <b>Room Type: </b><span>{{ booking.roomType }}</span>
+                        </li>
+                        <li *ngIf="booking.noOfPersons > 0" style="color: white !important;">
+                          <b>No Of Person(s): </b><span>{{ booking.noOfPersons }}</span>
+                        </li>
+                        <li *ngIf="booking.noOfExtraPerson >0" style="color: white !important;">
+                          <b>No Of Extra Person(s): </b><span>{{ booking.noOfExtraPerson }}</span>
+                        </li>
+                        <li *ngIf=" booking.extraPersonCharge >0" style="color: white !important;">
+                          <b>Extra Person charges: </b><span>
+                            {{
+                            booking.extraPersonCharge
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span>
+                        </li>
+                        <li *ngIf="  booking.netAmount >0" style="color: white !important;">
+                          <b>Net Amount: </b>
+                          <span>
+                            {{
+                            booking.netAmount
+                            | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </span>
+                        </li>
+                        <li style="color: white !important;" *ngIf=" totalExtraAmount >0">
+                          <b>Total Extra Service Amount: </b>
+                          <span>
+                            {{
+                              totalExtraAmount
+                            | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </span>
+                        </li>
+                        <li style="color: white !important;padding-top: 10px; " *ngIf=" breakfast?.count > 0 || lunch?.count > 0 || dinner?.count > 0">
+                          <b>Extra Services Breakdowns:</b>
+                        </li>
+                        <li style="color: white !important;" *ngIf="breakfast?.count > 0">
+                          Breakfast Service Quantity:
+                          <span>{{breakfast?.count}}</span>
+                        </li>
+                        <li style="color: white !important;" *ngIf="breakfast?.count > 0">
+                          Breakfast Service Price:
+                          <span>{{breakfast?.afterTaxAmount}}</span>
+                        </li>
+                        <li style="color: white !important;" *ngIf="lunch?.count > 0">
+                          Lunch Service Quantity:
+                          <span>{{lunch?.count}}</span>
+                        </li>
+                        <li style="color: white !important;" *ngIf="lunch?.count > 0">
+                          Lunch Service Price:
+                          <span>{{lunch?.afterTaxAmount }}</span>
+                        </li>
+                        <li style="color: white !important;"  *ngIf="dinner?.count > 0">
+                          Dinner Service Quantity:
+                          <span>{{dinner?.count}}</span>
+                        </li>
+                        <li style="color: white !important;" *ngIf="dinner?.count > 0">
+                          Dinner Service Price:
+                          <span>{{dinner?.afterTaxAmount }}</span>
+                        </li>
+                        <!-- <li style="color: white !important;" *ngIf="dinner.count > 0">
+                          Dinner Quantity:
+                          <span>{{dinner.afterTaxAmount * dinner.count}}</span>
+                        </li>
+                        <li style="color: white !important;" *ngIf="dinner.count > 0">
+                          Dinner Price:
+                          <span>{{dinner.afterTaxAmount * dinner.count}}</span>
+                        </li> -->
+                        <!-- <li>
+                            <b>Extra Service Amount: </b>
+                            <span>
+                              {{
+                                totalExtraAmount
+                                  | currency: currency:"symbol":"1.2-2"
+                              }}
+                            </span>
+                          </li>
+                          <li *ngIf="discountPercentage">
+                            <b>Discount: </b>{{ discountPercentage }}%
+                          </li> -->
+                        <!-- <li>
+                      <h5>Total Amount: <span>
+                          {{booking.totalAmount + totalExtraAmount | currency: currency:'symbol':'1.2-2' }} </span>
+                      </h5>
+                    </li>
+                    <li>
+                      <h5>Advance Amount: <span>
+                          {{(booking.totalAmount + totalExtraAmount)  | currency: currency:'symbol':'1.2-2' }} </span>
+                      </h5>
+                    </li> -->
+                        <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
+                      </ul>
+                      <ul style="padding-left:19px" class="nodisplaysm" *ngIf="div==true &&  totalExtraAmount == 0 && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined">
+                        <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
+                          Do you want to add any Services?
+                          <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button" (click)="navigateToSection('nearbyplaceslg')">Yes</button>
+                          <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button" (click)="hidediv();">No</button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6" *ngIf="showDiv===true">
+                      <ul style="padding-left:16px">
+                        <li *ngIf="booking.noOfRooms >0" style="color: white !important;">
+                          <b>No Of Room(s): </b><span>{{ booking.noOfRooms }}</span>
+                        </li>
+                        <li *ngIf="booking.noOfChildren >0" style="color: white !important;">
+                          <b>No Of Child: </b><span>{{ booking.noOfChildren }}</span>
+                        </li>
+                        <li *ngIf="booking.noOfExtraChild >0" style="color: white !important;">
+                          <b>No Of Extra Child(s): </b><span>{{ booking.noOfExtraChild }}</span>
+                        </li>
+                        <li *ngIf="booking.extraChildCharge >0" style="color: white !important;">
+                          <b>Extra Child charges: </b><span>{{
+                            booking.extraChildCharge
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span>
+                        </li>
+                        <li *ngIf="DiffDate>0" style="color: white !important;">
+                          <b>No of Nights: </b><span>
+                            {{
+                            DiffDate
+
+                            }}
+                          </span>
+                        </li>
+                        <li *ngIf="booking.roomPrice >0" style="color: white !important;">
+                          <b>Room Price: </b><span>
+                            {{
+                            booking.roomPrice
+                            | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </span>
+                        </li>
+                        <li style="color: white !important;">
+                          <b>Tax Amount ({{ this.taxPercentage }}%): </b>
+                          <span style="font-weight: bolder" *ngIf="businessUser.taxDetails">
+                            {{ businessUser.taxDetails[0]?.name }} & charges
+                            <span>{{
+                              (this.booking.netAmount *
+                              this.booking.taxPercentage) /
+                              100 | currency: currency:"symbol":"1.2-2"
+                              }}</span>
+                          </span>
+                        </li>
+                        <li *ngIf="  booking.netAmount >0" style="color: white !important;">
+                          <b>Total Amount: </b>
+                          <span>
+                            {{
+                            (booking.netAmount + ((this.booking.netAmount *
+                            this.booking.taxPercentage) /
+                            100))+totalExtraAmount
+                            | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </span>
+                        </li>
+                        <!-- <li *ngIf="discountPercentage">
+                            <b>Discount Amount: </b
+                            >{{
+                              booking.discountAmount
+                                | currency: currency:"symbol":"1.2-2"
+                            }}
+                          </li> -->
+
+                        <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
+                      </ul>
+                      <ul style="padding-left:19px" class="nodisplaylg"
+                        *ngIf="div==true && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined">
+                        <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
+                          Do you want to add any Services?
+                          <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button"
+                            (click)="navigateToSection('mealplanssm')">Yes</button>
+                          <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button"
+                            (click)="hidediv();">No</button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="row" style="justify-content: center !important;padding: 15px;">
+                    <button class="btn mt-2 paybtn" style="width: 178px;
+                      background-color:#271a55 ;border-radius: 35px;color: white;
+                       " *ngIf="showDiv===true" (click)="navigate()"><span style="font-family: 'Arial';
+                      font-style: normal;
+                      font-weight: 500;
+                      font-size: 19px;">Payments >> </span> </button>
+                    <button class="btn mt-2 RB"
+                    *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
+                      font-style: normal;
+                      font-weight: 500;
+                      font-size: 19px;" >Reset <img src="assets/images/reset.svg" alt=""> </span> </button>
+                  </div>
+                  <!-- <div class="row py-1 px-5" style="justify-content: flex-end;">
+                    <button class="privacy" style="color: white;background: border-box;" data-toggle="modal"
+                      data-target="#exampleModal">Privacy Policy</button>
+                  </div> -->
+                </div>
+              </div>
+
+
+            </div>
+
         </div>
       </div>
       <div class="container-fluid nodisplaysm" style="background-color:#F8FFF5; border-radius: 40px; padding: 10px"  *ngIf="propertyServiceListData?.length >0 ">
@@ -1125,7 +1338,7 @@
                               currency: currency: "symbol": "1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                            <button class="privacy mx-1 VM">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
@@ -1162,7 +1375,7 @@
                               currency: currency: "symbol": "1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px; justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                            <button class="privacy mx-1 VM">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementL(lunchservice)">-</div>
@@ -1199,7 +1412,7 @@
                               currency: currency: "symbol":"1.2-2"}}</span>
                           </div>
                           <div class="row nowrap countersm" style="padding: 30px;justify-content: space-between;">
-                            <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                            <button class="privacy mx-1 VM">View More</button>
                             <div class="row btn "
                               style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                               <div style="font-size: 20px" (click)="decrementD(dinnerservice)">-</div>
@@ -1427,7 +1640,7 @@
         </div> -->
       </div>
       <div class="container-fluid mt-4" *ngIf="availableRooms?.length >=0 && availability ==true">
-        <div class="desktop_view_room">
+        <div class="desktop_view_room" id="accmd">
           <h3 class="room-text-edit" id="accmd" *ngIf="availableRooms?.length >=0 && availability ==true">Accommodation Types
           </h3>
           <div *ngIf="this.activeForGoogleHotelCenter == true">
@@ -1558,12 +1771,11 @@
                                 </div>
                               </div>
 
-                              <div style="text-align: center;">
-                                <button class="btn text-white"
-                                  style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
+                              <!-- <div style="text-align: center;">
+                                <button class="btn text-white SVM"
                                   (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                   View More</button>
-                              </div>
+                              </div> -->
                             </div>
                           </div>
                         </div>
@@ -1629,7 +1841,7 @@
                                 100 | number: "1.2-2"
                                 }}% Discount)
                               </div>
-                              <div>
+                              <div class="BN">
                                 <button class="btn text-white" (click)="
                       onPlanSelected(plan, room);
                       booking.roomName = rates.roomName;
@@ -1645,8 +1857,7 @@
                       selectedRoomAvailableNumber =
                         room.noOfRooms;
                       checkAvailabilityStatus = true;
-                      checkingAvailability1(); bookRoomNow();  document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                    " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                      checkingAvailability1(); bookRoomNow();  document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                   BOOK NOW</button>
                               </div>
 
@@ -1712,7 +1923,7 @@
                                 100 | number: "1.2-2"
                                 }}% Discount)
                               </div>
-                                  <div>
+                                  <div class="BN">
                                     <button class="btn text-white" (click)="
                           onPlanSelected(plan, room);
                           booking.roomName = rates.roomName;
@@ -1729,8 +1940,7 @@
                             room.noOfRooms;
                           checkAvailabilityStatus = true;
                           checkingAvailability1(); bookRoomNow();
-                          document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                        " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                          document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                       BOOK NOW</button>
                                   </div>
 
@@ -1898,12 +2108,11 @@
 
 
 
-                            <div style="text-align: center;">
-                              <button class="btn text-white"
-                                style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
+                            <!-- <div style="text-align: center;">
+                              <button class="btn text-white SVM"
                                 (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 View More</button>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -1976,7 +2185,7 @@
                               100 | number: "1.2-2"
                               }}% Discount)
                             </div>
-                                <div>
+                                <div class="BN">
                                   <button class="btn text-white" (click)="
                               onPlanSelected(plan, room);
                               booking.roomName = rates.roomName;
@@ -1992,8 +2201,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                            " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                              bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2014,7 +2222,7 @@
                                 <div>
                                   <h4>{{plan.name}}</h4>
                                   <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
-                                    {{ plan.showDetails ? 'View less' : 'View More' }}
+                                    {{ plan.showDetails ? 'View Less' : 'View More' }}
                                   </a>
                                   <li *ngIf="plan.showDetails">
                                     Extra person charge :<span> {{
@@ -2062,7 +2270,7 @@
                               100 | number: "1.2-2"
                               }}% Discount)
                             </div>
-                                <div>
+                                <div class="BN">
                                   <button class="btn text-white" (click)="
                         onPlanSelected(plan, room);
                         booking.roomName = rates.roomName;
@@ -2078,8 +2286,7 @@
                         selectedRoomAvailableNumber =
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
-                        checkingAvailability1(); bookRoomNow();
-                      " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                        checkingAvailability1(); bookRoomNow();">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2217,12 +2424,11 @@
                               </div>
                             </div>
 
-                            <div style="text-align: center;">
-                              <button class="btn text-white"
-                                style="padding: 10px;background: #271a55;border-radius: 35px; margin-top: 15px;"
+                            <!-- <div style="text-align: center;">
+                              <button class="btn text-white SVM"
                                 (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
                                 More Detail</button>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -2240,7 +2446,7 @@
                                   <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                   <h4 *ngIf="plan.name === 'GHC'">Economy</h4>
                                   <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
-                                    {{ plan.showDetails ? 'View less' : 'View More' }}
+                                    {{ plan.showDetails ? 'View Less' : 'View More' }}
                                   </a>
                                   <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
                                     Extra person charge :<span> {{
@@ -2291,7 +2497,7 @@
                               100 | number: "1.2-2"
                               }}% Discount)
                             </div>
-                                <div>
+                                <div class="BN">
                                   <button class="btn text-white" (click)="
                               onPlanSelected(plan, room);
                               booking.roomName = rates.roomName;
@@ -2307,8 +2513,7 @@
                               selectedRoomAvailableNumber =
                                 room.noOfRooms;
                               checkAvailabilityStatus = true;
-                              bookRoomNow();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });
-                            " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                              bookRoomNow();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2329,7 +2534,7 @@
                                 <div>
                                   <h4>{{plan.name}}</h4>
                                   <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
-                                    {{ plan.showDetails ? 'View less' : 'View More' }}
+                                    {{ plan.showDetails ? 'View Less' : 'View More' }}
                                   </a>
                                   <li *ngIf="plan.showDetails">
                                     Extra person charge :<span> {{
@@ -2377,7 +2582,7 @@
                               100 | number: "1.2-2"
                               }}% Discount)
                             </div>
-                                <div>
+                                <div class="BN">
                                   <button class="btn text-white" (click)="
                         onPlanSelected(plan, room);
                         booking.roomName = rates.roomName;
@@ -2393,8 +2598,7 @@
                         selectedRoomAvailableNumber =
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
-                        bookRoomNow()
-                      " style="width: 159.45px;height: 49.71px;background: #271a55;border-radius: 35px; ">
+                        bookRoomNow()">
                                     BOOK NOW</button>
                                 </div>
 
@@ -2708,9 +2912,8 @@
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;">Payments >> </span> </button>
-                  <button class="btn mt-2" style="width: 178px;
-                    background-color:#271a55 ;border-radius: 35px;color: white;
-                     " *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
+                  <button class="btn mt-2 RB"
+                  *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
                     font-style: normal;
                     font-weight: 500;
                     font-size: 19px;" >Reset <img src="assets/images/reset.svg" alt=""> </span> </button>
@@ -2724,222 +2927,7 @@
 
 
           </div>
-          <div class="col-lg-6 d-flex justify-content-center align-items-center roomform"  *ngIf="showDiv===true  && this.activeForGoogleHotelCenter === false">
-            <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
-              <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
-                  ">
-                <span class="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
-                  Booking Summary</span>
-                <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
-                  <div class="col-md-6" *ngIf="showDiv===true">
-                    <ul style="padding-left:19px">
-                      <!-- <li><b>Date: </b> <span> {{booking.fromDate  | date:'EEE, MMM d, y'}} - {{booking.toDate | date:'EEE, MMM d, y'}}</span></li> -->
-                      <!-- <li><b>Number of Night(s): </b> <span> {{DiffDate}}</span></li> -->
-                      <li style="color: white !important;">
-                        <b>Room Plan: </b><span>{{ booking.roomRatePlanName }}</span>
-                      </li>
-                      <li style="color: white !important;">
-                        <b>Room Type: </b><span>{{ booking.roomType }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfPersons > 0" style="color: white !important;">
-                        <b>No Of Person(s): </b><span>{{ booking.noOfPersons }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfExtraPerson >0" style="color: white !important;">
-                        <b>No Of Extra Person(s): </b><span>{{ booking.noOfExtraPerson }}</span>
-                      </li>
-                      <li *ngIf=" booking.extraPersonCharge >0" style="color: white !important;">
-                        <b>Extra Person charges: </b><span>
-                          {{
-                          booking.extraPersonCharge
-                          | currency: currency:"symbol":"1.2-2"
-                          }}</span>
-                      </li>
-                      <li *ngIf="  booking.netAmount >0" style="color: white !important;">
-                        <b>Net Amount: </b>
-                        <span>
-                          {{
-                          booking.netAmount
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <li style="color: white !important;" *ngIf=" totalExtraAmount >0">
-                        <b>Total Extra Service Amount: </b>
-                        <span>
-                          {{
-                            totalExtraAmount
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <li style="color: white !important;padding-top: 10px; " *ngIf=" breakfast?.count > 0 || lunch?.count > 0 || dinner?.count > 0">
-                        <b>Extra Services Breakdowns:</b>
-                      </li>
-                      <li style="color: white !important;" *ngIf="breakfast?.count > 0">
-                        Breakfast Service Quantity:
-                        <span>{{breakfast?.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="breakfast?.count > 0">
-                        Breakfast Service Price:
-                        <span>{{breakfast?.afterTaxAmount}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="lunch?.count > 0">
-                        Lunch Service Quantity:
-                        <span>{{lunch?.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="lunch?.count > 0">
-                        Lunch Service Price:
-                        <span>{{lunch?.afterTaxAmount }}</span>
-                      </li>
-                      <li style="color: white !important;"  *ngIf="dinner?.count > 0">
-                        Dinner Service Quantity:
-                        <span>{{dinner?.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="dinner?.count > 0">
-                        Dinner Service Price:
-                        <span>{{dinner?.afterTaxAmount }}</span>
-                      </li>
-                      <!-- <li style="color: white !important;" *ngIf="dinner.count > 0">
-                        Dinner Quantity:
-                        <span>{{dinner.afterTaxAmount * dinner.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="dinner.count > 0">
-                        Dinner Price:
-                        <span>{{dinner.afterTaxAmount * dinner.count}}</span>
-                      </li> -->
-                      <!-- <li>
-                          <b>Extra Service Amount: </b>
-                          <span>
-                            {{
-                              totalExtraAmount
-                                | currency: currency:"symbol":"1.2-2"
-                            }}
-                          </span>
-                        </li>
-                        <li *ngIf="discountPercentage">
-                          <b>Discount: </b>{{ discountPercentage }}%
-                        </li> -->
-                      <!-- <li>
-                    <h5>Total Amount: <span>
-                        {{booking.totalAmount + totalExtraAmount | currency: currency:'symbol':'1.2-2' }} </span>
-                    </h5>
-                  </li>
-                  <li>
-                    <h5>Advance Amount: <span>
-                        {{(booking.totalAmount + totalExtraAmount)  | currency: currency:'symbol':'1.2-2' }} </span>
-                    </h5>
-                  </li> -->
-                      <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
-                    </ul>
-                    <ul style="padding-left:19px" class="nodisplaysm" *ngIf="div==true &&  totalExtraAmount == 0 && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined">
-                      <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
-                        Do you want to add any Services?
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button" (click)="navigateToSection('nearbyplaceslg')">Yes</button>
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button" (click)="hidediv();">No</button>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6" *ngIf="showDiv===true">
-                    <ul style="padding-left:16px">
-                      <li *ngIf="booking.noOfRooms >0" style="color: white !important;">
-                        <b>No Of Room(s): </b><span>{{ booking.noOfRooms }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfChildren >0" style="color: white !important;">
-                        <b>No Of Child: </b><span>{{ booking.noOfChildren }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfExtraChild >0" style="color: white !important;">
-                        <b>No Of Extra Child(s): </b><span>{{ booking.noOfExtraChild }}</span>
-                      </li>
-                      <li *ngIf="booking.extraChildCharge >0" style="color: white !important;">
-                        <b>Extra Child charges: </b><span>{{
-                          booking.extraChildCharge
-                          | currency: currency:"symbol":"1.2-2"
-                          }}</span>
-                      </li>
-                      <li *ngIf="DiffDate>0" style="color: white !important;">
-                        <b>No of Nights: </b><span>
-                          {{
-                          DiffDate
 
-                          }}
-                        </span>
-                      </li>
-                      <li *ngIf="booking.roomPrice >0" style="color: white !important;">
-                        <b>Room Price: </b><span>
-                          {{
-                          booking.roomPrice
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <li style="color: white !important;">
-                        <b>Tax Amount ({{ this.taxPercentage }}%): </b>
-                        <span style="font-weight: bolder" *ngIf="businessUser.taxDetails">
-                          {{ businessUser.taxDetails[0]?.name }} & charges
-                          <span>{{
-                            (this.booking.netAmount *
-                            this.booking.taxPercentage) /
-                            100 | currency: currency:"symbol":"1.0-0"
-                            }}</span>
-                        </span>
-                      </li>
-                      <li *ngIf="  booking.netAmount >0" style="color: white !important;">
-                        <b>Total Amount: </b>
-                        <span>
-                          {{
-                          (booking.netAmount + ((this.booking.netAmount *
-                          this.booking.taxPercentage) /
-                          100))+totalExtraAmount
-                          | currency: currency:"symbol":"1.0-0"
-                          }}
-                        </span>
-                      </li>
-                      <!-- <li *ngIf="discountPercentage">
-                          <b>Discount Amount: </b
-                          >{{
-                            booking.discountAmount
-                              | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </li> -->
-
-                      <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
-                    </ul>
-                    <ul style="padding-left:19px" class="nodisplaylg"
-                      *ngIf="div==true && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined">
-                      <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
-                        Do you want to add any Services?
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button"
-                          (click)="navigateToSection('mealplanssm')">Yes</button>
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button"
-                          (click)="hidediv();">No</button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="row" style="justify-content: center !important;padding: 15px;">
-                  <button class="btn mt-2 paybtn" style="width: 178px;
-                    background-color:#271a55 ;border-radius: 35px;color: white;
-                     " *ngIf="showDiv===true" (click)="navigate()"><span style="font-family: 'Arial';
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 19px;">Payments >> </span> </button>
-                  <button class="btn mt-2" style="width: 178px;
-                    background-color:#271a55 ;border-radius: 35px;color: white;
-                     " *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 19px;" >Reset <img src="assets/images/reset.svg" alt=""> </span> </button>
-                </div>
-                <!-- <div class="row py-1 px-5" style="justify-content: flex-end;">
-                  <button class="privacy" style="color: white;background: border-box;" data-toggle="modal"
-                    data-target="#exampleModal">Privacy Policy</button>
-                </div> -->
-              </div>
-            </div>
-
-
-          </div>
         </div>
         <!-- <div class="col mt-4">
           <h3>Location of {{businessUser.name}}</h3>
@@ -3018,7 +3006,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{breakfastservice?.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                    <button class="privacy mx-1 VM">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px" (click)="decrementb(breakfastservice)">-</div>
@@ -3048,7 +3036,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{lunchservice?.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                    <button class="privacy mx-1 VM">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;" (click)="decrementL(lunchservice)">-</div>
@@ -3078,7 +3066,7 @@
                         font-size: 30px;color: #808080; float: right;"> {{dinnerservice.afterTaxAmount| currency: currency: "symbol": "1.2-2"}}</span>
                   </div>
                   <div class="row" style="padding:10px; justify-content: space-between;">
-                    <button class="privacy mx-1" style="color: #808080;background: border-box;">View More</button>
+                    <button class="privacy mx-1 VM">View More</button>
                     <div class="row btn "
                       style="width: 120px;height: 49.71px;background-color: #271a55; color:white; border-radius: 35px;justify-content: space-around;">
                       <div style="font-size: 20px;"(click)="decrementD(dinnerservice)">-</div>
@@ -3230,9 +3218,8 @@
               <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
             </div>
         </div>
-        <button type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'
-          style="position: relative; float: right; background-color: #271a55; padding:15px 25px; border-radius:25px; margin-top:15px; margin-bottom: 20px;color:white">
-          Submit
+        <button class="SF" type="submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>
+                    Submit
         </button>
         </form>
       </div>
@@ -3735,6 +3722,7 @@
 
   </div>
 
+
   <!-- HTML -->
 
   <!-- <div class="popup-container" *ngIf="isPopupVisible" style="float: left;z-index: 1000;">
@@ -3759,6 +3747,39 @@
 
                     </div>
   </div> -->
+  <footer *ngIf="websiteUrlBookingEngine === true" class="custom-footer">
+    <div class="container-fluid">
+      <div class="row custom-footer-row">
+        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+          <ul class="footer-links">
+            <li><img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo"></li>
+            <li *ngIf="businessUser?.website && socialmedialist?.aboutUs"><a style="color: #fff;" href="{{socialmedialist?.aboutUs}}">About Us</a></li>
+            <li *ngIf="businessUser?.website && socialmedialist?.privacyPolicy"><a style="color: #fff;" href="{{socialmedialist?.privacyPolicy}}">Privacy Policy</a></li>
+            <li *ngIf="businessUser?.website && socialmedialist?.termsAndConditions"><a style="color: #fff;" href="{{socialmedialist?.termsAndConditions}}">Terms of Service </a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+          <ul class="footer-socials">
+            <li class="me-3">
+              <i class="fab fa-whatsapp"></i>
+            </li>
+            <li class="me-3">
+              <i class="fab fa-facebook"></i>
+            </li>
+            <li class="me-3">
+              <i class="fab fa-instagram"></i>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+          <a href="tel:{{this.businessUser.mobile}}" class="contact-us-link">
+            <i class="fas fa-phone-alt contact-icon"></i> Contact Us - {{this.businessUser.mobile}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
 </body>
 </html>

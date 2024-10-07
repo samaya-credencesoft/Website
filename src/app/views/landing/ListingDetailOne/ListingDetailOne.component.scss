@@ -77,6 +77,101 @@ margin-top: 16px;
 .my-float{
 	margin-top:16px;
 }
+.custom-footer {
+  background-color: #141319;
+  color: white;
+
+  margin-top: 50px;
+}
+
+.custom-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.custom-footer-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.text-left {
+  justify-content: flex-start;
+}
+
+.text-center {
+  justify-content: center;
+}
+
+.text-right {
+  justify-content: flex-end;
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-socials {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-socials li {
+  margin-right: 20px;
+}
+
+.footer-socials i {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.footer-socials i:hover {
+  transform: scale(1.2);
+}
+
+.fab.fa-whatsapp {
+  color: #25D366;
+}
+
+.fab.fa-facebook {
+  color: #1877F2;
+}
+
+.fab.fa-instagram {
+  color: #E4405F;
+}
+
+/* Responsive design for smaller devices */
+@media (max-width: 768px) {
+  .custom-footer-col {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .text-right {
+    justify-content: center;
+  }
+
+  .footer-socials li {
+    margin-right: 10px;
+  }
+}
+
+
 
 
 @media(max-width:500px){
@@ -1312,6 +1407,7 @@ background-color: rgba(50, 50, 93, 0.5);
     width: 33.6%;
     height: 166.66px;
     border-radius: 5px;
+    color: var(--primary);
   }
 
   .masonry-item-right {
@@ -2534,6 +2630,38 @@ border: none !important;
   padding-top: 70px;
   padding-bottom: 70px;
 }
+.logo-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: fill;
+  margin-left: 14px;
+}
+
+.contact-us-link {
+  color: white;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.contact-us-link:hover {
+  color: #5AB3CF; /* Change the color on hover */
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  margin-right: 10px;
+  color: #5AB3CF;
+  transition: transform 0.3s;
+}
+
+.contact-us-link:hover .contact-icon {
+  transform: scale(1.2);
+}
 
 .tabs-to-dropdown .dropdown-menu {
   border: none;
@@ -2990,7 +3118,8 @@ height: 100%;
 .icon {
   font-size: 60px;
   animation: blink 1s infinite;
-  color: white;
+  color: var(--tertiary) !important;
+  background-color: var(--primary) !important;
 }
 
 @keyframes blink {
@@ -3032,7 +3161,7 @@ height: 100%;
   z-index: -1;
   content: '';
   display: block;
-  border: 5px solid #271a55;
+  border: 5px solid var(--primary);
 }
 
 .ribbon span {
@@ -3168,11 +3297,88 @@ height: 100%;
   }
 }
 
+.CA{
+  position: relative;
+  float: right;
+  background-color: var(--primary);
+  color: var(--tertiary) !important;
+  padding:9px;
+  border-radius:25px;
+  margin-top:20px;
+  width: 40%;
+  align-self: self-start;
+}
+.CA1{
+  background-color: var(--primary);
+  color: var(--tertiary) !important;
+  padding: 15px;
+  position: relative;
+  float: right;
+  background-color: var(--primary);
+  color: var(--tertiary);
+  padding:9px;
+  border-radius:25px;
+  margin-top:20px;
+  width: 40%;
+  align-self: self-start;
+}
+.CA1{
+  background-color: var(--primary);
+  color: var(--tertiary);
+  padding: 15px;
+  border-radius: 25px;
+}
+.SVM{
+  padding: 10px;
+  background: var(--primary);
+  color: var(--tertiary);
+  border-radius: 35px;
+  margin-top: 15px;
+}
+.VM{
+  color: var(--primary);
+  background: border-box;
+}
+.SF{
+position: relative;
+float: right;
+background-color: var(--primary);
+padding:15px 25px;
+border-radius:25px;
+margin-top:15px;
+margin-bottom: 20px;
+color:var(--tertiary);
+}
+.BN{
+  width: 159.45px;
+  height: 49.71px;
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+  border-radius: 35px;
+  text-align: center;
+  padding: 6px;
+}
+.paybtn{
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+}
+.RB{
+  width: 178px;
+  background-color: var(--primary);
+  border-radius: 35px;
+  color: var(--tertiary);
+}
+button {
+  background: var(--button-primary);
+}
 
+.header {
+  background: var(--primary-gradient);
+}
 
-
-
-
+.footer {
+  background: var(--secondary-gradient);
+}
 
 
 
