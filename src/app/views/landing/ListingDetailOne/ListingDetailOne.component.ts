@@ -875,7 +875,7 @@ if (this.city != null && this.city != undefined) {
       this.details = this.data;
 
       if (this.data.id === undefined) {
-        this.getDynamicNameFromUrl(this.data);
+        // this.getDynamicNameFromUrl(this.data);
       }
       this.changeDetectorRefs.detectChanges();
 
@@ -888,19 +888,21 @@ if (this.city != null && this.city != undefined) {
   // showhide(){
 
        getDynamicNameFromUrl(url: string): string | null {
-        console.log("SDf"+ url)
+
         try {
           // Create a new URL object
-          const urlObj = new URL(url);
+          // const urlObj = new URL(url);
 
           // Get the hostname (e.g., "booking.saanaira-Resort-Spa.bookone.io")
-          const hostname = urlObj.hostname;
+          const hostname = url;
 
           // Check if the hostname contains both "booking." and ".bookone.io"
           if (hostname.includes('booking.') && hostname.includes('.bookone.io')) {
             // Extract the part between "booking." and ".bookone.io"
             const dynamicName = hostname.split('.')[1];
-            console.log("Dynamic Name:", dynamicName); // Print dynamic name to the co
+            console.log("Dynamic Name:", dynamicName);
+            // Print dynamic name to the co
+            this.getPropertyDetailsBySeoName(dynamicName)
             return dynamicName;
           } else {
             // Return null if the structure doesn't match
