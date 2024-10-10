@@ -81,6 +81,7 @@ export class ListingDetailOneComponent implements OnInit {
   website: string;
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
+  currentUrl: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -769,9 +770,18 @@ export class ListingDetailOneComponent implements OnInit {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
       }
+      if (!params['hotelID'] && !params['BookingEngine']) {
+        this.getDynamicNameFromUrl(this.currentUrl);
+      }
+
       // //console.log(this.adults);
       // this.updateTag();
     });
+    this.acRoute.url.subscribe(urlSegments => {
+      this.currentUrl = window.location.href; // Use window.location.href to get the full URL
+      console.log(this.currentUrl);
+    });
+
     // //console.log("sdfgh"+this.city)
   }
   blogPosts$: Observable<any> | undefined;
@@ -878,27 +888,15 @@ if (this.city != null && this.city != undefined) {
     }
 
     if (businessSlug !== undefined) {
-      // if (isNaN(Number(businessSlug)) === true) {
+
       this.data = businessSlug;
       this.details = this.data;
 
       if (this.data.id === undefined) {
-        this.getPropertyDetailsBySeoName(this.data);
+        // this.getDynamicNameFromUrl(this.data);
       }
       this.changeDetectorRefs.detectChanges();
 
-      // this.updateTag();
-      // }
-      //  else {
-      //   this.getPropertyDetailsById(Number(businessSlug));
-      // }
-
-      // else {
-      //   this.getPropertyDetails(this.details.id);
-      // }
-
-      // this.addToCartList = [];
-      // this.slotTimes = [];
     }
 
     this.getDiffDate(this.toDate, this.fromDate);
@@ -906,6 +904,34 @@ if (this.city != null && this.city != undefined) {
     // this.checkingAvailability();
   }
   // showhide(){
+
+       getDynamicNameFromUrl(url: string): string | null {
+
+        try {
+          // Create a new URL object
+          // const urlObj = new URL(url);
+
+          // Get the hostname (e.g., "booking.saanaira-Resort-Spa.bookone.io")
+          const hostname = url;
+
+          // Check if the hostname contains both "booking." and ".bookone.io"
+          if (hostname.includes('booking.') && hostname.includes('.bookone.io')) {
+            // Extract the part between "booking." and ".bookone.io"
+            const dynamicName = hostname.split('.')[1];
+            console.log("Dynamic Name:", dynamicName);
+            // Print dynamic name to the co
+            this.getPropertyDetailsBySeoName(dynamicName)
+            return dynamicName;
+          } else {
+            // Return null if the structure doesn't match
+            return null;
+          }
+        } catch (error) {
+          console.error('Invalid URL:', error);
+          return null;
+        }
+      }
+
 
   decrementL(lunchservice) {
 
