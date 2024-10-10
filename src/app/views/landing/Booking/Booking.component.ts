@@ -560,10 +560,16 @@ this.externalReservationdto =res.body
           this.booking.taxDetails.push(element);
           this.taxPercentage = element.percentage;
           this.booking.taxPercentage = this.taxPercentage;
+          // console.log("this.taxPercentage0" +this.taxPercentage)
           // if (this.bookingCity != null && this.bookingCity != undefined) {
           //   this.booking.roomPrice = Number(this.bookingCity)
 
           // }
+          if (this.bookingCity != null && this.bookingCity != undefined) {
+            this.booking.roomPrice = Number(this.bookingCity)
+
+          }
+          // debugger
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
               if (
@@ -580,6 +586,7 @@ this.externalReservationdto =res.body
           }
         }
       });
+      // console.log("this.taxPercentage1" +this.taxPercentage)
 
       // this.taxPercentage = this.booking.taxDetails[0].percentage;
     }
