@@ -914,10 +914,10 @@ if (this.city != null && this.city != undefined) {
           // Get the hostname (e.g., "booking.saanaira-Resort-Spa.bookone.io")
           let hostname = url;
           const parts = hostname?.split('.');
-          if (parts.length > 4) {
+          if (parts?.length > 4) {
               // Remove the extra subdomain (e.g., "uat")
-              parts.splice(-3, 1);  // Remove the second last part
-              hostname = parts.join('.');
+              parts?.splice(-3, 1);  // Remove the second last part
+              hostname = parts?.join('.');
           }
 
           // Check if the hostname contains both "booking." and ".bookone.io"
