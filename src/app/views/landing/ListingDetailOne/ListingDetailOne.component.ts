@@ -913,7 +913,7 @@ if (this.city != null && this.city != undefined) {
 
           // Get the hostname (e.g., "booking.saanaira-Resort-Spa.bookone.io")
           let hostname = url;
-          const parts = hostname.split('.');
+          const parts = hostname?.split('.');
           if (parts.length > 4) {
               // Remove the extra subdomain (e.g., "uat")
               parts.splice(-3, 1);  // Remove the second last part
