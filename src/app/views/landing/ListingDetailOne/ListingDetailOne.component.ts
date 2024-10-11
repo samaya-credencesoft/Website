@@ -773,9 +773,7 @@ export class ListingDetailOneComponent implements OnInit {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
       }
-      if (!params['hotelID'] && !params['BookingEngine']) {
-        this.getDynamicNameFromUrl(this.currentUrl);
-      }
+
 
       // //console.log(this.adults);
       // this.updateTag();
@@ -786,6 +784,7 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    this.getDynamicNameFromUrl(this.currentUrl);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
       const chatbotElement = document.getElementById('chatbot');
