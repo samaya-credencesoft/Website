@@ -724,7 +724,10 @@ export class ListingDetailOneComponent implements OnInit {
     if ( this.activeForGoogleHotelCenter === true) {
       this.showDiv = false
     }
-
+    this.acRoute.url.subscribe(urlSegments => {
+      this.currentUrl = window.location.href; // Use window.location.href to get the full URL
+      console.log(this.currentUrl);
+    });
     this.acRoute.queryParams.subscribe((params) => {
       if (params['BookingEngine'] !== undefined) {
         this.urlLocation = params['BookingEngine'];
@@ -777,10 +780,7 @@ export class ListingDetailOneComponent implements OnInit {
       // //console.log(this.adults);
       // this.updateTag();
     });
-    this.acRoute.url.subscribe(urlSegments => {
-      this.currentUrl = window.location.href; // Use window.location.href to get the full URL
-      console.log(this.currentUrl);
-    });
+
 
     // //console.log("sdfgh"+this.city)
   }
