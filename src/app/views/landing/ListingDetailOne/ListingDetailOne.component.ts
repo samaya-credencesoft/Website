@@ -922,7 +922,7 @@ if (this.city != null && this.city != undefined) {
 
           // Check if the hostname contains both "booking." and ".bookone.io"
           // Check if the hostname contains "booking." and ends with ".bookone.io"
-        if (hostname.includes('booking.') && hostname.endsWith('.bookone.io')) {
+        if (hostname?.includes('booking.') && hostname?.endsWith('.bookone.io')) {
           // Extract the part between "booking." and ".bookone.io"
           const bookingIndex = hostname.indexOf('booking.') + 'booking.'.length;
           const endIndex = hostname.indexOf('.bookone.io');
