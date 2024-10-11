@@ -147,7 +147,7 @@ export class TokenStorage {
   localStorage.removeItem(COUNTRY);
   }
   public getBookingData(): Booking {
-    return JSON.parse(localStorage.getItem(BOOKINGDATA) as string);
+    return JSON.parse(sessionStorage.getItem(BOOKINGDATA) as string);
   }
   public saveProperty(property: BusinessUser) {
     localStorage.removeItem(PROPERTY_DETAILS);
@@ -170,12 +170,15 @@ export class TokenStorage {
   }
     // Booking
     public saveBookingData(booking: Booking) {
-      localStorage.removeItem(BOOKINGDATA);
+      sessionStorage.removeItem(BOOKINGDATA);
         if (booking !== null || booking !== undefined) {
-        localStorage.setItem(BOOKINGDATA, JSON.stringify(booking));
+        sessionStorage.setItem(BOOKINGDATA, JSON.stringify(booking));
         } else {
-        localStorage.setItem(BOOKINGDATA,  '{}');
+        sessionStorage.setItem(BOOKINGDATA,  '{}');
         }
+      }
+      public clearBookingData(): void {
+        sessionStorage.removeItem(BOOKINGDATA);
       }
   public saveCity(city:any) {
   localStorage.removeItem(CITY);
