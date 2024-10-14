@@ -591,6 +591,7 @@ export class ListingDetailOneComponent implements OnInit {
     private offerService: BusinessService,
     private changeDetectorRefs: ChangeDetectorRef,
     private acRoute: ActivatedRoute,
+    private location: Location,
     // private meta:Meta,
     private triggerEventService: TriggerEventService,
     private router: Router,
@@ -888,41 +889,14 @@ if (this.city != null && this.city != undefined) {
   // showhide(){
 
        getDynamicNameFromUrl(url: string): string | null {
+        const fullUrl = this.location.prepareExternalUrl(this.location.path(true));
 
-        try {
-          // Create a new URL object
-          // const urlObj = new URL(url);
+        // You can also access the current URL with window.location.href
+        const domain = window.location.hostname; // Get the domain part from the URL
+        const name = domain.split('.')[1]; // This will extract 'saanaira-resort-spa'
+        this.getPropertyDetailsBySeoName(name)
+        return name;
 
-          // Get the hostname (e.g., "booking.saanaira-Resort-Spa.bookone.io")
-          let hostname = url;
-          const parts = hostname.split('.');
-          if (parts.length > 4) {
-              // Remove the extra subdomain (e.g., "uat")
-              parts.splice(-3, 1);  // Remove the second last part
-              hostname = parts.join('.');
-          }
-
-          // Check if the hostname contains both "booking." and ".bookone.io"
-          // Check if the hostname contains "booking." and ends with ".bookone.io"
-        if (hostname.includes('booking.') && hostname.endsWith('.bookone.io')) {
-          // Extract the part between "booking." and ".bookone.io"
-          const bookingIndex = hostname.indexOf('booking.') + 'booking.'.length;
-          const endIndex = hostname.indexOf('.bookone.io');
-
-          // Extract dynamic name (e.g., "saanaira-resort-spa")
-          const dynamicName = hostname.substring(bookingIndex, endIndex);
-          this.getPropertyDetailsBySeoName(dynamicName)
-          console.log("Dynamic Name:", dynamicName); // Print dynamic name
-          return dynamicName;
-      } else {
-          console.warn('URL structure does not match expected format.');
-          return null;
-      }
-
-        } catch (error) {
-          console.error('Invalid URL:', error);
-          return null;
-        }
       }
 
 
