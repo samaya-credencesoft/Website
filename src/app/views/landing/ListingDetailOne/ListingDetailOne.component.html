@@ -1642,8 +1642,28 @@
           </agm-map>
         </div> -->
       </div>
-      <div *ngIf="(businessUser != null || businessUser != undefined) && !availableRooms ">
-         There is no room type available for this Date Range.Please select anther date range.
+
+      <div *ngIf="(businessUser != null || businessUser != undefined) && !availableRooms " id="accmd" style="    display: flex;
+    justify-content: center;">
+        <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; padding: 20px; max-width: 700px;
+        margin: auto; background-color: #f9f9f9; margin-bottom: 70px; margin-top: 40px; margin-left: 15px; margin-right: 15px;">
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+
+            <div style="margin-bottom: 20px;">
+              <img src="assets/images/sad images.png" alt="No Data" style="height: 110px; width: 150px; opacity: 0.8;">
+            </div>
+
+            <div style="max-width: 500px;">
+              <p style="font-size: 18px; color: #D9534F !important; line-height: 1.6; padding-bottom: 20px; font-family: 'Arial', sans-serif;">
+                Unfortunately, there are no room types available for the selected date range. Please choose a different date range to check availability.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+
       </div>
       <div class="container-fluid mt-4" *ngIf="availableRooms?.length >=0 && availability ==true">
         <div class="desktop_view_room" id="accmd">
