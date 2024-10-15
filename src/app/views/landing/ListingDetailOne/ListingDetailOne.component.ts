@@ -893,7 +893,7 @@ if (this.city != null && this.city != undefined) {
       this.details = this.data;
 
       if (this.data.id === undefined) {
-        // this.getDynamicNameFromUrl(this.data);
+        this.getPropertyDetailsBySeoName(this.data);
       }
       this.changeDetectorRefs.detectChanges();
 
