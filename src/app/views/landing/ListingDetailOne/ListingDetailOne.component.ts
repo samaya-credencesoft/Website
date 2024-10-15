@@ -2667,7 +2667,7 @@ if (bookingSummaryElement) {
             this.availableRooms !== null &&
             this.availableRooms !== undefined
           ) {
-            this.availableRooms.forEach((room) => {
+            this.availableRooms?.forEach((room) => {
 
               room?.roomFacilities?.forEach((element) => {
                 if (element.name == 'Bar') {
@@ -2833,7 +2833,7 @@ if (bookingSummaryElement) {
           this.maxSelectRoom = response.body.numberOfRooms;
           // this.selectedRoomMaximumOccupancy = response.body.noOfPersons;
 
-          this.availableRooms.forEach((ele) => {
+          this.availableRooms?.forEach((ele) => {
             if (
               ele.ratesAndAvailabilityDtos != null &&
               ele.ratesAndAvailabilityDtos != undefined &&
@@ -3086,7 +3086,7 @@ if (bookingSummaryElement) {
             this.availableRooms !== null &&
             this.availableRooms !== undefined
           ) {
-            this.availableRooms.forEach((room) => {
+            this.availableRooms?.forEach((room) => {
               room?.ratesAndAvailabilityDtos?.forEach((ele) => {
                 ele.roomRatePlans?.forEach((e) => {
                   // //console.log(JSON.stringify(e.propertyServicesList));
@@ -3269,7 +3269,7 @@ if (bookingSummaryElement) {
           this.maxSelectRoom = response.body.numberOfRooms;
           // this.selectedRoomMaximumOccupancy = response.body.noOfPersons;
 
-          this.availableRooms.forEach((ele) => {
+          this.availableRooms?.forEach((ele) => {
             if (
               ele.ratesAndAvailabilityDtos != null &&
               ele.ratesAndAvailabilityDtos != undefined &&
