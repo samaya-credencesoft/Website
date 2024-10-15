@@ -54,7 +54,7 @@
     </ul>
   </nav> -->
   <!-- <app-header *ngIf="isHeaderVisible === true"></app-header> -->
-  <div class="main-wrapper" *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined )  ">
+  <div class="main-wrapper" *ngIf="businessUser != null || businessUser != undefined" >
     <div class="block-space bg-white ml-4 mr-4 mt-3">
 
       <!-- <div class="container-fluid px-5 booknow" *ngIf="isHeaderVisible === true">
@@ -63,7 +63,7 @@
           <h4 style="color: #F2F1F1;">BOOK NOW!</h4>
         </button>
       </div> -->
-                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;" *ngIf="availableRooms?.length >=0 && availability ==true"  [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
+                <div class="col-lg-12 d-flex justify-content-center align-items-center roomform nodisplaysm" style="background-color: #9999;"   [ngStyle]="{'margin-top': businessUser?.website ? '100px' : '0px'}">
             <form class="form" style="padding:15px; width:80%;height: 100%; display: flex; justify-content: space-evenly;">
               <div class="container">
                 <!-- <div class="row" style="justify-content: space-evenly;">
@@ -1641,6 +1641,9 @@
             }" style="font-weight: 600; color: wheat"></agm-marker>
           </agm-map>
         </div> -->
+      </div>
+      <div *ngIf="availability === false">
+         There is no Room Type available for this Date Range.Please Select anther date range.
       </div>
       <div class="container-fluid mt-4" *ngIf="availableRooms?.length >=0 && availability ==true">
         <div class="desktop_view_room" id="accmd">
