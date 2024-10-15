@@ -1642,7 +1642,7 @@
           </agm-map>
         </div> -->
       </div>
-      <div *ngIf="availability === false">
+      <div *ngIf="(businessUser != null || businessUser != undefined) && !availableRooms ">
          There is no Room Type available for this Date Range.Please Select anther date range.
       </div>
       <div class="container-fluid mt-4" *ngIf="availableRooms?.length >=0 && availability ==true">
