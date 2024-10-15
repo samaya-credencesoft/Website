@@ -1980,7 +1980,7 @@ this.isHeaderVisible = true;
       },
       (error) => {
         this.loader = false;
-        this.router.navigate(["/error"]);
+        // this.router.navigate(["/error"]);
       }
     );
   }
