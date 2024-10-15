@@ -194,7 +194,10 @@ const routes: Routes = [
     path: 'detail',
     component: ListingDetailOneComponent, data: {title: 'detail'}
   },
-
+  {
+    path: 'details',
+    component: ListingDetailOneComponent, data: {title: 'details'}
+  },
   {
     path: 'listing-one',
     component: ListingDetailOneComponent, data: {title: 'BookOne Connect'}
