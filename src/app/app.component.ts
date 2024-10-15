@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
     // If URL is "booking.seoname.bookone.io"
     else if (hostname.startsWith('booking.') && hostname.endsWith('.bookone.io')) {
-      this.router.navigate(['']);  // Redirect to listing details
+      this.router.navigate(['details']);  // Redirect to listing details
  }
 
     // this.course = this.route.snapshot.data['course'];
