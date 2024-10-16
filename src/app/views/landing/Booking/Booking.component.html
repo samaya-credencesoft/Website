@@ -261,7 +261,7 @@
             (click)="submitForm()">Enquiry Now</button>
             <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
             (click)="payAndCheckout()">Pay Now</button>
-            <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true" 
+            <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
             (click)="payAndCheckout()">Pay At Hotel</button>
        </div>
       </div>
@@ -2170,7 +2170,7 @@
 <div *ngIf="bookingConfirmed && isEnquiry" style="padding-top: 6rem ;">
 
   <img class="thankyou-enquiry" src="assets/images/demo.png" alt="Avatar" />
-  <h2 class="thankyou-enquiry1">Thank You for Choosing TheHotelmate.</h2>
+  <h2 class="thankyou-enquiry1">Thank You for Choosing BookOne Connect.</h2>
   <p class="thankyou-enquiry2">Enquiry No: #{{ enquiryNo }}</p>
   <p class="cont">This is not a confirmed booking.</p>
   <div >
