@@ -149,6 +149,9 @@ export class TokenStorage {
   public getBookingData(): Booking {
     return JSON.parse(localStorage.getItem(BOOKINGDATA) as string);
   }
+  public clearBookingData() {
+    return localStorage.removeItem(BOOKINGDATA);
+  }
   public saveProperty(property: BusinessUser) {
     localStorage.removeItem(PROPERTY_DETAILS);
       if (property !== null) {

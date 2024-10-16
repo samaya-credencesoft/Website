@@ -1144,6 +1144,7 @@ if (this.city != null && this.city != undefined) {
   reset() {
     this.booking = {} as Booking;
     this.showDiv = false;
+    this.token.clearBookingData();
   }
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
