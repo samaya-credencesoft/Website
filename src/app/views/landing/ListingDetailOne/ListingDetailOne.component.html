@@ -3703,6 +3703,36 @@
 
       </div>
     </div>
+
+  <div class="col-lg-12" style="margin-top: 4px;margin-bottom: 11px;">
+    <span class="room-text-edit1 ">Nearby Places</span>
+    <!-- <span style="position: relative; float: right;">
+       <img src="assets/images/downarrow.svg" height="50px" width="50px" alt="">
+    </span> -->
+</div>
+      <div >
+<main *ngIf="blogPosts$ | async as blogPosts">
+
+        <ng-container *ngFor="let blogPost of blogPosts.items; let i = index">
+<div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city">
+<div class=" cardlistmenu scroll-container">
+          <div    *ngFor="let item of blogPost.fields.citiesimages">
+
+              <div class="cardDesignmenu imageitemmenu"  >
+                <img   [src]="item.fields.file.url"  class="imageitemmenu" />
+
+              </div>
+              <h3 class="menuheading"> {{ item.fields.title }}</h3>
+
+          </div>
+        </div>
+        </div>
+        </ng-container>
+      </main>
+      </div>
+
+
+
   </div>
 
 
