@@ -967,10 +967,7 @@ top: 6335px;
     padding-right:15px !important;
     padding-left: 15px !important;
   }
-  .mainimage {
-    width: 400px !important;
-    margin-top: 0px !important;
-  }
+
   a.item.mfp-gallery.cover{
     background-size:cover;
     height: 250px;
@@ -980,9 +977,6 @@ top: 6335px;
   }
 }
 @media (max-width:992px) {
-    .float-right {
-        display: none;
-      }
 
     .float-left {
         display: none;
@@ -1416,7 +1410,7 @@ background-color: rgba(50, 50, 93, 0.5);
     width: 33.6%;
     height: 166.66px;
     border-radius: 5px;
-    color: var(--primary);
+    // color: var(--primary);
   }
 
   .masonry-item-right {
@@ -1445,7 +1439,7 @@ background-color: rgba(50, 50, 93, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -1667,6 +1661,7 @@ border-radius: 30px;
       border-radius: 5px;
     }
 
+
     .masonry-item-right {
       background-size: cover;
       background-position: center;
@@ -1677,6 +1672,8 @@ border-radius: 30px;
       margin-bottom: 10px;
       border-radius: 5px;
     }
+
+
 
     .masonry-item-thumb {
       background-size: cover;
@@ -3416,6 +3413,167 @@ button {
   .mobile-view-ui {
     display: none;
   }
+}
+
+@media (max-width: 600px) {
+
+  .masonry-item-leftOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 35.5%;
+    height: 111.66px;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-bottom: 5px;
+}
+
+  .masonry-item-rightOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 132px;
+    height: 229px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+  }
+
+  .filter-card {
+    margin-top: -114px;
+    left: -20px;
+  }
+
+  .customised-card {
+    padding: 0px;
+  }
+  .customized-title {
+    font-size: 11px;
+    margin-bottom: 0;
+    margin-left: 7px;
+    margin-top: 5px;
+    font-weight: bold;
+
+  }
+  .customized-p {
+    margin-left: 7px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 3px;
+
+  }
+}
+
+@media (min-width:401px) and (max-width:469px){
+  .customized-subcard {
+    width: 148px;
+  }
+
+  .filter-card {
+    margin-top: -114px;
+    left: -36px;
+  }
+}
+
+@media (min-width:359px) and (max-width:400px){
+.customized-subcard {
+  width: 122px;
+}
+}
+
+@media (min-width:470px) and (max-width:600px){
+  .filter-card {
+    margin-top: -99px;
+    left: -59px;
+}
+
+
+  .customized-subcard {
+    width: 194px;
+  }
+
+  .masonry-item-rightOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 132px;
+    height: 193px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.masonry-item-leftOne {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 35.5%;
+  height: 94.66px;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
+
+}
+
+@media (min-width:600px) and (max-width:724px){
+  .masonry-item-rightOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 230px;
+    height: 276px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.masonry-item-leftOne {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 35.5%;
+  height: 135.66px;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
+.filter-card {
+  margin-top: -134px;
+  left: -20px;
+}
+}
+
+@media (min-width:725px) and (max-width:1180px){
+  .masonry-item-rightOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 289px;
+    height: 295px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+  .masonry-item-leftOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 35.5%;
+    height: 144.66px;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-bottom: 5px;
+}
+.filter-card {
+  margin-top: -149px;
+  left: -20px;
+}
 }
 
 

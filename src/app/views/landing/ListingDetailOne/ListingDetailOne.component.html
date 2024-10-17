@@ -3608,23 +3608,27 @@
   </div>
   <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined">
     <h2 style="padding-top: 6rem; font-weight: 700; margin-left: 20px;">{{businessUser?.name}}</h2>
-    <div class="container  " style=" padding-bottom: 10px; font-weight: 600;" *ngIf="isRestaurant || distance || DistanceRailway ">
+    <p style="font-weight: 800;
+    margin-left: 22px;
+    font-size: 19px;
+    margin-top: -7px;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
+    <!-- <div class="container  " style=" padding-bottom: 10px; font-weight: 600;" *ngIf="isRestaurant || distance || DistanceRailway ">
       <ul>
         <li style="list-style-type: disc; margin-right: 30px; font-weight: 900;font-size: 17px;   " *ngIf="isRestaurant">{{isRestaurant.name}}</li>
         <li style="list-style-type: disc; margin-right: 30px;font-weight: 900;font-size: 17px;" *ngIf="distance">{{distance.name}}</li>
         <li style="list-style-type: disc;font-weight: 900;font-size: 17px;"*ngIf="DistanceRailway">{{DistanceRailway.name}}</li>
       </ul>
-    </div>
-    <div class="mt-5 sm:mt-3" style="margin-bottom: 30px;">
-      <div class="row mt-8 pt-4"  >
+    </div> -->
+    <div  style="margin-bottom: 30px;">
+      <div class="row mr-0 ml-0"  >
 
-        <div class="col-lg-8" >
-          <div class="row image_height " *ngIf="
+        <div class="col-lg-12 pl-0 pr-0" style="background-color: #D9D9D92E;">
+          <div class="image_height " *ngIf="
           businessUser !== undefined &&
           businessUser.imageList !== undefined &&
           businessUser?.imageList?.length > 0
         ">
-        <div class="col-12 mainimage" style="width: 800px;margin-top:85px"
+        <div class="col-8 mainimage" style="margin-top: 16px;"
          *ngIf="businessUser?.imageList?.length > 1" (click)="
             openImage(room, businessUser.imageList, businessUser.name)
           ">
@@ -3632,29 +3636,62 @@
             <a [ngStyle]="{
                 'background-image':
                   'url(' + businessUser.imageList[0].url + ')'
-              }" class="masonry-item-right" title="{{ businessUser.imageList[0].name }}"></a>
+              }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
           </div>
           <div aria-hidden="true" *ngIf="businessUser.imageList[1]">
             <a [ngStyle]="{
                 'background-image':
                   'url(' + businessUser.imageList[1].url + ')'
-              }" class="masonry-item-left" title="{{ businessUser.imageList[1].name }}"></a>
+              }" class="masonry-item-leftOne" title="{{ businessUser.imageList[1].name }}"></a>
           </div>
-          <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
+          <!-- <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
             <a [ngStyle]="{
                 'background-image':
                   'url(' + businessUser.imageList[2].url + ')'
               }" class="masonry-item-left" title="{{ businessUser.imageList[2].name }}"></a>
-          </div>
+          </div> -->
           <div aria-hidden="true" *ngIf="businessUser.imageList[3]">
             <a [ngStyle]="{
                 'background-image':
                   'url(' + businessUser.imageList[3].url + ')'
-              }" class="masonry-item-left" title="{{ businessUser.imageList[3].name }}"><span class="masonry-text" *ngIf="businessUser?.imageList?.length>3">View +{{businessUser?.imageList?.length-3}}</span></a>
+              }" class="masonry-item-leftOne" title="{{ businessUser.imageList[3].name }}"><span class="masonry-text" *ngIf="businessUser?.imageList?.length>3">View +{{businessUser?.imageList?.length-3}}</span></a>
           </div>
         </div>
 
+        <div class="col-4 pl-0 pr-0 float-right filter-card" >
+          <div class="container">
+            <div class="row">
+              <div class="col-12 mb-3">
+                <div class="card customized-subcard">
+                  <div class="card-body customised-card">
+                    <h5 class="card-title customized-title">Executive Non Sea Facing Room</h5>
+                    <p class="customized-p">₹ 5,093</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <div class="card customized-subcard">
+                  <div class="card-body customised-card">
+                    <h5 class="card-title customized-title">Premium Room</h5>
+                    <p class="customized-p">₹ 6,169</p>
 
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <div class="card customized-subcard">
+                  <div class="card-body customised-card" >
+                    <h5 class="card-title customized-title">Ocean View Premium Room
+                    </h5>
+                    <p class="customized-p">₹ 8,543</p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
 
           </div>
 
@@ -3665,232 +3702,49 @@
         </div>
 
           <!-- <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left"> -->
-          <div class="col-lg-4 d-flex justify-content-center align-items-center roomform"  *ngIf="showDiv===true  && this.activeForGoogleHotelCenter === false " >
-            <div id="contentOne" style="width: 80%;" *ngIf=" availability === true">
-              <div class="clsr" style="border: 1px solid lightgray;border-radius: 15px;background-color: #505050;color: white;
-                  ">
-                <span class="booking-summary" style="font-size: 20px;font-weight: 700;padding: 10px;display: flex;justify-content: center;">Your
-                  Booking Summary</span>
-                <div class="row " style="font-size: 13px;padding-top: 20px;color: white !important;">
-                  <div class="col-md-6" *ngIf="showDiv===true">
-                    <ul style="padding-left:19px">
-                      <!-- <li><b>Date: </b> <span> {{booking.fromDate  | date:'EEE, MMM d, y'}} - {{booking.toDate | date:'EEE, MMM d, y'}}</span></li> -->
-                      <!-- <li><b>Number of Night(s): </b> <span> {{DiffDate}}</span></li> -->
-                      <li style="color: white !important;">
-                        <b>Room Plan: </b><span>{{ booking.roomRatePlanName }}</span>
-                      </li>
-                      <li style="color: white !important;">
-                        <b>Room Type: </b><span>{{ booking.roomType }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfPersons > 0" style="color: white !important;">
-                        <b>No Of Person(s): </b><span>{{ booking.noOfPersons }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfExtraPerson >0" style="color: white !important;">
-                        <b>No Of Extra Person(s): </b><span>{{ booking.noOfExtraPerson }}</span>
-                      </li>
-                      <li *ngIf=" booking.extraPersonCharge >0" style="color: white !important;">
-                        <b>Extra Person charges: </b><span>
-                          {{
-                          booking.extraPersonCharge
-                          | currency: currency:"symbol":"1.2-2"
-                          }}</span>
-                      </li>
-                      <li *ngIf="  booking.netAmount >0" style="color: white !important;">
-                        <b>Net Amount: </b>
-                        <span>
-                          {{
-                          booking.netAmount
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <li style="color: white !important;" *ngIf=" totalExtraAmount >0">
-                        <b>Total Extra Service Amount: </b>
-                        <span>
-                          {{
-                            totalExtraAmount
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <li style="color: white !important;padding-top: 10px; " *ngIf=" breakfast?.count > 0 || lunch?.count > 0 || dinner?.count > 0">
-                        <b>Extra Services Breakdowns:</b>
-                      </li>
-                      <li style="color: white !important;" *ngIf="breakfast?.count > 0">
-                        Breakfast Service Quantity:
-                        <span>{{breakfast?.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="breakfast?.count > 0">
-                        Breakfast Service Price:
-                        <span>{{breakfast?.afterTaxAmount}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="lunch?.count > 0">
-                        Lunch Service Quantity:
-                        <span>{{lunch?.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="lunch?.count > 0">
-                        Lunch Service Price:
-                        <span>{{lunch?.afterTaxAmount }}</span>
-                      </li>
-                      <li style="color: white !important;"  *ngIf="dinner?.count > 0">
-                        Dinner Service Quantity:
-                        <span>{{dinner?.count}}</span>
-                      </li>
-                      <li style="color: white !important;" *ngIf="dinner?.count > 0">
-                        Dinner Service Price:
-                        <span>{{dinner?.afterTaxAmount }}</span>
-                      </li>
 
-                    </ul>
-                    <ul style="padding-left:19px" class="nodisplaysm" *ngIf="div==true &&  totalExtraAmount == 0 && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined">
-                      <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
-                        Do you want to add any Services?
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button" (click)="navigateToSection('nearbyplaceslg')">Yes</button>
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button" (click)="hidediv();">No</button>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-md-6" *ngIf="showDiv===true">
-                    <ul style="padding-left:16px">
-                      <li *ngIf="booking.noOfRooms >0" style="color: white !important;">
-                        <b>No Of Room(s): </b><span>{{ booking.noOfRooms }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfChildren >0" style="color: white !important;">
-                        <b>No Of Child: </b><span>{{ booking.noOfChildren }}</span>
-                      </li>
-                      <li *ngIf="booking.noOfExtraChild >0" style="color: white !important;">
-                        <b>No Of Extra Child(s): </b><span>{{ booking.noOfExtraChild }}</span>
-                      </li>
-                      <li *ngIf="booking.extraChildCharge >0" style="color: white !important;">
-                        <b>Extra Child charges: </b><span>{{
-                          booking.extraChildCharge
-                          | currency: currency:"symbol":"1.2-2"
-                          }}</span>
-                      </li>
-                      <li *ngIf="DiffDate>0" style="color: white !important;">
-                        <b>No of Nights: </b><span>
-                          {{
-                          DiffDate
-
-                          }}
-                        </span>
-                      </li>
-                      <li *ngIf="booking.roomPrice >0" style="color: white !important;">
-                        <b>Room Price: </b><span>
-                          {{
-                          booking.roomPrice
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <li style="color: white !important;">
-                        <b>Tax Amount ({{ this.taxPercentage }}%): </b>
-                        <span style="font-weight: bolder" *ngIf="businessUser.taxDetails">
-                          {{ businessUser.taxDetails[0]?.name }} & charges
-                          <span>{{
-                            (this.booking.netAmount *
-                            this.booking.taxPercentage) /
-                            100 | currency: currency:"symbol":"1.2-2"
-                            }}</span>
-                        </span>
-                      </li>
-                      <li *ngIf="  booking.netAmount >0" style="color: white !important;">
-                        <b>Total Amount: </b>
-                        <span>
-                          {{
-                          (booking.netAmount + ((this.booking.netAmount *
-                          this.booking.taxPercentage) /
-                          100))+totalExtraAmount
-                          | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </span>
-                      </li>
-                      <!-- <li *ngIf="discountPercentage">
-                          <b>Discount Amount: </b
-                          >{{
-                            booking.discountAmount
-                              | currency: currency:"symbol":"1.2-2"
-                          }}
-                        </li> -->
-
-                      <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
-                    </ul>
-                    <ul style="padding-left:19px" class="nodisplaylg"
-                      *ngIf="div==true && breakfastservice?.afterTaxAmount !=null && breakfastservice?.afterTaxAmount !=undefined || lunchservice?.afterTaxAmount !=null && lunchservice?.afterTaxAmount !=undefined || dinnerservice?.afterTaxAmount !=null && dinnerservice?.afterTaxAmount !=undefined">
-                      <li style="color: white !important; font-weight: bold; display: flex; justify-content: space-between;">
-                        Do you want to add any Services?
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button"
-                          (click)="navigateToSection('mealplanssm')">Yes</button>
-                        <button class="btn-sm btn-primary p-2" style="margin-right: 10px; height: 30px;" type="button"
-                          (click)="hidediv();">No</button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="row" style="justify-content: center !important;padding: 15px;">
-                  <button class="btn mt-2 paybtn" style="width: 178px;
-                    background-color:#271a55 ;border-radius: 35px;color: white;
-                     " *ngIf="showDiv===true" (click)="navigate()"><span style="font-family: 'Arial';
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 19px;">Payments >> </span> </button>
-                  <button class="btn mt-2 RB"
-                  *ngIf="showDiv===true" (click)="reset()"><span style="font-family: 'Arial';
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 19px;" >Reset <img src="assets/images/reset.svg" alt=""> </span> </button>
-                </div>
-                <!-- <div class="row py-1 px-5" style="justify-content: flex-end;">
-                  <button class="privacy" style="color: white;background: border-box;" data-toggle="modal"
-                    data-target="#exampleModal">Privacy Policy</button>
-                </div> -->
-              </div>
-            </div>
-
-
-          </div>
 
       </div>
     </div>
   </div>
 
 
-  <footer *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) && websiteUrlBookingEngine === true" class="custom-footer">
-    <div class="container-fluid">
-      <div class="row custom-footer-row">
-        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
-          <ul class="footer-links">
-            <li><img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo"></li>
-            <li *ngIf="businessUser?.website && socialmedialist?.aboutUs"><a style="color: #fff;" href="{{socialmedialist?.aboutUs}}">About Us</a></li>
-            <li *ngIf="businessUser?.website && socialmedialist?.privacyPolicy"><a style="color: #fff;" href="{{socialmedialist?.privacyPolicy}}">Privacy Policy</a></li>
-            <li *ngIf="businessUser?.website && socialmedialist?.termsAndConditions"><a style="color: #fff;" href="{{socialmedialist?.termsAndConditions}}">Terms of Service </a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
-          <ul class="footer-socials">
-            <li class="me-3">
-              <i class="fab fa-whatsapp"></i>
-            </li>
-            <li class="me-3">
-              <i class="fab fa-facebook"></i>
-            </li>
-            <li class="me-3">
-              <i class="fab fa-instagram"></i>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-sm-12 custom-footer-col text-center">
-          <a href="tel:{{this.businessUser.mobile}}" class="contact-us-link">
-            <i class="fas fa-phone-alt contact-icon"></i> Contact Us - {{this.businessUser.mobile}}
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+
 
 
 </body>
+<footer *ngIf="(businessUser != null || businessUser != undefined )&&(availableRooms != null || availableRooms != undefined ) && websiteUrlBookingEngine === true" class="custom-footer">
+  <div class="container-fluid">
+    <div class="row custom-footer-row">
+      <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+        <ul class="footer-links">
+          <li><img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo"></li>
+          <li *ngIf="businessUser?.website && socialmedialist?.aboutUs"><a style="color: #fff;" href="{{socialmedialist?.aboutUs}}">About Us</a></li>
+          <li *ngIf="businessUser?.website && socialmedialist?.privacyPolicy"><a style="color: #fff;" href="{{socialmedialist?.privacyPolicy}}">Privacy Policy</a></li>
+          <li *ngIf="businessUser?.website && socialmedialist?.termsAndConditions"><a style="color: #fff;" href="{{socialmedialist?.termsAndConditions}}">Terms of Service </a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+        <ul class="footer-socials">
+          <li class="me-3">
+            <i class="fab fa-whatsapp"></i>
+          </li>
+          <li class="me-3">
+            <i class="fab fa-facebook"></i>
+          </li>
+          <li class="me-3">
+            <i class="fab fa-instagram"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-12 custom-footer-col text-center">
+        <a href="tel:{{this.businessUser.mobile}}" class="contact-us-link">
+          <i class="fas fa-phone-alt contact-icon"></i> Contact Us - {{this.businessUser.mobile}}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </html>
 <!-- <router-outlet></router-outlet> -->
