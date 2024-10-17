@@ -3464,6 +3464,19 @@ button {
     margin-top: 3px;
 
   }
+  .hero-heading{
+    padding-top: 6rem;
+    font-weight: 700;
+    margin-left: 20px;
+    font-size: 21px;
+  }
+
+  .hero-subheading {
+    font-weight: bold;
+    margin-left: 22px;
+    font-size: 14px;
+    margin-top: -7px;
+  }
 }
 
 @media (min-width:401px) and (max-width:469px){
@@ -3545,9 +3558,27 @@ button {
   margin-top: -134px;
   left: -20px;
 }
+.hero-subheading {
+  font-weight: bold;
+  margin-left: 22px;
+  font-size: 14px;
+  margin-top: -7px;
+}
 }
 
 @media (min-width:725px) and (max-width:1180px){
+  .hero-heading{
+    padding-top: 6rem;
+    font-weight: 700;
+    margin-left: 20px;
+
+  }
+  .hero-subheading {
+    font-weight: bold;
+    margin-left: 22px;
+    font-size: 19px;
+    margin-top: -7px;
+  }
   .masonry-item-rightOne {
     background-size: cover;
     background-position: center;

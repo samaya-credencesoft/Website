@@ -3607,11 +3607,8 @@
 
   </div>
   <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined">
-    <h2 style="padding-top: 6rem; font-weight: 700; margin-left: 20px;">{{businessUser?.name}}</h2>
-    <p style="font-weight: 800;
-    margin-left: 22px;
-    font-size: 19px;
-    margin-top: -7px;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
+    <h2 class="hero-heading">{{businessUser?.name}}</h2>
+    <p class="hero-subheading" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
     <!-- <div class="container  " style=" padding-bottom: 10px; font-weight: 600;" *ngIf="isRestaurant || distance || DistanceRailway ">
       <ul>
         <li style="list-style-type: disc; margin-right: 30px; font-weight: 900;font-size: 17px;   " *ngIf="isRestaurant">{{isRestaurant.name}}</li>
