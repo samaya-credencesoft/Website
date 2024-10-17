@@ -2642,7 +2642,6 @@ border: none !important;
 .logo-image {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
   margin-right: 10px;
   object-fit: fill;
   margin-left: 14px;
@@ -3407,7 +3406,17 @@ button {
 .footer {
   background: var(--secondary-gradient);
 }
+@media (max-width: 1180px) {
+.desktop-view-ui {
+  display: none;
+}
+}
 
+@media (min-width: 1181px) {
+  .mobile-view-ui {
+    display: none;
+  }
+}
 
 
 
