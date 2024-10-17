@@ -191,6 +191,10 @@ const routes: Routes = [
   },
 
   {
+    path: 'details',
+    component: ListingDetailOneComponent, data: {title: 'details'}
+  },
+  {
     path: 'detail',
     component: ListingDetailOneComponent, data: {title: 'detail'}
   },

@@ -81,6 +81,7 @@ export class ListingDetailOneComponent implements OnInit {
   website: string;
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
+  currentUrl: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -768,9 +769,17 @@ export class ListingDetailOneComponent implements OnInit {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
       }
+      if (!params['hotelID'] && !params['BookingEngine']) {
+        this.getDynamicNameFromUrl(this.currentUrl);
+      }
       // //console.log(this.adults);
       // this.updateTag();
     });
+
+ this.acRoute.url.subscribe(urlSegments => {
+  this.currentUrl = window.location.href; // Use window.location.href to get the full URL
+  console.log(this.currentUrl);
+});
     // //console.log("sdfgh"+this.city)
   }
   blogPosts$: Observable<any> | undefined;
@@ -889,6 +898,16 @@ if (this.city != null && this.city != undefined) {
   }
   // showhide(){
 
+  getDynamicNameFromUrl(url: string): string | null {
+    const fullUrl = this.locationBack.prepareExternalUrl(this.locationBack.path(true));
+
+    // You can also access the current URL with window.location.href
+    const domain = window.location.hostname; // Get the domain part from the URL
+    const name = domain.split('.')[1]; // This will extract 'saanaira-resort-spa'
+    this.getPropertyDetailsBySeoName(name)
+    return name;
+
+  }
   decrementL(lunchservice) {
 
     if (this.counterl > 0) {
