@@ -1060,9 +1060,9 @@ li{
 
 .room-text-edit1{
   //
-font-style: normal;
-font-weight: 500 !important;
-font-size: 24px;
+
+font-weight: bold;
+
 }
 .room-text-edit{
 
@@ -3717,9 +3717,10 @@ button {
   overflow: hidden; /* Hide any overflow */
   text-overflow: ellipsis; /* Adds "..." if text overflows the container */
   line-height: 1.5; /* Adjust line height for readability */
-  font-size: 18px; /* You can adjust font-size if needed */
+  font-size: 15px; /* You can adjust font-size if needed */
   text-align: center;
   margin-top: 10px;
+  font-weight: bold;
 }
 
 @media (max-width: 600px) {
@@ -3735,7 +3736,7 @@ button {
 .imageitemmenu {
   width: 150px;
   height: 150px;
-
+border-radius: 10px;
     object-fit: cover;
     background-color: white;
 }
@@ -3746,7 +3747,7 @@ button {
   scroll-behavior: smooth;
   white-space: nowrap;
   position: relative;
-  width: 100%;
+
 }
 
 
