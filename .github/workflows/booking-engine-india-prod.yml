@@ -1,4 +1,4 @@
-name: Release India Prod
+name: Release Booking Engine India Prod
 
 on: [workflow_dispatch]
 
