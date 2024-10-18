@@ -582,6 +582,9 @@ export class ListingDetailOneComponent implements OnInit {
   daterangefilter: any;
   isHeaderVisible:boolean = false;
   socialmedialist:any;
+  sortedRooms: any[] = [];
+  sortedRoomsOne: any[] = [];
+  isExpanded: boolean = false;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -772,6 +775,7 @@ export class ListingDetailOneComponent implements OnInit {
       // this.updateTag();
     });
     // //console.log("sdfgh"+this.city)
+
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
@@ -884,10 +888,35 @@ if (this.city != null && this.city != undefined) {
     }
 
     this.getDiffDate(this.toDate, this.fromDate);
+    setTimeout(() => {
+      if(this.activeForGoogleHotelCenter == true){
+        this.sortAndLimitRooms();
+      } else if (this.activeForGoogleHotelCenter == false){
+        this.sortAndLimitRoomsOne();
+      }
+    }, 3000);
     // this.adults = this.adults;
     // this.checkingAvailability();
   }
   // showhide(){
+
+  sortAndLimitRooms() {
+    // Sort rooms by roomOnlyPrice in ascending order
+    this.sortedRooms = this.roomWithGHCPlan
+      .sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice)
+      .slice(0, 3);
+  }
+
+  sortAndLimitRoomsOne() {
+    // Sort rooms by roomOnlyPrice in ascending order
+    this.sortedRoomsOne = this.availableRooms
+      .sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice)
+      .slice(0, 3);
+  }
+
+  toggleView() {
+    this.isExpanded = !this.isExpanded;
+  }
 
   decrementL(lunchservice) {
 

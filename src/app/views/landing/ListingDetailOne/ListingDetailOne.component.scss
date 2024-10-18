@@ -2755,7 +2755,8 @@ padding: 0px !important;
 }
 .label_heading1 {
   padding-left: 0.625rem;
-  font-size: 18px;
+  font-size: 15px;
+
 }
 .banner_listing_page{
   display: block;
@@ -2955,19 +2956,20 @@ height: 100%;
   white-space: nowrap;
 }
 #facilitysm{
-  background-color: #EFF0F2;
+  background-color: #fff;
   border-radius: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  padding-left: 30px;
-  padding-right: 30px;
   height: 100%;
   align-items: center;
+  gap: 10px;
+  padding-left: 5px;
 }
 #facilitysm p{
   text-transform: capitalize;
-  font-weight: 700;
+  font-weight: bold;
   font-size: small;
+  color: black !important;
 }
 #facilitysm img{
   mix-blend-mode: multiply;
@@ -3003,13 +3005,13 @@ height: 100%;
     padding-left: 55px;
     padding-right: 55px;
   }
-  .facrow1 {
-    margin-left: -85px;
-  }
+  // .facrow1 {
+  //   margin-left: -85px;
+  // }
 
-  .facrow2 {
-    margin-left: -85px;
-  }
+  // .facrow2 {
+  //   margin-left: -85px;
+  // }
 }
 @media(max-width:1199px){
   #facility{
@@ -3331,25 +3333,20 @@ height: 100%;
   align-self: self-start;
 }
 .CA1{
-  background-color: var(--primary);
-  color: var(--tertiary) !important;
+
   padding: 15px;
   position: relative;
   float: right;
-  background-color: var(--primary);
-  color: var(--tertiary);
+  background-color: #FEE13D !important;
+  color: black !important;
   padding:9px;
-  border-radius:25px;
-  margin-top:20px;
+  border-radius:8px;
+  font-weight: bold;
+
   // width: 40%;
   align-self: self-start;
 }
-.CA1{
-  background-color: var(--primary);
-  color: var(--tertiary);
-  padding: 15px;
-  border-radius: 25px;
-}
+
 .SVM{
   padding: 10px;
   background: var(--primary);
@@ -3416,6 +3413,9 @@ button {
 }
 
 @media (max-width: 600px) {
+  .ammmmi{
+    margin-top: -10px;
+  }
 
   .masonry-item-leftOne {
     background-size: cover;
@@ -3482,6 +3482,7 @@ button {
 @media (min-width:401px) and (max-width:469px){
   .customized-subcard {
     width: 148px;
+    margin-bottom: 11px;
   }
 
   .filter-card {
@@ -3493,6 +3494,7 @@ button {
 @media (min-width:359px) and (max-width:400px){
 .customized-subcard {
   width: 122px;
+  margin-bottom: 11px;
 }
 }
 
@@ -3505,6 +3507,7 @@ button {
 
   .customized-subcard {
     width: 194px;
+    margin-bottom: 11px;
   }
 
   .masonry-item-rightOne {
@@ -3564,7 +3567,9 @@ button {
   margin-left: 20px;
 
 }
-
+.customized-subcard {
+  margin-bottom: 11px;
+}
 
 .hero-subheading {
   font-weight: bold;
@@ -3590,6 +3595,7 @@ button {
 }
 
 @media (min-width:725px) and (max-width:1180px){
+
   .hero-heading{
     padding-top: 6rem;
     font-weight: 700;
@@ -3642,6 +3648,9 @@ button {
   margin-left: 10px;
   margin-bottom: 5px;
   margin-top: 2px;
+}
+.customized-subcard {
+  margin-bottom: 11px;
 }
 }
 
@@ -3759,12 +3768,63 @@ button {
   }
 }
 
+.checkAva1 {
+   border-radius: 12px;
+}
 
+.checkAva2 {
+  justify-content: space-evenly;
+   margin-left: 10px;
+   margin-right: 10px;
+   margin-top: 10px;
+}
+.checkAva3 {
+  background-color: #fff;
+  height: 60px;
+  padding: 0px;
+   padding-top: 4px;
+            margin-bottom: 11px;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+}
 
+.checkAva4 {
+  padding-top:0px;
+  margin-bottom:0px!important;
+  color: black;
+}
+.checkAva5 {
+  border: none; background: none !important;margin-top: -6px;
+}
+.checkAva6 {
+  background-color: #fff; height: 60px;
+            padding: 0px;
+            padding-top: 4px;
+            margin-bottom: 11px;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+}
+.checkAva7 {
+  padding-top:0px;margin-bottom:0px!important;color: black;
+}
 
+.checkAva8 {
+  display: flex; justify-content: center; margin-top: 5px;
+}
 
-
-
+.checkAva9 {
+  background-color: #FEE13D;
+                          padding: 4px;
+                          color: black;
+                          font-weight: 700;
+                          border-radius: 7px;
+                          padding-left: 14px;
+                          padding-right: 14px;
+}
+.ameniti1 {
+  font-weight: bold;
+  margin-left: 6px;
+}
 
 
 
