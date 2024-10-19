@@ -3980,6 +3980,15 @@
 </div>
 <!-- property aminities ends -->
 
+<div class=" terms-container" *ngFor="let bServiceDtoList of policies">
+  <div *ngIf="bServiceDtoList.policy !== undefined && bServiceDtoList.policy !== null" >
+  <h3  class="ameniti1" style="padding-left:10px;padding-top: 10px;" *ngIf="policies">Terms & Conditions</h3>
+  <div class="terms-content" [innerHTML]="bServiceDtoList.policy" >
+    <!-- Add terms and conditions content here -->
+  </div>
+</div>
+</div>
+
 
 
 
