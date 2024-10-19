@@ -441,7 +441,7 @@ export class ListingDetailOneComponent implements OnInit {
         breakpoint: 767,
         settings: {
           centerPadding: '0',
-          slidesToShow: 1,
+          slidesToShow: 2,
         },
       },
     ],

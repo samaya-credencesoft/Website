@@ -1123,12 +1123,7 @@ margin-bottom: 21px;
   margin: 20px;
   margin-top: 0px !important;
 }
-@media (max-width:500px) {
-  .slide_plan{
-    margin: 0px;
 
-  }
-}
 
 .button1 {
 
@@ -2900,7 +2895,7 @@ font-size: 30px;
 @media(max-width:764px){
   .img_size_room{
     object-fit: cover;
-  border-radius: 30px !important;
+  border-radius: 10px !important;
 
 
   }
@@ -3371,13 +3366,10 @@ margin-bottom: -70px;
 padding-bottom: 10px;
 }
 .BN{
-  width: 159.45px;
-  height: 49.71px;
   background-color: var(--primary) !important;
   color: var(--tertiary) !important;
   border-radius: 35px;
   text-align: center;
-  padding: 6px;
 }
 .paybtn{
   background-color: var(--primary) !important;
@@ -3868,9 +3860,9 @@ border-radius: 10px;
 .review-item {
   display: flex;
   align-items: center;
-  padding: 50px;
-  background-color: #f8f8f8;
+  padding: 40px;
   border-radius: 10px;
+  padding-top: 10px;
 }
 .review_test{
   display: flex;
@@ -3883,6 +3875,15 @@ border-radius: 10px;
   margin-right: 15px;
 }
 
+.carousel-control-prev {
+  left: -10px;
+}
+
+.carousel-control-next {
+  right: -10px;
+}
+
+
 .review-content {
   max-width: 500px;
 }
@@ -3894,11 +3895,18 @@ border-radius: 10px;
   border-radius: 5px;
   font-weight: bold;
 }
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: black;  /* Change this to your desired color */
-  border-radius: 50%;  /* Optional: Make the arrows round */
+.carousel-control-prev, .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 }
+
+
+
 
 .review-rating i {
   color: #ffd700;
