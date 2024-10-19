@@ -1292,6 +1292,8 @@ if (this.city != null && this.city != undefined) {
     this.email.message =
       '\nPropertyName: ' +
       this.businessUser.name +
+      '\nName: ' +
+      this.name +
       '\nEmail: ' +
       this.fromEmail +
       ' \nPhone: ' +
