@@ -4298,7 +4298,7 @@
           <h2>{{room.name}}</h2>
         </div>
         <div >
-          <div class="card-body">
+          <div class="card-body" style="margin-top: -23px;">
             <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
               <div *ngIf="room.id === rates.roomId && r < 1">
                 <div class="row mb-4">
@@ -4399,18 +4399,24 @@
                               padding-bottom: 4px; font-weight: bold;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}}</p>
                             </div>
                           </div>
+
                         </div>
+
                       </div>
                        <!-- desktop view -->
-                      <div  class="desktopone" style="font-weight: bold;">
+                      <div *ngIf="showDescription"  class="desktopone" style="font-weight: bold;">
                         <div class="mt-2"  [innerHTML]="room.description">
                           </div>
                     </div>
 
-                    <div  class="mobile-one" style="font-weight: bold;">
+                    <div *ngIf="showDescription"  class="mobile-one" style="font-weight: bold;">
                       <div class="mt-2"  [innerHTML]="room.description">
                         </div>
                   </div>
+                  <p (click)="showDescription = !showDescription"
+                  style="color: #271a55; font-weight: bold; text-align: right; cursor: pointer;">
+                  {{ showDescription ? 'View Less' : 'View More' }}
+               </p>
                       <!-- <div style="text-align: center;">
                         <button class="btn text-white SVM"
                           (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
@@ -4514,27 +4520,29 @@
                 ">
                       <div ngxSlickItem class="slide slide_plan"
                         *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
-                        <div class="card plan_cards" style="padding: 30px;">
-                          <div>
-                            <h5>{{plan.name}}</h5>
-                            <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;">
-                              {{ plan.showDetails ? 'View Less' : 'View More' }}
-                            </a>
-                            <li *ngIf="plan.showDetails">
-                              Extra person charge :<span> {{
+                        <div class="card plan_cards" >
+                          <div class="card-header" style="padding-left: 7px;
+                          padding-top: 5px;
+                          padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
+                          <div style="margin-left: 6px;">
+
+
+                            <li class="listplan"  *ngIf="plan.showDetails">
+                             <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
                                 plan.extraChargePerPerson
                                 | currency: currency:"symbol":"1.2-2"
                                 }}</span>
                             </li>
-                            <li *ngIf="plan.showDetails">
-                              Extra Child charge :<span> {{
+                            <li class="listplan"  *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;"> Extra Child charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
                                 plan.extraChargePerChild
                                 | currency: currency:"symbol":"1.2-2"
                                 }}</span>
                             </li>
                           </div>
 
-                          <div style="padding-top: 10px;">
+                          <div style="padding-top: 10px;margin-left: 6px;" >
                             <span style="font-family: 'sans-sarif Lato';
               font-style: normal;
               font-weight: 600;
@@ -4548,16 +4556,17 @@
                               <span  style="font-family: 'sans-sarif Lato';
                               font-style: normal;
                               font-weight: 400;
-                              font-size: 20px;color: #808080;text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                              font-size: 18px;color: #808080;text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && plan.showDetails">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
                           </div>
-                          <div style="color: #271a55;font-weight: 600;" *ngIf="
+
+                          <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
                           hasPercentage(
                             room.roomOnlyPrice,
                             plan.amount
-                          ) == true
+                          ) == true && plan.showDetails
                         ">
                         ({{
                         ((room.roomOnlyPrice -
@@ -4566,8 +4575,11 @@
                         100 | number: "1.2-2"
                         }}% Discount)
                       </div>
-                          <div class="BN">
-                            <button class="btn text-white" (click)="
+                      <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600; margin-left: 6px;">
+                        {{ plan.showDetails ? 'View Less' : 'View More' }}
+                      </a>
+                          <div class="d-flex justify-content-center" style="margin:7px">
+                            <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
                   onPlanSelected(plan, room);
                   booking.roomName = rates.roomName;
                   selectedRoomName = rates.roomName;
@@ -4583,7 +4595,7 @@
                     room.noOfRooms;
                   checkAvailabilityStatus = true;
                   checkingAvailability1(); bookRoomNow();">
-                              BOOK NOW</button>
+                              BOOK</button>
                           </div>
 
                         </div>
