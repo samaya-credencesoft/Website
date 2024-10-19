@@ -4298,7 +4298,7 @@
           <h2>{{room.name}}</h2>
         </div>
         <div >
-          <div class="card-body">
+          <div class="card-body" style="margin-top: -23px;">
             <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
               <div *ngIf="room.id === rates.roomId && r < 1">
                 <div class="row mb-4">
