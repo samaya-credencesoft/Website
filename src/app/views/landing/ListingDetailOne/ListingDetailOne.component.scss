@@ -3678,22 +3678,25 @@ button {
  }
 }
 ::-webkit-scrollbar {
-  width: 12px;
+  // width: 12px;
+  // overflow: hidden
+  display: none;
+
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+// ::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+// }
 
-::-webkit-scrollbar-thumb {
-  background-color: #32325d;
-  border-radius: 10px;
-  border: 3px solid #f1f1f1;
-}
+// ::-webkit-scrollbar-thumb {
+//   background-color: #32325d;
+//   border-radius: 10px;
+//   border: 3px solid #f1f1f1;
+// }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #32325d;
-}
+// ::-webkit-scrollbar-thumb:hover {
+//   background-color: #32325d;
+// }
 
 .cardDesignmenu {
   border-radius: 100px;
@@ -3828,7 +3831,7 @@ border-radius: 10px;
 }
 
 .contact-form {
-  max-width: 400px;
+
   margin: 50px auto;
   padding: 20px;
   margin: 20px;
@@ -3847,7 +3850,7 @@ border-radius: 10px;
 }
 .contact-form .subtitle {
   text-align: center;
-  color: #f39c12;
+
   margin-bottom: 20px;
 }
 .contact-form button {
