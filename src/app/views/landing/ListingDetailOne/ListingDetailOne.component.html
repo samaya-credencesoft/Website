@@ -5017,8 +5017,8 @@
     <div class="terms-content">
       <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
       </div>
-      <span style="font-weight: bold;" (click)="toggleReadMore(i)">
-        {{ isReadMore[i] ? 'Read Less' : 'Read More' }}
+      <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right" (click)="toggleReadMore(i)">
+        {{ isReadMore[i] ? 'View Less' : 'View More' }}
       </span>
     </div>
   </div>
