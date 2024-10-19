@@ -5008,14 +5008,22 @@
 
  <!-- Add terms and conditions starts here -->
 
-<div class=" terms-container" *ngFor="let bServiceDtoList of policies">
-  <div *ngIf="bServiceDtoList.policy !== undefined && bServiceDtoList.policy !== null" >
-  <h3  class="ameniti1" style="padding-left:10px;padding-top: 10px;" *ngIf="policies">Terms & Conditions</h3>
-  <div class="terms-content" [innerHTML]="bServiceDtoList.policy" >
+ <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index">
+  <div *ngIf="bServiceDtoList?.policy">
+    <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
+      Terms & Conditions
+    </h3>
 
+    <div class="terms-content">
+      <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+      </div>
+      <span style="font-weight: bold;" (click)="toggleReadMore(i)">
+        {{ isReadMore[i] ? 'Read Less' : 'Read More' }}
+      </span>
+    </div>
   </div>
 </div>
-</div>
+
 
 <!-- Add terms and conditions end here -->
 

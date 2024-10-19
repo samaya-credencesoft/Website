@@ -521,6 +521,7 @@ export class ListingDetailOneComponent implements OnInit {
   wifi: string;
   tv: string;
   blogPost: any[] = [];
+  isReadMore: boolean[] = [];
   bookingMinDate: NgbDate | null;
   bookingMaxDate: NgbDate | null;
   planSelected = false;
@@ -779,6 +780,7 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
       const chatbotElement = document.getElementById('chatbot');
@@ -917,7 +919,10 @@ if (this.city != null && this.city != undefined) {
   toggleView() {
     this.isExpanded = !this.isExpanded;
   }
-
+  toggleReadMore(index: number) {
+    // Toggle the read more/less flag for the clicked policy
+    this.isReadMore[index] = !this.isReadMore[index];
+  }
   decrementL(lunchservice) {
 
     if (this.counterl > 0) {
