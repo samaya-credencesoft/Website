@@ -5040,15 +5040,19 @@
 
       <div class="cardlistmenu scroll-container">
         <div *ngFor="let item of blogPost.fields.citiesimages">
-          <div class="cardDesignmenu imageitemmenu">
-            <img [src]="item.fields.file.url" class="imageitemmenu" />
+          <!-- Background wrapper div for each item -->
+          <div class="item-background">
+            <div class="cardDesignmenu imageitemmenu">
+              <img [src]="item.fields.file.url" class="imageitemmenu" />
+            </div>
+            <h3 class="menuheading">{{ item.fields.title }}</h3>
           </div>
-          <h3 class="menuheading">{{ item.fields.title }}</h3>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- nearby section ends -->
 <div class="contact-form  p-4">
