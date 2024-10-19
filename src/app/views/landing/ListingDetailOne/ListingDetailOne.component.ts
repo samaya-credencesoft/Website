@@ -276,6 +276,7 @@ export class ListingDetailOneComponent implements OnInit {
   isCustomerReviewFound = false;
   currentRate = 4.54;
   planpropertyServiceList: any[] = [];
+  showDescription: boolean = false;
 
   closeResult = '';
   modalImage = '';
@@ -419,9 +420,9 @@ export class ListingDetailOneComponent implements OnInit {
     centerMode: true,
     centerPadding: '0%',
     slidesToShow: 2,
-    margin: 20,
+    margin: 10,
     dots: false,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 6000,
     arrows: true,
     responsive: [
