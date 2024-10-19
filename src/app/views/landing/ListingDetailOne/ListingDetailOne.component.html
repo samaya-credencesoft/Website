@@ -3979,6 +3979,80 @@
 </div>
 </div>
 <!-- property aminities ends -->
+<div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px;">
+  <div class="carousel-inner">
+    <!-- Review 1 -->
+    <div class="carousel-item review_test active">
+      <div class="review-item d-flex align-items-center">
+        <img src="profile1.jpg" class="rounded-circle profile-pic" alt="Reviewer 1">
+        <div class="review-content">
+          <h5 class="reviewer-name">John Doe</h5>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p class="review-text">
+            The rooms were affordable yet very good. Full points to the staff who seem to be trained to be very hospitable.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="carousel-item">
+      <div class="review-item d-flex align-items-center">
+        <img src="profile2.jpg" class="rounded-circle profile-pic" alt="Reviewer 2">
+        <div class="review-content">
+          <h5 class="reviewer-name">Jane Smith</h5>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="review-text">
+            Amazing experience! The staff were incredibly friendly and the rooms were spotless. Highly recommend this place.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="carousel-item">
+      <div class="review-item d-flex align-items-center">
+        <img src="profile3.jpg" class="rounded-circle profile-pic" alt="Reviewer 3">
+        <div class="review-content">
+          <h5 class="reviewer-name">Michael Johnson</h5>
+          <div class="review-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <p class="review-text">
+            Good value for money. The rooms were decent, and the service was satisfactory. Will visit again.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel controls -->
+  <a class="carousel-control-prev" href="#reviewsCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#reviewsCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
 
 <div class=" terms-container" *ngFor="let bServiceDtoList of policies">
   <div *ngIf="bServiceDtoList.policy !== undefined && bServiceDtoList.policy !== null" >
