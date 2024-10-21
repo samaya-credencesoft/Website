@@ -3043,6 +3043,7 @@ textarea {
 .addon-details {
   display: flex;
   flex-direction: column;
+
 }
 
 .addon-details strong {
@@ -3053,7 +3054,11 @@ textarea {
 .addon-details p {
   margin: 5px 0 0 0; 
   font-size: 14px;
-  color: #666;
+  color: #000;
+}
+
+.colorprice{
+  color: #000;
 }
 
 .alignmentcard{
@@ -3073,9 +3078,14 @@ textarea {
 }
 .Bookingroommargine{
   margin-bottom: 5px;
-  font-weight: bold;
+  
   color: #000;
 }
+
+.info-item {
+  text-align: center;  
+  height: 40px;
+ }
 
 
 
