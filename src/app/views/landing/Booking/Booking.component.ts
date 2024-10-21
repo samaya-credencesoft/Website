@@ -1687,6 +1687,11 @@ this.externalReservationdto =res.body
     this.cashPayment = false;
   }
 
+  redirectToBooking() {
+     this.router.navigateByUrl('Saanaira-Resort-Spa?BookingEngine=true');
+   
+  }
+
   sendConfirmationMessage() {
     this.paymentLoader = true;
     let msg = new Msg();

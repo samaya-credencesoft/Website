@@ -2362,17 +2362,24 @@
   <h2 class="booking-title">Booking Summary</h2>
 
   <!-- Date Section -->
-  <div class="Bookingdate-section">
-    <div class="Bookingdate">
-      <h6>Check-in Date</h6>
-      <strong>16 OCT</strong>
+   <div class="DateSection ">
+    <div class="Bookingdate-section">
+      <div class="Bookingdate">
+        <h6>Check-in Date</h6>
+        <strong>16 OCT</strong>
+      </div>
+      <div class="Bookingdate">
+        <h6>Check-out Date</h6>
+        <strong>17 OCT</strong>
+       </div>
+  
     </div>
-    <div class="Bookingdate">
-      <h6>Check-out Date</h6>
-      <strong>17 OCT</strong>
-    
-    </div>
-  </div>
+    <button (click)="redirectToBooking()" class="editStyle">
+      <i class="fas fa-edit"></i>
+  </button>
+   </div>
+
+
 
   <!-- Room Information -->
   <div class="Bookingroominfo">
