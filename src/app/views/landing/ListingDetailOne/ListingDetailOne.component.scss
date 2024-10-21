@@ -326,9 +326,7 @@ margin-top: 16px;
 }
 .img_size_room{
   object-fit: cover;
-  border-radius: 30px;
-
-
+  border-radius: 13px;
 }
 .plan1{
   text-align: left;
@@ -350,18 +348,10 @@ margin-top: 16px;
 }
 
 @media (min-width:425px) and (max-width:1241px){
-  .plan_card_style{
-    padding:30px;
-    max-width: 100%;
-  }
+
 }
 @media (max-width:450px) {
-  .plan_card_style {
-      padding: 0px;
-      max-width: 100%;
-      margin-top: 15px;
-      height: auto !important;
-    }
+
   .countersm{
     justify-content: center !important;
     padding-top: 0px !important;

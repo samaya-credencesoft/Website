@@ -77,6 +77,7 @@ export interface Email {
 })
 export class ListingDetailOneComponent implements OnInit {
   @ViewChild('accmd') accmdSection!: ElementRef;
+  showFullDescription: boolean[] = [];
   showListingDetails: boolean = false;
   website: string;
   propertyusername: string;
@@ -587,6 +588,7 @@ export class ListingDetailOneComponent implements OnInit {
   sortedRooms: any[] = [];
   sortedRoomsOne: any[] = [];
   isExpanded: boolean = false;
+  showFullDescriptionOne: boolean = false;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -903,6 +905,13 @@ if (this.city != null && this.city != undefined) {
   }
   // showhide(){
 
+  toggleDescriptionOne() {
+    this.showFullDescriptionOne = !this.showFullDescriptionOne;
+  }
+
+  toggleDescription(index: number) {
+    this.showFullDescription[index] = !this.showFullDescription[index];
+  }
   sortAndLimitRooms() {
     // Sort rooms by roomOnlyPrice in ascending order
     this.sortedRooms = this.roomWithGHCPlan
