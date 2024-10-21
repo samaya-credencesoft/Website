@@ -2898,8 +2898,8 @@ padding-left: 65px;
 
 .booking-summary-container {
   
-  margin: 0 auto;
-  padding: 20px;
+  margin: 20px;
+  // padding: 20px;
   background-color: ghostwhite; 
   font-family: Arial, sans-serif;
   border-radius: 8px;
@@ -2908,19 +2908,24 @@ padding-left: 65px;
 .booking-title {
  
   font-size: 1.2em;
-  margin-bottom: 10px;
+  margin-left: 40px;
+  margin-top: 20px;
+
 }
 
 .DateSection{
   background-color: white;
   padding: 15px 10px;
+  margin: 20px;
+  
   border-radius: 8px;
+  
 }
 
 .Bookingdate-section {
   display: flex;
   justify-content:space-evenly;
-
+ 
 
 }
 
