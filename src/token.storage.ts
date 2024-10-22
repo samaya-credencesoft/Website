@@ -119,11 +119,11 @@ export class TokenStorage {
     }
 
     saveSelectedServices(services: any[]) {
-      localStorage.setItem('selectedServices', JSON.stringify(services));
+      sessionStorage.setItem('selectedServices', JSON.stringify(services));
     }
 
     getSelectedServices() {
-      return JSON.parse(localStorage.getItem('selectedServices') || '[]');
+      return JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
     }
 
     public getPropertyData(): BusinessUser {

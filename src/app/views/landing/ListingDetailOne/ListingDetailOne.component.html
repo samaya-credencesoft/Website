@@ -3887,14 +3887,14 @@
 
   <h3 class="ameniti1">About the property</h3>
   <div class="container" style="padding-bottom: 20px; font-weight: 600;" *ngIf="isRestaurant || distance || DistanceRailway">
-    <ul>
+
       <li *ngIf="isRestaurant">{{isRestaurant.name}}</li>
       <li *ngIf="distance">{{distance.name}}</li>
       <li *ngIf="DistanceRailway">{{DistanceRailway.name}}</li>
-    </ul>
+
 
     <div *ngIf="isExpanded">
-      <div *ngIf="businessUser.businessDescription" style="margin-top: -10px;">
+      <div *ngIf="businessUser.businessDescription" >
         <p [innerHTML]="businessUser.businessDescription">{{businessUser.businessDescription}}</p>
       </div>
     </div>
@@ -4999,27 +4999,17 @@
 <!-- property room details ends -->
 
 <!-- Add on service Start -->
-<div class="servicecdiv">
+<div class="servicecdiv" *ngIf="viewAddon" id="serv">
   <h3 class="servicetitle">Add-On Services</h3>
-  <!-- <div class="col-lg-6 col-6 p-2" *ngFor="let fac of propertyServiceListData | slice:0:4">
-    <div class="d-flex" id="facilitysm"
-      *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-      <div>
-        <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
-        <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
-      </div>
-      <div> <p>{{fac.name}}</p></div>
-    </div>
-  </div> -->
 
-  <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left;">
-    <ng-container *ngFor="let fac of propertyServiceListData; let i = index">
 
-      <div class="col-lg-6 col-6 p-2" style="margin-bottom: 15px;">
+  <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left;" >
+    <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
+
+      <div class="col-lg-6 col-6 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
         <div class="d-flex" id="facilitysms"
-          *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+          >
 
-          <!-- Service Image -->
           <div>
             <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
             <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
@@ -5032,12 +5022,11 @@
 
         </div>
 
-        <!-- Add button or Quantity box based on isAdded flag -->
-        <div *ngIf="!fac.isAdded">
+        <div *ngIf="!fac.isAdded && !fac.quantity ">
           <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
         </div>
 
-        <div *ngIf="fac.isAdded" class="d-flex " style="padding: 5px;">
+        <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
           <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
           <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
           <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
@@ -5054,7 +5043,7 @@
 <!-- Add on service end -->
 
 <!-- review section button starts -->
-  <div style="display: flex; justify-content: center;">
+  <div style="display: flex; justify-content: center; margin-top: 10px;" *ngIf="viewAddon">
     <button class="reviewbtn">
       Review Booking Details
     </button>

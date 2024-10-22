@@ -82,6 +82,7 @@ export class ListingDetailOneComponent implements OnInit {
   website: string;
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
+  viewAddon: boolean;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -102,6 +103,8 @@ export class ListingDetailOneComponent implements OnInit {
   dynamicStreetName: string
   dynamicLocality: string;
   propertyServiceListData: any[] = [];
+  propertyServiceListDataOne: any[] =[];
+  savedServices: any[] = [];
   otaNames: string[] = [];
   dynamicCountryName: string
   dynamicStreetNumber: string
@@ -590,6 +593,7 @@ export class ListingDetailOneComponent implements OnInit {
   isExpanded: boolean = false;
   showFullDescriptionOne: boolean = false;
   selectedServices: any[] = [];
+  valSelected: boolean = false;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -780,9 +784,8 @@ export class ListingDetailOneComponent implements OnInit {
       // this.updateTag();
     });
     // //console.log("sdfgh"+this.city)
-    const savedServices = this.token.getSelectedServices();
 
-console.log ("this.token.getSelectedServices()", savedServices)
+
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
@@ -920,16 +923,12 @@ if (this.city != null && this.city != undefined) {
   }
   sortAndLimitRooms() {
     // Sort rooms by roomOnlyPrice in ascending order
-    this.sortedRooms = this.roomWithGHCPlan
-      .sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice)
-      .slice(0, 3);
+    this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 3);
   }
 
   sortAndLimitRoomsOne() {
     // Sort rooms by roomOnlyPrice in ascending order
-    this.sortedRoomsOne = this.availableRooms
-      .sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice)
-      .slice(0, 3);
+    this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 3);
   }
 
   toggleView() {
@@ -1933,6 +1932,17 @@ this.isHeaderVisible = true;
           if (this.token?.getRoomsData() != null) {
             this.checkingAvailability();
           }
+          this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
+          this.savedServices = this.token.getSelectedServices().forEach(ele => {
+            this.propertyServiceListDataOne.forEach(val => {
+              if (ele.name === val.name) {
+                this.valSelected = true;
+                this.viewAddon = true;
+              val.quantity = ele.quantity;
+              }
+            })
+            console.log("val.quantity", this.propertyServiceListDataOne)
+          });
 
           if (this.token?.getRoomsData() === null) {
             // this.getRoom();
@@ -2345,6 +2355,13 @@ if (bookingSummaryElement) {
     }
   }
 
+  scrollToService() {
+    const element = document.getElementById('serv');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = this.businessUser.whatsApp;
@@ -2554,6 +2571,8 @@ if (bookingSummaryElement) {
     // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // this.checkAvailabilityStatus = false;
     this.selectedIndex = index;
+    this.viewAddon = true;
+    this.scrollToService();
     // this.getPlan(roomId);
   }
 
@@ -3032,6 +3051,7 @@ if (bookingSummaryElement) {
 
     this.token.saveProperty(this.businessUser);
     this.token.saveBookingData(this.booking);
+
   }
 
   validateNoOfrooms(event: number, no) {
