@@ -4019,16 +4019,7 @@
                             <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
                           </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"
-                          *ngIf="room.imageList.length >1">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"
-                          *ngIf="room.imageList.length >1">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
-                        </a>
+
                       </div>
 
 
@@ -4230,6 +4221,7 @@
                   ">
                         <div ngxSlickItem class="slide slide_plan"
                           *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
+
                           <div class="card" style="padding: 30px;">
                             <div class="card-header" style="padding-left: 7px;
                             padding-top: 5px;
