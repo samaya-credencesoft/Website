@@ -4354,12 +4354,22 @@
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
-                      <div class="carousel-inner img_size_room">
-                        <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
-                          [class.active]="i === 0">
-                          <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
+                      <div class="carousel-inner img_size_room" class="image-container">
+                        <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0">
+                          <div class="imageSoldcontainer"> <!-- Updated container for the image and card -->
+                            <img src="{{image.url}}" class="img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
+                            <div class="cardSold">
+                              <p class="Soldheading">Sold Out!</p>
+                              <p class="Soldpara">Sorry, this room is not available for the selected dates.</p>
+                              <div>
+                                  <button class="Checksoldbutton">Check Other Options</button>
+                              </div>
+                         
+                            </div>
+                          </div>
                         </div>
                       </div>
+                      
 
                     </div>
 
