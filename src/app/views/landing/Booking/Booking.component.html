@@ -2205,13 +2205,13 @@
           suitable alternative options that match your preferences.
         </li>
       </ol>
-  
-  
+
+
       <div>
         <p class="enquiry-details">Enquiry Details</p>
       </div>
-  
-  
+
+
       <div class="cardenquiry1">
         <div class="cardenquiry1a">
           <table class="vl">
@@ -2286,8 +2286,8 @@
               </td>
             </tr>
             <tr *ngIf="discountPercentage">
-  
-  
+
+
               <td class="cardenquiry1c">Discount:</td>
               <td class="cardenquiry1c">{{ booking.discountPercentage }}%</td>
             </tr>
@@ -2297,10 +2297,10 @@
                 booking.discountAmount
                 | currency : currency : "symbol" : "1.2-2"
                 }}</td>
-  
-  
-  
-  
+
+
+
+
             </tr>
             <tr>
               <td class="cardenquiry1c">Notes</td>
@@ -2309,8 +2309,8 @@
           </table>
         </div>
       </div>
-  
-  
+
+
       <div class="enquiry-terms">
         <div style="display: flex;justify-content: space-between;">
           <a class="enquiry-terms-a" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
@@ -2331,8 +2331,8 @@
       </div>
     </div>
   </div>
-  
-  
+
+
   <div>
     <a href="{{PropertyUrl}}">
     <img class="arrowfoot" src="assets/images/Arrow.png" />
@@ -2343,15 +2343,15 @@
       at <br />+918328818871/+919040443275.
     </p>
   </div>
-  
+
   </div>
-  
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10904222935" ng-if="bookingConfirmed && isEnquiry"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
+
     gtag('config', 'AW-10904222935');
   </script>
 </div>
@@ -2366,13 +2366,13 @@
     <div class="Bookingdate-section">
       <div class="Bookingdate">
         <h6>Check-in Date</h6>
-        <h6>16 OCT</h6>
+        <h6>{{booking.fromDate  | date: 'dd MMM' }}</h6>
       </div>
       <div class="Bookingdate">
         <h6>Check-out Date</h6>
-        <h6>17 OCT</h6>
+        <h6>{{booking.toDate  | date: 'dd MMM' }}</h6>
        </div>
-  
+
     </div>
     <button (click)="redirectToBooking()" class="editStyle">
       <i class="fas fa-edit"></i>
@@ -2384,93 +2384,179 @@
   <!-- Room Information -->
   <div class="Bookingroominfo">
     <div class="Bookingroomdetails">
-      <p class="Bookingroommargine">STANDARD AC ROOM 
+      <p class="Bookingroommargine">{{booking.roomName}}
         <i class="fas fa-pencil-alt" (click)="redirectToBooking()" style="cursor: pointer; margin-left: 10px;"></i>
 
       </p>
-    
+
       <!-- <button (click)="redirectToBooking()" class="editStyle">
         <i class="fas fa-edit"></i>
     </button> -->
       <ul>
-        <li>CP Room Plan x 1 <span>₹5,093</span></li>
-        <li>Extra Pax Charges <span>₹0</span></li>
-        <li>Tax + Services (12%) <span>₹612</span></li>
-        <li>Total Amount <span>₹5,705</span></li>
+        <li>{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
+        <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+        <li>Tax <span>  {{
+          booking.taxAmount | currency : currency : "symbol" : "1.2-2"
+          }}</span></li>
+        <li>Total Amount  <span> {{
+          booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+          }}</span></li>
       </ul>
     </div>
   </div>
 
   <!-- Add-on Services -->
-  <div class="addon-services">
+  <!-- <div class="addon-services">
     <h6>Add-on Service</h6>
     <div class="alignmentcard">
       <div class="addon-title">
         <div>
           <i class="fa fa-car"></i>
         </div>
-       
+
         <div class="addon-details">
           <p>Pick-up & Drop off</p>
           <p>₹500 + ₹50 (10% tax)</p>
         </div>
       </div>
-   
+
         <p class="colorprice">₹550</p>
     </div>
- 
-  
-  </div>
+
+
+  </div> -->
 
   <!-- Guests and Nights Info -->
   <div class="guest-nights-info">
     <div class="info-item">
       <span>No. Of Guests</span>
-      <p style="display: block;" class="colorprice">2</p>
+      <p style="display: block;" class="colorprice">{{booking.noOfPersons}}</p>
     </div>
     <div class="info-item">
       <span>Number Of Nights</span>
-      <p style="display: block;" class="colorprice">1</p>
+      <p style="display: block;" class="colorprice">{{ DiffDate }}</p>
     </div>
   </div>
 
   <!-- Payment Information -->
   <div class="paymentinfo">
     <ul>
-      <li>Total Payable Amount <span>₹6,255</span></li>
-      <li>Advance Amount (50%) <span>₹3,128</span></li>
-      <li>Due Amount <span>₹3,127</span></li>
+      <li>Total Payable Amount <span> {{
+        booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+        }}</span></li>
+
+      <li>Due Amount  <span> {{
+        booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+        }}</span></li>
     </ul>
   </div>
 
   <!-- Fill Your Details Section -->
+  <form (ngSubmit)="orderForm?.form.valid && onSubmit(orderForm)" #orderForm="ngForm" *ngIf="!bookingConfirmed">
   <div class="FillCard">
     <h3>Fill your details</h3>
     <div class="Fillform">
       <div class="Fillinput-group">
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" placeholder="First Name" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="First Name"
+          id="firstName"
+          name="firstName"
+          [(ngModel)]="booking.firstName"
+          #firstName="ngModel"
+          required
+
+        />
+        <span
+          class="text-danger"
+          *ngIf="(firstName.touched || orderForm.submitted) && firstName.errors?.required"
+        >
+          First Name is required
+        </span>
       </div>
-    
+
       <div class="Fillinput-group">
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" placeholder="Last Name" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last Name"
+          id="lastName"
+          name="lastName"
+          [(ngModel)]="booking.lastName"
+          #lastName="ngModel"
+          required
+
+        />
+        <span
+          class="text-danger"
+          *ngIf="(lastName.touched || orderForm.submitted) && lastName.errors?.required"
+        >
+          Last Name is required
+        </span>
       </div>
- 
     </div>
-    
+
     <label for="email">Email Address</label>
-    <input type="email" id="email" placeholder="Email Address" />
-    
+    <input
+      type="email"
+      class="form-control"
+      placeholder="eg: mrjames@xyz.com"
+      id="email"
+      name="email"
+      [(ngModel)]="booking.email"
+      #email="ngModel"
+      required
+      email
+
+    />
+    <span
+      class="text-danger"
+      *ngIf="(email.touched || orderForm.submitted) && email.errors?.required"
+    >
+      Email is required
+    </span>
+    <span
+      class="text-danger"
+      *ngIf="(email.touched || orderForm.submitted) && email.errors?.email"
+    >
+      Enter a valid email
+    </span>
+
     <label for="mobile">Mobile Number</label>
-    <input type="email" id="mobile" placeholder="Mobile Number" />
-    
+    <input
+      type="tel"
+      maxlength="10"
+      class="form-control"
+      placeholder="eg: 8912345678"
+      id="mobile"
+      name="mobile"
+      [(ngModel)]="booking.mobile"
+      #mobile="ngModel"
+      required
+
+    />
+    <span
+      class="text-danger"
+      *ngIf="(mobile.touched || orderForm.submitted) && !mobile.valid"
+    >
+      Invalid Phone number
+    </span>
+
+
     <label for="notes">Special Notes</label>
-    <textarea id="notes" placeholder="Special Notes"></textarea>
-  
-    <button class="Fillpaybtn">Pay Now</button>
+    <textarea id="notes" placeholder="Special Notes">{{booking.notes}}</textarea>
+
+    <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+    (click)="submitForm()">Enquiry Now</button>
+    <button  class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+    (click)="payAndCheckout()">Pay Now</button>
+    <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
+    (click)="payAndCheckout()">Pay At Hotel</button>
   </div>
-  
+</form>
 </div>
 
 

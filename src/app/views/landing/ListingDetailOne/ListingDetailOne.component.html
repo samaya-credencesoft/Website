@@ -4025,7 +4025,7 @@
                       </div>
                     </div>
                       <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                        src="https://via.placeholder.com/400x300" alt="" width="100%" />
+                        src="assets/images/default-rooms.avif" alt="" width="100%" />
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
                         *ngIf="room.imageList.length >=1">
                         <!-- <ol class="carousel-indicators">
@@ -4366,9 +4366,9 @@
                     </div>
                   </div>
                     <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                      src="https://via.placeholder.com/400x300" alt="" width="100%" />
+                      src="assets/images/default-rooms.avif" alt="" width="100%" />
                       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-                      *ngIf="room.imageList.length >=1">
+                      *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
@@ -4378,19 +4378,26 @@
                           <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
                         </div>
                       </div>
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"
-                        *ngIf="room.imageList.length >1">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"
-                        *ngIf="room.imageList.length >1">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
+
                     </div>
 
-                    <!-- <img *ngIf="room.imageList?.length" src="{{room.imageList[0]?.url}}" width="100%" class="img_size_room" alt=""> -->
+                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
+
+                      <div aria-hidden="true" *ngIf="room.imageList[0]">
+                        <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[1]">
+                        <img [src]="room?.imageList[1].url" alt="Image 1" class="masonry-item-leftTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[2]">
+                        <img [src]="room?.imageList[2].url" alt="Image 2" class="masonry-item-leftTwo" />
+                        <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
+                      </div>
+
+                    </div>
+
 
                   </div>
                   <div class="col-12">
@@ -4484,52 +4491,59 @@
                         let p = index
                       ">
                       <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0">
-                        <div class="card plan_cards" style="padding: 20px;" *ngIf="rates.roomRatePlans.length <= 2">
-                          <div>
-                            <h4 *ngIf="plan.name !== 'GHC'" class="planname">{{plan.name}}</h4>
+                        <div class="card plan_cards"  *ngIf="rates.roomRatePlans.length <= 2">
+                          <div class="card-header" style="padding-left: 7px;
+                          padding-top: 5px;
+                          padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; ">
+                          <h5 *ngIf="plan.name !== 'GHC'" style=" font-size: 15px; color: #fff !important;" class="planname">{{plan.name}}</h5>
                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
-                            <h4 *ngIf="plan.name === 'GHC'">Economy</h4>
+                            <h5 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h5></div>
+                          <div style="margin-left: 7px;" *ngIf="plan.showDetails">
+
                             <li *ngIf=" plan.extraChargePerPerson >0">
-                              Extra person charge :<span> {{
+                              <b style="color: #031EAA !important;"> Extra person charge : </b>
+                              <span style=" color: black !important; font-weight: bold;"> {{
                                 plan.extraChargePerPerson
                                 | currency: currency:"symbol":"1.2-2"
                                 }}</span>
                             </li>
-                            <li *ngIf=" plan.extraChargePerPerson < 0"><br></li>
+
                             <li *ngIf=" plan.extraChargePerChild >0">
-                              Extra Child charge :<span> {{
+                              <b style="color: #031EAA !important;"> Extra Child charge : </b>
+                              <span style=" color: black !important; font-weight: bold;"> {{
                                 plan.extraChargePerChild
                                 | currency: currency:"symbol":"1.2-2"
                                 }}</span>
                             </li>
-                            <li *ngIf=" plan.extraChargePerChild < 0"><br></li>
+
                           </div>
 
-                          <div style="padding-top: 10px;">
-                            <span style="font-family: 'sans-sarif Lato';
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 35px;color: black;"> {{
+                          <div style="padding-top: 10px; margin-left: 7px;">
+                            <span style="    font-family: 'sans-sarif Lato';
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 20px;
+                            color: black;"> {{
                               plan.amount * DiffDate * noOfrooms
                               | currency
                               : currency
                               : "symbol"
                               : "1.2-2"
-                              }}</span>
+                              }}</span> <br>
                               <span  style="font-family: 'sans-sarif Lato';
                               font-style: normal;
                               font-weight: 400;
-                              font-size: 20px;color: #808080; text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                              font-size: 18px;color: #808080;text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && plan.showDetails">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
                           </div>
 
-                          <div style="color: #271a55; font-weight: 600;" *ngIf="
+                          <div style="color: #271a55; font-weight: 600; margin-left: 7px;" *ngIf="
                           hasPercentage(
                             room.roomOnlyPrice,
                             plan.amount
-                          ) == true
+                          ) == true && plan.showDetails
                         ">
                         ({{
                         ((room.roomOnlyPrice -
@@ -4538,8 +4552,11 @@
                         100 | number: "1.2-2"
                         }}% Discount)
                       </div>
-                          <div class="BN">
-                            <button class="btn text-white" (click)="
+                      <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600; margin-left: 6px;">
+                        {{ plan.showDetails ? 'View Less' : 'View More' }}
+                      </a>
+                          <div class="d-flex justify-content-center" style="margin:7px">
+                            <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
                         onPlanSelected(plan, room);
                         booking.roomName = rates.roomName;
                         selectedRoomName = rates.roomName;
@@ -4555,7 +4572,7 @@
                           room.noOfRooms;
                         checkAvailabilityStatus = true;
                         bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
-                              BOOK NOW</button>
+                              BOOK </button>
                           </div>
 
                         </div>
@@ -4681,9 +4698,9 @@
                     </div>
                   </div>
                     <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                      src="https://via.placeholder.com/400x300" alt="" width="100%" />
+                      src="assets/images/default-rooms.avif" alt="" width="100%" />
                       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-                      *ngIf="room.imageList.length >=1">
+                      *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
@@ -4693,17 +4710,26 @@
                           <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
                         </div>
                       </div>
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"
-                        *ngIf="room.imageList.length >1">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"
-                        *ngIf="room.imageList.length >1">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
+
                     </div>
+
+                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
+
+                      <div aria-hidden="true" *ngIf="room.imageList[0]">
+                        <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[1]">
+                        <img [src]="room?.imageList[1].url" alt="Image 1" class="masonry-item-leftTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[2]">
+                        <img [src]="room?.imageList[2].url" alt="Image 2" class="masonry-item-leftTwo" />
+                        <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
+                      </div>
+
+                    </div>
+
 
                     <!-- <img *ngIf="room.imageList?.length" src="{{room.imageList[0]?.url}}" width="100%" class="img_size_room" alt=""> -->
                   </div>

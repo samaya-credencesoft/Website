@@ -3399,6 +3399,18 @@ button {
     margin-top: -10px;
   }
 
+  .masonry-item-rightTwo {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 195px;
+    height: 229px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+  }
+
   .masonry-item-leftOne {
     background-size: cover;
     background-position: center;
@@ -3409,6 +3421,17 @@ button {
     border-radius: 5px;
     margin-left: 3px;
     margin-bottom: 5px;
+}
+.masonry-item-leftTwo {
+  background-size: cover;
+        background-position: center;
+        display: block;
+        float: left;
+        width: 41.5%;
+        height: 111.66px;
+        border-radius: 5px;
+        margin-left: 5px !important;
+        margin-bottom: 5px !important;
 }
 
   .masonry-item-rightOne {
@@ -3422,6 +3445,7 @@ button {
     border-radius: 5px;
 
   }
+
 
   .filter-card {
     margin-top: -114px;
@@ -3473,10 +3497,34 @@ button {
   }
 }
 
+@media (max-width:358px) {
+  .masonry-item-rightTwo {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 132px;
+    height: 229px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+  }
+}
+
 @media (min-width:359px) and (max-width:400px){
 .customized-subcard {
   width: 122px;
   margin-bottom: 11px;
+}
+.masonry-item-rightTwo {
+  background-size: cover;
+        background-position: center;
+        display: block;
+        float: left;
+        width: 173px;
+        height: 229px;
+        margin-bottom: 10px;
+        border-radius: 5px;
 }
 }
 
@@ -3503,7 +3551,30 @@ button {
     border-radius: 5px;
 }
 
+.masonry-item-rightTwo {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 132px;
+  height: 193px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
 .masonry-item-leftOne {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 35.5%;
+  height: 94.66px;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
+
+.masonry-item-leftTwo {
   background-size: cover;
   background-position: center;
   display: block;
@@ -3528,7 +3599,28 @@ button {
     margin-bottom: 10px;
     border-radius: 5px;
 }
+.masonry-item-rightTwo {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 132px;
+  height: 193px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
 .masonry-item-leftOne {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 35.5%;
+  height: 135.66px;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
+.masonry-item-leftTwo {
   background-size: cover;
   background-position: center;
   display: block;
@@ -3601,6 +3693,17 @@ button {
     border-radius: 5px;
 }
 
+.masonry-item-rightTwo {
+  background-size: cover;
+        background-position: center;
+        display: block;
+        float: left;
+        width: 352px;
+        height: 293px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+}
+
   .masonry-item-leftOne {
     background-size: cover;
     background-position: center;
@@ -3611,6 +3714,17 @@ button {
     border-radius: 5px;
     margin-left: 3px;
     margin-bottom: 5px;
+}
+.masonry-item-leftTwo {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  float: left;
+  width: 35.5%;
+  height: 144.66px;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-bottom: 5px;
 }
 .filter-card {
   margin-top: -149px;
