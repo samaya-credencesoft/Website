@@ -2355,6 +2355,13 @@ if (bookingSummaryElement) {
     }
   }
 
+  scrollToAccommodationDash() {
+    const element = document.getElementById('accmdOne');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   scrollToService() {
     const element = document.getElementById('serv');
     if (element) {
