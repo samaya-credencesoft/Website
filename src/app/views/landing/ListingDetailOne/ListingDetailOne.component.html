@@ -5038,9 +5038,9 @@
         </div>
 
         <div *ngIf="fac.isAdded" class="d-flex " style="padding: 5px;">
-          <button (click)="decreaseQuantity(fac)">-</button>
-          <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black;" readonly />
-          <button (click)="increaseQuantity(fac)">+</button>
+          <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+          <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+          <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
         </div>
       </div>
 
