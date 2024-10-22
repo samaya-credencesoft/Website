@@ -3704,25 +3704,7 @@
         </div>
 
           <!-- <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left"> -->
-          <ng-template class="nodisplaylg" #room let-modal style="max-width: 500px">
-            <div class="modal-header">
-              <h4 class="modal-title" id="modal-basic-title">
-                {{ modalTitle }}
-              </h4>
-              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true"> × </span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <ngx-slick-carousel class="carousel listing-slider mfp-gallery-container margin-bottom-0 ml-4 mr-4"
-                #slickModal="slick-carousel" [config]="modalSlideConfig">
-                <div ngxSlickItem *ngFor="let gallery of modalImage" class="slide">
-                  <a *ngIf="gallery.url !== null" [ngStyle]="{ 'background-image': 'url(' + gallery.url + ')' }"
-                    class="item mfp-gallery cover" title="{{ gallery.name }}"></a>
-                </div>
-              </ngx-slick-carousel>
-            </div>
-        </ng-template>
+      
 
       </div>
     </div>
