@@ -786,6 +786,7 @@ console.log ("this.token.getSelectedServices()", savedServices)
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    this.getGoogleReview();
     this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
@@ -2062,6 +2063,17 @@ this.isHeaderVisible = true;
         this.isReviewFound = false;
         this.changeDetectorRefs.detectChanges();
       }
+    );
+  }
+  getGoogleReview() {
+    this.listingService.getGoogleReview(this.token.getProperty().id).subscribe(
+      (response) => {
+        this.googleReviews = response.body;
+        // this.cdrf.detectChanges();
+        // this.chunkReviews();
+    console.log("this.googleReviews" + JSON.stringify(this.googleReviews))
+      },
+
     );
   }
   getCustomerReview(id) {

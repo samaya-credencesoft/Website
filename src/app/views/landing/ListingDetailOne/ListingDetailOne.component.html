@@ -5069,68 +5069,20 @@
   <div class="carousel-inner">
 
     <!-- Review 1 -->
-    <div class="carousel-item review_test active">
-      <div class="review-item" >
+    <div class="carousel-item review_test " data-interval="10000"
+    *ngFor="let item of googleReviews; let i = index"
+    [ngClass]="{ 'active': i === 0 }">
+      <div class="review-item"  >
         <div class="card d-flex" style="margin: auto ; background-color: #F8F8F8; flex-direction: row !important;">
-          <img src="profile1.jpg" class="rounded-circle profile-pic" alt="Reviewer 1">
+          <img [src]="item.profileImageUrl" class="rounded-circle profile-pic" alt="{{ item.reviewerName }}">
+
           <div class="review-content">
-            <h5 class="reviewer-name">John Doe</h5>
+            <h5 class="reviewer-name">{{ item.reviewerName }}</h5>
             <div class="review-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
+              {{ '★'.repeat(item.rating) }}
             </div>
             <p class="review-text">
-              The rooms were affordable yet very good. Full points to the staff who seem to be trained to be very hospitable.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Review 2 -->
-    <div class="carousel-item">
-      <div class="review-item" >
-
-        <div class="card d-flex" style="margin: auto ; background-color: #F8F8F8;flex-direction: row !important;">
-          <img src="profile1.jpg" class="rounded-circle profile-pic" alt="Reviewer 1">
-          <div class="review-content">
-            <h5 class="reviewer-name">John Doe</h5>
-            <div class="review-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <p class="review-text">
-              The rooms were affordable yet very good. Full points to the staff who seem to be trained to be very hospitable.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Review 3 -->
-    <div class="carousel-item">
-      <div class="review-item" >
-        <div class="card d-flex" style="margin: auto ; background-color: #F8F8F8;flex-direction: row !important;">
-          <img src="profile1.jpg" class="rounded-circle profile-pic" alt="Reviewer 1">
-          <div class="review-content">
-            <h5 class="reviewer-name">John Doe</h5>
-            <div class="review-rating">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-            <p class="review-text">
-              The rooms were affordable yet very good. Full points to the staff who seem to be trained to be very hospitable.
+              {{ item.reviewText }}
             </p>
           </div>
         </div>

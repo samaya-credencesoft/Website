@@ -49,6 +49,9 @@ export class ListingService {
   runCampaign(campaignId:number,businessServiceId:string) {
     return this.http.get<any>(environment.apiUrlPromotion+ '/api/campaign/runCampaign/'+campaignId+'/businessLeadId/'+businessServiceId , { observe: 'response' });
    }
+   getGoogleReview(propertyId: number) {
+    return this.http.get<any>(this.API_URL + '/api/thm/getGoogleReviews?PropertyId=' + propertyId, { observe: 'response' });
+  }
   // findProductsByBusinessServiceId(businessServiceId: number) {
   //   return this.http.get<ProductGroup[]>(this.API_URL + '/api/thm/getProductList/' + businessServiceId, { observe: 'response' });
   // }
