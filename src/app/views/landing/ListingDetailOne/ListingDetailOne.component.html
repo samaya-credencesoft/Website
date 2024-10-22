@@ -3672,7 +3672,7 @@
                 <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
                   <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
                     <h5 class="card-title customized-title">{{room.name}}</h5>
-                    <p class="customized-p">{{room.roomOnlyPrice}}</p>
+                    <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
 
                   </div>
                 </div>
