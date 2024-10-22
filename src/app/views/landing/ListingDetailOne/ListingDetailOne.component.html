@@ -3704,7 +3704,7 @@
         </div>
 
           <!-- <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left"> -->
-      
+
 
       </div>
     </div>
@@ -4125,7 +4125,7 @@
                           let p = index
                         ">
                         <div class="col-12 plan_card_style" *ngIf="plan.amount >0">
-                          <div class="card plan_cards" *ngIf="rates.roomRatePlans.length <= 2">
+                          <div class="card plan_cards hello_card" *ngIf="rates.roomRatePlans.length <= 2">
                             <div class="card-header" style="padding-left: 7px;
                             padding-top: 5px;
                             padding-right: 2px;
@@ -4354,22 +4354,12 @@
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
-                      <div class="carousel-inner img_size_room" class="image-container">
-                        <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0">
-                          <div class="imageSoldcontainer"> <!-- Updated container for the image and card -->
-                            <img src="{{image.url}}" class="img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
-                            <div class="cardSold">
-                              <p class="Soldheading">Sold Out!</p>
-                              <p class="Soldpara">Sorry, this room is not available for the selected dates.</p>
-                              <div>
-                                  <button class="Checksoldbutton">Check Other Options</button>
-                              </div>
-                         
-                            </div>
-                          </div>
+                      <div class="carousel-inner img_size_room">
+                        <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
+                          [class.active]="i === 0">
+                          <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
                         </div>
                       </div>
-                      
 
                     </div>
 
@@ -4483,7 +4473,7 @@
                         let p = index
                       ">
                       <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0">
-                        <div class="card plan_cards"  *ngIf="rates.roomRatePlans.length <= 2">
+                        <div class="card plan_cards hello_card"  *ngIf="rates.roomRatePlans.length <= 2">
                           <div class="card-header" style="padding-left: 7px;
                           padding-top: 5px;
                           padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; ">
@@ -4580,7 +4570,7 @@
                 ">
                       <div ngxSlickItem class="slide slide_plan"
                         *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
-                        <div class="card plan_cards" >
+                        <div class="card plan_cards " >
                           <div class="card-header" style="padding-left: 7px;
                           padding-top: 5px;
                           padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
@@ -4804,8 +4794,8 @@
                         let plan of rates.roomRatePlans;
                         let p = index
                       ">
-                      <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0" >
-                        <div class="card plan_cards"  *ngIf="rates.roomRatePlans.length <= 2">
+                      <div class="col-12 plan_card_style" *ngIf="plan.amount >0" >
+                        <div class="card plan_cards hello_card"  *ngIf="rates.roomRatePlans.length <= 2">
                           <div class="card-header" style="padding-left: 7px;
                           padding-top: 5px;
                           padding-right: 2px;
@@ -5011,60 +5001,53 @@
 <!-- Add on service Start -->
 <div class="servicecdiv">
   <h3 class="servicetitle">Add-On Services</h3>
-
-  <div class="serviceinline">
-    <div class="addon-service">
-      <div class="service-inline">
-        <i class="fa fa-car"></i>
-        <span class="service-name">Pick up & Drop Off</span>
+  <!-- <div class="col-lg-6 col-6 p-2" *ngFor="let fac of propertyServiceListData | slice:0:4">
+    <div class="d-flex" id="facilitysm"
+      *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+      <div>
+        <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
+        <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
       </div>
-      <button class="btn-add">Add</button>
+      <div> <p>{{fac.name}}</p></div>
     </div>
+  </div> -->
 
-    <div class="addon-service">
-      <div class="service-inline">
-        <i class="fa fa-tshirt"></i>
-        <span class="service-name">Laundry</span>
+  <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left;">
+    <ng-container *ngFor="let fac of propertyServiceListData; let i = index">
+
+      <div class="col-lg-6 col-6 p-2" style="margin-bottom: 15px;">
+        <div class="d-flex" id="facilitysms"
+          *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+
+          <!-- Service Image -->
+          <div>
+            <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
+            <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+          </div>
+
+          <!-- Service Name -->
+          <div>
+            <p>{{fac.name}}</p>
+          </div>
+
+        </div>
+
+        <!-- Add button or Quantity box based on isAdded flag -->
+        <div *ngIf="!fac.isAdded">
+          <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+        </div>
+
+        <div *ngIf="fac.isAdded" class="d-flex " style="padding: 5px;">
+          <button (click)="decreaseQuantity(fac)">-</button>
+          <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black;" readonly />
+          <button (click)="increaseQuantity(fac)">+</button>
+        </div>
       </div>
-      <button class="btn-add">Add</button>
-    </div>
+
+    </ng-container>
   </div>
 
-  <div class="serviceinline">
-    <div class="addon-service">
-      <div class="service-inline">
-     <!-- <i class="fa fa-utensils-alt"></i> -->
-     <i class="fa fa-cutlery"></i>
 
-        <span class="service-name">Reserve A Meal</span>
-      </div>
-      <button class="btn-add">Add</button>
-    </div>
-
-    <div class="addon-service">
-      <div class="service-inline">
-        <i class="fa fa-spa"></i>
-        <span class="service-name">Spa</span>
-      </div>
-      <button class="btn-add">Add</button>
-    </div>
-  </div>
-
-  <div class="addon-service">
-    <div class="service-inline">
-    <i class="fa fa-clock"></i>
-    <span class="service-name">Early Check-in</span>
-  </div>
-    <button class="btn-add">Add</button>
-  </div>
-
-  <div class="Late-service">
-    <div class="service-inline">
-    <i class="fa fa-clock"></i>
-    <span class="service-name">Late Check-out</span>
-  </div>
-    <button class="btn-add">Add</button>
-  </div>
 </div>
 
 

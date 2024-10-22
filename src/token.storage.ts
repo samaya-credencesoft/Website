@@ -117,6 +117,15 @@ export class TokenStorage {
       localStorage.setItem(PROPERTY_SERVICE_DATA, '{}');
       }
     }
+
+    saveSelectedServices(services: any[]) {
+      localStorage.setItem('selectedServices', JSON.stringify(services));
+    }
+
+    getSelectedServices() {
+      return JSON.parse(localStorage.getItem('selectedServices') || '[]');
+    }
+
     public getPropertyData(): BusinessUser {
       return JSON.parse(localStorage.getItem(PROPERTY) as string);
     }

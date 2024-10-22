@@ -3297,8 +3297,30 @@ body {
   gap: 10px;
   padding-left: 5px;
 }
+#facilitysms{
 
-#facilitysm p {
+  border-radius: 10px;
+  // padding-top: 5px;
+  // padding-bottom: 5px;
+  align-items: center;
+  gap: 10px;
+  padding-left: 5px;
+}
+
+#facilitysms p{
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: small;
+  color: black !important;
+}
+#facilitysms img{
+  mix-blend-mode: multiply;
+  height: 25px;
+  width: 25px;
+}
+
+
+#facilitysm p{
   text-transform: capitalize;
   font-weight: bold;
   font-size: small;
@@ -4263,6 +4285,7 @@ button {
 }
 
 @media (max-width: 600px) {
+
   .cardDesignmenu {
     border-radius: 100px;
     box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
@@ -4284,6 +4307,12 @@ button {
   .listplan {
     font-size: 14px;
   }
+}
+.listplan {
+  font-size: 14px;
+}
+.quantity-input {
+  width:100px;
 }
 
 .scroll-container {

@@ -589,6 +589,7 @@ export class ListingDetailOneComponent implements OnInit {
   sortedRoomsOne: any[] = [];
   isExpanded: boolean = false;
   showFullDescriptionOne: boolean = false;
+  selectedServices: any[] = [];
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -779,7 +780,9 @@ export class ListingDetailOneComponent implements OnInit {
       // this.updateTag();
     });
     // //console.log("sdfgh"+this.city)
+    const savedServices = this.token.getSelectedServices();
 
+console.log ("this.token.getSelectedServices()", savedServices)
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
@@ -891,6 +894,8 @@ if (this.city != null && this.city != undefined) {
       // this.addToCartList = [];
       // this.slotTimes = [];
     }
+
+
 
     this.getDiffDate(this.toDate, this.fromDate);
     setTimeout(() => {
@@ -1180,6 +1185,32 @@ if (this.city != null && this.city != undefined) {
 
   backClicked() {
     this.locationBack.back();
+  }
+  onAdd(facility, index) {
+    facility.isAdded = true;
+    facility.quantity = 1; // Initialize quantity
+    this.selectedServices.push(facility);
+    this.updateTokenStorage();
+  }
+
+  // Increase the quantity
+  increaseQuantity(facility) {
+    facility.quantity++;
+    this.updateTokenStorage();
+  }
+
+  // Decrease the quantity
+  decreaseQuantity(facility) {
+    if (facility.quantity > 1) {
+      facility.quantity--;
+      this.updateTokenStorage();
+    }
+  }
+
+  // Save selected services to token storage
+
+  updateTokenStorage() {
+    this.token.saveSelectedServices(this.selectedServices);
   }
   navigateToSection(elementId: string): void {
 
@@ -3139,6 +3170,7 @@ if (bookingSummaryElement) {
                   // //console.log(JSON.stringify(e.propertyServicesList));
                   if (e.name === this.booking.roomRatePlanName) {
                     this.planpropertyServiceList = e.propertyServicesList;
+                    console.log("this.planpropertyServiceList",this.planpropertyServiceList)
                     this.planpropertyServiceList?.forEach((service) => {
                       if (service.name == 'Breakfast' || 'Breakfast (Adult)') {
                         this.breakfastservice = service;
