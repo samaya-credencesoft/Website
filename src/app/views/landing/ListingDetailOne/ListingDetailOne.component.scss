@@ -3928,6 +3928,79 @@ border-radius: 10px;
 }
 
 
+// <!-- Add on service Start -->
+.addon-container {
+  width: full;
+  margin: 10px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.addon-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  margin-left: 30px;
+ 
+}
+
+.addinline {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.addon-service {
+   flex-direction: column;
+   width: 45%;
+}
+
+.Late-service{
+   flex-direction: column;
+   width: 40%;
+  margin-top: 10px;
+}
+
+/* Align the icon and text inline */
+.service-inline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.service-inline i {
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.service-name {
+  font-size: 14px;
+  color:darkblue
+}
+
+.btn-add {
+  background-color: #f0f0f0;
+  border: none;
+   margin-left: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+   width: 50px;
+}
+
+.btn-add:hover {
+  background-color: #d0d0d0;
+}
+
+
+
+
+
+
+
+
 
 
 
