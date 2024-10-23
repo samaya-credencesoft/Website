@@ -83,11 +83,13 @@ export class BookingCompleteComponent implements OnInit {
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
     {
       this.businessUser = this.token.getPropertyData();
+
     }
 
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
     {
       this.booking = this.token.getBookingData();
+      this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
     }
 
     if (this.token.getPaymentData() != null && this.token.getPaymentData() != undefined)
@@ -125,13 +127,13 @@ export class BookingCompleteComponent implements OnInit {
     }
     setTimeout(() => {
       this.savedServices = this.token.getSelectedServices();
-      this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
                 }, 1000);
 
                 this.businessServiceDtoList = this.token.getProperty().businessServiceDtoList;
                 this.businessServiceDtoList.forEach((element) => {
+                  if(element.name === 'Accommodation'){
                   this.getDetailsData = element.advanceAmountPercentage;
-
+                }
                 });
 
   }
