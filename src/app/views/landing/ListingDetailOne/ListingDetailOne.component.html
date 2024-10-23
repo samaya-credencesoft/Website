@@ -33,7 +33,13 @@
      justify-content: end;
      margin-top: -8px;
      margin-bottom: 7px;">
-      <button class="btn btn-danger close-btn" id="closeCardBtn">x</button>
+      <button style="    border: 1px solid black;
+      padding: 5px;
+      border-radius: 26px;
+      padding-top: 0;
+      padding-bottom: 0;
+      font-size: 14px;
+      font-weight: bold;" id="closeCardBtn">x</button>
      </div>
      <div class="Bookingroominfo" style=" border: 1px solid black; border-radius: 8px;">
       <div class="Bookingroomdetails">
@@ -84,6 +90,19 @@
             }}</span></li>
         </ul>
       </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <button class="shadow " (click)="scrollToAccommodationDash()" style="    border: 2px solid black;
+      padding: 4px;
+      color: black;
+      font-weight: 700;
+      border-radius: 7px;
+      padding-left: 36px;
+      padding-right: 36px;
+      padding-top: 10px;
+      padding-bottom: 10px;">
+      Edit Booking </button>
     </div>
     <!-- <button class="btn btn-danger" id="closeCardBtn">Close</button> -->
   </div>
@@ -365,22 +384,11 @@
 
               </div>
             </div>
-            <p style="text-align: right; color: #031EAA !important; cursor: pointer; font-weight: bold;">View More Options</p>
+            <p  *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true"
+            style="text-align: right; color: #031EAA !important; cursor: pointer; font-weight: bold;" (click)="scrollToAccommodationDash()">View More Options</p>
           </div>
 
-          <div *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true" style="margin-top: -5x;
-                margin-left: 15px;">
-            <button class="shadow " (click)="scrollToAccommodationDash()" style="    background-color: #FEE13D;
-            padding: 4px;
-            color: black;
-            font-weight: 700;
-            border-radius: 7px;
-            padding-left: 36px;
-            padding-right: 36px;
-            padding-top: 10px;
-            padding-bottom: 10px;">
-            Book Now</button>
-          </div>
+
 
         </div>
       </div>
@@ -587,6 +595,7 @@
                           <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
                           <span>x {{room.maximumOccupancy}} Guests</span>
                         </div>
+
 
                         <!-- <b>Available:</b><br /> -->
                         <!-- <span style="font-size: 12px;"> -->
@@ -949,6 +958,7 @@
                           <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
                           <span>x {{room.maximumOccupancy}} Guests</span>
                         </div>
+
                       </div>
                         <div style="background-color: #fff !important;" *ngFor="let item of room.roomFacilities; let i=index ">
                           <div *ngIf="i<3" style="padding-bottom: 0px;padding-top: 5px;">

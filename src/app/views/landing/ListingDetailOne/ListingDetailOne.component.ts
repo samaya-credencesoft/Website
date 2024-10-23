@@ -85,6 +85,7 @@ export class ListingDetailOneComponent implements OnInit {
   viewAddon: boolean;
   noofRoomsAvailable: any[] = [];
   valueAvailable: any;
+  getValueOfRooms: import("c:/Users/1998s/Documents/GitHub/Website/src/app/model/ratesAndAvailability").RatesAndAvailability;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -2864,7 +2865,7 @@ if (bookingSummaryElement) {
           this.roomWithGHCPlan = [];
           let ghcPlan = new RoomRatePlans();
           this.daterange = [];
-          this.daterangefilter = []
+          this.daterangefilter = [];
           this.availableRooms?.forEach((event) => {
             event?.ratesAndAvailabilityDtos?.forEach((event2) => {
 
@@ -3249,6 +3250,7 @@ if (bookingSummaryElement) {
             this.availableRooms !== undefined
           ) {
             this.availableRooms?.forEach((room) => {
+
               room?.ratesAndAvailabilityDtos?.forEach((ele) => {
                 ele.roomRatePlans?.forEach((e) => {
                   // //console.log(JSON.stringify(e.propertyServicesList));
