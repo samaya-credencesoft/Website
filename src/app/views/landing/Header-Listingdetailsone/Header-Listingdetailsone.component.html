@@ -11,13 +11,7 @@
 
   <ul class="nav-menu" >
 
-    <!-- <li class="nav-item">
-      <img *ngIf="businessUser?.logoUrl" [src]="logoUrl" alt="Logo" class="logo-imagetwo">
-      <a  href="{{PropertyUrl}}" class="nav-link">
-        <i class="fas fa-home"></i> Dashboard
-    </a>
-  </li>
-    <hr> -->
+
 
     <li class="nav-item">
       <img *ngIf="businessUser?.logoUrl" [src]="businessUser?.logoUrl" alt="Logo" class="logo-imagetwo">
@@ -26,34 +20,7 @@
       </a>
     </li>
     <hr *ngIf="businessUser?.website">
-<!--
-    <li class="nav-item">
-      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
-        <i class="fa-regular fa-address-card"></i> About
-      </a>
-    </li>
-    <hr *ngIf="businessUser?.website"> -->
 
-    <!-- <li class="nav-item">
-      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
-        <i class="fa-solid fa-house-chimney"></i> Rooms
-      </a>
-    </li>
-    <hr *ngIf="businessUser?.website"> -->
-
-    <!-- <li class="nav-item">
-      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
-        <i class="fa-brands fa-servicestack"></i> Ammenities
-      </a>
-    </li>
-    <hr *ngIf="businessUser?.website"> -->
-
-    <!-- <li class="nav-item">
-      <a *ngIf="businessUser?.website" href="{{ this.website }}" class="nav-link">
-        <i class="fa-solid fa-phone"></i> Contact Us
-      </a>
-    </li>
-    <hr *ngIf="businessUser?.website"> -->
 
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.aboutUs" href="{{socialmedialist?.aboutUs}}" class="nav-link">
@@ -83,26 +50,7 @@
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.paymentTerms">
 
-    <!-- <li class="nav-item">
-      <a routerLink="/manage-property" [state]="{ businessUser: businessUser }" class="nav-link">
-        <i class="fas fa-cogs"></i> Manage Property
-      </a>
-    </li>
-    <hr> -->
 
-    <!-- <li class="nav-item">
-      <a routerLink="/history" class="nav-link">
-        <i class="fas fa-history"></i> Manage Bookings
-      </a>
-    </li>
-    <hr> -->
-
-    <!-- <li class="nav-item">
-      <a routerLink="/manage-enquiry" class="nav-link">
-        <i class="fas fa-envelope"></i> Manage Enquiry
-      </a>
-    </li> -->
-    <!-- <hr> -->
 
 
 
@@ -110,12 +58,12 @@
 </div>
 
 <!-- Top Navbar -->
-<nav class="navbar navbar-dark top-navbar">
+<nav class="navbar navbar-dark top-navbar desktop-view-ui">
   <div class="container-div">
     <!-- Left Section: Logo and Business Name -->
     <div class="left-section">
         <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo">
-        <span class="title-nav">{{ businessUser?.name }}</span>
+        <!-- <span class="title-nav">{{ businessUser?.name }}</span> -->
     </div>
 
     <!-- Right Section: Toggle Button -->
@@ -135,10 +83,35 @@
 
 </nav>
 
+<nav class="navbar navbar-dark top-navbar mobile-view-ui">
+  <div class="container-div">
+    <!-- Left Section: Logo and Business Name -->
+    <div class="left-section">
+        <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo">
+        <!-- <span class="title-nav">{{ businessUser?.name }}</span> -->
+    </div>
+
+    <!-- Right Section: Toggle Button -->
+     <div style="float: right;
+     display: flex;
+     gap: 7px;">
+
+
+
+
+
+    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
+    </button>
+  </div>
+</div>
+
+</nav>
+
 <!-- Styles -->
 
 
-<div class="banner-container" *ngIf="!businessUser?.website">
+<!-- <div class="banner-container" *ngIf="!businessUser?.website">
   <img src="assets/images/BookOne Website Bannerr.png" alt="Website Banner" class="banner-image">
-</div>
+</div> -->
 

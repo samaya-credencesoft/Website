@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { Logger } from 'src/services/logger.service';
 // import { EnquiryForm } from '../Enquiry/Enquiry.component';
 import { API_URL_NZ, API_URL_IN } from 'src/app/app.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EnquiryForm } from '../onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 import { TokenStorage } from 'src/token.storage';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
@@ -59,6 +59,10 @@ export class BookingCompleteComponent implements OnInit {
   API_URL: string;
   enquirySent: boolean = false;
   submitButtonDisable: boolean;
+  savedServices: any[] = [];
+  businessServiceDtoList: any[] = [];
+  getDetailsData: any;
+  dueAmount: number;
 
   constructor(
     private http: HttpClient,
@@ -66,7 +70,9 @@ export class BookingCompleteComponent implements OnInit {
     private acRoute: ActivatedRoute,
     private hotelBookingService: HotelBookingService,
     private ngZone: NgZone,
-    private changeDetectorRefs: ChangeDetectorRef
+    private changeDetectorRefs: ChangeDetectorRef,
+    private location: Location,
+    private router: Router,
   ) {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
@@ -77,11 +83,13 @@ export class BookingCompleteComponent implements OnInit {
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
     {
       this.businessUser = this.token.getPropertyData();
+
     }
 
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
     {
       this.booking = this.token.getBookingData();
+      this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
     }
 
     if (this.token.getPaymentData() != null && this.token.getPaymentData() != undefined)
@@ -117,6 +125,17 @@ export class BookingCompleteComponent implements OnInit {
       // this.children3to5 = this.booking.noOfChildren3To5yrs;
       this.noOfrooms = this.booking.noOfRooms;
     }
+    setTimeout(() => {
+      this.savedServices = this.token.getSelectedServices();
+                }, 1000);
+
+                this.businessServiceDtoList = this.token.getProperty().businessServiceDtoList;
+                this.businessServiceDtoList.forEach((element) => {
+                  if(element.name === 'Accommodation'){
+                  this.getDetailsData = element.advanceAmountPercentage;
+                }
+                });
+
   }
 
   ngOnInit() {
@@ -189,6 +208,9 @@ export class BookingCompleteComponent implements OnInit {
       }
     });
   }
+
+
+
   mileSecondToNGBDate(date: string) {
     const dsd = new Date(date);
     const year = dsd.getFullYear();
@@ -706,5 +728,9 @@ this.externalReservationdto =res.body
   backClicked() {
     // this.locationBack.back();
     this.token.clearHotelBooking();
+  }
+
+  onGoHome(){
+    this.router.navigate(["/booking"]);
   }
 }
