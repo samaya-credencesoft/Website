@@ -420,7 +420,7 @@ p {
 }
 
 .img_size_room {
-  height: 365px;
+  height: 288px;
 }
 
 .group_field {
@@ -4413,6 +4413,29 @@ button {
   .filter-card {
     margin-top: -249px;
     left: -20px;
+  }
+
+  .masonry-item-leftTwo {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 35.5%;
+    height: 144.66px;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-bottom: 5px;
+  }
+
+  .masonry-item-rightTwo {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 337px;
+    height: 293px;
+    margin-bottom: 10px;
+    border-radius: 5px;
   }
 
   .masonry-item-leftOne {
