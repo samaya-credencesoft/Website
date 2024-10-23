@@ -4367,8 +4367,13 @@ button {
     margin-bottom: 11px;
   }
 
+  .customized-title {
+    font-weight: bold;
+
+  }
+
   .filter-card {
-    margin-top: -266px;
+    margin-top: -200px;
     left: -20px;
   }
 
@@ -4377,11 +4382,11 @@ button {
     background-position: center;
     display: block;
     float: left;
-    width: 36.5%;
-    height: 141.66px;
+    width: 24.5%;
+    height: 113.66px;
     border-radius: 5px;
     margin-left: 6px;
-    margin-bottom: 9px;
+    margin-bottom: 6px;
 }
 
 
@@ -4390,8 +4395,8 @@ button {
     background-position: center;
     display: block;
     float: left;
-    width: 471px;
-    height: 446px;
+    width: 541px;
+    height: 354px;
     margin-bottom: 10px;
     border-radius: 5px;
   }

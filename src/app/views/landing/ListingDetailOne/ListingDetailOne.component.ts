@@ -924,12 +924,12 @@ if (this.city != null && this.city != undefined) {
   }
   sortAndLimitRooms() {
     // Sort rooms by roomOnlyPrice in ascending order
-    this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 3);
+    this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
   }
 
   sortAndLimitRoomsOne() {
     // Sort rooms by roomOnlyPrice in ascending order
-    this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 3);
+    this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
   }
 
   toggleView() {
