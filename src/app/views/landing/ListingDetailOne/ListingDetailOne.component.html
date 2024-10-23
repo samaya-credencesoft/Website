@@ -242,20 +242,27 @@
   <!-- section reviews starts -->
 
   <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
-    <h3 style="font-weight: bold; margin-left: 20px;">Reviews</h3>
+
 
     <div class="carousel-inner">
       <!-- Review Items -->
       <div class="carousel-item" *ngFor="let item of googleReviews; let i = index" [ngClass]="{ 'active': i === 0 }">
         <div class="d-flex justify-content-center">
-          <div class="card" style="background-color: #F8F8F8; width: 18rem;">
+          <div class="card" style="background-color: #F8F8F8; ">
 
             <div class="card-body text-center">
               <div class="row d-flex">
+               <div class="col-2">
+                <h3 style="font-weight: bold;margin-top: 50px; ">Reviews</h3>
+               </div>
                 <div  class="text-center col-3">
-                  <img [src]="item.profileImageUrl" class="rounded-circle" alt="{{ item.reviewerName }}" style="width: 80px; height: 80px; margin-top: 10px;">
+                  <img [src]="'https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'"
+                  class="rounded-circle"
+                  alt="{{ item.reviewerName }}"
+                  style="width: 80px; height: 80px; margin-top: 20px;">
+
                 </div>
-               <div class="col-9">
+               <div class="col-7">
                 <h5 class="card-title reviewer-name">{{ item.reviewerName }}</h5>
                 <div class="review-rating" style="color: #FFD700;">
                   <span *ngFor="let star of [].constructor(item.rating)">★</span>
