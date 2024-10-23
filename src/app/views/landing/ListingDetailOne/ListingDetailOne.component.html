@@ -217,6 +217,7 @@
 
 
 <!-- Add terms and conditions end here -->
+
  <!-- nearby section starts -->
 <div class="col-lg-12" *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;">
   <div *ngFor="let blogPost of blogPosts.items">
@@ -238,7 +239,50 @@
   </div>
 </div>
 
+  <!-- section reviews starts -->
 
+  <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
+    <h3 style="font-weight: bold; margin-left: 20px;">Reviews</h3>
+
+    <div class="carousel-inner">
+      <!-- Review Items -->
+      <div class="carousel-item" *ngFor="let item of googleReviews; let i = index" [ngClass]="{ 'active': i === 0 }">
+        <div class="d-flex justify-content-center">
+          <div class="card" style="background-color: #F8F8F8; width: 18rem;">
+
+            <div class="card-body text-center">
+              <div class="row d-flex">
+                <div  class="text-center col-3">
+                  <img [src]="item.profileImageUrl" class="rounded-circle" alt="{{ item.reviewerName }}" style="width: 80px; height: 80px; margin-top: 10px;">
+                </div>
+               <div class="col-9">
+                <h5 class="card-title reviewer-name">{{ item.reviewerName }}</h5>
+                <div class="review-rating" style="color: #FFD700;">
+                  <span *ngFor="let star of [].constructor(item.rating)">★</span>
+                </div>
+                <p class="card-text">{{ item.reviewText }}</p>
+              </div>
+            </div>
+               </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <a class="carousel-control-prev" href="#reviewsCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#reviewsCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+   <!-- section reviews ends -->
 <!-- nearby section ends -->
 <div class="contact-form  p-4">
   <h3 class="ameniti1 text-center">Contact Us</h3>
