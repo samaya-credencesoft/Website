@@ -80,6 +80,7 @@ export class ListingDetailOneComponent implements OnInit {
   showFullDescription: boolean[] = [];
   showListingDetails: boolean = false;
   website: string;
+  currentUrl: string;
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
   viewAddon: boolean;
@@ -655,6 +656,7 @@ export class ListingDetailOneComponent implements OnInit {
       if (this.hotelID != null && this.hotelID != undefined) {
         this.getPropertyDetailsById(this.hotelID);
       }
+
       if (this.token.getServiceData() !== null) {
         this.addServiceList = this.token.getServiceData();
         this.totalExtraAmount = 0;
@@ -682,6 +684,10 @@ export class ListingDetailOneComponent implements OnInit {
     if (this.token?.getRoomsData() !== null && this.token?.getRoomsData() !== undefined) {
       this.availableRooms = this.token?.getRoomsData();
     }
+    this.acRoute.url.subscribe(urlSegments => {
+      this.currentUrl = window.location.href; // Use window.location.href to get the full URL
+      console.log(this.currentUrl);
+    });
     if (this.token.getBookingData() !== null && this.token?.getRoomsData() !== undefined) {
       this.booking = this.token.getBookingData();
 
@@ -779,6 +785,9 @@ export class ListingDetailOneComponent implements OnInit {
       if (this.hotelID != null && this.hotelID != undefined) {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
+      }
+      if (!params['hotelID'] && !params['BookingEngine']) {
+        this.getDynamicNameFromUrl(this.currentUrl);
       }
       // //console.log(this.adults);
       // this.updateTag();
@@ -927,6 +936,16 @@ if (this.city != null && this.city != undefined) {
     this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 3);
   }
 
+  getDynamicNameFromUrl(url: string): string | null {
+    const fullUrl = this.locationBack.prepareExternalUrl(this.locationBack.path(true));
+
+    // You can also access the current URL with window.location.href
+    const domain = window.location.hostname; // Get the domain part from the URL
+    const name = domain.split('.')[1]; // This will extract 'saanaira-resort-spa'
+    this.getPropertyDetailsBySeoName(name)
+    return name;
+
+  }
   sortAndLimitRoomsOne() {
     // Sort rooms by roomOnlyPrice in ascending order
     this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 3);
