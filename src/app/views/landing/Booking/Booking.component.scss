@@ -2912,6 +2912,11 @@ padding-left: 65px;
   margin-top: 20px;
 
 }
+.Fillpaybtn:disabled {
+  background-color: #cccccc; /* Disabled button color */
+  color: #666666; /* Disabled text color */
+  cursor: not-allowed; /* Disable hover effect */
+}
 
 .DateSection{
   background-color: white;
