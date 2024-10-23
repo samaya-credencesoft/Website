@@ -393,7 +393,7 @@
   </div>
 
   <div class="col-5">
-    <h3  class="ameniti1">About the property</h3>
+    <h3  class="ameniti1" *ngIf="isRestaurant || distance || DistanceRailway">About the property</h3>
     <div class="container-fluid" *ngIf="isRestaurant || distance || DistanceRailway"  >
       <div style="background-color: #D9D9D92E;
       border-radius: 12px;
@@ -419,7 +419,9 @@
 </div>
 <!-- aminities section and about us section ends -->
 
-    <h3 style="padding-left: 56px;font-weight: bold;">Property Description</h3>
+ <!-- Property description section starts -->
+
+    <h3 style="padding-left: 56px;font-weight: bold;" *ngIf="businessUser.businessDescription">Property Description</h3>
 
  <div class=" popame" style="background-color: #D9D9D92E;
  border-radius: 12px;
@@ -433,6 +435,1019 @@
 </div>
 
  <!-- Property description section ends -->
+
+<!-- property room details starts -->
+<div class="container-fluid mt-4" id="accmdOne" *ngIf="availableRooms?.length >=0 && availability ==true">
+
+  <div class="desktop_view_room" >
+    <h3 class="ameniti1" style="margin-top: 10px; margin-bottom: 23px;">Room Types</h3>
+    <div *ngIf="this.activeForGoogleHotelCenter == true">
+      <div *ngFor="let room of roomWithGHCPlan; let i = index" style="margin-bottom:20px" >
+        <div class="card" style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
+          <div class="card-header" style="background: none !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
+            <h3 style=" font-weight: bold; margin-left: 6px;" >{{room.name}}</h3>
+          </div>
+          <div >
+            <div class="card-body" style="margin-top: -23px;">
+              <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
+                <div *ngIf="room.id === rates.roomId && r < 1">
+                  <div class="row mb-4">
+                    <div class="col-md-7" style="padding: 0px;">
+                      <div *ngFor="
+                      let plan of rates.roomRatePlans;
+                      let p = index
+                    ">
+                      <div class="ribbon ribbon-top-left" style="z-index: 1;" *ngIf="  ((room.roomOnlyPrice -
+                      plan.amount) /
+                      room.roomOnlyPrice) *
+                      100 >0 ">
+                            <span class="icon">Special Offer!</span>
+                      </div>
+                    </div>
+                      <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
+                        src="assets/images/default-rooms.avif" alt="" width="100%" />
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                        *ngIf="room.imageList.length >=1">
+                        <!-- <ol class="carousel-indicators">
+                          <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
+                        </ol> -->
+                        <div class="carousel-inner img_size_room">
+                          <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
+                            [class.active]="i === 0">
+                            <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
+                          </div>
+                        </div>
+
+                      </div>
+
+
+                    </div>
+                    <div class="col-12">
+                      <div style=" padding: 5px;padding-bottom: 4px;padding-top: 10px;">
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img src="assets/images/icons/b1.png" alt="1 guest">
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
+                          <b>Occupancy: </b>
+                          <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
+                          <span>x {{room.maximumOccupancy}} Guests</span>
+                        </div>
+
+                        <!-- <b>Available:</b><br /> -->
+                        <!-- <span style="font-size: 12px;"> -->
+                          <!-- {{ -->
+                          <!-- room.ratesAndAvailabilityDtos[0] -->
+                          <!-- .noOfAvailable -->
+                          <!-- }} room<span *ngIf="room.ratesAndAvailabilityDtos[0].noOfAvailable > 1">s</span> -->
+                          <!-- <br />Shared: -->
+                          <!-- <span *ngIf="room.shared">Yes</span><span *ngIf="!room.shared">No</span> -->
+                        <!-- </span> -->
+                        <div style="padding-top: 4px;">
+
+                          <div class="row" style="gap: 10px;">
+                            <!-- <div class="dbox2 col-md-6 col-6" style="display:flex; flex-wrap:wrap;" *ngFor="let item of room.roomFacilities; let
+                                      i=index ">
+
+                                    <div class="oa1" style="padding-bottom: 0px;padding-top: 5px;" *ngIf="i<4">
+                                      <p style="font-size: 12px;"><img [src]="item.imageUrl" height="
+                                              10px" alt="">
+                                        &nbsp; {{ item.name }}</p>
+                                    </div>
+                                  </div> -->
+                            <div style="background-color: #fff !important;" *ngFor="let item of room.roomFacilities; let i=index ">
+                              <div *ngIf="i<3" style="padding-bottom: 0px;padding-top: 5px;">
+                                <p style="text-transform: capitalize;
+                                font-weight: bold;
+                                font-size: small;
+                                color: black !important;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}} </p>
+                              </div>
+                              <div  *ngIf="i===3" style="padding-bottom: 0px;padding-top: 5px;">
+                                <p style="text-transform: capitalize;
+                                font-weight: bold;
+                                font-size: small;
+                                color: black !important;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- <div style="text-align: center;">
+                          <button class="btn text-white SVM"
+                            (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
+                            View More</button>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
+                    <div class="card_body_styl" *ngIf="rates.roomRatePlans.length <= 2">
+                      <div  *ngFor="
+                          let plan of rates.roomRatePlans;
+                          let p = index
+                        ">
+                        <div class="col-12 plan_card_style" *ngIf="plan.amount >0">
+                          <div class="card plan_cards hello_card" *ngIf="rates.roomRatePlans.length <= 2">
+                            <div class="card-header" style="padding-left: 7px;
+                            padding-top: 5px;
+                            padding-right: 2px;
+                            padding-bottom: 1px;
+                            background-color: #4A4A4A !important;">
+                              <h4 *ngIf="plan.name !== 'GHC'" class="planname" style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
+                              <!--Used white-space: nowrap so that long title doesnt affect the card size-->
+                              <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
+                            </div>
+                            <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
+
+                              <li *ngIf=" plan.extraChargePerPerson >0">
+                                <b style="color: #031EAA !important;">
+                                Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li *ngIf=" plan.extraChargePerChild >0">
+                                <b style="color: #031EAA !important;">
+                                  Extra Child charge :
+                                  </b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+
+                            </div>
+
+                            <div style="padding-top: 10px;margin-left: 6px;">
+                              <span style="font-family: 'sans-sarif Lato';
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 20px;color: black;"> {{
+                                                         this.totalplanPrice
+                                | currency
+                                : currency
+                                : "symbol"
+                                : "1.2-2"
+                                }}</span>
+                                <span  style="font-family: 'sans-sarif Lato';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 20px;color: #808080; text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && showFullDescriptionOne">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                                    : currency
+                                    : "symbol"
+                                    : "1.2-2"}}</span>
+                            </div>
+
+                            <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
+                            hasPercentage(
+                              room.roomOnlyPrice,
+                              plan.amount
+                            ) == true && showFullDescriptionOne
+                          ">
+                          ({{
+                          ((room.roomOnlyPrice -
+                          plan.amount) /
+                          room.roomOnlyPrice) *
+                          100 | number: "1.2-2"
+                          }}% Discount)
+                        </div>
+                        <p style="color: blue; cursor: pointer; text-align: left; margin-left: 7px;    color: #221950;
+                        font-weight: bold;
+                        font-size: 15px;" (click)="toggleDescriptionOne()">
+                          {{ showFullDescriptionOne ? 'View Less' : 'View More' }}
+                        </p>
+                        <div class="d-flex justify-content-center" style="margin: 7px;">
+                          <button class="btn text-white" style="    background-color: #FEE13D;
+                          color: black !important;
+                          border-radius: 10px;
+                          font-weight: bold;" (click)="
+                onPlanSelected(plan, room);
+                booking.roomName = rates.roomName;
+                selectedRoomName = rates.roomName;
+                booking.roomType = rates.roomName;
+                maxSelectRoom = rates.noOfAvailable;
+                maxOccupancy =
+                  room.maximumOccupancy;
+                onRoomBook(room.id, i);
+                booking.roomId = room.id;
+                selectedRoomMaximumOccupancy =
+                  room.maximumOccupancy;
+                selectedRoomAvailableNumber =
+                  room.noOfRooms;
+                checkAvailabilityStatus = true;
+                checkingAvailability1(); bookRoomNow();  document?.getElementsByClassName('booking-summary').scrollIntoView({ behavior: 'smooth' });">
+                            BOOK</button>
+                        </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <ngx-slick-carousel class="carousel listing-slider mfp-gallery-container margin-bottom-0 ml-4 mr-4"
+                      style="margin-bottom: 20px;" #slickModal="slick-carousel" [config]="modalSlideConfig1"
+                      *ngIf="rates.roomRatePlans.length > 2">
+                      <div *ngFor="
+                    let plan of rates.roomRatePlans;
+                    let p = index
+                  ">
+                        <div ngxSlickItem class="slide slide_plan"
+                          *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
+
+                          <div class="card" style="padding: 30px;">
+                            <div class="card-header" style="padding-left: 7px;
+                            padding-top: 5px;
+                            padding-right: 2px;
+                            padding-bottom: 1px;
+                            background-color: #4A4A4A !important;">
+                              <h4 style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
+                            </div>
+                            <div style="margin-left: 7px;">
+
+                              <li>
+                                <b style="color: #031EAA !important;"> Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li>
+                                <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                            </div>
+
+                            <div style="padding-top: 10px; margin-left: 6px;">
+                              <span style="font-family: 'sans-sarif Lato';
+                              font-style: normal;
+                              font-weight: 600;
+                              font-size: 20px;color: black;"> {{
+                                plan.amount * DiffDate * noOfrooms
+                                | currency
+                                : currency
+                                : "symbol"
+                                : "1.2-2"
+                                }} </span>
+                                <span  style="font-family: 'sans-sarif Lato';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 20px;color: #808080;text-decoration: line-through; " class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                                    : currency
+                                    : "symbol"
+                                    : "1.2-2"}}</span>
+                            </div>
+                            <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
+                            hasPercentage(
+                              room.roomOnlyPrice,
+                              plan.amount
+                            ) == true
+                          ">
+                          ({{
+                          ((room.roomOnlyPrice -
+                          plan.amount) /
+                          room.roomOnlyPrice) *
+                          100 | number: "1.2-2"
+                          }}% Discount)
+                        </div>
+                            <div class="d-flex justify-content-center" style="margin: 7px;">
+                              <button  class="btn text-white" style="    background-color: #FEE13D;
+                              color: black !important;
+                              border-radius: 10px;
+                              font-weight: bold;" (click)="
+                    onPlanSelected(plan, room);
+                    booking.roomName = rates.roomName;
+                    selectedRoomName = rates.roomName;
+                    booking.roomType = rates.roomName;
+                    maxSelectRoom = rates.noOfAvailable;
+                    maxOccupancy =
+                      room.maximumOccupancy;
+                    onRoomBook(room.id, i);
+                    booking.roomId = room.id;
+                    selectedRoomMaximumOccupancy =
+                      room.maximumOccupancy;
+                    selectedRoomAvailableNumber =
+                      room.noOfRooms;
+                    checkAvailabilityStatus = true;
+                    checkingAvailability1(); bookRoomNow();
+                    document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
+                                BOOK </button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ngx-slick-carousel>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="this.activeForGoogleHotelCenter == false">
+    <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" >
+      <div class="card"  style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
+
+        <div >
+          <div class="card-body" >
+            <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
+              <div *ngIf="room.id === rates.roomId && r < 1">
+                <div class="row mb-4">
+                  <div class="col-6" style="padding: 0px;">
+                    <div *ngFor="
+                    let plan of rates.roomRatePlans;
+                    let p = index
+                  ">
+                    <div class="ribbon ribbon-top-left" style="z-index: 1;" *ngIf="  ((room.roomOnlyPrice -
+                    plan.amount) /
+                    room.roomOnlyPrice) *
+                    100 >0 ">
+                          <span class="icon">Special Offer!</span>
+                    </div>
+                  </div>
+                    <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
+                      src="assets/images/default-rooms.avif" alt="" width="100%" />
+                      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                      *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
+                      <!-- <ol class="carousel-indicators">
+                        <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
+                      </ol> -->
+                      <div class="carousel-inner img_size_room">
+                        <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
+                          [class.active]="i === 0">
+                          <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="288px" width="100%">
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
+
+                      <div aria-hidden="true" *ngIf="room.imageList[0]">
+                        <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[1]">
+                        <img [src]="room?.imageList[1].url" alt="Image 1" class="masonry-item-leftTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[2]">
+                        <img [src]="room?.imageList[2].url" alt="Image 2" class="masonry-item-leftTwo" />
+                        <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
+                      </div>
+
+                    </div>
+
+                    <div  style=" padding:5px;padding-bottom: 4px;padding-top: 10px;">
+
+                       <!-- desktop view -->
+                      <div   class="desktopone" style="font-weight: bold;">
+                        <div class="mt-2"  [innerHTML]="room.description">
+                          </div>
+                    </div>
+
+                    <div  class="mobile-one" style="font-weight: bold;">
+                      <div class="mt-2"  [innerHTML]="room.description">
+                        </div>
+                  </div>
+
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div style="padding-top: 4px;">
+                      <h3 *ngIf="room.ratesAndAvailabilityDtos?.length>=0 " style=" font-weight: bold; margin-left:38px;">{{room.name}}</h3>
+                      <div class="row" style="gap:10px; margin-left:38px;" >
+                        <div class="col-12">
+                        <div  style="margin:auto" *ngIf="room.maximumOccupancy === 1">
+                        <b>Occupancy: </b> <span>{{room.maximumOccupancy}} Guests </span>
+                          <img src="assets/images/icons/b1.png" alt="1 guest">
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+
+                          <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
+                          <b>Occupancy: </b>
+                          <span>{{room.maximumOccupancy}} Guests </span>
+                          <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
+                        </div>
+                        <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
+                          <b>Occupancy: </b>
+                          <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
+                          <span>x {{room.maximumOccupancy}} Guests</span>
+                        </div>
+                      </div>
+                        <div style="background-color: #fff !important;" *ngFor="let item of room.roomFacilities; let i=index ">
+                          <div *ngIf="i<3" style="padding-bottom: 0px;padding-top: 5px;">
+                            <p style="font-size: 16px;padding-left: 4px;
+                            padding-right: 4px;
+                            padding-bottom: 4px; font-weight: bold;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}} </p>
+                          </div>
+                          <div *ngIf="i===3" style="padding-bottom: 0px;padding-top: 5px;">
+                            <p style="font-size: 16px;padding-left: 4px;
+                            padding-right: 4px;
+                            padding-bottom: 4px; font-weight: bold;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}}</p>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div>
+                      <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
+                      <div class="row col-lg-12 card_body_styl" *ngIf="rates.roomRatePlans.length <= 2">
+                        <div *ngFor="
+                            let plan of rates.roomRatePlans;
+                            let p = index
+                          ">
+                          <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0">
+                            <div class="card plan_cards hello_card"  *ngIf="rates.roomRatePlans.length <= 2">
+                              <div class="card-header" style="padding-left: 7px;
+                              padding-top: 5px;
+                              padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; ">
+                              <h5 *ngIf="plan.name !== 'GHC'" style=" font-size: 15px; color: #fff !important;" class="planname">{{plan.name}}</h5>
+                                <!--Used white-space: nowrap so that long title doesnt affect the card size-->
+                                <h5 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h5></div>
+                              <div style="margin-left: 7px;" *ngIf="plan.showDetails">
+
+                                <li *ngIf=" plan.extraChargePerPerson >0">
+                                  <b style="color: #031EAA !important;"> Extra person charge : </b>
+                                  <span style=" color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerPerson
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+
+                                <li *ngIf=" plan.extraChargePerChild >0">
+                                  <b style="color: #031EAA !important;"> Extra Child charge : </b>
+                                  <span style=" color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerChild
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+
+                              </div>
+
+                              <div style="padding-top: 10px; margin-left: 7px;">
+                                <span style="    font-family: 'sans-sarif Lato';
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 20px;
+                                color: black;"> {{
+                                  plan.amount * DiffDate * noOfrooms
+                                  | currency
+                                  : currency
+                                  : "symbol"
+                                  : "1.2-2"
+                                  }}</span> <br>
+                                  <span  style="font-family: 'sans-sarif Lato';
+                                  font-style: normal;
+                                  font-weight: 400;
+                                  font-size: 18px;color: #808080;text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && plan.showDetails">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                                      : currency
+                                      : "symbol"
+                                      : "1.2-2"}}</span>
+                              </div>
+
+                              <div style="color: #271a55; font-weight: 600; margin-left: 7px;" *ngIf="
+                              hasPercentage(
+                                room.roomOnlyPrice,
+                                plan.amount
+                              ) == true && plan.showDetails
+                            ">
+                            ({{
+                            ((room.roomOnlyPrice -
+                            plan.amount) /
+                            room.roomOnlyPrice) *
+                            100 | number: "1.2-2"
+                            }}% Discount)
+                          </div>
+                          <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600; margin-left: 6px;">
+                            {{ plan.showDetails ? 'View Less' : 'View More' }}
+                          </a>
+                              <div class="d-flex justify-content-center" style="margin:7px">
+                                <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
+                            onPlanSelected(plan, room);
+                            booking.roomName = rates.roomName;
+                            selectedRoomName = rates.roomName;
+                            booking.roomType = rates.roomName;
+                            maxSelectRoom = rates.noOfAvailable;
+                            maxOccupancy =
+                              room.maximumOccupancy;
+                            onRoomBook(room.id, i);
+                            booking.roomId = room.id;
+                            selectedRoomMaximumOccupancy =
+                              room.maximumOccupancy;
+                            selectedRoomAvailableNumber =
+                              room.noOfRooms;
+                            checkAvailabilityStatus = true;
+                            bookRoomNow(); checkingAvailability1();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
+                                  BOOK </button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="padding-left: 38px;
+                      padding-right: 38px;
+                      margin-top: 27px;">
+                        <ngx-slick-carousel class="carousel listing-slider mfp-gallery-container margin-bottom-0 "
+                        style="margin-bottom: 20px;" #slickModal="slick-carousel" [config]="modalSlideConfig1"
+                        *ngIf="rates.roomRatePlans.length > 2">
+                        <div *ngFor="
+                      let plan of rates.roomRatePlans;
+                      let p = index
+                    ">
+                          <div ngxSlickItem class="slide slide_plan"
+                            *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
+                            <div class="card plan_cards " >
+                              <div class="card-header" style="padding-left: 7px;
+                              padding-top: 5px;
+                              padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
+                              <div style="margin-left: 6px;">
+
+
+                                <li class="listplan"  *ngIf="plan.showDetails">
+                                 <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerPerson
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+                                <li class="listplan"  *ngIf="plan.showDetails">
+                                  <b style="color: #031EAA !important;"> Extra Child charge :</b>
+                                  <span style="color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerChild
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+                              </div>
+
+                              <div style="padding-top: 10px;margin-left: 6px;" >
+                                <span style="font-family: 'sans-sarif Lato';
+                  font-style: normal;
+                  font-weight: 600;
+                  font-size: 20px;color: black;"> {{
+                                  plan.amount * DiffDate * noOfrooms
+                                  | currency
+                                  : currency
+                                  : "symbol"
+                                  : "1.2-2"
+                                  }} </span>
+                                  <span  style="font-family: 'sans-sarif Lato';
+                                  font-style: normal;
+                                  font-weight: 400;
+                                  font-size: 18px;color: #808080;text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && plan.showDetails">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                                      : currency
+                                      : "symbol"
+                                      : "1.2-2"}}</span>
+                              </div>
+
+                              <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
+                              hasPercentage(
+                                room.roomOnlyPrice,
+                                plan.amount
+                              ) == true && plan.showDetails
+                            ">
+                            ({{
+                            ((room.roomOnlyPrice -
+                            plan.amount) /
+                            room.roomOnlyPrice) *
+                            100 | number: "1.2-2"
+                            }}% Discount)
+                          </div>
+                          <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600; margin-left: 6px;">
+                            {{ plan.showDetails ? 'View Less' : 'View More' }}
+                          </a>
+                              <div class="d-flex justify-content-center" style="margin:7px">
+                                <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
+                      onPlanSelected(plan, room);
+                      booking.roomName = rates.roomName;
+                      selectedRoomName = rates.roomName;
+                      booking.roomType = rates.roomName;
+                      maxSelectRoom = rates.noOfAvailable;
+                      maxOccupancy =
+                        room.maximumOccupancy;
+                      onRoomBook(room.id, i);
+                      booking.roomId = room.id;
+                      selectedRoomMaximumOccupancy =
+                        room.maximumOccupancy;
+                      selectedRoomAvailableNumber =
+                        room.noOfRooms;
+                      checkAvailabilityStatus = true;
+                      checkingAvailability1(); bookRoomNow();">
+                                  BOOK</button>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </ngx-slick-carousel>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i>0 && this.isDiabled">
+
+
+
+        <div >
+          <div class="card-body" >
+            <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
+              <div *ngIf="room.id === rates.roomId && r < 1">
+                <div class="row mb-4">
+                  <div class="col-6" style="padding: 0px;">
+                    <div *ngFor="
+                    let plan of rates.roomRatePlans;
+                    let p = index
+                  ">
+                    <div class="ribbon ribbon-top-left" style="z-index: 1;" *ngIf="  ((room.roomOnlyPrice -
+                    plan.amount) /
+                    room.roomOnlyPrice) *
+                    100 >0 ">
+                          <span class="icon">Special Offer!</span>
+                    </div>
+                  </div>
+                    <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
+                      src="assets/images/default-rooms.avif" alt="" width="100%" />
+                      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                      *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
+                      <!-- <ol class="carousel-indicators">
+                        <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
+                      </ol> -->
+                      <div class="carousel-inner img_size_room">
+                        <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
+                          [class.active]="i === 0">
+                          <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-12 mainimage" style=" height: 300px" *ngIf="room.imageList.length >= 3">
+
+                      <div aria-hidden="true" *ngIf="room.imageList[0]">
+                        <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[1]">
+                        <img [src]="room?.imageList[1].url" alt="Image 1" class="masonry-item-leftTwo" />
+                      </div>
+
+                      <div aria-hidden="true" *ngIf="room.imageList[2]">
+                        <img [src]="room?.imageList[2].url" alt="Image 2" class="masonry-item-leftTwo" />
+                        <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
+                      </div>
+
+                    </div>
+
+                    <div *ngIf="room.description"  class=" col-12 desktopone" style="font-weight: bold;">
+                      <div class="mt-2"  [innerHTML]="room.description">
+                        </div>
+                  </div>
+
+                  <div *ngIf="room.description" class= " col-12 mobile-one" style="font-weight: bold;">
+                    <div class="mt-2"  [innerHTML]="room.description">
+                      </div>
+                </div>
+
+                    <!-- <img *ngIf="room.imageList?.length" src="{{room.imageList[0]?.url}}" width="100%" class="img_size_room" alt=""> -->
+                  </div>
+                  <div class="col-6">
+                    <h3 *ngIf="room.ratesAndAvailabilityDtos?.length>0 " style=" font-weight: bold; margin-left: 38px;">{{room.name}}</h3>
+                    <div style="    margin-left: 38px;">
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
+                        <b>Occupancy: </b>
+                        <span>{{room.maximumOccupancy}} Guests </span>
+                        <img src="assets/images/icons/b1.png" alt="1 guest">
+                      </div>
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
+                        <b>Occupancy: </b>
+                        <span>{{room.maximumOccupancy}} Guests </span>
+                        <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
+                      </div>
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
+                        <b>Occupancy: </b>
+                        <span>{{room.maximumOccupancy}} Guests </span>
+                        <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
+                      </div>
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
+                        <b>Occupancy: </b>
+                        <span>{{room.maximumOccupancy}} Guests </span>
+                        <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
+                      </div>
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
+                        <b>Occupancy: </b>
+                        <span>{{room.maximumOccupancy}} Guests </span>
+                        <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
+                      </div>
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
+                        <b>Occupancy: </b>
+                        <span>{{room.maximumOccupancy}} Guests </span>
+                        <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
+                      </div>
+                      <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
+                        <b>Occupancy: </b>
+                        <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
+                        <span>x {{room.maximumOccupancy}} Guests</span>
+                      </div>
+
+                      <div style="padding-top: 4px;">
+
+                        <div class="row" style="gap: 10px; margin-left: 38px;">
+
+                          <div style="background-color: #fff !important;" *ngFor="let item of room.roomFacilities; let i=index ">
+                            <div *ngIf="i<3" style="padding-bottom: 0px;padding-top: 5px;">
+                              <p style="font-size: 16px;padding-left: 4px;
+                              padding-right: 4px;
+                              padding-bottom: 4px; font-weight: bold;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}} </p>
+                            </div>
+                            <div *ngIf="i===3" style="padding-bottom: 0px;padding-top: 5px;">
+                              <p style="font-size: 16px;padding-left: 4px;
+                              padding-right: 4px;
+                              padding-bottom: 4px; font-weight: bold;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+
+                    <div class="row card_body_styl" *ngIf="rates.roomRatePlans.length <= 2" style="justify-content: center !important; margin-left: 53px;
+                    margin-right: 38px;
+                    margin-top: 27px;" >
+                      <div class="d-flex" >
+                      <div  *ngFor="
+                          let plan of rates.roomRatePlans;
+                          let p = index
+                        ">
+                        <div class="col-12 plan_card_style" *ngIf="plan.amount >0" >
+                          <div class="card plan_cards hello_card"  *ngIf="rates.roomRatePlans.length <= 2" >
+                            <div class="card-header" style="padding-left: 50px;
+                            padding-top: 5px;
+                            padding-right: 50px;
+                            padding-bottom: 1px;
+                            background-color: #4A4A4A !important;">
+                              <h4 *ngIf="plan.name !== 'GHC'" class="planname" style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
+                              <!--Used white-space: nowrap so that long title doesnt affect the card size-->
+                              <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
+                            </div>
+                            <div style="margin-left: 7px;">
+
+
+                              <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
+                                <b style="color: #031EAA !important;">Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
+                                <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+
+                            </div>
+
+                            <div style="padding-top: 10px; margin-left: 6px;">
+                              <span style="font-family: 'sans-sarif Lato';
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 20px;color: black;"> {{
+                                plan.amount * DiffDate * noOfrooms
+                                | currency
+                                : currency
+                                : "symbol"
+                                : "1.2-2"
+                                }} </span>
+                                <span  style="font-family: 'sans-sarif Lato';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 20px;color: #808080;text-decoration: line-through; " class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && plan.showDetails">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                                : currency
+                                : "symbol"
+                                : "1.2-2"}}</span>
+                            </div>
+
+                            <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
+                            hasPercentage(
+                              room.roomOnlyPrice,
+                              plan.amount
+                            ) == true && plan.showDetails">
+                          ({{
+                          ((room.roomOnlyPrice -
+                          plan.amount) /
+                          room.roomOnlyPrice) *
+                          100 | number: "1.2-2"
+                          }}% Discount)
+                        </div>
+                        <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="    color: #271a55;
+                        font-weight: 600;
+                        margin-left: 6px;">
+                          {{ plan.showDetails ? 'View Less' : 'View More' }}
+                        </a>
+                            <div class="d-flex justify-content-center" style="margin: 7px;">
+                              <button class="btn text-white" style="    background-color: #FEE13D;
+                              color: black !important;
+                              border-radius: 10px;
+                              font-weight: bold;" (click)="
+                          onPlanSelected(plan, room);
+                          booking.roomName = rates.roomName;
+                          selectedRoomName = rates.roomName;
+                          booking.roomType = rates.roomName;
+                          maxSelectRoom = rates.noOfAvailable;
+                          maxOccupancy =
+                            room.maximumOccupancy;
+                          onRoomBook(room.id, i);
+                          booking.roomId = room.id;
+                          selectedRoomMaximumOccupancy =
+                            room.maximumOccupancy;
+                          selectedRoomAvailableNumber =
+                            room.noOfRooms;
+                          checkAvailabilityStatus = true;
+                          bookRoomNow();  document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">
+                                BOOK</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div style="padding-left: 38px; padding-right: 38px; margin-top: 27px;">
+                    <ngx-slick-carousel class="carousel listing-slider mfp-gallery-container margin-bottom-0 "
+                      style="margin-bottom: 20px;" #slickModal="slick-carousel" [config]="modalSlideConfig1"
+                      *ngIf="rates.roomRatePlans.length > 2">
+                      <div *ngFor="
+                    let plan of rates.roomRatePlans;
+                    let p = index
+                  ">
+                        <div ngxSlickItem class="slide slide_plan"
+                          *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
+                          <div class="card plan_cards" >
+                            <div style="padding-left: 7px;
+                            padding-top: 5px;
+                            padding-right: 2px;
+                            padding-bottom: 1px;
+                            background-color: #4A4A4A !important;">
+                              <h4 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
+                            </div>
+                            <div style="margin-left: 6px;">
+
+
+                              <li class="listplan" *ngIf="plan.showDetails">
+                                <b style="color: #031EAA !important;">Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li class="listplan" *ngIf="plan.showDetails">
+                                <b style="color: #031EAA !important;">
+                                  Extra Child charge :
+                                </b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                            </div>
+
+                            <div style="padding-top: 10px; margin-left: 6px;">
+                              <span style="font-family: 'sans-sarif Lato';
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 20px;color: black;"> {{
+                                plan.amount * DiffDate * noOfrooms
+                                | currency
+                                : currency
+                                : "symbol"
+                                : "1.2-2"
+                                }}</span>
+                                <span  style="font-family: 'sans-sarif Lato';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 20px;color: #808080;text-decoration: line-through;" class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount && plan.showDetails">{{ room.roomOnlyPrice * DiffDate * noOfrooms | currency
+                                    : currency
+                                    : "symbol"
+                                    : "1.2-2"}}</span>
+                            </div>
+                            <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
+                            hasPercentage(
+                              room.roomOnlyPrice,
+                              plan.amount
+                            ) == true && plan.showDetails">
+                          ({{
+                          ((room.roomOnlyPrice -
+                          plan.amount) /
+                          room.roomOnlyPrice) *
+                          100 | number: "1.2-2"
+                          }}% Discount)
+                        </div>
+                        <a href="javascript:void(0)" (click)="plan.showDetails = !plan.showDetails" style="color: #271a55; font-weight: 600;margin-left: 6px;">
+                          {{ plan.showDetails ? 'View Less' : 'View More' }}
+                        </a>
+                            <div  class="d-flex justify-content-center" style="margin: 7px;">
+                              <button class="btn text-white" style="background-color: #FEE13D; color: black !important; border-radius: 10px; font-weight: bold;" (click)="
+                    onPlanSelected(plan, room);
+                    booking.roomName = rates.roomName;
+                    selectedRoomName = rates.roomName;
+                    booking.roomType = rates.roomName;
+                    maxSelectRoom = rates.noOfAvailable;
+                    maxOccupancy =
+                      room.maximumOccupancy;
+                    onRoomBook(room.id, i);
+                    booking.roomId = room.id;
+                    selectedRoomMaximumOccupancy =
+                      room.maximumOccupancy;
+                    selectedRoomAvailableNumber =
+                      room.noOfRooms;
+                    checkAvailabilityStatus = true;
+                    bookRoomNow()">
+                                BOOK</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ngx-slick-carousel>
+                  </div>
+                  </div>
+                </div>
+                <div>
+                  <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- property room details ends -->
+
+
 
  <!-- nearby section starts -->
 <div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 50px;margin-right: 50px;">
