@@ -83,6 +83,8 @@ export class ListingDetailOneComponent implements OnInit {
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
   viewAddon: boolean;
+  noofRoomsAvailable: any[] = [];
+  valueAvailable: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -925,11 +927,36 @@ if (this.city != null && this.city != undefined) {
   sortAndLimitRooms() {
     // Sort rooms by roomOnlyPrice in ascending order
     this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
+    this.sortedRooms?.forEach((room) => {
+      let totalAvailableRooms = 0;
+
+      room?.ratesAndAvailabilityDtos?.forEach((rate) => {
+        if (rate?.roomName === room?.name) {
+          totalAvailableRooms += rate?.noOfAvailable || 0;
+        }
+      });
+
+      // Assign the total available rooms to the room object
+      room.roomsAvailable = totalAvailableRooms;
+    });
   }
 
   sortAndLimitRoomsOne() {
-    // Sort rooms by roomOnlyPrice in ascending order
+    // Sort rooms by roomOnlyPrice in ascending order and take top 2
     this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
+
+    this.sortedRoomsOne?.forEach((room) => {
+      let totalAvailableRooms = 0;
+
+      room?.ratesAndAvailabilityDtos?.forEach((rate) => {
+        if (rate?.roomName === room?.name) {
+          totalAvailableRooms += rate?.noOfAvailable || 0;
+        }
+      });
+
+      // Assign the total available rooms to the room object
+      room.roomsAvailable = totalAvailableRooms;
+    });
   }
 
   toggleView() {
