@@ -311,8 +311,8 @@
 <!-- HERO SECTION ENDS -->
 
  <!-- Add terms and conditions starts here -->
- <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index">
-  <div *ngIf="bServiceDtoList?.policy">
+ <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 90px;margin-right: 50px;">
+  <div *ngIf="bServiceDtoList?.policy" >
     <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
       Terms & Conditions
     </h3>
@@ -333,7 +333,7 @@
 <!-- Add terms and conditions end here -->
 
  <!-- nearby section starts -->
-<div class="col-lg-12" *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;">
+<div class="col-lg-12" *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 90px;margin-right: 50px;">
   <div *ngFor="let blogPost of blogPosts.items">
     <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
       <h3 class="ameniti1">Nearby Places</h3>
@@ -355,7 +355,7 @@
 
   <!-- section reviews starts -->
 
-  <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
+  <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;margin-left: 90px;margin-right: 50px;" *ngIf="googleReviews">
 
 
     <div class="carousel-inner">
