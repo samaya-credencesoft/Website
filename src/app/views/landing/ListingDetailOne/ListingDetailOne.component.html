@@ -408,16 +408,7 @@
           <li *ngIf="DistanceRailway">{{DistanceRailway.name}}</li>
 
 
-        <div *ngIf="isExpanded">
-          <div *ngIf="businessUser.businessDescription" >
-            <p [innerHTML]="businessUser.businessDescription">{{businessUser.businessDescription}}</p>
-          </div>
-        </div>
-        <a href="javascript:void(0)" (click)="toggleView()" style="float: right;cursor: pointer;
-        color: #221950;
-        font-weight: bold;">
-          {{ isExpanded ? 'View Less' : 'View More' }}
-        </a>
+
       </div>
 
 
@@ -428,8 +419,20 @@
 </div>
 <!-- aminities section and about us section ends -->
 
+    <h3 style="padding-left: 56px;font-weight: bold;">Property Description</h3>
 
+ <div class=" popame" style="background-color: #D9D9D92E;
+ border-radius: 12px;
+ padding: 11px;    margin-right: 55px;
+ margin-top: 10px;">
 
+  <div *ngIf="businessUser.businessDescription" >
+    <p [innerHTML]="businessUser.businessDescription">{{businessUser.businessDescription}}</p>
+  </div>
+
+</div>
+
+ <!-- Property description section ends -->
 
  <!-- nearby section starts -->
 <div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 50px;margin-right: 50px;">
