@@ -28,7 +28,7 @@
  <!-- check availability section starts -->
  <div  *ngIf="(availableRooms?.length >=0 && availability ==true) || !availability">
   <div  style="justify-content: space-evenly;" [ngStyle]="{'margin-top': businessUser?.website ? '0px' : '0px'}">
-    <div class="card" style="background-color: #D9D9D9; margin: 40px; margin-top: 100px;">
+    <div class="card" style="background-color: #D9D9D9; margin-left: 90px; margin-top: 100px;margin-right: 90px; margin-bottom: 30px;">
 
 
       <div class="row d-flex checkAva2" >
@@ -192,11 +192,109 @@
   </div>
 </div>
 <!-- check availability section ends -->
-<div class="container">
-  <h1 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h1>
-<p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
- <!-- Add terms and conditions starts here -->
+ <!-- HERO SECTION starts -->
+<div style="margin-left: 50px; margin-right: 50px;">
+  <h2 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h2>
+  <p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
+</div>
 
+<div class="container" style="max-width: 1500px !important;">
+  <div class="row mr-0 ml-0"  >
+
+    <div class="col-lg-12 pl-0 pr-0" >
+      <div class="image_height " *ngIf="
+      businessUser !== undefined &&
+      businessUser.imageList !== undefined &&
+      businessUser?.imageList?.length > 0
+    ">
+    <div class="col-8 mainimage" style="margin-top: 16px;"
+     *ngIf="businessUser?.imageList?.length > 1" (click)="
+        openImage(room, businessUser.imageList, businessUser.name)
+      ">
+      <div aria-hidden="true" *ngIf="businessUser.imageList[0]">
+        <a [ngStyle]="{
+            'background-image':
+              'url(' + businessUser.imageList[0].url + ')'
+          }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
+      </div>
+      <div aria-hidden="true" *ngIf="businessUser.imageList[1]">
+        <a [ngStyle]="{
+            'background-image':
+              'url(' + businessUser.imageList[1].url + ')'
+          }" class="masonry-item-leftOne" title="{{ businessUser.imageList[1].name }}"></a>
+      </div>
+      <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
+        <a [ngStyle]="{
+            'background-image':
+              'url(' + businessUser.imageList[2].url + ')'
+          }" class="masonry-item-leftOne" title="{{ businessUser.imageList[2].name }}"></a>
+      </div>
+      <div aria-hidden="true" *ngIf="businessUser.imageList[3]">
+        <a [ngStyle]="{
+            'background-image':
+              'url(' + businessUser.imageList[3].url + ')'
+          }" class="masonry-item-leftOne" title="{{ businessUser.imageList[3].name }}"><span class="masonry-text" *ngIf="businessUser?.imageList?.length>3">View +{{businessUser?.imageList?.length-3}}</span></a>
+      </div>
+    </div>
+
+    <div class="col-4  pl-0 pr-0 float-right filter-card" >
+      <div class="container">
+        <div class="row" >
+          <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true">
+            <div class="card shadow customized-subcard"
+                 *ngFor="let room of sortedRooms">
+              <div class="card-body customised-card"
+                   *ngIf="room.ratesAndAvailabilityDtos?.length >= 0">
+                <h5 class="card-title customized-title">{{room.name}}</h5>
+                <p class="customized-p">{{room.roomOnlyPrice}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == false">
+            <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
+              <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
+                <h5 class="card-title customized-title">{{room.name}}</h5>
+                <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
+
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true" style="margin-top: -5x;
+                margin-left: 15px;">
+            <button class="shadow " (click)="scrollToAccommodationDash()" style="background-color: #FEE13D;
+            padding: 4px;
+            color: black;
+            font-weight: 700;
+            border-radius: 7px;
+            padding-left: 14px;
+            padding-right: 14px;">
+            Book Now</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+      </div>
+
+
+
+
+
+    </div>
+
+      <!-- <img src="assets/images/Right shadow.png" alt="" height="700px" width="200px" style="margin-top: -30%;" class="float-left"> -->
+
+
+  </div>
+</div>
+
+<!-- HERO SECTION ENDS -->
+
+ <!-- Add terms and conditions starts here -->
  <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index">
   <div *ngIf="bServiceDtoList?.policy">
     <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
@@ -338,7 +436,7 @@
     <button type="submit" class="btn btn-dark property-submit" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>Submit</button>
   </form>
 </div>
-</div>
+
 
   </div>
  <!-- Desktop view design ends -->

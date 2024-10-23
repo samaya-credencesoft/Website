@@ -3830,10 +3830,13 @@ button {
   }
 }
 
+
+
 @media (max-width: 600px) {
   .ammmmi {
     margin-top: -10px;
   }
+
 
   .masonry-item-rightTwo {
     background-size: cover;
@@ -4118,6 +4121,8 @@ button {
   }
 }
 
+
+
 @media (min-width:725px) and (max-width:1180px) {
 
   .hero-heading {
@@ -4355,6 +4360,40 @@ button {
   .cardlistmenu {
     width: 90%;
     margin: auto;
+  }
+
+  .customized-subcard {
+
+    margin-bottom: 11px;
+  }
+
+  .filter-card {
+    margin-top: -266px;
+    left: -20px;
+  }
+
+  .masonry-item-leftOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 36.5%;
+    height: 141.66px;
+    border-radius: 5px;
+    margin-left: 6px;
+    margin-bottom: 9px;
+}
+
+
+  .masonry-item-rightOne {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 471px;
+    height: 446px;
+    margin-bottom: 10px;
+    border-radius: 5px;
   }
 }
 
