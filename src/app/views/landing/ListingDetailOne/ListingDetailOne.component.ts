@@ -1853,7 +1853,10 @@ this.isHeaderVisible = true;
       this.booking.taxAmount;
     this.token.saveServiceData(this.addServiceList);
   }
+  gotocheckout(){
 
+    this.router.navigate(['/booking']);
+  }
 
   getPropertyDetailsBySeoName(seoName: string) {
 
