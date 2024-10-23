@@ -789,10 +789,11 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
-    this.getGoogleReview();
+
     this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
+
       const chatbotElement = document.getElementById('chatbot');
       // ... rest of your code to set chat title
     chatbotElement.setAttribute('chat-title', this.propertyusername);
@@ -1519,6 +1520,7 @@ if (this.city != null && this.city != undefined) {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.getGoogleReview(this.businessUser.id)
         this.showStaticContent = true;
 this.isHeaderVisible = true;
         this.policies = this.businessUser.businessServiceDtoList.filter(
@@ -1860,6 +1862,7 @@ this.isHeaderVisible = true;
       (data) => {
         if (data.status === 200) {
           this.businessUser = data.body;
+         this.getGoogleReview(this.businessUser.id)
           this.showStaticContent = true
           // this.businessUser.businessServiceDtoList.filter(ele =>
           //   )
@@ -2075,8 +2078,8 @@ this.isHeaderVisible = true;
       }
     );
   }
-  getGoogleReview() {
-    this.listingService.getGoogleReview(this.token.getProperty().id).subscribe(
+  getGoogleReview(id) {
+    this.listingService.getGoogleReview(id).subscribe(
       (response) => {
         this.googleReviews = response.body;
         // this.cdrf.detectChanges();
