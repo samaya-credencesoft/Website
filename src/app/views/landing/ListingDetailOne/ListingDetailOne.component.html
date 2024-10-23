@@ -1729,34 +1729,35 @@
 
  <!-- section reviews starts -->
 
-<div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
+ <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
   <h3 style="font-weight: bold; margin-left: 20px;">Reviews</h3>
+
   <div class="carousel-inner">
+    <!-- Review Items -->
+    <div class="carousel-item" *ngFor="let item of googleReviews; let i = index" [ngClass]="{ 'active': i === 0 }">
+      <div class="d-flex justify-content-center">
+        <div class="card" style="background-color: #F8F8F8; width: 18rem;">
 
-    <!-- Review 1 -->
-    <div class="carousel-item review_test " data-interval="10000"
-    *ngFor="let item of googleReviews; let i = index"
-    [ngClass]="{ 'active': i === 0 }">
-      <div class="review-item"  >
-        <div class="card d-flex" style="margin: auto ; background-color: #F8F8F8; flex-direction: row !important;">
-          <img [src]="item.profileImageUrl" class="rounded-circle profile-pic" alt="{{ item.reviewerName }}">
-
-          <div class="review-content">
-            <h5 class="reviewer-name">{{ item.reviewerName }}</h5>
-            <div class="review-rating">
-              {{ '★'.repeat(item.rating) }}
+          <div class="card-body text-center">
+            <div class="row d-flex">
+              <div  class="text-center col-3">
+                <img [src]="item.profileImageUrl" class="rounded-circle" alt="{{ item.reviewerName }}" style="width: 80px; height: 80px; margin-top: 10px;">
+              </div>
+             <div class="col-9">
+              <h5 class="card-title reviewer-name">{{ item.reviewerName }}</h5>
+              <div class="review-rating" style="color: #FFD700;">
+                <span *ngFor="let star of [].constructor(item.rating)">★</span>
+              </div>
+              <p class="card-text">{{ item.reviewText }}</p>
             </div>
-            <p class="review-text">
-              {{ item.reviewText }}
-            </p>
           </div>
+             </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- Carousel controls -->
+  <!-- Carousel Controls -->
   <a class="carousel-control-prev" href="#reviewsCarousel" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -1766,6 +1767,8 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+
 
  <!-- section reviews ends -->
 
