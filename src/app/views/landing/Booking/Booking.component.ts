@@ -156,6 +156,7 @@ export class BookingComponent implements OnInit {
   roomsAndOccupancy: boolean = false;
   bookingCity: string;
   adults: number = 2;
+  avedServices: any[] = [];
   children: number = 0;
   noOfrooms: number = 1;
   DiffDate;
@@ -189,6 +190,7 @@ export class BookingComponent implements OnInit {
   equitycreatedData: any;
   success: EnquiryForm;
   bookingengineurl: any;
+  savedServices: any;
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -243,6 +245,11 @@ export class BookingComponent implements OnInit {
 
 
     }
+
+setTimeout(() => {
+      this.savedServices = this.token.getSelectedServices();
+
+                }, 1000);
     this.bookingengineurl = this.token.getwebsitebookingURL()
     if (this.token.getBookingData() !== null) {
       this.bookingData = this.token.getBookingData();
@@ -1689,7 +1696,7 @@ this.externalReservationdto =res.body
 
   redirectToBooking() {
      this.router.navigateByUrl('Saanaira-Resort-Spa?BookingEngine=true');
-   
+
   }
 
   sendConfirmationMessage() {

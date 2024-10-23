@@ -2407,25 +2407,32 @@
   </div>
 
   <!-- Add-on Services -->
-  <!-- <div class="addon-services">
+   <div class="addon-services">
     <h6>Add-on Service</h6>
-    <div class="alignmentcard">
-      <div class="addon-title">
+    <div class="alignmentcard"  *ngFor="let fac of savedServices">
+      <div class="addon-title" >
+
         <div>
-          <i class="fa fa-car"></i>
+          <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
+          <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
         </div>
 
         <div class="addon-details">
-          <p>Pick-up & Drop off</p>
-          <p>₹500 + ₹50 (10% tax)</p>
+          <p>{{fac.name }} * {{fac.quantity}} <br>
+            <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.taxAmount !== null && fac.taxAmount !== undefined">
+              {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+              {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+            </b>
         </div>
       </div>
 
-        <p class="colorprice">₹550</p>
+        <p class="colorprice" *ngIf="fac.servicePrice == null || fac.servicePrice == undefined"> {{0 | currency : currency : "symbol" : "1.2-2"}}</p>
+        <p class="colorprice" *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined"> {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}}</p>
+
     </div>
 
 
-  </div> -->
+  </div>
 
   <!-- Guests and Nights Info -->
   <div class="guest-nights-info">
