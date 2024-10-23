@@ -1,3 +1,4 @@
+import { CallToActionComponent } from './../../../../views/landing/components/call-to-action/call-to-action.component';
 // import { Components } from './../../model/components';
 // import { Template } from './../../model/template';
 
@@ -191,6 +192,8 @@ export class BookingComponent implements OnInit {
   success: EnquiryForm;
   bookingengineurl: any;
   savedServices: any;
+  calculatedServices: any;
+  totalServiceCost: number =0;
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -246,10 +249,10 @@ export class BookingComponent implements OnInit {
 
     }
 
-setTimeout(() => {
+
       this.savedServices = this.token.getSelectedServices();
 
-                }, 1000);
+
     this.bookingengineurl = this.token.getwebsitebookingURL()
     if (this.token.getBookingData() !== null) {
       this.bookingData = this.token.getBookingData();
@@ -271,6 +274,13 @@ setTimeout(() => {
     if (this.token.getBookingCity() !== null) {
       this.bookingCity = this.token.getBookingCity();
     }
+
+
+  this.calculateserviceprice();
+
+
+    console.log('Total Service Cost:', this.totalServiceCost);
+
     this.booking.fromTime =
       new Date(this.booking.fromDate).getTime() + 21600000;
     this.booking.toTime = new Date(this.booking.toDate).getTime() + 21600000;
@@ -382,6 +392,17 @@ setTimeout(() => {
       event.target.parentNode.parentNode.classList.add("payment-tab-active");
     }
   }
+  calculateserviceprice(){
+   this.calculatedServices =[]
+ if (this.savedServices != null && this.savedServices != undefined) {
+
+    this.savedServices.forEach(element => {
+      let serviceCost = element.afterTaxAmount * element.quantity;
+      this.calculatedServices.push(serviceCost);
+      this.totalServiceCost += serviceCost; // Accumulating the total cost
+    });
+  }
+}
   externalReservation(booking){
     this.reservationRoomDetails =[];
     let roomdetailss = new RoomDetail();
@@ -603,8 +624,8 @@ this.externalReservationdto =res.body
     this.booking.totalAmount =
       this.booking.netAmount +
       this.booking.gstAmount -
-      this.booking.discountAmount;
-
+      this.booking.discountAmount +this.totalServiceCost;
+console.log("this.totalServiceCost" + this.totalServiceCost)
     this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
       (data) => data.name === "Accommodation"
     );
