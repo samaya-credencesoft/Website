@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { Logger } from 'src/services/logger.service';
 // import { EnquiryForm } from '../Enquiry/Enquiry.component';
 import { API_URL_NZ, API_URL_IN } from 'src/app/app.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EnquiryForm } from '../onboarding-roomdetails-form/onboarding-roomdetails-form.component';
 import { TokenStorage } from 'src/token.storage';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
@@ -66,7 +66,9 @@ export class BookingCompleteComponent implements OnInit {
     private acRoute: ActivatedRoute,
     private hotelBookingService: HotelBookingService,
     private ngZone: NgZone,
-    private changeDetectorRefs: ChangeDetectorRef
+    private changeDetectorRefs: ChangeDetectorRef,
+    private location: Location,
+    private router: Router,
   ) {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
@@ -706,5 +708,9 @@ this.externalReservationdto =res.body
   backClicked() {
     // this.locationBack.back();
     this.token.clearHotelBooking();
+  }
+
+  onGoHome(){
+    this.router.navigate(["/booking"]);
   }
 }
