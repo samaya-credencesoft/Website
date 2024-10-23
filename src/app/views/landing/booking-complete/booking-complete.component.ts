@@ -59,6 +59,10 @@ export class BookingCompleteComponent implements OnInit {
   API_URL: string;
   enquirySent: boolean = false;
   submitButtonDisable: boolean;
+  savedServices: any[] = [];
+  businessServiceDtoList: any[] = [];
+  getDetailsData: any;
+  dueAmount: number;
 
   constructor(
     private http: HttpClient,
@@ -119,6 +123,17 @@ export class BookingCompleteComponent implements OnInit {
       // this.children3to5 = this.booking.noOfChildren3To5yrs;
       this.noOfrooms = this.booking.noOfRooms;
     }
+    setTimeout(() => {
+      this.savedServices = this.token.getSelectedServices();
+      this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
+                }, 1000);
+
+                this.businessServiceDtoList = this.token.getProperty().businessServiceDtoList;
+                this.businessServiceDtoList.forEach((element) => {
+                  this.getDetailsData = element.advanceAmountPercentage;
+
+                });
+
   }
 
   ngOnInit() {
@@ -191,6 +206,9 @@ export class BookingCompleteComponent implements OnInit {
       }
     });
   }
+
+
+
   mileSecondToNGBDate(date: string) {
     const dsd = new Date(date);
     const year = dsd.getFullYear();
