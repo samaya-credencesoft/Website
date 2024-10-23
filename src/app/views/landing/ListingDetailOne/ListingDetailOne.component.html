@@ -195,6 +195,98 @@
 <div class="container">
   <h1 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h1>
 <p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
+ <!-- Add terms and conditions starts here -->
+
+ <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index">
+  <div *ngIf="bServiceDtoList?.policy">
+    <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
+      Terms & Conditions
+    </h3>
+
+    <div class="terms-content">
+      <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+      </div>
+      <div style="padding: 10px;">
+        <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right" (click)="toggleReadMore(i)">
+          {{ isReadMore[i] ? 'View Less' : 'View More' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add terms and conditions end here -->
+ <!-- nearby section starts -->
+<div class="col-lg-12" *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;">
+  <div *ngFor="let blogPost of blogPosts.items">
+    <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
+      <h3 class="ameniti1">Nearby Places</h3>
+
+      <div class="cardlistmenu scroll-container">
+        <div *ngFor="let item of blogPost.fields.citiesimages">
+          <!-- Background wrapper div for each item -->
+          <div class="item-background">
+            <div class="cardDesignmenu imageitemmenu">
+              <img [src]="item.fields.file.url" class="imageitemmenu" />
+            </div>
+            <h3 class="menuheading">{{ item.fields.title }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- nearby section ends -->
+<div class="contact-form  p-4">
+  <h3 class="ameniti1 text-center">Contact Us</h3>
+  <div class="subtitle text-muted">Support Team</div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert"
+  *ngIf="!successMessage === false">
+    <div class="d-flex align-items-center">
+      <span class="alert-inner--icon mr-2"><i class="fa fa-thumbs-o-up"></i></span>
+      <span class="alert-inner--text">
+        <strong>Message Sent!</strong> Thanks for reaching us.
+        <button type="button" data-dismiss="alert" aria-label="Close" style="width: 20px;">
+          <span aria-hidden="true">×</span>
+        </button>
+      </span>
+    </div>
+
+  </div>
+
+  <form #contactForm=ngForm >
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control text-form" id="name" [formControl]="nameControl" placeholder="Enter your name"  [(ngModel)]="name" >
+    </div>
+    <div class="form-group">
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" class="form-control text-form"  [formControl]="phoneControl"  id="mobile"  [(ngModel)]="phone" placeholder="Enter your mobile number">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control text-form" [formControl]="fromEmailControl" id="email"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Enter your email" [(ngModel)]="fromEmail" >
+      <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
+                *ngIf="(fromEmailControl.touched || contactForm.submitted) && fromEmailControl.errors">
+                <span *ngIf="fromEmailControl.errors.required" class="text-danger">* Email is required </span>
+                <span *ngIf="fromEmailControl.errors.pattern" class="text-danger">Please enter valid email</span>
+              </div>
+
+    </div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea class="form-control text-form" [formControl]="messageControl" id="message" rows="3" placeholder="Your message" [(ngModel)]="message"></textarea>
+      <div class="form-control-feedback pr-1 d-flex"
+              *ngIf="(messageControl.touched || contactForm.submitted) && messageControl.errors">
+              <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
+            </div>
+    </div>
+    <button type="submit" class="btn btn-dark" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>Submit</button>
+  </form>
+</div>
 </div>
 
   </div>
