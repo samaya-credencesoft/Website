@@ -319,27 +319,7 @@
 
 <!-- HERO SECTION ENDS -->
 
- <!-- Add terms and conditions starts here -->
- <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 90px;margin-right: 50px;">
-  <div *ngIf="bServiceDtoList?.policy" >
-    <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
-      Terms & Conditions
-    </h3>
 
-    <div class="terms-content">
-      <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
-      </div>
-      <div style="padding: 10px;">
-        <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right" (click)="toggleReadMore(i)">
-          {{ isReadMore[i] ? 'View Less' : 'View More' }}
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Add terms and conditions end here -->
 
  <!-- nearby section starts -->
 <div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 90px;margin-right: 50px;">
@@ -362,6 +342,29 @@
   </div>
 </div>
 
+
+ <!-- nearby section ends -->
+ <!-- Add terms and conditions starts here -->
+ <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 90px;margin-right: 50px;">
+  <div *ngIf="bServiceDtoList?.policy" >
+    <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
+      Terms & Conditions
+    </h3>
+
+    <div class="terms-content">
+      <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+      </div>
+      <div style="padding: 10px;">
+        <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right" (click)="toggleReadMore(i)">
+          {{ isReadMore[i] ? 'View Less' : 'View More' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add terms and conditions end here -->
   <!-- section reviews starts -->
 
   <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;margin-left: 90px;margin-right: 50px;" *ngIf="googleReviews">
