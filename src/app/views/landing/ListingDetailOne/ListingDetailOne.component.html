@@ -340,7 +340,7 @@
 
 
  <!-- nearby section starts -->
-<div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 90px;margin-right: 50px;">
+<div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 50px;margin-right: 50px;">
   <div *ngFor="let blogPost of blogPosts.items">
     <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
       <h3 class="ameniti1">Nearby Places</h3>
@@ -360,10 +360,10 @@
   </div>
 </div>
 
-
  <!-- nearby section ends -->
+
  <!-- Add terms and conditions starts here -->
- <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 90px;margin-right: 50px;">
+ <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 50px;margin-right: 50px;">
   <div *ngIf="bServiceDtoList?.policy" >
     <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
       Terms & Conditions
@@ -385,7 +385,7 @@
 <!-- Add terms and conditions end here -->
   <!-- section reviews starts -->
 
-  <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;margin-left: 90px;margin-right: 50px;" *ngIf="googleReviews">
+  <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;margin-left: 90px;margin-right: 50px;width: 1400px;margin: auto;" *ngIf="googleReviews">
 
 
     <div class="carousel-inner">
@@ -396,22 +396,22 @@
 
             <div class="card-body text-center">
               <div class="row d-flex">
-               <div class="col-2">
-                <h3 style="font-weight: bold;margin-top: 50px; ">Reviews</h3>
+               <div class="col-2" style="text-align: right;">
+                <h3 style="font-weight: bold;margin-top: 33px; ">Reviews</h3>
                </div>
-                <div  class="text-center col-3">
+                <div  class="text-center col-1" style="justify-content: end;display: flex;">
                   <img [src]="'https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'"
                   class="rounded-circle"
                   alt="{{ item.reviewerName }}"
-                  style="width: 80px; height: 80px; margin-top: 20px;">
+                  style="width: 100px; height: 100px;">
 
                 </div>
-               <div class="col-7">
+               <div class="col-9" style="text-align: left;">
                 <h5 class="card-title reviewer-name">{{ item.reviewerName }}</h5>
                 <div class="review-rating" style="color: #FFD700;">
                   <span *ngFor="let star of [].constructor(item.rating)">★</span>
                 </div>
-                <p class="card-text">{{ item.reviewText }}</p>
+                <p class="card-text" style="max-height: 3em; overflow-y: auto; white-space: normal;background-color: white;overflow: scroll;">{{ item.reviewText }}</p>
               </div>
             </div>
                </div>
@@ -434,7 +434,7 @@
 
 
    <!-- section reviews ends -->
-<!-- nearby section ends -->
+
 <div class="contact-form  p-4">
   <h3 class="ameniti1 text-center">Contact Us</h3>
   <div class="subtitle text-muted">Support Team</div>
