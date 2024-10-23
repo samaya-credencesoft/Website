@@ -791,7 +791,19 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    const toggleCardBtn = document.getElementById('toggleCardBtn');
+    const closeCardBtn = document.getElementById('closeCardBtn');
+    const stickyCard = document.getElementById('stickyCard');
 
+    // Toggle the visibility of the sticky card
+    toggleCardBtn.addEventListener('click', function() {
+      stickyCard.classList.toggle('show');
+    });
+
+    // Close the card when the 'Close' button is clicked
+    closeCardBtn.addEventListener('click', function() {
+      stickyCard.classList.remove('show');
+    });
     this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;

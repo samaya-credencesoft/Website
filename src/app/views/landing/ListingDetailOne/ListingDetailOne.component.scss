@@ -4255,6 +4255,38 @@ button {
   display: none;
 
 }
+.sticky-button {
+  position: fixed;
+  top: 40%;
+  right: 23px;
+font-size: 23px !important;
+  transform: translateY(-50%) rotate(269deg); /* Rotate button vertically */
+      transform-origin: right center;
+  z-index: 9999;
+}
+
+.sticky-card {
+  position: fixed;
+  top: 43%;
+  right: -500px; /* Initially offscreen */
+  transform: translateY(-50%);
+  width: 418px;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 9998;
+}
+
+.sticky-card.show {
+  right: 52px; /* Slides into view */
+}
+.rotate {
+  transition: transform 0.5s ease;
+  transform: rotate(180deg); /* Rotates 180 degrees */
+}
 .scroll-bar-review {
   max-height: 3.6em;            /* Set the height for the text container */
   overflow-y: scroll;           /* Always show the vertical scrollbar */

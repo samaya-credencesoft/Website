@@ -22,6 +22,72 @@
 
 
   <app-Header-Listingdetailsone   [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
+  <div class="sticky-button">
+    <button class="btn " id="toggleCardBtn" style="font-size: 23px;background-color: #FFD700;color:black;font-weight: bold;">Booking Summary</button>
+  </div>
+
+  <!-- Sticky card -->
+  <div class="sticky-card" id="stickyCard">
+     <!-- Date Section -->
+     <div style="    display: flex;
+     justify-content: end;
+     margin-top: -8px;
+     margin-bottom: 7px;">
+      <button class="btn btn-danger close-btn" id="closeCardBtn">x</button>
+     </div>
+     <div class="Bookingroominfo" style=" border: 1px solid black; border-radius: 8px;">
+      <div class="Bookingroomdetails">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+
+              <td style="color:black">
+                <span>Check-In</span><br>{{booking.fromDate  | date: 'dd MMM' }}
+              </td>
+              <td style="color:black">
+                <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
+              </td>
+              <td>
+                <button  class="editStyle">
+                  <i class="fas fa-edit"></i>
+              </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+     <div style="padding-left: 16px;">
+      <p>No of Guest </p>
+      <p>{{booking.noOfPersons}}</p>
+     </div>
+    </div>
+    <div class="Bookingroominfo" >
+      <div class="Bookingroomdetails">
+
+
+        <!-- <button (click)="redirectToBooking()" class="editStyle">
+          <i class="fas fa-edit"></i>
+      </button> -->
+        <ul style="padding-left: 3px;">
+          <li style="    display: flex;
+    justify-content: space-between;">{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
+          <li style="    display: flex;
+    justify-content: space-between;">Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+          <li style="    display: flex;
+    justify-content: space-between;">Tax <span>  {{
+            booking.taxAmount | currency : currency : "symbol" : "1.2-2"
+            }}</span></li>
+          <li style="    display: flex;
+    justify-content: space-between;">Total Amount  <span> {{
+            booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+            }}</span></li>
+        </ul>
+      </div>
+    </div>
+    <!-- <button class="btn btn-danger" id="closeCardBtn">Close</button> -->
+  </div>
+
 
  <!-- Desktop view design starts -->
   <div class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px;">
