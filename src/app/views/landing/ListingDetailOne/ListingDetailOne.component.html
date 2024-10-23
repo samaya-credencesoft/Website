@@ -193,8 +193,8 @@
 </div>
 <!-- check availability section ends -->
  <!-- HERO SECTION starts -->
-<div style="margin-left: 50px; margin-right: 50px;">
-  <h1 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h1>
+<div style="margin-left: 90px; margin-right: 50px;">
+  <h2 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h2>
   <p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
 </div>
 
@@ -245,8 +245,14 @@
                  *ngFor="let room of sortedRooms">
               <div class="card-body customised-card"
                    *ngIf="room.ratesAndAvailabilityDtos?.length >= 0">
-                <h5 class="card-title customized-title">{{room.name}}</h5>
-                <p class="customized-p">{{room.roomOnlyPrice}}</p>
+                   <div class="col-6">
+                    <h3 class="card-title customized-title">{{room.name}}</h3>
+                    <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
+                   </div>
+                   <div class="col-6">
+                    <!-- <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2" }}</p> -->
+                   </div>
+
               </div>
             </div>
           </div>
@@ -254,8 +260,16 @@
           <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == false">
             <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
               <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
-                <h5 class="card-title customized-title">{{room.name}}</h5>
-                <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
+                <div class="d-flex">
+                  <div class="col-6">
+                    <h3 class="card-title customized-title">{{room.name}}</h3>
+                    <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
+                   </div>
+                   <div class="col-6">
+                    <!-- <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2" }}</p> -->
+                   </div>
+                </div>
+
 
               </div>
             </div>
@@ -263,13 +277,15 @@
 
           <div *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true" style="margin-top: -18px;
                 margin-left: 15px;">
-            <button class="shadow " (click)="scrollToAccommodationDash()" style="background-color: #FEE13D;
+            <button class="shadow " (click)="scrollToAccommodationDash()" style="    background-color: #FEE13D;
             padding: 4px;
             color: black;
             font-weight: 700;
             border-radius: 7px;
-            padding-left: 14px;
-            padding-right: 14px;">
+            padding-left: 36px;
+            padding-right: 36px;
+            padding-top: 10px;
+            padding-bottom: 10px;">
             Book Now</button>
           </div>
 
