@@ -1695,7 +1695,7 @@ this.externalReservationdto =res.body
   }
 
   redirectToBooking() {
-     this.router.navigateByUrl('Saanaira-Resort-Spa?BookingEngine=true');
+     this.locationBack.back();
 
   }
 
