@@ -305,26 +305,25 @@
       ">
       <div aria-hidden="true" *ngIf="businessUser.imageList[0]">
         <a [ngStyle]="{
-            'background-image':
-              'url(' + businessUser.imageList[0].url + ')'
-          }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
+    'background-image': 'url(' + (businessUser?.imageList?.[0]?.url ? businessUser.imageList[0].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') + ')'
+  }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
       </div>
       <div aria-hidden="true" *ngIf="businessUser.imageList[1]">
         <a [ngStyle]="{
             'background-image':
-              'url(' + businessUser.imageList[1].url + ')'
+              'url(' + (businessUser.imageList[1].url ? businessUser.imageList[1].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg' ) + ')'
           }" class="masonry-item-leftOne" title="{{ businessUser.imageList[1].name }}"></a>
       </div>
       <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
         <a [ngStyle]="{
             'background-image':
-              'url(' + businessUser.imageList[2].url + ')'
+              'url(' + ( businessUser.imageList[2].url ? businessUser.imageList[2].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') +')'
           }" class="masonry-item-leftOne" title="{{ businessUser.imageList[2].name }}"></a>
       </div>
       <div aria-hidden="true" *ngIf="businessUser.imageList[3]">
         <a [ngStyle]="{
             'background-image':
-              'url(' + businessUser.imageList[3].url + ')'
+            'url(' + ( businessUser.imageList[3].url ? businessUser.imageList[3].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') +')'
           }" class="masonry-item-leftOne" title="{{ businessUser.imageList[3].name }}"><span class="masonry-text" *ngIf="businessUser?.imageList?.length>3">View +{{businessUser?.imageList?.length-3}}</span></a>
       </div>
     </div>
