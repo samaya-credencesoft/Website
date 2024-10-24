@@ -2012,7 +2012,7 @@
 
             <div class="col-12 my-2 button-container">
               <button class="CA1" type="button mt-4"
-                (click)="checkingAvailability(); scrollToAccommodationDash();">
+                (click)="checkingAvailability(); scrollToAccommodationDashmobile();">
                 Check Availability
               </button>
             </div>
@@ -2127,7 +2127,7 @@
 <!-- property aminities ends -->
 
 <!-- property room details starts -->
-<div class="container-fluid mt-4" id="accmdOne" *ngIf="availableRooms?.length >=0 && availability ==true">
+<div class="container-fluid mt-4" id="accmdtwo" *ngIf="availableRooms?.length >=0 && availability ==true">
   <div class="desktop_view_room" >
     <div *ngIf="this.activeForGoogleHotelCenter == true">
       <div *ngFor="let room of roomWithGHCPlan; let i = index" style="margin-bottom:20px" >

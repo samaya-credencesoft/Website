@@ -2436,7 +2436,12 @@ if (bookingSummaryElement) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
+  scrollToAccommodationDashmobile(){
+    const element = document.getElementById('accmdtwo');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
   scrollToService() {
     const element = document.getElementById('serv');
     if (element) {
