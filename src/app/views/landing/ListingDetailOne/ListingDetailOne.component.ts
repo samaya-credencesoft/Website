@@ -9,6 +9,8 @@ import {
   ChangeDetectorRef,
   ElementRef,
   ViewChild,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -78,6 +80,7 @@ export interface Email {
 })
 export class ListingDetailOneComponent implements OnInit {
   @ViewChild('accmd') accmdSection!: ElementRef;
+  // @Output() bookNowClicked = new EventEmitter<void>();
   showFullDescription: boolean[] = [];
   showListingDetails: boolean = false;
   website: string;
@@ -365,6 +368,15 @@ export class ListingDetailOneComponent implements OnInit {
       },
     ],
   };
+  slideConfigOne = {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": true,
+    "infinite": true,
+    "autoplay": true,
+    "autoplaySpeed": 2000,
+    "arrows": true,
+  };
   modalSlideConfig = {
     centerMode: true,
     centerPadding: '0%',
@@ -599,6 +611,8 @@ export class ListingDetailOneComponent implements OnInit {
   showFullDescriptionOne: boolean = false;
   selectedServices: any[] = [];
   valSelected: boolean = false;
+  showCarousel = false;
+
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -2413,7 +2427,7 @@ if (bookingSummaryElement) {
   }
 
   onBookNowClick() {
-    this.scrollToAccommodation();
+    this.scrollToAccommodationDash() ;
   }
 
   scrollToAccommodation() {
@@ -3178,20 +3192,25 @@ if (bookingSummaryElement) {
         }
       );
   }
-  openImage(content, src, title) {
-    this.modalImage = src;
-    this.modalTitle = title;
-    this.modalService
-      .open(content, { size: 'lg', scrollable: true })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
+  // openImage(content, src, title) {
+  //   this.modalImage = src;
+  //   this.modalTitle = title;
+  //   this.modalService
+  //     .open(content, { size: 'lg', scrollable: true })
+  //     .result.then(
+  //       (result) => {
+  //         this.closeResult = `Closed with: ${result}`;
+  //       },
+  //       (reason) => {
+  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //       }
+  //     );
+  // }
+  openImage() {
+    // Set this to true to open the modal with the carousel
+    this.showCarousel = true;
   }
+
   checkingAvailability1() {
     this.isSuccess = true;
     this.headerTitle = 'Success!';
