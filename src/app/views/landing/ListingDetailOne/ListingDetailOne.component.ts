@@ -9,6 +9,8 @@ import {
   ChangeDetectorRef,
   ElementRef,
   ViewChild,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -78,6 +80,7 @@ export interface Email {
 })
 export class ListingDetailOneComponent implements OnInit {
   @ViewChild('accmd') accmdSection!: ElementRef;
+  // @Output() bookNowClicked = new EventEmitter<void>();
   showFullDescription: boolean[] = [];
   showListingDetails: boolean = false;
   website: string;
@@ -2405,7 +2408,7 @@ if (bookingSummaryElement) {
   }
 
   onBookNowClick() {
-    this.scrollToAccommodation();
+    this.scrollToAccommodationDash() ;
   }
 
   scrollToAccommodation() {

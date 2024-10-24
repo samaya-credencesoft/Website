@@ -10,7 +10,8 @@ import { BusinessUser } from 'src/app/model/user';
   styleUrls: ['./Header-Listingdetailsone.component.css']
 })
 export class HeaderListingdetailsoneComponent implements OnInit {
-  @Output() bookNowClicked = new EventEmitter<void>();
+  // @Output() bookNowClicked = new EventEmitter<void>();
+  @Output() onBookNowClick = new EventEmitter<void>();
   showListItems: boolean = false; // For your existing toggle functionality
   isdone : boolean = false;
   @Input()
@@ -92,8 +93,10 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     this.showListItems = !this.showListItems;
   }
 
-  scrollToAccommodation() {
-    this.bookNowClicked.emit(); // Emit the event when the button is clicked
+  scrollToAccommodation(event: MouseEvent) {
+ // Prevent the event from bubbling up
+
+    this.onBookNowClick.emit(); // Emit the event when the button is clicked
   }
   navigate(){
 
