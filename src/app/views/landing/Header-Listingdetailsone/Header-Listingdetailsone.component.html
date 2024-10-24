@@ -59,29 +59,42 @@
 
 <!-- Top Navbar -->
 <nav class="navbar navbar-dark top-navbar desktop-view-ui">
-  <div class="container-div">
+  <div class="container-div" style="display: flex; justify-content: space-between; align-items: center;">
     <!-- Left Section: Logo and Business Name -->
-    <div class="left-section">
-        <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo">
-        <!-- <span class="title-nav">{{ businessUser?.name }}</span> -->
+    <div class="left-section" style="display: flex; align-items: center;">
+      <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo" style="height: 50px; margin-right: 15px;">
+      <!-- <span class="title-nav">{{ businessUser?.name }}</span> -->
     </div>
 
-    <!-- Right Section: Toggle Button -->
-     <div style="float: right;
-     display: flex;
-     gap: 7px;">
+    <!-- Middle Section: Navigation Links -->
+    <div style="display: flex;
+    gap: 58px;
+    color: white;
+    margin-left: 442px;">
+      <div>
+        <a *ngIf="businessUser?.website" href="{{ businessUser.website }}" style="color: white;">Home</a>
+      </div>
+      <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.aboutUs" href="{{ socialmedialist?.aboutUs }}" style="color: white;">About Us</a>
+      </div>
+      <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.termsAndConditions" href="{{ socialmedialist?.termsAndConditions }}" style="color: white;">Terms & Conditions</a>
+      </div>
+      <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.privacyPolicy" href="{{ socialmedialist?.privacyPolicy }}" style="color: white;">Privacy Policy</a>
+      </div>
+      <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.paymentTerms" href="{{ socialmedialist?.paymentTerms }}" style="color: white;">Payment Terms</a>
+      </div>
+    </div>
 
-          <button class="blinking-unique-btn" (click)="scrollToAccommodation()">Book Now</button>
-
-
-
-    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
-    </button>
+    <!-- Right Section: Book Now Button -->
+    <div style="margin-right: 30px;">
+      <button class="blinking-unique-btn" (click)="scrollToAccommodation()" style="background-color: #FF6347; color: white; border: none; padding: 10px 20px;">Book Now</button>
+    </div>
   </div>
-</div>
-
 </nav>
+
 
 <nav class="navbar navbar-dark top-navbar mobile-view-ui">
   <div class="container-div">
