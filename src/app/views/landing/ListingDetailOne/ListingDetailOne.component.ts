@@ -59,6 +59,7 @@ import { Details } from 'src/app/model/detail';
 import { TriggerEventService } from 'src/services/trigger-event.service';
 import { BusinessService } from 'src/services/business.service';
 import { BusinessUser } from 'src/app/model/user';
+import { RatesAndAvailability } from 'src/app/model/ratesAndAvailability';
 // import { Email } from "src/app/pages/Contact/Contact.component";
 
 export interface Email {
@@ -84,6 +85,9 @@ export class ListingDetailOneComponent implements OnInit {
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
   viewAddon: boolean;
+  noofRoomsAvailable: any[] = [];
+  valueAvailable: any;
+  getValueOfRooms: RatesAndAvailability;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -798,7 +802,19 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    const toggleCardBtn = document.getElementById('toggleCardBtn');
+    const closeCardBtn = document.getElementById('closeCardBtn');
+    const stickyCard = document.getElementById('stickyCard');
 
+    // Toggle the visibility of the sticky card
+    toggleCardBtn.addEventListener('click', function() {
+      stickyCard.classList.toggle('show');
+    });
+
+    // Close the card when the 'Close' button is clicked
+    closeCardBtn.addEventListener('click', function() {
+      stickyCard.classList.remove('show');
+    });
     this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
@@ -934,6 +950,18 @@ if (this.city != null && this.city != undefined) {
   sortAndLimitRooms() {
     // Sort rooms by roomOnlyPrice in ascending order
     this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
+    this.sortedRooms?.forEach((room) => {
+      let totalAvailableRooms = 0;
+
+      room?.ratesAndAvailabilityDtos?.forEach((rate) => {
+        if (rate?.roomName === room?.name) {
+          totalAvailableRooms += rate?.noOfAvailable || 0;
+        }
+      });
+
+      // Assign the total available rooms to the room object
+      room.roomsAvailable = totalAvailableRooms;
+    });
   }
 
   getDynamicNameFromUrl(url: string): string | null {
@@ -947,8 +975,21 @@ if (this.city != null && this.city != undefined) {
 
   }
   sortAndLimitRoomsOne() {
-    // Sort rooms by roomOnlyPrice in ascending order
+    // Sort rooms by roomOnlyPrice in ascending order and take top 2
     this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
+
+    this.sortedRoomsOne?.forEach((room) => {
+      let totalAvailableRooms = 0;
+
+      room?.ratesAndAvailabilityDtos?.forEach((rate) => {
+        if (rate?.roomName === room?.name) {
+          totalAvailableRooms += rate?.noOfAvailable || 0;
+        }
+      });
+
+      // Assign the total available rooms to the room object
+      room.roomsAvailable = totalAvailableRooms;
+    });
   }
 
   toggleView() {
@@ -2844,7 +2885,7 @@ if (bookingSummaryElement) {
           this.roomWithGHCPlan = [];
           let ghcPlan = new RoomRatePlans();
           this.daterange = [];
-          this.daterangefilter = []
+          this.daterangefilter = [];
           this.availableRooms?.forEach((event) => {
             event?.ratesAndAvailabilityDtos?.forEach((event2) => {
 
@@ -3229,6 +3270,7 @@ if (bookingSummaryElement) {
             this.availableRooms !== undefined
           ) {
             this.availableRooms?.forEach((room) => {
+
               room?.ratesAndAvailabilityDtos?.forEach((ele) => {
                 ele.roomRatePlans?.forEach((e) => {
                   // //console.log(JSON.stringify(e.propertyServicesList));

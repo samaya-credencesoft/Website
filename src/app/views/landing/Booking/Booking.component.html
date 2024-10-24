@@ -2382,7 +2382,242 @@
 <app-Header-Listingdetailsone   [businessUser]="businessUser"> </app-Header-Listingdetailsone>
 
 <!-- Booking Summry section -->
-<h2 class="booking-title">Booking Summary</h2>
+<div class="booking-checkout-web-view" >
+  <div class="row d-flex">
+
+  <h3  style="margin-top:97px;font-weight: bold; margin-left: 40px;">Booking Summary</h3>
+  </div>
+<div class="booking-summary-container">
+
+<div class="row">
+  <div class="col-6">
+
+   <div style="margin-left: 10px;">
+     <!-- Date Section -->
+
+     <div class="Bookingroominfo" style="font-weight: bold;">
+      <div class="Bookingroomdetails">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td class="align-self-end">Dates :</td>
+              <td>
+                <span>Check-In</span><br>{{booking.fromDate  | date: 'dd MMM' }}
+              </td>
+              <td>
+                <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
+              </td>
+              <td>
+                <button (click)="redirectToBooking()" class="editStyle">
+                  <i class="fas fa-edit"></i>
+              </button>
+              </td>
+            </tr>
+            <tr>
+              <td>Guests :</td>
+              <td colspan="2">{{booking.noOfPersons}}</td>
+            </tr>
+            <tr>
+              <td>Number of nights :</td>
+              <td colspan="2">{{ DiffDate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- Room Information -->
+    <div class="Bookingroominfo" style="font-weight: bold;">
+      <div class="Bookingroomdetails">
+        <p class="Bookingroommargine">{{booking.roomName}}
+          <i class="fas fa-pencil-alt" (click)="redirectToBooking()" style="cursor: pointer; margin-left: 10px;"></i>
+
+        </p>
+
+        <!-- <button (click)="redirectToBooking()" class="editStyle">
+          <i class="fas fa-edit"></i>
+      </button> -->
+        <ul>
+          <li>{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
+          <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+          <li>Tax <span>  {{
+            booking.taxAmount | currency : currency : "symbol" : "1.2-2"
+            }}</span></li>
+          <li>Total Amount  <span> {{
+            booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+            }}</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Add-on Services -->
+     <div class="addon-services" style="font-weight: bold;">
+      <h4 style="font-weight: bold;">Add-on Services</h4>
+      <table style=" border: none; width:100%">
+        <tr *ngFor="let fac of savedServices">
+          <td><div class="d-flex "  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+            <div style="display: flex; gap:4px">
+
+              <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
+
+
+              <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+              <br>
+
+              <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+              </b>
+
+              </p>
+            </div>
+          </div></td>
+          <td *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
+          <td *ngIf="fac.afterTaxAmount !== null || fac.afterTaxAmount !== undefined"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+        </tr>
+
+      </table>
+
+
+    </div>
+
+
+
+    <!-- Payment Information -->
+    <div class="paymentinfo" style="font-weight: bold;">
+      <ul>
+        <li>Total Payable Amount <span> {{
+          booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+          }}</span></li>
+
+        <li>Due Amount  <span> {{
+          booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+          }}</span></li>
+      </ul>
+    </div>
+
+   </div>
+  </div>
+   <div class="col-6" >
+     <!-- Fill Your Details Section -->
+     <form (ngSubmit)="orderForm?.form.valid && onSubmit(orderForm)" #orderForm="ngForm" *ngIf="!bookingConfirmed">
+      <div class="FillCard" style="padding: 27px;margin-left: 10px;margin-right: 10px !important;margin: 10px auto;">
+        <h3 style="font-weight: bold;">Fill your details</h3>
+        <div class="">
+          <div class="Fillinput-group">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="First Name"
+              id="firstName"
+              name="firstName"
+              [(ngModel)]="booking.firstName"
+              #firstName="ngModel"
+              required
+
+            />
+            <span
+              class="text-danger"
+              *ngIf="(firstName.touched || orderForm.submitted) && firstName.errors?.required"
+            >
+              First Name is required
+            </span>
+          </div>
+
+          <div class="Fillinput-group">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Last Name"
+              id="lastName"
+              name="lastName"
+              [(ngModel)]="booking.lastName"
+              #lastName="ngModel"
+              required
+
+            />
+            <span
+              class="text-danger"
+              *ngIf="(lastName.touched || orderForm.submitted) && lastName.errors?.required"
+            >
+              Last Name is required
+            </span>
+          </div>
+        </div>
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="eg: mrjames@xyz.com"
+          id="email"
+          name="email"
+          [(ngModel)]="booking.email"
+          #email="ngModel"
+          required
+          email
+
+        />
+        <span
+          class="text-danger"
+          *ngIf="(email.touched || orderForm.submitted) && email.errors?.required"
+        >
+          Email is required
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="(email.touched || orderForm.submitted) && email.errors?.email"
+        >
+          Enter a valid email
+        </span>
+
+        <label for="mobile">Mobile Number</label>
+        <input
+          type="tel"
+          maxlength="10"
+          class="form-control"
+          placeholder="eg: 8912345678"
+          id="mobile"
+          name="mobile"
+          [(ngModel)]="booking.mobile"
+          #mobile="ngModel"
+          required
+
+        />
+        <span
+          class="text-danger"
+          *ngIf="(mobile.touched || orderForm.submitted) && !mobile.valid"
+        >
+          Invalid Phone number
+        </span>
+
+
+        <label for="notes">Special Notes</label>
+        <textarea id="notes" placeholder="Special Notes">{{booking.notes}}</textarea>
+
+
+      </div>
+    </form>
+</div>
+ </div>
+ <div style="margin: auto;padding: 20px;">
+  <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+  (click)="submitForm()">Enquiry Now</button>
+  <button  class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+  (click)="payAndCheckout()">Pay Now</button>
+  <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
+  (click)="payAndCheckout()">Pay At Hotel</button>
+  </div>
+</div>
+</div>
+<div class="booking-checkout-mobile-view">
+  <h2 class="booking-title">Booking Summary</h2>
 <div class="booking-summary-container">
 
 
@@ -2595,6 +2830,7 @@
     (click)="payAndCheckout()">Pay At Hotel</button>
   </div>
 </form>
+</div>
 </div>
 
 

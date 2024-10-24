@@ -25,25 +25,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   propertyname: string;
   propertydetails:BusinessUser;
   PropertyUrl: string;
-  toggleListingDetails() {
-    this.showListingDetails = !this.showListingDetails;
-    this.isdone = true;
-    this.website = this.businessUser?.website;
-  this.businessUser?.socialMediaLinks.forEach(element => {
-    this.socialmedialist=element
-  });
-    this.propertyname = this.businessUser?.seoFriendlyName;
-    this.logoUrl=this.businessUser?.logoUrl;
-    //console.log(this.logoUrl);
-    //console.log('new link is',this.website);
-    //console.log('new link is hello world',this.socialmedialist);
-    //console.log('new link is',this.propertyname);
 
-
-  }
-  toggleListItems() {
-    this.showListItems = !this.showListItems;
-  }
 
 
   // gotopropertydetail() {
@@ -73,11 +55,41 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     // //console.log("propertydata="+ JSON.stringify(this.propertydetails))
     this.PropertyUrl = this.token.getPropertyUrl();
     //console.log("property url:" + this.PropertyUrl)
+    this.website = this.businessUser?.website;
+
+    setTimeout(() => {
+      console.log("businessUser",this.businessUser)
+    this.website = this.businessUser?.website;
+      this.businessUser?.socialMediaLinks?.forEach(element => {
+        this.socialmedialist=element
+      });
+                }, 1000);
+
    }
 
   ngOnInit() {
     this.website = this.businessUser?.website;
     //console.log('new link is',this.website);
+  }
+
+  toggleListingDetails() {
+    this.showListingDetails = !this.showListingDetails;
+    this.isdone = true;
+    this.website = this.businessUser?.website;
+  this.businessUser?.socialMediaLinks.forEach(element => {
+    this.socialmedialist=element
+  });
+    this.propertyname = this.businessUser?.seoFriendlyName;
+    this.logoUrl=this.businessUser?.logoUrl;
+    //console.log(this.logoUrl);
+    //console.log('new link is',this.website);
+    //console.log('new link is hello world',this.socialmedialist);
+    //console.log('new link is',this.propertyname);
+
+
+  }
+  toggleListItems() {
+    this.showListItems = !this.showListItems;
   }
 
   scrollToAccommodation() {

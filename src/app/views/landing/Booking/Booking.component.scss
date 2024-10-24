@@ -2686,8 +2686,8 @@ a.fancybox.tcClick.mngroominfo {
 .FB{
 background-color: var(--primary) !important;
 color: var(--tertiary) !important;
-font-size: 20px; 
-padding-right: 65px; 
+font-size: 20px;
+padding-right: 65px;
 padding-left: 65px;
 }
 
@@ -2926,39 +2926,44 @@ padding-left: 65px;
 }
 
 
-// Booking Summry section  
+// Booking Summry section
 
 
 .booking-summary-container {
-  
+
   margin: 2px 20px;
    padding: 1px;
-  background-color: ghostwhite; 
+  background-color: ghostwhite;
   font-family: Arial, sans-serif;
   border-radius: 8px;
 }
 
 .booking-title {
- 
+
   font-size: 1.2em;
   margin-left: 40px;
   margin-top: 20px;
 
+}
+.Fillpaybtn:disabled {
+  background-color: #cccccc; /* Disabled button color */
+  color: #666666; /* Disabled text color */
+  cursor: not-allowed; /* Disable hover effect */
 }
 
 .DateSection{
   background-color: white;
   padding: 15px 10px;
   margin: 20px;
-  
+
   border-radius: 8px;
-  
+
 }
 
 .Bookingdate-section {
   display: flex;
   justify-content:space-evenly;
- 
+
 
 }
 
@@ -3010,7 +3015,7 @@ padding-left: 65px;
 
 .Fillinput-group {
   flex: 1;
- 
+
 }
 
 .FillCard {
@@ -3031,7 +3036,7 @@ label {
   display: block;
   font-size: 14px;
   font-weight: bold;
-  color: #333; 
+  color: #333;
   margin-bottom: 5px;
 
 }
@@ -3047,9 +3052,9 @@ input[type="text"], input[type="email"], textarea {
 
 /* Styling for the Special Notes textarea */
 textarea {
-  min-height: 100px; 
-  max-height: 150px; 
-  resize: vertical;  
+  min-height: 100px;
+  max-height: 150px;
+  resize: vertical;
 }
 
 .Fillpaybtn {
@@ -3069,12 +3074,12 @@ textarea {
 .addon-title {
   display: flex;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
   font-size: 16px;
 }
 
 .addon-title i {
-  font-size: 24px; 
+  font-size: 24px;
   color: #333;
 }
 
@@ -3090,7 +3095,7 @@ textarea {
 }
 
 .addon-details p {
-  margin: 5px 0 0 0; 
+  margin: 5px 0 0 0;
   font-size: 14px;
   color: #000;
 }
@@ -3105,28 +3110,40 @@ textarea {
 }
 
 .editStyle{
-  background: none; 
-  border: none; 
+  background: none;
+  border: none;
   padding: 0;
   margin-left: 20px;
   float:right;
   right: 0;
   margin-top: -10px;
-  
+
 }
 .Bookingroommargine{
   margin-bottom: 5px;
-  
+
   color: #000;
 }
 
 .info-item {
-  text-align: center;  
+  text-align: center;
   height: 40px;
  }
 
-
-
+ .booking-checkout-mobile-view{
+  display: none;
+}
+.booking-checkout-web-view{
+  display: block;
+}
+@media (max-width:1180px) {
+  .booking-checkout-mobile-view{
+    display: block;
+  }
+  .booking-checkout-web-view{
+    display: none;
+  }
+}
 
 
 

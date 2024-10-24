@@ -420,7 +420,7 @@ p {
 }
 
 .img_size_room {
-  height: 365px;
+  height: 288px;
 }
 
 .group_field {
@@ -3366,7 +3366,7 @@ body {
   .expanded-row {
     flex-wrap: wrap;
     justify-content: flex-start;
-    padding-left: 167px;
+    // padding-left: 167px;
   }
 
 }
@@ -3828,6 +3828,18 @@ button {
   .mobile-view-ui {
     display: none;
   }
+
+  @media  (min-width:1508px) {
+    .popame {
+      margin-left: 50px;
+      margin-bottom: 50px;
+    }
+
+    // .popame2 {
+    //   width:800px;
+    // }
+  }
+
 }
 
 
@@ -4243,6 +4255,64 @@ button {
   display: none;
 
 }
+.sticky-button {
+  position: fixed;
+  top: 40%;
+  right: 23px;
+font-size: 23px !important;
+  transform: translateY(-50%) rotate(269deg); /* Rotate button vertically */
+      transform-origin: right center;
+  z-index: 9999;
+}
+
+.sticky-card {
+  position: fixed;
+  top: 43%;
+  right: -500px; /* Initially offscreen */
+  transform: translateY(-50%);
+  width: 418px;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 9998;
+}
+
+.sticky-card.show {
+  right: 52px; /* Slides into view */
+}
+.rotate {
+  transition: transform 0.5s ease;
+  transform: rotate(180deg); /* Rotates 180 degrees */
+}
+.scroll-bar-review {
+  max-height: 3.6em;            /* Set the height for the text container */
+  overflow-y: scroll;           /* Always show the vertical scrollbar */
+  overflow-x: hidden;           /* Hide the horizontal scrollbar */
+  white-space: normal;          /* Ensure the text wraps within the container */
+  word-wrap: break-word;        /* Break long words to avoid horizontal overflow */
+  padding-right: 15px;          /* Add padding to avoid text being hidden by scrollbar */
+  box-sizing: border-box;       /* Include padding and borders in width/height calculation */
+}
+
+/* Optional: Customize the vertical scrollbar for WebKit browsers */
+.scroll-bar-review::-webkit-scrollbar {
+  width: 10px;                  /* Width of the vertical scrollbar */
+  display: block;
+}
+
+.scroll-bar-review::-webkit-scrollbar-thumb {
+  background-color: #888;       /* Color of the scrollbar thumb */
+  border-radius: 6px;           /* Rounded corners for scrollbar thumb */
+}
+
+.scroll-bar-review::-webkit-scrollbar-thumb:hover {
+  background-color: #555;       /* Darker color on hover */
+}
+
+
 
 // ::-webkit-scrollbar-track {
 //   background: #f1f1f1;
@@ -4373,8 +4443,31 @@ button {
   }
 
   .filter-card {
-    margin-top: -200px;
+    margin-top: -249px;
     left: -20px;
+  }
+
+  .masonry-item-leftTwo {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 35.5%;
+    height: 144.66px;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-bottom: 5px;
+  }
+
+  .masonry-item-rightTwo {
+    background-size: cover;
+    background-position: center;
+    display: block;
+    float: left;
+    width: 337px;
+    height: 293px;
+    margin-bottom: 10px;
+    border-radius: 5px;
   }
 
   .masonry-item-leftOne {
@@ -4582,6 +4675,17 @@ button {
 
 .reviewbtn {
   background-color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.reviewbtn2 {
+  background-color: #FEE13D;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
