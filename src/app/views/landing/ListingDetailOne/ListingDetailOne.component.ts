@@ -807,7 +807,7 @@ export class ListingDetailOneComponent implements OnInit {
     const stickyCard = document.getElementById('stickyCard');
 
     // Toggle the visibility of the sticky card
-    toggleCardBtn.addEventListener('click', function() {
+    toggleCardBtn?.addEventListener('click', function() {
       stickyCard.classList.toggle('show');
     });
 
