@@ -1741,35 +1741,31 @@
           businessUser.imageList !== undefined &&
           businessUser?.imageList?.length > 0
         ">
-        <div class="col-8 mainimage" style="margin-top: 16px;"
-         *ngIf="businessUser?.imageList?.length > 1" (click)="
-            openImage(room, businessUser.imageList, businessUser.name)
-          ">
+        <div class="col-8 mainimage" style="margin-top: 16px;" *ngIf="businessUser?.imageList?.length > 1" (click)="openImage()">
           <div aria-hidden="true" *ngIf="businessUser.imageList[0]">
             <a [ngStyle]="{
                 'background-image':
-                  'url(' + businessUser.imageList[0].url + ')'
+                  'url(' + (businessUser.imageList[0].url ? businessUser.imageList[0].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') + ')'
               }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
           </div>
+
           <div aria-hidden="true" *ngIf="businessUser.imageList[1]">
             <a [ngStyle]="{
                 'background-image':
-                  'url(' + businessUser.imageList[1].url + ')'
+                  'url(' + (businessUser.imageList[1].url ? businessUser.imageList[1].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') + ')'
               }" class="masonry-item-leftOne" title="{{ businessUser.imageList[1].name }}"></a>
           </div>
-          <!-- <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
-            <a [ngStyle]="{
-                'background-image':
-                  'url(' + businessUser.imageList[2].url + ')'
-              }" class="masonry-item-left" title="{{ businessUser.imageList[2].name }}"></a>
-          </div> -->
+
           <div aria-hidden="true" *ngIf="businessUser.imageList[3]">
             <a [ngStyle]="{
                 'background-image':
-                  'url(' + businessUser.imageList[3].url + ')'
-              }" class="masonry-item-leftOne" title="{{ businessUser.imageList[3].name }}"><span class="masonry-text" *ngIf="businessUser?.imageList?.length>3">View +{{businessUser?.imageList?.length-3}}</span></a>
+                  'url(' + (businessUser.imageList[3].url ? businessUser.imageList[3].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') + ')'
+              }" class="masonry-item-leftOne" title="{{ businessUser.imageList[3].name }}">
+              <span class="masonry-text" *ngIf="businessUser?.imageList?.length > 3">View +{{ businessUser?.imageList?.length - 3 }}</span>
+            </a>
           </div>
         </div>
+
 
         <div class="col-4 pl-0 pr-0 float-right filter-card" >
           <div class="container">
@@ -1810,6 +1806,21 @@
             </div>
           </div>
 
+        </div>
+        <div *ngIf="showCarousel" class="unique-modal-overlay">
+          <div class="unique-modal-content">
+            <button (click)="showCarousel = false" class="unique-modal-close-button">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+
+            <!-- Slick Carousel -->
+            <ngx-slick-carousel class="unique-carousel" [config]="slideConfigOne" #uniqueCarousel="slick-carousel">
+              <div ngxSlickItem *ngFor="let image of businessUser?.imageList" class="unique-slick-slide">
+                <img [src]="image.url ? image.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                     [alt]="image.name" class="unique-carousel-image" />
+              </div>
+            </ngx-slick-carousel>
+          </div>
         </div>
 
           </div>
