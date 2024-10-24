@@ -22,7 +22,7 @@
 
 
   <app-Header-Listingdetailsone   [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
-  <div class="sticky-button">
+  <div class="sticky-button"  *ngIf="showDiv===true  ">
     <button class="btn " id="toggleCardBtn" style="font-size: 23px;background-color: #FFD700;color:black;font-weight: bold;">Booking Summary</button>
   </div>
 
