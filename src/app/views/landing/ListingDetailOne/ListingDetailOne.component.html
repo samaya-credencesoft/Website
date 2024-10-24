@@ -934,15 +934,15 @@
                     <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
 
                       <div aria-hidden="true" *ngIf="room.imageList[0]">
-                        <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
+                        <img [src]="room?.imageList[0].url ? room?.imageList[0].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'" alt="Image 0" class="masonry-item-rightTwo" />
                       </div>
 
                       <div aria-hidden="true" *ngIf="room.imageList[1]">
-                        <img [src]="room?.imageList[1].url" alt="Image 1" class="masonry-item-leftTwo" />
+                        <img [src]="room?.imageList[1].url ? room?.imageList[1].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'" alt="Image 1" class="masonry-item-leftTwo" />
                       </div>
 
                       <div aria-hidden="true" *ngIf="room.imageList[2]">
-                        <img [src]="room?.imageList[2].url" alt="Image 2" class="masonry-item-leftTwo" />
+                        <img [src]="room?.imageList[2].url ? room?.imageList[2].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'" alt="Image 2" class="masonry-item-leftTwo" />
                         <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
                       </div>
 
@@ -1261,22 +1261,38 @@
 
                     </div>
 
-                    <div class="col-12 mainimage" style=" height: 300px" *ngIf="room.imageList.length >= 3">
+                    <div class="col-12 mainimage" style=" height: 300px" *ngIf="room.imageList.length >= 3" (click)="openRoomCarousel()">
 
                       <div aria-hidden="true" *ngIf="room.imageList[0]">
-                        <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
+                        <img [src]="room?.imageList[0].url ? room?.imageList[0].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'" alt="Image 0" class="masonry-item-rightTwo" />
                       </div>
 
                       <div aria-hidden="true" *ngIf="room.imageList[1]">
-                        <img [src]="room?.imageList[1].url" alt="Image 1" class="masonry-item-leftTwo" />
+                        <img [src]="room?.imageList[1].url ? room?.imageList[1].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'" alt="Image 1" class="masonry-item-leftTwo" />
                       </div>
 
                       <div aria-hidden="true" *ngIf="room.imageList[2]">
-                        <img [src]="room?.imageList[2].url" alt="Image 2" class="masonry-item-leftTwo" />
-                        <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
+                        <img [src]="room?.imageList[2].url? room?.imageList[2].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg' " alt="Image 2" class="masonry-item-leftTwo" />
+                        <span class="masonry-text"   *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
                       </div>
 
                     </div>
+                    <div *ngIf="showRoomCarousel" class="unique-room-modal-overlay">
+                      <div class="unique-room-modal-content">
+                        <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+
+                        <!-- Slick Carousel -->
+                        <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
+                          <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
+                            <img [src]="image.url ? image.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                                 [alt]="image.name" class="unique-room-carousel-image" />
+                          </div>
+                        </ngx-slick-carousel>
+                      </div>
+                    </div>
+
 
                     <div *ngIf="room.description"  class=" col-12 desktopone" style="font-weight: bold;">
                       <div class="mt-2"  [innerHTML]="room.description">
@@ -1667,9 +1683,6 @@
       </a>
     </div>
   </div>
-
-
-
    <!-- section reviews ends -->
 
    <!-- contact us section starts -->

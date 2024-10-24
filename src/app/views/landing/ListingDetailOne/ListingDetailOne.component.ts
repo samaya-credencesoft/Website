@@ -611,6 +611,15 @@ export class ListingDetailOneComponent implements OnInit {
   selectedServices: any[] = [];
   valSelected: boolean = false;
   showCarousel = false;
+  showRoomCarousel = false;
+  roomCarouselConfig = {
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true
+  };
 
   constructor(
     private listingService: ListingService,
@@ -944,6 +953,9 @@ if (this.city != null && this.city != undefined) {
     // this.checkingAvailability();
   }
   // showhide(){
+    openRoomCarousel() {
+      this.showRoomCarousel = true;
+    }
 
   toggleDescriptionOne() {
     this.showFullDescriptionOne = !this.showFullDescriptionOne;
