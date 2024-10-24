@@ -58,6 +58,7 @@ const USER_ID = 'UserId';
 const USER_NAME = 'UserName';
 const PROPERTY_URL = 'PropertyUrl';
 const REQUEST_HANDLE = "requestvalue";
+const BOOKINGROOMPRICE = 'bookingPrice';
 
 @Injectable()
 export class TokenStorage {
@@ -124,6 +125,18 @@ export class TokenStorage {
 
     getSelectedServices() {
       return JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
+    }
+
+    public saveBookingRoomPrice(roomPrice: number) {
+      localStorage.removeItem(BOOKINGROOMPRICE);
+      if (roomPrice !== null && roomPrice !== undefined) {
+        localStorage.setItem(BOOKINGROOMPRICE, roomPrice.toString());
+      } else {
+        localStorage.setItem(BOOKINGROOMPRICE, '{}');
+      }
+    }
+    public getBookingRoomPrice() {
+      return localStorage.getItem(BOOKINGROOMPRICE);
     }
 
     public getPropertyData(): BusinessUser {

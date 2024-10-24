@@ -2422,7 +2422,7 @@
           <i class="fas fa-edit"></i>
       </button> -->
         <ul>
-          <li>{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
+          <li>{{booking.roomRatePlanName}} x 1 <span>{{(bookingRoomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
           <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
           <li>Tax <span> {{
             (this.booking.netAmount *
