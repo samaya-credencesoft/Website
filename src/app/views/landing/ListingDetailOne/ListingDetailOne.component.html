@@ -22,12 +22,12 @@
 
 
   <app-Header-Listingdetailsone   [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
-  <div class="sticky-button"  *ngIf="showDiv===true  ">
+  <div class="sticky-button"style="display: none;" >
     <button class="btn " id="toggleCardBtn" style="font-size: 23px;background-color: #FFD700;color:black;font-weight: bold;">Booking Summary</button>
   </div>
 
   <!-- Sticky card -->
-  <div class="sticky-card" id="stickyCard">
+  <div class="sticky-card" id="stickyCard" >
      <!-- Date Section -->
      <div style="    display: flex;
      justify-content: end;

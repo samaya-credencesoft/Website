@@ -798,7 +798,7 @@ export class ListingDetailOneComponent implements OnInit {
     const stickyCard = document.getElementById('stickyCard');
 
     // Toggle the visibility of the sticky card
-    toggleCardBtn?.addEventListener('click', function() {
+    toggleCardBtn.addEventListener('click', function() {
       stickyCard.classList.toggle('show');
     });
 
@@ -2217,6 +2217,8 @@ this.isHeaderVisible = true;
     this.booking.roomType = room.name;
     // //console.log("sdfghjkl"+ JSON.stringify(plan))
     this.showDiv = true;
+    let elements = document.getElementsByClassName("sticky-button");
+(elements[0] as HTMLElement).style.display = "block";
     this.div = true;
     this.checkAvailabilityStatus = false;
     this.checkAvailabilityStatusHide = true;
