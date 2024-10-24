@@ -92,6 +92,13 @@
       </div>
     </div>
 
+    <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;" >
+      <button class="reviewbtn" (click)="gotocheckout()">
+        Review Booking Details
+      </button>
+    </div>
+
+
     <div style="display: flex; justify-content: center;">
       <button class="shadow " (click)="scrollToAccommodationDash()" style="    border: 2px solid black;
       padding: 4px;
@@ -526,7 +533,7 @@
               <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
                 <div *ngIf="room.id === rates.roomId && r < 1">
                   <div class="row mb-4">
-                    <div class="col-md-6" style="padding: 0px;">
+                    <div class="col-6" style="padding: 0px;">
                       <div *ngFor="
                       let plan of rates.roomRatePlans;
                       let p = index
@@ -840,6 +847,14 @@
                         </div>
                       </div>
                     </div>
+
+                    <!-- Add on service Start -->
+
+
+
+                <!-- Add on service end -->
+
+
                   </div>
 
                 </div>
@@ -1168,6 +1183,8 @@
 
                     </div>
                   </div>
+
+
                 </div>
 
               </div>
@@ -1505,6 +1522,7 @@
                     </ngx-slick-carousel>
                   </div>
                   </div>
+
                 </div>
                 <div>
                   <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
