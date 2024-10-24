@@ -59,6 +59,7 @@ import { Details } from 'src/app/model/detail';
 import { TriggerEventService } from 'src/services/trigger-event.service';
 import { BusinessService } from 'src/services/business.service';
 import { BusinessUser } from 'src/app/model/user';
+import { RatesAndAvailability } from 'src/app/model/ratesAndAvailability';
 // import { Email } from "src/app/pages/Contact/Contact.component";
 
 export interface Email {
@@ -85,7 +86,7 @@ export class ListingDetailOneComponent implements OnInit {
   viewAddon: boolean;
   noofRoomsAvailable: any[] = [];
   valueAvailable: any;
-  getValueOfRooms: import("c:/Users/1998s/Documents/GitHub/Website/src/app/model/ratesAndAvailability").RatesAndAvailability;
+  getValueOfRooms: RatesAndAvailability;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
