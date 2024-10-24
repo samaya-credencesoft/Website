@@ -364,6 +364,15 @@ export class ListingDetailOneComponent implements OnInit {
       },
     ],
   };
+  slideConfigOne = {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": true,
+    "infinite": true,
+    "autoplay": true,
+    "autoplaySpeed": 2000,
+    "arrows": true,
+  };
   modalSlideConfig = {
     centerMode: true,
     centerPadding: '0%',
@@ -598,6 +607,8 @@ export class ListingDetailOneComponent implements OnInit {
   showFullDescriptionOne: boolean = false;
   selectedServices: any[] = [];
   valSelected: boolean = false;
+  showCarousel = false;
+
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -3159,20 +3170,25 @@ if (bookingSummaryElement) {
         }
       );
   }
-  openImage(content, src, title) {
-    this.modalImage = src;
-    this.modalTitle = title;
-    this.modalService
-      .open(content, { size: 'lg', scrollable: true })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
+  // openImage(content, src, title) {
+  //   this.modalImage = src;
+  //   this.modalTitle = title;
+  //   this.modalService
+  //     .open(content, { size: 'lg', scrollable: true })
+  //     .result.then(
+  //       (result) => {
+  //         this.closeResult = `Closed with: ${result}`;
+  //       },
+  //       (reason) => {
+  //         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //       }
+  //     );
+  // }
+  openImage() {
+    // Set this to true to open the modal with the carousel
+    this.showCarousel = true;
   }
+
   checkingAvailability1() {
     this.isSuccess = true;
     this.headerTitle = 'Success!';
