@@ -2878,6 +2878,19 @@ a.fancybox.tcClick.mngroominfo {
 
 
 // }
+@media (max-width: 1180px) {
+  .desktop-view-ui {
+    display: none;
+  }
+}
 
+@media (min-width: 1181px) {
+  .mobile-view-ui {
+    display: none;
+  }
+  .minnni {
+    max-width: 1400px !important;
+  }
+}
 
 
