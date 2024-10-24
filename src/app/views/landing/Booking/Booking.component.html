@@ -2376,26 +2376,26 @@
         <table class="table table-borderless">
           <tbody>
             <tr>
-              <td class="align-self-end">Dates :</td>
-              <td>
+              <td class="align-self-end" style="color: black !important;">Dates :</td>
+              <td style="color: black !important;">
                 <span>Check-In</span><br>{{booking.fromDate  | date: 'dd MMM' }}
               </td>
-              <td>
+              <td style="color: black !important;">
                 <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
               </td>
-              <td>
+              <td style="color: black !important;">
                 <button (click)="redirectToBooking()" class="editStyle">
                   <i class="fas fa-edit"></i>
               </button>
               </td>
             </tr>
             <tr>
-              <td>Guests :</td>
-              <td colspan="2">{{booking.noOfPersons}}</td>
+              <td style="color: black !important;">Guests :</td>
+              <td colspan="2" style="color: black !important;">{{booking.noOfPersons}}</td>
             </tr>
             <tr>
-              <td>Number of nights :</td>
-              <td colspan="2">{{ DiffDate }}</td>
+              <td style="color: black !important;">Number of nights :</td>
+              <td colspan="2" style="color: black !important;">{{ DiffDate }}</td>
             </tr>
           </tbody>
         </table>
