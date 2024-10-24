@@ -2417,11 +2417,16 @@
         <ul>
           <li>{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
           <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
-          <li>Tax <span>  {{
-            booking.taxAmount | currency : currency : "symbol" : "1.2-2"
+          <li>Tax1 <span> h {{
+            (this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100 | currency: currency:"symbol":"1.2-2"
             }}</span></li>
           <li>Total Amount  <span> {{
-            booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+            (booking.netAmount + ((this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100))+totalExtraAmount
+            | currency: currency:"symbol":"1.2-2"
             }}</span></li>
         </ul>
       </div>
