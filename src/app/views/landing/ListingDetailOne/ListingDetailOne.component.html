@@ -520,18 +520,23 @@
 
  <!-- Property description section starts -->
 
-    <h3 style="padding-left: 56px;font-weight: bold;" *ngIf="businessUser.businessDescription">Property Description</h3>
+ <div style="margin-top: 20px;">
+  <h3 style="padding-left: 56px;font-weight: bold;" *ngIf="businessUser.businessDescription">Property Description</h3>
 
- <div class=" popame" style="background-color: #D9D9D92E;
- border-radius: 12px;
- padding: 11px;    margin-right: 55px;
- margin-top: 10px;">
+  <div class=" popame" style="background-color: #D9D9D92E;
+  border-radius: 12px;
+  padding: 11px;
+  margin-right: 60px;
+  margin-top: 13px;
+  margin-left: 60px;">
 
-  <div *ngIf="businessUser.businessDescription" >
-    <p [innerHTML]="businessUser.businessDescription">{{businessUser.businessDescription}}</p>
-  </div>
+   <div *ngIf="businessUser.businessDescription"  style="padding:10px; font-weight: bold">
+     <p [innerHTML]="businessUser.businessDescription">{{businessUser.businessDescription}}</p>
+   </div>
 
-</div>
+ </div>
+ </div>
+
 
  <!-- Property description section ends -->
 
@@ -1592,13 +1597,13 @@
  <!-- nearby section ends -->
 
  <!-- Add terms and conditions starts here -->
- <div class="terms-container" *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 50px;margin-right: 50px;">
+ <div  *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 60px;margin-right: 60px; margin-top: 20px;">
   <div *ngIf="bServiceDtoList?.policy" >
     <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
       Terms & Conditions
     </h3>
 
-    <div class="terms-content">
+    <div class="terms-content terms-container">
       <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
       </div>
       <div style="padding: 10px;">
@@ -1613,9 +1618,9 @@
 
   <!-- section reviews starts -->
 
-  <div style="    margin-left: 55px;
+  <div style="    margin-left: 60px;
  background-color: rgba(217, 217, 217, 0.1803921569);
-  margin-right: 51px;">
+  margin-right: 60px;">
     <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;margin-left: 90px;margin-right: 50px;margin: auto;" *ngIf="googleReviews">
 
 
@@ -1713,7 +1718,7 @@
               <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
             </div>
     </div>
-    <button type="submit" class="btn property-submit" style="background-color: #FEE13D !important; color: black; font-size: 15px; font-weight: bold; margin-top: 10px;" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>Submit</button>
+    <button type="submit" class="btn property-submit" style="background-color: #FEE13D !important; color: black; font-size: 15px; font-weight: bold; margin-top: 20px;" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>Submit</button>
   </form>
 </div>
 </div>
