@@ -1940,7 +1940,7 @@ this.isHeaderVisible = true;
     this.token.saveServiceData(this.addServiceList);
   }
   gotocheckout(){
-
+    this.token.saveBookingRoomPrice(this.booking.roomPrice);
     this.router.navigate(['/booking']);
   }
 
@@ -2491,6 +2491,7 @@ if (bookingSummaryElement) {
     //   ) {
     //     this.router.navigate(["/add-service"]);
     //   } else {
+      this.token.saveBookingRoomPrice(this.booking.roomPrice);
     this.router.navigate(['/booking']);
     // }
   }

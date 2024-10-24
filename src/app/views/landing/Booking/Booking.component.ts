@@ -194,6 +194,7 @@ export class BookingComponent implements OnInit {
   savedServices: any;
   calculatedServices: any;
   totalServiceCost: number =0;
+  bookingRoomPrice: any;
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -274,7 +275,11 @@ export class BookingComponent implements OnInit {
     if (this.token.getBookingCity() !== null) {
       this.bookingCity = this.token.getBookingCity();
     }
+    if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
+      this.bookingRoomPrice = this.token.getBookingRoomPrice();
 
+
+    }
 
   this.calculateserviceprice();
 
