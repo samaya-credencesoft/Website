@@ -56,10 +56,15 @@ export class HeaderListingdetailsoneComponent implements OnInit {
     this.PropertyUrl = this.token.getPropertyUrl();
     //console.log("property url:" + this.PropertyUrl)
     this.website = this.businessUser?.website;
+
+    setTimeout(() => {
+      console.log("businessUser",this.businessUser)
     this.website = this.businessUser?.website;
-    this.businessUser?.socialMediaLinks.forEach(element => {
-      this.socialmedialist=element
-    });
+      this.businessUser?.socialMediaLinks?.forEach(element => {
+        this.socialmedialist=element
+      });
+                }, 1000);
+
    }
 
   ngOnInit() {
