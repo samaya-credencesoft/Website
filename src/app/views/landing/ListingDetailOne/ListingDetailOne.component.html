@@ -22,12 +22,12 @@
 
 
   <app-Header-Listingdetailsone   [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
-  <div class="sticky-button"  *ngIf="showDiv===true  ">
+  <div class="sticky-button"style="display: none;" >
     <button class="btn " id="toggleCardBtn" style="font-size: 23px;background-color: #FFD700;color:black;font-weight: bold;">Booking Summary</button>
   </div>
 
   <!-- Sticky card -->
-  <div class="sticky-card" id="stickyCard">
+  <div class="sticky-card" id="stickyCard" >
      <!-- Date Section -->
      <div style="    display: flex;
      justify-content: end;
@@ -290,10 +290,10 @@
   <p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
 </div>
 
-<div  >
+<div class="container" style="max-width: 1500px !important;">
   <div class="row mr-0 ml-0"  >
 
-    <div class="col-lg-12 pl-0 pr-0" style="background-color: #D9D9D92E;">
+    <div class="col-lg-12 pl-0 pr-0" >
       <div class="image_height " *ngIf="
       businessUser !== undefined &&
       businessUser.imageList !== undefined &&
@@ -305,31 +305,30 @@
       ">
       <div aria-hidden="true" *ngIf="businessUser.imageList[0]">
         <a [ngStyle]="{
-            'background-image':
-              'url(' + businessUser.imageList[0].url + ')'
-          }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
+    'background-image': 'url(' + (businessUser?.imageList?.[0]?.url ? businessUser.imageList[0].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') + ')'
+  }" class="masonry-item-rightOne" title="{{ businessUser.imageList[0].name }}"></a>
       </div>
       <div aria-hidden="true" *ngIf="businessUser.imageList[1]">
         <a [ngStyle]="{
             'background-image':
-              'url(' + businessUser.imageList[1].url + ')'
+              'url(' + (businessUser.imageList[1].url ? businessUser.imageList[1].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg' ) + ')'
           }" class="masonry-item-leftOne" title="{{ businessUser.imageList[1].name }}"></a>
       </div>
-      <!-- <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
+      <div aria-hidden="true" *ngIf="businessUser.imageList[2]">
         <a [ngStyle]="{
             'background-image':
-              'url(' + businessUser.imageList[2].url + ')'
-          }" class="masonry-item-left" title="{{ businessUser.imageList[2].name }}"></a>
-      </div> -->
+              'url(' + ( businessUser.imageList[2].url ? businessUser.imageList[2].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') +')'
+          }" class="masonry-item-leftOne" title="{{ businessUser.imageList[2].name }}"></a>
+      </div>
       <div aria-hidden="true" *ngIf="businessUser.imageList[3]">
         <a [ngStyle]="{
             'background-image':
-              'url(' + businessUser.imageList[3].url + ')'
+            'url(' + ( businessUser.imageList[3].url ? businessUser.imageList[3].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg') +')'
           }" class="masonry-item-leftOne" title="{{ businessUser.imageList[3].name }}"><span class="masonry-text" *ngIf="businessUser?.imageList?.length>3">View +{{businessUser?.imageList?.length-3}}</span></a>
       </div>
     </div>
 
-    <div class="col-4 pl-0 pr-0 float-right filter-card" >
+    <div class="col-4  pl-0 pr-0 float-right filter-card" >
       <div class="container">
         <div class="row" >
           <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true">
@@ -394,6 +393,7 @@
             <p  *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true"
             style="text-align: right; color: #031EAA !important; cursor: pointer; font-weight: bold;" (click)="scrollToAccommodationDash()">View More Options</p>
           </div>
+
 
 
         </div>
