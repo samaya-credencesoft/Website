@@ -2438,7 +2438,7 @@
     <div class="Bookingroominfo" style="font-weight: bold;">
       <div class="Bookingroomdetails">
         <p class="Bookingroommargine">{{booking.roomName}}
-          <i class="fas fa-pencil-alt" (click)="redirectToBooking()" style="cursor: pointer; margin-left: 10px;"></i>
+          <!-- <i class="fas fa-pencil-alt" (click)="redirectToBooking()" style="cursor: pointer; margin-left: 10px;"></i> -->
 
         </p>
 
@@ -2448,7 +2448,7 @@
         <ul>
           <li>{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
           <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
-          <li>Tax1 <span> h {{
+          <li>Tax <span> {{
             (this.booking.netAmount *
             this.booking.taxPercentage) /
             100 | currency: currency:"symbol":"1.2-2"
@@ -2610,7 +2610,7 @@
   <div class="Bookingroominfo">
     <div class="Bookingroomdetails">
       <p class="Bookingroommargine">{{booking.roomName}}
-        <i class="fas fa-pencil-alt" (click)="redirectToBooking()" style="cursor: pointer; margin-left: 10px;"></i>
+        <!-- <i class="fas fa-pencil-alt" (click)="redirectToBooking()" style="cursor: pointer; margin-left: 10px;"></i> -->
 
       </p>
 
