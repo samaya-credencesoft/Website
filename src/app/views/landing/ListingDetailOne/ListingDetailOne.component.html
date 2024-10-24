@@ -81,13 +81,18 @@
           <li style="    display: flex;
     justify-content: space-between;">Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
           <li style="    display: flex;
-    justify-content: space-between;">Tax <span>  {{
-            booking.taxAmount | currency : currency : "symbol" : "1.2-2"
-            }}</span></li>
+    justify-content: space-between;">Tax <span> {{
+                              (this.booking.netAmount *
+                              this.booking.taxPercentage) /
+                              100 | currency: currency:"symbol":"1.2-2"
+                              }}</span></li>
           <li style="    display: flex;
     justify-content: space-between;">Total Amount  <span> {{
-            booking.totalAmount | currency : currency : "symbol" : "1.2-2"
-            }}</span></li>
+                            (booking.netAmount + ((this.booking.netAmount *
+                            this.booking.taxPercentage) /
+                            100))+totalExtraAmount
+                            | currency: currency:"symbol":"1.2-2"
+                            }}</span></li>
         </ul>
       </div>
     </div>
