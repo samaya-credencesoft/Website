@@ -12,7 +12,7 @@ env:
   AWS_REGION: ap-south-1
   deployment_variables: uat_deployment_api_credentials
 
-  BRANCH: release-uat
+  BRANCH: release-uat-booking-engine
   depl_username: aa
   depl_password: aa
   depl_url: aa
