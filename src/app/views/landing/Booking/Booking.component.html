@@ -2358,7 +2358,7 @@
 
 <!-- Booking Summry section -->
 <div class="booking-checkout-web-view" >
-  <div class="row d-flex" style="margin: 0px !important;">
+  <div class="row d-flex justify-content-center" style="margin: 0px !important;">
     <button style="    color: darkgrey;
     margin: 10px;
     margin-top: 102px;
@@ -2558,12 +2558,24 @@
 </div>
 </div>
 <div class="booking-checkout-mobile-view">
-  <h2 class="booking-title">Booking Summary</h2>
+  <div class="row d-flex" style="margin: 0px !important;">
+    <button style="    color: darkgrey;
+    margin: 10px;
+    margin-top: 102px;
+    margin-left: 47px;    height: 10px;
+    background: none;color: black;    border: 0px;
+    border-radius: 7px; "  (click)="backClicked()">
+
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+  <h3  style="margin-top:100px;font-weight: bold; ">Booking Summary</h3>
+  </div>
+
 <div class="booking-summary-container">
 
 
   <!-- Date Section -->
-   <div class="DateSection " style="margin-top: 70px;">
+   <div class="DateSection " >
     <div class="Bookingdate-section">
       <div class="Bookingdate">
         <h6>Check-in Date</h6>
