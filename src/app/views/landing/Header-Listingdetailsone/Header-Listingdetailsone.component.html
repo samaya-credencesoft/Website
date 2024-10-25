@@ -89,36 +89,36 @@
 
     <!-- Right Section: Book Now Button -->
     <div style="margin-right: 30px;">
-      <button class="blinking-unique-btn" (click)="scrollToAccommodation($event)" style="background-color: var(--secondary); color: white; border: none; padding: 10px 20px;">Book Now</button>
+      <button class="blinking-unique-btn" (click)="scrollToAccommodation($event)" style="background-color: var(--secondary); color: var(--tertiary) !important; border: none; padding: 10px 20px;">Book Now</button>
     </div>
   </div>
 </nav>
 
 
-<nav class="navbar navbar-dark top-navbar mobile-view-ui">
-  <div class="container-div">
-    <!-- Left Section: Logo and Business Name -->
-    <div class="left-section">
-        <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo">
-        <!-- <span class="title-nav">{{ businessUser?.name }}</span> -->
+    <nav class="navbar navbar-dark top-navbar mobile-view-ui">
+      <div class="container-div">
+        <!-- Left Section: Logo and Business Name -->
+        <div class="left-section">
+            <img class="logo-image" [src]="businessUser?.logoUrl" alt="Business Logo">
+            <!-- <span class="title-nav">{{ businessUser?.name }}</span> -->
+        </div>
+
+        <!-- Right Section: Toggle Button -->
+        <div style="float: right;
+        display: flex;
+        gap: 7px;">
+
+
+
+
+
+        <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
+        </button>
+      </div>
     </div>
 
-    <!-- Right Section: Toggle Button -->
-     <div style="float: right;
-     display: flex;
-     gap: 7px;">
-
-
-
-
-
-    <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
-    </button>
-  </div>
-</div>
-
-</nav>
+    </nav>
 
 <!-- Styles -->
 

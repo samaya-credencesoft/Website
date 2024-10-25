@@ -54,7 +54,7 @@
                 <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
               </td>
               <td>
-                <button  class="editStyle">
+                <button (click)="scrollToAccommodationCheckin()" class="editStyle">
                   <i class="fas fa-edit"></i>
               </button>
               </td>
@@ -121,7 +121,7 @@
 
 
  <!-- Desktop view design starts -->
-  <div class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px;">
+  <div id="checkin" class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px;">
  <!-- check availability section starts -->
  <div  *ngIf="(availableRooms?.length >=0 && availability ==true) || !availability">
   <div  style="justify-content: space-evenly; display: flex;" [ngStyle]="{'margin-top': businessUser?.website ? '0px' : '0px'}">
@@ -711,26 +711,7 @@
                                     <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                     <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                                   </div>
-                                  <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
 
-                                    <li *ngIf=" plan.extraChargePerPerson >0">
-                                      <b style="color: #031EAA !important;">
-                                      Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerPerson
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-                                    <li *ngIf=" plan.extraChargePerChild >0">
-                                      <b style="color: #031EAA !important;">
-                                        Extra Child charge :
-                                        </b>
-                                      <span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerChild
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-
-                                  </div>
 
                                   <div style="padding-top: 10px;margin-left: 6px;">
                                     <span style="font-family: 'sans-sarif Lato';
@@ -750,6 +731,27 @@
                                           : currency
                                           : "symbol"
                                           : "1.2-2"}}</span>
+                                  </div>
+
+                                  <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
+
+                                    <li *ngIf=" plan.extraChargePerPerson >0">
+                                      <b style="color: #031EAA !important;">
+                                      Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerPerson
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
+                                    <li *ngIf=" plan.extraChargePerChild >0">
+                                      <b style="color: #031EAA !important;">
+                                        Extra Child charge :
+                                        </b>
+                                      <span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerChild
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
+
                                   </div>
 
                                   <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -782,7 +784,7 @@
                       maxSelectRoom = rates.noOfAvailable;
                       maxOccupancy =
                         room.maximumOccupancy;
-                      onRoomBook(room.id, i);
+                        onRoomBook(room.id, i, r);
                       booking.roomId = room.id;
                       selectedRoomMaximumOccupancy =
                         room.maximumOccupancy;
@@ -815,23 +817,7 @@
                                   background-color: #4A4A4A !important;">
                                     <h4 style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                                   </div>
-                                  <div style="margin-left: 7px;">
 
-                                    <li>
-                                      <b style="color: #031EAA !important;"> Extra person charge :</b>
-                                      <span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerPerson
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-                                    <li>
-                                      <b style="color: #031EAA !important;">Extra Child charge :</b>
-                                      <span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerChild
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-                                  </div>
 
                                   <div style="padding-top: 10px; margin-left: 6px;">
                                     <span style="font-family: 'sans-sarif Lato';
@@ -851,6 +837,23 @@
                                           : currency
                                           : "symbol"
                                           : "1.2-2"}}</span>
+                                  </div>
+                                  <div style="margin-left: 7px;">
+
+                                    <li>
+                                      <b style="color: #031EAA !important;"> Extra person charge :</b>
+                                      <span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerPerson
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
+                                    <li>
+                                      <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                      <span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerChild
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
                                   </div>
                                   <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                                   hasPercentage(
@@ -877,7 +880,7 @@
                           maxSelectRoom = rates.noOfAvailable;
                           maxOccupancy =
                             room.maximumOccupancy;
-                          onRoomBook(room.id, i);
+                            onRoomBook(room.id, i, r);
                           booking.roomId = room.id;
                           selectedRoomMaximumOccupancy =
                             room.maximumOccupancy;
@@ -897,11 +900,47 @@
                       </div>
                     </div>
 
-                    <!-- Add on service Start -->
+                    <div class="col-12"  *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
+                      <div  *ngIf="viewAddon"  >
+                        <h3 class="servicetitle">Add-On Services</h3>
 
 
+                        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;" >
+                          <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
 
-                <!-- Add on service end -->
+                            <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                              <div class="d-flex" id="facilitysms"
+                                >
+
+                                <div>
+                                  <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
+                                  <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+                                </div>
+
+                                <!-- Service Name -->
+                                <div>
+                                  <p>{{fac.name}}</p>
+                                </div>
+
+                              </div>
+
+                              <div *ngIf="!fac.isAdded && !fac.quantity ">
+                                <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+                              </div>
+
+                              <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
+                                <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+                                <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+                                <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                        </div>
+
+
+                      </div>
+                    </div>
 
 
                   </div>
@@ -914,7 +953,7 @@
       </div>
     </div>
     <div *ngIf="this.activeForGoogleHotelCenter == false">
-    <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" >
+    <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" (click)='onRoomSelect(i)'>
       <div class="card"  style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
 
         <div >
@@ -986,6 +1025,8 @@
                       <div class="mt-2"  [innerHTML]="room.description">
                         </div>
                   </div>
+
+
 
                     </div>
                   </div>
@@ -1062,25 +1103,7 @@
                               <h5 *ngIf="plan.name !== 'GHC'" style=" font-size: 15px; color: #fff !important;" class="planname">{{plan.name}}</h5>
                                 <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                 <h5 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h5></div>
-                              <div style="margin-left: 7px;" *ngIf="plan.showDetails">
 
-                                <li *ngIf=" plan.extraChargePerPerson >0">
-                                  <b style="color: #031EAA !important;"> Extra person charge : </b>
-                                  <span style=" color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerPerson
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-
-                                <li *ngIf=" plan.extraChargePerChild >0">
-                                  <b style="color: #031EAA !important;"> Extra Child charge : </b>
-                                  <span style=" color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerChild
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-
-                              </div>
 
                               <div style="padding-top: 10px; margin-left: 7px;">
                                 <span style="    font-family: 'sans-sarif Lato';
@@ -1101,6 +1124,25 @@
                                       : currency
                                       : "symbol"
                                       : "1.2-2"}}</span>
+                              </div>
+                              <div style="margin-left: 7px;" *ngIf="plan.showDetails">
+
+                                <li *ngIf=" plan.extraChargePerPerson >0">
+                                  <b style="color: #031EAA !important;"> Extra person charge : </b>
+                                  <span style=" color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerPerson
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+
+                                <li *ngIf=" plan.extraChargePerChild >0">
+                                  <b style="color: #031EAA !important;"> Extra Child charge : </b>
+                                  <span style=" color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerChild
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+
                               </div>
 
                               <div style="color: #271a55; font-weight: 600; margin-left: 7px;" *ngIf="
@@ -1128,7 +1170,7 @@
                             maxSelectRoom = rates.noOfAvailable;
                             maxOccupancy =
                               room.maximumOccupancy;
-                            onRoomBook(room.id, i);
+                            onRoomBook(room.id, i, r);
                             booking.roomId = room.id;
                             selectedRoomMaximumOccupancy =
                               room.maximumOccupancy;
@@ -1159,23 +1201,7 @@
                               <div class="card-header" style="padding-left: 7px;
                               padding-top: 5px;
                               padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
-                              <div style="margin-left: 6px;">
 
-
-                                <li class="listplan"  *ngIf="plan.showDetails">
-                                 <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerPerson
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-                                <li class="listplan"  *ngIf="plan.showDetails">
-                                  <b style="color: #031EAA !important;"> Extra Child charge :</b>
-                                  <span style="color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerChild
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-                              </div>
 
                               <div style="padding-top: 10px;margin-left: 6px;" >
                                 <span style="font-family: 'sans-sarif Lato';
@@ -1195,6 +1221,23 @@
                                       : currency
                                       : "symbol"
                                       : "1.2-2"}}</span>
+                              </div>
+                              <div style="margin-left: 6px;">
+
+
+                                <li class="listplan"  *ngIf="plan.showDetails">
+                                 <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerPerson
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+                                <li class="listplan"  *ngIf="plan.showDetails">
+                                  <b style="color: #031EAA !important;"> Extra Child charge :</b>
+                                  <span style="color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerChild
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
                               </div>
 
                               <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -1222,7 +1265,7 @@
                       maxSelectRoom = rates.noOfAvailable;
                       maxOccupancy =
                         room.maximumOccupancy;
-                      onRoomBook(room.id, i);
+                        onRoomBook(room.id, i, r);
                       booking.roomId = room.id;
                       selectedRoomMaximumOccupancy =
                         room.maximumOccupancy;
@@ -1239,9 +1282,53 @@
                       </ngx-slick-carousel>
                       </div>
 
+
                     </div>
                   </div>
 
+                   <!-- Add on service Start -->
+                    <div class="col-12"  *ngIf="selectedRoomIndex === i  && viewAddon">
+                      <div  *ngIf="viewAddon" >
+                        <h3 class="servicetitle">Add-On Services</h3>
+
+
+                        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;" >
+                          <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
+
+                            <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                              <div class="d-flex" id="facilitysms"
+                                >
+
+                                <div>
+                                  <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
+                                  <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+                                </div>
+
+                                <!-- Service Name -->
+                                <div>
+                                  <p>{{fac.name}}</p>
+                                </div>
+
+                              </div>
+
+                              <div *ngIf="!fac.isAdded && !fac.quantity ">
+                                <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+                              </div>
+
+                              <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
+                                <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+                                <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+                                <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  <!-- Add on service end -->
 
                 </div>
 
@@ -1412,25 +1499,7 @@
                               <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                               <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                             </div>
-                            <div style="margin-left: 7px;">
 
-
-                              <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
-                                <b style="color: #031EAA !important;">Extra person charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
-                                <b style="color: #031EAA !important;">Extra Child charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-
-                            </div>
 
                             <div style="padding-top: 10px; margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -1450,6 +1519,25 @@
                                 : currency
                                 : "symbol"
                                 : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 7px;">
+
+
+                              <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
+                                <b style="color: #031EAA !important;">Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
+                                <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+
                             </div>
 
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
@@ -1481,7 +1569,7 @@
                           maxSelectRoom = rates.noOfAvailable;
                           maxOccupancy =
                             room.maximumOccupancy;
-                          onRoomBook(room.id, i);
+                            onRoomBook(room.id, i, r);
                           booking.roomId = room.id;
                           selectedRoomMaximumOccupancy =
                             room.maximumOccupancy;
@@ -1515,26 +1603,7 @@
                             background-color: #4A4A4A !important;">
                               <h4 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                             </div>
-                            <div style="margin-left: 6px;">
 
-
-                              <li class="listplan" *ngIf="plan.showDetails">
-                                <b style="color: #031EAA !important;">Extra person charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li class="listplan" *ngIf="plan.showDetails">
-                                <b style="color: #031EAA !important;">
-                                  Extra Child charge :
-                                </b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                            </div>
 
                             <div style="padding-top: 10px; margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -1554,6 +1623,26 @@
                                     : currency
                                     : "symbol"
                                     : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 6px;">
+
+
+                              <li class="listplan" *ngIf="plan.showDetails">
+                                <b style="color: #031EAA !important;">Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li class="listplan" *ngIf="plan.showDetails">
+                                <b style="color: #031EAA !important;">
+                                  Extra Child charge :
+                                </b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
                             </div>
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                             hasPercentage(
@@ -1579,7 +1668,7 @@
                     maxSelectRoom = rates.noOfAvailable;
                     maxOccupancy =
                       room.maximumOccupancy;
-                    onRoomBook(room.id, i);
+                      onRoomBook(room.id, i, r);
                     booking.roomId = room.id;
                     selectedRoomMaximumOccupancy =
                       room.maximumOccupancy;
@@ -1597,6 +1686,50 @@
                   </div>
                   </div>
 
+                  <!-- Add on service Start -->
+
+                  <div class="col-12" class="col-12"  *ngIf="selectedRoomIndex === i  && viewAddon">
+                    <div  *ngIf="viewAddon"  >
+                      <h3 class="servicetitle">Add-On Services</h3>
+
+
+                      <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;" >
+                        <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
+
+                          <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                            <div class="d-flex" id="facilitysms"
+                              >
+
+                              <div>
+                                <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
+                                <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+                              </div>
+
+                              <!-- Service Name -->
+                              <div>
+                                <p>{{fac.name}}</p>
+                              </div>
+
+                            </div>
+
+                            <div *ngIf="!fac.isAdded && !fac.quantity ">
+                              <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+                            </div>
+
+                            <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
+                              <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+                              <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+                              <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
+                            </div>
+                          </div>
+
+                        </ng-container>
+                      </div>
+
+
+                    </div>
+                  </div>
+            <!-- Add on service end -->
                 </div>
                 <div>
                   <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
@@ -1695,7 +1828,8 @@
                   <h3 style="font-weight: bold;margin-top: 33px; ">Reviews</h3>
                  </div>
                   <div  class="text-center col-3" style="justify-content: end;display: flex;">
-                    <img [src]="'https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'"
+
+                    <img  *ngIf="item.reviewerName" [src]=" 'https://static.thenounproject.com/png/3542335-200.png'"
                     class="rounded-circle"
                     alt="{{ item.reviewerName }}"
                     style="width: 100px; height: 100px;">
@@ -1862,7 +1996,7 @@
 
               <div *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true" style="margin-top: -18px;
                     margin-left: 15px;">
-                <button class="shadow " (click)="scrollToAccommodationDash()" style="background-color: var(--secondary);
+                <button class="shadow " (click)="scrollToAccommodationDashmobile()" style="background-color: var(--secondary);
                 padding: 4px;
                 color: var(--tertiary);
                 font-weight: 700;
@@ -1955,7 +2089,11 @@
                     [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkout')"
                     [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
                     [startDate]="toDate" tabindex="-1"
-                    [minDate]="fromDate" />
+                    [minDate]="fromDate" style="position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    will-change: transform;
+                    transform: translate(-67px, 0px);" />
                 </div>
               </div>
             </div>
@@ -2323,26 +2461,7 @@
                               <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                               <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                             </div>
-                            <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
 
-                              <li *ngIf=" plan.extraChargePerPerson >0">
-                                <b style="color: #031EAA !important;">
-                                Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li *ngIf=" plan.extraChargePerChild >0">
-                                <b style="color: #031EAA !important;">
-                                  Extra Child charge :
-                                  </b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-
-                            </div>
 
                             <div style="padding-top: 10px;margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -2362,6 +2481,26 @@
                                     : currency
                                     : "symbol"
                                     : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
+
+                              <li *ngIf=" plan.extraChargePerPerson >0">
+                                <b style="color: #031EAA !important;">
+                                Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li *ngIf=" plan.extraChargePerChild >0">
+                                <b style="color: #031EAA !important;">
+                                  Extra Child charge :
+                                  </b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+
                             </div>
 
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -2394,7 +2533,7 @@
                 maxSelectRoom = rates.noOfAvailable;
                 maxOccupancy =
                   room.maximumOccupancy;
-                onRoomBook(room.id, i);
+                  onRoomBook(room.id, i, r);
                 booking.roomId = room.id;
                 selectedRoomMaximumOccupancy =
                   room.maximumOccupancy;
@@ -2427,23 +2566,7 @@
                             background-color: #4A4A4A !important;">
                               <h4 style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                             </div>
-                            <div style="margin-left: 7px;">
 
-                              <li>
-                                <b style="color: #031EAA !important;"> Extra person charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li>
-                                <b style="color: #031EAA !important;">Extra Child charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                            </div>
 
                             <div style="padding-top: 10px; margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -2463,6 +2586,23 @@
                                     : currency
                                     : "symbol"
                                     : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 7px;">
+
+                              <li>
+                                <b style="color: #031EAA !important;"> Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li>
+                                <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
                             </div>
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                             hasPercentage(
@@ -2489,7 +2629,7 @@
                     maxSelectRoom = rates.noOfAvailable;
                     maxOccupancy =
                       room.maximumOccupancy;
-                    onRoomBook(room.id, i);
+                      onRoomBook(room.id, i, r);
                     booking.roomId = room.id;
                     selectedRoomMaximumOccupancy =
                       room.maximumOccupancy;
@@ -2669,25 +2809,7 @@
                           <h5 *ngIf="plan.name !== 'GHC'" style=" font-size: 15px; color: #fff !important;" class="planname">{{plan.name}}</h5>
                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                             <h5 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h5></div>
-                          <div style="margin-left: 7px;" *ngIf="plan.showDetails">
 
-                            <li *ngIf=" plan.extraChargePerPerson >0">
-                              <b style="color: #031EAA !important;"> Extra person charge : </b>
-                              <span style=" color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-
-                            <li *ngIf=" plan.extraChargePerChild >0">
-                              <b style="color: #031EAA !important;"> Extra Child charge : </b>
-                              <span style=" color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-
-                          </div>
 
                           <div style="padding-top: 10px; margin-left: 7px;">
                             <span style="    font-family: 'sans-sarif Lato';
@@ -2708,6 +2830,25 @@
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
+                          </div>
+                          <div style="margin-left: 7px;" *ngIf="plan.showDetails">
+
+                            <li *ngIf=" plan.extraChargePerPerson >0">
+                              <b style="color: #031EAA !important;"> Extra person charge : </b>
+                              <span style=" color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+
+                            <li *ngIf=" plan.extraChargePerChild >0">
+                              <b style="color: #031EAA !important;"> Extra Child charge : </b>
+                              <span style=" color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+
                           </div>
 
                           <div style="color: #271a55; font-weight: 600; margin-left: 7px;" *ngIf="
@@ -2735,7 +2876,7 @@
                         maxSelectRoom = rates.noOfAvailable;
                         maxOccupancy =
                           room.maximumOccupancy;
-                        onRoomBook(room.id, i);
+                          onRoomBook(room.id, i, r);
                         booking.roomId = room.id;
                         selectedRoomMaximumOccupancy =
                           room.maximumOccupancy;
@@ -2763,23 +2904,7 @@
                           <div class="card-header" style="padding-left: 7px;
                           padding-top: 5px;
                           padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
-                          <div style="margin-left: 6px;">
 
-
-                            <li class="listplan"  *ngIf="plan.showDetails">
-                             <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                            <li class="listplan"  *ngIf="plan.showDetails">
-                              <b style="color: #031EAA !important;"> Extra Child charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                          </div>
 
                           <div style="padding-top: 10px;margin-left: 6px;" >
                             <span style="font-family: 'sans-sarif Lato';
@@ -2799,6 +2924,24 @@
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
+                          </div>
+
+                          <div style="margin-left: 6px;">
+
+
+                            <li class="listplan"  *ngIf="plan.showDetails">
+                             <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+                            <li class="listplan"  *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;"> Extra Child charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
                           </div>
 
                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -2826,7 +2969,7 @@
                   maxSelectRoom = rates.noOfAvailable;
                   maxOccupancy =
                     room.maximumOccupancy;
-                  onRoomBook(room.id, i);
+                    onRoomBook(room.id, i, r);
                   booking.roomId = room.id;
                   selectedRoomMaximumOccupancy =
                     room.maximumOccupancy;
@@ -2994,25 +3137,7 @@
                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                             <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                           </div>
-                          <div style="margin-left: 7px;">
 
-
-                            <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
-                              <b style="color: #031EAA !important;">Extra person charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                            <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
-                              <b style="color: #031EAA !important;">Extra Child charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-
-                          </div>
 
                           <div style="padding-top: 10px; margin-left: 6px;">
                             <span style="font-family: 'sans-sarif Lato';
@@ -3032,6 +3157,26 @@
                               : currency
                               : "symbol"
                               : "1.2-2"}}</span>
+                          </div>
+
+                          <div style="margin-left: 7px;">
+
+
+                            <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
+                              <b style="color: #031EAA !important;">Extra person charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+                            <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
+                              <b style="color: #031EAA !important;">Extra Child charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+
                           </div>
 
                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
@@ -3063,7 +3208,7 @@
                         maxSelectRoom = rates.noOfAvailable;
                         maxOccupancy =
                           room.maximumOccupancy;
-                        onRoomBook(room.id, i);
+                          onRoomBook(room.id, i, r);
                         booking.roomId = room.id;
                         selectedRoomMaximumOccupancy =
                           room.maximumOccupancy;
@@ -3096,26 +3241,7 @@
                           background-color: #4A4A4A !important;">
                             <h4 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                           </div>
-                          <div style="margin-left: 6px;">
 
-
-                            <li class="listplan" *ngIf="plan.showDetails">
-                              <b style="color: #031EAA !important;">Extra person charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                            <li class="listplan" *ngIf="plan.showDetails">
-                              <b style="color: #031EAA !important;">
-                                Extra Child charge :
-                              </b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                          </div>
 
                           <div style="padding-top: 10px; margin-left: 6px;">
                             <span style="font-family: 'sans-sarif Lato';
@@ -3135,6 +3261,26 @@
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
+                          </div>
+                          <div style="margin-left: 6px;">
+
+
+                            <li class="listplan" *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;">Extra person charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+                            <li class="listplan" *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;">
+                                Extra Child charge :
+                              </b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
                           </div>
                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                           hasPercentage(
@@ -3160,7 +3306,7 @@
                   maxSelectRoom = rates.noOfAvailable;
                   maxOccupancy =
                     room.maximumOccupancy;
-                  onRoomBook(room.id, i);
+                    onRoomBook(room.id, i, r);
                   booking.roomId = room.id;
                   selectedRoomMaximumOccupancy =
                     room.maximumOccupancy;
@@ -3188,27 +3334,21 @@
 <!-- property room details ends -->
 
 <!-- Add on service Start -->
-<div class="servicecdiv" *ngIf="viewAddon" id="serv">
+<div class="servicecdiv" *ngIf="viewAddon " id="serv">
   <h3 class="servicetitle">Add-On Services</h3>
 
-
-  <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left;" >
-    <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
-
+  <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left;">
+    <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMore ? propertyServiceListDataOne.length : 4); let i = index">
       <div class="col-lg-6 col-6 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-        <div class="d-flex" id="facilitysms"
-          >
-
+        <div class="d-flex" id="facilitysms">
           <div>
             <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
             <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
           </div>
-
           <!-- Service Name -->
           <div>
             <p>{{fac.name}}</p>
           </div>
-
         </div>
 
         <div *ngIf="!fac.isAdded && !fac.quantity ">
@@ -3221,12 +3361,17 @@
           <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
         </div>
       </div>
-
     </ng-container>
   </div>
 
-
+  <!-- View More / View Less Toggle -->
+  <div class="text-center ">
+    <button style="    font-weight: bold; cursor: pointer; font-size: 16px; text-decoration: none;" class="btn btn-link" (click)="viewMore = !viewMore">
+      {{ viewMore ? 'View Less' : 'View More' }}
+    </button>
+  </div>
 </div>
+
 
 
 <!-- Add on service end -->
@@ -3242,7 +3387,7 @@
 
  <!-- section reviews starts -->
 
- <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
+ <div id="reviewsCarouselMobile" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;" *ngIf="googleReviews">
   <h3 style="font-weight: bold; margin-left: 20px;">Reviews</h3>
 
   <div class="carousel-inner">
@@ -3252,21 +3397,20 @@
         <div class="card" style="background-color: #F8F8F8; width: 18rem;">
 
           <div class="card-body text-center">
-            <div class="row d-flex">
-              <div  class="text-center col-3">
-                <img [src]="'https://static.vecteezy.com/system/resources/thumbnails/020/765/399/small/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'"
-                  class="rounded-circle"
-                  alt="{{ item.reviewerName }}"
-                  style="width: 80px; height: 80px; margin-top: 20px;">
-              </div>
-             <div class="col-9">
-              <h5 class="card-title reviewer-name">{{ item.reviewerName }}</h5>
+           <div style="margin-bottom: 10px;" *ngIf="item.reviewerName">
+            <img
+                [src]="item.reviewerImage || 'https://static.thenounproject.com/png/3542335-200.png'"
+                class="rounded-circle"
+                alt="{{ item.reviewerName }}"
+                style="width: 50px; height: 50px; margin-top: 20px; margin-bottom: 10px;">
+
+           </div>
+              <h5 class="card-title reviewer-name" style="margin-bottom: 0px !important;">{{ item.reviewerName }}</h5>
               <div class="review-rating" style="color: var(--secondary);">
                 <span *ngFor="let star of [].constructor(item.rating)">★</span>
               </div>
-              <p class="card-text">{{ item.reviewText }}</p>
-            </div>
-          </div>
+              <p class="card-text scroll-bar-review" style="max-height: 4em; overflow-y: scroll; white-space: normal;">{{ item.reviewText }}</p>
+
              </div>
         </div>
       </div>
@@ -3274,17 +3418,15 @@
   </div>
 
   <!-- Carousel Controls -->
-  <a class="carousel-control-prev" href="#reviewsCarousel" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="#reviewsCarouselMobile" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#reviewsCarousel" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#reviewsCarouselMobile" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-
 
  <!-- section reviews ends -->
 
@@ -3308,7 +3450,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Add terms and conditions end here -->
 

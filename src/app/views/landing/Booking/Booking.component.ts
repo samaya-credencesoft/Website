@@ -2418,12 +2418,30 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
-  this.parametertype2.text = (this.booking.noOfPersons + this.booking.noOfExtraPerson).toString();
+  this.parametertype2.text = (this.booking.noOfPersons).toString();
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
-  this.parametertype2.text = (this.booking.noOfChildren + this.booking.noOfExtraChild).toString();
+  this.parametertype2.text = (this.booking.noOfChildren).toString();
   this.parameterss2.push(this.parametertype2);
+  this.parametertype2 = new Para();
+  this.parametertype2.type = 'text';
+  if(this.booking.noOfExtraPerson != null && this.booking.noOfExtraPerson != undefined  && this.booking.noOfExtraPerson != 0){
+    this.parametertype2.text = (this.booking.noOfExtraPerson).toString();
+  }else{
+    this.parametertype2.text = '0'
+  }
+
+  this.parameterss2.push(this.parametertype2);
+  this.parametertype2 = new Para();
+  this.parametertype2.type = 'text';
+  if(this.booking.noOfExtraChild != null && this.booking.noOfExtraChild != undefined  && this.booking.noOfExtraChild != 0){
+    this.parametertype2.text = ( this.booking.noOfExtraChild).toString();
+  }else{
+    this.parametertype2.text = '0'
+  }
+  this.parameterss2.push(this.parametertype2);
+
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text';
   if (this.booking.notes != null && this.booking.notes != undefined) {

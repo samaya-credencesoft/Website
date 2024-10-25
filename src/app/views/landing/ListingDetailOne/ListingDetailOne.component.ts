@@ -126,7 +126,10 @@ export class ListingDetailOneComponent implements OnInit {
   successMessage: boolean = false;
   div: boolean = true;
   childno: any;
+  viewMore: boolean = false;
   success: any = null;
+  selectedRoomIndex: number | null = null; // Initially no room selected
+
   subjectControl: FormControl = new FormControl();
   nameControl: FormControl = new FormControl([Validators.required]);
   fromEmailControl: FormControl = new FormControl([
@@ -2451,6 +2454,14 @@ if (bookingSummaryElement) {
     }
   }
 
+  scrollToAccommodationCheckin() {
+    const element = document.getElementById('checkin');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+
   scrollToAccommodationDash() {
     const element = document.getElementById('accmdOne');
     if (element) {
@@ -2676,9 +2687,14 @@ if (bookingSummaryElement) {
     this.token.saveBookingData(this.booking);
     // this.router.navigate(['/add-service-odt']);
   }
-  onRoomBook(roomId, index) {
+  onRoomSelect(roomIndex: number) {
+    this.selectedRoomIndex = roomIndex; // Set the selected room index
+    this.viewAddon = true; // Show add-on services if needed
+  }
+  onRoomBook(roomId, index, indexOne) {
     // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // this.checkAvailabilityStatus = false;
+    // this.selectedRoomIndex = indexOne;
     this.selectedIndex = index;
     this.viewAddon = true;
 
