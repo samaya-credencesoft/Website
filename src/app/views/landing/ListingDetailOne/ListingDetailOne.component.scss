@@ -3749,13 +3749,16 @@ body {
 .CA1 {
 
   padding: 15px;
-  position: relative;
-  float: right;
+  /* position: relative; */
+  /* float: right; */
   background-color: var(--secondary);
   color: var(--tertiary);
-  padding: 15px;
+  padding: 19px;
   border-radius: 8px;
   font-weight: bold;
+  padding-left: 35px;
+  padding-right: 35px;
+  margin-left: 25px;
 }
 
 .SVM {
@@ -4536,7 +4539,6 @@ font-size: 23px !important;
 
   .filter-card {
     margin-top: -249px;
-    left: -20px;
   }
 
   .masonry-item-leftTwo {
