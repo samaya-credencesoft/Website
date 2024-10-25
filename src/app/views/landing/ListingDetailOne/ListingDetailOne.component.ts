@@ -437,11 +437,12 @@ export class ListingDetailOneComponent implements OnInit {
     ],
   };
   modalSlideConfig1 = {
-    centerMode: true,
+    centerMode: false,
     centerPadding: '0%',
     slidesToShow: 2,
     margin: 10,
     dots: false,
+    initialSlide: 0,
     // autoplay: true,
     autoplaySpeed: 6000,
     arrows: true,
@@ -449,7 +450,8 @@ export class ListingDetailOneComponent implements OnInit {
       {
         breakpoint: 1367,
         settings: {
-          centerPadding: '0%',
+
+          centerPadding: '0',
         },
       },
       {
