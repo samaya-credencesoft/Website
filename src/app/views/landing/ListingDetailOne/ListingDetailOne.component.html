@@ -80,6 +80,13 @@
     justify-content: space-between;">{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
           <li style="    display: flex;
     justify-content: space-between;">Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+    <li
+    *ngIf="  booking.netAmount >0"  style="    display: flex;
+    justify-content: space-between;">Net Amount <span>
+                {{
+                          booking.netAmount
+                          | currency: currency:"symbol":"1.2-2"
+                          }}</span></li>
           <li style="    display: flex;
     justify-content: space-between;">Tax <span> {{
                               (this.booking.netAmount *
