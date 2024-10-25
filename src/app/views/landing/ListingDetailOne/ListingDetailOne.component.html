@@ -953,7 +953,7 @@
       </div>
     </div>
     <div *ngIf="this.activeForGoogleHotelCenter == false">
-    <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" >
+    <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" (click)='onRoomSelect(i)'>
       <div class="card"  style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
 
         <div >
@@ -1287,7 +1287,7 @@
                   </div>
 
                    <!-- Add on service Start -->
-                    <div class="col-12" *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
+                    <div class="col-12"  *ngIf="selectedRoomIndex === i  && viewAddon">
                       <div  *ngIf="viewAddon" >
                         <h3 class="servicetitle">Add-On Services</h3>
 
@@ -1687,7 +1687,8 @@
                   </div>
 
                   <!-- Add on service Start -->
-                  <div class="col-12" class="col-12" *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
+
+                  <div class="col-12" class="col-12"  *ngIf="selectedRoomIndex === i  && viewAddon">
                     <div  *ngIf="viewAddon"  >
                       <h3 class="servicetitle">Add-On Services</h3>
 
