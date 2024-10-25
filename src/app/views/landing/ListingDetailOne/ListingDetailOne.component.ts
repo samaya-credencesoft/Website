@@ -2662,6 +2662,11 @@ if (bookingSummaryElement) {
     // this.checkAvailabilityStatus = false;
     this.selectedIndex = index;
     this.viewAddon = true;
+
+    const stickyCard = document.getElementById('stickyCard');
+
+      stickyCard.classList.toggle('show');
+
     this.scrollToService();
     // this.getPlan(roomId);
   }
