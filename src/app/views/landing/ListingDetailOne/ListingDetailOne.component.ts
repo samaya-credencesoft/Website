@@ -129,6 +129,7 @@ export class ListingDetailOneComponent implements OnInit {
   viewMore: boolean = false;
   success: any = null;
   selectedRoomIndex: number | null = null; // Initially no room selected
+  viewMoreOne = false;
 
   subjectControl: FormControl = new FormControl();
   nameControl: FormControl = new FormControl([Validators.required]);
@@ -2481,6 +2482,10 @@ if (bookingSummaryElement) {
     }
   }
 
+  toggleViewMore() {
+    this.viewMoreOne = !this.viewMoreOne;
+  }
+
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = this.businessUser.whatsApp;
@@ -2689,7 +2694,7 @@ if (bookingSummaryElement) {
   }
   onRoomSelect(roomIndex: number) {
     this.selectedRoomIndex = roomIndex; // Set the selected room index
-    this.viewAddon = true; // Show add-on services if needed
+
   }
   onRoomBook(roomId, index, indexOne) {
     // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
@@ -2697,6 +2702,7 @@ if (bookingSummaryElement) {
     // this.selectedRoomIndex = indexOne;
     this.selectedIndex = index;
     this.viewAddon = true;
+
 
     const stickyCard = document.getElementById('stickyCard');
 

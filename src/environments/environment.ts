@@ -30,6 +30,5 @@ export const environment = {
   country: 'in',
   googleKey: '',
   // callbackUrl: 'http://localhost:4200/#/details?ReferenceNumber='
-  // callbackUrl: 'https://bookonepms.com/booking-complete?ReferenceNumber='
-  callbackUrl: 'http://test.bookonepms.com//booking-complete?ReferenceNumber='
+  callbackUrl: 'https://booking.credencesoft-bookone-hotel.uat.bookone.io/booking-complete?ReferenceNumber='
 };
