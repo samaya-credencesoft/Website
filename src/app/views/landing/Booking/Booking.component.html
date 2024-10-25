@@ -2530,7 +2530,7 @@
 
         <div class="mb-3">
           <label for="mobile">Mobile Number</label>
-          <input type="tel" maxlength="10" class="form-control" placeholder="e.g., 8912345678" id="mobile" name="mobile"
+          <input type="number" maxlength="10" class="form-control" placeholder="e.g., 8912345678" id="mobile" name="mobile"
                  [(ngModel)]="booking.mobile" #mobile="ngModel" required />
           <span class="text-danger small" *ngIf="(mobile.touched || orderForm.submitted) && !mobile.valid">
             Invalid phone number
@@ -2704,7 +2704,7 @@
 
       <div class="mb-3">
         <label for="mobile">Mobile Number</label>
-        <input type="tel" maxlength="10" class="form-control" placeholder="e.g., 8912345678" id="mobile" name="mobile"
+        <input type="number" maxlength="10" class="form-control" placeholder="e.g., 8912345678" id="mobile" name="mobile"
                [(ngModel)]="booking.mobile" #mobile="ngModel" required />
         <span class="text-danger small" *ngIf="(mobile.touched || orderForm.submitted) && !mobile.valid">
           Invalid phone number
