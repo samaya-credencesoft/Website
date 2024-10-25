@@ -2430,6 +2430,10 @@
           <ul>
             <li>{{booking.roomRatePlanName}} x 1 <span>{{(bookingRoomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
             <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+            <li>Total Net Amount  <span>    {{
+              booking.netAmount
+              | currency: currency:"symbol":"1.2-2"
+              }}</span></li>
             <li>Tax <span> {{
               (this.booking.netAmount *
               this.booking.taxPercentage) /
@@ -2441,6 +2445,7 @@
               100))+totalExtraAmount
               | currency: currency:"symbol":"1.2-2"
               }}</span></li>
+
           </ul>
         </div>
       </div>
