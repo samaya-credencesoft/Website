@@ -54,7 +54,7 @@
                 <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
               </td>
               <td>
-                <button  class="editStyle">
+                <button (click)="scrollToAccommodationCheckin()" class="editStyle">
                   <i class="fas fa-edit"></i>
               </button>
               </td>
@@ -121,7 +121,7 @@
 
 
  <!-- Desktop view design starts -->
-  <div class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px;">
+  <div id="checkin" class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px;">
  <!-- check availability section starts -->
  <div  *ngIf="(availableRooms?.length >=0 && availability ==true) || !availability">
   <div  style="justify-content: space-evenly; display: flex;" [ngStyle]="{'margin-top': businessUser?.website ? '0px' : '0px'}">
@@ -3406,8 +3406,6 @@
   </a>
 </div>
 
-
-
  <!-- section reviews ends -->
 
 
@@ -3430,7 +3428,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Add terms and conditions end here -->
 

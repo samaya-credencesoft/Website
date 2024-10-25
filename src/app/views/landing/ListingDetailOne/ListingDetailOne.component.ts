@@ -2433,6 +2433,14 @@ if (bookingSummaryElement) {
     }
   }
 
+  scrollToAccommodationCheckin() {
+    const element = document.getElementById('checkin');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+
   scrollToAccommodationDash() {
     const element = document.getElementById('accmdOne');
     if (element) {
