@@ -2088,7 +2088,11 @@
                     [autoClose]="true" (dateSelect)="onDateSelection($event, 'checkout')"
                     [displayMonths]="1" [dayTemplate]="t1" outsideDays="hidden"
                     [startDate]="toDate" tabindex="-1"
-                    [minDate]="fromDate" />
+                    [minDate]="fromDate" style="position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    will-change: transform;
+                    transform: translate(-67px, 0px);" />
                 </div>
               </div>
             </div>
