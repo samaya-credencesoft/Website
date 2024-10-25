@@ -126,6 +126,7 @@ export class ListingDetailOneComponent implements OnInit {
   div: boolean = true;
   childno: any;
   success: any = null;
+  selectedRoomIndex: number | null = null;
   subjectControl: FormControl = new FormControl();
   nameControl: FormControl = new FormControl([Validators.required]);
   fromEmailControl: FormControl = new FormControl([
@@ -2657,9 +2658,10 @@ if (bookingSummaryElement) {
     this.token.saveBookingData(this.booking);
     // this.router.navigate(['/add-service-odt']);
   }
-  onRoomBook(roomId, index) {
+  onRoomBook(roomId, index, indexOne) {
     // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // this.checkAvailabilityStatus = false;
+    this.selectedRoomIndex = indexOne;
     this.selectedIndex = index;
     this.viewAddon = true;
 
