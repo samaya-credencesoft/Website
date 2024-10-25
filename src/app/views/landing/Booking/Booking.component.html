@@ -2428,7 +2428,8 @@
             <i class="fas fa-edit"></i>
         </button> -->
           <ul>
-            <li>{{booking.roomRatePlanName}} x 1 <span>{{(bookingRoomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
+            <li>{{booking.roomRatePlanName}} x {{booking.noOfRooms}} <span>{{(bookingRoomPrice * booking.noOfRooms)| currency: currency:"symbol":"1.2-2"}}</span></li>
+            <li> No Of Rooms <span>{{booking.noOfRooms}}</span></li>
             <li>Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
             <li>Total Net Amount  <span>    {{
               booking.netAmount
