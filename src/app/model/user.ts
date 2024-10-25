@@ -44,6 +44,7 @@ export class BusinessUser {
   imageUrl: string;
   bookOneRating: number;
   minimumRoooPrice: number;
+  socialMediaLinks:[];
   imageList: [
     {
       description: string;

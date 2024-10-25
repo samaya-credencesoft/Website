@@ -2,21 +2,21 @@
 // import { OpenDays } from './openDays';
 // import { BusinessServiceTypes } from './businessServiceTypes';
 
-import { BusinessServiceTypes } from "./businessServiceTypes";
-import { ClosedDays } from "./closedDays";
-import { OpenDays } from "./openDays";
+import { BusinessServiceTypes } from './businessServiceTypes';
+// import { ClosedDays } from "./closedDays";
+// import { OpenDays } from "./openDays";
 
 export class BusinessServiceDtoList {
   id: number;
-  closedDays: ClosedDays[];
-  openDays: OpenDays[];
+  // closedDays: ClosedDays[];
+  // openDays: OpenDays[];
   name: string;
 
   businessLocationName: string;
   customerLocationName: string;
   canChangeBusinessAddress: boolean;
   provideBusinessAndCustomerAddress: boolean;
-
+  advanceAmountPercentage:number;
   businessTermLocation: string;
   businessTermResource: string;
 

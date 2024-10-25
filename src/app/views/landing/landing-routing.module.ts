@@ -32,7 +32,12 @@ import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.
 import { LoginDetailsComponent } from './login-details/login-details.component';
 import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
 import { ManageEnquiryComponent } from './manage-enquiry/manage-enquiry.component';
+import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.component';
 import { CancelBookingComponent } from './cancel-booking/cancel-booking.component';
+import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -84,11 +89,11 @@ const routes: Routes = [
     component: LandingV11Component
   },
   {
-    path: 'login-cancel-page',
+    path: 'manage-property',
     component: LoginCancelPageComponent
   },
   {
-    path:'login-details',
+    path:'manage-property-details',
     component:LoginDetailsComponent
   },
   {
@@ -102,6 +107,10 @@ const routes: Routes = [
   {
     path:'manage-enuiry',
     component:ManageEnquiryComponent
+  },
+  {
+    path:'Confirm-Booking',
+    component:ConfirmBookingComponent
   },
 
   // {
@@ -121,6 +130,16 @@ const routes: Routes = [
     path: 'onboard',
     component: OnboardingCouponcodeFormComponent, data: {title: 'onboard'}
   },
+  {
+    path: 'history',component: NotificationHandlingComponent,},
+    {
+      path: 'booking-complete',
+      component: BookingCompleteComponent,
+    },
+    {
+      path: 'manage-enquiry',component: EnquiryComponent,},
+      {
+        path: 'checkout',component: CheckoutComponent,},
   {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {
@@ -170,11 +189,15 @@ const routes: Routes = [
     path: "detail/bookingSource/:id",
     component: ListingDetailOneComponent,
   },
+
   {
     path: 'detail',
     component: ListingDetailOneComponent, data: {title: 'detail'}
   },
-
+  {
+    path: 'details',
+    component: ListingDetailOneComponent, data: {title: 'details'}
+  },
   {
     path: 'listing-one',
     component: ListingDetailOneComponent, data: {title: 'BookOne Connect'}

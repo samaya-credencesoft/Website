@@ -49,12 +49,14 @@
 <!-- Latest compiled and minified CSS -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-xz7q8q+8Hvq9b2jkn5XbZgjx7D7fghc27bEE8e3ijFqZm+2NcA7ri2y3MIJm5hT" crossorigin="anonymous"> -->
 
+
  <link rel="icon" type="image/x-icon" href="favicon.ico">
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline';"> -->
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYGJ1SMIW5BIny9Af7eoozmgSGZShhUuE&libraries=places&language=en"></script> -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYGJ1SMIW5BIny9Af7eoozmgSGZShhUuE&libraries=places&language=en"></script>
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD76Ocky2MYrAcI-f9H3XbxzsrSB0TsbJI&libraries=places&language=en"></script> -->
  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900" rel="stylesheet"> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
   <script type="application/ld+json">
@@ -102,10 +104,96 @@
    right: 32% !important;
  top: 87% !important;
 }
+df-messenger {
+      z-index: 999;
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      --df-messenger-font-color: #000; /* Change text color to black */
+      --df-messenger-font-family: Google Sans;
+      /* Change chat background to green */
+      --df-messenger-chat-background: #fff;
+      --df-messenger-titlebar-background:var(--secondary);
 
+      /* --df-messenger-chat-background-image: url('assets/images/chatbot.png'); */
+      /* --df-messenger-chat-background: url('assets/images/chatbot.png') no-repeat center center fixed; */
+      --df-messenger-chat-background:  url('assets/images/chatbot.png')no-repeat; /* Adjust width and height as needed */
+      --df-messenger-message-user-font-color:#fff;
+      --df-messenger-message-user-background: var(--secondary);
+      --df-messenger-send-icon-color:#221950;
+      --df-messenger-message-bot-background: #221950;
+      --df-messenger-message-bot-font-color:hsla(31, 91%, 82%, 0.982);
+      --df-messenger-chat-scroll-button-font-color:#fff;
+      --df-messenger-chat-scroll-button-background:#221950;
+      --df-messenger-chat-bubble-background:var(--secondary);
+      /* Set custom background image */
+--df-messenger-chips-background:#221950;
+--df-messenger-chips-font-color:#fff;
+ --df-messenger-chips-background-hover:var(--secondary);
+
+      /* Adjust background size and other properties as needed */
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 50px; /* Adjust the width of the widget as needed */
+      height: 50px; /* Adjust the height of the widget as needed */
+    }
+    .chip{
+      background-color: #000;
+    }
+    .df-chat-message-list .df-chat-message-payload a {
+    background-color: #000;
+}
+    .message.user-message{
+      color: #fff;
+    }
+    .df-messenger .df-messenger-user-message,
+    .df-messenger .df-messenger-bot-message {
+      color: #fff;
+    }
+    #message-list{
+      background-image: url('./assets/images/chatbot.png') no-repeat center center fixed;
+      --df-messenger-chat-background-image: url('assets/images/chatbot.png');
+
+    }
+
+    .ngb-dp-week-number, .ngb-dp-weekday {
+      color: white !important
+    }
+
+    .ngb-dp-navigation-chevron{
+      color:white !important
+    }
+
+/* message-list-wrapper{
+  background-image: url('./assets/images/chatbot.png') no-repeat center center fixed;
+} */
+
+/* .df-messenger-wrapper {
+  background: url('assets/images/chatbot.png') no-repeat center center fixed;
+  background-size: cover;
+} */
+
+.BN{
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+}
+
+.CA{
+  background-color: var(--primary) !important;
+  color: var(--tertiary) !important;
+}
+
+.CA1{
+  background-color: var(--secondary) !important;
+  color: var(--tertiary) !important;
+}
 </style>
 <body>
+
+
   <app-root></app-root>
+
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4VZ4HG"
    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>

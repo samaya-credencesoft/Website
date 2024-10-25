@@ -26,6 +26,7 @@ export class externalReservationDtoList {
   notes: string;
   otaName: string;
   otaReservationId: string;
+  otaBooking:boolean;
   paidAmount: Number;
   payloadType: string;
   propertyBusinessEmail: string;

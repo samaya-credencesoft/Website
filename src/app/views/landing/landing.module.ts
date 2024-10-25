@@ -4,7 +4,7 @@ import { OnboardingformSubmittedFormComponent } from './onboardingform-submitted
 
 import { ScrollToDirective } from './helpers/scrollTo.directives';
 import { WINDOW_PROVIDERS } from './helpers/window.helpers';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 // import { NgForm } from "@angular/forms";
 import { CommonModule, DatePipe } from '@angular/common';
 import { NguCarouselModule } from '@ngu/carousel';
@@ -78,7 +78,8 @@ import {
   MatInputModule,
   MatSelectModule,
   MatRadioModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatTableModule
 } from '@angular/material';
 import { CallToActionComponent } from './components/call-to-action/call-to-action.component';
 import { SubscribeEmailComponent } from './components/subscribe-email/subscribe-email.component';
@@ -86,7 +87,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { OnboardingCouponcodeFormComponent } from './onboarding-couponcode-form/onboarding-couponcode-form.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { CheckoutModule } from 'paytm-blink-checkout-angular';
+// import { CheckoutModule } from 'paytm-blink-checkout-angular';
 import { TokenStorage } from 'src/token.storage';
 import { BookOneConnectComponent } from 'src/app/views/landing/book-one-connect/book-one-connect.component';
 import { ListingDetailOneComponent } from './ListingDetailOne/ListingDetailOne.component';
@@ -100,6 +101,13 @@ import { HeaderListingdetailsoneComponent } from './Header-Listingdetailsone/Hea
 import { ManageBookingsLoginComponent } from './manage-bookings-login/manage-bookings-login.component';
 import { LoginCancelPageComponent } from './Login-cancel-page/Login-cancel-page.component';
 import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.component';
+import { NotificationHandlingComponent } from './notification-handling/notification-handling.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
+import { LoginDetailsComponent } from './login-details/login-details.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
+import { CheckoutModule } from 'paytm-blink-checkout-angular';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -121,6 +129,7 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     MatSelectModule,
     MatRadioModule,
     MatFormFieldModule,
+    MatTableModule,
   ],
   declarations: [
     LandingV1Component,
@@ -137,7 +146,7 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     ContactFormComponent,
     FooterComponent,
     ListingDetailOneComponent,
-    LandingV2Component,
+   LandingV2Component,
     FeaturesComponent,
     FeaturesTwoComponent,
     BestComponent,
@@ -148,6 +157,7 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     FaqsComponent,
     BookOneConnectComponent,
     BookingComponent,
+    BookingCompleteComponent,
     NewsTwoComponent,
     IntroThreeComponent,
     LandingV3Component,
@@ -167,13 +177,16 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     OnboardingformSubmittedFormComponent,
     OnboardingRoomdetailsFormComponent,
     OnboardingThankyouFormComponent,
+    NotificationHandlingComponent,
     HeaderWhiteComponent,
     IntroNineComponent,
     LandingV9Component,
-
+EnquiryComponent,
+    LoginDetailsComponent,
     IntroTenComponent,
     LandingV10Component,
     DemosComponent,
+    CheckoutComponent,
     BlogDetailsComponent,
     BlogDetailsPageComponent,
     IntroElevenComponent,
@@ -206,9 +219,9 @@ import { ManageBookingsComponent } from './Manage-Bookings/Manage-Bookings.compo
     ],
   exports: [
     FormsModule,
-  ]
+  ],
 
-
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
   // exports: ScrollToDirective
 })
 export class LandingModule {}

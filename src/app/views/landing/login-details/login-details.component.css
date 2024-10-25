@@ -11,7 +11,14 @@ table {
   th {
     background-color: #ddd;
   }
+  .search-alignment{
+  margin-top: -14px;
+    margin-left: -20px;
+  }
   
+  .search-button-data{
+    margin-left:-10px;
+  }
 
   nav > .nav.nav-tabs{
 
@@ -66,6 +73,210 @@ table {
     border: 1px solid #ddd;
     border-radius: 4px;
   }
+
+
+  /* label.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+  } */
+
+
+
+  label.radio-container::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid #271a55;
+    border-radius: 50%;
+  }
+
+
+
+  /* label.radio-container::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid #271a55;
+    border-radius: 50%;
+  } */
+
+
+  input[type="radio"]:checked + label.radio-container::before {
+    background-color: #271a55; 
+  }
+
+
+  label.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 46px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 19px;
+  }
+
+
+  .gridradio {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 5px;
+  }
+
+
+
+  @media (min-width: 769px) {
+    .radiosection {
+      display: none;
+    }
+  
+    input[type="radio"] {
+      display: none; /* Hide the default radio button */
+    }
+  
+    .gridradio {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-gap: 5px;
+    }
+  
+    .gridradio2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-gap: 5px;
+      position: relative;
+      padding-left: 46px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 19px;
+    }
+  
+    .gridradio-a {
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 19px;
+      text-align: center;
+    }
+  
+  
+  }
+
+
+
+  @media (max-width: 768px) {
+
+
+    .tabs button {
+      background-color: #f2f2f2;
+  border: none;
+      cursor: pointer;
+      text-align: center;
+       width: 165px;
+      padding: 20px;
+    }
+  
+    .radiosection2 {
+      display: none;
+    }
+  
+    
+  
+  
+  
+  .gridradio {
+   
+    display: flex;
+    flex-wrap: wrap;
+  
+    align-items: center;
+  }
+  
+  .gridradio2 {
+  
+    display: flex;
+    justify-content: center;
+    grid-gap: 1px;
+    font-size: 13px;
+  }
+  
+  
+  .gridradio, .gridradio2 {
+  
+    margin-right: 10px;
+  }
+  
+  
+  .featured-card {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  input[type="radio"] {
+    display: none; 
+  }
+  
+  label.radio-container {
+    display: block;
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+  }
+  
+  label.radio-container::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid #271a55;
+    border-radius: 50%;
+  }
+  
+  }
+
+
+
+  
+
+
+ 
+
+
+  .gridradio2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 5px;
+    position: relative;
+    padding-left: 46px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 19px;
+  }
+
+
+
+
   
   .reservation-list-header {
     display: flex;
@@ -115,3 +326,47 @@ table {
     flex-direction: column;
   }
 }
+
+.allignment{
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
+  font-size: x-small;
+  margin-right: 38px;
+}
+
+.allignment span {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.allignment button {
+  padding: 8px 16px;
+  background-color: #221950;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.allignment button:hover {
+  background-color: #221950;
+}
+
+.allignment button[disabled] {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

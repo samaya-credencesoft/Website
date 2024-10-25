@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { API_URL_IN, API_URL_NZ } from "src/app/app.component";
+import { API_URL_IN, API_URL_LMS, API_URL_NZ } from "src/app/app.component";
 import { Booking } from "src/app/model/booking";
 import { GoogleReview } from "src/app/model/googleReview";
 import { BusinessUser } from "src/app/model/user";
@@ -49,6 +49,9 @@ export class ListingService {
   runCampaign(campaignId:number,businessServiceId:string) {
     return this.http.get<any>(environment.apiUrlPromotion+ '/api/campaign/runCampaign/'+campaignId+'/businessLeadId/'+businessServiceId , { observe: 'response' });
    }
+   getGoogleReview(propertyId: number) {
+    return this.http.get<any>(this.API_URL + '/api/thm/getGoogleReviews?PropertyId=' + propertyId, { observe: 'response' });
+  }
   // findProductsByBusinessServiceId(businessServiceId: number) {
   //   return this.http.get<ProductGroup[]>(this.API_URL + '/api/thm/getProductList/' + businessServiceId, { observe: 'response' });
   // }
@@ -139,6 +142,35 @@ export class ListingService {
     );
   }
 
+  findPropertiesByemailenquirylms(email) {
+    this.setApi();
+    return this.http.get<any>(
+      API_URL_LMS +
+      '/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate' + '?email=' + email,
+      { observe: 'response' }
+    );
+  }
+
+
+  findPropertiesByMobilenumberenquiryLms(phone) {
+    this.setApi();
+    return this.http.get<any>(
+      API_URL_LMS +
+      '/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate' + '?phone=' + phone,
+      { observe: 'response' }
+    );
+  }
+
+  findPropertiesBybookingIdLms(enquiryId: number){
+    return this.http.get<any>(
+      API_URL_LMS + "/api/v1/accommodationEnquiry/getBySearchCriteriaFromCurrentDate" + '?enquiryId=' + enquiryId,
+      {
+        observe: "response",
+      }
+    );
+  }
+
+
   findPropertiesBybookingIdenquiry(bookingId:string,bookingStatus:string) {
     this.setApi();
     return this.http.get<any>(
@@ -178,6 +210,7 @@ export class ListingService {
       { observe: 'response' }
     );
   }
+
 
 
   findByPropertyId(id: number) {

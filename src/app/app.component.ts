@@ -17,6 +17,16 @@ export class AppComponent implements OnInit {
    ) {}
 
   ngOnInit() {
+    const hostname = window.location.hostname;
+console.log("jhjgfd")
+    // If the default URL is "bookone.io"
+    if (hostname == 'uat.bookone.io') {
+      this.router.navigate(['/home']);  // Redirect to home route
+    }
+    // If URL is "booking.seoname.bookone.io"
+    else if (hostname.startsWith('booking.') && hostname.endsWith('.bookone.io')) {
+      this.router.navigate(['details']);  // Redirect to listing details
+ }
 
     // this.course = this.route.snapshot.data['course'];
     // ....
@@ -49,6 +59,7 @@ export class AppComponent implements OnInit {
 export const PARENTS_ORGANIZATION_ID = environment.parentOrganisationId;
 // export const HOME_ADDRESS = environment.homeAddress;
 export const API_URL = environment.apiUrl;
+export const API_URL_LMS = environment.apiLms;
 
 
 export const BUSINESS_TYPE_SOFTWARE_CONSULTING = "Software Consulting Services";

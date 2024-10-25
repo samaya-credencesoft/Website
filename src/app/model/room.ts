@@ -47,5 +47,6 @@ export class Room {
     imageList: RoomImage[];
     roomRatePlans: RoomRatePlans[];
     ratesAndAvailabilityDtos: RatesAndAvailability[];
+  roomsAvailable: number;
     constructor() { }
 }

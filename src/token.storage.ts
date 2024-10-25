@@ -22,6 +22,7 @@ import { BusinessService } from './app/model/businessService';
 import { Property } from './app/model/property';
 // import { String } from 'cypress/types/lodash';
 
+
 const SELECTED_COUNTRY = 'selectedCountry';
 const TOKEN_KEY = 'AuthToken';
 const BOOKSLOTDATA = 'slotbookdata';
@@ -29,6 +30,7 @@ const CUSTOMER = 'Customer';
 const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
 const BOOKINGCITY = 'bookingCity';
+const WEBSITE_BOOKING_URL ='websitebookingURL';
 const CITY = 'city';
 const ORGANIZATION_ID = "OrganizationId";
 const BUSINESS_SERVICE = 'businessservice';
@@ -55,7 +57,10 @@ const LOGIN_EMAIL = 'loginemail';
 const LOGIN_PASSWORD = 'loginpassword';
 const USER_ID = 'UserId';
 const USER_NAME = 'UserName';
+const PROPERTY_URL = 'PropertyUrl';
 const REQUEST_HANDLE = "requestvalue";
+const BOOKINGROOMPRICE = 'bookingPrice';
+
 
 @Injectable()
 export class TokenStorage {
@@ -66,6 +71,7 @@ export class TokenStorage {
     return true;
   }
 
+
   public getItem(key) {
     const value = window.sessionStorage.getItem(key);
     try {
@@ -74,10 +80,20 @@ export class TokenStorage {
       return null;
     }
   }
+  public getPayment2Data(): Payment {
+    return JSON.parse(localStorage.getItem(PAYMENT2) as string);
+  }
   public saveUserName(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(USER_NAME, token);
   }
+
+
+  public savePropertyUrl(PropertyUrl: string) {
+    window.sessionStorage.removeItem(PROPERTY_URL);
+    window.sessionStorage.setItem(PROPERTY_URL, PropertyUrl);
+  }
+
 
   public saveBusinessService(services: BusinessService[]) {
     window.sessionStorage.removeItem(BUSINESS_SERVICE);
@@ -87,6 +103,7 @@ export class TokenStorage {
       window.sessionStorage.setItem(BUSINESS_SERVICE, null);
     }
   }
+
 
   public saveRole(roles: string[]) {
     window.sessionStorage.removeItem(ROLES);
@@ -107,6 +124,29 @@ export class TokenStorage {
       localStorage.setItem(PROPERTY_SERVICE_DATA, '{}');
       }
     }
+
+
+    saveSelectedServices(services: any[]) {
+      sessionStorage.setItem('selectedServices', JSON.stringify(services));
+    }
+
+
+    getSelectedServices() {
+      return JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
+    }
+
+    public saveBookingRoomPrice(roomPrice: number) {
+      localStorage.removeItem(BOOKINGROOMPRICE);
+      if (roomPrice !== null && roomPrice !== undefined) {
+        localStorage.setItem(BOOKINGROOMPRICE, roomPrice.toString());
+      } else {
+        localStorage.setItem(BOOKINGROOMPRICE, '{}');
+      }
+    }
+    public getBookingRoomPrice() {
+      return localStorage.getItem(BOOKINGROOMPRICE);
+    }
+
     public getPropertyData(): BusinessUser {
       return JSON.parse(localStorage.getItem(PROPERTY) as string);
     }
@@ -114,24 +154,39 @@ export class TokenStorage {
       return JSON.parse(localStorage.getItem(PAYMENT) as string);
     }
 
+
     public checkRequestDialog(): string {
       return JSON.parse(sessionStorage.getItem(REQUEST_HANDLE));
     }
     public getPropertyId(): string {
       return sessionStorage.getItem(PROPERTY_ID);
     }
-    
+
+
+
+
+
+
+    public getPropertyUrl(): string {
+      return sessionStorage.getItem(PROPERTY_URL);
+    }
+
+
   clearBusiness() {
   localStorage.removeItem(BUSINESS_SERVICE);
     // window.localStorage.removeItem(BOOKSLOTDATA);
   localStorage.removeItem(BOOKINGDATA);
   }
 
+
   clearCountry() {
   localStorage.removeItem(COUNTRY);
   }
   public getBookingData(): Booking {
-    return JSON.parse(localStorage.getItem(BOOKINGDATA) as string);
+    return JSON.parse(sessionStorage.getItem(BOOKINGDATA) as string);
+  }
+  public clearBookingData() {
+    return sessionStorage.removeItem(BOOKINGDATA);
   }
   public saveProperty(property: BusinessUser) {
     localStorage.removeItem(PROPERTY_DETAILS);
@@ -154,11 +209,11 @@ export class TokenStorage {
   }
     // Booking
     public saveBookingData(booking: Booking) {
-      localStorage.removeItem(BOOKINGDATA);
+      sessionStorage.removeItem(BOOKINGDATA);
         if (booking !== null || booking !== undefined) {
-        localStorage.setItem(BOOKINGDATA, JSON.stringify(booking));
+        sessionStorage.setItem(BOOKINGDATA, JSON.stringify(booking));
         } else {
-        localStorage.setItem(BOOKINGDATA,  '{}');
+        sessionStorage.setItem(BOOKINGDATA,  '{}');
         }
       }
   public saveCity(city:any) {
@@ -185,6 +240,7 @@ export class TokenStorage {
   //   return JSON.parse(localStorage.getItem(PROPERTY) as string);
   // }
 
+
   // Auth
   signOut() {
   localStorage.removeItem(BOOKSLOTDATA);
@@ -194,6 +250,8 @@ export class TokenStorage {
   window.sessionStorage.removeItem(REQUEST_HANDLE);
     //window.localStorage.clear();
   }
+
+
 
 
   public saveToken(token: string) {
@@ -214,19 +272,23 @@ export class TokenStorage {
   localStorage.removeItem(LOGIN_EMAIL);
   localStorage.setItem(LOGIN_EMAIL, username);
 
+
   localStorage.removeItem(LOGIN_PASSWORD);
   localStorage.setItem(LOGIN_PASSWORD, password);
   }
+
 
   public saveLoginEmail(username: string) {
   localStorage.removeItem(LOGIN_EMAIL);
   localStorage.setItem(LOGIN_EMAIL, username);
   }
 
+
   public saveLoginPassword(password: string) {
   localStorage.removeItem(LOGIN_PASSWORD);
   localStorage.setItem(LOGIN_PASSWORD, password);
   }
+
 
   // public saveCustomer(customer: Customer) {
   // localStorage.removeItem(CUSTOMER);
@@ -243,6 +305,7 @@ export class TokenStorage {
   localStorage.removeItem(LOGIN_EMAIL);
   }
 
+
   public getLoginUserEmail() {
     return localStorage.getItem(LOGIN_EMAIL);
   }
@@ -253,9 +316,12 @@ export class TokenStorage {
     return window.localStorage.getItem(SELECTED_COUNTRY);
   }
 
+
   public getUserName() {
     return localStorage.getItem(USER_NAME);
   }
+
+
 
 
   // BusinessTypeGroupList
@@ -271,9 +337,11 @@ export class TokenStorage {
     }
   }
 
+
   public getBusinessTypeListGroupData(): any[] {
     return JSON.parse(localStorage.getItem(businessTypeGroupListDATA)as string);
   }
+
 
   // public getProperty(): BusinessUser {
   //   return JSON.parse(localStorage.getItem(PROPERTY_DETAILS) as string);
@@ -291,6 +359,7 @@ export class TokenStorage {
     window.sessionStorage.removeItem(ORGANIZATION_ID);
     window.sessionStorage.setItem(ORGANIZATION_ID, organizationId.toString());
   }
+
 
   public saveRoomTypes(roomTypes: Room[]) {
     // Logger.log(roomTypes);
@@ -316,6 +385,7 @@ export class TokenStorage {
       window.sessionStorage.setItem(PROPERTY_ID, null);
     }
   }
+
 
   // public saveProperty(property: BusinessUser) {
   // localStorage.removeItem(PROPERTY_DETAILS);
@@ -368,9 +438,11 @@ export class TokenStorage {
     }
   }
 
+
   public getBusinessTypeListData(): any[] {
     return JSON.parse(localStorage.getItem(businessTypeListDATA) as string);
   }
+
 
   // public saveSlotData(businessServiceTypes: BusinessServiceTypes[]) {
   // localStorage.removeItem(SLOTDATA);
@@ -384,12 +456,14 @@ export class TokenStorage {
   //   }
   // }
 
+
   // public getSlotData(): BusinessServiceTypes[] {
   //   return JSON.parse(localStorage.getItem(SLOTDATA) as string);
   // }
   // public getServiceData(): PropertyServiceDTO[] {
   //   return JSON.parse(localStorage.getItem(PROPERTY_SERVICE_DATA) as string);
   // }
+
 
   // PROPERTY_SERVICE_DATA
   // public saveServiceData(propertyServiceDTO: PropertyServiceDTO[]) {
@@ -413,9 +487,11 @@ export class TokenStorage {
   //   }
   // }
 
+
   // public getBookingData(): Booking {
   //   return JSON.parse(localStorage.getItem(BOOKINGDATA) as string);
   // }
+
 
   clearHotelBooking() {
   localStorage.removeItem(BOOKINGDATA);
@@ -430,18 +506,39 @@ export class TokenStorage {
     }
   }
 
+
   public getBookingCity() {
     return localStorage.getItem(BOOKINGCITY);
   }
+
 
   clearBookingCity() {
   localStorage.removeItem(BOOKINGCITY);
   }
 
 
+  public savewebsitebookingURL(websitebookingURL: string){
+    localStorage.removeItem(WEBSITE_BOOKING_URL);
+    if (websitebookingURL !== null || websitebookingURL !== undefined) {
+    localStorage.setItem(WEBSITE_BOOKING_URL, websitebookingURL);
+    } else {
+    localStorage.setItem(WEBSITE_BOOKING_URL, '{}');
+    }
+  }
+
+
+  public getwebsitebookingURL() {
+    return localStorage.getItem(WEBSITE_BOOKING_URL);
+  }
+
+
+  clearwebsitebookingURL() {
+  localStorage.removeItem(WEBSITE_BOOKING_URL);
+  }
   // public getRoomsData(): Room[] {
   //   return JSON.parse(localStorage.getItem(ROOMSDATA) as string);
   // }
+
 
   clearRoomsData() {
   localStorage.removeItem(ROOMSDATA);
@@ -454,6 +551,7 @@ export class TokenStorage {
     localStorage.setItem(PAYMENT, '{}');
     }
   }
+
 
   // public getPaymentData(): Payment {
   //   return JSON.parse(localStorage.getItem(PAYMENT) as string);
@@ -468,6 +566,7 @@ export class TokenStorage {
     }
   }
 
+
   // public getPayment2Data(): Payment {
   //   return JSON.parse(localStorage.getItem(PAYMENT2) as string);
   // }
@@ -480,6 +579,7 @@ export class TokenStorage {
     localStorage.setItem(PROPERTY,  '{}');
     }
   }
+
 
   // BusinessService
   // public saveBusinessService(businessUser: BusinessUser[]) {
@@ -494,12 +594,15 @@ export class TokenStorage {
   //   }
   // }
 
+
   // public getBusinessService(): BusinessUser[] {
   //   return JSON.parse(localStorage.getItem(BUSINESS_SERVICE) as string);
   // }
 
+
    // Current City
 public saveCurrentCity(currentCity: string){
+
 
 localStorage.removeItem(CURRENT_CITY);
   if (currentCity !== null || currentCity !== undefined) {
@@ -511,13 +614,17 @@ localStorage.removeItem(CURRENT_CITY);
   }
 }
 
+
 public getCurrentCity(){
   return localStorage.getItem(CURRENT_CITY);
 }
 
+
 // delivery option
 
+
 // public saveDeliveryOption(deliveryOption: DeliveryOption){
+
 
 // localStorage.removeItem(DELIVERY_OPTION);
 //   if (deliveryOption !== null || deliveryOption !== undefined) {
@@ -530,7 +637,11 @@ public saveSelectedCountry(countryCode: string) {
   window.localStorage.setItem(SELECTED_COUNTRY, countryCode);
 }
 
+
 // public getDeliveryOption(): DeliveryOption {
 //   return JSON.parse(localStorage.getItem(DELIVERY_OPTION) as string);
 // }
 }
+
+
+

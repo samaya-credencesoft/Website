@@ -11,6 +11,7 @@ import {
   RouteConfigLoadEnd,
   NavigationExtras,
 } from "@angular/router";
+// import { Location } from '@angular/common';
 import { Property } from 'src/app/model/property';
 import { CheckUserType } from 'src/app/model/checkUserType';
 // import { HOME_ADDRESS } from 'src/app/app.component';
@@ -34,7 +35,7 @@ const TOKEN_PREFIX = "Bearer ";
 export class LoginCancelPageComponent implements OnInit {
   emailt :UntypedFormControl = new UntypedFormControl();
   passwordd :UntypedFormControl = new UntypedFormControl();
-  
+
   // email: string;
    returnUrl: string;
 
@@ -52,7 +53,7 @@ export class LoginCancelPageComponent implements OnInit {
   property: Property;
   // homeAddress: String;
   signinForm: FormGroup;
-
+  businessUserdata:BusinessUser
   noOfRoomType: number = 0;
   contactEmail: string;
   contactMobile: string;
@@ -66,36 +67,43 @@ export class LoginCancelPageComponent implements OnInit {
   showListingDetails: boolean = false;
   isdone: boolean=false;
   propertyname:string;
- 
- 
+  businessEmail: string;
+
+
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
     this.isdone = true;
     this.propertyname= this.propertyname;
-    console.log('data is',this.propertyname);
-    
-    
+    console.log('data is',this.businessUser);
+
+
   }
   constructor(
+    // private location: Location,
  private router: Router,
     private jwtAuthService: JwtAuthService,
-   
+
     private route: ActivatedRoute,
-    
+
     private token: TokenStorage,
   ) {
     this.property = new Property();
+    this.businessUserdata = new BusinessUser();
     this.model = new ApplicationUser();
     this.checkUserType = new CheckUserType();
+    this.businessUserdata = this.token.getProperty();
     // this.homeAddress = HOME_ADDRESS;
    }
 
   ngOnInit() {
-    console.log('data is',this.propertyname);
+    // console.log('data is',JSON.stringify(this.businessUserdata));
+    this.businessEmail = this.businessUserdata?.email;
+    // console.log('data is one',this.businessEmail);
+
     // this.contactEmail = CONT_EMAIL;
     // this.contactMobile = const CONT_MOBILE;
     this.businessUser = history.state.businessUser;
-
+// console.log("user is "+ JSON.stringify(this.businessUser))
     this.signinForm = new FormGroup({
       username: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required),
@@ -114,17 +122,37 @@ export class LoginCancelPageComponent implements OnInit {
       }
     });
   }
+  // goBack(): void {
+  //   this.location.back();
+  // }
 
   signIn() {
-    
+this.model.username = this.businessEmail;
     this.msgs = [];
     Logger.log("this.model : " + JSON.stringify(this.model));
     this.jwtAuthService.login(this.model).subscribe( response => {
-      this.router.navigate([this.returnUrl || "/login-details"],{ state: { businessUser: this.businessUser } });
+      this.router.navigate([this.returnUrl || "/manage-property-details"],{ state: { businessUser: this.businessUser } });
     },
     (error) => {
         // Your existing error handling code
     });
+}
+
+
+
+
+
+
+cancel() {
+
+  this.msgs = [];
+  Logger.log("this.model : " + JSON.stringify(this.model));
+  this.jwtAuthService.login(this.model).subscribe( response => {
+    this.router.navigate([this.returnUrl || "/cancel-booking"],{ state: { businessUser: this.businessUser } });
+  },
+  (error) => {
+      // Your existing error handling code
+  });
 }
 
   //       this.loader = false;
