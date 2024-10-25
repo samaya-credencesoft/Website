@@ -711,26 +711,7 @@
                                     <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                     <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                                   </div>
-                                  <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
 
-                                    <li *ngIf=" plan.extraChargePerPerson >0">
-                                      <b style="color: #031EAA !important;">
-                                      Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerPerson
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-                                    <li *ngIf=" plan.extraChargePerChild >0">
-                                      <b style="color: #031EAA !important;">
-                                        Extra Child charge :
-                                        </b>
-                                      <span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerChild
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-
-                                  </div>
 
                                   <div style="padding-top: 10px;margin-left: 6px;">
                                     <span style="font-family: 'sans-sarif Lato';
@@ -750,6 +731,27 @@
                                           : currency
                                           : "symbol"
                                           : "1.2-2"}}</span>
+                                  </div>
+
+                                  <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
+
+                                    <li *ngIf=" plan.extraChargePerPerson >0">
+                                      <b style="color: #031EAA !important;">
+                                      Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerPerson
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
+                                    <li *ngIf=" plan.extraChargePerChild >0">
+                                      <b style="color: #031EAA !important;">
+                                        Extra Child charge :
+                                        </b>
+                                      <span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerChild
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
+
                                   </div>
 
                                   <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -815,23 +817,7 @@
                                   background-color: #4A4A4A !important;">
                                     <h4 style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                                   </div>
-                                  <div style="margin-left: 7px;">
 
-                                    <li>
-                                      <b style="color: #031EAA !important;"> Extra person charge :</b>
-                                      <span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerPerson
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-                                    <li>
-                                      <b style="color: #031EAA !important;">Extra Child charge :</b>
-                                      <span style="color: black !important; font-weight: bold;"> {{
-                                        plan.extraChargePerChild
-                                        | currency: currency:"symbol":"1.2-2"
-                                        }}</span>
-                                    </li>
-                                  </div>
 
                                   <div style="padding-top: 10px; margin-left: 6px;">
                                     <span style="font-family: 'sans-sarif Lato';
@@ -851,6 +837,23 @@
                                           : currency
                                           : "symbol"
                                           : "1.2-2"}}</span>
+                                  </div>
+                                  <div style="margin-left: 7px;">
+
+                                    <li>
+                                      <b style="color: #031EAA !important;"> Extra person charge :</b>
+                                      <span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerPerson
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
+                                    <li>
+                                      <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                      <span style="color: black !important; font-weight: bold;"> {{
+                                        plan.extraChargePerChild
+                                        | currency: currency:"symbol":"1.2-2"
+                                        }}</span>
+                                    </li>
                                   </div>
                                   <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                                   hasPercentage(
@@ -1100,25 +1103,7 @@
                               <h5 *ngIf="plan.name !== 'GHC'" style=" font-size: 15px; color: #fff !important;" class="planname">{{plan.name}}</h5>
                                 <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                 <h5 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h5></div>
-                              <div style="margin-left: 7px;" *ngIf="plan.showDetails">
 
-                                <li *ngIf=" plan.extraChargePerPerson >0">
-                                  <b style="color: #031EAA !important;"> Extra person charge : </b>
-                                  <span style=" color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerPerson
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-
-                                <li *ngIf=" plan.extraChargePerChild >0">
-                                  <b style="color: #031EAA !important;"> Extra Child charge : </b>
-                                  <span style=" color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerChild
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-
-                              </div>
 
                               <div style="padding-top: 10px; margin-left: 7px;">
                                 <span style="    font-family: 'sans-sarif Lato';
@@ -1139,6 +1124,25 @@
                                       : currency
                                       : "symbol"
                                       : "1.2-2"}}</span>
+                              </div>
+                              <div style="margin-left: 7px;" *ngIf="plan.showDetails">
+
+                                <li *ngIf=" plan.extraChargePerPerson >0">
+                                  <b style="color: #031EAA !important;"> Extra person charge : </b>
+                                  <span style=" color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerPerson
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+
+                                <li *ngIf=" plan.extraChargePerChild >0">
+                                  <b style="color: #031EAA !important;"> Extra Child charge : </b>
+                                  <span style=" color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerChild
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+
                               </div>
 
                               <div style="color: #271a55; font-weight: 600; margin-left: 7px;" *ngIf="
@@ -1197,23 +1201,7 @@
                               <div class="card-header" style="padding-left: 7px;
                               padding-top: 5px;
                               padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
-                              <div style="margin-left: 6px;">
 
-
-                                <li class="listplan"  *ngIf="plan.showDetails">
-                                 <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerPerson
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-                                <li class="listplan"  *ngIf="plan.showDetails">
-                                  <b style="color: #031EAA !important;"> Extra Child charge :</b>
-                                  <span style="color: black !important; font-weight: bold;"> {{
-                                    plan.extraChargePerChild
-                                    | currency: currency:"symbol":"1.2-2"
-                                    }}</span>
-                                </li>
-                              </div>
 
                               <div style="padding-top: 10px;margin-left: 6px;" >
                                 <span style="font-family: 'sans-sarif Lato';
@@ -1233,6 +1221,23 @@
                                       : currency
                                       : "symbol"
                                       : "1.2-2"}}</span>
+                              </div>
+                              <div style="margin-left: 6px;">
+
+
+                                <li class="listplan"  *ngIf="plan.showDetails">
+                                 <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerPerson
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
+                                <li class="listplan"  *ngIf="plan.showDetails">
+                                  <b style="color: #031EAA !important;"> Extra Child charge :</b>
+                                  <span style="color: black !important; font-weight: bold;"> {{
+                                    plan.extraChargePerChild
+                                    | currency: currency:"symbol":"1.2-2"
+                                    }}</span>
+                                </li>
                               </div>
 
                               <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -1494,25 +1499,7 @@
                               <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                               <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                             </div>
-                            <div style="margin-left: 7px;">
 
-
-                              <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
-                                <b style="color: #031EAA !important;">Extra person charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
-                                <b style="color: #031EAA !important;">Extra Child charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-
-                            </div>
 
                             <div style="padding-top: 10px; margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -1532,6 +1519,25 @@
                                 : currency
                                 : "symbol"
                                 : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 7px;">
+
+
+                              <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
+                                <b style="color: #031EAA !important;">Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
+                                <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+
                             </div>
 
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
@@ -1597,26 +1603,7 @@
                             background-color: #4A4A4A !important;">
                               <h4 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                             </div>
-                            <div style="margin-left: 6px;">
 
-
-                              <li class="listplan" *ngIf="plan.showDetails">
-                                <b style="color: #031EAA !important;">Extra person charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li class="listplan" *ngIf="plan.showDetails">
-                                <b style="color: #031EAA !important;">
-                                  Extra Child charge :
-                                </b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                            </div>
 
                             <div style="padding-top: 10px; margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -1636,6 +1623,26 @@
                                     : currency
                                     : "symbol"
                                     : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 6px;">
+
+
+                              <li class="listplan" *ngIf="plan.showDetails">
+                                <b style="color: #031EAA !important;">Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li class="listplan" *ngIf="plan.showDetails">
+                                <b style="color: #031EAA !important;">
+                                  Extra Child charge :
+                                </b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
                             </div>
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                             hasPercentage(
@@ -2449,26 +2456,7 @@
                               <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                               <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                             </div>
-                            <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
 
-                              <li *ngIf=" plan.extraChargePerPerson >0">
-                                <b style="color: #031EAA !important;">
-                                Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li *ngIf=" plan.extraChargePerChild >0">
-                                <b style="color: #031EAA !important;">
-                                  Extra Child charge :
-                                  </b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-
-                            </div>
 
                             <div style="padding-top: 10px;margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -2488,6 +2476,26 @@
                                     : currency
                                     : "symbol"
                                     : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
+
+                              <li *ngIf=" plan.extraChargePerPerson >0">
+                                <b style="color: #031EAA !important;">
+                                Extra person charge : </b><span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li *ngIf=" plan.extraChargePerChild >0">
+                                <b style="color: #031EAA !important;">
+                                  Extra Child charge :
+                                  </b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+
                             </div>
 
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -2553,23 +2561,7 @@
                             background-color: #4A4A4A !important;">
                               <h4 style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                             </div>
-                            <div style="margin-left: 7px;">
 
-                              <li>
-                                <b style="color: #031EAA !important;"> Extra person charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerPerson
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                              <li>
-                                <b style="color: #031EAA !important;">Extra Child charge :</b>
-                                <span style="color: black !important; font-weight: bold;"> {{
-                                  plan.extraChargePerChild
-                                  | currency: currency:"symbol":"1.2-2"
-                                  }}</span>
-                              </li>
-                            </div>
 
                             <div style="padding-top: 10px; margin-left: 6px;">
                               <span style="font-family: 'sans-sarif Lato';
@@ -2589,6 +2581,23 @@
                                     : currency
                                     : "symbol"
                                     : "1.2-2"}}</span>
+                            </div>
+                            <div style="margin-left: 7px;">
+
+                              <li>
+                                <b style="color: #031EAA !important;"> Extra person charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerPerson
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
+                              <li>
+                                <b style="color: #031EAA !important;">Extra Child charge :</b>
+                                <span style="color: black !important; font-weight: bold;"> {{
+                                  plan.extraChargePerChild
+                                  | currency: currency:"symbol":"1.2-2"
+                                  }}</span>
+                              </li>
                             </div>
                             <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                             hasPercentage(
@@ -2795,25 +2804,7 @@
                           <h5 *ngIf="plan.name !== 'GHC'" style=" font-size: 15px; color: #fff !important;" class="planname">{{plan.name}}</h5>
                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                             <h5 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h5></div>
-                          <div style="margin-left: 7px;" *ngIf="plan.showDetails">
 
-                            <li *ngIf=" plan.extraChargePerPerson >0">
-                              <b style="color: #031EAA !important;"> Extra person charge : </b>
-                              <span style=" color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-
-                            <li *ngIf=" plan.extraChargePerChild >0">
-                              <b style="color: #031EAA !important;"> Extra Child charge : </b>
-                              <span style=" color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-
-                          </div>
 
                           <div style="padding-top: 10px; margin-left: 7px;">
                             <span style="    font-family: 'sans-sarif Lato';
@@ -2834,6 +2825,25 @@
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
+                          </div>
+                          <div style="margin-left: 7px;" *ngIf="plan.showDetails">
+
+                            <li *ngIf=" plan.extraChargePerPerson >0">
+                              <b style="color: #031EAA !important;"> Extra person charge : </b>
+                              <span style=" color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+
+                            <li *ngIf=" plan.extraChargePerChild >0">
+                              <b style="color: #031EAA !important;"> Extra Child charge : </b>
+                              <span style=" color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+
                           </div>
 
                           <div style="color: #271a55; font-weight: 600; margin-left: 7px;" *ngIf="
@@ -2889,23 +2899,7 @@
                           <div class="card-header" style="padding-left: 7px;
                           padding-top: 5px;
                           padding-right: 2px;padding-bottom:1px; background-color: #4A4A4A !important; "><h5 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h5></div>
-                          <div style="margin-left: 6px;">
 
-
-                            <li class="listplan"  *ngIf="plan.showDetails">
-                             <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                            <li class="listplan"  *ngIf="plan.showDetails">
-                              <b style="color: #031EAA !important;"> Extra Child charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                          </div>
 
                           <div style="padding-top: 10px;margin-left: 6px;" >
                             <span style="font-family: 'sans-sarif Lato';
@@ -2925,6 +2919,24 @@
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
+                          </div>
+
+                          <div style="margin-left: 6px;">
+
+
+                            <li class="listplan"  *ngIf="plan.showDetails">
+                             <b style="color: #031EAA !important;">Extra person charge :</b> <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+                            <li class="listplan"  *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;"> Extra Child charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
                           </div>
 
                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
@@ -3120,25 +3132,7 @@
                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                             <h4 *ngIf="plan.name === 'GHC'" style=" font-size: 15px; color: #fff !important;">Economy</h4>
                           </div>
-                          <div style="margin-left: 7px;">
 
-
-                            <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
-                              <b style="color: #031EAA !important;">Extra person charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                            <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
-                              <b style="color: #031EAA !important;">Extra Child charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-
-                          </div>
 
                           <div style="padding-top: 10px; margin-left: 6px;">
                             <span style="font-family: 'sans-sarif Lato';
@@ -3158,6 +3152,26 @@
                               : currency
                               : "symbol"
                               : "1.2-2"}}</span>
+                          </div>
+
+                          <div style="margin-left: 7px;">
+
+
+                            <li *ngIf="  plan.extraChargePerPerson >0 && plan.showDetails ">
+                              <b style="color: #031EAA !important;">Extra person charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+                            <li *ngIf=" plan.extraChargePerChild >0 && plan.showDetails">
+                              <b style="color: #031EAA !important;">Extra Child charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+
                           </div>
 
                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
@@ -3222,26 +3236,7 @@
                           background-color: #4A4A4A !important;">
                             <h4 style="font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
                           </div>
-                          <div style="margin-left: 6px;">
 
-
-                            <li class="listplan" *ngIf="plan.showDetails">
-                              <b style="color: #031EAA !important;">Extra person charge :</b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerPerson
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                            <li class="listplan" *ngIf="plan.showDetails">
-                              <b style="color: #031EAA !important;">
-                                Extra Child charge :
-                              </b>
-                              <span style="color: black !important; font-weight: bold;"> {{
-                                plan.extraChargePerChild
-                                | currency: currency:"symbol":"1.2-2"
-                                }}</span>
-                            </li>
-                          </div>
 
                           <div style="padding-top: 10px; margin-left: 6px;">
                             <span style="font-family: 'sans-sarif Lato';
@@ -3261,6 +3256,26 @@
                                   : currency
                                   : "symbol"
                                   : "1.2-2"}}</span>
+                          </div>
+                          <div style="margin-left: 6px;">
+
+
+                            <li class="listplan" *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;">Extra person charge :</b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerPerson
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
+                            <li class="listplan" *ngIf="plan.showDetails">
+                              <b style="color: #031EAA !important;">
+                                Extra Child charge :
+                              </b>
+                              <span style="color: black !important; font-weight: bold;"> {{
+                                plan.extraChargePerChild
+                                | currency: currency:"symbol":"1.2-2"
+                                }}</span>
+                            </li>
                           </div>
                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                           hasPercentage(
