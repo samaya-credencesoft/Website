@@ -125,6 +125,7 @@ export class ListingDetailOneComponent implements OnInit {
   successMessage: boolean = false;
   div: boolean = true;
   childno: any;
+  viewMore: boolean = false;
   success: any = null;
   selectedRoomIndex: number | null = null;
   subjectControl: FormControl = new FormControl();
