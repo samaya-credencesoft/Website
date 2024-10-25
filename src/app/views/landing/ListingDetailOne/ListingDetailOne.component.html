@@ -23,7 +23,7 @@
 
   <app-Header-Listingdetailsone   [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
   <div class="sticky-button"style="display: none;" >
-    <button class="btn " id="toggleCardBtn" style="font-size: 23px;background-color: #FFD700;color:black;font-weight: bold;">Booking Summary</button>
+    <button class="btn " id="toggleCardBtn" style="font-size: 23px;background-color: var(--secondary);color:var(--tertiary);font-weight: bold;">Booking Summary</button>
   </div>
 
   <!-- Sticky card -->
@@ -124,8 +124,14 @@
   <div class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px;">
  <!-- check availability section starts -->
  <div  *ngIf="(availableRooms?.length >=0 && availability ==true) || !availability">
-  <div  style="justify-content: space-evenly;" [ngStyle]="{'margin-top': businessUser?.website ? '0px' : '0px'}">
-    <div class="card" style="background-color: #D9D9D9; margin-left: 90px; margin-top: 100px;margin-right: 90px; margin-bottom: 30px;">
+  <div  style="justify-content: space-evenly; display: flex;" [ngStyle]="{'margin-top': businessUser?.website ? '0px' : '0px'}">
+    <div class="card" style="    background-color: #D9D9D9;
+    margin-top: 46px;
+    margin-bottom: 30px;
+    width: 77%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 26px;">
 
 
       <div class="row d-flex checkAva2" >
@@ -290,10 +296,16 @@
 </div>
 <!-- check availability section ends -->
  <!-- HERO SECTION starts -->
-<div style="margin-left: 90px; margin-right: 50px;">
-  <h2 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h2>
-  <p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
-</div>
+
+    <div class="container" style="max-width: 1500px !important;">
+      <div class="row mr-0 ml-0"  >
+
+        <div class="col-lg-12 pl-0 pr-0" >
+            <h2 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h2>
+            <p class="hero-subheading" style="font-weight: bold !important;" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
+      </div>
+     </div>
+    </div>
 
 <div class="container" style="max-width: 1500px !important;">
   <div class="row mr-0 ml-0"  >
@@ -304,7 +316,7 @@
       businessUser.imageList !== undefined &&
       businessUser?.imageList?.length > 0
     ">
-    <div class="col-8 mainimage" style="margin-top: 16px;"
+    <div class="col-8 mainimage p-0" style="margin-top: 16px;"
      *ngIf="businessUser?.imageList?.length > 1" (click)="openImage(room, businessUser.imageList, businessUser.name); showCarousel = true">
       <div aria-hidden="true" *ngIf="businessUser.imageList[0]">
         <a [ngStyle]="{
@@ -331,7 +343,7 @@
       </div>
     </div>
 
-    <div class="col-4  pl-0 pr-0 float-right filter-card" >
+    <div class="col-4 p-0 pl-0 pr-0 float-right filter-card" >
       <div class="container">
         <div class="row" >
           <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true">
@@ -437,11 +449,14 @@
 <!-- HERO SECTION ENDS -->
 
 <!-- aminities section and about us section starts -->
+<div class="container" style="max-width: 1500px !important;">
+  <div class="row mr-0 ml-0"  >
 
-<div class="d-flex popame" style="margin-top: 20px;">
+    <div class="col-lg-12 pl-0 pr-0" >
+<div class="d-flex" style="margin-top: 20px;">
 
-  <div class="col-7">
-    <div class="container-fluid popame2"   *ngIf="propertyServiceListData?.length >0 ">
+  <div class="col-7 p-0">
+    <div class="container-fluid popame2 pl-0"   *ngIf="propertyServiceListData?.length >0 ">
       <h3 class="ameniti1">Property Amenities</h3>
       <div style="background-color: #D9D9D92E;
       border-radius: 12px;
@@ -491,7 +506,7 @@
     </div>
   </div>
 
-  <div class="col-5">
+  <div class="col-5 p-0">
     <h3  class="ameniti1" *ngIf="isRestaurant || distance || DistanceRailway">About the property</h3>
     <div class="container-fluid" *ngIf="isRestaurant || distance || DistanceRailway"  >
       <div style="background-color: #D9D9D92E;
@@ -516,24 +531,32 @@
   </div>
 
 </div>
+</div>
+</div>
+</div>
 <!-- aminities section and about us section ends -->
 
  <!-- Property description section starts -->
 
- <div style="margin-top: 20px;">
-  <h3 style="padding-left: 56px;font-weight: bold;" *ngIf="businessUser.businessDescription">Property Description</h3>
+ <div class="container" style="max-width: 1500px !important;">
+  <div class="row mr-0 ml-0"  >
 
-  <div class=" popame" style="background-color: #D9D9D92E;
+    <div class="col-lg-12 pl-0 pr-0" >
+ <div style="margin-top: 20px;">
+  <h3 style="font-weight: bold; margin-left: 7px;" *ngIf="businessUser.businessDescription">Property Description</h3>
+
+  <div style="background-color: #D9D9D92E;
   border-radius: 12px;
   padding: 11px;
-  margin-right: 60px;
-  margin-top: 13px;
-  margin-left: 60px;">
+  margin-top: 13px;">
 
    <div *ngIf="businessUser.businessDescription"  style="padding:10px; font-weight: bold">
      <p [innerHTML]="businessUser.businessDescription">{{businessUser.businessDescription}}</p>
    </div>
 
+ </div>
+      </div>
+ </div>
  </div>
  </div>
 
@@ -543,7 +566,10 @@
 <!-- property room details starts -->
 <div class="container-fluid mt-4" id="accmdOne" *ngIf="availableRooms?.length >=0 && availability ==true">
 
-  <div class="desktop_view_room" >
+  <div class="container" style="max-width: 1500px !important;">
+    <div class="row mr-0 ml-0"  >
+
+      <div class="col-lg-12 pl-0 pr-0" >
     <h3 class="ameniti1" style="margin-top: 10px; margin-bottom: 23px;">Room Types</h3>
     <div *ngIf="this.activeForGoogleHotelCenter == true">
       <div *ngFor="let room of roomWithGHCPlan; let i = index" style="margin-bottom:20px" >
@@ -745,8 +771,8 @@
                                 {{ showFullDescriptionOne ? 'View Less' : 'View More' }}
                               </p>
                               <div class="d-flex justify-content-center" style="margin: 7px;">
-                                <button class="btn text-white" style="    background-color: #FEE13D;
-                                color: black !important;
+                                <button class="btn text-white" style="    background-color: var(--secondary);
+                                color: var(--tertiary);
                                 border-radius: 10px;
                                 font-weight: bold;" (click)="
                       onPlanSelected(plan, room);
@@ -840,8 +866,8 @@
                                 }}% Discount)
                               </div>
                                   <div class="d-flex justify-content-center" style="margin: 7px;">
-                                    <button  class="btn text-white" style="    background-color: #FEE13D;
-                                    color: black !important;
+                                    <button  class="btn text-white" style="    background-color: var(--secondary);
+                                    color: var(--tertiary);
                                     border-radius: 10px;
                                     font-weight: bold;" (click)="
                           onPlanSelected(plan, room);
@@ -1094,7 +1120,7 @@
                             {{ plan.showDetails ? 'View Less' : 'View More' }}
                           </a>
                               <div class="d-flex justify-content-center" style="margin:7px">
-                                <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
+                                <button class="btn" style="background-color: var(--secondary); color: var(--tertiary); border-radius: 10px; font-weight: bold;" (click)="
                             onPlanSelected(plan, room);
                             booking.roomName = rates.roomName;
                             selectedRoomName = rates.roomName;
@@ -1188,7 +1214,7 @@
                             {{ plan.showDetails ? 'View Less' : 'View More' }}
                           </a>
                               <div class="d-flex justify-content-center" style="margin:7px">
-                                <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
+                                <button class="btn" style="background-color: var(--secondary); color: var(--tertiary); border-radius: 10px; font-weight: bold;" (click)="
                       onPlanSelected(plan, room);
                       booking.roomName = rates.roomName;
                       selectedRoomName = rates.roomName;
@@ -1444,8 +1470,8 @@
                           {{ plan.showDetails ? 'View Less' : 'View More' }}
                         </a>
                             <div class="d-flex justify-content-center" style="margin: 7px;">
-                              <button class="btn text-white" style="    background-color: #FEE13D;
-                              color: black !important;
+                              <button class="btn text-white" style="    background-color: var(--secondary);
+                              color: var(--tertiary) !important;
                               border-radius: 10px;
                               font-weight: bold;" (click)="
                           onPlanSelected(plan, room);
@@ -1545,7 +1571,7 @@
                           {{ plan.showDetails ? 'View Less' : 'View More' }}
                         </a>
                             <div  class="d-flex justify-content-center" style="margin: 7px;">
-                              <button class="btn text-white" style="background-color: #FEE13D; color: black !important; border-radius: 10px; font-weight: bold;" (click)="
+                              <button class="btn text-white" style="background-color: var(--secondary); color: var(--tertiary) !important; border-radius: 10px; font-weight: bold;" (click)="
                     onPlanSelected(plan, room);
                     booking.roomName = rates.roomName;
                     selectedRoomName = rates.roomName;
@@ -1585,12 +1611,18 @@
   </div>
   </div>
 </div>
+</div>
+</div>
 <!-- property room details ends -->
 
 
 
  <!-- nearby section starts -->
-<div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;margin-left: 50px;margin-right: 50px;">
+ <div class="container" style="max-width: 1500px !important;">
+  <div class="row mr-0 ml-0"  >
+
+    <div class="col-lg-12 pl-0 pr-0" >
+<div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;">
   <div *ngFor="let blogPost of blogPosts.items">
     <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
       <h3 class="ameniti1">Nearby Places</h3>
@@ -1609,11 +1641,18 @@
     </div>
   </div>
 </div>
+</div>
+</div>
+</div>
 
  <!-- nearby section ends -->
 
  <!-- Add terms and conditions starts here -->
- <div  *ngFor="let bServiceDtoList of policies; let i = index" style="margin-left: 60px;margin-right: 60px; margin-top: 20px;">
+ <div class="container" style="max-width: 1500px !important;">
+  <div class="row mr-0 ml-0"  >
+
+    <div class="col-lg-12 pl-0 pr-0" >
+ <div  *ngFor="let bServiceDtoList of policies; let i = index" style=" margin-top: 20px;">
   <div *ngIf="bServiceDtoList?.policy" >
     <h3 class="ameniti1" style="padding-left:10px; padding-top: 10px;" *ngIf="policies">
       Terms & Conditions
@@ -1630,13 +1669,17 @@
     </div>
   </div>
 </div>
+</div>
+</div>
+</div>
 <!-- Add terms and conditions end here -->
 
   <!-- section reviews starts -->
+  <div class="container" style="max-width: 1500px !important;">
+    <div class="row mr-0 ml-0"  >
 
-  <div style="    margin-left: 60px;
- background-color: rgba(217, 217, 217, 0.1803921569);
-  margin-right: 60px;">
+      <div class="col-lg-12 pl-0 pr-0" >
+  <div style="background-color: rgba(217, 217, 217, 0.1803921569);">
     <div id="reviewsCarousel" class="carousel slide" data-ride="carousel" style="margin: 10px; position: relative;margin-left: 90px;margin-right: 50px;margin: auto;" *ngIf="googleReviews">
 
 
@@ -1660,7 +1703,7 @@
                   </div>
                  <div class="col-7" style="text-align: left;">
                   <h5 class="card-title reviewer-name" style="margin-bottom: 0px;">{{ item.reviewerName }}</h5>
-                  <div class="review-rating" style="color: #FFD700;">
+                  <div class="review-rating" style="color: var(--secondary);">
                     <span *ngFor="let star of [].constructor(item.rating)">★</span>
                   </div>
                   <p class="card-text scroll-bar-review" style="max-height: 4em; overflow-y: scroll; white-space: normal;background-color: white;padding: 12px;">{{ item.reviewText }}</p>
@@ -1683,60 +1726,68 @@
       </a>
     </div>
   </div>
+  </div>
+  </div>
+  </div>
    <!-- section reviews ends -->
 
    <!-- contact us section starts -->
-<div style="margin-top: 40px; margin-left: 90px; margin-right: 50px;">
-  <h2 class="ameniti1 text-center">Contact Our <b style="color: #E9BA78"> Support Team </b> </h2>
-<div class="contact-form  p-4">
+   <div class="container" style="max-width: 1500px !important;">
+    <div class="row mr-0 ml-0"  >
 
-  <div class="alert alert-success alert-dismissible fade show" role="alert"
-  *ngIf="!successMessage === false">
-    <div class="d-flex align-items-center">
-      <span class="alert-inner--icon mr-2"><i class="fa fa-thumbs-o-up"></i></span>
-      <span class="alert-inner--text">
-        <strong>Message Sent!</strong> Thanks for reaching us.
-        <button type="button" data-dismiss="alert" aria-label="Close" style="width: 20px;">
-          <span aria-hidden="true">×</span>
-        </button>
-      </span>
-    </div>
+      <div class="col-lg-12 pl-0 pr-0" >
+          <div style="margin-top: 40px; ">
+            <h2 class="ameniti1 text-center">Contact Our <b style="color: #E9BA78"> Support Team </b> </h2>
+          <div class="contact-form  p-4">
 
-  </div>
-
-  <form #contactForm=ngForm style="padding-left: 60px; padding-right: 60px;">
-    <div class="form-group">
-      <label for="name" style="font-weight: bold; font-size: 15px;">Name</label>
-      <input type="text" class="form-control text-form" id="name" [formControl]="nameControl" placeholder="Enter your name"  [(ngModel)]="name" >
-    </div>
-    <div class="form-group">
-      <label for="mobile"  style="font-weight: bold;font-size: 15px;">Mobile Number</label>
-      <input type="tel" class="form-control text-form"  [formControl]="phoneControl"  id="mobile"  [(ngModel)]="phone" placeholder="Enter your mobile number">
-    </div>
-    <div class="form-group" >
-      <label for="email"  style="font-weight: bold;font-size: 15px;">Email</label>
-      <input type="email" class="form-control text-form" [formControl]="fromEmailControl" id="email"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Enter your email" [(ngModel)]="fromEmail" >
-      <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
-                *ngIf="(fromEmailControl.touched || contactForm.submitted) && fromEmailControl.errors">
-                <span *ngIf="fromEmailControl.errors.required" class="text-danger">* Email is required </span>
-                <span *ngIf="fromEmailControl.errors.pattern" class="text-danger">Please enter valid email</span>
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+            *ngIf="!successMessage === false">
+              <div class="d-flex align-items-center">
+                <span class="alert-inner--icon mr-2"><i class="fa fa-thumbs-o-up"></i></span>
+                <span class="alert-inner--text">
+                  <strong>Message Sent!</strong> Thanks for reaching us.
+                  <button type="button" data-dismiss="alert" aria-label="Close" style="width: 20px;">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </span>
               </div>
 
-    </div>
-    <div class="form-group" >
-      <label for="message"  style="font-weight: bold;font-size: 15px;">Message</label>
-      <textarea class="form-control text-form" [formControl]="messageControl" id="message" rows="3" placeholder="Your message" [(ngModel)]="message"></textarea>
-      <div class="form-control-feedback pr-1 d-flex"
-              *ngIf="(messageControl.touched || contactForm.submitted) && messageControl.errors">
-              <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
             </div>
-    </div>
-    <button type="submit" class="btn property-submit" style="background-color: #FEE13D !important; color: black; font-size: 15px; font-weight: bold; margin-top: 20px;" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>Submit</button>
-  </form>
-</div>
-</div>
 
+            <form #contactForm=ngForm style="padding-left: 60px; padding-right: 60px;">
+              <div class="form-group">
+                <label for="name" style="font-weight: bold; font-size: 15px;">Name</label>
+                <input type="text" class="form-control text-form" id="name" [formControl]="nameControl" placeholder="Enter your name"  [(ngModel)]="name" >
+              </div>
+              <div class="form-group">
+                <label for="mobile"  style="font-weight: bold;font-size: 15px;">Mobile Number</label>
+                <input type="tel" class="form-control text-form"  [formControl]="phoneControl"  id="mobile"  [(ngModel)]="phone" placeholder="Enter your mobile number">
+              </div>
+              <div class="form-group" >
+                <label for="email"  style="font-weight: bold;font-size: 15px;">Email</label>
+                <input type="email" class="form-control text-form" [formControl]="fromEmailControl" id="email"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Enter your email" [(ngModel)]="fromEmail" >
+                <div class="form-control-feedback pr-1 d-flex justify-content-center align-items-center"
+                          *ngIf="(fromEmailControl.touched || contactForm.submitted) && fromEmailControl.errors">
+                          <span *ngIf="fromEmailControl.errors.required" class="text-danger">* Email is required </span>
+                          <span *ngIf="fromEmailControl.errors.pattern" class="text-danger">Please enter valid email</span>
+                        </div>
 
+              </div>
+              <div class="form-group" >
+                <label for="message"  style="font-weight: bold;font-size: 15px;">Message</label>
+                <textarea class="form-control text-form" [formControl]="messageControl" id="message" rows="3" placeholder="Your message" [(ngModel)]="message"></textarea>
+                <div class="form-control-feedback pr-1 d-flex"
+                        *ngIf="(messageControl.touched || contactForm.submitted) && messageControl.errors">
+                        <span *ngIf="messageControl.errors.required" class="text-danger">* Question is required </span>
+                      </div>
+              </div>
+              <button type="submit" class="btn property-submit" style="background-color: var(--secondary) !important; color: var(--tertiary); font-size: 15px; font-weight: bold; margin-top: 20px;" (click)="submitForm(contactForm)" [disabled]='contactForm.invalid'>Submit</button>
+            </form>
+          </div>
+          </div>
+      </div>
+      </div>
+      </div>
    <!-- contact us section ends -->
 
 
@@ -1811,9 +1862,9 @@
 
               <div *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true" style="margin-top: -18px;
                     margin-left: 15px;">
-                <button class="shadow " (click)="scrollToAccommodationDash()" style="background-color: #FEE13D;
+                <button class="shadow " (click)="scrollToAccommodationDash()" style="background-color: var(--secondary);
                 padding: 4px;
-                color: black;
+                color: var(--tertiary);
                 font-weight: 700;
                 border-radius: 7px;
                 padding-left: 14px;
@@ -2332,8 +2383,8 @@
                           {{ showFullDescriptionOne ? 'View Less' : 'View More' }}
                         </p>
                         <div class="d-flex justify-content-center" style="margin: 7px;">
-                          <button class="btn text-white" style="    background-color: #FEE13D;
-                          color: black !important;
+                          <button class="btn text-white" style="    background-color: var(--secondary);
+                          color: var(--tertiary) !important;
                           border-radius: 10px;
                           font-weight: bold;" (click)="
                 onPlanSelected(plan, room);
@@ -2427,8 +2478,8 @@
                           }}% Discount)
                         </div>
                             <div class="d-flex justify-content-center" style="margin: 7px;">
-                              <button  class="btn text-white" style="    background-color: #FEE13D;
-                              color: black !important;
+                              <button  class="btn text-white" style="    background-color: var(--secondary);
+                              color: var(--tertiary) !important;
                               border-radius: 10px;
                               font-weight: bold;" (click)="
                     onPlanSelected(plan, room);
@@ -2676,7 +2727,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div class="d-flex justify-content-center" style="margin:7px">
-                            <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
+                            <button class="btn" style="background-color: var(--tertiary); color: black; border-radius: 10px; font-weight: bold;" (click)="
                         onPlanSelected(plan, room);
                         booking.roomName = rates.roomName;
                         selectedRoomName = rates.roomName;
@@ -2767,7 +2818,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div class="d-flex justify-content-center" style="margin:7px">
-                            <button class="btn" style="background-color: #FEE13D; color: black; border-radius: 10px; font-weight: bold;" (click)="
+                            <button class="btn" style="background-color: var(--secondary); color: var(--tertiary); border-radius: 10px; font-weight: bold;" (click)="
                   onPlanSelected(plan, room);
                   booking.roomName = rates.roomName;
                   selectedRoomName = rates.roomName;
@@ -3001,8 +3052,8 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div class="d-flex justify-content-center" style="margin: 7px;">
-                            <button class="btn text-white" style="    background-color: #FEE13D;
-                            color: black !important;
+                            <button class="btn text-white" style="    background-color: var(--secondary);
+                            color: var(--tertiary) !important;
                             border-radius: 10px;
                             font-weight: bold;" (click)="
                         onPlanSelected(plan, room);
@@ -3101,7 +3152,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div  class="d-flex justify-content-center" style="margin: 7px;">
-                            <button class="btn text-white" style="background-color: #FEE13D; color: black !important; border-radius: 10px; font-weight: bold;" (click)="
+                            <button class="btn text-white" style="background-color: var(--secondary); color: var(--tertiary) !important; border-radius: 10px; font-weight: bold;" (click)="
                   onPlanSelected(plan, room);
                   booking.roomName = rates.roomName;
                   selectedRoomName = rates.roomName;
@@ -3210,7 +3261,7 @@
               </div>
              <div class="col-9">
               <h5 class="card-title reviewer-name">{{ item.reviewerName }}</h5>
-              <div class="review-rating" style="color: #FFD700;">
+              <div class="review-rating" style="color: var(--secondary);">
                 <span *ngFor="let star of [].constructor(item.rating)">★</span>
               </div>
               <p class="card-text">{{ item.reviewText }}</p>

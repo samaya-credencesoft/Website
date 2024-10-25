@@ -74,7 +74,8 @@ export class BookingComponent implements OnInit {
   parameterss2:Para[];
   parameterss3:Para[];
   externalReservationDtoList:externalReservationDtoList[];
-
+  policies = [];
+  businessTypeName: string;
   parameterss4:Para[];
   language:Language
   showAlert: boolean = false;
@@ -120,6 +121,8 @@ export class BookingComponent implements OnInit {
   prepareDay: number;
   prepareHour: number;
   prepareMinute: number;
+  propertyId: any;
+  hotelID: number;
 
   leadHour: number;
   leadDay: number;
@@ -247,7 +250,6 @@ export class BookingComponent implements OnInit {
       this.propertyData = this.token.getProperty();
 
 
-
     }
 
 
@@ -280,6 +282,8 @@ export class BookingComponent implements OnInit {
 
 
     }
+
+
 
   this.calculateserviceprice();
 
@@ -583,6 +587,12 @@ this.externalReservationdto =res.body
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
         this.currency = this.businessUser.localCurrency.toUpperCase();
     this.getOfferDetails();
+
+
+
+    if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
+      this.getPropertyDetailsById(this.bookingData.propertyId);
+    }
     this.mobileWallet = this.businessUser.mobileWallet;
     this.bankAccount = this.businessUser.bankAccount;
     //  Logger.log(' this.businessUser ===='+JSON.stringify( this.businessUser));
@@ -2008,6 +2018,69 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
       this.submitButtonDisable = true;
       this.bookingConfirmed = true;
     })
+  }
+
+  async getPropertyDetailsById(id: number) {
+    // debugger
+    // //console.log("id isequal to" + id)
+    try {
+      this.loader = true;
+      const data = await this.listingService?.findByPropertyId(id).toPromise();
+      if (data.status === 200) {
+        this.businessUser = data.body;
+
+        this.policies = this.businessUser.businessServiceDtoList.filter(
+          (ele) => ele.name === 'Accommodation'
+        );
+        this.token.saveProperty(this.businessUser);
+        this.currency = this.businessUser.localCurrency.toUpperCase();
+        this.businessTypeName = this.businessUser.businessType;
+        this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
+          (data) => data.name === this.businessUser.businessType
+        );
+
+        if (this.businessUser.primaryColor !== undefined) {
+          this.changeTheme(
+            this.businessUser.primaryColor,
+            this.businessUser.secondaryColor,
+            this.businessUser.tertiaryColor
+          );
+        }
+
+
+        this.changeDetectorRefs.detectChanges();
+      } else {
+        this.router.navigate(["/404"]);
+      }
+    } catch (error) {
+      this.loader = false;
+      // Handle the error appropriately, if needed.
+    }
+  }
+
+  changeTheme(primary: string, secondary: string, tertiary: string) {
+    document.documentElement.style.setProperty('--primary', primary);
+
+    document.documentElement.style.setProperty('--secondary', secondary);
+    document.documentElement.style.setProperty('--tertiary', tertiary);
+    document.documentElement.style.setProperty('--button-primary', tertiary);
+    document.documentElement.style.setProperty(
+      '--primary-gradient',
+      'linear-gradient( 180deg, ' + tertiary + ', ' + secondary + ')'
+    );
+    document.documentElement.style.setProperty(
+      '--secondary-gradient',
+      'linear-gradient( 312deg, ' + primary + ', ' + secondary + ')'
+    );
+    document.documentElement.style.setProperty(
+      '--secondary-one-gradient',
+      'linear-gradient( 180deg, ' + primary + ', ' + secondary + ')'
+    );
+
+    document.documentElement.style.setProperty(
+      '--third-gradient',
+      'linear-gradient( 180deg, ' + primary + ', ' + secondary + ')'
+    );
   }
 
   loadStripe() {
