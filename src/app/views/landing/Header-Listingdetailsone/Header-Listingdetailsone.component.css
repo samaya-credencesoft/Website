@@ -152,31 +152,21 @@ hr {
   padding: 5px;
   border-radius: 9px;
   border: 0px solid #6C8003;
-  background-color: #8EDDBE;
   color: #fff !important;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  animation: _ngcontent-serverApp-c98_unique-blink 3s linear infinite;
+
 
 }
 
-/* Blink animation keyframes */
-@keyframes unique-blink {
-  0%, 100% {
-      background-color: var(--primary); /* Start and end color */
-  }
-  50% {
-    background-color: var(--secondary); /* Middle color */
-  }
-}
 
 /* Visit Website Section */
 .unique-container {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #8EDDBE; /* Background for the container */
+
 }
 
 .unique-inner-div {

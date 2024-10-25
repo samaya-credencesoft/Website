@@ -3058,17 +3058,17 @@ textarea {
 }
 
 .Fillpaybtn {
-  background-color: #FFD700;
-  color: white;
+  background-color: var(--secondary);
+  color: var(--tertiary) !important;
   border: none;
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 10px 10px;
   border-radius: 4px;
   cursor: pointer;
   display: block;
-  margin:  auto;
+  margin: auto;
   text-align: center;
-  width: 150px;
+  width: 184px;
+  font-weight: bold;
 }
 
 .addon-title {

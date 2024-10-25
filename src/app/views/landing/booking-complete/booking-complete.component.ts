@@ -19,6 +19,8 @@ import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { EnquiryDto } from 'src/app/model/enquiry';
 import { RoomDetail } from 'src/app/model/RoomDetail';
 import { externalReservationDtoList } from 'src/app/model/externalReservation';
+import { ListingService } from 'src/services/listing.service';
+import { BusinessServiceDtoList } from 'src/app/model/businessServiceDtoList';
 
 @Component({
   selector: 'app-booking-complete',
@@ -63,6 +65,7 @@ export class BookingCompleteComponent implements OnInit {
   businessServiceDtoList: any[] = [];
   getDetailsData: any;
   dueAmount: number;
+  businessServiceDto: BusinessServiceDtoList;
 
   constructor(
     private http: HttpClient,
@@ -73,6 +76,7 @@ export class BookingCompleteComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef,
     private location: Location,
     private router: Router,
+    private listingService: ListingService,
   ) {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
@@ -135,7 +139,9 @@ export class BookingCompleteComponent implements OnInit {
                   this.getDetailsData = element.advanceAmountPercentage;
                 }
                 });
-
+                if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
+                  this.getPropertyDetailsById(this.bookingData.propertyId);
+                }
   }
 
   ngOnInit() {
@@ -375,6 +381,67 @@ this.hotelBookingService
         this.accommodationEnquiryBookingData();
     }, 3000);
   }
+
+  async getPropertyDetailsById(id: number) {
+
+    try {
+
+      const data = await this.listingService?.findByPropertyId(id).toPromise();
+      if (data.status === 200) {
+        this.businessUser = data.body;
+
+
+        this.token.saveProperty(this.businessUser);
+        this.currency = this.businessUser.localCurrency.toUpperCase();
+
+        this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
+          (data) => data.name === this.businessUser.businessType
+        );
+
+        if (this.businessUser.primaryColor !== undefined) {
+          this.changeTheme(
+            this.businessUser.primaryColor,
+            this.businessUser.secondaryColor,
+            this.businessUser.tertiaryColor
+          );
+        }
+
+
+        this.changeDetectorRefs.detectChanges();
+      } else {
+        this.router.navigate(["/404"]);
+      }
+    } catch (error) {
+
+      // Handle the error appropriately, if needed.
+    }
+  }
+
+  changeTheme(primary: string, secondary: string, tertiary: string) {
+    document.documentElement.style.setProperty('--primary', primary);
+
+    document.documentElement.style.setProperty('--secondary', secondary);
+    document.documentElement.style.setProperty('--tertiary', tertiary);
+    document.documentElement.style.setProperty('--button-primary', tertiary);
+    document.documentElement.style.setProperty(
+      '--primary-gradient',
+      'linear-gradient( 180deg, ' + tertiary + ', ' + secondary + ')'
+    );
+    document.documentElement.style.setProperty(
+      '--secondary-gradient',
+      'linear-gradient( 312deg, ' + primary + ', ' + secondary + ')'
+    );
+    document.documentElement.style.setProperty(
+      '--secondary-one-gradient',
+      'linear-gradient( 180deg, ' + primary + ', ' + secondary + ')'
+    );
+
+    document.documentElement.style.setProperty(
+      '--third-gradient',
+      'linear-gradient( 180deg, ' + primary + ', ' + secondary + ')'
+    );
+  }
+
 
   externalReservation(booking){
     this.reservationRoomDetails =[];

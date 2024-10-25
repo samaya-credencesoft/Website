@@ -3737,7 +3737,7 @@ body {
 .CA {
   position: relative;
   float: right;
-  background-color: var(--primary);
+  background-color: var(--secondary);
   color: var(--tertiary) !important;
   padding: 9px;
   border-radius: 25px;
@@ -3751,14 +3751,11 @@ body {
   padding: 15px;
   position: relative;
   float: right;
-  background-color: #FEE13D !important;
-  color: black !important;
-  padding: 9px;
+  background-color: var(--secondary);
+  color: var(--tertiary);
+  padding: 15px;
   border-radius: 8px;
   font-weight: bold;
-
-  // width: 40%;
-  align-self: self-start;
 }
 
 .SVM {
@@ -3806,9 +3803,7 @@ body {
   color: var(--tertiary);
 }
 
-button {
-  background: var(--button-primary);
-}
+
 
 .header {
   background: var(--primary-gradient);
@@ -4572,7 +4567,7 @@ font-size: 23px !important;
     background-position: center;
     display: block;
     float: left;
-    width: 24.5%;
+    width: 28.5%;
     height: 113.66px;
     border-radius: 5px;
     margin-left: 6px;
@@ -4585,10 +4580,11 @@ font-size: 23px !important;
     background-position: center;
     display: block;
     float: left;
-    width: 541px;
+    width: 538px;
     height: 354px;
     margin-bottom: 10px;
     border-radius: 5px;
+
   }
 }
 
@@ -4605,7 +4601,7 @@ font-size: 23px !important;
 
 .checkAva3 {
   background-color: #fff;
-  height: 60px;
+  height: 63px;
   padding: 0px;
   padding-top: 4px;
   margin-bottom: 11px;
@@ -4627,7 +4623,7 @@ font-size: 23px !important;
 
 .checkAva6 {
   background-color: #fff;
-  height: 60px;
+  height: 63px;
   padding: 0px;
   padding-top: 4px;
   margin-bottom: 11px;
@@ -4729,11 +4725,12 @@ font-size: 23px !important;
 }
 
 .reviewer-name {
-  background-color: #fdd835;
+  background-color: var(--secondary);
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
   font-weight: bold;
+  color: var(--tertiary) !important;
 }
 
 .carousel-control-prev,
@@ -4771,14 +4768,14 @@ font-size: 23px !important;
 }
 
 .reviewbtn {
-  background-color: #fff;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 2px solid black;
   border-radius: 10px;
   font-weight: bold;
+  background-color: var(--secondary);
+  color: var(--tertiary) !important;
 }
 
 .reviewbtn2 {
