@@ -782,7 +782,7 @@
                       maxSelectRoom = rates.noOfAvailable;
                       maxOccupancy =
                         room.maximumOccupancy;
-                      onRoomBook(room.id, i);
+                        onRoomBook(room.id, i, r);
                       booking.roomId = room.id;
                       selectedRoomMaximumOccupancy =
                         room.maximumOccupancy;
@@ -877,7 +877,7 @@
                           maxSelectRoom = rates.noOfAvailable;
                           maxOccupancy =
                             room.maximumOccupancy;
-                          onRoomBook(room.id, i);
+                            onRoomBook(room.id, i, r);
                           booking.roomId = room.id;
                           selectedRoomMaximumOccupancy =
                             room.maximumOccupancy;
@@ -897,11 +897,47 @@
                       </div>
                     </div>
 
-                    <!-- Add on service Start -->
+                    <div class="col-12"  *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
+                      <div  *ngIf="viewAddon" id="serv" >
+                        <h3 class="servicetitle">Add-On Services</h3>
 
 
+                        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;" >
+                          <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
 
-                <!-- Add on service end -->
+                            <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                              <div class="d-flex" id="facilitysms"
+                                >
+
+                                <div>
+                                  <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
+                                  <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+                                </div>
+
+                                <!-- Service Name -->
+                                <div>
+                                  <p>{{fac.name}}</p>
+                                </div>
+
+                              </div>
+
+                              <div *ngIf="!fac.isAdded && !fac.quantity ">
+                                <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+                              </div>
+
+                              <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
+                                <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+                                <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+                                <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                        </div>
+
+
+                      </div>
+                    </div>
 
 
                   </div>
@@ -986,6 +1022,8 @@
                       <div class="mt-2"  [innerHTML]="room.description">
                         </div>
                   </div>
+
+
 
                     </div>
                   </div>
@@ -1128,7 +1166,7 @@
                             maxSelectRoom = rates.noOfAvailable;
                             maxOccupancy =
                               room.maximumOccupancy;
-                            onRoomBook(room.id, i);
+                            onRoomBook(room.id, i, r);
                             booking.roomId = room.id;
                             selectedRoomMaximumOccupancy =
                               room.maximumOccupancy;
@@ -1222,7 +1260,7 @@
                       maxSelectRoom = rates.noOfAvailable;
                       maxOccupancy =
                         room.maximumOccupancy;
-                      onRoomBook(room.id, i);
+                        onRoomBook(room.id, i, r);
                       booking.roomId = room.id;
                       selectedRoomMaximumOccupancy =
                         room.maximumOccupancy;
@@ -1239,9 +1277,53 @@
                       </ngx-slick-carousel>
                       </div>
 
+
                     </div>
                   </div>
 
+                   <!-- Add on service Start -->
+                    <div class="col-12" *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
+                      <div  *ngIf="viewAddon" id="serv" >
+                        <h3 class="servicetitle">Add-On Services</h3>
+
+
+                        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;" >
+                          <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
+
+                            <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                              <div class="d-flex" id="facilitysms"
+                                >
+
+                                <div>
+                                  <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
+                                  <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+                                </div>
+
+                                <!-- Service Name -->
+                                <div>
+                                  <p>{{fac.name}}</p>
+                                </div>
+
+                              </div>
+
+                              <div *ngIf="!fac.isAdded && !fac.quantity ">
+                                <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+                              </div>
+
+                              <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
+                                <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+                                <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+                                <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
+                              </div>
+                            </div>
+
+                          </ng-container>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  <!-- Add on service end -->
 
                 </div>
 
@@ -1481,7 +1563,7 @@
                           maxSelectRoom = rates.noOfAvailable;
                           maxOccupancy =
                             room.maximumOccupancy;
-                          onRoomBook(room.id, i);
+                            onRoomBook(room.id, i, r);
                           booking.roomId = room.id;
                           selectedRoomMaximumOccupancy =
                             room.maximumOccupancy;
@@ -1579,7 +1661,7 @@
                     maxSelectRoom = rates.noOfAvailable;
                     maxOccupancy =
                       room.maximumOccupancy;
-                    onRoomBook(room.id, i);
+                      onRoomBook(room.id, i, r);
                     booking.roomId = room.id;
                     selectedRoomMaximumOccupancy =
                       room.maximumOccupancy;
@@ -1597,6 +1679,49 @@
                   </div>
                   </div>
 
+                  <!-- Add on service Start -->
+                  <div class="col-12" class="col-12" *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
+                    <div  *ngIf="viewAddon" id="serv" >
+                      <h3 class="servicetitle">Add-On Services</h3>
+
+
+                      <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;" >
+                        <ng-container *ngFor="let fac of propertyServiceListDataOne; let i = index">
+
+                          <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                            <div class="d-flex" id="facilitysms"
+                              >
+
+                              <div>
+                                <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
+                                <img *ngIf="fac.imageUrl != null && fac.imageUrl != undefined" src="{{fac.imageUrl}}" alt="icon">
+                              </div>
+
+                              <!-- Service Name -->
+                              <div>
+                                <p>{{fac.name}}</p>
+                              </div>
+
+                            </div>
+
+                            <div *ngIf="!fac.isAdded && !fac.quantity ">
+                              <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
+                            </div>
+
+                            <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1 " class="d-flex " style="padding: 5px;">
+                              <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
+                              <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
+                              <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
+                            </div>
+                          </div>
+
+                        </ng-container>
+                      </div>
+
+
+                    </div>
+                  </div>
+            <!-- Add on service end -->
                 </div>
                 <div>
                   <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
@@ -2394,7 +2519,7 @@
                 maxSelectRoom = rates.noOfAvailable;
                 maxOccupancy =
                   room.maximumOccupancy;
-                onRoomBook(room.id, i);
+                  onRoomBook(room.id, i, r);
                 booking.roomId = room.id;
                 selectedRoomMaximumOccupancy =
                   room.maximumOccupancy;
@@ -2489,7 +2614,7 @@
                     maxSelectRoom = rates.noOfAvailable;
                     maxOccupancy =
                       room.maximumOccupancy;
-                    onRoomBook(room.id, i);
+                      onRoomBook(room.id, i, r);
                     booking.roomId = room.id;
                     selectedRoomMaximumOccupancy =
                       room.maximumOccupancy;
@@ -2735,7 +2860,7 @@
                         maxSelectRoom = rates.noOfAvailable;
                         maxOccupancy =
                           room.maximumOccupancy;
-                        onRoomBook(room.id, i);
+                          onRoomBook(room.id, i, r);
                         booking.roomId = room.id;
                         selectedRoomMaximumOccupancy =
                           room.maximumOccupancy;
@@ -2826,7 +2951,7 @@
                   maxSelectRoom = rates.noOfAvailable;
                   maxOccupancy =
                     room.maximumOccupancy;
-                  onRoomBook(room.id, i);
+                    onRoomBook(room.id, i, r);
                   booking.roomId = room.id;
                   selectedRoomMaximumOccupancy =
                     room.maximumOccupancy;
@@ -3063,7 +3188,7 @@
                         maxSelectRoom = rates.noOfAvailable;
                         maxOccupancy =
                           room.maximumOccupancy;
-                        onRoomBook(room.id, i);
+                          onRoomBook(room.id, i, r);
                         booking.roomId = room.id;
                         selectedRoomMaximumOccupancy =
                           room.maximumOccupancy;
@@ -3160,7 +3285,7 @@
                   maxSelectRoom = rates.noOfAvailable;
                   maxOccupancy =
                     room.maximumOccupancy;
-                  onRoomBook(room.id, i);
+                    onRoomBook(room.id, i, r);
                   booking.roomId = room.id;
                   selectedRoomMaximumOccupancy =
                     room.maximumOccupancy;
@@ -3188,7 +3313,7 @@
 <!-- property room details ends -->
 
 <!-- Add on service Start -->
-<div class="servicecdiv" *ngIf="viewAddon" id="serv">
+<div class="servicecdiv" *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex" id="serv">
   <h3 class="servicetitle">Add-On Services</h3>
 
 
