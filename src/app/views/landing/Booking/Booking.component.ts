@@ -362,7 +362,7 @@ export class BookingComponent implements OnInit {
     this.booking.totalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
-      this.booking.taxAmount;
+      this.booking.taxAmount+this.totalServiceCost;
     window["angularComponentReference"] = {
       component: this,
       zone: this.ngZone,
@@ -486,7 +486,7 @@ this.externalReservationdto =res.body
         this.booking.totalAmount =
           this.booking.netAmount +
           (this.booking.netAmount * this.taxPercentage) / 100 -
-          this.booking.discountAmount;
+          this.booking.discountAmount +this.totalServiceCost;
 
         this.promoMessage = offer.couponCode + " applied!";
       } else {
