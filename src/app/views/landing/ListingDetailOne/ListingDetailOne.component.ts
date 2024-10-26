@@ -715,6 +715,8 @@ export class ListingDetailOneComponent implements OnInit {
 
 
     }
+
+
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     if (this.token?.getRoomsData() !== null && this.token?.getRoomsData() !== undefined) {
       this.availableRooms = this.token?.getRoomsData();
@@ -826,6 +828,7 @@ export class ListingDetailOneComponent implements OnInit {
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+
     const toggleCardBtn = document.getElementById('toggleCardBtn');
     const closeCardBtn = document.getElementById('closeCardBtn');
     const stickyCard = document.getElementById('stickyCard');
@@ -962,6 +965,8 @@ if (this.city != null && this.city != undefined) {
     // this.adults = this.adults;
     // this.checkingAvailability();
   }
+
+
   // showhide(){
     openRoomCarousel() {
       this.showRoomCarousel = true;
@@ -1259,7 +1264,14 @@ if (this.city != null && this.city != undefined) {
   }
 
   // }
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+   }
 
   backClicked() {
     this.locationBack.back();
@@ -2464,7 +2476,7 @@ if (bookingSummaryElement) {
 
 
   scrollToAccommodationDash() {
-    const element = document.getElementById('checkinone');
+    const element = document.getElementById('accmdOne');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
