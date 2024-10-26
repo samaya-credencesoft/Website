@@ -21,7 +21,7 @@
   </df-messenger>
 
 
-  <app-Header-Listingdetailsone   [businessUser]="businessUser" (click)="onBookNowClick()"> </app-Header-Listingdetailsone>
+  <app-Header-Listingdetailsone   [businessUser]="businessUser" (onBookNowClick)="onBookNowClick()"> </app-Header-Listingdetailsone>
   <div class="sticky-button "style="display: none;" >
     <button class="btn desktop-view-ui" id="toggleCardBtn" style="font-size: 23px;background-color: var(--secondary);color:var(--tertiary);font-weight: bold;">Booking Summary</button>
   </div>
@@ -80,6 +80,13 @@
     justify-content: space-between;">{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
           <li style="    display: flex;
     justify-content: space-between;">Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+    <li
+    *ngIf="  booking.netAmount >0"  style="    display: flex;
+    justify-content: space-between;">Net Amount <span>
+                {{
+                          booking.netAmount
+                          | currency: currency:"symbol":"1.2-2"
+                          }}</span></li>
           <li style="    display: flex;
     justify-content: space-between;">Tax <span> {{
                               (this.booking.netAmount *
@@ -596,16 +603,32 @@
                       </div>
                     </div>
                       <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                        src="assets/images/default-rooms.avif" alt="" width="100%" />
+                        src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg" alt="" width="100%" />
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
                         *ngIf="room.imageList.length >=1">
                         <!-- <ol class="carousel-indicators">
                           <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                         </ol> -->
-                        <div class="carousel-inner img_size_room">
+                        <div class="carousel-inner img_size_room" (click)="openRoomCarousel()">
                           <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
                             [class.active]="i === 0">
                             <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="288px" width="100%">
+                          </div>
+                        </div>
+
+                        <div *ngIf="showRoomCarousel" class="unique-room-modal-overlay" >
+                          <div class="unique-room-modal-content">
+                            <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+
+                            <!-- Slick Carousel -->
+                            <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
+                              <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
+                                <img [src]="image?.url ? image?.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                                     [alt]="image.name" class="unique-room-carousel-image" />
+                              </div>
+                            </ngx-slick-carousel>
                           </div>
                         </div>
 
@@ -901,12 +924,12 @@
                       </div>
                     </div>
 
-                    <div class="col-12"  *ngIf="viewAddon && selectedRoomIndex !== null && this.selectedIndex">
-                      <div *ngIf="viewAddon">
+                    <div class="col-12"  *ngIf="viewAddon" style="margin-top: 10px;">
+                      <div >
                         <h3 class="servicetitle">Add-On Services</h3>
 
                         <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
-                          <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 6); let i = index">
+                          <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 8); let i = index">
                             <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
                               <div class="d-flex" id="facilitysms">
                                 <div>
@@ -980,8 +1003,8 @@
                     </div>
                   </div>
                     <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                      src="assets/images/default-rooms.avif" alt="" width="100%" />
-                      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                      src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg" alt="" width="100%" />
+                      <div id="carouselExampleIndicators" class="carousel slide" (click)="openRoomCarousel()" data-ride="carousel"
                       *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
@@ -995,7 +1018,7 @@
 
                     </div>
 
-                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
+                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3" (click)="openRoomCarousel()">
 
                       <div aria-hidden="true" *ngIf="room.imageList[0]">
                         <img [src]="room?.imageList[0].url ? room?.imageList[0].url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'" alt="Image 0" class="masonry-item-rightTwo" />
@@ -1010,6 +1033,22 @@
                         <span class="masonry-text" *ngIf="room.imageList?.length > 3">View +{{room.imageList?.length - 3}}</span>
                       </div>
 
+                    </div>
+
+                    <div *ngIf="showRoomCarousel && selectedRoomIndex === i " class="unique-room-modal-overlay" >
+                      <div class="unique-room-modal-content">
+                        <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+
+                        <!-- Slick Carousel -->
+                        <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
+                          <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
+                            <img [src]="image?.url ? image?.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                                 [alt]="image.name" class="unique-room-carousel-image" />
+                          </div>
+                        </ngx-slick-carousel>
+                      </div>
                     </div>
 
                     <div  style=" padding:5px;padding-bottom: 4px;padding-top: 10px;">
@@ -1291,7 +1330,7 @@
                       <h3 class="servicetitle">Add-On Services</h3>
 
                       <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
-                        <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 6); let i = index">
+                        <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 8); let i = index">
                           <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
                             <div class="d-flex" id="facilitysms">
                               <div>
@@ -1357,13 +1396,13 @@
                     </div>
                   </div>
                     <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                      src="assets/images/default-rooms.avif" alt="" width="100%" />
-                      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
+                      src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg" alt="" width="100%" />
+                      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" (click)="openRoomCarousel()"
                       *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
-                      <div class="carousel-inner img_size_room">
+                      <div class="carousel-inner img_size_room" >
                         <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
                           [class.active]="i === 0">
                           <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
@@ -1388,7 +1427,7 @@
                       </div>
 
                     </div>
-                    <div *ngIf="showRoomCarousel" class="unique-room-modal-overlay">
+                    <div *ngIf="showRoomCarousel && selectedRoomIndex === i " class="unique-room-modal-overlay" >
                       <div class="unique-room-modal-content">
                         <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
                           <i class="fa fa-times" aria-hidden="true"></i>
@@ -1397,7 +1436,7 @@
                         <!-- Slick Carousel -->
                         <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
                           <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
-                            <img [src]="image.url ? image.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                            <img [src]="image?.url ? image?.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
                                  [alt]="image.name" class="unique-room-carousel-image" />
                           </div>
                         </ngx-slick-carousel>
@@ -1691,7 +1730,7 @@
                       <h3 class="servicetitle">Add-On Services</h3>
 
                       <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
-                        <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 6); let i = index">
+                        <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 8); let i = index">
                           <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
                             <div class="d-flex" id="facilitysms">
                               <div>
@@ -2339,13 +2378,13 @@
                       </div>
                     </div>
                       <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                        src="assets/images/default-rooms.avif" alt="" width="100%" />
+                        src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg" alt="" width="100%" />
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
                         *ngIf="room.imageList.length >=1">
                         <!-- <ol class="carousel-indicators">
                           <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                         </ol> -->
-                        <div class="carousel-inner img_size_room">
+                        <div class="carousel-inner img_size_room" (click)="openRoomCarousel()">
                           <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
                             [class.active]="i === 0">
                             <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
@@ -2353,7 +2392,21 @@
                         </div>
 
                       </div>
+                      <div *ngIf="showRoomCarousel " class="unique-room-modal-overlay" >
+                        <div class="unique-room-modal-content">
+                          <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </button>
 
+                          <!-- Slick Carousel -->
+                          <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
+                            <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
+                              <img [src]="image?.url ? image?.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                                   [alt]="image.name" class="unique-room-carousel-image" />
+                            </div>
+                          </ngx-slick-carousel>
+                        </div>
+                      </div>
 
                     </div>
                     <div class="col-12">
@@ -2651,7 +2704,7 @@
       </div>
     </div>
     <div *ngIf="this.activeForGoogleHotelCenter == false">
-    <div *ngFor="let room of availableRooms; let i = index" style="margin-bottom:20px" >
+    <div *ngFor="let room of availableRooms; let i = index" (click)='onRoomSelect(i)' style="margin-bottom:20px" >
       <div class="card"  style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i===0 && this.isDiabled">
         <div class="card-header" style="background: none !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
           <h3 style=" font-weight: bold; margin-left: 6px;">{{room.name}}</h3>
@@ -2674,13 +2727,13 @@
                     </div>
                   </div>
                     <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                      src="assets/images/default-rooms.avif" alt="" width="100%" />
+                      src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg" alt="" width="100%" />
                       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
                       *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
-                      <div class="carousel-inner img_size_room">
+                      <div class="carousel-inner img_size_room" (click)="openRoomCarousel()">
                         <div class="carousel-item img_size_room" *ngFor="let image of room?.imageList; let i = index"
                           [class.active]="i === 0">
                           <img src={{image.url}} class=" img_size_room" alt="Slide {{ i }}" height="365px" width="100%">
@@ -2689,7 +2742,7 @@
 
                     </div>
 
-                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
+                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3" (click)="openRoomCarousel()">
 
                       <div aria-hidden="true" *ngIf="room.imageList[0]">
                         <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
@@ -2706,7 +2759,21 @@
 
                     </div>
 
+                    <div *ngIf="showRoomCarousel && selectedRoomIndex === i " class="unique-room-modal-overlay" >
+                      <div class="unique-room-modal-content">
+                        <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
 
+                        <!-- Slick Carousel -->
+                        <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
+                          <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
+                            <img [src]="image?.url ? image?.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                                 [alt]="image.name" class="unique-room-carousel-image" />
+                          </div>
+                        </ngx-slick-carousel>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-12">
                     <div  style=" padding:5px;padding-bottom: 4px;padding-top: 10px;">
@@ -2987,7 +3054,7 @@
           </div>
         </div>
       </div>
-      <div class="card" style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i>0 && this.isDiabled">
+      <div class="card" style="background-color: #F8F8F8 !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 && i>0 && this.isDiabled &&  room.ratesAndAvailabilityDtos?.[0]?.roomRatePlans?.length > 0">
         <div class="card-header" style="background: none !important;" *ngIf="room.ratesAndAvailabilityDtos?.length>0 ">
           <h3 style=" font-weight: bold; margin-left: 6px;">{{room.name}}</h3>
         </div>
@@ -3009,9 +3076,9 @@
                     </div>
                   </div>
                     <img class="img_size_room" *ngIf="room.imageList[0] == undefined ||!room.imageList"
-                      src="assets/images/default-rooms.avif" alt="" width="100%" />
+                      src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg" alt="" width="100%" />
                       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-                      *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
+                      *ngIf="room.imageList.length === 1 || room.imageList.length === 2" (click)="openRoomCarousel()">
                       <!-- <ol class="carousel-indicators">
                         <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                       </ol> -->
@@ -3024,7 +3091,7 @@
 
                     </div>
 
-                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3">
+                    <div class="col-12 mainimage" style="margin-top: 16px;" *ngIf="room.imageList.length >= 3" (click)="openRoomCarousel()">
 
                       <div aria-hidden="true" *ngIf="room.imageList[0]">
                         <img [src]="room?.imageList[0].url" alt="Image 0" class="masonry-item-rightTwo" />
@@ -3041,7 +3108,21 @@
 
                     </div>
 
+                    <div *ngIf="showRoomCarousel && selectedRoomIndex === i " class="unique-room-modal-overlay" >
+                      <div class="unique-room-modal-content">
+                        <button (click)="showRoomCarousel = false" class="unique-room-modal-close-button" style="padding-left: 10px ;">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
 
+                        <!-- Slick Carousel -->
+                        <ngx-slick-carousel class="unique-room-carousel" [config]="roomCarouselConfig" #roomCarousel="slick-carousel">
+                          <div ngxSlickItem *ngFor="let image of room?.imageList" class="unique-room-slick-slide">
+                            <img [src]="image?.url ? image?.url : 'https://www.shutterstock.com/image-vector/default-image-icon-vector-missing-600nw-2079504220.jpg'"
+                                 [alt]="image.name" class="unique-room-carousel-image" />
+                          </div>
+                        </ngx-slick-carousel>
+                      </div>
+                    </div>
                     <!-- <img *ngIf="room.imageList?.length" src="{{room.imageList[0]?.url}}" width="100%" class="img_size_room" alt=""> -->
                   </div>
                   <div class="col-12">

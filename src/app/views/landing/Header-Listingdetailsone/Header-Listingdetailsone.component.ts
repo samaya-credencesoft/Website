@@ -95,7 +95,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
 
   scrollToAccommodation(event: MouseEvent) {
  // Prevent the event from bubbling up
-
+ event.stopPropagation();
     this.onBookNowClick.emit(); // Emit the event when the button is clicked
   }
   navigate(){

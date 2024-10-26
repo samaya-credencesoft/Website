@@ -381,6 +381,15 @@ export class ListingDetailOneComponent implements OnInit {
     "autoplaySpeed": 2000,
     "arrows": true,
   };
+  roomCarouselConfig = {
+   "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "dots": true,
+    "infinite": true,
+    "autoplay": true,
+    "autoplaySpeed": 2000,
+    "arrows": true,
+  };
   modalSlideConfig = {
     centerMode: true,
     centerPadding: '0%',
@@ -619,14 +628,9 @@ export class ListingDetailOneComponent implements OnInit {
   valSelected: boolean = false;
   showCarousel = false;
   showRoomCarousel = false;
-  roomCarouselConfig = {
-    dots: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true
-  };
+
+
+
 
   constructor(
     private listingService: ListingService,
@@ -1619,6 +1623,8 @@ this.isHeaderVisible = true;
           (ele) => ele.name === 'Accommodation'
         );
 
+
+
         this.businessUser.propertyServicesList.forEach(ele => {
 
           if (ele.id != null && ele.id != undefined) {
@@ -1626,7 +1632,17 @@ this.isHeaderVisible = true;
           }
         });
 
-
+        this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
+          this.savedServices = this.token.getSelectedServices().forEach(ele => {
+            this.propertyServiceListDataOne.forEach(val => {
+              if (ele.name === val.name) {
+                this.valSelected = true;
+                this.viewAddon = true;
+              val.quantity = ele.quantity;
+              }
+            })
+            console.log("val.quantity", this.propertyServiceListDataOne)
+          });
 
         this.updateTag();
         this.token.saveProperty(this.businessUser);
