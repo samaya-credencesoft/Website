@@ -2455,17 +2455,21 @@ if (bookingSummaryElement) {
   scrollToAccommodationCheckin() {
     const element = document.getElementById('checkin');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+      const yOffset = -100; // Adjust this value as needed
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      console.log('Scroll target position:', y);
+  }
   }
 
 
   scrollToAccommodationDash() {
-    const element = document.getElementById('accmdOne');
+    const element = document.getElementById('checkinone');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
   scrollToAccommodationDashmobile(){
     const element = document.getElementById('accmdtwo');
     if (element) {
