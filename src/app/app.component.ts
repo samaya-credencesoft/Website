@@ -24,13 +24,14 @@ console.log("jhjgfd")
     if (hostname === 'bookone.io') {
       this.router.navigate(['/home']);
     }
+    else if (pathname.includes('booking-complete')) {
+      this.router.navigate(['/booking-complete']);
+    }
     // If URL is "booking.seoname.bookone.io"
     else if (hostname.startsWith('booking.') && hostname.endsWith('.bookone.io')) {
       this.router.navigate(['/details']);  // Redirect to listing details
  }
- else if (pathname.includes('booking-complete')) {
-  this.router.navigate(['/booking-complete']);
-}
+
     // this.course = this.route.snapshot.data['course'];
     // ....
     // SEO metadata
