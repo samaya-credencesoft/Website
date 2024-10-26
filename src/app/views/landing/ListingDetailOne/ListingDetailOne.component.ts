@@ -1658,6 +1658,10 @@ this.isHeaderVisible = true;
           }
         });
 
+        this.businessUser?.socialMediaLinks.forEach(element => {
+          this.socialmedialist=element
+        });
+
         this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
           this.savedServices = this.token.getSelectedServices().forEach(ele => {
             this.propertyServiceListDataOne.forEach(val => {
