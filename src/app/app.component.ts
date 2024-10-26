@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     const hostname = window.location.hostname;
 
     // If the default URL is "bookone.io"
-    if (hostname === 'uat.bookone.io') {
+    if (hostname === 'bookone.io') {
       this.router.navigate(['/home']);  // Redirect to home route
     }
     // If URL is "booking.seoname.bookone.io"
