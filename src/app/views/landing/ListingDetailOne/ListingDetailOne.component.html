@@ -59,14 +59,24 @@
               </button>
               </td>
             </tr>
+            <tr>
+              <td style="color:black">
+                Guest(s): <br/>
+                {{booking.noOfPersons}}
+              </td>
+             <td style="color:black">
+              Children(s): <br/>
+              {{booking.noOfChildren}}
+             </td>
+             <td>
+
+             </td>
+            </tr>
 
           </tbody>
         </table>
       </div>
-     <div style="padding-left: 16px;">
-      <p>No of Guest </p>
-      <p>{{booking.noOfPersons}}</p>
-     </div>
+
     </div>
     <div class="Bookingroominfo" >
       <div class="Bookingroomdetails">
@@ -75,32 +85,56 @@
         <!-- <button (click)="redirectToBooking()" class="editStyle">
           <i class="fas fa-edit"></i>
       </button> -->
-        <ul style="padding-left: 3px;">
-          <li style="    display: flex;
-    justify-content: space-between;">{{booking.roomRatePlanName}} x 1 <span>{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</span></li>
-          <li style="    display: flex;
-    justify-content: space-between;">Extra Pax Charges <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
-    <li
-    *ngIf="  booking.netAmount >0"  style="    display: flex;
-    justify-content: space-between;">Net Amount <span>
-                {{
-                          booking.netAmount
-                          | currency: currency:"symbol":"1.2-2"
-                          }}</span></li>
-          <li style="    display: flex;
-    justify-content: space-between;">Tax <span> {{
-                              (this.booking.netAmount *
-                              this.booking.taxPercentage) /
-                              100 | currency: currency:"symbol":"1.2-2"
-                              }}</span></li>
-          <li style="    display: flex;
-    justify-content: space-between;">Total Amount  <span> {{
-                            (booking.netAmount + ((this.booking.netAmount *
-                            this.booking.taxPercentage) /
-                            100))+totalExtraAmount
-                            | currency: currency:"symbol":"1.2-2"
-                            }}</span></li>
-        </ul>
+      <table style="border:none; width:100%">
+        <tr>
+          <td class="p-1">Room Type:</td>
+          <td  class="p-1" style="text-align: right;">{{ booking.roomType }}</td>
+
+        </tr>
+
+        <tr >
+          <td class="p-1" style="color: black !important;">Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
+        </tr>
+
+
+        <tr *ngIf="booking.extraPersonCharge" >
+          <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
+        </tr>
+
+        <tr *ngIf="booking.extraChildCharge">
+          <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
+        </tr>
+
+        <tr >
+          <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            booking.netAmount
+            | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
+
+        <tr *ngIf="booking.taxPercentage">
+          <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            (this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100 | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
+
+        <tr >
+          <td class="p-1" style="color: black !important;">Total Amount  :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            (booking.netAmount + ((this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100))+totalExtraAmount
+            | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
+      </table>
       </div>
     </div>
 

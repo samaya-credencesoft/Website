@@ -4406,9 +4406,9 @@ font-size: 23px !important;
 .sticky-card {
   position: fixed;
   top: 43%;
-  right: -500px; /* Initially offscreen */
+  right: -600px; /* Initially offscreen */
   transform: translateY(-50%);
-  width: 418px;
+  width: 550px;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ccc;
