@@ -133,8 +133,8 @@ export class BookingCompleteComponent implements OnInit {
       this.savedServices = this.token.getSelectedServices();
                 }, 1000);
 
-                this.businessServiceDtoList = this.token.getProperty().businessServiceDtoList;
-                this.businessServiceDtoList.forEach((element) => {
+                this.businessServiceDtoList = this.token.getProperty()?.businessServiceDtoList;
+                this.businessServiceDtoList?.forEach((element) => {
                   if(element.name === 'Accommodation'){
                   this.getDetailsData = element.advanceAmountPercentage;
                 }
@@ -394,7 +394,7 @@ this.hotelBookingService
         this.token.saveProperty(this.businessUser);
         this.currency = this.businessUser.localCurrency.toUpperCase();
 
-        this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
+        this.businessServiceDto = this.businessUser?.businessServiceDtoList.find(
           (data) => data.name === this.businessUser.businessType
         );
 
