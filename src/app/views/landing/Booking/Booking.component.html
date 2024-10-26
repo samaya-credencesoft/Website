@@ -16,7 +16,7 @@
           <h5 style="font-weight: 400 !important;">Property Amenities and Details</h5>
           <div class="row facrow1 mr-md-4" style="justify-content: space-between;">
             <div class="col-xl-1 col-6 p-1" *ngFor="let fac of businessUser.propertyServicesList | slice:0:6">
-              <div class="d-flex justify-content-center text-center" id="facility1"
+              <div class="d-flex justify-content-center text-center"
                 *ngIf="fac.name !== null && fac.name !== undefined">
                 <div>
                   <img *ngIf="fac.imageUrl == null || fac.imageUrl == undefined" src="assets/images/service.png" alt="icon">
@@ -29,7 +29,7 @@
             </div>
             <ng-container *ngIf="businessUser?.propertyServicesList?.length>7">
               <div class="col-xl-1 p-1" *ngIf="!showAll">
-                <div class="d-flex justify-content-center text-center" id="facility1">
+                <div class="d-flex justify-content-center text-center" >
                   <div>
                     <p style="font-size: 17px;padding: 0; margin: 0;">+{{businessUser.propertyServicesList.length-7}}<br>
                     <p>Amenities</p>
@@ -2169,6 +2169,9 @@
   <div *ngIf="bookingConfirmed && isEnquiry" style="padding-top: 15px ;">
 
     <div class="booking-checkout-web-view" style="padding-left: 40px; padding-top: 20px; padding-right: 40px;margin-top: 85px;">
+      <a href="{{PropertyUrl}}" style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
+    </a>
       <h3 style=" font-weight: bold; ">Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h3>
       <p style=" font-weight: bold; ">This is not a confirmed booking.We want to assure
         you that we are diligently handling your booking request and will provide
@@ -2186,7 +2189,7 @@
       <h3 style=" font-weight: bold; margin-top: 20px;">Your Enquiry Details</h3>
       <div class="d-flex">
         <div class="col-6">
-          <div class="col-12 checkAva3 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px;    border: 2px solid;
+          <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px;    border: 2px solid;
 border-radius: 10px;">
 
            <table style="width:100%">
@@ -2213,7 +2216,7 @@ border-radius: 10px;">
           </div>
 
 
-          <div class="col-12 checkAva3 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
+          <div class="col-12" style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
 border-radius: 10px;">
             <table style=" border: none; width:100%">
               <tr>
@@ -2275,12 +2278,12 @@ border-radius: 10px;">
             </table>
           </div>
 
-          <div class="col-12 checkAva3 " *ngIf="savedServices?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
+          <div class="col-12 " *ngIf="savedServices?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
             border-radius: 10px;">
                         <h4 style="font-weight: bold;">Add-on Services</h4>
                         <table style=" border: none; width:100%">
                           <tr *ngFor="let fac of savedServices">
-                            <td><div class="d-flex "  id="facility" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                            <td><div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
                               <div style="display: flex; gap:4px">
 
                                 <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
@@ -2309,7 +2312,7 @@ border-radius: 10px;">
            </div>
 
 
-          <div class="col-12 checkAva3 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
+          <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
 border-radius: 10px;">
             <table style=" border: none; width:100%">
               <tr>
@@ -2328,7 +2331,7 @@ border-radius: 10px;">
             <h3 style="color:#fff; font-weight: bold;">{{businessUser.name}}</h3>
             <h5 style="color:#fff; font-weight: bold;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</h5>
             <div class="d-flex">
-            <div class="col-12 checkAva3 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
+            <div class="col-12 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
               <div class="col-6" style="border-right: 1px solid black; ">
                 <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;" >
                   Check-In-Date
@@ -2412,8 +2415,11 @@ border-radius: 10px;">
     </div>
 
     <div class="booking-checkout-mobile-view">
-      <div *ngIf="bookingConfirmed" style="padding-left: 10px; padding-top: 20px; padding-right: 10px;margin-top: 65px;">
-        <h3 style=" font-weight: bold; ">Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h3>
+      <div  style="padding-left: 15px; padding-top: 20px; padding-right: 15px;margin-top: 65px;">
+        <a href="{{PropertyUrl}}" style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
+      </a>
+        <h4  style=" font-weight: bold; "> Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h4>
         <p style=" font-weight: bold; ">This is not a confirmed booking.We want to assure
           you that we are diligently handling your booking request and will provide
           a response shortly.
@@ -2433,7 +2439,7 @@ border-radius: 10px;">
           <h3 style="color:#fff; font-weight: bold;">{{businessUser.name}}</h3>
           <h5 style="color:#fff; font-weight: bold;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</h5>
           <div class="d-flex">
-          <div class="col-12 checkAva3 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
+          <div class="col-12 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
             <div class="col-6" style="border-right: 1px solid black; ">
               <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;" >
                 Check-In-Date
@@ -2475,7 +2481,7 @@ border-radius: 10px;">
           </table>
         </div>
 
-        <div class="col-12 checkAva3 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px;">
+        <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px;">
           <table style="width:100%">
             <tr>
               <td>Room Type:</td>
@@ -2501,7 +2507,7 @@ border-radius: 10px;">
 
 
 
-        <div class="col-12 checkAva3 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
+        <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
           <table style=" border: none; width:100%">
             <tr>
               <td>Room Price:</td>
@@ -2562,11 +2568,11 @@ border-radius: 10px;">
           </table>
         </div>
 
-        <div class="col-12 checkAva3 " *ngIf="savedServices?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
+        <div class="col-12 " *ngIf="savedServices?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
           <h4 style="font-weight: bold;">Add-on Services</h4>
           <table style=" border: none; width:100%">
             <tr *ngFor="let fac of savedServices">
-              <td><div class="d-flex "  id="facility" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+              <td><div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
                 <div style="display: flex; gap:4px">
 
                   <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
@@ -2594,7 +2600,7 @@ border-radius: 10px;">
           </table>
         </div>
 
-        <div class="col-12 checkAva3 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
+        <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
           <table style=" border: none; width:100%">
             <tr>
               <td>Total Payable Amount</td>
