@@ -2959,7 +2959,7 @@
                     </div>
                   </div>
                   <ngx-slick-carousel class="carousel listing-slider mfp-gallery-container margin-bottom-0 "
-                    style="margin-bottom: 20px;" #slickModal="slick-carousel" [config]="modalSlideConfig1"
+                    style="margin-bottom: 20px;" #slickModal2="slick-carousel" [config]="modalSlideConfig156"
                     *ngIf="rates.roomRatePlans.length > 2">
                     <div *ngFor="
                   let plan of rates.roomRatePlans;
@@ -3415,7 +3415,9 @@
 <!-- property room details ends -->
 
 <!-- Add on service Start -->
-<div class="servicecdiv" *ngIf="viewAddon " id="serv">
+
+ <div  id="serv">
+<div class="servicecdiv" *ngIf="viewAddon ">
   <h3 class="servicetitle">Add-On Services</h3>
 
   <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left;">
@@ -3453,7 +3455,7 @@
   </div>
 </div>
 
-
+</div>
 
 <!-- Add on service end -->
 

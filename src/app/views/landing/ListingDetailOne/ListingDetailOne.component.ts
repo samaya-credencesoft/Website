@@ -482,6 +482,39 @@ export class ListingDetailOneComponent implements OnInit {
       },
     ],
   };
+  modalSlideConfig156 = {
+    centerMode: false,
+    centerPadding: '0%',
+    slidesToShow: 2,
+
+    dots: false,
+    initialSlide: 0,
+    // autoplay: true,
+    autoplaySpeed: 6000,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1367,
+        settings: {
+
+          centerPadding: '0',
+        },
+      },
+      {
+        breakpoint: 1025,
+        settings: {
+          centerPadding: '0',
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          centerPadding: '10',
+          slidesToShow: 2,
+        },
+      },
+    ],
+  };
   modalSlideConfig2 = {
     centerMode: true,
     centerPadding: '0%',
@@ -2489,6 +2522,7 @@ if (bookingSummaryElement) {
     }
   }
   scrollToService() {
+console.log("lkjhgfgh")
     const element = document.getElementById('serv');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -2716,12 +2750,12 @@ if (bookingSummaryElement) {
     this.selectedIndex = index;
     this.viewAddon = true;
 
+    this.scrollToService();
 
     const stickyCard = document.getElementById('stickyCard');
 
       stickyCard.classList.toggle('show');
 
-    this.scrollToService();
     // this.getPlan(roomId);
   }
 
