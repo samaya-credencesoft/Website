@@ -2706,7 +2706,7 @@ border-radius: 10px;">
                 <td class="p-1" colspan="2" style="color: black !important;">{{ booking.noOfRooms }}</td>
               </tr>
               <tr>
-                <td class="p-1">Room Type:</td>
+                <td class="p-1" style="color: black !important">Room Type:</td>
                 <td class="p-1" style="color: black !important">{{booking.roomName}}</td>
               </tr>
             </tbody>
@@ -2864,7 +2864,7 @@ border-radius: 10px;">
     <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
     <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
-    (click)="payAndCheckout()">Pay At Hotel</button>
+    >Pay At Hotel</button>
     </div>
   </div>
   </div>

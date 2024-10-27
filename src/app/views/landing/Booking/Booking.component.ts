@@ -73,6 +73,7 @@ export class BookingComponent implements OnInit {
   parameterss:Para[];
   parameterss2:Para[];
   parameterss3:Para[];
+  socialmedialist:any;
   externalReservationDtoList:externalReservationDtoList[];
   policies = [];
   businessTypeName: string;
@@ -198,6 +199,7 @@ export class BookingComponent implements OnInit {
   calculatedServices: any;
   totalServiceCost: number =0;
   bookingRoomPrice: any;
+
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -254,6 +256,12 @@ export class BookingComponent implements OnInit {
 
 
       this.savedServices = this.token.getSelectedServices();
+
+      setTimeout(() => {
+        this.businessUser?.socialMediaLinks.forEach(element => {
+          this.socialmedialist=element
+        });
+                  }, 100);
 
 
     this.bookingengineurl = this.token.getwebsitebookingURL()
@@ -2038,6 +2046,10 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
         this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
           (data) => data.name === this.businessUser.businessType
         );
+
+        this.businessUser?.socialMediaLinks.forEach(element => {
+          this.socialmedialist=element
+        });
 
         if (this.businessUser.primaryColor !== undefined) {
           this.changeTheme(

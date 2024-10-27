@@ -66,6 +66,9 @@ export class BookingCompleteComponent implements OnInit {
   getDetailsData: any;
   dueAmount: number;
   businessServiceDto: BusinessServiceDtoList;
+  bookingRoomPrice: any;
+  socialmedialist:any;
+  taxAmountOne: number;
 
   constructor(
     private http: HttpClient,
@@ -90,9 +93,17 @@ export class BookingCompleteComponent implements OnInit {
 
     }
 
+
+      setTimeout(() => {
+        this.businessUser?.socialMediaLinks.forEach(element => {
+          this.socialmedialist=element
+        });
+                  }, 1000);
+
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
     {
       this.booking = this.token.getBookingData();
+      this.taxAmountOne = this.booking.taxAmount
       this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
     }
 
@@ -203,6 +214,16 @@ export class BookingCompleteComponent implements OnInit {
     }
     this.currency = 'INR';
   }
+  ngAfterViewInit() {
+    if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
+      {
+        setTimeout(() => {
+          this.booking = this.token.getBookingData();
+          this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
+                    }, 500);
+
+      }
+  }
   getPaymentInfoByReffId(referenceNumber){
     this.hotelBookingService.getPaymentByReffId(referenceNumber).subscribe((res) => {
       this.payment = res.body[0];
@@ -213,7 +234,14 @@ export class BookingCompleteComponent implements OnInit {
         this.createEnquiry();
       }
     });
+
+    if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
+      this.bookingRoomPrice = this.token.getBookingRoomPrice();
+
+
+    }
   }
+
 
 
 
@@ -390,6 +418,10 @@ this.hotelBookingService
       if (data.status === 200) {
         this.businessUser = data.body;
 
+        this.businessUser?.socialMediaLinks.forEach(element => {
+          this.socialmedialist=element
+        });
+
 
         this.token.saveProperty(this.businessUser);
         this.currency = this.businessUser.localCurrency.toUpperCase();
@@ -405,6 +437,9 @@ this.hotelBookingService
             this.businessUser.tertiaryColor
           );
         }
+
+
+
 
 
         this.changeDetectorRefs.detectChanges();
@@ -543,7 +578,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
     this.enquiryForm.bookingId = this.booking.id;
     this.enquiryForm.advanceAmount = this.booking.advanceAmount;
-    this.enquiryForm.taxAmunt = this.booking.taxAmount;
+    this.enquiryForm.taxAmount = this.booking.taxAmount;
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
@@ -602,7 +637,7 @@ this.externalReservationdto =res.body
   }
 
   createEnquiry() {
-    this.booking.modeOfPayment = this.payment.paymentMode;
+    this.booking.modeOfPayment = this.payment?.paymentMode;
     this.booking.externalSite = 'The Hotel Mate';
     this.booking.businessName = this.businessUser.name;
     this.booking.businessEmail = this.businessUser.email;
