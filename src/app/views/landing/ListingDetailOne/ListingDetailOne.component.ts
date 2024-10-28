@@ -91,6 +91,7 @@ export class ListingDetailOneComponent implements OnInit {
   noofRoomsAvailable: any[] = [];
   valueAvailable: any;
   getValueOfRooms: RatesAndAvailability;
+  allSavedService: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -661,8 +662,10 @@ export class ListingDetailOneComponent implements OnInit {
   valSelected: boolean = false;
   showCarousel = false;
   showRoomCarousel = false;
-
-
+  @ViewChild('scrollContainer', { read: ElementRef }) scrollContainer!: ElementRef;
+  @ViewChild('scrollContainerOne', { read: ElementRef }) scrollContainerOne!: ElementRef;
+  @ViewChild('scrollContainerThree', { read: ElementRef }) scrollContainerThree!: ElementRef;
+  @ViewChild('scrollContainerFour', { read: ElementRef }) scrollContainerFour!: ElementRef;
 
 
   constructor(
@@ -704,8 +707,10 @@ export class ListingDetailOneComponent implements OnInit {
     this.details = new Details();
     // this.updateTag();
     this.token.clearwebsitebookingURL();
+    // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
-
+this.selectedServices = this.token?.getSelectedServices();
+this.selectedServices =[]
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
 
@@ -1008,7 +1013,20 @@ if (this.city != null && this.city != undefined) {
     // this.checkingAvailability();
   }
 
+  scrollLeft() {
+    this.scrollContainer.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
+  }
 
+  scrollRight() {
+    this.scrollContainer.nativeElement.scrollLeft += 250; // Adjust this value to match card width
+  }
+  scrollLeftOne(index) {
+    this.scrollContainerOne.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
+  }
+
+  scrollRightOne() {
+    this.scrollContainerOne.nativeElement.scrollLeft += 250; // Adjust this value to match card width
+  }
   // showhide(){
     openRoomCarousel() {
       this.showRoomCarousel = true;
@@ -1126,7 +1144,7 @@ if (this.city != null && this.city != undefined) {
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
-    this.addServiceList.forEach((element) => {
+    this.addServiceList?.forEach((element) => {
       this.totalExtraAmount = this.totalExtraAmount + element.afterTaxAmount;
       this.totalTaxAmount = this.totalTaxAmount + element.taxAmount;
       this.totalBeforeTaxAmount =
@@ -1317,6 +1335,7 @@ if (this.city != null && this.city != undefined) {
 
   // }
   ngAfterViewInit() {
+    // this.token.saveSelectedServices(this.selectedServices);
     setTimeout(() => {
       window.scrollTo({
         top: 0,
@@ -1330,24 +1349,33 @@ if (this.city != null && this.city != undefined) {
   }
   onAdd(facility, index) {
     facility.isAdded = true;
-    facility.quantity = 1; // Initialize quantity
+    facility.quantity = 1;
     this.selectedServices.push(facility);
+    this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
   }
 
-  // Increase the quantity
   increaseQuantity(facility) {
     facility.quantity++;
+    this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
   }
 
-  // Decrease the quantity
   decreaseQuantity(facility) {
     if (facility.quantity > 1) {
       facility.quantity--;
-      this.updateTokenStorage();
+    } else if (facility.quantity === 1) {
+      facility.isAdded = false;
+      facility.quantity = null;
+      const index = this.selectedServices.indexOf(facility);
+      if (index > -1) {
+        this.selectedServices.splice(index, 1);
+      }
     }
+    this.token.saveSelectedServices(this.selectedServices);
+    this.updateTokenStorage();
   }
+
 
   // Save selected services to token storage
 
@@ -1682,17 +1710,19 @@ this.isHeaderVisible = true;
         });
 
         this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
-          this.savedServices = this.token.getSelectedServices().forEach(ele => {
-            this.propertyServiceListDataOne.forEach(val => {
-              if (ele.name === val.name) {
-                this.valSelected = true;
-                this.viewAddon = true;
-              val.quantity = ele.quantity;
-              }
-            })
+          if(this.selectedServices != null &&  this.selectedServices != undefined ){
+            this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
+              this.propertyServiceListDataOne.forEach(val => {
+                if (ele.name === val.name) {
+                  this.valSelected = true;
+                  this.viewAddon = true;
+                val.quantity = ele.quantity;
+                }
+              })
+
             console.log("val.quantity", this.propertyServiceListDataOne)
           });
-
+        }
         this.updateTag();
         this.token.saveProperty(this.businessUser);
 
@@ -2096,8 +2126,9 @@ this.isHeaderVisible = true;
             this.checkingAvailability();
           }
           this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
-          this.savedServices = this.token.getSelectedServices().forEach(ele => {
-            this.propertyServiceListDataOne.forEach(val => {
+          if(this.selectedServices != null &&  this.selectedServices != undefined ){
+          this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
+            this.propertyServiceListDataOne?.forEach(val => {
               if (ele.name === val.name) {
                 this.valSelected = true;
                 this.viewAddon = true;
@@ -2106,6 +2137,7 @@ this.isHeaderVisible = true;
             })
             console.log("val.quantity", this.propertyServiceListDataOne)
           });
+        }
 
           if (this.token?.getRoomsData() === null) {
             // this.getRoom();
@@ -3028,7 +3060,7 @@ console.log("lkjhgfgh")
                 plan.otaPlanList.forEach((otaPlan) => {
                   const otaName = otaPlan.otaName;
                   const price = otaPlan.price;
-                  this.otaPlans.push({ otaName, price }); // Push otaPlan object into the array
+                  this.otaPlans.push({ otaName, price });
                 });
 
                 if (

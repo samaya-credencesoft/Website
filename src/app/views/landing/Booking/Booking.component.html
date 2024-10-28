@@ -2228,10 +2228,7 @@ border-radius: 10px;">
                 <td style="text-align: right;">{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
 
               </tr>
-              <tr *ngIf="booking.extraPersonCharge">
-                <td>Extra Pax Charges({{booking.noOfExtraPerson}})</td>
-                <td style="text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
-              </tr>
+
               <tr *ngIf="booking.extraPersonCharge">
                 <td> Extra Pax Charges({{booking.noOfExtraPerson}})</td>
                 <td style="text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}} </td>
@@ -2518,10 +2515,7 @@ border-radius: 10px;">
               <td style="text-align: right;">{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
 
             </tr>
-            <tr *ngIf="booking.extraPersonCharge">
-              <td>Extra Pax Charges({{booking.noOfExtraPerson}})</td>
-              <td style="text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
-            </tr>
+
             <tr *ngIf="booking.extraPersonCharge">
               <td> Extra Pax Charges({{booking.noOfExtraPerson}})</td>
               <td style="text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}} </td>
@@ -2751,7 +2745,7 @@ border-radius: 10px;">
       </div>
 
       <!-- Add-on Services -->
-       <div class="addon-services" *ngIf="savedServices.length >0" style="font-weight: bold;">
+       <div class="addon-services" *ngIf="savedServices?.length >0" style="font-weight: bold;">
         <h4 style="font-weight: bold;">Add-on Services</h4>
         <table style=" border: none; width:100%">
           <tr *ngFor="let fac of savedServices">
@@ -2984,7 +2978,7 @@ border-radius: 10px;">
     </div>
 
     <!-- Add-on Services -->
-     <div class="addon-services" *ngIf="savedServices.length >0">
+     <div class="addon-services" *ngIf="savedServices?.length >0">
       <h4 style="font-weight: bold;">Add-on Services</h4>
       <table style=" border: none; width:100%">
         <tr *ngFor="let fac of savedServices">
