@@ -661,6 +661,8 @@ export class ListingDetailOneComponent implements OnInit {
   valSelected: boolean = false;
   showCarousel = false;
   showRoomCarousel = false;
+  @ViewChild('scrollContainer', { read: ElementRef }) scrollContainer!: ElementRef;
+  @ViewChild('scrollContainerOne', { read: ElementRef }) scrollContainerOne!: ElementRef;
 
 
 
@@ -1002,7 +1004,20 @@ if (this.city != null && this.city != undefined) {
     // this.checkingAvailability();
   }
 
+  scrollLeft() {
+    this.scrollContainer.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
+  }
 
+  scrollRight() {
+    this.scrollContainer.nativeElement.scrollLeft += 250; // Adjust this value to match card width
+  }
+  scrollLeftOne() {
+    this.scrollContainerOne.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
+  }
+
+  scrollRightOne() {
+    this.scrollContainerOne.nativeElement.scrollLeft += 250; // Adjust this value to match card width
+  }
   // showhide(){
     openRoomCarousel() {
       this.showRoomCarousel = true;
@@ -3026,7 +3041,7 @@ console.log("lkjhgfgh")
                 plan.otaPlanList.forEach((otaPlan) => {
                   const otaName = otaPlan.otaName;
                   const price = otaPlan.price;
-                  this.otaPlans.push({ otaName, price }); // Push otaPlan object into the array
+                  this.otaPlans.push({ otaName, price });
                 });
 
                 if (
