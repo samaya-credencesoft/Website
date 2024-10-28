@@ -327,7 +327,7 @@ export class BookingComponent implements OnInit {
     this.booking.taxAmount = this.booking.gstAmount;
     this.booking.beforeTaxAmount =
       this.booking.netAmount - this.booking.discountAmount;
-
+this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice());
     this.getPropertyDetails(this.booking.propertyId);
 
     this.payment.expYear = "";
