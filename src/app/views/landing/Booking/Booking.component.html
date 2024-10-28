@@ -2219,10 +2219,7 @@ border-radius: 10px;">
           <div class="col-12" style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
 border-radius: 10px;">
             <table style=" border: none; width:100%">
-              <tr>
-                <td>Room Price:</td>
-                <td style="text-align: right;">{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</td>
-              </tr>
+
               <tr>
                 <td>Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
                 <td style="text-align: right;">{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
@@ -2506,10 +2503,7 @@ border-radius: 10px;">
 
         <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
           <table style=" border: none; width:100%">
-            <tr>
-              <td>Room Price:</td>
-              <td style="text-align: right;">{{(booking.roomPrice)| currency: currency:"symbol":"1.2-2"}}</td>
-            </tr>
+
             <tr>
               <td>Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
               <td style="text-align: right;">{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
