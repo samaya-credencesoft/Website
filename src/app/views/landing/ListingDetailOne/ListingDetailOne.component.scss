@@ -4423,7 +4423,7 @@ body {
 ::-webkit-scrollbar {
   // width: 12px;
   // overflow: hidden
-  display: none;
+  // display: none;
 
 }
 .sticky-button {
@@ -4582,7 +4582,18 @@ font-size: 23px !important;
   scroll-behavior: smooth;
   white-space: nowrap;
   position: relative;
+  overflow-y: hidden;
 
+}
+
+.custom-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+
+.custom-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) #e0e0e0;
 }
 
 
