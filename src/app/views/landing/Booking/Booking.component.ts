@@ -449,7 +449,7 @@ roomdetailss.noOfRooms = this.booking.noOfRooms;
 roomdetailss.noOfadult = this.booking.noOfPersons;
 roomdetailss.noOfchild = this.booking.noOfChildren;
 roomdetailss.plan = this.booking.roomRatePlanName;
-roomdetailss.roomRate = this.booking.roomPrice;
+roomdetailss.roomRate = this.booking.roomTariffBeforeDiscount;
 roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
