@@ -665,7 +665,7 @@ export class ListingDetailOneComponent implements OnInit {
   @ViewChild('scrollContainerOne', { read: ElementRef }) scrollContainerOne!: ElementRef;
   @ViewChild('scrollContainerThree', { read: ElementRef }) scrollContainerThree!: ElementRef;
   @ViewChild('scrollContainerFour', { read: ElementRef }) scrollContainerFour!: ElementRef;
-
+  @ViewChild('ScrollingOne', { read: ElementRef }) ScrollingOne!: ElementRef;
 
   constructor(
     private listingService: ListingService,
