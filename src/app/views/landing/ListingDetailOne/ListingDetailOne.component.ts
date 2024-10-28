@@ -703,6 +703,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.details = new Details();
     // this.updateTag();
     this.token.clearwebsitebookingURL();
+    this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
 
     this.oneDayFromDate = calendar.getToday();
@@ -1311,24 +1312,33 @@ if (this.city != null && this.city != undefined) {
   }
   onAdd(facility, index) {
     facility.isAdded = true;
-    facility.quantity = 1; // Initialize quantity
+    facility.quantity = 1;
     this.selectedServices.push(facility);
+    this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
   }
 
-  // Increase the quantity
   increaseQuantity(facility) {
     facility.quantity++;
+    this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
   }
 
-  // Decrease the quantity
   decreaseQuantity(facility) {
     if (facility.quantity > 1) {
       facility.quantity--;
-      this.updateTokenStorage();
+    } else if (facility.quantity === 1) {
+      facility.isAdded = false;
+      facility.quantity = null;
+      const index = this.selectedServices.indexOf(facility);
+      if (index > -1) {
+        this.selectedServices.splice(index, 1);
+      }
     }
+    this.token.saveSelectedServices(this.selectedServices);
+    this.updateTokenStorage();
   }
+
 
   // Save selected services to token storage
 
