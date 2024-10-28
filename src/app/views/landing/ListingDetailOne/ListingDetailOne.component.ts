@@ -663,8 +663,8 @@ export class ListingDetailOneComponent implements OnInit {
   showRoomCarousel = false;
   @ViewChild('scrollContainer', { read: ElementRef }) scrollContainer!: ElementRef;
   @ViewChild('scrollContainerOne', { read: ElementRef }) scrollContainerOne!: ElementRef;
-
-
+  @ViewChild('scrollContainerThree', { read: ElementRef }) scrollContainerThree!: ElementRef;
+  @ViewChild('scrollContainerFour', { read: ElementRef }) scrollContainerFour!: ElementRef;
 
 
   constructor(
@@ -1011,7 +1011,7 @@ if (this.city != null && this.city != undefined) {
   scrollRight() {
     this.scrollContainer.nativeElement.scrollLeft += 250; // Adjust this value to match card width
   }
-  scrollLeftOne() {
+  scrollLeftOne(index) {
     this.scrollContainerOne.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
   }
 

@@ -4733,9 +4733,9 @@ font-size: 23px !important;
 }
 
 .checkAva9 {
-  background-color: #FEE13D;
+  background-color: var(--secondary);
   padding: 4px;
-  color: black;
+  color: var(--tertiary);
   font-weight: 700;
   border-radius: 7px;
   padding-left: 14px;
