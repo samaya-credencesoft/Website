@@ -1341,22 +1341,18 @@ if (this.city != null && this.city != undefined) {
 
   increaseQuantity(facility) {
     facility.quantity++;
-    if(this.selectedServicesOne != null && this.selectedServicesOne != undefined){
-      let facilityExists = false;
+    if (this.selectedServicesOne) {
+      const facilityIndex = this.selectedServicesOne.findIndex(ele => ele.id === facility.id);
 
-      this.selectedServicesOne.forEach(ele => {
-         if(ele.id === facility.id)
-         {
-          ele.quantity = facility.quantity;
-          facilityExists = true;
-         }
-      });
-      if (!facilityExists) {
-        this.selectedServicesOne.push(facility);
-    }
-      this.token.saveSelectedServices(this.selectedServicesOne)
+      if (facilityIndex !== -1) {
+          this.selectedServicesOne[facilityIndex].quantity = facility.quantity;
+      } else {
+          this.selectedServicesOne.push(facility);
+      }
 
-  } else {
+      this.token.saveSelectedServices(this.selectedServicesOne);
+  }
+  else {
     this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
   }
