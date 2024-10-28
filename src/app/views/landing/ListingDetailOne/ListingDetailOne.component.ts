@@ -707,7 +707,7 @@ export class ListingDetailOneComponent implements OnInit {
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
 this.selectedServices = this.token?.getSelectedServices();
-
+this.selectedServices =[]
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
 
@@ -1110,7 +1110,7 @@ if (this.city != null && this.city != undefined) {
     this.totalTaxAmount = 0;
     this.totalExtraAmount = 0;
     this.totalBeforeTaxAmount = 0;
-    this.addServiceList.forEach((element) => {
+    this.addServiceList?.forEach((element) => {
       this.totalExtraAmount = this.totalExtraAmount + element.afterTaxAmount;
       this.totalTaxAmount = this.totalTaxAmount + element.taxAmount;
       this.totalBeforeTaxAmount =
@@ -1677,7 +1677,7 @@ this.isHeaderVisible = true;
 
         this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
           if(this.selectedServices != null &&  this.selectedServices != undefined ){
-            this.savedServices = this.token?.getSelectedServices().forEach(ele => {
+            this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
               this.propertyServiceListDataOne.forEach(val => {
                 if (ele.name === val.name) {
                   this.valSelected = true;
@@ -2093,8 +2093,8 @@ this.isHeaderVisible = true;
           }
           this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
           if(this.selectedServices != null &&  this.selectedServices != undefined ){
-          this.savedServices = this.token?.getSelectedServices().forEach(ele => {
-            this.propertyServiceListDataOne.forEach(val => {
+          this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
+            this.propertyServiceListDataOne?.forEach(val => {
               if (ele.name === val.name) {
                 this.valSelected = true;
                 this.viewAddon = true;
