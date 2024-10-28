@@ -94,7 +94,7 @@
 
         <tr >
           <td class="p-1" style="color: black !important;">Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
-          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(booking.roomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
         </tr>
 
 
