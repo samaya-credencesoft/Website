@@ -36,6 +36,7 @@ const BUSINESS_SERVICE = 'businessservice';
 const businessTypeGroupListDATA = 'businessTypeGroupList';
 const businessTypeListDATA = 'businessTypeList';
 const PROPERTY_SERVICE_DATA = 'PROPERTY_SERVICE_DATA';
+const SELECTED_SERVICE_DATA = 'SELECTED_SERVICE_DATA';
 const PAYMENT = 'payment';
 const PAYMENT2 = 'payment2';
 const ROLES = "Roles";
@@ -119,12 +120,14 @@ export class TokenStorage {
       }
     }
 
-    saveSelectedServices(services: any[]) {
-      sessionStorage.setItem('selectedServices', JSON.stringify(services));
+    saveSelectedServices(propertyServiceDTO: PropertyServiceDTO[]) {
+      sessionStorage.setItem(SELECTED_SERVICE_DATA, JSON.stringify(propertyServiceDTO));
     }
 
     getSelectedServices() {
-      return JSON.parse(sessionStorage.getItem('selectedServices') || '[]');
+      // return JSON.parse(sessionStorage.getItem('selectedServices') );
+    return JSON.parse(sessionStorage.getItem(SELECTED_SERVICE_DATA) as string);
+
     }
 
     public saveBookingRoomPrice(roomPrice: number) {

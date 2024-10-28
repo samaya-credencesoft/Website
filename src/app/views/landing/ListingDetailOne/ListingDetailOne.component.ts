@@ -90,6 +90,7 @@ export class ListingDetailOneComponent implements OnInit {
   noofRoomsAvailable: any[] = [];
   valueAvailable: any;
   getValueOfRooms: RatesAndAvailability;
+  allSavedService: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -703,9 +704,10 @@ export class ListingDetailOneComponent implements OnInit {
     this.details = new Details();
     // this.updateTag();
     this.token.clearwebsitebookingURL();
-    this.token.saveSelectedServices(this.selectedServices);
+    // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
-
+this.selectedServices = this.token.getSelectedServices();
+console.log("ggh"+JSON.stringify(this.allSavedService))
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
 
@@ -1299,6 +1301,7 @@ if (this.city != null && this.city != undefined) {
 
   // }
   ngAfterViewInit() {
+    // this.token.saveSelectedServices(this.selectedServices);
     setTimeout(() => {
       window.scrollTo({
         top: 0,
