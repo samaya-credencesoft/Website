@@ -935,23 +935,23 @@ if (this.city != null && this.city != undefined) {
     // this.token.clearRoomsData();
 
 
-    const currentDate = new Date();
-    const fromDate = new NgbDate(
-        currentDate.getFullYear(),
-        currentDate.getMonth() + 1,
-        currentDate.getDate()
-    );
+    // const currentDate = new Date();
+    // const fromDate = new NgbDate(
+    //     currentDate.getFullYear(),
+    //     currentDate.getMonth() + 1,
+    //     currentDate.getDate()
+    // );
 
-    const nextDate = new Date(currentDate);
-    nextDate.setDate(currentDate.getDate() + 1);
-    const toDate = new NgbDate(
-        nextDate.getFullYear(),
-        nextDate.getMonth() + 1,
-        nextDate.getDate()
-    );
+    // const nextDate = new Date(currentDate);
+    // nextDate.setDate(currentDate.getDate() + 1);
+    // const toDate = new NgbDate(
+    //     nextDate.getFullYear(),
+    //     nextDate.getMonth() + 1,
+    //     nextDate.getDate()
+    // );
 
-    this.fromDate = fromDate;
-    this.toDate = toDate;
+    // this.fromDate = fromDate;
+    // this.toDate = toDate;
 
     this.blogPosts$ = this.contentfulService.getAllEntries();
     this.email = {
