@@ -2401,7 +2401,7 @@
           <div >
             <div class="card-body" style="margin-top: -23px;">
               <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
-                <div *ngIf="room.id === rates.roomId && r < 1">
+                <div *ngIf="room.id === rates.roomId && r < 1 && (rates.stopSellOTA === false || rates.stopSellOTA === null)">
                   <div class="row mb-4">
                     <div class="col-md-7" style="padding: 0px;">
                       <div *ngFor="
@@ -2750,7 +2750,7 @@
         <div >
           <div class="card-body" style="margin-top: -23px;">
             <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
-              <div *ngIf="room.id === rates.roomId && r < 1">
+              <div *ngIf="room.id === rates.roomId && r < 1 && (rates.stopSellOBE === false || rates.stopSellOBE === null)">
                 <div class="row mb-4">
                   <div class="col-12" style="padding: 0px;">
                     <div *ngFor="
@@ -3099,7 +3099,7 @@
         <div >
           <div class="card-body" style="margin-top: -23px;">
             <div *ngFor="let rates of room.ratesAndAvailabilityDtos;let r = index">
-              <div *ngIf="room.id === rates.roomId && r < 1">
+              <div *ngIf="room.id === rates.roomId && r < 1 && (rates.stopSellOBE === false || rates.stopSellOBE === null)">
                 <div class="row mb-4">
                   <div class="col-12" style="padding: 0px;">
                     <div *ngFor="
