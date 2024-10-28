@@ -91,6 +91,7 @@ export class ListingDetailOneComponent implements OnInit {
   valueAvailable: any;
   getValueOfRooms: RatesAndAvailability;
   allSavedService: any;
+  selectedServicesOne: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -708,7 +709,9 @@ export class ListingDetailOneComponent implements OnInit {
     this.token.clearwebsitebookingURL();
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
-this.selectedServices = this.token?.getSelectedServices();
+this.selectedServicesOne = this.token?.getSelectedServices();
+
+
 this.selectedServices =[]
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
@@ -1338,23 +1341,71 @@ if (this.city != null && this.city != undefined) {
 
   increaseQuantity(facility) {
     facility.quantity++;
+    if(this.selectedServicesOne != null && this.selectedServicesOne != undefined){
+      let facilityExists = false;
+
+      this.selectedServicesOne.forEach(ele => {
+         if(ele.id === facility.id)
+         {
+          ele.quantity = facility.quantity;
+          facilityExists = true;
+         }
+      });
+      if (!facilityExists) {
+        this.selectedServicesOne.push(facility);
+    }
+      this.token.saveSelectedServices(this.selectedServicesOne)
+
+  } else {
     this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
   }
+}
 
   decreaseQuantity(facility) {
     if (facility.quantity > 1) {
       facility.quantity--;
+      if(this.selectedServicesOne != null && this.selectedServicesOne != undefined){
+        this.selectedServicesOne.forEach(ele => {
+           if(ele.id === facility.id)
+           {
+            ele.quantity = facility.quantity;
+           }
+
+
+        });
+
+        this.token.saveSelectedServices(this.selectedServicesOne)
+
+    } else {
+       this.token.saveSelectedServices(this.selectedServices);
+    this.updateTokenStorage();
+    }
     } else if (facility.quantity === 1) {
       facility.isAdded = false;
       facility.quantity = null;
+      if (this.selectedServicesOne != null && this.selectedServicesOne != undefined) {
+        this.selectedServicesOne = this.selectedServicesOne.filter(ele => {
+            // Check if the condition is met
+            if (ele.id === facility.id) {
+                ele.quantity = facility.quantity; // Update quantity if needed
+
+
+                return false; // Exclude this element from the new array
+            }
+            return true;
+            // Keep this element in the new array
+        });
+        this.token.saveSelectedServices(this.selectedServicesOne);
+
+    }
+
       const index = this.selectedServices.indexOf(facility);
       if (index > -1) {
         this.selectedServices.splice(index, 1);
       }
     }
-    this.token.saveSelectedServices(this.selectedServices);
-    this.updateTokenStorage();
+
   }
 
 
