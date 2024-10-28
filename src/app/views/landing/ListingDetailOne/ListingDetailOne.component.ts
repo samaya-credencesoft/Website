@@ -706,7 +706,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.token.clearwebsitebookingURL();
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
-this.selectedServices = this.token.getSelectedServices();
+this.selectedServices = this.token?.getSelectedServices();
 
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
@@ -1676,17 +1676,19 @@ this.isHeaderVisible = true;
         });
 
         this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
-          this.savedServices = this.token.getSelectedServices().forEach(ele => {
-            this.propertyServiceListDataOne.forEach(val => {
-              if (ele.name === val.name) {
-                this.valSelected = true;
-                this.viewAddon = true;
-              val.quantity = ele.quantity;
-              }
-            })
+          if(this.selectedServices != null &&  this.selectedServices != undefined ){
+            this.savedServices = this.token?.getSelectedServices().forEach(ele => {
+              this.propertyServiceListDataOne.forEach(val => {
+                if (ele.name === val.name) {
+                  this.valSelected = true;
+                  this.viewAddon = true;
+                val.quantity = ele.quantity;
+                }
+              })
+
             console.log("val.quantity", this.propertyServiceListDataOne)
           });
-
+        }
         this.updateTag();
         this.token.saveProperty(this.businessUser);
 
@@ -2090,7 +2092,8 @@ this.isHeaderVisible = true;
             this.checkingAvailability();
           }
           this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
-          this.savedServices = this.token.getSelectedServices().forEach(ele => {
+          if(this.selectedServices != null &&  this.selectedServices != undefined ){
+          this.savedServices = this.token?.getSelectedServices().forEach(ele => {
             this.propertyServiceListDataOne.forEach(val => {
               if (ele.name === val.name) {
                 this.valSelected = true;
@@ -2100,6 +2103,7 @@ this.isHeaderVisible = true;
             })
             console.log("val.quantity", this.propertyServiceListDataOne)
           });
+        }
 
           if (this.token?.getRoomsData() === null) {
             // this.getRoom();
