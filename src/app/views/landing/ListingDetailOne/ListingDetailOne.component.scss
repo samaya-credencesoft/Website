@@ -3825,14 +3825,14 @@ body {
     background: white;
     padding: 20px;
     width: 80%;
-    height: auto;
+    height: 90%;
     max-width: 860px;
     border-radius: 10px;
 }
 
 .unique-room-carousel-image {
   width: 100%;
-  height: auto;
+  height: 63vh;
 }
 .unique-modal-content {
   background-color: white;
@@ -3842,12 +3842,12 @@ body {
   max-width: 860px;
   position: relative;
   z-index: 1001;
-  height: auto;
+  height: 80%;
 }
 
 .unique-carousel-image {
   width: 100%;
-  height: auto;
+  height: 63vh;
 }
 .unique-slick-slide {
   text-align: center;
@@ -3953,6 +3953,36 @@ body {
   .ammmmi {
     margin-top: -10px;
   }
+
+  .unique-room-modal-content {
+    position: relative;
+    background: white;
+    padding: 20px;
+    width: 80%;
+    height: auto !important;
+    max-width: 860px;
+    border-radius: 10px;
+}
+
+.unique-room-carousel-image {
+  width: 100%;
+  height: auto !important;
+}
+.unique-modal-content {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 860px;
+  position: relative;
+  z-index: 1001;
+  height: auto !important;
+}
+
+.unique-carousel-image {
+  width: 100%;
+  height: auto;
+}
 
 
   .masonry-item-rightTwo {
@@ -4405,8 +4435,8 @@ font-size: 23px !important;
 
 .sticky-card {
   position: fixed;
-  top: 43%;
-  right: -600px; /* Initially offscreen */
+  top: 52%;
+  right: -700px; /* Initially offscreen */
   transform: translateY(-50%);
   width: 550px;
   background-color: #fff;
@@ -4419,7 +4449,7 @@ font-size: 23px !important;
 }
 
 .sticky-card.show {
-  right: 52px; /* Slides into view */
+  right: 70px; /* Slides into view */
 }
 .rotate {
   transition: transform 0.5s ease;
