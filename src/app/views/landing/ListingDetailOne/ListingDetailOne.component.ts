@@ -707,7 +707,7 @@ export class ListingDetailOneComponent implements OnInit {
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
 this.selectedServices = this.token.getSelectedServices();
-console.log("ggh"+JSON.stringify(this.allSavedService))
+
     this.oneDayFromDate = calendar.getToday();
     if (this.token.getBookingCity() !== null) {
 
