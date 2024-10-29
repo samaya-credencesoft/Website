@@ -669,12 +669,13 @@ export class ListingDetailOneComponent implements OnInit {
   @ViewChild('scrollContainerFour', { read: ElementRef }) scrollContainerFour!: ElementRef;
   @ViewChild('ScrollingOne', { read: ElementRef }) ScrollingOne!: ElementRef;
   @ViewChild('ScrollingTwo', { read: ElementRef }) ScrollingTwo!: ElementRef;
+  @ViewChild('scrollContainerTen', { read: ElementRef }) scrollContainerTen!: ElementRef;
   slickConfigTen = {
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
     infinite: true,
     dots: true,
-    arrows: true,
+    arrows: false,
     autoplay: true,
     autoplaySpeed: 2000,
     responsive: [
@@ -1045,11 +1046,11 @@ if (this.city != null && this.city != undefined) {
   }
 
   scrollLeft() {
-    this.scrollContainer.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
+    this.scrollContainerTen.nativeElement.scrollLeft -= 300; // Adjust this value to match card width
   }
 
   scrollRight() {
-    this.scrollContainer.nativeElement.scrollLeft += 250; // Adjust this value to match card width
+    this.scrollContainerTen.nativeElement.scrollLeft += 300; // Adjust this value to match card width
   }
   scrollLeftOne(index) {
     this.scrollContainerOne.nativeElement.scrollLeft -= 250; // Adjust this value to match card width
