@@ -21,6 +21,7 @@ import { RoomDetail } from 'src/app/model/RoomDetail';
 import { externalReservationDtoList } from 'src/app/model/externalReservation';
 import { ListingService } from 'src/services/listing.service';
 import { BusinessServiceDtoList } from 'src/app/model/businessServiceDtoList';
+import { PropertyServiceDTO } from 'src/app/model/PropertyServices';
 
 @Component({
   selector: 'app-booking-complete',
@@ -58,6 +59,7 @@ export class BookingCompleteComponent implements OnInit {
   enquiryResponse: EnquiryForm;
   successMessage: boolean;
   reservationRoomDetails:RoomDetail[];
+  propertyServices:PropertyServiceDTO[];
   API_URL: string;
   enquirySent: boolean = false;
   submitButtonDisable: boolean;
@@ -481,6 +483,7 @@ this.hotelBookingService
   externalReservation(booking){
     this.reservationRoomDetails =[];
     let roomdetailss = new RoomDetail();
+
 let externalreservation = new externalReservationDtoList();
 externalreservation.checkinDate = this.booking.fromDate;
 externalreservation.checkoutDate = this.booking.toDate;
@@ -510,11 +513,22 @@ roomdetailss.noOfadult = this.booking.noOfPersons;
 roomdetailss.noOfchild = this.booking.noOfChildren;
 roomdetailss.plan = this.booking.roomRatePlanName;
 roomdetailss.roomRate = this.booking.roomTariffBeforeDiscount + this.booking.extraChildCharge + this.booking.extraPersonCharge;
-
 roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
 externalreservation.roomDetails = this.reservationRoomDetails;
+
+this.propertyServices = this.savedServices;
+this.propertyServices.forEach(ele => {
+  ele.count = ele.quantity;
+  ele.id = null;
+  ele.date = new Date().toString();
+  ele.logoUrl = null;
+  ele.imageUrl = null;
+  ele.description = null;
+ele.organisationId = null;
+});
+externalreservation.services = this.propertyServices;
 externalreservation.taxAmount = this.booking.taxAmount;
 // externalreservation.lastModifiedDate = new Date().toString();
 externalreservation.noOfPerson = this.booking.noOfPersons.toString();
