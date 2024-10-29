@@ -2002,30 +2002,27 @@
 
  <!-- nearby section starts -->
  <div class="container" style="max-width: 1500px !important;">
-  <div class="row mr-0 ml-0"  >
+  <div class="row mr-0 ml-0">
+    <div class="col-lg-12 pl-0 pr-0">
+      <div *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;">
+        <div *ngFor="let blogPost of blogPosts.items">
+          <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
+            <h3 class="ameniti1">Nearby Places</h3>
 
-    <div class="col-lg-12 pl-0 pr-0" >
-<div  *ngIf="blogPosts$ | async as blogPosts" style="margin-top: 10px;">
-  <div *ngFor="let blogPost of blogPosts.items">
-    <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
-      <h3 class="ameniti1">Nearby Places</h3>
-
-      <div #ScrollingTwo class="cardlistmenu custom-scroll-container" style="scroll-behavior: smooth; overflow-x: auto; overflow-y: hidden; white-space: nowrap; display: flex;">
-        <div *ngFor="let item of blogPost.fields.citiesimages">
-          <!-- Background wrapper div for each item -->
-          <div class="item-background">
-            <div class="cardDesignmenu imageitemmenu">
-              <img [src]="item.fields.file.url" class="imageitemmenu" />
+            <!-- Carousel Component -->
+            <ngx-slick-carousel #slickModal="slick-carousel" class="carousel" [config]="slickConfigTen">
+              <div ngxSlickItem *ngFor="let item of blogPost.fields.citiesimages" class="item-background">
+                <div class="cardDesignmenu imageitemmenu" style="margin: auto;">
+                  <img [src]="item.fields.file.url" class="imageitemmenu" />
+                </div>
+                <h3 class="menuheading">{{ item.fields.title }}</h3>
+              </div>
+            </ngx-slick-carousel>
             </div>
-            <h3 class="menuheading">{{ item.fields.title }}</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+            </div>
+            </div>
+            </div>
+            </div>
 </div>
 
  <!-- nearby section ends -->
