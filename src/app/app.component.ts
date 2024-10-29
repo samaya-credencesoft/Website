@@ -19,12 +19,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const hostname = window.location.hostname;
     const pathname = window.location.pathname;
-console.log("jhjgfd")
-    // If the default URL is "bookone.io"
-    if (hostname === 'bookone.io') {
-      this.router.navigate(['/home']);
-    }
-    else if (pathname.includes('booking-complete')) {
+
+
+    if (pathname.includes('booking-complete')) {
       this.router.navigate(['/booking-complete']);
     }
     // If URL is "booking.seoname.bookone.io"
