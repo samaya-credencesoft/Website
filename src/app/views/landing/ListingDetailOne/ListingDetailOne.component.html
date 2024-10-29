@@ -2010,7 +2010,7 @@
     <div *ngIf="blogPost.fields.title === this.token?.getProperty()?.address?.city && blogPost.fields.citiesimages?.length">
       <h3 class="ameniti1">Nearby Places</h3>
 
-      <div class="cardlistmenu custom-scroll-container">
+      <div #ScrollingTwo class="cardlistmenu custom-scroll-container">
         <div *ngFor="let item of blogPost.fields.citiesimages">
           <!-- Background wrapper div for each item -->
           <div class="item-background">
