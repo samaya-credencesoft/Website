@@ -670,11 +670,11 @@ export class ListingDetailOneComponent implements OnInit {
   @ViewChild('ScrollingOne', { read: ElementRef }) ScrollingOne!: ElementRef;
   @ViewChild('ScrollingTwo', { read: ElementRef }) ScrollingTwo!: ElementRef;
   slickConfigTen = {
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
     infinite: true,
     dots: true,
-    arrows: true,
+    arrows: false,
     autoplay: true,
     autoplaySpeed: 2000,
     responsive: [
