@@ -1,3 +1,4 @@
+import { PropertyServiceDTO } from "./PropertyServices";
 import { RoomDetail } from "./RoomDetail";
 
 
@@ -34,6 +35,7 @@ export class externalReservationDtoList {
   propertyName: string;
   resType: string;
   roomDetails: RoomDetail[];
+  services:PropertyServiceDTO[];
   status: string;
   taxAmount: Number;
   totalAmount: Number;

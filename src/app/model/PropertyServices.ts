@@ -13,6 +13,7 @@ export class PropertyServiceDTO {
   beforeTaxAmount: number;
   taxAmount: number;
   taxPercentage: number;
+  quantity:number;
   count: number;
   servicePrice: number;
   date: string;
