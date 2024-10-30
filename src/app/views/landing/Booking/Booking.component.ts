@@ -2214,7 +2214,6 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     });
   }
   submitForm() {
-    console.log('booking is',this.booking);
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
 
     this.enquiryForm = new EnquiryDto();
@@ -2249,6 +2248,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
+    this.enquiryForm.roomName = this.booking.roomType;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;
