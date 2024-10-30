@@ -99,15 +99,7 @@
         </tr>
 
 
-        <tr *ngIf="booking.extraPersonCharge" >
-          <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
-          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
-        </tr>
 
-        <tr *ngIf="booking.extraChildCharge">
-          <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
-          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
-        </tr>
 
 
 
@@ -123,17 +115,15 @@
 
               </tr>
             </ng-container>
-            <tr *ngIf="booking.extraPersonCharge >0 && activeForGoogleHotelCenter === true"  >
-             <td style="color: black;padding:5px">Extra Person charges</td>
-                <td style="color: black;padding:5px " >
-                 <span>
-                   {{
-                   booking.extraPersonCharge
-                   | currency: currency:"symbol":"1.2-2"
-                   }}</span>
-              </td>
-           </tr>
+            <tr *ngIf="booking.extraPersonCharge" >
+              <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
+            </tr>
 
+            <tr *ngIf="booking.extraChildCharge">
+              <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
+            </tr>
             <!-- Add more rows dynamically based on your data -->
             <tr >
               <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
