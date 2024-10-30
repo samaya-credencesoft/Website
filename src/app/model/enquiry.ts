@@ -20,7 +20,7 @@ export class EnquiryDto {
   noOfChildren: number;
   noOfPets: number;
   location: string;
-  createdDate:Date;
+  createdDate:string;
   country: string;
   alternativeLocation: string;
   phone: string;
@@ -53,5 +53,16 @@ export class EnquiryDto {
   payableAmount:number;
   bookingReservationId:string;
   bookingId:number;
+  planCode:string;
+  totalAmount:number;
+  tcsFee:number;
+  tdsFee:number;
+  hotelmateCommissionAmount:number;
+  tcsFeePercentage:number;
+  tdsFeePercentage:number;
+  hotelmateCommissionAmountPercentage:number;
+  fromTime:string;
+  toTime:string;
+
   // counterName:string;
 }

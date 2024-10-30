@@ -199,6 +199,7 @@ export class BookingComponent implements OnInit {
   calculatedServices: any;
   totalServiceCost: number =0;
   bookingRoomPrice: any;
+  timestamp: string;
 
   constructor(
     private token: TokenStorage,
@@ -209,7 +210,8 @@ export class BookingComponent implements OnInit {
     private listingService: ListingService,
     private router: Router,
     private http: HttpClient,
-    private hotelBookingService: HotelBookingService
+    private hotelBookingService: HotelBookingService,
+    public datepipe: DatePipe
   ) {
 
     this.message = new MessageDto();
@@ -1923,6 +1925,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     });
   }
   accommodationEnquiryBookingData(){
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.enquiryForm = new EnquiryDto();
 
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
@@ -1956,7 +1959,15 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.createdDate = new Date();
+    // this.enquiryForm.createdDate = new Date();
+    this.enquiryForm.createdDate = this.datepipe.transform(
+      new Date(),
+      "yyyy-MM-dd"
+    );
+  this.enquiryForm.createdDate = String(new Date().getTime());
+  this.timestamp =  this.enquiryForm.createdDate;
+  this.enquiryForm.createdDate = this.datePipe.transform(this.timestamp, 'EEEE, MMMM d, y h:mm:ss a', 'yourTimeZone') || '';
+  this.enquiryForm.createdDate = String(new Date(this.enquiryForm.createdDate).getTime());
 
     this.enquiryForm.accountManager ='TheHotelMate Team';
     this.enquiryForm.consultantPerson ='';
@@ -1974,12 +1985,26 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.planCode = this.booking.planCode;
 
     const TO_EMAIL = 'support@thehotelmate.com';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
     const bccName = 'Samaya';
+
+    let currentTime = new Date();
+    this.enquiryForm.fromTime = String(currentTime.getTime());
+    if (this.enquiryForm.fromTime) {
+        this.enquiryForm.checkInDate = this.datepipe.transform(currentTime, 'yyyy-MM-dd HH:mm:ss');
+    }
+
+    let currentChkoutTime = new Date();
+    this.enquiryForm.toTime = String(currentChkoutTime.getTime());
+    if (this.enquiryForm.toTime) {
+      this.enquiryForm.checkOutDate = this.datepipe.transform(currentChkoutTime, 'yyyy-MM-dd HH:mm:ss');
+    }
 
     this.enquiryForm.fromName =
     this.enquiryForm.firstName + ' ' + this.enquiryForm.lastName;
@@ -2189,6 +2214,9 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     });
   }
   submitForm() {
+    console.log('booking is',this.booking);
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
+
     this.enquiryForm = new EnquiryDto();
 
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
@@ -2209,6 +2237,8 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.checkOutDate = this.booking.toDate;
     this.enquiryForm.checkInDate = this.booking.fromDate;
     this.enquiryForm.noOfPerson = this.booking.noOfPersons;
+    this.enquiryForm.planCode = this.booking.planCode;
+    this.enquiryForm.roomPrice = this.booking.roomPrice;
     this.enquiryForm.noOfExtraPerson=this.booking.noOfExtraPerson;
     this.enquiryForm.roomId=this.booking.roomId;
     this.enquiryForm.payableAmount=this.booking.netAmount;
@@ -2225,7 +2255,16 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.createdDate = new Date();
+
+    // this.enquiryForm.createdDate = String(new Date());
+    this.enquiryForm.createdDate = this.datepipe.transform(
+      new Date(),
+      "yyyy-MM-dd"
+    );
+  this.enquiryForm.createdDate = String(new Date().getTime());
+  this.timestamp =  this.enquiryForm.createdDate;
+  this.enquiryForm.createdDate = this.datePipe.transform(this.timestamp, 'EEEE, MMMM d, y h:mm:ss a', 'yourTimeZone') || '';
+  this.enquiryForm.createdDate = String(new Date(this.enquiryForm.createdDate).getTime());
 
     this.enquiryForm.accountManager ='';
     this.enquiryForm.consultantPerson ='';
@@ -2237,12 +2276,27 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.planCode = this.booking.planCode;
 
     const TO_EMAIL = 'support@thehotelmate.com';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
     const bccName = 'Samaya';
+
+
+    let currentTime = new Date();
+this.enquiryForm.fromTime = String(currentTime.getTime());
+if (this.enquiryForm.fromTime) {
+    this.enquiryForm.checkInDate = this.datepipe.transform(currentTime, 'yyyy-MM-dd HH:mm:ss');
+}
+
+let currentChkoutTime = new Date();
+this.enquiryForm.toTime = String(currentChkoutTime.getTime());
+if (this.enquiryForm.toTime) {
+  this.enquiryForm.checkOutDate = this.datepipe.transform(currentChkoutTime, 'yyyy-MM-dd HH:mm:ss');
+}
 
     this.enquiryForm.fromName =
     this.enquiryForm.firstName + ' ' + this.enquiryForm.lastName;
