@@ -75,6 +75,7 @@
 
           </tbody>
         </table>
+
       </div>
 
     </div>
@@ -92,7 +93,7 @@
 
         </tr>
 
-        <tr >
+        <tr *ngIf="activeForGoogleHotelCenter != true">
           <td class="p-1" style="color: black !important;">Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
           <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(booking.roomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
         </tr>
@@ -108,13 +109,39 @@
           <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
         </tr>
 
-        <tr >
-          <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
-          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-            booking.netAmount
-            | currency: currency:"symbol":"1.2-2"
-            }}</td>
-        </tr>
+
+
+        <h4 *ngIf="activeForGoogleHotelCenter === true" style="font-weight: bold;">Price BreakUps</h4>
+
+
+            <ng-container *ngIf="activeForGoogleHotelCenter === true">
+              <tr *ngFor="let item of daterangefilter; let i = index">
+                <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
+                <td style="color: black;padding:5px ;float: right;" *ngFor="let price of [planPrice[i]]">
+  <div  *ngIf="daterangefilter && daterangefilter.length  ">  ₹{{ price | number:'1.2-2' }}</div>
+  </td>
+
+              </tr>
+            </ng-container>
+            <tr *ngIf="booking.extraPersonCharge >0 && activeForGoogleHotelCenter === true"  >
+             <td style="color: black;padding:5px">Extra Person charges</td>
+                <td style="color: black;padding:5px " >
+                 <span>
+                   {{
+                   booking.extraPersonCharge
+                   | currency: currency:"symbol":"1.2-2"
+                   }}</span>
+              </td>
+           </tr>
+
+            <!-- Add more rows dynamically based on your data -->
+            <tr >
+              <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+                booking.netAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}</td>
+            </tr>
 
         <tr *ngIf="booking.taxPercentage">
           <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
