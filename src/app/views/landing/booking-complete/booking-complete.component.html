@@ -232,7 +232,7 @@
 
         </div>
 
-        <div  *ngIf="bookingConfirmed" class="mobile-view-ui">
+        <div *ngIf="bookingConfirmed"   class="mobile-view-ui">
 
           <div style="padding-left: 10px; padding-top: 20px; padding-right: 10px;margin-top: 65px;">
             <a href="{{PropertyUrl}}" style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
@@ -335,7 +335,7 @@
 
                 <tr *ngIf="booking.extraChildCharge">
                   <td style="color: black !important;">
-                    Extra Child Charges({{booking.noOfExtraChild}})
+                    Extra Child Charges ({{this.bookinddata.noOfExtraChild}})
                   </td>
                   <td style="color: black !important; text-align: right;">
                     {{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}
@@ -527,7 +527,7 @@
 
                     <tr *ngIf="booking.extraChildCharge">
                       <td style="color: black !important;">
-                        Extra Child Charges({{booking.noOfExtraChild}})
+                        Extra Child Charges ({{this.bookinddata.noOfExtraChild}})
                       </td>
                       <td style="color: black !important; text-align: right;">
                         {{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}

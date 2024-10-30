@@ -71,6 +71,7 @@ export class BookingCompleteComponent implements OnInit {
   bookingRoomPrice: any;
   socialmedialist:any;
   taxAmountOne: number;
+  bookinddata: Booking;
 
   constructor(
     private http: HttpClient,
@@ -105,6 +106,8 @@ export class BookingCompleteComponent implements OnInit {
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
     {
       this.booking = this.token.getBookingData();
+      this.bookinddata =  this.booking
+      // console.log("this.booking" + JSON.stringify(this.booking))
       this.taxAmountOne = this.booking.taxAmount
       this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
     }
@@ -519,7 +522,7 @@ this.reservationRoomDetails.push(roomdetailss);
 externalreservation.roomDetails = this.reservationRoomDetails;
 
 this.propertyServices = this.savedServices;
-this.propertyServices.forEach(ele => {
+this.propertyServices?.forEach(ele => {
   ele.count = ele.quantity;
   ele.id = null;
   ele.date = new Date().toISOString().split('T')[0];
