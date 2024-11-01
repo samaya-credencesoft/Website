@@ -89,7 +89,7 @@
 
     <!-- Right Section: Book Now Button -->
     <div style="margin-right: 30px;">
-      <button class="blinking-unique-btn" (click)="scrollToAccommodation($event)" style="background-color: var(--secondary); color: var(--tertiary) !important; border: none; padding: 10px 20px;">Book Now</button>
+      <button class="blinking-unique-btn" (click)="scrollToAccommodation($event)" style="background-color: black; color: white !important; border: none; padding: 10px 20px;">Book Now</button>
     </div>
   </div>
 </nav>
@@ -112,7 +112,7 @@
 
 
 
-        <button class="navbar-toggler" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" *ngIf="businessUser?.website" (click)="toggleListingDetails()" type="button" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <img src="assets/images/nav-toggle.png" alt="Toggle Navigation">
         </button>
       </div>
