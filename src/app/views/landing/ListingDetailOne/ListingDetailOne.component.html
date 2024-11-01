@@ -693,7 +693,7 @@
     <div class="col-4 p-0 pl-0 pr-0 float-right filter-card" >
       <div class="container">
         <div class="row" >
-          <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true">
+          <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true && !isLoading">
             <div class="card shadow customized-subcard"
                  *ngFor="let room of sortedRooms" style="margin-left: -24px;">
               <div class="card-body customised-card" style="padding: 10px;"
@@ -724,37 +724,40 @@
             <p style="text-align: right; color: #031EAA !important; cursor: pointer; font-weight: bold;" (click)="scrollToAccommodationDash()">View More Options</p>
           </div>
 
-          <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == false">
-            <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne" style="margin-left: -24px;">
-              <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 " style="padding: 10px;">
+          <div class="col-12 mb-3" *ngIf="!isLoading && this.activeForGoogleHotelCenter == false">
+            <div class="card shadow customized-subcard" *ngFor="let room of sortedRoomsOne" style="margin-left: -24px;">
+              <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length >= 0" style="padding: 10px;">
                 <div class="d-flex">
                   <div class="col-6" style="border-right: 1px solid gray;">
-                    <h4 class="card-title customized-title">{{room.name}}</h4>
-                    <p class="customized-p" style="font-size: 23px; font-weight: bold; padding-bottom: 0px;">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}
+                    <h4 class="card-title customized-title">{{ room.name }}</h4>
+                    <p class="customized-p" style="font-size: 23px; font-weight: bold; padding-bottom: 0px;">
+                      {{ room.roomOnlyPrice | currency: currency: "symbol": "1.2-2" }}
                       <b style="font-size: 13px;">per night </b>
-
                     </p>
-                   </div>
-                   <div class="col-6" style="    padding-right: 5px; padding-left: 5px;">
+                  </div>
+                  <div class="col-6" style="padding-right: 5px; padding-left: 5px;">
                     <table style="width:100%">
-                      <tr >
+                      <tr>
                         <td style="padding-bottom: 30px; font-weight: bold;">Occupancy:</td>
-                        <td style="text-align: right;padding-bottom: 30px; font-weight: bold;">{{room.maximumOccupancy}} Adults</td>
+                        <td style="text-align: right; padding-bottom: 30px; font-weight: bold;">{{ room.maximumOccupancy }} Adults</td>
                       </tr>
                       <tr>
                         <td style="padding-bottom: 30px; font-weight: bold;">Rooms Available:</td>
-                        <td style="text-align: right;padding-bottom: 30px; font-weight: bold;">{{room.roomsAvailable}}</td>
+                        <td style="text-align: right; padding-bottom: 30px; font-weight: bold;">{{ room.roomsAvailable }}</td>
                       </tr>
                     </table>
-                   </div>
+                  </div>
                 </div>
-
-
               </div>
             </div>
-            <p  *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true"
-            style="text-align: right; color: #031EAA !important; cursor: pointer; font-weight: bold;" (click)="scrollToAccommodationDash()">View More Options</p>
+            <p *ngIf="!isLoading" style="text-align: right; color: #031EAA !important; cursor: pointer; font-weight: bold;" (click)="scrollToAccommodationDash()">View More Options</p>
           </div>
+
+          <!-- Loading spinner -->
+          <div *ngIf="isLoading" class="loading-spinner">
+            Loading...
+          </div>
+
 
 
 
@@ -2571,7 +2574,7 @@
         <div class="col-4 pl-0 pr-0 float-right filter-card" >
           <div class="container">
             <div class="row" >
-              <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true">
+              <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true && !isLoading">
                 <div class="card shadow customized-subcard"
                      *ngFor="let room of sortedRooms">
                   <div class="card-body customised-card"
@@ -2582,7 +2585,7 @@
                 </div>
               </div>
 
-              <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == false">
+              <div class="col-12 mb-3" *ngIf="!isLoading && this.activeForGoogleHotelCenter == false">
                 <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
                   <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
                     <h5 class="card-title customized-title">{{room.name}}</h5>
@@ -2592,9 +2595,13 @@
                 </div>
               </div>
 
-              <div *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true" style="margin-top: -18px;
+              <div *ngIf="isLoading" class="loading-spinner">
+                Loading...
+              </div>
+
+              <div *ngIf="!isLoading" style="margin-top: -18px;
                     margin-left: 15px;">
-                <button class="shadow " (click)="scrollToAccommodationDashmobile()" style="background-color: black;
+                <button class="shadow " *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true " (click)="scrollToAccommodationDashmobile()" style="background-color: black;
                 padding: 4px;
                 color:white;
                 font-weight: 700;
