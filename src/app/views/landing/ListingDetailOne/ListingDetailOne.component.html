@@ -1844,29 +1844,54 @@
 
                       <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
                         <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 8); let i = index">
-                          <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-                            <div class="d-flex" id="facilitysms">
-                              <div>
-                                <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
-                                <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon">
+                          <div class="col-lg-12 col-12 p-2" style="margin-bottom: 15px;display: flex;justify-content: space-between;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                            <div class="card" style="width: 100%;border-radius: 10px;">
+                             <div class="row">
+                              <div class="col-6" style="border-right: 1px solid lightgray;">
+                               <div  style="display:flex;gap: 25px;
+     padding-left:10px;padding-right:10px;">
+                                 <div>
+                                   <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png"  height="50px" width="50px" alt="icon" style="margin-top:5px;margin-bottom:5px;">
+                                   <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" height="60px" width="60px" alt="icon">
+                                 </div>
+
+                                 <!-- Service Name -->
+                                 <div style="margin-top: 17px;
+                                 font-size: 20px;
+                                 font-weight: bold;">
+                                   <p style="color:#031EAA !important">{{fac.name}}</p>
+                                 </div>
+
+                               </div>
                               </div>
+   <div class="col-6">
+     <div style="display: flex;justify-content: space-around;">
+       <div style="margin-top: 17px;
+       font-size: 20px;
+      ">
+         {{fac.afterTaxAmount}}
+       </div>
+       <div *ngIf="!fac.isAdded && !fac.quantity" style="margin-top: 17px;
+       font-size: 20px;
+       ">
+         <button class="btn-add" (click)="onAdd(fac, i)" style="background-color: black;color:white;padding-left: 15px;
+     padding-right: 15px;border-radius:20px;">Add</button>
+       </div>
+       <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1" class="d-flex" style="padding: 5px;margin-top: 10px;background-color:lightgrey;border-radius:20px;font-size: 20px;    padding-left: 10px;
+     padding-right: 10px;
+        ">
+         <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;background-color:lightgrey;">-</button>
+         <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border:none; text-align: center; font-weight: bold;background-color:lightgrey;" readonly />
+         <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;background-color:lightgrey;">+</button>
+       </div>
+       </div>
+   </div>
+                             </div>
 
-                              <!-- Service Name -->
-                              <div>
-                                <p>{{fac.name}}</p>
-                              </div>
-                            </div>
 
-                            <div *ngIf="!fac.isAdded && !fac.quantity">
-                              <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
-                            </div>
 
-                            <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1" class="d-flex" style="padding: 5px;">
-                              <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
-                              <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
-                              <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
                             </div>
-                          </div>
+                           </div>
                         </ng-container>
                       </div>
 
