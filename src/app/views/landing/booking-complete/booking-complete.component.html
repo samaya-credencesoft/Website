@@ -405,8 +405,8 @@
                       </p>
                     </div>
                   </div></td>
-                  <td *ngIf="fac.servicePrice == null || fac.servicePrice == undefined">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
-                  <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
+                  <td *ngIf="fac.servicePrice == null || fac.servicePrice == undefined" style="float: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
+                  <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="float: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
                   </td>
                 </tr>
 
