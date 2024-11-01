@@ -214,7 +214,9 @@
     box-shadow: 2px 2px 3px #999;
     z-index: 100;
   }
-
+.quantity-input {
+  width:60px !important;
+}
   .float-two {
     position: fixed;
     width: 60px;
@@ -3761,6 +3763,23 @@ body {
   margin-left: 25px;
 }
 
+@media (max-width:500px) {
+  .CA1 {
+
+    padding: 15px;
+    /* position: relative; */
+    /* float: right; */
+    background-color: black;
+    color:white;
+    padding: 19px;
+    border-radius: 8px;
+    font-weight: bold;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+  }
+
+}
 .SVM {
   padding: 10px;
   background: var(--primary);
