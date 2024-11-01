@@ -19,6 +19,19 @@
                 <a href="{{PropertyUrl}}">
                    <button class="btn btn-primary" type="button">Go Back</button>
                    </a>
+
+                   <div *ngIf="loadersnipper"  class="loading-spinner" style="    padding: 56px;
+                   display: flex;
+                   justify-content: center;
+                   margin: auto;
+                   vertical-align: center;
+
+                   margin-top: 200px;
+               ">
+                  <div class="card" style="margin-top: 60px;padding: 56px;">
+                    Connecting Please Wait...
+                  </div>
+                  </div>
             </div>
         </div>
     </div>

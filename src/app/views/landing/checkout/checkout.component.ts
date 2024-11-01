@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit {
   contentDialog: any;
   DiffDate;
   currency: string;
+  loadersnipper: boolean = true;
 
   constructor(
     private readonly checkoutService: CheckoutService,
@@ -51,6 +52,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+     this.loadersnipper=false
+    }, 3000);
     if (this.payment.failureMessage !== null) {
     } else {
       this.checkoutService.init(
