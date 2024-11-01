@@ -3758,9 +3758,23 @@ body {
   padding: 19px;
   border-radius: 8px;
   font-weight: bold;
-  padding-left: 35px;
-  padding-right: 35px;
   margin-left: 25px;
+}
+
+.CA2 {
+
+  padding: 15px;
+  /* position: relative; */
+  /* float: right; */
+  background-color: black;
+  color: white;
+  padding: 19px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-left: 25px;
+  padding-left: 30px;
+  padding-right: 27px;
+
 }
 
 @media (max-width:500px) {
@@ -3774,10 +3788,28 @@ body {
     padding: 19px;
     border-radius: 8px;
     font-weight: bold;
-    padding-left: 0px;
-    padding-right: 0px;
+    margin-top: 9px;
+    margin-bottom: 10px;
     margin-left: 0px;
   }
+
+  .CA2 {
+
+    padding: 15px;
+    /* position: relative; */
+    /* float: right; */
+    background-color: black;
+    color:white;
+    padding: 19px;
+    border-radius: 8px;
+    font-weight: bold;
+    width:110px;
+    margin-left: 0px;
+    margin-top: 9px;
+    margin-bottom: 10px;
+
+  }
+
 
 }
 .SVM {
