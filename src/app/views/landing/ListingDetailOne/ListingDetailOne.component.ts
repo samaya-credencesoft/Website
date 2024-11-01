@@ -664,6 +664,7 @@ export class ListingDetailOneComponent implements OnInit {
   valSelected: boolean = false;
   showCarousel = false;
   showRoomCarousel = false;
+  isLoading = true;
   @ViewChild('scrollContainer', { read: ElementRef }) scrollContainer!: ElementRef;
   @ViewChild('scrollContainerOne', { read: ElementRef }) scrollContainerOne!: ElementRef;
   @ViewChild('scrollContainerThree', { read: ElementRef }) scrollContainerThree!: ElementRef;
@@ -741,6 +742,13 @@ export class ListingDetailOneComponent implements OnInit {
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
 this.selectedServicesOne = this.token?.getSelectedServices();
+setTimeout(() => {
+  if(this.activeForGoogleHotelCenter == true){
+    this.fetchAndProcessRoomsDataOne();
+  } else if (this.activeForGoogleHotelCenter == false){
+    this.fetchAndProcessRoomsData();
+  }
+}, 3000);
 
 
 this.selectedServices =[]
@@ -1037,13 +1045,31 @@ if (this.city != null && this.city != undefined) {
     this.getDiffDate(this.toDate, this.fromDate);
     setTimeout(() => {
       if(this.activeForGoogleHotelCenter == true){
-        this.sortAndLimitRooms();
+        this.fetchAndProcessRoomsDataOne();
       } else if (this.activeForGoogleHotelCenter == false){
-        this.sortAndLimitRoomsOne();
+        this.fetchAndProcessRoomsData();
       }
     }, 3000);
     // this.adults = this.adults;
     // this.checkingAvailability();
+  }
+
+  fetchAndProcessRoomsData() {
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.sortAndLimitRoomsOne();
+      this.isLoading = false;
+    }, 1000);
+  }
+
+  fetchAndProcessRoomsDataOne() {
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.sortAndLimitRooms();
+      this.isLoading = false;
+    }, 1000);
   }
 
   scrollLeft() {
