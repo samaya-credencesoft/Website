@@ -25,7 +25,284 @@
   <div class="sticky-button "style="display: none;" >
     <button class="btn desktop-view-ui" id="toggleCardBtn" style="font-size: 23px;background-color: black;color:white;font-weight: bold;">Booking Summary</button>
   </div>
+  <div class="sticky-card mobile-view-ui" id="stickyCardone" >
+    <!-- Date Section -->
+    <div style="    display: flex;
+    justify-content: end;
+    margin-top: -8px;
+    margin-bottom: 7px;">
+     <button style="    border: 1px solid black;
+     padding: 5px;
+     border-radius: 26px;
+     padding-top: 0;
+     padding-bottom: 0;
+     font-size: 14px;
+     font-weight: bold;" id="closeCardBtn">x</button>
+    </div>
+    <div class="Bookingroominfo" style=" border: 1px solid black; border-radius: 8px;">
+     <div class="Bookingroomdetails">
+       <table class="table table-borderless">
+         <tbody>
+           <tr>
 
+             <td style="color:black">
+               <span>Check-In</span><br>{{booking.fromDate  | date: 'dd MMM' }}
+             </td>
+             <td style="color:black">
+               <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
+             </td>
+             <td>
+               <button (click)="scrollToAccommodationCheckin()" class="editStyle">
+                 <i class="fas fa-edit"></i>
+             </button>
+             </td>
+           </tr>
+           <tr>
+             <td style="color:black">
+               Guest(s): <br/>
+               {{booking.noOfPersons}}
+             </td>
+            <td style="color:black">
+             Children(s): <br/>
+             {{booking.noOfChildren}}
+            </td>
+            <td>
+
+            </td>
+           </tr>
+
+         </tbody>
+       </table>
+
+     </div>
+
+   </div>
+   <div class="Bookingroominfo" >
+     <div class="Bookingroomdetails">
+
+
+       <!-- <button (click)="redirectToBooking()" class="editStyle">
+         <i class="fas fa-edit"></i>
+     </button> -->
+     <table style="border:none; width:100%">
+       <tr>
+         <td class="p-1">Room Type:</td>
+         <td  class="p-1" style="text-align: right;">{{ booking.roomType }}</td>
+
+       </tr>
+
+       <tr *ngIf="activeForGoogleHotelCenter != true">
+         <td class="p-1" style="color: black !important;">Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
+         <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(booking.roomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
+       </tr>
+
+
+
+
+
+
+       <h4 *ngIf="activeForGoogleHotelCenter === true" style="font-weight: bold;">Price BreakUps</h4>
+
+
+           <ng-container *ngIf="activeForGoogleHotelCenter === true">
+             <tr *ngFor="let item of daterangefilter; let i = index">
+               <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
+               <td style="color: black;padding:5px ;float: right;" *ngFor="let price of [planPrice[i]]">
+ <div  *ngIf="daterangefilter && daterangefilter.length  ">  ₹{{ price | number:'1.2-2' }}</div>
+ </td>
+
+             </tr>
+           </ng-container>
+           <tr *ngIf="booking.extraPersonCharge" >
+             <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
+             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
+           </tr>
+
+           <tr *ngIf="booking.extraChildCharge">
+             <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
+             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
+           </tr>
+           <!-- Add more rows dynamically based on your data -->
+           <tr >
+             <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
+             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+               booking.netAmount
+               | currency: currency:"symbol":"1.2-2"
+               }}</td>
+           </tr>
+
+       <tr *ngIf="booking.taxPercentage">
+         <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
+         <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+           (this.booking.netAmount *
+           this.booking.taxPercentage) /
+           100 | currency: currency:"symbol":"1.2-2"
+           }}</td>
+       </tr>
+
+       <tr >
+         <td class="p-1" style="color: black !important;">Total Amount  :</td>
+         <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+           (booking.netAmount + ((this.booking.netAmount *
+           this.booking.taxPercentage) /
+           100))+totalExtraAmount
+           | currency: currency:"symbol":"1.2-2"
+           }}</td>
+       </tr>
+     </table>
+     </div>
+   </div>
+
+   <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;" >
+     <button class="reviewbtn" (click)="gotocheckout()">
+       Review Booking Details
+     </button>
+   </div>
+
+
+   <div style="display: flex; justify-content: center;">
+     <button class="shadow " (click)="scrollToAccommodationDash()" style="    border: 2px solid black;
+     padding: 4px;
+     color: black;
+     font-weight: 700;
+     border-radius: 7px;
+     padding-left: 36px;
+     padding-right: 36px;
+     padding-top: 10px;
+     padding-bottom: 10px;">
+     Edit Booking </button>
+   </div>
+   <!-- <button class="btn btn-danger" id="closeCardBtn">Close</button> -->
+ </div>
+ <button class="sticky-buttonmobile" (click)="toggleCard()">
+  <img src="/assets/images/checkout.jpg" alt="" height="45px" width="30px">
+ </button>
+ <div class="slide-up-card" id="slideCard">
+  <div class="card-content">
+    <div class="Bookingroominfo" style=" border: 1px solid black; border-radius: 8px;">
+      <div class="Bookingroomdetails">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+
+              <td style="color:black">
+                <span>Check-In</span><br>{{booking.fromDate  | date: 'dd MMM' }}
+              </td>
+              <td style="color:black">
+                <span>Check-Out</span><br>{{booking.toDate  | date: 'dd MMM' }}
+              </td>
+              <td>
+                <button (click)="scrollToAccommodationCheckin()" class="editStyle">
+                  <i class="fas fa-edit"></i>
+              </button>
+              </td>
+            </tr>
+            <tr>
+              <td style="color:black">
+                Guest(s): <br/>
+                {{booking.noOfPersons}}
+              </td>
+             <td style="color:black">
+              Children(s): <br/>
+              {{booking.noOfChildren}}
+             </td>
+             <td>
+
+             </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+    <div class="Bookingroominfo" >
+      <div class="Bookingroomdetails">
+
+
+        <!-- <button (click)="redirectToBooking()" class="editStyle">
+          <i class="fas fa-edit"></i>
+      </button> -->
+      <table style="border:none; width:100%">
+        <tr>
+          <td class="p-1">Room Type:</td>
+          <td  class="p-1" style="text-align: right;">{{ booking.roomType }}</td>
+
+        </tr>
+
+        <tr *ngIf="activeForGoogleHotelCenter != true">
+          <td class="p-1" style="color: black !important;">Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(booking.roomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
+        </tr>
+
+
+
+
+
+
+        <h4 *ngIf="activeForGoogleHotelCenter === true" style="font-weight: bold;">Price BreakUps</h4>
+
+
+            <ng-container *ngIf="activeForGoogleHotelCenter === true">
+              <tr *ngFor="let item of daterangefilter; let i = index">
+                <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
+                <td style="color: black;padding:5px ;float: right;" *ngFor="let price of [planPrice[i]]">
+  <div  *ngIf="daterangefilter && daterangefilter.length  ">  ₹{{ price | number:'1.2-2' }}</div>
+  </td>
+
+              </tr>
+            </ng-container>
+            <tr *ngIf="booking.extraPersonCharge" >
+              <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
+            </tr>
+
+            <tr *ngIf="booking.extraChildCharge">
+              <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
+            </tr>
+            <!-- Add more rows dynamically based on your data -->
+            <tr >
+              <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+                booking.netAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}</td>
+            </tr>
+
+        <tr *ngIf="booking.taxPercentage">
+          <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            (this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100 | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
+
+        <tr >
+          <td class="p-1" style="color: black !important;">Total Amount  :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            (booking.netAmount + ((this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100))+totalExtraAmount
+            | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;" >
+      <button class="reviewbtn" (click)="gotocheckout()">
+        Review Booking Details
+      </button>
+    </div>
+
+
+    <button class="close-button" (click)="toggleCard()">Close</button>
+  </div>
+</div>
   <!-- Sticky card -->
   <div class="sticky-card desktop-view-ui" id="stickyCard" >
      <!-- Date Section -->

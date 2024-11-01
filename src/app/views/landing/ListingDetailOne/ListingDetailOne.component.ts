@@ -3005,7 +3005,10 @@ console.log("lkjhgfgh")
     return `${day1}-${month1}-${year}`;
   }
   oneDayTripShow() { }
-
+  toggleCard() {
+    const card = document.getElementById('slideCard');
+    card.classList.toggle('active');
+  }
 resetForm(){
   this.checkAvailabilityDisabled = false;
   this.adults = 1;

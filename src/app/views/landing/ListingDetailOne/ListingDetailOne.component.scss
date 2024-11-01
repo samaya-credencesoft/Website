@@ -5050,3 +5050,55 @@ color:#031EAA
   color: white !important;
   text-align: center;
 }
+
+
+
+.sticky-buttonmobile  {
+  position: fixed;
+  bottom: 84px;
+  right: -11%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  background-color: var(--secondary) !important;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Card styling */
+.slide-up-card {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+  transition: bottom 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.slide-up-card.active {
+  bottom: 0;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.close-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
