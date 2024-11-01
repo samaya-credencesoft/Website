@@ -241,7 +241,7 @@
             </div>
           </div>
         </div>
-            <div class="col-3 main-search-input-item " style="padding:0px;padding-left: 30px;" >
+            <div class="col-4 main-search-input-item " style="padding:0px;padding-left: 30px;" >
               <div data-visible="accommodation,flights" class="input-group guests">
                 <div data-component="index/guest-errors" data-id="main" data-view-id="accommodation" role="alert"></div>
                 <div class="input-box" (click)="toggleRoomsAndOccupancy()"
@@ -343,13 +343,15 @@
               </div>
             </div>
 
-        <div class="col-5 button-container">
+
+        <div class="col-4 button-container">
+
           <button class="CA1" type="button mt-4"  [disabled]="checkAvailabilityDisabled"   [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
             (click)="checkingAvailability(); scrollToAccommodationDash();clicked()">
             {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }}
           </button>
           <button
-          class="CA1" type="button mt-4"
+          class="CA2" type="button mt-4"
     (click)="resetForm()"
   >
     Reset
@@ -2518,13 +2520,13 @@
                   </div>
                 </div>
 
-            <div class="col-12 my-2 button-container" style="display: flex; justify-content: center;">
+            <div class="col-12 my-2 button-container" style="display: flex; justify-content: center; gap:20px">
               <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"   [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
                 (click)="checkingAvailability(); scrollToAccommodationDashmobile();" >
                 {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }}
               </button>
               <button
-              class="CA1" type="button mt-4"
+              class="CA2" type="button mt-4"
         (click)="resetForm()"
       >
         Reset
