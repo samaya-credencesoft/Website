@@ -93,6 +93,7 @@ export class ListingDetailOneComponent implements OnInit {
   getValueOfRooms: RatesAndAvailability;
   allSavedService: any;
   selectedServicesOne: any;
+  checkAvailabilityDisabled: boolean;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -724,6 +725,7 @@ export class ListingDetailOneComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private viewportScroller: ViewportScroller
   ) {
+    // this.checkAvailabilityDisabled = true;
     let currenturl = window.location.href
     this.token.savePropertyUrl(currenturl);
     //console.log (currenturl)
@@ -3004,6 +3006,17 @@ console.log("lkjhgfgh")
   }
   oneDayTripShow() { }
 
+resetForm(){
+  this.checkAvailabilityDisabled = false;
+  this.adults = 1;
+    this.children = 0;
+    this.rooms = 1;
+    this.fromDate = this.calendar.getToday();
+    this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
+}
+clicked(){
+  this.checkAvailabilityDisabled = true;
+}
   checkingAvailability() {
 
     if(this.activeForGoogleHotelCenter === true){
