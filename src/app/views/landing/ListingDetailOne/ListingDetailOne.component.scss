@@ -3928,6 +3928,10 @@ body {
 
   }
 
+  .sticky-buttonmobile  {
+   display: none;
+  }
+
   .unique-room-carousel-image {
     width: 100%;
     height: 75vh;
@@ -4279,6 +4283,22 @@ body {
 }
 
 @media (min-width:600px) and (max-width:724px) {
+  .sticky-buttonmobile {
+    position: fixed;
+    bottom: 84px;
+    right: -4.5%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    background-color: var(--secondary) !important;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
   .masonry-item-rightOne {
     background-size: cover;
     background-position: center;
@@ -4370,6 +4390,22 @@ body {
 
 
 @media (min-width:725px) and (max-width:1180px) {
+  .sticky-buttonmobile {
+    position: fixed;
+    bottom: 84px;
+    right: -4.5%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    background-color: var(--secondary) !important;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
 
   .hero-heading {
     padding-top: 6rem;
@@ -4604,6 +4640,24 @@ font-size: 23px !important;
 }
 
 @media (max-width: 600px) {
+
+  .sticky-buttonmobile {
+    position: fixed;
+    bottom: 84px;
+    right: -8.5%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    background-color: var(--secondary) !important;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
+
 
   .cardDesignmenu {
     border-radius: 100px;
@@ -5061,22 +5115,7 @@ color:#031EAA
 
 
 
-.sticky-buttonmobile  {
-  position: fixed;
-  bottom: 84px;
-  right: -8%;
-  transform: translateX(-50%);
-  padding: 15px 30px;
-  background-color: var(--secondary) !important;
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  z-index: 1000;
-}
+
 
 /* Card styling */
 .slide-up-card {
