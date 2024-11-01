@@ -3511,8 +3511,8 @@ body {
 .icon {
   font-size: 60px;
   animation: blink 1s infinite;
-  color: var(--tertiary) !important;
-  background-color: var(--primary) !important;
+  color: white;
+  background-color: rgba(255, 70, 70, 0.95) !important;
 }
 
 @keyframes blink {
@@ -3568,7 +3568,7 @@ body {
   z-index: -1;
   content: '';
   display: block;
-  border: 5px solid var(--primary);
+  border: 5px solid rgba(255, 70, 70, 0.95);
 }
 
 .ribbon span {
