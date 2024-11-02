@@ -2755,16 +2755,16 @@ border-radius: 10px;">
 
                 <p>{{fac.name }} * {{fac.quantity}} <br>
 
-                  <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                  <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
                   {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
                   {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
                 </b>
-
+                <b *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined || fac.afterTaxAmount == 0" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
                 </p>
               </div>
             </div></td>
-            <td *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
-            <td *ngIf="fac.afterTaxAmount !== null || fac.afterTaxAmount !== undefined"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+
+            <td *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount !== undefined || fac.afterTaxAmount == 0"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
           </tr>
 
         </table>
