@@ -94,6 +94,7 @@ export class ListingDetailOneComponent implements OnInit {
   allSavedService: any;
   selectedServicesOne: any;
   checkAvailabilityDisabled: boolean;
+  Googlehotelsortrooms: any[];
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -210,6 +211,7 @@ export class ListingDetailOneComponent implements OnInit {
 
   roomsone: Room[];
   availableRooms: Room[];
+  shortrooms: Room[];
   roomWithGHCPlan: Room[];
   facilities: BusinessUser[];
   roomAvailability = false;
@@ -801,6 +803,7 @@ this.selectedServices =[]
     // this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     if (this.token?.getRoomsData() !== null && this.token?.getRoomsData() !== undefined) {
       this.availableRooms = this.token?.getRoomsData();
+      this.shortrooms = this.token.getRoomsData()
     }
     this.acRoute.url.subscribe(urlSegments => {
       this.currentUrl = window.location.href; // Use window.location.href to get the full URL
@@ -1056,20 +1059,20 @@ if (this.city != null && this.city != undefined) {
 
   fetchAndProcessRoomsData() {
     this.isLoading = true;
+    this.sortAndLimitRoomsOne();
+    this.isLoading = false;
+    // setTimeout(() => {
 
-    setTimeout(() => {
-      this.sortAndLimitRoomsOne();
-      this.isLoading = false;
-    }, 1000);
+    // }, 1000);
   }
 
   fetchAndProcessRoomsDataOne() {
     this.isLoading = true;
+    this.sortAndLimitRooms();
+    this.isLoading = false;
+    // setTimeout(() => {
 
-    setTimeout(() => {
-      this.sortAndLimitRooms();
-      this.isLoading = false;
-    }, 1000);
+    // }, 1000);
   }
 
   scrollLeft() {
@@ -1100,7 +1103,7 @@ if (this.city != null && this.city != undefined) {
   }
   sortAndLimitRooms() {
     // Sort rooms by roomOnlyPrice in ascending order
-    this.sortedRooms = this.roomWithGHCPlan?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
+    this.sortedRooms = this.Googlehotelsortrooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
     this.sortedRooms?.forEach((room) => {
       let totalAvailableRooms = 0;
 
@@ -1127,7 +1130,7 @@ if (this.city != null && this.city != undefined) {
   }
   sortAndLimitRoomsOne() {
     // Sort rooms by roomOnlyPrice in ascending order and take top 2
-    this.sortedRoomsOne = this.availableRooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
+    this.sortedRoomsOne = this.shortrooms?.sort((a, b) => a.roomOnlyPrice - b.roomOnlyPrice).slice(0, 2);
 
     this.sortedRoomsOne?.forEach((room) => {
       let totalAvailableRooms = 0;
@@ -1546,6 +1549,7 @@ if (this.city != null && this.city != undefined) {
         (response) => {
           this.loaderHotelBooking = false;
           this.availableRooms = response.body.roomList;
+          this.shortrooms = response.body.roomList
           this.checkAvailabilityStatus = response.body.available;
           this.booking.bookingAmount = response.body.bookingAmount;
           // //console.log("check availability");
@@ -2622,7 +2626,7 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     Logger.log(JSON.stringify(this.booking));
     Logger.log(JSON.stringify(this.checkAvailabilityStatusHide));
     this.changeDetectorRefs.detectChanges();
-    this.checkingAvailability1();
+    // this.checkingAvailability1();
   }
 
 
@@ -3127,7 +3131,7 @@ clicked(){
         (response) => {
           this.loaderHotelBooking = false;
           this.availableRooms = response.body.roomList;
-
+          this.shortrooms =  response.body.roomList;
           let facilities = this.businessUser.propertyServicesList;
           if (
             this.availableRooms !== null &&
@@ -3167,6 +3171,7 @@ clicked(){
             });
           }
           this.roomWithGHCPlan = [];
+          this.Googlehotelsortrooms = [];
           let ghcPlan = new RoomRatePlans();
           this.daterange = [];
           this.daterangefilter = [];
@@ -3243,6 +3248,7 @@ clicked(){
               });
             });
           });
+          this.Googlehotelsortrooms = this.roomWithGHCPlan;
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
               (des2) => {
@@ -3553,6 +3559,7 @@ clicked(){
         (response) => {
           this.loaderHotelBooking = false;
           this.availableRooms = response.body.roomList;
+          this.shortrooms = response.body.roomList;
           let facilities = this.businessUser.propertyServicesList;
           if (
             this.availableRooms !== null &&
@@ -3616,6 +3623,8 @@ clicked(){
             });
           }
           this.roomWithGHCPlan = [];
+          this.Googlehotelsortrooms =[];
+
           let ghcPlan = new RoomRatePlans();
           this.daterange = [];
           this.daterangefilter = []
@@ -3687,6 +3696,7 @@ clicked(){
               });
             });
           }
+          this.Googlehotelsortrooms = this.roomWithGHCPlan
           this.availableRooms?.forEach((des) => {
             const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
               (des2) => {
