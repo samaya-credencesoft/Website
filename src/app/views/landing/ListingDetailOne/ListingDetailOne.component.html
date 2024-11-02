@@ -2798,7 +2798,7 @@
 
             <div class="col-12 my-2 button-container" style="display: flex; justify-content: center; gap:20px">
               <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"   [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
-                (click)="checkingAvailability(); scrollToAccommodationDashmobile();" >
+                (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked()" >
                 <!-- {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }} -->
                 Check Availability
               </button>
