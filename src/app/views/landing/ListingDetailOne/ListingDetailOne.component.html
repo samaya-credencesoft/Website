@@ -1703,7 +1703,9 @@
       <div style="margin-top: 17px;
       font-size: 20px;
      ">
-        ₹{{fac.afterTaxAmount}}
+<span *ngIf="fac.afterTaxAmount != null && fac.afterTaxAmount != undefined && fac.afterTaxAmount >0">₹{{fac.afterTaxAmount}}</span>
+
+<span *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined  || fac.afterTaxAmount ===0">₹ 0 </span>
       </div>
       <div *ngIf="!fac.isAdded && !fac.quantity" style="margin-top: 17px;
       font-size: 20px;
@@ -2143,7 +2145,9 @@
       <div style="margin-top: 9px;
       font-size: 20px;
      ">
-        ₹{{fac.afterTaxAmount}}
+        <span *ngIf="fac.afterTaxAmount != null && fac.afterTaxAmount != undefined && fac.afterTaxAmount >0">₹{{fac.afterTaxAmount}}</span>
+
+        <span *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined  || fac.afterTaxAmount ===0">₹ 0 </span>
       </div>
       <div *ngIf="!fac.isAdded && !fac.quantity" style="margin-top: 9px;
       font-size: 20px;
@@ -4193,7 +4197,9 @@
 <div style="margin-top: 9px;
 font-size: 20px;
 ">
-₹{{fac.afterTaxAmount}}
+<span *ngIf="fac.afterTaxAmount != null && fac.afterTaxAmount != undefined && fac.afterTaxAmount >0">₹{{fac.afterTaxAmount}}</span>
+
+<span *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined  || fac.afterTaxAmount ===0">₹ 0 </span>
 </div>
 <div *ngIf="!fac.isAdded && !fac.quantity" style="margin-top: 9px;
 font-size: 20px;
