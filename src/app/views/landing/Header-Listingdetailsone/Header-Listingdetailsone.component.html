@@ -58,7 +58,7 @@
 </div>
 
 <!-- Top Navbar -->
-<nav class="navbar navbar-dark top-navbar desktop-view-ui">
+<nav class="navbar navbar-dark top-navbar desktop-view-ui" *ngIf="showheader === true" >
   <div class="container-div" style="display: flex; justify-content: space-between; align-items: center;    margin-left: 60px; margin-right: 60px;">
     <!-- Left Section: Logo and Business Name -->
     <div class="left-section" style="display: flex; align-items: center;">
@@ -95,7 +95,7 @@
 </nav>
 
 
-    <nav class="navbar navbar-dark top-navbar mobile-view-ui">
+    <nav class="navbar navbar-dark top-navbar mobile-view-ui" *ngIf="showheader === true">
       <div class="container-div">
         <!-- Left Section: Logo and Business Name -->
         <div class="left-section">

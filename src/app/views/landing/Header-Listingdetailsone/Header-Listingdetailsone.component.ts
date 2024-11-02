@@ -26,6 +26,7 @@ export class HeaderListingdetailsoneComponent implements OnInit {
   propertyname: string;
   propertydetails:BusinessUser;
   PropertyUrl: string;
+  showheader: boolean =false;
 
 
 
@@ -64,12 +65,16 @@ export class HeaderListingdetailsoneComponent implements OnInit {
       this.businessUser?.socialMediaLinks?.forEach(element => {
         this.socialmedialist=element
       });
+      if (this.businessUser != null ) {
+        this.showheader = true
+      }
                 }, 1000);
 
    }
 
   ngOnInit() {
     this.website = this.businessUser?.website;
+
     //console.log('new link is',this.website);
   }
 
