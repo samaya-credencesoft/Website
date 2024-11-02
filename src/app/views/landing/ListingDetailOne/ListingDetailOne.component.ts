@@ -81,6 +81,7 @@ export class ListingDetailOneComponent implements OnInit {
   website: string;
   propertyusername: string;
   websiteUrlBookingEngine: boolean;
+  notShowEconomy: boolean = true;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -542,7 +543,7 @@ export class ListingDetailOneComponent implements OnInit {
   urlLocation: boolean;
   isHotelMate: boolean = true;
   showAll: boolean = false;
-
+  BookingEngine: boolean = false; // Initialize with false
 
   checkinDay: number;
   propertyDetail: any;
@@ -1927,7 +1928,7 @@ this.isHeaderVisible = true;
             this.prepareHour = prep.getHours();
             this.prepareMinute = prep.getMinutes();
           }
-
+          
           this.booking.propertyId = this.businessUser.id;
           this.lat = parseFloat(this.businessUser.latitude);
           this.lng = parseFloat(this.businessUser.longitude);
@@ -2584,7 +2585,7 @@ if (bookingSummaryElement) {
   oneDayTripShow() { }
 
   checkingAvailability() {
-
+   
     if(this.activeForGoogleHotelCenter === true){
       this.showDiv = false
       }
@@ -2708,14 +2709,21 @@ if (bookingSummaryElement) {
           this.availableRooms?.forEach((event) => {
             event?.ratesAndAvailabilityDtos?.forEach((event2) => {
 
-
+              
               event2?.roomRatePlans?.forEach((plan) => {
+                console.log("fdghfdcgv",plan )
+                if (this.websiteUrlBookingEngine === true && plan?.code === 'GHC' ) {
+                  this.notShowEconomy = false;
+                  console.log("Economy plan visibility set to:", this.notShowEconomy);
+                }
+                
 
                 plan.otaPlanList.forEach((otaPlan) => {
                   const otaName = otaPlan.otaName;
                   const price = otaPlan.price;
                   this.otaPlans.push({ otaName, price }); // Push otaPlan object into the array
                 });
+
 
                 if (
                   plan?.code === 'GHC' &&
@@ -2758,6 +2766,8 @@ if (bookingSummaryElement) {
                   event2.roomRatePlans.push(ghcPlan);
                   this.roomWithGHCPlan?.push(event);
                 }
+
+                
               });
             });
           });
@@ -2765,6 +2775,7 @@ if (bookingSummaryElement) {
           this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
+                console.log("fdgh",element2)
                 if(element2.otaName ==='GHC'){
                   this.planPrice.push(element2.price);
                 this.totalplanPrice = this.planPrice.reduce(
@@ -3149,6 +3160,7 @@ if (bookingSummaryElement) {
           this.availableRooms?.forEach((event) => {
             event?.ratesAndAvailabilityDtos?.forEach((event2) => {
               event2?.roomRatePlans?.forEach((plan) => {
+                
                 if (
                   plan?.code === 'GHC' &&
                   this.activeForGoogleHotelCenter === true

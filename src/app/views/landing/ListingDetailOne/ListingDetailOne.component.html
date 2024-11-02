@@ -2043,8 +2043,77 @@
                           </div>
                         </div>
                         <div class="col-md-5">
-                          <div style="text-align: center; padding: 05px;padding-bottom: 4px;padding-top: 80px;">
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
+                          <div *ngIf="this.websiteUrlBookingEngine === true" style="text-align: center; padding: 05px;padding-bottom: 4px;padding-top: 80px;">
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img src="assets/images/icons/b1.png" alt="1 guest">
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                              <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
+                              <span>x {{room.minimumOccupancy}} Guests</span>
+                            </div>
+
+                            <!-- <b>Available:</b><br /> -->
+                            <!-- <span style="font-size: 12px;"> -->
+                              <!-- {{ -->
+                              <!-- room.ratesAndAvailabilityDtos[0] -->
+                              <!-- .noOfAvailable -->
+                              <!-- }} room<span *ngIf="room.ratesAndAvailabilityDtos[0].noOfAvailable > 1">s</span> -->
+                              <!-- <br />Shared: -->
+                              <!-- <span *ngIf="room.shared">Yes</span><span *ngIf="!room.shared">No</span> -->
+                            <!-- </span> -->
+                            <div style="padding-top: 4px;">
+                              <h6>Room Amenities</h6>
+
+                              <div class="row" style="padding-left:15px ;padding-right: 15px;justify-content: center;">
+                                <!-- <div class="dbox2 col-md-6 col-6" style="display:flex; flex-wrap:wrap;" *ngFor="let item of room.roomFacilities; let
+                                          i=index ">
+
+                                        <div class="oa1" style="padding-bottom: 0px;padding-top: 5px;" *ngIf="i<4">
+                                          <p style="font-size: 12px;"><img [src]="item.imageUrl" height="
+                                                  10px" alt="">
+                                            &nbsp; {{ item.name }}</p>
+                                        </div>
+                                      </div> -->
+                                <div *ngFor="let item of room.roomFacilities; let i=index ">
+                                  <div *ngIf="i<3" style="padding-bottom: 0px;padding-top: 5px;">
+                                    <p style="font-size: 16px;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}} |</p>
+                                  </div>
+                                  <div *ngIf="i===3" style="padding-bottom: 0px;padding-top: 5px;">
+                                    <p style="font-size: 16px;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- <div style="text-align: center;">
+                              <button class="btn text-white SVM"
+                                (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
+                                More Detail</button>
+                            </div> -->
+                          </div>
+                          <div *ngIf="this.websiteUrlBookingEngine === false || this.websiteUrlBookingEngine === null || this.websiteUrlBookingEngine === undefined" style="text-align: center; padding: 05px;padding-bottom: 4px;padding-top: 80px;">
+                            <div style="margin:auto" *ngIf="room.maximumOccupancy=== 1">
                               <span>{{room.maximumOccupancy}} Guests </span>
                               <img src="assets/images/icons/b1.png" alt="1 guest">
                             </div>
@@ -2106,34 +2175,10 @@
                               </div>
                             </div>
 
-
-
-                             <!-- desktop view -->
-                            <div  class="desktopone" >
-                              <h6 class="text_heading_font_size" style="padding-left: 30px;">Description</h6>
-
-                              <div class="mt-2"  [innerHTML]="room.description">
-                                </div>
-                          </div>
-                                    <!-- mobile view  -->
-
-                          <div  class="mobile-one ">
-                            <h6 class="text_heading_font_size">Description</h6>
-
-                            <div class="mt-2"  [innerHTML]="room.description">
-                              </div>
-                        </div>
-
-
-
-
-
-
-
                             <!-- <div style="text-align: center;">
                               <button class="btn text-white SVM"
                                 (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
-                                View More</button>
+                                More Detail</button>
                             </div> -->
                           </div>
                         </div>
@@ -2152,7 +2197,7 @@
                               let plan of rates.roomRatePlans;
                               let p = index
                             ">
-                            <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0">
+                            <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0 && !(plan?.code === 'GHC' && !notShowEconomy)">
                               <div class="card plan_cards" style="padding: 20px;" *ngIf="rates.roomRatePlans.length <= 2">
                                 <div>
                                   <h4 *ngIf="plan.name !== 'GHC'" class="planname">{{plan.name}}</h4>
@@ -2239,7 +2284,7 @@
                         let p = index
                       ">
                             <div ngxSlickItem class="slide slide_plan"
-                              *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
+                              *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0 && !(plan?.code === 'GHC' && !notShowEconomy)">
                               <div class="card plan_cards" style="padding: 30px;">
                                 <div>
                                   <h4>{{plan.name}}</h4>
@@ -2382,9 +2427,78 @@
                             <!-- <span style="color: black;font-size: 18px;font-family: sans-sarif Lato;text-decoration: underline; height:20px" *ngIf="room.description.length>108" (click)="open(content, room, room.name)">... <u>Read More</u></span> -->
                           </div>
                         </div>
-                        <div class="col-md-5">
-                          <div style="text-align: center; padding: 05px;padding-bottom: 4px;padding-top: 80px;">
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
+                        <div class="col-md-5" >
+                          <div *ngIf="this.websiteUrlBookingEngine === true" style="text-align: center; padding: 05px;padding-bottom: 4px;padding-top: 80px;">
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img src="assets/images/icons/b1.png" alt="1 guest">
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                              <span>{{room.minimumOccupancy}} Guests </span>
+                              <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
+                            </div>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                              <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
+                              <span>x {{room.minimumOccupancy}} Guests</span>
+                            </div>
+
+                            <!-- <b>Available:</b><br /> -->
+                            <!-- <span style="font-size: 12px;"> -->
+                              <!-- {{ -->
+                              <!-- room.ratesAndAvailabilityDtos[0] -->
+                              <!-- .noOfAvailable -->
+                              <!-- }} room<span *ngIf="room.ratesAndAvailabilityDtos[0].noOfAvailable > 1">s</span> -->
+                              <!-- <br />Shared: -->
+                              <!-- <span *ngIf="room.shared">Yes</span><span *ngIf="!room.shared">No</span> -->
+                            <!-- </span> -->
+                            <div style="padding-top: 4px;">
+                              <h6>Room Amenities</h6>
+
+                              <div class="row" style="padding-left:15px ;padding-right: 15px;justify-content: center;">
+                                <!-- <div class="dbox2 col-md-6 col-6" style="display:flex; flex-wrap:wrap;" *ngFor="let item of room.roomFacilities; let
+                                          i=index ">
+
+                                        <div class="oa1" style="padding-bottom: 0px;padding-top: 5px;" *ngIf="i<4">
+                                          <p style="font-size: 12px;"><img [src]="item.imageUrl" height="
+                                                  10px" alt="">
+                                            &nbsp; {{ item.name }}</p>
+                                        </div>
+                                      </div> -->
+                                <div *ngFor="let item of room.roomFacilities; let i=index ">
+                                  <div *ngIf="i<3" style="padding-bottom: 0px;padding-top: 5px;">
+                                    <p style="font-size: 16px;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}} |</p>
+                                  </div>
+                                  <div *ngIf="i===3" style="padding-bottom: 0px;padding-top: 5px;">
+                                    <p style="font-size: 16px;">&nbsp; <img [src]="item.imageUrl" height="15px" alt=""> {{item.name}}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- <div style="text-align: center;">
+                              <button class="btn text-white SVM"
+                                (click)="open(content, room, room.name); document?.getElementById('booking-summary').scrollIntoView({ behavior: 'smooth' });">See
+                                More Detail</button>
+                            </div> -->
+                          </div>
+                          <div *ngIf="this.websiteUrlBookingEngine === false || this.websiteUrlBookingEngine === null || this.websiteUrlBookingEngine === undefined" style="text-align: center; padding: 05px;padding-bottom: 4px;padding-top: 80px;">
+                            <div style="margin:auto" *ngIf="room.maximumOccupancy=== 1">
                               <span>{{room.maximumOccupancy}} Guests </span>
                               <img src="assets/images/icons/b1.png" alt="1 guest">
                             </div>
@@ -2461,7 +2575,7 @@
                               let plan of rates.roomRatePlans;
                               let p = index
                             ">
-                            <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0">
+                            <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0 && !(plan?.code === 'GHC' && !notShowEconomy)">
                               <div class="card plan_cards" style="padding: 20px;" *ngIf="rates.roomRatePlans.length <= 2">
                                 <div>
                                   <h4 *ngIf="plan.name !== 'GHC'" class="planname">{{plan.name}}</h4>
@@ -2551,7 +2665,7 @@
                         let p = index
                       ">
                             <div ngxSlickItem class="slide slide_plan"
-                              *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0">
+                              *ngIf="rates.roomRatePlans.length > 2 && plan.amount >0 && !(plan?.code === 'GHC' && !notShowEconomy)">
                               <div class="card plan_cards" style="padding: 30px;">
                                 <div>
                                   <h4>{{plan.name}}</h4>
