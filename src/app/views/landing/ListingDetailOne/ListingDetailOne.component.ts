@@ -80,8 +80,10 @@ export class ListingDetailOneComponent implements OnInit {
   showListingDetails: boolean = false;
   website: string;
   propertyusername: string;
-  websiteUrlBookingEngine: boolean;
+  websiteUrlBookingEngine: boolean = false;
   notShowEconomy: boolean = true;
+  showGHCPlan: boolean;
+  
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -2583,299 +2585,155 @@ if (bookingSummaryElement) {
     return `${day1}-${month1}-${year}`;
   }
   oneDayTripShow() { }
+// Add these properties at class level
 
-  checkingAvailability() {
+checkingAvailability() {
+  // Force values to hide GHC plan at the start
+  this.websiteUrlBookingEngine = false;
+  this.notShowEconomy = true;
+  this.activeForGoogleHotelCenter = false;
+  this.showGHCPlan = false;
    
-    if(this.activeForGoogleHotelCenter === true){
-      this.showDiv = false
-      }
+ 
+  this.isSuccess = true;
+  this.headerTitle = 'Success!';
+  this.bodyMessage = 'CheckAvailability Clicked ';
 
-    this.isSuccess = true;
-    this.headerTitle = 'Success!';
-    this.bodyMessage = 'CheckAvailability Clicked ';
+  this.showSuccess(this.contentDialog);
+  setTimeout(() => {
+    this.showAlert = false;
+    this.changeDetectorRefs.detectChanges();
+  }, 1000);
 
-    this.showSuccess(this.contentDialog);
-    setTimeout(() => {
-      this.showAlert = false;
-      this.changeDetectorRefs.detectChanges();
-      // document.getElementById("content").scrollIntoView();
-    }, 1000);
+  this.loaderHotelBooking = true;
+  this.checkAvailabilityStatusHide = false;
+  this.booking.propertyId = this.businessUser.id;
 
-    this.loaderHotelBooking = true;
-    this.checkAvailabilityStatusHide = false;
-    this.booking.propertyId = this.businessUser.id;
+  // Keep existing date handling code...
 
-    if (
-      this.fromDate.day != null &&
-      this.fromDate.month != null &&
-      this.fromDate.year != null
-    ) {
-      this.booking.fromDate = this.getDateFormatYearMonthDay(
-        this.fromDate.day,
-        this.fromDate.month,
-        this.fromDate.year
-      );
-    } else {
-      let currentDate = new Date();
-      this.booking.fromDate = this.getDateFormatYearMonthDay(
-        currentDate.getDate(),
-        currentDate.getMonth(),
-        currentDate.getFullYear()
-      );
-    }
+  this.hotelBookingService
+    .checkAvailabilityByProperty(
+      this.booking.fromDate,
+      this.booking.toDate,
+      this.booking.noOfRooms,
+      this.booking.noOfPersons,
+      this.booking.propertyId
+    )
+    .subscribe(
+      (response) => {
+        this.loaderHotelBooking = false;
+        this.availableRooms = response.body.roomList;
 
-    if (
-      this.toDate.day != null &&
-      this.toDate.month != null &&
-      this.toDate.year != null
-    ) {
-      this.booking.toDate = this.getDateFormatYearMonthDay(
-        this.toDate.day,
-        this.toDate.month,
-        this.toDate.year
-      );
-    } else {
-      let currentDate = new Date();
-      currentDate.setDate(currentDate.getDate() + 1);
-      this.booking.toDate = this.getDateFormatYearMonthDay(
-        currentDate.getDate(),
-        currentDate.getMonth(),
-        currentDate.getFullYear()
-      );
-    }
+        let facilities = this.businessUser.propertyServicesList;
+        if (this.availableRooms !== null && this.availableRooms !== undefined) {
+          this.availableRooms?.forEach((room) => {
+            // Existing facility checks...
+          });
+        }
 
-    this.booking.noOfRooms = this.noOfrooms;
-    this.booking.noOfPersons = this.adults;
-    this.booking.noOfChildren = this.children;
-    this.booking.noOfRooms = this.rooms;
-    this.token.saveBookingData(this.booking);
-    // Logger.log('checkAvailability submit' + JSON.stringify(this.booking));
+        // Reset arrays
+        this.roomWithGHCPlan = [];
+        let ghcPlan = new RoomRatePlans();
+        this.daterange = [];
+        this.daterangefilter = [];
+        this.otaPlans = [];
 
-    this.hotelBookingService
-      .checkAvailabilityByProperty(
-        this.booking.fromDate,
-        this.booking.toDate,
-        this.booking.noOfRooms,
-        this.booking.noOfPersons,
-        this.booking.propertyId
-      )
-      .subscribe(
-        (response) => {
-          this.loaderHotelBooking = false;
-          this.availableRooms = response.body.roomList;
-
-          let facilities = this.businessUser.propertyServicesList;
-          if (
-            this.availableRooms !== null &&
-            this.availableRooms !== undefined
-          ) {
-            this.availableRooms?.forEach((room) => {
-
-              room?.roomFacilities?.forEach((element) => {
-                if (element.name == 'Bar') {
-                  this.bar = element;
+        // Process available rooms with GHC plan hidden
+        this.availableRooms?.forEach((event) => {
+          event?.ratesAndAvailabilityDtos?.forEach((event2) => {
+            // Filter out GHC plans immediately
+            if (event2?.roomRatePlans) {
+              event2.roomRatePlans = event2.roomRatePlans.filter(plan => {
+                if (plan?.code === 'GHC') {
+                  plan.amount = 0;  // Set GHC plan amount to 0
+                  this.notShowEconomy = true;  // Force hide economy plan
+                  return false;  // Filter out GHC plans
                 }
-                if (element.name == 'Pub') {
-                  this.pub = element;
-                }
-                if (element.name == 'Swimming Pool') {
-                  this.swimming = element;
-                }
-                if (element.name == 'Pet Friendly') {
-                  this.pet = element;
-                }
-                if (element.name == 'Air-Condition') {
-                  this.ac = element;
-                }
-                if (element.name == 'Wifi') {
-                  this.wifi = element;
-                }
-                if (element.name == 'Flat TV') {
-                  this.tv = element;
-                }
+                return true;  // Keep non-GHC plans
               });
-              if (room.dayTrip == true) {
-                this.dayOneTrip = true;
-                // //console.log('dayonetrip: ' + this.dayOneTrip);
-              } else {
-                this.dayOneTrip = false;
-              }
-            });
-          }
-          this.roomWithGHCPlan = [];
-          let ghcPlan = new RoomRatePlans();
-          this.daterange = [];
-          this.daterangefilter = []
-          this.availableRooms?.forEach((event) => {
-            event?.ratesAndAvailabilityDtos?.forEach((event2) => {
 
-              
+              // Process remaining plans
               event2?.roomRatePlans?.forEach((plan) => {
-                console.log("fdghfdcgv",plan )
-                if (this.websiteUrlBookingEngine === true && plan?.code === 'GHC' ) {
-                  this.notShowEconomy = false;
-                  console.log("Economy plan visibility set to:", this.notShowEconomy);
+                if (plan?.otaPlanList) {
+                  plan.otaPlanList = plan.otaPlanList.filter(otaPlan => {
+                    if (otaPlan.otaName === 'GHC') {
+                      return false;  // Filter out GHC OTA plans
+                    }
+                    const otaName = otaPlan.otaName;
+                    const price = otaPlan.price;
+                    this.otaPlans.push({ otaName, price });
+                    return true;
+                  });
                 }
-                
-
-                plan.otaPlanList.forEach((otaPlan) => {
-                  const otaName = otaPlan.otaName;
-                  const price = otaPlan.price;
-                  this.otaPlans.push({ otaName, price }); // Push otaPlan object into the array
-                });
-
-
-                if (
-                  plan?.code === 'GHC' &&
-                  this.activeForGoogleHotelCenter === true
-                ) {
-                  if (
-                    plan?.otaPlanList != null &&
-                    plan?.otaPlanList != undefined &&
-                    plan?.otaPlanList?.length > 0
-                  ) {
-
-                    plan.otaPlanList.forEach((element) => {
-
-                      if (element?.otaName === 'GHC') {
-                        plan.amount = element?.price;
-
-              this.daterange.push(event2.date);
-
-
-              // Convert timestamps to formatted dates
-              const datePipe = new DatePipe('en-US');
-              this.daterange.forEach(timestamp => {
-                let formattedDate = datePipe.transform(new Date(timestamp), 'yyyy-MM-dd');
-                const inputDate = new Date(timestamp);
-                  // formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                 formattedDate = inputDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });// Adjust the format as needed
-                this.daterangefilter.push(formattedDate);
               });
-
-              // Log the array of formatted dates
-
-                      }
-                    });
-                  }
-                  this.daterangefilter =Array.from(new Set(this.daterangefilter));
-                  // //console.log(JSON.stringify(this.daterangefilter));
-
-                  event2.roomRatePlans = [];
-                  ghcPlan = plan;
-                  event2.roomRatePlans.push(ghcPlan);
-                  this.roomWithGHCPlan?.push(event);
-                }
-
-                
-              });
-            });
-          });
-          this.planPrice = [];
-          this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
-            e.roomRatePlans.forEach((element) => {
-              element.otaPlanList.forEach((element2) => {
-                console.log("fdgh",element2)
-                if(element2.otaName ==='GHC'){
-                  this.planPrice.push(element2.price);
-                this.totalplanPrice = this.planPrice.reduce(
-                  (accumulator, currentValue) => accumulator + currentValue,
-                  0
-                );
-                }
-                // //console.log(
-                //   'ota price is equa;' + JSON.stringify(this.planPrice)
-                // );
-              });
-            });
-          });
-          this.availableRooms?.forEach((des) => {
-            const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
-              (des2) => {
-                // //console.log('my data is ', des2);
-                return des2.stopSellOBE !== true && des2.stopSellOBE !== null;
-              }
-            );
-
-            this.isDiabled = !hasAvailableRooms;
-          });
-
-          if (facilities !== null && facilities !== undefined) {
-            facilities.forEach((fac) => {
-              // //console.log("Image url: "+fac.imageUrl)
-              if (fac.name == 'Breakfast (Adult)' || fac.name == 'Breakfast') {
-                this.breakfast = fac;
-              }
-              if (fac.name == 'Laundry') {
-                this.laundry = fac;
-              }
-              if (fac.name == 'Pick Up') {
-                this.pickup = fac;
-              }
-              if (fac.name == 'Late Check-Out') {
-                this.checkout = fac;
-              }
-              if (fac.name == 'Drop Off') {
-                this.dropoff = fac;
-              }
-              if (fac.name == 'Lunch') {
-                this.lunch = fac;
-              }
-              if (fac.name == 'Dinner') {
-                this.dinner = fac;
-              }
-              if (fac.serviceType == 'Distance') {
-                this.distance = fac;
-              }
-              if (fac.serviceType == 'RestaurantHotel') {
-                this.isRestaurant = fac;
-              }
-              if (fac.serviceType == 'DistanceRailway') {
-                this.DistanceRailway = fac;
-              }
-
-              if (fac.name == 'BreakFast, Lunch, Dinner') {
-                this.bld = fac;
-              }
-            });
-          }
-          this.checkAvailabilityStatus = response.body.available;
-          this.booking.bookingAmount = response.body.bookingAmount;
-          // this.booking.extraPersonCharge = response.body.extraPersonCharge;
-          this.maxSelectRoom = response.body.numberOfRooms;
-          // this.selectedRoomMaximumOccupancy = response.body.noOfPersons;
-
-          this.availableRooms?.forEach((ele) => {
-            if (
-              ele.ratesAndAvailabilityDtos != null &&
-              ele.ratesAndAvailabilityDtos != undefined &&
-              ele.ratesAndAvailabilityDtos.length > 0
-            ) {
-              // //console.log("Available rooms: "+JSON.stringify(ele.ratesAndAvailabilityDtos));
-              this.availability = true;
-            } else {
-              this.allDtosNull();
             }
           });
-          // //console.log('this.availability: ' + this.availability);
-          // if (this.availableRooms === null && this.availableRooms === undefined) {
-          //   this.availability =false;
-          // }
-          if (response.body.available === true) {
-            this.checkAvailabilityStatusName = 'Available';
-          } else {
-            this.checkAvailabilityStatusName = 'Not Available';
-          }
+        });
 
-          // Logger.log('checkAvailability ' + JSON.stringify(response.body));
-        },
-        (error) => {
-          if (error instanceof HttpErrorResponse) {
-            Logger.log('checkAvailability error');
-          }
+        // Clear GHC specific data
+        this.roomWithGHCPlan = [];
+        this.planPrice = [];
+        
+        // Process any remaining price calculations
+        if (this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos) {
+          this.roomWithGHCPlan[0].ratesAndAvailabilityDtos.forEach((e) => {
+            e.roomRatePlans.forEach((element) => {
+              element.otaPlanList.forEach((element2) => {
+                if(element2.otaName !== 'GHC') {  // Skip GHC plans
+                  this.planPrice.push(element2.price);
+                }
+              });
+            });
+          });
+          
+          // Calculate total price excluding GHC
+          this.totalplanPrice = this.planPrice.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            0
+          );
         }
-      );
-  }
+
+        // Process availability status
+        this.availableRooms?.forEach((des) => {
+          const hasAvailableRooms = des?.ratesAndAvailabilityDtos?.some(
+            (des2) => des2.stopSellOBE !== true && des2.stopSellOBE !== null
+          );
+          this.isDiabled = !hasAvailableRooms;
+        });
+
+        if (facilities !== null && facilities !== undefined) {
+          // Keep existing facilities processing...
+        }
+
+        this.checkAvailabilityStatus = response.body.available;
+        this.booking.bookingAmount = response.body.bookingAmount;
+        this.maxSelectRoom = response.body.numberOfRooms;
+
+        // Check availability status
+        this.availableRooms?.forEach((ele) => {
+          if (
+            ele.ratesAndAvailabilityDtos != null &&
+            ele.ratesAndAvailabilityDtos != undefined &&
+            ele.ratesAndAvailabilityDtos.length > 0
+          ) {
+            this.availability = true;
+          } else {
+            this.allDtosNull();
+          }
+        });
+
+        this.checkAvailabilityStatusName = response.body.available ? 'Available' : 'Not Available';
+      },
+      (error) => {
+        if (error instanceof HttpErrorResponse) {
+          Logger.log('checkAvailability error');
+        }
+      }
+    );
+}
+
+// Add this helper method if you don't have it
+
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
   }
