@@ -254,6 +254,37 @@
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
             </tr>
             <!-- Add more rows dynamically based on your data -->
+            <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
+              <h4 style="font-weight: bold;">Add-on Services</h4>
+
+                <tr *ngFor="let fac of selectedServicesOne">
+                  <td style="padding-left: 10px;display: flex;justify-content: center;"><div class="d-flex "  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                    <div style="display: flex; gap:4px">
+
+                      <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
+
+
+                      <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+                      <br>
+
+                      <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                        <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                        {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                        {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                      </b>
+                      <b *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined || fac.afterTaxAmount == 0" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+                      </p>
+                    </div>
+                  </div></td>
+
+                  <td  *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount !== undefined || fac.afterTaxAmount == 0"  style="text-align: right;padding-right: 6px;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+                </tr>
+
+
+
+            </ng-container>
             <tr >
               <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
@@ -383,6 +414,7 @@
 
               </tr>
             </ng-container>
+
             <tr *ngIf="booking.extraPersonCharge" >
               <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
@@ -393,6 +425,37 @@
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
             </tr>
             <!-- Add more rows dynamically based on your data -->
+            <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
+              <h4 style="font-weight: bold;">Add-on Services</h4>
+
+                <tr *ngFor="let fac of selectedServicesOne">
+                  <td><div class="d-flex "  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                    <div style="display: flex; gap:4px">
+
+                      <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
+
+
+                      <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+                      <br>
+
+                      <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                        <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                        {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                        {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                      </b>
+                      <b *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined || fac.afterTaxAmount == 0" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+                      </p>
+                    </div>
+                  </div></td>
+
+                  <td *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount !== undefined || fac.afterTaxAmount == 0"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+                </tr>
+
+
+
+            </ng-container>
             <tr >
               <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
@@ -1259,47 +1322,75 @@
                       </div>
                     </div>
 
-                    <div class="col-12"  *ngIf="viewAddon" style="margin-top: 10px;">
-                      <div >
-                        <h3 class="servicetitle">Add-On Services</h3>
+                   <!-- Add on service Start -->
+                   <div class="col-12" *ngIf=" viewAddon">
+                    <div *ngIf="viewAddon">
+                      <h3 class="servicetitle" style="margin-left: 162px;">Add-On Services</h3>
 
-                        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
-                          <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 4); let i = index">
-                            <div class="col-lg-3 col-3 p-2" style="margin-bottom: 15px;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-                              <div class="d-flex" id="facilitysms">
+                      <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
+                        <ng-container *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMoreOne ? propertyServiceListDataOne.length : 4); let i = index">
+                          <div class="col-lg-12 col-12 p-2" style="margin-bottom: 15px;display: flex;justify-content: center;" *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                           <div class="card" style="width: 80%;border-radius: 10px;">
+                            <div class="row">
+                             <div class="col-6" style="border-right: 1px solid lightgray;">
+                              <div  style="display:flex;gap: 25px;
+    padding-left:10px;padding-right:10px;">
                                 <div>
-                                  <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon">
-                                  <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon">
+                                  <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png"  height="50px" width="50px" alt="icon" style="margin-top:5px;margin-bottom:5px;">
+                                  <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" height="60px" width="60px" alt="icon">
                                 </div>
 
                                 <!-- Service Name -->
-                                <div>
-                                  <p>{{fac.name}}</p>
+                                <div style="margin-top: 17px;
+                                font-size: 20px;
+                                font-weight: bold;">
+                                  <p style="color:#031EAA !important">{{fac.name}}</p>
                                 </div>
-                              </div>
 
-                              <div *ngIf="!fac.isAdded && !fac.quantity">
-                                <button class="btn-add" (click)="onAdd(fac, i)">Add</button>
                               </div>
+                             </div>
+  <div class="col-6">
+    <div style="display: flex;justify-content: space-around;">
+      <div style="margin-top: 17px;
+      font-size: 20px;
+     ">
+<span *ngIf="fac.afterTaxAmount != null && fac.afterTaxAmount != undefined && fac.afterTaxAmount >0">₹{{fac.afterTaxAmount}}</span>
 
-                              <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1" class="d-flex" style="padding: 5px;">
-                                <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;">-</button>
-                                <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border: 1px solid black; text-align: center; font-weight: bold;" readonly />
-                                <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;">+</button>
-                              </div>
+<span *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined  || fac.afterTaxAmount ===0">₹ 0 </span>
+      </div>
+      <div *ngIf="!fac.isAdded && !fac.quantity" style="margin-top: 17px;
+      font-size: 20px;
+      ">
+        <button class="btn-add" (click)="onAdd(fac, i)" style="background-color: black;color:white;padding-left: 15px;
+    padding-right: 15px;border-radius:20px;">Add</button>
+      </div>
+      <div *ngIf="(fac.isAdded || valSelected) && fac.quantity >= 1" class="d-flex" style="padding: 5px;margin-top: 10px;background-color:lightgrey;border-radius:20px;font-size: 20px;    padding-left: 10px;
+    padding-right: 10px;
+       ">
+        <button (click)="decreaseQuantity(fac)" style="margin-right: 9px; font-size: 21px;background-color:lightgrey;">-</button>
+        <input type="number" [(ngModel)]="fac.quantity" min="1" class="quantity-input" style="border:none; text-align: center; font-weight: bold;background-color:lightgrey;" readonly />
+        <button (click)="increaseQuantity(fac)" style="margin-left: 9px; font-size: 21px;background-color:lightgrey;">+</button>
+      </div>
+      </div>
+  </div>
                             </div>
-                          </ng-container>
-                        </div>
 
-                        <!-- View More / View Less Button -->
-                        <div class="text-center mt-3">
-                          <button (click)="toggleViewMore()" class="btn btn-link">
-                            {{ viewMoreOne ? 'View Less' : 'View More' }}
-                          </button>
-                        </div>
+
+
+                           </div>
+                          </div>
+                        </ng-container>
+                      </div>
+
+                      <!-- View More / View Less Button -->
+                      <div class="text-center mt-3">
+                        <button (click)="toggleViewMore()" class="btn btn-link">
+                          {{ viewMoreOne ? 'View Less' : 'View More' }}
+                        </button>
                       </div>
                     </div>
-
+                  </div>
+                  <!-- Add on service end -->
                   </div>
 
                 </div>
