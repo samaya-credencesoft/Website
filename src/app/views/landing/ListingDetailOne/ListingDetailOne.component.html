@@ -1036,7 +1036,7 @@
                     </div>
                     <div class="col-6">
 
-                      <h3 *ngIf="room.ratesAndAvailabilityDtos?.length>=0 " style=" font-weight: bold; margin-left: 6px;" >{{room.name}}</h3>
+                      <h3 *ngIf="room.ratesAndAvailabilityDtos?.length>=0 " style=" font-weight: bold; margin-left: 6px; margin-top: 10px;" >{{room.name}}</h3>
                       <div style=" padding: 5px;padding-bottom: 4px;padding-top: 10px;">
                         <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
                           <b>Occupancy: </b>
@@ -1086,7 +1086,7 @@
                         <!-- </span> -->
                         <div style="padding-top: 4px;">
 
-                          <div class="row" style="gap: 10px;">
+                          <div  style="gap: 10px; display: flex; margin-left: 3px; flex-wrap: wrap;">
                             <!-- <div class="dbox2 col-md-6 col-6" style="display:flex; flex-wrap:wrap;" *ngFor="let item of room.roomFacilities; let
                                       i=index ">
 
@@ -1121,7 +1121,7 @@
 
                         <div>
                           <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
-                          <div class="card_body_styl d-flex justify-content-center" *ngIf="rates.roomRatePlans.length <= 2" style="justify-content: center !important; margin-left: 53px; margin-right: 38px; margin-top: 27px;">
+                          <div class="card_body_styl d-flex justify-content-center" *ngIf="rates.roomRatePlans.length <= 2" style=" margin-right: 38px; margin-top: 27px;">
                             <div  *ngFor="
                                 let plan of rates.roomRatePlans;
                                 let p = index
