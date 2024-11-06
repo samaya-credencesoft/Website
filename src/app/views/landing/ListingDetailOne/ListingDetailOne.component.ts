@@ -650,6 +650,9 @@ export class ListingDetailOneComponent implements OnInit {
   planPrice: any;
   totalplanPrice: any;
   lunchservice: any;
+  propertyData: BusinessUser;
+  bookingengineurl: string;
+  value: any;
   dinnerservice: any;
   activeForGoogleHotelCenter: boolean = false;
   isDiabled: boolean;
@@ -667,6 +670,7 @@ export class ListingDetailOneComponent implements OnInit {
   showCarousel = false;
   showRoomCarousel = false;
   isLoading = true;
+  showHideFlag: boolean = false;
   @ViewChild('scrollContainer', { read: ElementRef }) scrollContainer!: ElementRef;
   @ViewChild('scrollContainerOne', { read: ElementRef }) scrollContainerOne!: ElementRef;
   @ViewChild('scrollContainerThree', { read: ElementRef }) scrollContainerThree!: ElementRef;
@@ -743,6 +747,9 @@ export class ListingDetailOneComponent implements OnInit {
     this.token.clearwebsitebookingURL();
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
+    this.bookingengineurl = this.token.getwebsitebookingURL()
+
+
 this.selectedServicesOne = this.token?.getSelectedServices();
 setTimeout(() => {
   if(this.activeForGoogleHotelCenter == true){
@@ -1008,6 +1015,20 @@ if (this.city != null && this.city != undefined) {
     this.city = this.token.getProperty()?.address?.city;
     if (this.token.getProperty() !== null) {
       this.propertyDetail = this.token.getProperty();
+      if (this.activeForGoogleHotelCenter === true) {
+        this.accommodationData = this.propertyDetail.businessServiceDtoList?.filter(
+          (entry) => entry.name === 'Accommodation'
+        );
+        this.accommodationData.forEach(element => {
+          if (this.bookingengineurl === "true") {
+            this.value = element.websiteinstantBooking;
+            console.log("this.value", this.value)
+          } else if (this.value !== true) {
+            this.value = element.instantBooking;
+            console.log("this.value", this.value)
+          }
+        });
+            }
       // //console.log("property details are" + JSON.stringify(this.propertyDetail))
     }
     if (this.token.getBookingCity() !== null) {
@@ -1056,6 +1077,8 @@ if (this.city != null && this.city != undefined) {
     // this.adults = this.adults;
     // this.checkingAvailability();
   }
+
+
 
   fetchAndProcessRoomsData() {
     this.isLoading = true;
