@@ -748,7 +748,7 @@ export class ListingDetailOneComponent implements OnInit {
     // this.token.saveSelectedServices(this.selectedServices);
     this.bookingMinDate = calendar.getToday();
     this.bookingengineurl = this.token.getwebsitebookingURL()
-
+    sessionStorage.removeItem('enquiryNo');
 
 this.selectedServicesOne = this.token?.getSelectedServices();
 setTimeout(() => {
@@ -1620,7 +1620,7 @@ if (this.city != null && this.city != undefined) {
     // debugger;
     //console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
-    const TO_EMAIL = "samaya.muduli@credencesoft.co.nz";
+    const TO_EMAIL = "support@thehotelmate.com";
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
     // const TO_EMAIL = "subhasmitatripathy37@gmail.com";
     this.email.fromEmail = this.fromEmail;

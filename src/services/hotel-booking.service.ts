@@ -113,10 +113,16 @@ export class HotelBookingService {
   createBooking(booking: Booking) {
     this.setApi();
     return this.http.post<Booking>(
-      "https://api.thehotelmate.com" + '/api/thm/booking',
+      environment.apiUrl + '/api/thm/booking',
       booking,
       { observe: 'response' }
     );
+  }
+
+  saveBookingService(bookingId: number,planPropertyServicesList: PropertyServiceDTO[] ) {
+    return this.http.post<Booking>(environment.apiUrl + "/api/booking/add/services/"+bookingId, planPropertyServicesList, {
+      observe: "response",
+    });
   }
   externalReservation(externalReservation: externalReservationDtoList[]) {
     this.setApi();
