@@ -688,7 +688,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.paymentLoader = true;
-
+    this.enquiryForm.enquiryId = sessionStorage.getItem('enquiryNo');
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
       this.paymentLoader = false;
