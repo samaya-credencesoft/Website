@@ -602,6 +602,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
     this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.advanceAmount = this.booking.advanceAmount;
 
     this.enquiryForm.firstName = this.booking.firstName;
     this.enquiryForm.lastName = this.booking.lastName;
