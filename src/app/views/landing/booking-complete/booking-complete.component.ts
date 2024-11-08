@@ -147,7 +147,7 @@ export class BookingCompleteComponent implements OnInit {
     }
     setTimeout(() => {
       this.savedServices = this.token.getSelectedServices();
-                }, 1000);
+                }, 100);
 
                 this.businessServiceDtoList = this.token.getProperty()?.businessServiceDtoList;
                 this.businessServiceDtoList?.forEach((element) => {
@@ -233,7 +233,9 @@ export class BookingCompleteComponent implements OnInit {
     this.hotelBookingService.getPaymentByReffId(referenceNumber).subscribe((res) => {
       this.payment = res.body[0];
       if (this.payment?.failureCode === null && this.payment.status == 'Paid') {
+        setTimeout(() => {
         this.createBookingPayTM();
+      }, 100);
       }else{
         // //Logger.log('create enquiry')
         this.createEnquiry();
@@ -291,6 +293,7 @@ export class BookingCompleteComponent implements OnInit {
     }
   }
   createBookingPayTM() {
+
     this.booking.modeOfPayment = this.payment.paymentMode;
     this.booking.externalSite = 'The Hotel Mate';
     this.booking.businessName = this.businessUser.name;
@@ -302,6 +305,17 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
+//     this.propertyServices = this.savedServices;
+// this.propertyServices?.forEach(ele => {
+//   ele.count = ele.quantity;
+//   ele.id = null;
+//   ele.date = new Date().toISOString().split('T')[0];
+//   ele.logoUrl = null;
+//   ele.imageUrl = null;
+//   ele.description = null;
+// ele.organisationId = null;
+// });
+// this.booking.services = this.propertyServices;
 
     //Logger.log('createBooking ', JSON.stringify(this.booking));
 
@@ -318,6 +332,16 @@ export class BookingCompleteComponent implements OnInit {
 
           this.payment.referenceNumber = this.booking.propertyReservationNumber;
           this.payment.externalReference = this.booking.externalBookingID;
+          if (
+            this.savedServices != null &&
+            this.savedServices != undefined &&
+            this.savedServices.length > 0
+          ) {
+            this.addSeviceTopBooking(
+              response.body.id,
+              this.savedServices
+            );
+          }
           this.addServiceToBooking(this.booking);
           this.externalReservation(this.booking);
           this.bookingConfirmed = true;
@@ -413,6 +437,20 @@ this.hotelBookingService
       setTimeout(() => {
         this.accommodationEnquiryBookingData();
     }, 3000);
+  }
+
+  addSeviceTopBooking(bookingId, savedServices: any[]) {
+
+    this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
+      (data) => {
+
+        this.changeDetectorRefs.detectChanges();
+        // Logger.log(JSON.stringify( this.businessServices));
+      },
+      (error) => {
+
+      }
+    );
   }
 
   async getPropertyDetailsById(id: number) {
@@ -549,11 +587,13 @@ this.externalReservationdto =res.body
     });
   }
   accommodationEnquiryBookingData(){
+
     this.enquiryForm = new EnquiryDto();
 
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
       this.token.getProperty().address.city != null && this.token.getProperty().address.city != undefined)
     {
+      this.enquiryForm.address = this.token.getProperty().address;
       this.enquiryForm.country = this.token.getProperty().address.country;
       this.enquiryForm.location = this.token.getProperty().address.city;
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
@@ -582,7 +622,9 @@ this.externalReservationdto =res.body
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
+    this.enquiryForm.roomPrice = this.booking.roomTariffBeforeDiscount;
     this.enquiryForm.createdDate = new Date();
+
 
     this.enquiryForm.accountManager ='TheHotelMate Team';
     this.enquiryForm.consultantPerson ='';
@@ -645,7 +687,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.paymentLoader = true;
-    this.enquiryForm.roomPrice = this.booking.roomPrice;
+
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
       this.paymentLoader = false;
