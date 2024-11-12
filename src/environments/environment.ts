@@ -30,5 +30,6 @@ export const environment = {
   country: 'in',
   googleKey: '',
   // callbackUrl: 'http://localhost:4200/#/details?ReferenceNumber='
-  callbackUrl: 'https://uat.bookone.io/booking-complete?ReferenceNumber='
+  callbackUrl: 'https://uat.bookone.io/booking-complete?ReferenceNumber=',
+  callbackUrlPayment:'https://uat.bookone.io/confirm-payment'
 };
