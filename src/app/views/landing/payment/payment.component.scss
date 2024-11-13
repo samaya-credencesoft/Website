@@ -186,5 +186,127 @@ form.stripe {
       width: 80vw;
     }
   }
-
+  .mobile-view{
+    display: none;
+  }
 //   stripe end
+@media (max-width:500px) {
+  .desktop-view{
+    display: none;
+  }
+  .mobile-view{
+    display: block;
+  }
+  .confirmation-image{
+    width: 150px !important;
+    height: 150px !important;
+  }
+  .moile-booking-details{
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white !important;
+  }
+}
+
+.confirmation-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom:15px;
+}
+.confirmation-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
+}
+.confirmation-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.confirmation-text h5 {
+  margin: 0;
+  font-weight: bold;
+}
+.booking-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.booking-header {
+  font-weight: bold;
+}
+.booking-details, .reservation-details {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  background-color: #ffffff ;
+}
+.booking-details{
+  background-color: #f7f7f7 !important;
+}
+.booking-details h5, .reservation-details h5 {
+  font-weight: bold;
+}
+.check-in-out {
+  display: flex;
+  justify-content: space-between;
+}
+.check-in-out div {
+  text-align: center;
+  font-weight: bold;
+}
+.payment-header {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.payment-details {
+  display: flex;
+  justify-content: space-between;
+}
+.payment-details div {
+  font-weight: bold;
+}
+.total-amount {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 15px;
+}
+.pay-now-btn {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto 0;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.check-in-out {
+
+  padding: 10px;
+  border-radius: 8px;
+}
+.check-in-out p {
+  font-size: 14px;
+  color: #555;
+}
+.check-in-out h5 {
+  font-size: 16px;
+  font-weight: bold;
+}
+.custom-shadow {
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
