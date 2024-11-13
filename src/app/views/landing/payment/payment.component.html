@@ -1,484 +1,273 @@
-<div class="main-wrapper payment-page">
-    <!--Title Bar -->
-    <title-bar title="Booking Details" subtitle=""></title-bar>
-    <!-- Container -->
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <!-- Sidebar -->
-          <div class="col-lg-4 col-md-4">
-            <!-- Booking Summary -->
-            <div class="order-summary-widget">
-              <div class="listing-item">
-                <img *ngIf="businessUser?.logoUrl" src="{{businessUser?.logoUrl}}" alt="" width="100%" height="auto">
+<div class="main-wrapper payment-page desktop-view">
+  <!--Title Bar -->
+  <title-bar title="Booking Details" subtitle=""></title-bar>
+  <!-- Container -->
+  <div class="content">
+    <div class="container">
 
-                <img *ngIf="!businessUser.logoUrl" src="assets/images/app-logo.png" alt="" width="100%">
-                <div class="listing-item-content pt-3">
-                  <!-- <div>
-            <span class="pull-left badge badge-pill list-banner badge-success text-uppercase">{{businessUser.businessType}}</span>
-          </div> -->
-                  <h3>{{businessUser.name}}</h3>
-                  <span><small *ngIf="businessUser.address">
-                      <p class="description">
-                        {{businessUser.address.streetNumber? businessUser.address.streetNumber + ', ' : '' }}
-                        {{businessUser.address.streetName? businessUser.address.streetName + ', ' : '' }}
-                        {{businessUser.address.suburb? businessUser.address.suburb + ', ' : '' }}
-                        {{businessUser.address.locality? businessUser.address.locality + ', ' : '' }}
-                        {{businessUser.address.city? businessUser.address.city + ', ' : '' }}
-                        {{ businessUser.address.country? businessUser.address.country : '' }}
-                      </p>
-                    </small></span>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="bg-secondary p-4">
-              <h4><i class="fa text-primary fa-calendar-check-o"></i> Booking Summary</h4>
-              <ul class="summery">
-                <li><b>Date: </b> <span> {{booking.fromDate | date:'EEEE, MMM d, y'}} - {{booking.toDate | date:'EEEE, MMM d, y'}}</span></li>
-                <li><b>Number of Night(s): </b> <span> {{timeDifferenceInDays}}</span></li>
-                <li><b>Room Type: </b><span>{{booking.roomType}}</span></li>
-                <li><b>No Of Person(s): </b><span>{{booking.noOfPersons}}</span></li>
-                <li><b>No Of Room(s): </b><span>{{booking.noOfRooms}}</span></li>
-                <li><b>Room Price: </b><span>{{booking.roomPrice}} </span>
-                </li>
-                <li><b>Net Amount: </b> <span>{{booking.netAmount | currency: currency:'symbol':'1.2-2' }}
-                    </span></li>
-                <li><b>Tax Amount ({{this.taxPercentage}}%): </b>
-                  <span>{{booking.totalAmount - booking.netAmount| number : '1.2-2' }}</span></li>
-                <li>
-                  <h6>Total Amount: <span>{{booking.totalAmount | currency: currency:'symbol':'1.2-2' }}
-                      </span></h6>
-                </li>
+      <div class="confirmation-container">
+        <div class="confirmation-image">
+          <img *ngIf="businessUser?.logoUrl" src="{{businessUser?.logoUrl}}" alt="" width="100%" height="auto">
 
-              </ul>
-            </div> -->
-            <!-- Booking Summary / End -->
-          </div>
-          <!-- Content -->
-          <div class="col-lg-8 col-md-8 padding-right-30">
-            <div *ngIf="loader" class="progress">
-              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100"
-                aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-            </div>
+          <img *ngIf="!businessUser.logoUrl" src="assets/images/app-logo.png" alt="" width="100%">
+        </div>
+        <div class="confirmation-text">
+          <h4 style="font-weight: bold;">Your booking at {{businessUser.name}} is confirmed!</h4>
+          <p>Please complete the payment to secure your reservation.
 
-            <h4 class="mb-4">Booking Details</h4>
-            <div class="row">
-              <div class="col-md-6">
-                <ul class="summery">
-                  <li><b>Business Name: </b><span>{{booking.businessName}}</span></li>
-                  <li><b>Business Email: </b><span>{{booking.businessEmail}}</span></li>
-                  <li><b>Date: </b> <span> {{booking.fromDate | date:'EEEE, MMM d, y'}} - {{booking.toDate | date:'EEEE, MMM d, y'}}</span></li>
-                  <li><b>Number of Night(s): </b> <span> {{timeDifferenceInDays}}</span></li>
-                  <li><b>Room Type: </b><span>{{booking.roomName}}</span></li>
-                  <li><b>No Of Room(s): </b><span>{{booking.noOfRooms}}</span></li>
-                  <li><b>Room Price: </b><span> {{booking.roomPrice | currency: currency:'symbol':'1.2-2' }} </span>
-                  </li>
-
-                  <!-- <li class="total-costs"><b>Total Cost: </b><span> 546.00</span></li> -->
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <ul class="summery">
-                  <li><b>Reservation No: </b><span>{{booking.propertyReservationNumber}}</span></li>
-                  <li><b>Booking Status: </b><span>{{booking.bookingStatus}}</span></li>
-                  <li><b>Name: </b><span>{{booking.firstName}} {{booking.lastName}}</span></li>
-                  <li><b>Email: </b><span>{{booking.email}}</span></li>
-                  <li><b>Phone: </b><span>{{booking.mobile}}</span></li>
-                  <li><b>No Of Person(s): </b><span>{{booking.noOfPersons}}</span></li>
-                  <li><b>Booking Created At: </b><span>{{booking.createdDate | date:'MMM d, y, hh:mm a'}}</span></li>
-                  <li><b>Booking Updated At: </b><span>{{booking.lastModifiedDate | date:'MMM d, y, hh:mm a'}}</span></li>
-                </ul>
-              </div>
-            </div>
-            <h4 class="mb-3 mt-4">Payment Details</h4>
-            <div class="row">
-              <div class="col-md-6">
-                <ul class="summery">
-                  <li><b>Payment Id: </b> <span> {{payment.id}}</span></li>
-                  <li><b>Payment Ref. Id: </b> <span> {{payment.referenceNumber}}</span></li>
-                  <li><b>Booking Amount: </b><span>  {{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</span></li>
-                  <li><b>Tax Amount: </b><span>  {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</span></li>
-                  <li><h5><b>Total Amount: </b><span> {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</span></h5></li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <ul class="summery">
-                  <li><b>Payment Method: </b><span>{{payment.paymentMode}}</span></li>
-                  <li><b>Status: </b> <span>{{payment.status }}</span></li>
-
-                </ul>
-              </div>
-
-
-            </div>
-
-            <h4 class="mb-3 mt-4"  >Payment Method</h4>
-						<div *ngIf="paymentLoader" class="progress">
-							<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-								aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-						</div>
-						<div class="nav-wrapper" >
-							<ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text"
-								role="tablist">
-								<!-- <li class="nav-item">
-									<a class="nav-link mb-sm-3 mb-md-0 show active" id="tabs-icons-text-2-tab"
-										data-toggle="tab" href="#tabs-icons-text-2" role="tab"
-										aria-controls="tabs-icons-text-2" aria-selected="false"><i
-											class="fa fa-money  mr-2" (click)="cashOnDelivery()"></i>Cash Payment</a>
-								</li> -->
-								<!-- <li class="nav-item">
-									<a class="nav-link mb-sm-3 mb-md-0 " id="tabs-icons-text-1-tab" data-toggle="tab"
-										href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1"
-										aria-selected="true" (click)="cardPayment()"><i
-											class="fa fa-credit-card mr-2"></i>Credit/Debit Card</a>
-								</li> -->
-                <li class="nav-item active show">
-									<a class="nav-link mb-sm-3 mb-md-0 " id="tabs-icons-text-6-tab" data-toggle="tab"
-										href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-6"
-										aria-selected="true" (click)="cardPayment()"><i
-											class="fa fa-credit-card mr-2"></i>UPI</a>
-								</li>
-
-								<li class="nav-item" *ngIf="bankAccount != undefined && bankAccount != null">
-									<a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab"
-										href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3"
-										aria-selected="false" (click)="bankPayment()"><i class="fa fa-  mr-2"></i>Bank
-										Transfer</a>
-								</li>
-
-								<li class="nav-item"
-									*ngIf="businessUser.mobileWallet != undefined && businessUser.mobileWallet != null">
-									<a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-4-tab" data-toggle="tab"
-										href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4"
-										aria-selected="false" (click)="MobileWallet()"><i
-											class="fa fa-  mr-2"></i>Mobile Wallet</a>
-								</li>
-							</ul>
-						</div>
-						<div class="card shadow"  >
-							<div class="card-body">
-								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade" id="tabs-icons-text-1" role="tabpanel"
-										aria-labelledby="tabs-icons-text-1-tab">
-										<form #payForm="ngForm">
-											<div class="row"
-												*ngIf="!cashPayment && businessUser.paymentGateway != 'eway' && businessUser.paymentGateway == 'stripe' && businessUser.paymentGatewayPublicKey !== null ">
-												<div class="col-md-12">
-													<form id="payment-form">
-														<div id="card-element" class="stripe">
-															<!--Stripe.js injects the Card Element-->
-														</div>
-														<button id="submit" class="stripe">
-															<div class="spinner hidden" id="spinner"></div>
-															<span id="button-text">Pay now</span>
-														</button>
-														<p id="card-error" class="stripe" role="alert"></p>
-														<p class="result-message hidden"> Payment succeeded! </p>
-													</form>
-												</div>
-											</div>
-											<div class="row"
-												*ngIf="!cashPayment && businessUser.paymentGateway != 'eway' && businessUser.paymentGateway != 'stripe' && businessUser.paymentGatewayPublicKey == null">
-												<div class="col-12">
-													<p class="result-message">Card payment not available!</p>
-												</div>
-											</div>
-										</form>
-									</div>
-                  <div class="tab-pane fade active show" id="tabs-icons-text-6" role="tabpanel"
-                  aria-labelledby="tabs-icons-text-6-tab" style="padding-bottom: 10px;">
-                 <p> Please make the total payment via UPI.</p>
-<button class="paynow-payment" style="    width: 150px;padding: 10px;
-/* border-radius: 0%; */
-border-radius: 6px;
-background-color: black;
-color: white;
-" (click)="phonepay()">Pay Now</button>
-                </div>
-									<div class="tab-pane fade " id="tabs-icons-text-2" role="tabpanel"
-										aria-labelledby="tabs-icons-text-2-tab">
-										<form action="">
-											<div class="row">
-												<div class="col-md-12">
-													<h5>Confirm Booking</h5>
-													<p>Pay the total amount
-														{{booking.totalAmount | currency: currency:'symbol':'1.2-2' }}
-														when you
-														Checking in at the hotel.</p>
-												</div>
-												<div class="col-md-12 mt-3">
-													<button class="btn btn-primary" type="button"
-														[disabled]="!payForm.form.valid  || paymentLoader "
-														(click)="onCashPaymentSubmit()">Confirm</button>
-
-												</div>
-											</div>
-										</form>
-									</div>
-									<div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel"
-										aria-labelledby="tabs-icons-text-3-tab">
-										<form action="">
-											<div class="row" *ngIf="bankAccount != undefined && bankAccount != null">
-												<div class="col-md-12">
-													<h5>Bank Information</h5>
-
-													<div class="row mb-4">
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="streetNumberc">Bank Name</label>
-																<input type="text" id="BankName" placeholder="Bank Name"
-																	readonly
-																	class="form-control form-control-alternative"
-																	[(ngModel)]="bankAccount.bankName" type="text"
-																	name="BankName" #BankName="ngModel">
-
-															</div>
-														</div>
-														<!-- streetName -->
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="Branch">Branch Name</label>
-																<input type="text" id="Branch" placeholder="Branch Name"
-																	class="form-control form-control-alternative"
-																	readonly [(ngModel)]="bankAccount.branchName"
-																	type="text" name="Branch" #Branch="ngModel">
-
-															</div>
-														</div>
-
-													</div>
-
-													<div class="row mb-4">
-
-														<div class="col-md-4">
-															<div class="form-group">
-																<label for="AccountName">Account Name</label>
-																<input type="text" id="AccountName"
-																	placeholder="Account Name" readonly
-																	class="form-control form-control-alternative"
-																	[(ngModel)]="bankAccount.accountName" type="text"
-																	name="AccountName" #AccountName="ngModel">
-
-															</div>
-														</div>
-														<!-- streetName -->
-														<div class="col-md-4">
-															<div class="form-group">
-																<label for="Branch">Account Number</label>
-																<input type="text" id="AccountNumber"
-																	placeholder="Account Number"
-																	class="form-control form-control-alternative"
-																	readonly [(ngModel)]="bankAccount.accountNumber"
-																	type="text" name="AccountNumber"
-																	#AccountNumber="ngModel">
-
-															</div>
-														</div>
-
-														<div class="col-md-4">
-															<div class="form-group">
-																<label for="Branch">Swift Code</label>
-																<input type="text" id="SwiftCode"
-																	placeholder="Swift Code"
-																	class="form-control form-control-alternative"
-																	readonly [(ngModel)]="bankAccount.swiftCode"
-																	type="text" name="SwiftCode" #SwiftCode="ngModel">
-
-															</div>
-														</div>
-
-													</div>
-
-													<p>Please pay
-														{{ booking.totalAmount | currency: currency:'symbol':'1.2-2' }}
-														using following bank details and share transaction details in
-														the given below.</p>
-
-													<div class="row mb-4">
-
-														<div class="col-md-12">
-															<div class="form-group">
-																<label for="ReceiptNumber">Transaction Reference
-																	Number</label>
-																<input type="text" id="ReceiptNumber"
-																	placeholder="Transaction Reference Number"
-																	class="form-control form-control-alternative"
-																	[(ngModel)]="payment.receiptNumber" type="text"
-																	name="ReceiptNumber" #ReceiptNumber="ngModel">
-
-															</div>
-														</div>
-													</div>
-
-												</div>
-												<div class="col-md-12">
-													<button class="btn btn-primary" type="button"
-														[disabled]="!payForm.form.valid || paymentLoader  || payment.receiptNumber === undefined || payment.receiptNumber === ''"
-														(click)="onBankPaymentSubmit()">Confirm</button>
-
-												</div>
-											</div>
-										</form>
-									</div>
-									<div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel"
-										aria-labelledby="tabs-icons-text-4-tab">
-										<form action="">
-											<div class="row" *ngIf="businessUser.mobileWallet != undefined && businessUser.mobileWallet != null">
-												<div class="col-md-12">
-													<h5>Mobile Wallet Information</h5>
-
-													<div class="row mb-4">
-
-														<div class="col-md-4">
-															<div class="form-group">
-																<label for="streetNumberc">First Name</label>
-																<input type="text" id="FirstName"
-																	placeholder="First Name" readonly
-																	class="form-control form-control-alternative"
-																	[(ngModel)]="mobileWallet.firstName" type="text"
-																	name="FirstName" #FirstName="ngModel">
-
-															</div>
-														</div>
-														<!-- streetName -->
-														<div class="col-md-4">
-															<div class="form-group">
-																<label for="Branch">Last Name</label>
-																<input type="text" id="LastName" placeholder="Last Name"
-																	class="form-control form-control-alternative"
-																	readonly [(ngModel)]="mobileWallet.lastName"
-																	type="text" name="LastName" #LastName="ngModel">
-
-															</div>
-														</div>
-
-														<div class="col-md-4">
-															<div class="form-group">
-																<label for="Branch">Phone Number</label>
-																<input type="text" id="PhoneNumber"
-																	placeholder="Phone Number"
-																	class="form-control form-control-alternative"
-																	readonly [(ngModel)]="mobileWallet.phoneNumber"
-																	type="text" name="PhoneNumber"
-																	#PhoneNumber="ngModel">
-
-															</div>
-														</div>
-
-													</div>
-
-													<div class="row mb-4">
-
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="AccountName">Wallet Provider</label>
-																<input type="text" id="WalletProvider"
-																	placeholder="Wallet Provider" readonly
-																	class="form-control form-control-alternative"
-																	[(ngModel)]="mobileWallet.walletProvider"
-																	type="text" name="WalletProvider"
-																	#WalletProvider="ngModel">
-
-															</div>
-														</div>
-														<!-- streetName -->
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="Branch">Wallet Url</label>
-																<input type="text" id="WalletUrl"
-																	placeholder="Wallet Url"
-																	class="form-control form-control-alternative"
-																	readonly [(ngModel)]="mobileWallet.walletUrl"
-																	type="text" name="WalletUrl" #WalletUrl="ngModel">
-
-															</div>
-														</div>
-
-
-
-													</div>
-
-													<p>Please pay
-														{{ booking.totalAmount | currency: currency:'symbol':'1.2-2' }}
-														using following mobile wallet details and share transaction
-														details in the given below.</p>
-
-													<div class="row mb-4">
-
-														<div class="col-md-12">
-															<div class="form-group">
-																<label for="ReceiptNumber">Transaction Reference
-																	Number</label>
-																<input type="text" id="ReceiptNumber"
-																	placeholder="Transaction Reference Number"
-																	class="form-control form-control-alternative"
-																	[(ngModel)]="payment.receiptNumber" type="text"
-																	name="ReceiptNumber" #ReceiptNumber="ngModel">
-
-															</div>
-														</div>
-													</div>
-
-												</div>
-
-												<div class="col-md-12">
-													<button class="btn btn-primary" type="button"
-														[disabled]="!payForm.form.valid || paymentLoader  || payment.receiptNumber === undefined || payment.receiptNumber === ''"
-														(click)="onWalletPaymentSubmit()">Confirm</button>
-
-												</div>
-											</div>
-										</form>
-									</div>
-                  <ngb-alert *ngIf="showAlert" [type]="alertType" (close)="showAlert = false">
-                    <strong>{{headerTitle}}</strong> {{bodyMessage}}</ngb-alert>
-									<!-- <form action="">
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<input type="text" placeholder="Full Name"
-															class="form-control form-control-alternative">
-													</div>
-												</div>
-												<div class="col-md-12">
-													<div class="form-group">
-														<input type="text" placeholder="Bank Name"
-															class="form-control form-control-alternative">
-													</div>
-												</div>
-												<div class="col-md-12">
-													<div class="form-group">
-														<input type="text" placeholder="A/C Number"
-															class="form-control form-control-alternative">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<input type="text" placeholder="A/C Type"
-															class="form-control form-control-alternative">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<div class="form-group">
-														<input type="text" placeholder="Swift Code"
-															class="form-control form-control-alternative">
-													</div>
-												</div>
-												<div class="col-md-12">
-													<button class="btn btn-primary" type="button"
-														[disabled]="!payForm.form.valid  || loader"
-														(click)="onCashPaymentSubmit(content)">Click n Collect</button>
-												</div>
-											</div>
-										</form>
-									</div> -->
-								</div>
-							</div>
-						</div>
-          </div>
+            <!-- <span class="text-muted"><small *ngIf="businessUser.address">
+              <p class="description">
+                {{businessUser.address.streetNumber? businessUser.address.streetNumber + ', ' : '' }}
+                {{businessUser.address.streetName? businessUser.address.streetName + ', ' : '' }}
+                {{businessUser.address.suburb? businessUser.address.suburb + ', ' : '' }}
+                {{businessUser.address.locality? businessUser.address.locality + ', ' : '' }}
+                {{businessUser.address.city? businessUser.address.city + ', ' : '' }}
+                {{ businessUser.address.country? businessUser.address.country : '' }}
+              </p>
+            </small></span> -->
+          </p>
 
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6 booking-details">
+          <p class="booking-header">BOOKING STATUS : {{booking.bookingStatus}}</p>
+          <div class="row">
+            <div class="col-6" style="font-weight: bold;">
+              <p>Hotel Name</p>
+              <p>Number Of Nights</p>
+              <p>Number Of Guests</p>
+              <p>Room Type</p>
+              <p>Number Of Rooms</p>
+              <p>Room Price</p>
+            </div>
+            <div class="col-6 text-right"  style="font-weight: bold;">
+              <p>{{businessUser.name}}</p>
+              <p>{{timeDifferenceInDays}}0</p>
+              <p>{{booking.noOfPersons}}</p>
+              <p>{{booking.roomName}}</p>
+              <p>{{booking.noOfRooms}}</p>
+              <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 reservation-details mt-3 mt-md-0">
+          <div class="card p-3 mb-3 custom-shadow">
+            <div class="check-in-out d-flex justify-content-between">
+              <div class="text-center">
+                <p class="mb-1">Check-in Date</p>
+                <h5 class="mb-0">{{booking.fromDate | date:'EEEE, MMM d, y'}}</h5>
+              </div>
+              <div class="border-left mx-3"></div>
+              <div class="text-center">
+                <p class="mb-1">Check-out Date</p>
+                <h5 class="mb-0">{{booking.toDate | date:'EEEE, MMM d, y'}}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="info-section"  style="font-weight: bold;">
+            <div class="d-flex justify-content-between">
+              <span>Reservation ID:</span>
+              <span>{{booking.propertyReservationNumber}}</span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <span>Guest Name:</span>
+              <span>{{booking.firstName}} {{booking.lastName}}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Email Address:</span>
+              <span>{{booking.email}}</span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span>Phone Number:</span>
+              <span>{{booking.mobile}}</span>
+            </div>
+        </div>
+      </div>
+      </div>
+      <p class="payment-header">Payment Details</p>
+      <div class="row">
+        <div class="col-6">
+          <p>Payment ID</p>
+          <div style="font-weight: bold;" > {{payment.id}}</div>
+        </div>
+        <div class="col-6 text-right">
+          <p>Payment Ref ID</p>
+          <div  style="font-weight: bold;"> {{payment.referenceNumber}}</div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-6">
+          <p>Booking Amount</p>
+        </div>
+        <div class="col-6 text-right">
+          <p >{{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <p>Tax Amount</p>
+        </div>
+        <div class="col-6 text-right">
+          <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <div class="row total-amount">
+        <div class="col-6">
+          <p>Total Amount</p>
+        </div>
+        <div class="col-6 text-right">
+          <p> {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p>
+        </div>
+      </div>
+      <button class="pay-now-btn" (click)="phonepay()">PAY NOW</button>
+
     </div>
   </div>
+</div>
+
+
+
+<div class="main-wrapper payment-page mobile-view">
+  <!--Title Bar -->
+  <title-bar title="Booking Details" subtitle=""></title-bar>
+  <!-- Container -->
+  <div class="content">
+    <div class="container">
+
+      <div class="confirmation-container-mobile">
+        <div class="confirmation-image" style="margin: auto;">
+          <img *ngIf="businessUser?.logoUrl" src="{{businessUser?.logoUrl}}" alt="" width="100%" height="auto">
+
+          <img *ngIf="!businessUser.logoUrl" src="assets/images/app-logo.png" alt="" width="100%">
+        </div>
+        <div class="confirmation-text" style="margin: auto;text-align:center ;margin-top: 10px;">
+          <h3 style="font-weight: bold;" >Your booking at {{businessUser.name}} is confirmed!</h3>
+          <p style="color: #031eaa;font-weight: bold;">Please complete the payment to secure your reservation.
+
+            <!-- <span class="text-muted"><small *ngIf="businessUser.address">
+              <p class="description">
+                {{businessUser.address.streetNumber? businessUser.address.streetNumber + ', ' : '' }}
+                {{businessUser.address.streetName? businessUser.address.streetName + ', ' : '' }}
+                {{businessUser.address.suburb? businessUser.address.suburb + ', ' : '' }}
+                {{businessUser.address.locality? businessUser.address.locality + ', ' : '' }}
+                {{businessUser.address.city? businessUser.address.city + ', ' : '' }}
+                {{ businessUser.address.country? businessUser.address.country : '' }}
+              </p>
+            </small></span> -->
+          </p>
+
+        </div>
+      </div>
+      <div class="row" style="padding: 10px;">
+        <div class="col-md-6  mobile-booking-details">
+          <p class="booking-header">BOOKING STATUS :  {{booking.bookingStatus}}</p>
+          <div class="row">
+            <div class="col-6" style="font-weight: bold;">
+              <p>Hotel Name</p>
+              <p>Number Of Nights</p>
+              <p>Number Of Guests</p>
+              <p>Room Type</p>
+              <p>Number Of Rooms</p>
+              <p>Room Price</p>
+            </div>
+            <div class="col-6 text-right"  style="font-weight: bold;">
+              <p>{{businessUser.name}}</p>
+              <p>{{timeDifferenceInDays}}0</p>
+              <p>{{booking.noOfPersons}}</p>
+              <p>{{booking.roomName}}</p>
+              <p>{{booking.noOfRooms}}</p>
+              <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 reservation-details mt-3 mt-md-0">
+          <div class="card p-3 mb-3 custom-shadow">
+            <div class="check-in-out d-flex justify-content-between">
+              <div class="text-center">
+                <p class="mb-1">Check-in Date</p>
+                <h5 class="mb-0">{{booking.fromDate | date:'EEEE, MMM d, y'}}</h5>
+              </div>
+              <div class="border-left mx-3"></div>
+              <div class="text-center">
+                <p class="mb-1">Check-out Date</p>
+                <h5 class="mb-0">{{booking.toDate | date:'EEEE, MMM d, y'}}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="info-section"  style="font-weight: bold;padding: 10px;">
+            <div class="d-flex justify-content-between" style="margin-bottom: 5px;">
+              <span>Reservation ID:</span>
+              <span>{{booking.propertyReservationNumber}}</span>
+            </div>
+
+            <div class="d-flex justify-content-between" style="margin-bottom: 5px;">
+              <span>Guest Name:</span>
+              <span>{{booking.firstName}} {{booking.lastName}}</span>
+            </div>
+            <div class="d-flex justify-content-between" style="margin-bottom: 5px;">
+              <span>Email Address:</span>
+              <span>{{booking.email}}</span>
+            </div>
+            <div class="d-flex justify-content-between" style="margin-bottom: 5px;">
+              <span>Phone Number:</span>
+              <span>{{booking.mobile}}</span>
+            </div>
+        </div>
+      </div>
+      </div>
+ <div class="card" style="padding: 10px;background-color:#f7f7f7 ;">
+  <p class="payment-header" style="font-size: 20px;">Payment Details</p>
+  <div class="row">
+    <div class="col-6">
+      <p>Payment ID</p>
+      <div style="font-weight: bold;" > {{payment.id}}</div>
+    </div>
+    <div class="col-6 text-right">
+      <p>Payment Ref ID</p>
+      <div  style="font-weight: bold;"> {{payment.referenceNumber}}</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-6">
+      <p>Booking Amount</p>
+    </div>
+    <div class="col-6 text-right">
+      <p >{{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <p>Tax Amount</p>
+    </div>
+    <div class="col-6 text-right">
+      <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+    </div>
+  </div>
+
+  <div class="row total-amount">
+    <div class="col-6">
+      <p>Total Amount</p>
+    </div>
+    <div class="col-6 text-right">
+      <p> {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p>
+    </div>
+  </div>
+ </div>
+      <button class="pay-now-btn" (click)="phonepay()" style="margin-bottom: 10px;">PAY NOW</button>
+
+    </div>
+  </div>
+</div>
