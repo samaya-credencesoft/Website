@@ -29,6 +29,7 @@ const CUSTOMER = 'Customer';
 const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
 const BOOKINGCITY = 'bookingCity';
+const BOOKINGREFID = 'bookingRefId';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
 const CITY = 'city';
 const ORGANIZATION_ID = "OrganizationId";
@@ -225,6 +226,7 @@ export class TokenStorage {
   public getCountry() {
     return localStorage.getItem(COUNTRY);
   }
+
   // public getPropertyData(): BusinessUser {
   //   return JSON.parse(localStorage.getItem(PROPERTY) as string);
   // }
@@ -474,10 +476,20 @@ export class TokenStorage {
     }
   }
 
+  public savePaymentRef(bookingRefId: string) {
+    sessionStorage.removeItem(BOOKINGREFID);
+      if (bookingRefId !== null || bookingRefId !== undefined) {
+        sessionStorage.setItem(BOOKINGREFID, bookingRefId);
+      } else {
+        sessionStorage.setItem(BOOKINGREFID, '{}');
+      }
+    }
   public getBookingCity() {
     return localStorage.getItem(BOOKINGCITY);
   }
-
+  public getPaymentRef() {
+    return sessionStorage.getItem(BOOKINGREFID);
+  }
   clearBookingCity() {
   localStorage.removeItem(BOOKINGCITY);
   }

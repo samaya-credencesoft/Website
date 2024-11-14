@@ -65,6 +65,7 @@ export class PaymentComponent implements OnInit {
   contentDialog: any;
   alertType: string;
   showAlert: boolean;
+  prvpaymentref: string;
 
   constructor(
     private acRoute: ActivatedRoute,
@@ -223,8 +224,9 @@ export class PaymentComponent implements OnInit {
         this.payment.amount =this.payment.transactionAmount;
         this.booking.advanceAmount = this.payment.transactionAmount;
         this.payment.transactionChargeAmount =this.payment.transactionAmount ;
-
-      this.payment.referenceNumber = this.payment.referenceNumber ;
+        this.prvpaymentref = this.payment.referenceNumber;
+        this.token.savePaymentRef(this.prvpaymentref )
+      this.payment.referenceNumber =new Date().getTime().toString();  ;
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );
       Logger.log("this.payment "+ JSON.stringify(this.payment));
