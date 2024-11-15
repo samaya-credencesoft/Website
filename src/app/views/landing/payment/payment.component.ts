@@ -66,6 +66,7 @@ export class PaymentComponent implements OnInit {
   alertType: string;
   showAlert: boolean;
   prvpaymentref: string;
+  advPanyment: any;
 
   constructor(
     private acRoute: ActivatedRoute,
@@ -86,6 +87,9 @@ export class PaymentComponent implements OnInit {
     this.acRoute.queryParams.subscribe((params) => {
       if (params["BookingReferenceNumber"] !== undefined) {
         this.bookingNumber = params["BookingReferenceNumber"];
+      }
+      if (params["Amount"] !== undefined) {
+        this.advPanyment = params["Amount"];
       }
       if (params["BookingEmail"] !== undefined) {
         this.bookingEmail = params["BookingEmail"];
@@ -218,12 +222,23 @@ export class PaymentComponent implements OnInit {
       this.payment.propertyId = this.businessUser.id;
       this.booking.taxAmount = ((this.booking.netAmount * this.booking.taxPercentage) / 100);
 
-        this.payment.taxAmount = this.payment.taxAmount ;
-        this.payment.netReceivableAmount = this.payment.transactionAmount;
-        this.payment.transactionAmount = this.payment.transactionAmount;
-        this.payment.amount =this.payment.transactionAmount;
-        this.booking.advanceAmount = this.payment.transactionAmount;
-        this.payment.transactionChargeAmount =this.payment.transactionAmount ;
+
+        if(this.advPanyment > 0){
+          this.payment.netReceivableAmount = this.advPanyment
+          this.payment.transactionAmount = this.advPanyment;
+          this.payment.amount =this.advPanyment;
+          this.booking.advanceAmount = this.advPanyment;
+          this.payment.transactionChargeAmount =this.advPanyment;
+          this.payment.taxAmount = 0 ;
+        }else{
+          this.payment.netReceivableAmount = this.payment.transactionAmount;
+          this.payment.transactionAmount = this.payment.transactionAmount;
+          this.payment.amount =this.payment.transactionAmount;
+          this.booking.advanceAmount = this.payment.transactionAmount;
+          this.payment.transactionChargeAmount =this.payment.transactionAmount ;
+          this.payment.taxAmount = this.payment.taxAmount ;
+        }
+
         this.prvpaymentref = this.payment.referenceNumber;
         this.token.savePaymentRef(this.prvpaymentref )
       this.payment.referenceNumber =new Date().getTime().toString();  ;
