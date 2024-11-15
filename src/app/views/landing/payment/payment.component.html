@@ -121,10 +121,11 @@
 
       <div class="row total-amount">
         <div class="col-6">
-          <p>Total Amount</p>
+          <p>Total Payable Amount</p>
         </div>
         <div class="col-6 text-right">
-          <p> {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p>
+          <p *ngIf="this.advPanyment === 0 || this.advPanyment === null ||  this.advPanyment === undefined">  {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p>
+      <p *ngIf="this.advPanyment > 0"> {{this.advPanyment| currency: currency:'symbol':'1.2-2' }}</p>
         </div>
       </div>
       <button class="pay-now-btn" (click)="phonepay()" style="margin-bottom: 10px;">PAY NOW</button>
@@ -259,10 +260,11 @@
 
   <div class="row total-amount">
     <div class="col-6">
-      <p>Total Amount</p>
+      <p>Total Payable Amount</p>
     </div>
     <div class="col-6 text-right">
-      <p> {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p>
+      <p *ngIf="this.advPanyment === 0 || this.advPanyment === null ||  this.advPanyment === undefined">  {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p>
+      <p *ngIf="this.advPanyment > 0"> {{this.advPanyment| currency: currency:'symbol':'1.2-2' }}</p>
     </div>
   </div>
  </div>
