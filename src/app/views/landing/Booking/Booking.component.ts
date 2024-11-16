@@ -2085,7 +2085,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     this.enquiryForm.mobile=this.booking.mobile;
-    this.enquiryForm.roomType=this.booking.roomType;
+    this.enquiryForm.roomType=this.booking.roomName;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
 
