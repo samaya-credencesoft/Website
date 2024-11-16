@@ -2097,6 +2097,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
     // this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     // this.enquiryForm.planCode = this.booking.planCode;
