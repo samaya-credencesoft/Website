@@ -2149,7 +2149,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.paymentLoader = true;
-    this.enquiryForm.roomPrice = this.booking.roomPrice;
+    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
       this.paymentLoader = false;
