@@ -315,7 +315,7 @@ export class PaymentComponent implements OnInit {
         this.token.savePaymentData(this.payment);
         this.token.savePropertyData(this.businessUser);
 
-        this.router.navigate(["/checkout"]);
+        this.router.navigate(["/checkout-payment"]);
       }
     });
   }

@@ -8,6 +8,7 @@ import { Payment } from "src/app/model/payment";
 import { BusinessUser } from "src/app/model/user";
 import { HotelBookingService } from "src/services/hotel-booking.service";
 import { TokenStorage } from "src/token.storage";
+import { Location} from "@angular/common";
 
 
 @Component({
@@ -32,10 +33,14 @@ export class CheckoutPaymentComponent implements OnInit {
   DiffDate;
   currency: string;
   loadersnipper: boolean = true;
+  headertitl1one: string;
+  headertitlePayment: string;
+  bodyMessagePayment: string;
 
   constructor(
     private readonly checkoutService: CheckoutService,
     private token: TokenStorage,
+    private locationBack:Location,
     private hotelBookingService: HotelBookingService,
     private changeDetectorRefs: ChangeDetectorRef,
     private router: Router
@@ -86,17 +91,28 @@ export class CheckoutPaymentComponent implements OnInit {
       );
 
       this.subs = this.checkoutService.checkoutJsInstance$.subscribe(
-        (instance) => console.log(instance)
+        (instance) => console.log("kj"+instance)
       );
     }
   }
   notifyMerchantHandler = (eventType, data): void => {
-    console.log("MERCHANT NOTIFY LOG", eventType, data);
-    if (data.body !== undefined) {
+    console.log("MERCHANT NOTIFY LOG1", eventType, data);
+    if (eventType === "APP_CLOSED") {
+      // Handle the popup close event
+      this.paymentLoader = false; // Stop the loader
+      this.isSuccess = false; // Mark the payment as unsuccessful
+      this.headertitlePayment = "Payment Incomplete!";
+      this.bodyMessagePayment = "The payment popup was closed before completing the transaction.";
+      this.showDanger(this.contentDialog); // Show an error alert
+      this.changeDetectorRefs.detectChanges(); // Trigger UI update
+    } else if (data.body !== undefined) {
       this.payment.failureCode = data?.body?.resultInfo?.resultCode;
       this.payment.failureMessage = data?.body?.resultInfo?.resultMsg;
     }
   };
+  closewindow(){
+   this.locationBack.back();
+  }
 
   ngOnDestroy(): void {
     if (this.subs) {
