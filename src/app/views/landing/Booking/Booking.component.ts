@@ -2098,8 +2098,13 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.totalAmount = this.booking.totalAmount;
+    // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    // this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
+    let taxarray = this.token.getProperty().taxDetails;
+    taxarray =taxarray.filter(
+      (tax) => tax.name !== 'IGST' && tax.name !== 'GST'
+    );
+    this.enquiryForm.taxDetails = taxarray
     // this.enquiryForm.planCode = this.booking.planCode;
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
     this.enquiryForm.bookingId = this.booking.id;
