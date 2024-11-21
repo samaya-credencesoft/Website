@@ -96,6 +96,9 @@ export class BookingCompleteComponent implements OnInit {
 
     }
 
+    setTimeout(() => {
+      this.pushDataToDataLayer();
+    }, 200);
 
       setTimeout(() => {
         this.businessUser?.socialMediaLinks.forEach(element => {
@@ -218,6 +221,31 @@ export class BookingCompleteComponent implements OnInit {
       this.bookingConfirmed = true;
     }
     this.currency = 'INR';
+  }
+
+  pushDataToDataLayer(): void {
+    const completeBookingData = {
+
+      hotel_name: this.token.getProperty()?.name || '',
+      event_time: new Date().toISOString(),
+      reservation_num: this.booking.propertyReservationNumber || '',
+      guest_name: this.booking.firstName + this.booking.lastName || '',
+      email: this.booking.email || '',
+      mobile: this.booking.mobile || '',
+      room_name: this.booking.roomName || '',
+      destination: this.token.getProperty()?.address?.city || '' ,
+      total_amount: this.booking.totalAmount || '',
+      num_person: this.booking.noOfPersons || '',
+    };
+
+    // Datalayer
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: 'booking_complete',
+      Hotel: [completeBookingData]
+    });
+
+
   }
   ngAfterViewInit() {
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)

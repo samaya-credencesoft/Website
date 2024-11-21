@@ -66,6 +66,52 @@
   <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD76Ocky2MYrAcI-f9H3XbxzsrSB0TsbJI&libraries=places&language=en"></script> -->
  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900" rel="stylesheet"> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+  </script>
+  <script>
+   function getPropertyData() {
+  const propertyDetails = JSON.parse(localStorage.getItem('PROPERTY_DETAILS'));
+  console.log(propertyDetails, "propertydatalayer");
+  return propertyDetails ? propertyDetails : {};
+}
+
+function getBookingData() {
+  const bookingData = JSON.parse(sessionStorage.getItem('booking'));
+  console.log(bookingData, "bookingdatalayer");
+  return bookingData ? bookingData : {};
+}
+
+function pushDataLayer() {
+  const property = getPropertyData();
+  const booking = getBookingData();
+
+  const hotelBookingData = {
+    hotel_name: property.name || '',
+    event_time: new Date().toISOString(),
+    num_adults: booking.noOfPersons || 0,
+    num_children: booking.noOfChildren || 0,
+    checkin_date: booking.fromDate || '',
+    checkout_date: booking.toDate || '',
+    num_rooms: booking.noOfRooms || 0,
+    destination: property.address?.city || ''
+  };
+
+  window.dataLayer.push({
+    event: 'hotel_booking',
+    Hotel: [hotelBookingData]
+  });
+}
+
+
+setTimeout(() => {
+  pushDataLayer();
+}, 1000);
+
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

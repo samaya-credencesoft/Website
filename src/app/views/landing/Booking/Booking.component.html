@@ -256,11 +256,11 @@
           </div>
         </div>
         <div class="d-flex justify-content-center mb-4" style="color:black">
-          <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+          <button class="btn btn-primary text-white FB enquiry-btn"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
             (click)="submitForm()">Enquiry Now</button>
-            <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+            <button class="btn btn-primary text-white FB pay-btn"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
             (click)="payAndCheckout()">Pay Now</button>
-            <button class="btn btn-primary text-white FB"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
+            <button class="btn btn-primary text-white FB pay-at-hotel-btn"type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
             (click)="payAndCheckout()">Pay At Hotel</button>
        </div>
       </div>
@@ -2628,13 +2628,12 @@ border-radius: 10px;">
 
   </div>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10904222935" ng-if="bookingConfirmed && isEnquiry"></script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'AW-10904222935');
   </script>
 </div>
 <app-Header-Listingdetailsone   [businessUser]="businessUser"> </app-Header-Listingdetailsone>
@@ -2847,11 +2846,11 @@ border-radius: 10px;">
   </div>
    </div>
    <div style="margin: auto;padding: 20px;">
-    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+    <button   class="Fillpaybtn enquiry-btn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
     (click)="submitForm()">Enquiry Now</button>
-    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+    <button  class="Fillpaybtn pay-btn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
-    <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
+    <button   class="Fillpaybtn pay-at-hotel-btn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
     >Pay At Hotel</button>
     </div>
   </div>
@@ -3072,17 +3071,24 @@ border-radius: 10px;">
         </div>
 
 
-      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+      <button   class="Fillpaybtn enquiry-btn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
       (click)="submitForm()">Enquiry Now</button>
-      <button  class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+      <button  class="Fillpaybtn pay-btn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
       (click)="payAndCheckout()">Pay Now</button>
-      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
+      <button   class="Fillpaybtn pay-at-hotel-btn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
       (click)="payAndCheckout()">Pay At Hotel</button>
     </div>
   </form>
   </div>
   </div>
  </div>
+
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+ </script>
 
 
 
