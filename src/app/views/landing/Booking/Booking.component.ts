@@ -1767,7 +1767,7 @@ this.token.saveToTime(String(this.enquiryForm.toTime));
   // }
 
     addServiceToBooking(bookingId, savedServices: any[]) {
-this.savedServices.forEach(element => {
+this.savedServices?.forEach(element => {
   element.count = element.quantity
 });
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
