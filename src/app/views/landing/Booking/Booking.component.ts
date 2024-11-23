@@ -1932,6 +1932,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
           this.booking = response.body;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
+          this.addServiceToBooking(this.booking);
           this.externalReservation(this.booking);
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
