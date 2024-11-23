@@ -1747,7 +1747,9 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   // }
 
     addServiceToBooking(bookingId, savedServices: any[]) {
-
+this.savedServices.forEach(element => {
+  element.count = element.quantity
+});
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
         (data) => {
 
