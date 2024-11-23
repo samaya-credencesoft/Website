@@ -1227,7 +1227,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
             // for pre booking create
 
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
           }
         } else {
           this.paymentLoader = false;
@@ -1276,7 +1276,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
             // for pre booking create
 
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
           }
         } else {
           this.paymentLoader = false;
@@ -1325,7 +1325,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
             // for pre booking create
 
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
           }
         } else {
           this.paymentLoader = false;
@@ -1745,15 +1745,22 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   //     }
   //   });
   // }
-  addServiceToBooking(booking) {
-    if (this.addServiceList.length > 0) {
-      this.hotelBookingService
-        .addServicesToBooking(this.addServiceList, booking.id)
-        .subscribe((serviceRes) => {
-          Logger.log("addServiceList ", JSON.stringify(serviceRes.body));
-        });
+
+    addServiceToBooking(bookingId, savedServices: any[]) {
+
+      this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
+        (data) => {
+
+          this.changeDetectorRefs.detectChanges();
+          // Logger.log(JSON.stringify( this.businessServices));
+        },
+        (error) => {
+
+        }
+      );
     }
-  }
+
+
   processPayment(payment: Payment) {
     this.paymentLoader = true;
     this.changeDetectorRefs.detectChanges();
@@ -1932,7 +1939,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
           this.booking = response.body;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
-          this.addServiceToBooking(this.booking);
+          this.addServiceToBooking(this.booking.id,this.savedServices);
           this.externalReservation(this.booking);
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
@@ -1947,7 +1954,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
               this.booking.propertyReservationNumber +
               " and an email is sent with the booking details.";
             this.bookingConfirmed = true;
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
             this.token.clearHotelBooking();
             this.showSuccess(this.contentDialog);
             if (
