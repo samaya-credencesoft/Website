@@ -30,6 +30,8 @@ const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
 const BOOKINGCITY = 'bookingCity';
 const BOOKINGREFID = 'bookingRefId';
+const GETTIME = 'getTime';
+const GETTOTIME = 'getToTime';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
 const CITY = 'city';
 const ORGANIZATION_ID = "OrganizationId";
@@ -493,6 +495,40 @@ export class TokenStorage {
   clearBookingCity() {
   localStorage.removeItem(BOOKINGCITY);
   }
+
+  public saveTime(getTime: string) {
+    localStorage.removeItem(GETTIME);
+      if (getTime !== null || getTime !== undefined) {
+      localStorage.setItem(GETTIME, getTime);
+      } else {
+      localStorage.setItem(GETTIME, '{}');
+      }
+    }
+
+    public getFromTime() {
+        return localStorage.getItem(GETTIME);
+       }
+
+    public saveToTime(getToTime: string) {
+      localStorage.removeItem(GETTOTIME);
+        if (getToTime !== null || getToTime !== undefined) {
+        localStorage.setItem(GETTOTIME, getToTime);
+        } else {
+        localStorage.setItem(GETTOTIME, '{}');
+        }
+      }
+
+      public getToTime() {
+        return localStorage.getItem(GETTOTIME);
+       }
+
+       clearFromTime() {
+        localStorage.removeItem(GETTIME);
+        }
+
+        clearToTime() {
+          localStorage.removeItem(GETTOTIME);
+          }
 
   public savewebsitebookingURL(websitebookingURL: string){
     localStorage.removeItem(WEBSITE_BOOKING_URL);

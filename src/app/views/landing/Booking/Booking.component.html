@@ -2836,6 +2836,26 @@ border-radius: 10px;">
             </span>
           </div>
 
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="fromTimeDate">Checkin Time <b style="color:red">*</b> </label>
+              <input type="time" class="form-control" name="fromTimeDate" [(ngModel)]="fromTimeDate" required />
+              <span class="text-danger small"
+                    *ngIf="(fromTimeDate.touched || orderForm.submitted) && !fromTimeDate.valid">
+                Checkin Time is required
+              </span>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
+              <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
+              <span class="text-danger small"
+                    *ngIf="(toTimeDate.touched || orderForm.submitted) && !toTimeDate.valid">
+                Checkout Time is required
+              </span>
+            </div>
+          </div>
+
           <div class="mb-3">
             <label for="notes">Special Notes</label>
             <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
@@ -2847,12 +2867,10 @@ border-radius: 10px;">
   </div>
    </div>
    <div style="margin: auto;padding: 20px;">
-    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" *ngIf="value === false"
+    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom() || !toTimeDate || !fromTimeDate" *ngIf="value === false"
     (click)="onCashPaymentSubmit()">Pay At Hotel</button>
-    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
+    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom() || !toTimeDate || !fromTimeDate"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
-    <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
-    >Pay At Hotel</button>
     </div>
   </div>
   </div>
@@ -3064,6 +3082,26 @@ border-radius: 10px;">
           <span class="text-danger small" *ngIf="(mobile.touched || orderForm.submitted) && !mobile.valid">
             Invalid phone number
           </span>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="fromTimeDate">Checkin Time <b style="color:red">*</b> </label>
+            <input type="time" class="form-control" name="fromTimeDate" [(ngModel)]="fromTimeDate" required />
+            <span class="text-danger small"
+                  *ngIf="(fromTimeDate.touched || orderForm.submitted) && !fromTimeDate.valid">
+              Checkin Time is required
+            </span>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
+            <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
+            <span class="text-danger small"
+                  *ngIf="(toTimeDate.touched || orderForm.submitted) && !toTimeDate.valid">
+              Checkout Time is required
+            </span>
+          </div>
         </div>
 
         <div class="mb-3">

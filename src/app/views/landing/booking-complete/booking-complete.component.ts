@@ -72,6 +72,10 @@ export class BookingCompleteComponent implements OnInit {
   socialmedialist:any;
   taxAmountOne: number;
   bookinddata: Booking;
+  fromTimeDate: string = '';
+  toTimeDate: string = '';
+  combinedDateFromTime: number;
+  combinedDateToTime: number;
 
   constructor(
     private http: HttpClient,
@@ -333,6 +337,9 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
+
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
 //   ele.count = ele.quantity;
@@ -653,7 +660,8 @@ this.externalReservationdto =res.body
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.roomPrice = this.booking.roomTariffBeforeDiscount;
     this.enquiryForm.createdDate = new Date();
-
+    this.enquiryForm.fromTime = this.token.getFromTime();
+    this.enquiryForm.toTime = this.token.getToTime();
 
     this.enquiryForm.accountManager ='TheHotelMate Team';
     this.enquiryForm.consultantPerson ='';
@@ -662,7 +670,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     this.enquiryForm.planCode = this.booking.planCode;
@@ -724,6 +732,8 @@ this.externalReservationdto =res.body
       this.isSuccess = true;
       this.submitButtonDisable = true;
       this.bookingConfirmed = true;
+      this.token.clearFromTime();
+      this.token.clearToTime();
     })
   }
 
