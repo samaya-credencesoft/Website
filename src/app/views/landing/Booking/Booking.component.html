@@ -2836,8 +2836,29 @@ border-radius: 10px;">
             </span>
           </div>
 
+          <!-- <div class="Bookingdate-section">
+            <div class="Bookingdate">
+              <h6>Check-in Date</h6>
+              <h6>{{booking.fromDate  | date: 'dd MMM' }}</h6>
+            </div>
+            <div class="Bookingdate">
+              <h6>Check-out Date</h6>
+              <h6>{{booking.toDate  | date: 'dd MMM' }}</h6>
+             </div>
+
+          </div> -->
+
           <div class="form-row">
-            <div class="col-md-6 mb-3">
+
+
+
+            <div class="col-md-6 mb-6">
+              <label for="fromTimeDate">Checkin Date </label>
+              <input class="form-control" name="fromTimeDate" placeholder="{{booking.fromDate}}"  readonly style="background-color: #fff"/>
+
+            </div>
+
+            <div class="col-md-6 mb-6">
               <label for="fromTimeDate">Checkin Time <b style="color:red">*</b> </label>
               <input type="time" class="form-control" name="fromTimeDate" [(ngModel)]="fromTimeDate" required />
               <span class="text-danger small"
@@ -2846,7 +2867,15 @@ border-radius: 10px;">
               </span>
             </div>
 
-            <div class="col-md-6 mb-3">
+
+
+            <div class="col-md-6 mb-6">
+              <label for="toTimeDate">Checkout Date </label>
+              <input class="form-control" name="toTimeDate" placeholder="{{booking.toDate}}"  readonly style="background-color: #fff;"/>
+
+            </div>
+
+            <div class="col-md-6 mb-6">
               <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
               <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
               <span class="text-danger small"
@@ -2867,9 +2896,9 @@ border-radius: 10px;">
   </div>
    </div>
    <div style="margin: auto;padding: 20px;">
-    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom() || !toTimeDate || !fromTimeDate" *ngIf="value === false"
+    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom() || !fromTimeDate || !toTimeDate" *ngIf="value === false"
     (click)="onCashPaymentSubmit()">Pay At Hotel</button>
-    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom() || !toTimeDate || !fromTimeDate"  *ngIf="value === true && businessUser.paymentGateway != null"
+    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateFrom() || !fromTimeDate || !toTimeDate"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
     </div>
   </div>
@@ -3085,7 +3114,13 @@ border-radius: 10px;">
         </div>
 
         <div class="form-row">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-6 mb-6">
+            <label for="fromTimeDate">Checkin Date </label>
+            <input class="form-control" name="fromTimeDate" placeholder="{{booking.fromDate}}"  readonly style="background-color: #fff"/>
+
+          </div>
+
+          <div class="col-md-6 mb-6">
             <label for="fromTimeDate">Checkin Time <b style="color:red">*</b> </label>
             <input type="time" class="form-control" name="fromTimeDate" [(ngModel)]="fromTimeDate" required />
             <span class="text-danger small"
@@ -3094,7 +3129,13 @@ border-radius: 10px;">
             </span>
           </div>
 
-          <div class="col-md-6 mb-3">
+          <div class="col-md-6 mb-6">
+            <label for="toTimeDate">Checkin Date </label>
+            <input class="form-control" name="toTimeDate" placeholder="{{booking.toDate}}"  readonly style="background-color: #fff"/>
+
+          </div>
+
+          <div class="col-md-6 mb-6">
             <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
             <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
             <span class="text-danger small"

@@ -169,6 +169,15 @@ form.stripe {
     animation: loading 2s infinite ease;
   }
 
+  .checkin-box {
+    border: 1px solid #ccc; /* Border for the box */
+    padding: 8px;           /* Padding inside the box */
+    background-color: #f9f9f9; /* Light background color for the box */
+    border-radius: 8px;      /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds subtle shadow for a 3D effect */
+  }
+
+
   @-webkit-keyframes loading {
     0% {
       -webkit-transform: rotate(0deg);
