@@ -2173,6 +2173,8 @@ this.isHeaderVisible = true;
   gotocheckout(){
     this.token.saveBookingRoomPrice(this.booking.roomPrice);
     this.router.navigate(['/booking']);
+    this.token.getFromTime();
+    this.token.getToTime();
   }
 
   getPropertyDetailsBySeoName(seoName: string) {

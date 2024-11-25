@@ -353,6 +353,8 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   }
 
   ngOnInit() {
+    this.fromTimeDate = this.datePipe.transform( this.token.getFromTime(), "hh:mm" );
+    this.toTimeDate = this.datePipe.transform( this.token.getToTime(), "hh:mm" );
 // this.sendWhatsappMessageToPropertyOwner();
     this.accommodationData = this.propertyData.businessServiceDtoList?.filter(
       (entry) => entry.name === 'Accommodation'
@@ -384,6 +386,25 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       loadAngularFunction: () => this.stripePaymentSuccess(),
     };
   }
+
+  removetoTime(){
+    // this.token.clearToTime();
+    this.toTimeDate ='';
+   }
+
+  removeFromTime(){
+    // this.token.clearFromTime();
+    this.fromTimeDate = '';
+  }
+
+  saveTimeInToken(){
+   this.fromTimeDate =  String(this.token.saveTime(String(this.enquiryForm.fromTime)));
+  }
+
+  saveToTimeInToken(){
+    this.toTimeDate = String(this.token.saveToTime(String(this.enquiryForm.toTime)));
+  }
+
 
   setApi() {
     if (this.token.getCountry() === 'New Zealand') {
