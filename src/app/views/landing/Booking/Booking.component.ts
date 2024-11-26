@@ -353,8 +353,8 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   }
 
   ngOnInit() {
-    this.fromTimeDate = this.datePipe.transform( this.token.getFromTime(), "hh:mm" );
-    this.toTimeDate = this.datePipe.transform( this.token.getToTime(), "hh:mm" );
+    this.fromTimeDate = this.datePipe.transform(this.token.getFromTime(), "hh:mm");
+    this.toTimeDate = this.datePipe.transform(this.token.getToTime(), "hh:mm");
 // this.sendWhatsappMessageToPropertyOwner();
     this.accommodationData = this.propertyData.businessServiceDtoList?.filter(
       (entry) => entry.name === 'Accommodation'

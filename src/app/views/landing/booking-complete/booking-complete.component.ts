@@ -732,8 +732,8 @@ this.externalReservationdto =res.body
       this.isSuccess = true;
       this.submitButtonDisable = true;
       this.bookingConfirmed = true;
-      this.token.clearFromTime();
-      this.token.clearToTime();
+      // this.token.clearFromTime();
+      // this.token.clearToTime();
     })
   }
 

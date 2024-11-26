@@ -2884,23 +2884,26 @@ border-radius: 10px;">
 
             </div>
 
-            <div class="col-md-6 mb-6" *ngIf="!toTimeDate">
+
+
+            <div class="col-md-6 mb-6"  *ngIf="!toTimeDate">
               <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
-              <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate"  required />
+              <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
               <span class="text-danger small"
                     *ngIf="(toTimeDate?.touched || orderForm?.submitted) && !toTimeDate.valid">
-                Checkout Time is required
+                    Checkout Time is required
               </span>
             </div>
 
             <div class="col-md-6 mb-6" *ngIf="toTimeDate">
               <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
               <div style="    display: flex; align-items: center; gap: 10px;">
-              <input  class="form-control" name="toTimeDate" [value]="toTimeDate | date:'hh:mm a'" (change)="saveToTimeInToken()" readonly />
-              <i class="fa-solid fa-pen-to-square" (click)="removetoTime()" style="font-size: 20px;"></i>
+              <input type="time"  class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" (change)="saveToTimeInToken()" readonly />
+              <i class="fa-solid fa-pen-to-square" style="font-size: 20px;" (click)="removetoTime()"></i>
               </div>
 
             </div>
+
           </div>
 
           <div class="mb-3">
@@ -3132,13 +3135,16 @@ border-radius: 10px;">
         </div>
 
         <div class="form-row">
+
+
+
           <div class="col-md-6 mb-6">
             <label for="fromTimeDate">Checkin Date </label>
             <input class="form-control" name="fromTimeDate" placeholder="{{booking.fromDate}}"  readonly style="background-color: #fff"/>
 
           </div>
 
-          <div class="col-md-6 mb-6">
+          <div class="col-md-6 mb-6"  *ngIf="!fromTimeDate">
             <label for="fromTimeDate">Checkin Time <b style="color:red">*</b> </label>
             <input type="time" class="form-control" name="fromTimeDate" [(ngModel)]="fromTimeDate" required />
             <span class="text-danger small"
@@ -3147,19 +3153,56 @@ border-radius: 10px;">
             </span>
           </div>
 
-          <div class="col-md-6 mb-6">
-            <label for="toTimeDate">Checkin Date </label>
-            <input class="form-control" name="toTimeDate" placeholder="{{booking.toDate}}"  readonly style="background-color: #fff"/>
+          <div class="col-md-6 mb-6" *ngIf="fromTimeDate">
+            <label for="fromTimeDate">Checkin Time <b style="color:red">*</b> </label>
+            <div style="    display: flex; align-items: center; gap: 10px;">
+            <input type="time"  class="form-control" name="fromTimeDate" [(ngModel)]="fromTimeDate" (change)="saveTimeInToken()" readonly />
+            <i class="fa-solid fa-pen-to-square" style="font-size: 20px;" (click)="removeFromTime()"></i>
+            </div>
 
           </div>
 
+
+
           <div class="col-md-6 mb-6">
+            <label for="toTimeDate">Checkout Date </label>
+            <input class="form-control" name="toTimeDate" placeholder="{{booking.toDate}}"  readonly style="background-color: #fff;"/>
+
+          </div>
+
+          <!-- <div class="col-md-6 mb-6" *ngIf="!toTimeDate">
             <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
-            <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
+            <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate"  required />
             <span class="text-danger small"
                   *ngIf="(toTimeDate?.touched || orderForm?.submitted) && !toTimeDate.valid">
               Checkout Time is required
             </span>
+          </div> -->
+          <div class="col-md-6 mb-6"  *ngIf="!toTimeDate">
+            <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
+            <input type="time" class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" required />
+            <span class="text-danger small"
+                  *ngIf="(toTimeDate?.touched || orderForm?.submitted) && !toTimeDate.valid">
+                  Checkout Time is required
+            </span>
+          </div>
+
+          <!-- <div class="col-md-6 mb-6" *ngIf="toTimeDate">
+            <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
+            <div style="    display: flex; align-items: center; gap: 10px;">
+            <input  class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" (change)="saveToTimeInToken()" readonly />
+            <i class="fa-solid fa-pen-to-square" (click)="removetoTime()" style="font-size: 20px;"></i>
+            </div>
+
+          </div> -->
+
+          <div class="col-md-6 mb-6" *ngIf="toTimeDate">
+            <label for="toTimeDate">Checkout Time <b style="color:red">*</b> </label>
+            <div style="    display: flex; align-items: center; gap: 10px;">
+            <input type="time"  class="form-control" name="toTimeDate" [(ngModel)]="toTimeDate" (change)="saveToTimeInToken()" readonly />
+            <i class="fa-solid fa-pen-to-square" style="font-size: 20px;" (click)="removetoTime()"></i>
+            </div>
+
           </div>
         </div>
 
