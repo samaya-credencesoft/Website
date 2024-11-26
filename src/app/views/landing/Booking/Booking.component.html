@@ -2854,7 +2854,7 @@ border-radius: 10px;">
 
             <div class="col-md-6 mb-6">
               <label for="fromTimeDate">Checkin Date </label>
-              <input class="form-control" name="fromTimeDate" placeholder="{{booking.fromDate}}"  readonly style="background-color: #fff"/>
+              <input class="form-control" name="fromTimeDate" [value]="booking.fromDate"  readonly style="background-color: #fff"/>
 
             </div>
 
@@ -2880,7 +2880,7 @@ border-radius: 10px;">
 
             <div class="col-md-6 mb-6">
               <label for="toTimeDate">Checkout Date </label>
-              <input class="form-control" name="toTimeDate" placeholder="{{booking.toDate}}"  readonly style="background-color: #fff;"/>
+              <input class="form-control" name="toTimeDate" [value]="booking.toDate"  readonly style="background-color: #fff;"/>
 
             </div>
 
