@@ -1397,8 +1397,11 @@ this.token.saveToTime(String(this.enquiryForm.toTime));
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
+    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
+    this.booking.toTime = Number(this.enquiryForm?.toTime);
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -1526,8 +1529,11 @@ this.token.saveToTime(String(this.enquiryForm.toTime));
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
+  this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
+    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
+    this.booking.toTime = Number(this.enquiryForm?.toTime);
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -1968,7 +1974,10 @@ this.savedServices?.forEach(element => {
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
+    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
+    this.booking.toTime = Number(this.enquiryForm?.toTime);
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
