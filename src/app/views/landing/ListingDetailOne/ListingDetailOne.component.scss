@@ -364,7 +364,13 @@ p {
   height: 44px;
   line-height: 44px;
 }
-
+.errorbutton{
+  background-color: #000 !important;
+  color: white;
+}
+.errorbutton:hover{
+  color: white;
+}
 .stepper_display {
   padding: 0 10px;
 }
@@ -481,10 +487,11 @@ p {
 
 .modal-dialog {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow-y: auto;
-  min-height: calc(100vh - 60px);
+  align-items: center; /* Vertically centers the modal */
+  justify-content: center; /* Horizontally centers the modal */
+  min-height: 100vh; /* Full height to ensure centering */
+  margin: 0; /* Removes unnecessary spacing */
+
 }
 
 @media (max-width: 767px) {
@@ -4943,6 +4950,57 @@ font-size: 23px !important;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
+}
+.modal-content {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.modal-header {
+
+  color: #fff;
+  border-bottom: none;
+  padding: 15px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #fff;
+}
+
+.modal-body {
+  padding: 20px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.modal-footer {
+  border-top: none;
+  justify-content: center;
+}
+
+.btn-secondary {
+  background-color: #9AC852;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #9AC852;
 }
 
 

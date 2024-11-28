@@ -95,6 +95,9 @@ export class ListingDetailOneComponent implements OnInit {
   selectedServicesOne: any;
   checkAvailabilityDisabled: boolean;
   Googlehotelsortrooms: any[];
+  roomOccupancy: any;
+  showError: boolean=false;
+  errorMessage: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -2171,10 +2174,30 @@ this.isHeaderVisible = true;
     this.token.saveServiceData(this.addServiceList);
   }
   gotocheckout(){
+
+    this.availableRooms?.forEach((room) => {
+      room.ratesAndAvailabilityDtos?.forEach(ele => {
+        ele.roomRatePlans?.forEach(ele1 =>{
+          if (ele1.name === this.booking.roomRatePlanName) {
+            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy
+              this.showError = true;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
+              this.showErrorPopup();
+            } else {
+              this.router.navigate(['/booking']);
+            }
+          }
+        })
+
+      })
+
+    });
     this.token.saveBookingRoomPrice(this.booking.roomPrice);
-    this.router.navigate(['/booking']);
+
     this.token.getFromTime();
     this.token.getToTime();
+
   }
 
   getPropertyDetailsBySeoName(seoName: string) {
@@ -2491,6 +2514,22 @@ this.isHeaderVisible = true;
   }
 
   onPlanSelected(plan, room) {
+    this.availableRooms?.forEach((room) => {
+      room.ratesAndAvailabilityDtos?.forEach(ele => {
+        ele.roomRatePlans?.forEach(ele1 =>{
+          if (ele1.name === this.booking.roomRatePlanName) {
+            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy
+              this.showError = true;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the person according to the plan occupancy  for book the Room.`;
+              this.showErrorPopup();
+            }
+          }
+        })
+
+      })
+
+    });
 
     // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // //console.log("room"+JSON.stringify(room))
@@ -2674,7 +2713,14 @@ if (bookingSummaryElement) {
 
     return baseUrl + "?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
   }
-
+  showErrorPopup() {
+    const bootstrap = window['bootstrap'];
+    const modalElement = document.getElementById('errorModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
+  }
   onBookNowClick() {
     this.scrollToAccommodationDash() ;
   }
@@ -2738,16 +2784,24 @@ console.log("lkjhgfgh")
   }
 
   navigate() {
-    // if (
-    //     serviceList.length > 0 &&
-    //     serviceList !== undefined &&
-    //     serviceList !== null
-    //   ) {
-    //     this.router.navigate(["/add-service"]);
-    //   } else {
-      this.token.saveBookingRoomPrice(this.booking.roomPrice);
-    this.router.navigate(['/booking']);
-    // }
+    this.availableRooms?.forEach((room) => {
+      room.ratesAndAvailabilityDtos?.forEach(ele => {
+        ele.roomRatePlans?.forEach(ele1 =>{
+          if (ele1.name === this.booking.roomRatePlanName) {
+            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy
+              this.showError = true;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
+              this.showErrorPopup();
+            } else {
+              this.router.navigate(['/booking']);
+            }
+          }
+        })
+
+      })
+
+    });
   }
   opendate() {
     this.oneDayTrip = true;

@@ -4559,6 +4559,31 @@ padding-right: 10px;
     </div>
   </div>
 </footer>
+  <!-- Error Popup Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="    width: 50% !important;
+    display: flex
+;
+    justify-content: center;
+    margin: auto;
+
+">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="errorModalLabel">Choose a Different Plan</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{ errorMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn  errorbutton" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 <!-- footer section ends -->
 </html>
 <!-- <router-outlet></router-outlet> -->

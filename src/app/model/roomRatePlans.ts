@@ -16,6 +16,6 @@ export class RoomRatePlans {
   status: string;
   propertyServicesList: any[];
   otaPlanList:any[];
-
+  maximumOccupancy:number;
   constructor() {}
 }
