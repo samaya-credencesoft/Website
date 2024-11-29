@@ -114,11 +114,17 @@ export class PaymentComponent implements OnInit {
     return { year: year, month: month, day: day };
   }
   getDiffDate(toDate, fromDate) {
-    this.enddate = new Date(toDate.year, toDate.month -1 , toDate.day);
+    this.enddate = new Date(toDate.year, toDate.month - 1, toDate.day);
+    this.startDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
 
-    this.startDate = new Date(fromDate.year, fromDate.month -1 , fromDate.day);
-    // console.log('this.fromDate: ', this.startDate);
-    // console.log('this.toDate: ', this.enddate);
+    if (this.startDate > this.enddate) {
+      // console.warn(
+      //   'Start Date is after End Date. Swapping dates.',
+      //   { startDate: this.startDate, endDate: this.enddate }
+      // );
+      [this.startDate, this.enddate] = [this.enddate, this.startDate];
+    }
+
     this.DiffDate = Math.floor(
       (Date.UTC(
         this.enddate.getFullYear(),
@@ -132,7 +138,11 @@ export class PaymentComponent implements OnInit {
         )) /
         (1000 * 60 * 60 * 24)
     );
+
+    // console.log('Difference in Days:', this.DiffDate);
   }
+
+
   getBookingDetails(bookingNumber: number, bookingEmail: string) {
     this.loader = true;
     this.hotelBookingService
@@ -140,6 +150,7 @@ export class PaymentComponent implements OnInit {
       .subscribe(
         (data) => {
           this.booking = data.body.bookingDetails;
+
           this.getPropertyDetails(this.booking.propertyId);
           this.payment = data.body.paymentDetails[0];
           // this.room = data.body.roomDetails;
@@ -162,6 +173,7 @@ export class PaymentComponent implements OnInit {
         }
       );
   }
+
   getPropertyDetails(id: number) {
 
 // this.businessUser = new BusinessUser()
