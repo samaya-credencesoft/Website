@@ -209,6 +209,8 @@ export class BookingComponent implements OnInit {
   propertyDetails: BusinessUser;
   fromTime: string;
   toTime: string;
+  tokenFromTime: number;
+  tokenToTime:number;
 
   constructor(
     private token: TokenStorage,
@@ -621,6 +623,29 @@ this.externalReservationdto =res.body
     //   (data) => {
     //     this.businessUser = data.body;
     this.businessUser = this.token.getProperty();
+
+    this.businessUser.businessServiceDtoList.forEach(item=>{
+      if(item.name === "Accommodation"){
+        this.fromTime = item.checkInTime;
+        this.toTime = item.checkOutTime;
+      }
+        });
+
+        let checkinDateConcat = this.booking.fromDate;
+        let timestamp = this.fromTime;
+        let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+        let combinedDateTime = new Date(combinedDateTimeString).getTime();
+        this.combinedDateFromTime = combinedDateTime;
+        let checkoutDateConcat = this.booking.toDate;
+        let timestampcheckout = this.toTime;
+        let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+        let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+        this.combinedDateToTime = combinedDateTimeCheckout;
+        this.tokenFromTime = this.combinedDateFromTime;
+        this.tokenToTime = this.combinedDateToTime;
+        this.token.saveTime(String(this.tokenFromTime));
+        this.token.saveToTime(String(this.tokenToTime));
+
     this.accommodationvalue = this.businessUser.businessServiceDtoList.filter(ele => ele.name === 'Accommodation');
     console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
@@ -1989,8 +2014,8 @@ this.savedServices?.forEach(element => {
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -2262,13 +2287,33 @@ this.savedServices?.forEach(element => {
   }
 
   async getPropertyDetailsById(id: number) {
-    // debugger
     // //console.log("id isequal to" + id)
     try {
       this.loader = true;
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.businessUser.businessServiceDtoList.forEach(item=>{
+          if(item.name === "Accommodation"){
+            this.fromTime = item.checkInTime;
+            this.toTime = item.checkOutTime;
+          }
+            });
+
+            let checkinDateConcat = this.booking.fromDate;
+            let timestamp = this.fromTime;
+            let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+            let combinedDateTime = new Date(combinedDateTimeString).getTime();
+            this.combinedDateFromTime = combinedDateTime;
+            let checkoutDateConcat = this.booking.toDate;
+            let timestampcheckout = this.toTime;
+            let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+            let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+            this.combinedDateToTime = combinedDateTimeCheckout;
+            this.tokenFromTime = this.combinedDateFromTime;
+            this.tokenToTime = this.combinedDateToTime;
+            this.token.saveTime(String(this.tokenFromTime));
+            this.token.saveToTime(String(this.tokenToTime));
 
         this.policies = this.businessUser.businessServiceDtoList.filter(
           (ele) => ele.name === 'Accommodation'

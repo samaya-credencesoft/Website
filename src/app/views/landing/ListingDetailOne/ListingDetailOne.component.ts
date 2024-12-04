@@ -2195,9 +2195,6 @@ this.isHeaderVisible = true;
     });
     this.token.saveBookingRoomPrice(this.booking.roomPrice);
 
-    this.token.getFromTime();
-    this.token.getToTime();
-
   }
 
   getPropertyDetailsBySeoName(seoName: string) {
