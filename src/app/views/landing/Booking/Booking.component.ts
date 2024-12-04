@@ -1413,8 +1413,8 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -1545,8 +1545,8 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -1989,119 +1989,110 @@ this.savedServices?.forEach(element => {
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
     this.paymentLoader = true;
-    this.hotelBookingService
-      .createBooking(this.booking)
-      .subscribe((response) => {
-        //  Logger.log('createBooking ', JSON.stringify(response.body));
-        if (response.status === 200) {
-          this.paymentLoader = false;
-          this.booking = response.body;
-          this.booking.fromDate = this.bookingData.fromDate;
-          this.booking.toDate = this.bookingData.toDate;
-          this.addServiceToBooking(this.booking.id,this.savedServices);
-          this.externalReservation(this.booking);
-          setTimeout(() => {
-            this.accommodationEnquiryBookingData();
-        }, 3000);
-          this.router.navigate(['/Confirm-Booking']);
-          if (this.booking.id !== null) {
-            this.submitButtonDisable = true;
-            this.isSuccess = true;
-            this.headerTitle = "Success!";
-            this.bodyMessage =
-              "Thanks for the booking .Please note the Reservation No: # " +
-              this.booking.propertyReservationNumber +
-              " and an email is sent with the booking details.";
-            this.bookingConfirmed = true;
-            // this.addServiceToBooking(this.booking);
-            this.token.clearHotelBooking();
-            this.showSuccess(this.contentDialog);
-            if (
-              this.booking.mobile !== null &&
-              this.booking.mobile !== undefined
-            ) {
-              setTimeout(() => {
-                // this.backClicked();
-                // this.router.navigate(['/']);
-                this.sendConfirmationMessage();
-                this.changeDetectorRefs.detectChanges();
-              }, 1000);
-              // this.sendConfirmationMessage();
-            }
-            this.payment.referenceNumber =
-              this.booking.propertyReservationNumber;
+    // this.hotelBookingService
+    //   .createBooking(this.booking)
+    //   .subscribe((response) => {
+    //     //  Logger.log('createBooking ', JSON.stringify(response.body));
+    //     if (response.status === 200) {
+    //       this.paymentLoader = false;
+    //       this.booking = response.body;
+    //       this.booking.fromDate = this.bookingData.fromDate;
+    //       this.booking.toDate = this.bookingData.toDate;
+    //       this.addServiceToBooking(this.booking.id,this.savedServices);
+    //       this.externalReservation(this.booking);
+    //       setTimeout(() => {
+    //         this.accommodationEnquiryBookingData();
+    //     }, 3000);
+    //       this.router.navigate(['/Confirm-Booking']);
+    //       if (this.booking.id !== null) {
+    //         this.submitButtonDisable = true;
+    //         this.isSuccess = true;
+    //         this.headerTitle = "Success!";
+    //         this.bodyMessage =
+    //           "Thanks for the booking .Please note the Reservation No: # " +
+    //           this.booking.propertyReservationNumber +
+    //           " and an email is sent with the booking details.";
+    //         this.bookingConfirmed = true;
+    //         // this.addServiceToBooking(this.booking);
+    //         this.token.clearHotelBooking();
+    //         this.showSuccess(this.contentDialog);
+    //         if (
+    //           this.booking.mobile !== null &&
+    //           this.booking.mobile !== undefined
+    //         ) {
+    //           setTimeout(() => {
+    //             // this.backClicked();
+    //             // this.router.navigate(['/']);
+    //             this.sendConfirmationMessage();
+    //             this.changeDetectorRefs.detectChanges();
+    //           }, 1000);
+    //           // this.sendConfirmationMessage();
+    //         }
+    //         this.payment.referenceNumber =
+    //           this.booking.propertyReservationNumber;
 
-            this.payment.externalReference = this.booking.externalBookingID;
-            this.paymentLoader = true;
+    //         this.payment.externalReference = this.booking.externalBookingID;
+    //         this.paymentLoader = true;
 
-            Logger.log("payment " + JSON.stringify(this.payment));
+    //         Logger.log("payment " + JSON.stringify(this.payment));
 
-            this.hotelBookingService
-              .savePayment(this.payment)
-              .subscribe((res) => {
-                if (res.status === 200) {
-                  // this.openSuccessSnackBar(`Payment Details Saved`);
-                  this.paymentLoader = false;
-                  setTimeout(() => {
-                    this.isSuccess = true;
-                    this.headerTitle = "Success!";
-                    this.bodyMessage = "Payment Details Saved.";
-                    this.showSuccess(this.contentDialog);
-                    this.changeDetectorRefs.detectChanges();
-                  }, 5000);
-                } else {
-                  this.paymentLoader = false;
-                  // this.openErrorSnackBar(`Error in updating payment details`);
-                  setTimeout(() => {
-                    // this.paymentLoader = false;
-                    this.isSuccess = false;
-                    this.headerTitle = "Error!";
-                    this.bodyMessage = "Error in updating payment details.";
-                    this.showDanger(this.contentDialog);
-                    this.changeDetectorRefs.detectChanges();
-                  }, 9000);
-                }
-              });
-            setTimeout(() => {
-              this.showAlert = false;
-              this.changeDetectorRefs.detectChanges();
-            }, 9000);
-            setTimeout(() => {
-              // this.backClicked();
-              // this.router.navigate(['/']);
-              this.changeDetectorRefs.detectChanges();
-            }, 10000);
-            this.paymentLoader = false;
-          } else {
-            this.paymentLoader = false;
-            // this.msgs.push({
-            //   severity: 'error',
-            //   summary: 'Please check the booking details and try again !'
-            // });
-          }
-        } else {
-          this.paymentLoader = false;
-          // this.msgs.push({
-          //   severity: 'error',
-          //   summary: response.statusText + ':' + response.statusText
-          // });
-        }
-      });
-    /*setTimeout(() => {
-      this.msgs = [];
-      createBookingObsr.unsubscribe();
-      this.spinner = false;
-      this.msgs.push({
-        severity: 'error',
-        summary: 'The server is taking more than usual time,please try again after sometime.'
-      });
-    }, 25000); */
+    //         this.hotelBookingService
+    //           .savePayment(this.payment)
+    //           .subscribe((res) => {
+    //             if (res.status === 200) {
+    //               // this.openSuccessSnackBar(`Payment Details Saved`);
+    //               this.paymentLoader = false;
+    //               setTimeout(() => {
+    //                 this.isSuccess = true;
+    //                 this.headerTitle = "Success!";
+    //                 this.bodyMessage = "Payment Details Saved.";
+    //                 this.showSuccess(this.contentDialog);
+    //                 this.changeDetectorRefs.detectChanges();
+    //               }, 5000);
+    //             } else {
+    //               this.paymentLoader = false;
+    //               // this.openErrorSnackBar(`Error in updating payment details`);
+    //               setTimeout(() => {
+    //                 // this.paymentLoader = false;
+    //                 this.isSuccess = false;
+    //                 this.headerTitle = "Error!";
+    //                 this.bodyMessage = "Error in updating payment details.";
+    //                 this.showDanger(this.contentDialog);
+    //                 this.changeDetectorRefs.detectChanges();
+    //               }, 9000);
+    //             }
+    //           });
+    //         setTimeout(() => {
+    //           this.showAlert = false;
+    //           this.changeDetectorRefs.detectChanges();
+    //         }, 9000);
+    //         setTimeout(() => {
+    //           // this.backClicked();
+    //           // this.router.navigate(['/']);
+    //           this.changeDetectorRefs.detectChanges();
+    //         }, 10000);
+    //         this.paymentLoader = false;
+    //       } else {
+    //         this.paymentLoader = false;
+    //         // this.msgs.push({
+    //         //   severity: 'error',
+    //         //   summary: 'Please check the booking details and try again !'
+    //         // });
+    //       }
+    //     } else {
+    //       this.paymentLoader = false;
+    //       // this.msgs.push({
+    //       //   severity: 'error',
+    //       //   summary: response.statusText + ':' + response.statusText
+    //       // });
+    //     }
+    //   });
   }
 
   onGoHome() {

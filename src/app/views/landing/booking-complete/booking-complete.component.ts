@@ -22,7 +22,7 @@ import { externalReservationDtoList } from 'src/app/model/externalReservation';
 import { ListingService } from 'src/services/listing.service';
 import { BusinessServiceDtoList } from 'src/app/model/businessServiceDtoList';
 import { PropertyServiceDTO } from 'src/app/model/PropertyServices';
-
+ 
 @Component({
   selector: 'app-booking-complete',
   templateUrl: './booking-complete.component.html',
