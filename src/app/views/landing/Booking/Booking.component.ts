@@ -72,6 +72,8 @@ export class BookingComponent implements OnInit {
   components2:Components[];
   parameterss:Para[];
   parameterss2:Para[];
+  tokenFromTime: number;
+  tokenToTime:number;
   parameterss3:Para[];
   socialmedialist:any;
   externalReservationDtoList:externalReservationDtoList[];
@@ -81,6 +83,10 @@ export class BookingComponent implements OnInit {
   language:Language
   showAlert: boolean = false;
   alertType: string;
+  propertyDetails: BusinessUser;
+  fromTime: string;
+  toTime: string;
+
   totalExtraAmount: number = 0;
   images:Images
   verifyOption = "email";
@@ -111,6 +117,8 @@ export class BookingComponent implements OnInit {
   businessUser: BusinessUser;
   // totalQuantity: number ;
   // totalPrice: number;
+  combinedDateFromTime: number;
+  combinedDateToTime: number;
   myDate: any;
   whatsappForm:WhatsappDto;
   whatsappForm2:WhatsappDto;
@@ -595,6 +603,27 @@ this.externalReservationdto =res.body
     //   (data) => {
     //     this.businessUser = data.body;
     this.businessUser = this.token.getProperty();
+    this.businessUser.businessServiceDtoList.forEach(item=>{
+      if(item.name === "Accommodation"){
+        this.fromTime = item.checkInTime;
+        this.toTime = item.checkOutTime;
+      }
+        });
+
+        let checkinDateConcat = this.booking.fromDate;
+        let timestamp = this.fromTime;
+        let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+        let combinedDateTime = new Date(combinedDateTimeString).getTime();
+        this.combinedDateFromTime = combinedDateTime;
+        let checkoutDateConcat = this.booking.toDate;
+        let timestampcheckout = this.toTime;
+        let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+        let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+        this.combinedDateToTime = combinedDateTimeCheckout;
+        this.tokenFromTime = this.combinedDateFromTime;
+        this.tokenToTime = this.combinedDateToTime;
+        this.token.saveTime(String(this.tokenFromTime));
+        this.token.saveToTime(String(this.tokenToTime));
     this.accommodationvalue = this.businessUser.businessServiceDtoList.filter(ele => ele.name === 'Accommodation');
     console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
@@ -961,6 +990,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   }
 
   submitFormOne() {
+
     this.enquiryForm = new EnquiryDto();
     console.log("this.token.getProperty().address", this.token.getProperty().address.city)
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
@@ -1007,7 +1037,28 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
+this.propertyDetails = this.token.getProperty();
+    this.propertyDetails.businessServiceDtoList.forEach(item=>{
+  if(item.name === "Accommodation"){
+    this.fromTime = item.checkInTime;
+    this.toTime = item.checkOutTime;
+  }
+    });
 
+    let checkinDateConcat = this.booking.fromDate;
+    let timestamp = this.fromTime;
+    let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+    let combinedDateTime = new Date(combinedDateTimeString).getTime();
+    this.combinedDateFromTime = combinedDateTime;
+    let checkoutDateConcat = this.booking.toDate;
+    let timestampcheckout = this.toTime;
+    let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+    let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+    this.combinedDateToTime = combinedDateTimeCheckout;
+    this.enquiryForm.fromTime = this.combinedDateFromTime;
+    this.enquiryForm.toTime = this.combinedDateToTime;
+    this.token.saveTime(String(this.enquiryForm.fromTime));
+    this.token.saveToTime(String(this.enquiryForm.toTime));
     this.enquiryForm.accountManager ='';
     this.enquiryForm.consultantPerson ='';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
@@ -1932,7 +1983,8 @@ this.savedServices.forEach(element => {
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
-
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
     this.paymentLoader = true;
@@ -2102,7 +2154,28 @@ this.savedServices.forEach(element => {
     this.enquiryForm.roomType=this.booking.roomName;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
+    this.propertyDetails = this.token.getProperty();
+    this.propertyDetails.businessServiceDtoList.forEach(item=>{
+  if(item.name === "Accommodation"){
+    this.fromTime = item.checkInTime;
+    this.toTime = item.checkOutTime;
+  }
+    });
 
+    let checkinDateConcat = this.booking.fromDate;
+    let timestamp = this.fromTime;
+    let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+    let combinedDateTime = new Date(combinedDateTimeString).getTime();
+    this.combinedDateFromTime = combinedDateTime;
+    let checkoutDateConcat = this.booking.toDate;
+    let timestampcheckout = this.toTime;
+    let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+    let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+    this.combinedDateToTime = combinedDateTimeCheckout;
+    this.enquiryForm.fromTime = this.combinedDateFromTime;
+    this.enquiryForm.toTime = this.combinedDateToTime;
+    this.token.saveTime(String(this.enquiryForm.fromTime));
+    this.token.saveToTime(String(this.enquiryForm.toTime));
     this.enquiryForm.accountManager ='TheHotelMate Team';
     this.enquiryForm.consultantPerson ='';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
@@ -2187,7 +2260,27 @@ this.savedServices.forEach(element => {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.businessUser.businessServiceDtoList.forEach(item=>{
+          if(item.name === "Accommodation"){
+            this.fromTime = item.checkInTime;
+            this.toTime = item.checkOutTime;
+          }
+            });
 
+            let checkinDateConcat = this.booking.fromDate;
+            let timestamp = this.fromTime;
+            let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+            let combinedDateTime = new Date(combinedDateTimeString).getTime();
+            this.combinedDateFromTime = combinedDateTime;
+            let checkoutDateConcat = this.booking.toDate;
+            let timestampcheckout = this.toTime;
+            let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+            let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+            this.combinedDateToTime = combinedDateTimeCheckout;
+            this.tokenFromTime = this.combinedDateFromTime;
+            this.tokenToTime = this.combinedDateToTime;
+            this.token.saveTime(String(this.tokenFromTime));
+            this.token.saveToTime(String(this.tokenToTime));
         this.policies = this.businessUser.businessServiceDtoList.filter(
           (ele) => ele.name === 'Accommodation'
         );
@@ -2378,7 +2471,28 @@ this.savedServices.forEach(element => {
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
+    this.propertyDetails = this.token.getProperty();
+    this.propertyDetails.businessServiceDtoList.forEach(item=>{
+  if(item.name === "Accommodation"){
+    this.fromTime = item.checkInTime;
+    this.toTime = item.checkOutTime;
+  }
+    });
 
+    let checkinDateConcat = this.booking.fromDate;
+    let timestamp = this.fromTime;
+    let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+    let combinedDateTime = new Date(combinedDateTimeString).getTime();
+    this.combinedDateFromTime = combinedDateTime;
+    let checkoutDateConcat = this.booking.toDate;
+    let timestampcheckout = this.toTime;
+    let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+    let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+    this.combinedDateToTime = combinedDateTimeCheckout;
+    this.enquiryForm.fromTime = this.combinedDateFromTime;
+    this.enquiryForm.toTime = this.combinedDateToTime;
+    this.token.saveTime(String(this.enquiryForm.fromTime));
+    this.token.saveToTime(String(this.enquiryForm.toTime));
     this.enquiryForm.accountManager ='';
     this.enquiryForm.consultantPerson ='';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;

@@ -42,6 +42,9 @@ const SELECTED_SERVICE_DATA = 'SELECTED_SERVICE_DATA';
 const PAYMENT = 'payment';
 const PAYMENT2 = 'payment2';
 const ROLES = "Roles";
+const GETTIME = 'getTime';
+const GETTOTIME = 'getToTime';
+
 const ROOM_TYPES = "RoomDetails";
 const PROPERTY_ID = "PropertyId";
 const PROPERTY = 'property';
@@ -503,6 +506,39 @@ export class TokenStorage {
     localStorage.setItem(WEBSITE_BOOKING_URL, '{}');
     }
   }
+  public saveTime(getTime: string) {
+    localStorage.removeItem(GETTIME);
+      if (getTime !== null || getTime !== undefined) {
+      localStorage.setItem(GETTIME, getTime);
+      } else {
+      localStorage.setItem(GETTIME, '{}');
+      }
+    }
+
+    public getFromTime() {
+        return localStorage.getItem(GETTIME);
+       }
+
+    public saveToTime(getToTime: string) {
+      localStorage.removeItem(GETTOTIME);
+        if (getToTime !== null || getToTime !== undefined) {
+        localStorage.setItem(GETTOTIME, getToTime);
+        } else {
+        localStorage.setItem(GETTOTIME, '{}');
+        }
+      }
+
+      public getToTime() {
+        return localStorage.getItem(GETTOTIME);
+       }
+
+       clearFromTime() {
+        localStorage.removeItem(GETTIME);
+        }
+
+        clearToTime() {
+          localStorage.removeItem(GETTOTIME);
+          }
 
   public getwebsitebookingURL() {
     return localStorage.getItem(WEBSITE_BOOKING_URL);

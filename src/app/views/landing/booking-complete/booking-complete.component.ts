@@ -305,6 +305,8 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
 //   ele.count = ele.quantity;
@@ -625,7 +627,8 @@ this.externalReservationdto =res.body
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.roomPrice = this.booking.roomTariffBeforeDiscount;
     this.enquiryForm.createdDate = new Date();
-
+    this.enquiryForm.fromTime = Number(this.token.getFromTime());
+    this.enquiryForm.toTime = Number(this.token.getToTime());
 
     this.enquiryForm.accountManager ='TheHotelMate Team';
     this.enquiryForm.consultantPerson ='';
