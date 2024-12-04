@@ -108,6 +108,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
 import { CheckoutModule } from 'paytm-blink-checkout-angular';
 import { BrowserModule } from '@angular/platform-browser';
+import { PaymentComponent } from './payment/payment.component';
+import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 
 
 
@@ -138,7 +141,9 @@ import { BrowserModule } from '@angular/platform-browser';
     Works1Component,
     Works2Component,
     WorksCarouselComponent,
+    PaymentComponent,
     ServicesComponent,
+    CheckoutPaymentComponent,
     ServicesCauroselComponent,
     TestimonialComponent,
     TestimonialCauroselComponent,
@@ -150,6 +155,7 @@ import { BrowserModule } from '@angular/platform-browser';
     FeaturesComponent,
     FeaturesTwoComponent,
     BestComponent,
+
     LeftImageComponent,
     RightImageComponent,
     TeamComponent,
@@ -157,6 +163,7 @@ import { BrowserModule } from '@angular/platform-browser';
     FaqsComponent,
     BookOneConnectComponent,
     BookingComponent,
+
     BookingCompleteComponent,
     NewsTwoComponent,
     IntroThreeComponent,
@@ -211,7 +218,8 @@ EnquiryComponent,
     CallToActionComponent,
     SubscribeEmailComponent,
     PrivacyComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    ConfirmPaymentComponent
 
   ],
   providers: [WINDOW_PROVIDERS,

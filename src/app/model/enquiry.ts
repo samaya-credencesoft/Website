@@ -13,6 +13,7 @@ import { TaxDetails } from "./TaxDetails";
     bccEmail: string;
     bccName: string;
     firstName: string;
+    totalAmount:number;
     bookingPropertyId:number;
     lastName: string;
     planCode:string;

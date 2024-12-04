@@ -38,8 +38,15 @@ import { NotificationHandlingComponent } from './notification-handling/notificat
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { BookingCompleteComponent } from './booking-complete/booking-complete.component';
+import { PaymentComponent } from './payment/payment.component';
+import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
+  {
+    path: 'payment',
+    component: PaymentComponent
+  },
   {
     path: 'v1',
     component: LandingV1Component
@@ -60,6 +67,7 @@ const routes: Routes = [
     path: 'v5',
     component: LandingV5Component
   },
+
   {
     path: 'v6',
     component: LandingV6Component
@@ -112,7 +120,10 @@ const routes: Routes = [
     path:'Confirm-Booking',
     component:ConfirmBookingComponent
   },
-
+  {
+    path:'confirm-payment',
+    component:ConfirmPaymentComponent
+  },
   // {
   //   path: 'blog-details',
   //   component: BlogDetailsPageComponent
@@ -160,6 +171,10 @@ const routes: Routes = [
   {
     path: 'blog',
     component: BlogComponent, data: {title: 'Blog'}
+  },
+  {
+    path: 'checkout-payment',
+    component: CheckoutPaymentComponent, data: {title: 'Blog'}
   },
   {
     path: 'blog/:id',

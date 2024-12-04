@@ -1231,7 +1231,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
             // for pre booking create
 
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
           }
         } else {
           this.paymentLoader = false;
@@ -1280,7 +1280,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
             // for pre booking create
 
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
           }
         } else {
           this.paymentLoader = false;
@@ -1329,7 +1329,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
 
             // for pre booking create
 
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
           }
         } else {
           this.paymentLoader = false;
@@ -1749,15 +1749,24 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   //     }
   //   });
   // }
-  addServiceToBooking(booking) {
-    if (this.addServiceList.length > 0) {
-      this.hotelBookingService
-        .addServicesToBooking(this.addServiceList, booking.id)
-        .subscribe((serviceRes) => {
-          Logger.log("addServiceList ", JSON.stringify(serviceRes.body));
-        });
+
+    addServiceToBooking(bookingId, savedServices: any[]) {
+this.savedServices.forEach(element => {
+  element.count = element.quantity
+});
+      this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
+        (data) => {
+
+          this.changeDetectorRefs.detectChanges();
+          // Logger.log(JSON.stringify( this.businessServices));
+        },
+        (error) => {
+
+        }
+      );
     }
-  }
+
+
   processPayment(payment: Payment) {
     this.paymentLoader = true;
     this.changeDetectorRefs.detectChanges();
@@ -1936,6 +1945,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
           this.booking = response.body;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
+          this.addServiceToBooking(this.booking.id,this.savedServices);
           this.externalReservation(this.booking);
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
@@ -1950,7 +1960,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
               this.booking.propertyReservationNumber +
               " and an email is sent with the booking details.";
             this.bookingConfirmed = true;
-            this.addServiceToBooking(this.booking);
+            // this.addServiceToBooking(this.booking);
             this.token.clearHotelBooking();
             this.showSuccess(this.contentDialog);
             if (
@@ -2089,7 +2099,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     this.enquiryForm.mobile=this.booking.mobile;
-    this.enquiryForm.roomType=this.booking.roomType;
+    this.enquiryForm.roomType=this.booking.roomName;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
 
@@ -2101,8 +2111,14 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    // this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
+    let taxarray = this.token.getProperty().taxDetails;
+    taxarray =taxarray.filter(
+      (tax) => tax.name !== 'IGST' && tax.name !== 'GST'
+    );
+    this.enquiryForm.taxDetails = taxarray
     // this.enquiryForm.planCode = this.booking.planCode;
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
     this.enquiryForm.bookingId = this.booking.id;
@@ -2152,7 +2168,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.paymentLoader = true;
-    this.enquiryForm.roomPrice = this.booking.roomPrice;
+    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
       this.paymentLoader = false;
