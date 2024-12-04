@@ -30,6 +30,7 @@ const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
 const BOOKINGCITY = 'bookingCity';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
+const CHECK_BOOKING_ENGINE ='checkbookingengine';
 const CITY = 'city';
 const ORGANIZATION_ID = "OrganizationId";
 const BUSINESS_SERVICE = 'businessservice';
@@ -494,7 +495,17 @@ export class TokenStorage {
   public getwebsitebookingURL() {
     return localStorage.getItem(WEBSITE_BOOKING_URL);
   }
-
+  public saveBookingEngineBoolean(checkbookingengine: string){
+    sessionStorage.removeItem(CHECK_BOOKING_ENGINE);
+    if (checkbookingengine !== null || checkbookingengine !== undefined) {
+      sessionStorage.setItem(CHECK_BOOKING_ENGINE, checkbookingengine);
+    } else {
+      sessionStorage.setItem(CHECK_BOOKING_ENGINE, '{}');
+    }
+  }
+  public getBookingEngineBoolean() {
+    return sessionStorage.getItem(CHECK_BOOKING_ENGINE);
+  }
   clearwebsitebookingURL() {
   localStorage.removeItem(WEBSITE_BOOKING_URL);
   }

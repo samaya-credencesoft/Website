@@ -200,6 +200,8 @@ export class BookingComponent implements OnInit {
   totalServiceCost: number =0;
   bookingRoomPrice: any;
   enquiriesNo: any;
+  url: string;
+  activeGoogleCenter: boolean = false;
 
   constructor(
     private token: TokenStorage,
@@ -296,7 +298,6 @@ export class BookingComponent implements OnInit {
 
   this.calculateserviceprice();
 
-
     console.log('Total Service Cost:', this.totalServiceCost);
 
     this.booking.fromTime =
@@ -308,7 +309,10 @@ export class BookingComponent implements OnInit {
     // this.calculateDateDeference();
     this.getDiffDate(this.toDate, this.fromDate);
     // this.booking.roomId = this.bookingData.roomId;
-
+    this.url = this.token.getBookingEngineBoolean()
+    if (this.url === "googlehotelcenter") {
+      this.activeGoogleCenter = true;
+      }
     // this.booking.roomType = this.bookingData.roomType;
     // this.booking.noOfRooms = this.bookingData.noOfRooms;
     // this.booking.noOfPersons = this.bookingData.noOfPersons;
