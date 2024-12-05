@@ -67,6 +67,7 @@ export class PaymentComponent implements OnInit {
   showAlert: boolean;
   prvpaymentref: string;
   advPanyment: any;
+  anotherpaymentBackup: any;
 
   constructor(
     private acRoute: ActivatedRoute,
@@ -82,6 +83,7 @@ export class PaymentComponent implements OnInit {
   ) {
     this.businessServiceDto = new BusinessServiceDtoList();
     this.businessUser = new BusinessUser();
+    this.anotherpaymentBackup = new Payment()
     this.booking = new Booking();
     this.payment = new Payment();
     this.acRoute.queryParams.subscribe((params) => {
@@ -96,7 +98,17 @@ export class PaymentComponent implements OnInit {
       }
       this.getBookingDetails(this.bookingNumber, this.bookingEmail);
     });
+    this.anotherpaymentBackup = this.token.getPayment2Data()
+
+    if (this.token.savePayment2Data != null && this.token.savePayment2Data != undefined ) {
+      this.hotelBookingService.savePayment(this.anotherpaymentBackup).subscribe(
+        (res1) => {
+
+        })
+      }
+
   }
+
 
   ngOnInit() {
     window["angularComponentReference"] = {
@@ -144,6 +156,7 @@ export class PaymentComponent implements OnInit {
 
 
   getBookingDetails(bookingNumber: number, bookingEmail: string) {
+
     this.loader = true;
     this.hotelBookingService
       .getBookingDetails(bookingNumber, bookingEmail)
@@ -153,6 +166,8 @@ export class PaymentComponent implements OnInit {
 
           this.getPropertyDetails(this.booking.propertyId);
           this.payment = data.body.paymentDetails[0];
+          this.anotherpaymentBackup = data.body.paymentDetails[0];
+          this.token.savePayment2Data(this.anotherpaymentBackup);
           // this.room = data.body.roomDetails;
 
           console.log(" this.payment =" + JSON.stringify(this.payment));
