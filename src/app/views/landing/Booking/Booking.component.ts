@@ -426,7 +426,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
    this.calculatedServices =[]
  if (this.savedServices != null && this.savedServices != undefined) {
 
-    this.savedServices.forEach(element => {
+    this.savedServices?.forEach(element => {
       let serviceCost = element.afterTaxAmount * element.quantity;
       this.calculatedServices.push(serviceCost);
       this.totalServiceCost += serviceCost; // Accumulating the total cost
@@ -1802,7 +1802,7 @@ this.propertyDetails = this.token.getProperty();
   // }
 
     addServiceToBooking(bookingId, savedServices: any[]) {
-this.savedServices.forEach(element => {
+this.savedServices?.forEach(element => {
   element.count = element.quantity
 });
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
