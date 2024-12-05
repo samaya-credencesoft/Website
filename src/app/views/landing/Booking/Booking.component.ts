@@ -213,6 +213,8 @@ export class BookingComponent implements OnInit {
   percentage1: number;
   percentage2: number;
   totalPercentage: number;
+  netAmount: number;
+  taxAmountBooking: number;
 
   constructor(
     private token: TokenStorage,
@@ -1083,8 +1085,8 @@ this.propertyDetails = this.token.getProperty();
       }
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
-    
-    this.enquiryForm.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+
+    this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.enquiryForm.planCode = this.booking.planCode;
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
@@ -1681,6 +1683,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     this.payment.firstName = this.booking.firstName;
     this.payment.lastName = this.booking.lastName;
     this.payment.netReceivableAmount = this.booking.netAmount;
+    this.netAmount = this.booking.netAmount;
+    this.taxAmountBooking =  (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.payment.transactionAmount = this.booking.totalAmount;
     this.payment.amount = this.booking.totalAmount;
     this.payment.propertyId = this.bookingData.propertyId;
@@ -1703,8 +1707,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       }
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
-    
-    this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+
+    this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.processPayment(this.payment);
   }
 
@@ -2158,7 +2162,7 @@ this.savedServices?.forEach(element => {
       this.enquiryForm.location = this.token.getProperty().address.city;
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
     }
-    this.payment.netReceivableAmount = this.booking.netAmount;
+    this.payment.netReceivableAmount = this.netAmount;
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
     // this.enquiryForm.totalAmount = this.booking.totalAmount;
@@ -2167,6 +2171,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.lastName = this.booking.lastName;
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
+    this.enquiryForm.taxAmount = this.taxAmountBooking;
+
     this.enquiryForm.checkOutDate = this.booking.toDate;
     this.enquiryForm.checkInDate = this.booking.fromDate;
     this.enquiryForm.noOfPerson = this.booking.noOfPersons;
@@ -2229,18 +2235,17 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
-    this.enquiryForm.taxDetails.forEach(item=>{
-      if(item.name === 'CGST'){
-        this.percentage1 = item.percentage;
-      }
+    // this.enquiryForm.taxDetails.forEach(item=>{
+    //   if(item.name === 'CGST'){
+    //     this.percentage1 = item.percentage;
+    //   }
 
-      if(item.name === 'SGST'){
-        this.percentage2 = item.percentage;
-      }
-    })
-    this.totalPercentage = (this.percentage1 + this.percentage2);
-    
-    this.enquiryForm.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+    //   if(item.name === 'SGST'){
+    //     this.percentage2 = item.percentage;
+    //   }
+    // })
+    // this.totalPercentage = (this.percentage1 + this.percentage2);
+
 
     const TO_EMAIL = 'support@thehotelmate.com';
     const TO_NAME = 'Support - The Hotel Mate';
@@ -2558,8 +2563,8 @@ this.savedServices?.forEach(element => {
       }
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
-    
-    this.enquiryForm.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+
+    this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
     const TO_EMAIL = 'support@thehotelmate.com';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';

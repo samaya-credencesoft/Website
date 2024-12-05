@@ -322,7 +322,7 @@ export class BookingCompleteComponent implements OnInit {
       }
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
-    
+
     this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
@@ -662,7 +662,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
     this.enquiryForm.bookingId = this.booking.id;
     this.enquiryForm.advanceAmount = this.booking.advanceAmount;
-    this.enquiryForm.taxAmount = this.booking.taxAmount;
+    this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
@@ -784,8 +784,7 @@ this.externalReservationdto =res.body
       this.enquiryForm.paymentStatus = this.payment.status;
       this.enquiryForm.totalRoomTariffBeforeDiscount = this.booking.totalRoomTariffBeforeDiscount;
       this.enquiryForm.discountAmount = this.booking.discountAmount;
-      this.enquiryForm.discountPercentage = this.booking.discountPercentage;
-      this.enquiryForm.taxAmount = this.booking.taxAmount;
+      this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100
       this.enquiryForm.taxDetails = this.booking.taxDetails;
       this.enquiryForm.payableAmount = this.booking.payableAmount;
       this.enquiryForm.totalAmount = this.booking.totalAmount;
