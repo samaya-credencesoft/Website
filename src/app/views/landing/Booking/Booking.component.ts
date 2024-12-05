@@ -51,7 +51,6 @@ import { EnquiryForm } from "../onboarding-roomdetails-form/onboarding-roomdetai
 import { PropertyEnquiryDto } from "src/model/propertyEnquiryDto";
 import { externalReservationDtoList } from "src/app/model/externalReservation";
 import { RoomDetail } from "src/app/model/RoomDetail";
-import { FormGroup } from '@angular/forms';
 
 declare var Stripe: any;
 
@@ -73,6 +72,8 @@ export class BookingComponent implements OnInit {
   components2:Components[];
   parameterss:Para[];
   parameterss2:Para[];
+  tokenFromTime: number;
+  tokenToTime:number;
   parameterss3:Para[];
   socialmedialist:any;
   externalReservationDtoList:externalReservationDtoList[];
@@ -82,6 +83,10 @@ export class BookingComponent implements OnInit {
   language:Language
   showAlert: boolean = false;
   alertType: string;
+  propertyDetails: BusinessUser;
+  fromTime: string;
+  toTime: string;
+
   totalExtraAmount: number = 0;
   images:Images
   verifyOption = "email";
@@ -112,6 +117,8 @@ export class BookingComponent implements OnInit {
   businessUser: BusinessUser;
   // totalQuantity: number ;
   // totalPrice: number;
+  combinedDateFromTime: number;
+  combinedDateToTime: number;
   myDate: any;
   whatsappForm:WhatsappDto;
   whatsappForm2:WhatsappDto;
@@ -201,14 +208,8 @@ export class BookingComponent implements OnInit {
   totalServiceCost: number =0;
   bookingRoomPrice: any;
   enquiriesNo: any;
-  fromTimeDate: string = '';  // Store Checkin Time
-  toTimeDate: string = '';
-  checkTimeForm: FormGroup;
-  combinedDateFromTime: number;
-  combinedDateToTime: number;
-  propertyDetails: BusinessUser;
-  fromTime: string;
-  toTime: string;
+  url: string;
+  activeGoogleCenter: boolean = false;
 
   constructor(
     private token: TokenStorage,
@@ -305,7 +306,6 @@ export class BookingComponent implements OnInit {
 
   this.calculateserviceprice();
 
-
     console.log('Total Service Cost:', this.totalServiceCost);
 
     this.booking.fromTime =
@@ -317,7 +317,10 @@ export class BookingComponent implements OnInit {
     // this.calculateDateDeference();
     this.getDiffDate(this.toDate, this.fromDate);
     // this.booking.roomId = this.bookingData.roomId;
-
+    this.url = this.token.getBookingEngineBoolean()
+    if (this.url === "googlehotelcenter") {
+      this.activeGoogleCenter = true;
+      }
     // this.booking.roomType = this.bookingData.roomType;
     // this.booking.noOfRooms = this.bookingData.noOfRooms;
     // this.booking.noOfPersons = this.bookingData.noOfPersons;
@@ -356,8 +359,6 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   }
 
   ngOnInit() {
-    this.fromTimeDate = this.datePipe.transform(this.token.getFromTime(), "hh:mm");
-    this.toTimeDate = this.datePipe.transform(this.token.getToTime(), "hh:mm");
 // this.sendWhatsappMessageToPropertyOwner();
     this.accommodationData = this.propertyData.businessServiceDtoList?.filter(
       (entry) => entry.name === 'Accommodation'
@@ -389,25 +390,6 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       loadAngularFunction: () => this.stripePaymentSuccess(),
     };
   }
-
-  removetoTime(){
-    // this.token.clearToTime();
-    this.toTimeDate ='';
-   }
-
-  removeFromTime(){
-    // this.token.clearFromTime();
-    this.fromTimeDate = '';
-  }
-
-  saveTimeInToken(){
-   this.fromTimeDate =  String(this.token.saveTime(String(this.enquiryForm.fromTime)));
-  }
-
-  saveToTimeInToken(){
-    this.toTimeDate = String(this.token.saveToTime(String(this.enquiryForm.toTime)));
-  }
-
 
   setApi() {
     if (this.token.getCountry() === 'New Zealand') {
@@ -621,6 +603,27 @@ this.externalReservationdto =res.body
     //   (data) => {
     //     this.businessUser = data.body;
     this.businessUser = this.token.getProperty();
+    this.businessUser.businessServiceDtoList.forEach(item=>{
+      if(item.name === "Accommodation"){
+        this.fromTime = item.checkInTime;
+        this.toTime = item.checkOutTime;
+      }
+        });
+
+        let checkinDateConcat = this.booking.fromDate;
+        let timestamp = this.fromTime;
+        let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+        let combinedDateTime = new Date(combinedDateTimeString).getTime();
+        this.combinedDateFromTime = combinedDateTime;
+        let checkoutDateConcat = this.booking.toDate;
+        let timestampcheckout = this.toTime;
+        let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+        let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+        this.combinedDateToTime = combinedDateTimeCheckout;
+        this.tokenFromTime = this.combinedDateFromTime;
+        this.tokenToTime = this.combinedDateToTime;
+        this.token.saveTime(String(this.tokenFromTime));
+        this.token.saveToTime(String(this.tokenToTime));
     this.accommodationvalue = this.businessUser.businessServiceDtoList.filter(ele => ele.name === 'Accommodation');
     console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
@@ -987,6 +990,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   }
 
   submitFormOne() {
+
     this.enquiryForm = new EnquiryDto();
     console.log("this.token.getProperty().address", this.token.getProperty().address.city)
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
@@ -1033,8 +1037,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
-
-    this.propertyDetails = this.token.getProperty();
+this.propertyDetails = this.token.getProperty();
     this.propertyDetails.businessServiceDtoList.forEach(item=>{
   if(item.name === "Accommodation"){
     this.fromTime = item.checkInTime;
@@ -1056,7 +1059,6 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.toTime = this.combinedDateToTime;
     this.token.saveTime(String(this.enquiryForm.fromTime));
     this.token.saveToTime(String(this.enquiryForm.toTime));
-
     this.enquiryForm.accountManager ='';
     this.enquiryForm.consultantPerson ='';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
@@ -1087,7 +1089,6 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.bccName = bccEmail;
     this.enquiryForm.bccEmailTo = bccEmail2;
     this.enquiryForm.status = 'Enquiry';
-
 
     if (
       this.enquiryForm.dietaryRequirement === null ||
@@ -1410,11 +1411,8 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
-    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -1542,11 +1540,8 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
-  this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
 
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
@@ -1807,7 +1802,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   // }
 
     addServiceToBooking(bookingId, savedServices: any[]) {
-this.savedServices?.forEach(element => {
+this.savedServices.forEach(element => {
   element.count = element.quantity
 });
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
@@ -1987,11 +1982,9 @@ this.savedServices?.forEach(element => {
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
-    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.currency = this.businessUser.localCurrency;
-    this.booking.fromTime = Number(this.enquiryForm?.fromTime);
-    this.booking.toTime = Number(this.enquiryForm?.toTime);
-
+    this.booking.fromTime = Number(this.token.getFromTime());
+    this.booking.toTime = Number(this.token.getToTime());
     Logger.log("createBooking ", JSON.stringify(this.booking));
 
     this.paymentLoader = true;
@@ -2161,17 +2154,6 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.roomType=this.booking.roomName;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.createdDate = new Date();
-
-    this.enquiryForm.accountManager ='TheHotelMate Team';
-    this.enquiryForm.consultantPerson ='';
-    this.enquiryForm.noOfRooms = this.booking.noOfRooms;
-    this.enquiryForm.noOfChildren = this.booking.noOfChildren;
-    this.enquiryForm.accommodationType = this.token.getProperty().businessType;
-    this.enquiryForm.status = "Booked";
-    this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
-    this.enquiryForm.totalAmount = this.booking.totalAmount;
-    // this.enquiryForm.taxDetails = this.booking.taxDetails;
     this.propertyDetails = this.token.getProperty();
     this.propertyDetails.businessServiceDtoList.forEach(item=>{
   if(item.name === "Accommodation"){
@@ -2194,7 +2176,16 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.toTime = this.combinedDateToTime;
     this.token.saveTime(String(this.enquiryForm.fromTime));
     this.token.saveToTime(String(this.enquiryForm.toTime));
-
+    this.enquiryForm.accountManager ='TheHotelMate Team';
+    this.enquiryForm.consultantPerson ='';
+    this.enquiryForm.noOfRooms = this.booking.noOfRooms;
+    this.enquiryForm.noOfChildren = this.booking.noOfChildren;
+    this.enquiryForm.accommodationType = this.token.getProperty().businessType;
+    this.enquiryForm.status = "Booked";
+    this.enquiryForm.specialNotes = this.booking.notes
+    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
     let taxarray = this.token.getProperty().taxDetails;
     taxarray =taxarray.filter(
@@ -2269,7 +2260,27 @@ this.savedServices?.forEach(element => {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.businessUser.businessServiceDtoList.forEach(item=>{
+          if(item.name === "Accommodation"){
+            this.fromTime = item.checkInTime;
+            this.toTime = item.checkOutTime;
+          }
+            });
 
+            let checkinDateConcat = this.booking.fromDate;
+            let timestamp = this.fromTime;
+            let combinedDateTimeString = checkinDateConcat + ' ' + timestamp;
+            let combinedDateTime = new Date(combinedDateTimeString).getTime();
+            this.combinedDateFromTime = combinedDateTime;
+            let checkoutDateConcat = this.booking.toDate;
+            let timestampcheckout = this.toTime;
+            let combinedCheckouDateTimeString = checkoutDateConcat + ' ' + timestampcheckout;
+            let combinedDateTimeCheckout = new Date(combinedCheckouDateTimeString).getTime();
+            this.combinedDateToTime = combinedDateTimeCheckout;
+            this.tokenFromTime = this.combinedDateFromTime;
+            this.tokenToTime = this.combinedDateToTime;
+            this.token.saveTime(String(this.tokenFromTime));
+            this.token.saveToTime(String(this.tokenToTime));
         this.policies = this.businessUser.businessServiceDtoList.filter(
           (ele) => ele.name === 'Accommodation'
         );
@@ -2482,8 +2493,6 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.toTime = this.combinedDateToTime;
     this.token.saveTime(String(this.enquiryForm.fromTime));
     this.token.saveToTime(String(this.enquiryForm.toTime));
-
-
     this.enquiryForm.accountManager ='';
     this.enquiryForm.consultantPerson ='';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
@@ -2837,3 +2846,5 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
       );
   }
 }
+
+

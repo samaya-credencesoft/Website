@@ -761,7 +761,7 @@ setTimeout(() => {
     this.fetchAndProcessRoomsData();
   }
 }, 3000);
-
+this.token.saveBookingEngineBoolean('normalUrl')
 
 this.selectedServices =[]
     this.oneDayFromDate = calendar.getToday();
@@ -782,6 +782,7 @@ this.selectedServices =[]
       this.rooms = 1;
 
       if (this.hotelID != null && this.hotelID != undefined) {
+        this.token.saveBookingEngineBoolean('googlehotelcenter')
         this.getPropertyDetailsById(this.hotelID);
       }
 
@@ -929,7 +930,10 @@ this.selectedServices =[]
   }
   blogPosts$: Observable<any> | undefined;
   ngOnInit() {
+    if (this.hotelID != null && this.hotelID != undefined) {
+      this.token.saveBookingEngineBoolean('googlehotelcenter')
 
+    }
     const toggleCardBtn = document.getElementById('toggleCardBtn');
     const closeCardBtn = document.getElementById('closeCardBtn');
     const stickyCard = document.getElementById('stickyCard');
@@ -1816,6 +1820,8 @@ if (this.city != null && this.city != undefined) {
 
   async getPropertyDetailsById(id: number) {
     // debugger
+    // this.token.saveBookingEngineBoolean('googlehotelcenter')
+
     // //console.log("id isequal to" + id)
     try {
       this.loader = true;

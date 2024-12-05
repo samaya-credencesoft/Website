@@ -33,6 +33,7 @@ const BOOKINGREFID = 'bookingRefId';
 const GETTIME = 'getTime';
 const GETTOTIME = 'getToTime';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
+const CHECK_BOOKING_ENGINE ='checkbookingengine';
 const CITY = 'city';
 const ORGANIZATION_ID = "OrganizationId";
 const BUSINESS_SERVICE = 'businessservice';
@@ -43,6 +44,8 @@ const SELECTED_SERVICE_DATA = 'SELECTED_SERVICE_DATA';
 const PAYMENT = 'payment';
 const PAYMENT2 = 'payment2';
 const ROLES = "Roles";
+
+
 const ROOM_TYPES = "RoomDetails";
 const PROPERTY_ID = "PropertyId";
 const PROPERTY = 'property';
@@ -496,6 +499,24 @@ export class TokenStorage {
   localStorage.removeItem(BOOKINGCITY);
   }
 
+
+
+       clearFromTime() {
+        localStorage.removeItem(GETTIME);
+        }
+
+        clearToTime() {
+          localStorage.removeItem(GETTOTIME);
+          }
+
+  public savewebsitebookingURL(websitebookingURL: string){
+    localStorage.removeItem(WEBSITE_BOOKING_URL);
+    if (websitebookingURL !== null || websitebookingURL !== undefined) {
+    localStorage.setItem(WEBSITE_BOOKING_URL, websitebookingURL);
+    } else {
+    localStorage.setItem(WEBSITE_BOOKING_URL, '{}');
+    }
+  }
   public saveTime(getTime: string) {
     localStorage.removeItem(GETTIME);
       if (getTime !== null || getTime !== undefined) {
@@ -522,27 +543,22 @@ export class TokenStorage {
         return localStorage.getItem(GETTOTIME);
        }
 
-       clearFromTime() {
-        localStorage.removeItem(GETTIME);
-        }
 
-        clearToTime() {
-          localStorage.removeItem(GETTOTIME);
-          }
-
-  public savewebsitebookingURL(websitebookingURL: string){
-    localStorage.removeItem(WEBSITE_BOOKING_URL);
-    if (websitebookingURL !== null || websitebookingURL !== undefined) {
-    localStorage.setItem(WEBSITE_BOOKING_URL, websitebookingURL);
-    } else {
-    localStorage.setItem(WEBSITE_BOOKING_URL, '{}');
-    }
-  }
 
   public getwebsitebookingURL() {
     return localStorage.getItem(WEBSITE_BOOKING_URL);
   }
-
+  public saveBookingEngineBoolean(checkbookingengine: string){
+    sessionStorage.removeItem(CHECK_BOOKING_ENGINE);
+    if (checkbookingengine !== null || checkbookingengine !== undefined) {
+      sessionStorage.setItem(CHECK_BOOKING_ENGINE, checkbookingengine);
+    } else {
+      sessionStorage.setItem(CHECK_BOOKING_ENGINE, '{}');
+    }
+  }
+  public getBookingEngineBoolean() {
+    return sessionStorage.getItem(CHECK_BOOKING_ENGINE);
+  }
   clearwebsitebookingURL() {
   localStorage.removeItem(WEBSITE_BOOKING_URL);
   }

@@ -286,7 +286,7 @@
 
             </ng-container>
             <tr >
-              <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
+              <td class="p-1" style="color: black !important;">Total Net Amount :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
                 booking.netAmount
                 | currency: currency:"symbol":"1.2-2"
@@ -1665,7 +1665,7 @@
                             maxSelectRoom = rates.noOfAvailable;
                             maxOccupancy =
                               room.maximumOccupancy;
-                              onRoomBook(room.id, i, r);
+                              onRoomBook(room.id, i, r);checkingAvailability1();
                             booking.roomId = room.id;
                             selectedRoomMaximumOccupancy =
                               room.maximumOccupancy;
@@ -1775,7 +1775,7 @@
                     maxSelectRoom = rates.noOfAvailable;
                     maxOccupancy =
                       room.maximumOccupancy;
-                      onRoomBook(room.id, i, r);
+                      onRoomBook(room.id, i, r);checkingAvailability1;
                     booking.roomId = room.id;
                     selectedRoomMaximumOccupancy =
                       room.maximumOccupancy;
@@ -4526,7 +4526,7 @@
                 maxSelectRoom = rates.noOfAvailable;
                 maxOccupancy =
                   room.maximumOccupancy;
-                  onRoomBook(room.id, i, r);
+                  onRoomBook(room.id, i, r);checkingAvailability1();
                 booking.roomId = room.id;
                 selectedRoomMaximumOccupancy =
                   room.maximumOccupancy;
