@@ -64,5 +64,6 @@ import { TaxDetails } from "./TaxDetails";
     toTime: number;
     bookingReservationId: string;
     bookingId: number;
+    taxAmount:number;
     // counterName:string;
   }

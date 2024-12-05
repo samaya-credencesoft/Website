@@ -210,6 +210,9 @@ export class BookingComponent implements OnInit {
   enquiriesNo: any;
   url: string;
   activeGoogleCenter: boolean = false;
+  percentage1: number;
+  percentage2: number;
+  totalPercentage: number;
 
   constructor(
     private token: TokenStorage,
@@ -990,7 +993,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   }
 
   submitFormOne() {
-
+    console.log("taxxation", this.booking.taxAmount)
     this.enquiryForm = new EnquiryDto();
     console.log("this.token.getProperty().address", this.token.getProperty().address.city)
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
@@ -1068,7 +1071,19 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
+    this.enquiryForm.taxDetails.forEach(item=>{
+      if(item.name === 'CGST'){
+        this.percentage1 = item.percentage;
+      }
+
+      if(item.name === 'SGST'){
+        this.percentage2 = item.percentage;
+      }
+    })
+    this.totalPercentage = (this.percentage1 + this.percentage2);
+    
+    this.enquiryForm.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
     this.enquiryForm.planCode = this.booking.planCode;
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
@@ -1117,10 +1132,10 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.paymentLoader = true;
-    this.enquiryForm.roomPrice = this.booking.roomPrice;
+    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.equitycreatedData = response.body;
-// console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
+console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       this.isEnquiry = true;
       this.paymentLoader = false;
       this.paymentLoader = false;
@@ -1676,6 +1691,19 @@ this.propertyDetails = this.token.getProperty();
     this.payment.date = formatDate(new Date(), "yyyy-MM-dd", "en");
     this.payment.taxAmount = this.booking.gstAmount;
     this.booking.outstandingAmount = this.booking.payableAmount;
+    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
+    this.booking.taxDetails.forEach(item=>{
+      if(item.name === 'CGST'){
+        this.percentage1 = item.percentage;
+      }
+
+      if(item.name === 'SGST'){
+        this.percentage2 = item.percentage;
+      }
+    })
+    this.totalPercentage = (this.percentage1 + this.percentage2);
+    
+    this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
     this.processPayment(this.payment);
   }
 
@@ -2198,6 +2226,19 @@ this.savedServices?.forEach(element => {
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
+    this.enquiryForm.taxDetails.forEach(item=>{
+      if(item.name === 'CGST'){
+        this.percentage1 = item.percentage;
+      }
+
+      if(item.name === 'SGST'){
+        this.percentage2 = item.percentage;
+      }
+    })
+    this.totalPercentage = (this.percentage1 + this.percentage2);
+    
+    this.enquiryForm.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
 
     const TO_EMAIL = 'support@thehotelmate.com';
     const TO_NAME = 'Support - The Hotel Mate';
@@ -2503,7 +2544,19 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
+    this.enquiryForm.taxDetails.forEach(item=>{
+      if(item.name === 'CGST'){
+        this.percentage1 = item.percentage;
+      }
 
+      if(item.name === 'SGST'){
+        this.percentage2 = item.percentage;
+      }
+    })
+    this.totalPercentage = (this.percentage1 + this.percentage2);
+    
+    this.enquiryForm.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
     const TO_EMAIL = 'support@thehotelmate.com';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';

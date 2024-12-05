@@ -76,6 +76,9 @@ export class BookingCompleteComponent implements OnInit {
   toTimeDate: string = '';
   combinedDateFromTime: number;
   combinedDateToTime: number;
+  percentage1: number;
+  percentage2: number;
+  totalPercentage: number;
 
   constructor(
     private http: HttpClient,
@@ -339,6 +342,20 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.paymentId = this.payment.id;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
+
+    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
+    this.booking.taxDetails.forEach(item=>{
+      if(item.name === 'CGST'){
+        this.percentage1 = item.percentage;
+      }
+
+      if(item.name === 'SGST'){
+        this.percentage2 = item.percentage;
+      }
+    })
+    this.totalPercentage = (this.percentage1 + this.percentage2);
+    
+    this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
 //   ele.count = ele.quantity;
