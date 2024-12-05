@@ -667,6 +667,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.payableAmount=this.booking.netAmount;
     this.enquiryForm.roomName=this.booking.roomName;
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
+    this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
