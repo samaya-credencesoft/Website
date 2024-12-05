@@ -35,17 +35,19 @@
           <div class="row">
             <div class="col-6" style="font-weight: bold;">
               <p>Hotel Name</p>
+              <p>Room Type</p>
               <p>Number Of Nights</p>
               <p>Number Of Guests</p>
-              <p>Room Type</p>
+
               <p>Number Of Rooms</p>
               <p>Room Price</p>
             </div>
             <div class="col-6 text-right"  style="font-weight: bold;">
               <p>{{businessUser.name}}</p>
+              <p>{{booking.roomName}}</p>
               <p>{{DiffDate}}</p>
               <p>{{booking.noOfPersons}}</p>
-              <p>{{booking.roomName}}</p>
+
               <p>{{booking.noOfRooms}}</p>
               <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
             </div>
@@ -173,18 +175,20 @@
           <div class="row">
             <div class="col-6" style="font-weight: bold;">
               <p>Hotel Name</p>
+              <p>Room Type</p>
               <p>Number Of Nights</p>
               <p>Number Of Guests</p>
-              <p>Room Type</p>
+
               <p>Number Of Rooms</p>
               <p>Room Price</p>
             </div>
             <div class="col-6 text-right"  style="font-weight: bold;">
               <p style="    font-size: 12px;
 ">{{businessUser.name}}</p>
+<p>{{booking.roomName}}</p>
               <p>{{DiffDate}}</p>
               <p>{{booking.noOfPersons}}</p>
-              <p>{{booking.roomName}}</p>
+
               <p>{{booking.noOfRooms}}</p>
               <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
             </div>
