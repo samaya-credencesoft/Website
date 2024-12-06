@@ -2026,6 +2026,7 @@ this.savedServices?.forEach(element => {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.paymentLoader = true;
     this.hotelBookingService
