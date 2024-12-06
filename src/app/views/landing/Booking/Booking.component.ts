@@ -2019,7 +2019,6 @@ this.savedServices?.forEach(element => {
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
     Logger.log("createBooking ", JSON.stringify(this.booking));
-
     this.paymentLoader = true;
     this.hotelBookingService
       .createBooking(this.booking)

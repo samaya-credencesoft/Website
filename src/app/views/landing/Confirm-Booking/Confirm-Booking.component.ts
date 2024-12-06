@@ -160,8 +160,8 @@ export class ConfirmBookingComponent implements OnInit {
                   this.getDetailsData = element.advanceAmountPercentage;
                 }
                 });
-                if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
-                  this.getPropertyDetailsById(this.bookingData.propertyId);
+                if (this.bookingData?.propertyId != null && this.bookingData?.propertyId != undefined) {
+                  this.getPropertyDetailsById(this.bookingData?.propertyId);
                 }
   }
 
@@ -919,5 +919,9 @@ this.externalReservationdto =res.body
 
   onGoHome(){
     this.router.navigate(["/booking"]);
+  }
+
+  goback(){
+    this.token.clearBookingData();
   }
 }
