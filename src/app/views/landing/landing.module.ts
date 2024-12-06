@@ -111,6 +111,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PaymentComponent } from './payment/payment.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
+import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.component';
 
 
 
@@ -124,6 +125,7 @@ import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.compo
     ReactiveFormsModule,
     NgbModule,
     CheckoutModule,
+
     MatCheckboxModule,
     MatInputModule,
     AgmCoreModule.forRoot({ apiKey: environment.googleKey }),
@@ -143,6 +145,7 @@ import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.compo
     WorksCarouselComponent,
     PaymentComponent,
     ServicesComponent,
+    ConfirmBookingComponent,
     CheckoutPaymentComponent,
     ServicesCauroselComponent,
     TestimonialComponent,

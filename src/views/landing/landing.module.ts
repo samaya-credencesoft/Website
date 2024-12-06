@@ -107,7 +107,7 @@ import { NumberCounterComponent } from './number-counter/number-counter.componen
     PricingOneComponent,
     ContactFormComponent,
     DynamicPricingComponent,
-ConfirmBookingComponent,
+
     FooterComponent,
     LandingV2Component,
     FeaturesComponent,
