@@ -76,6 +76,7 @@ export class ConfirmBookingComponent implements OnInit {
   percentage1: number;
   percentage2: number;
   totalPercentage: number;
+  extraChildCharge: any;
 
   constructor(
     private http: HttpClient,
@@ -223,6 +224,7 @@ export class ConfirmBookingComponent implements OnInit {
       this.bookingConfirmed = true;
     }
     this.currency = 'INR';
+    this.extraChildCharge = this.token.getExtraChildCharge(); 
   }
   ngAfterViewInit() {
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)

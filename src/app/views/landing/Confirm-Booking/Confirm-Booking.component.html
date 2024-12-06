@@ -1,10 +1,19 @@
 <div   class="mobile-view-ui">
 
-  <div style="padding-left: 10px; padding-top: 20px; padding-right: 10px;margin-top: 65px;">
-    <a href="{{PropertyUrl}}" (click)="goback()" style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+  <div style="padding-left: 10px; padding-top: 20px; padding-right: 10px;margin-top: 10px;">
+    <a href="{{PropertyUrl}}" (click)="goback()" style="text-align: left;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: black;
+    padding: 7px;
+    border-radius: 10px;
+    color: #ffff;">
       <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
   </a>
-    <h4 style=" font-weight: bold; margin-top: 10px; ">Thank You For Booking with {{businessUser.name }}!</h4>
+    <h4 style=" font-weight: bold; margin-top: 16px; ">Thank You For Booking with {{businessUser.name }}!</h4>
     <p style=" font-weight: bold; ">You will get a confirmation with the booking details in your mail and mobile number.</p>
     <p style=" font-weight: bold; ">For assistance, contact
       <b style="color: #000C7A;">'Our Service Team'</b> <br/> </p>
@@ -101,7 +110,7 @@
 
         <tr *ngIf="booking.extraChildCharge">
           <td style="color: black !important;">
-            Extra Child Charges ({{this.bookinddata.noOfExtraChild}})
+            Extra Child Charges ({{this.extraChildCharge}})
           </td>
           <td style="color: black !important; text-align: right;">
             {{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}
@@ -238,7 +247,16 @@
 <div  class="desktop-view-ui">
   <div  style="padding-left: 20px; padding-top: 20px; padding-right: 20px;margin-top: 20px;
     padding: 20px">
-    <a href="{{PropertyUrl}}" (click)="goback()" style="text-align: left; font-weight: 700; margin-bottom: 20px; margin-top: -20px;  cursor: pointer; text-decoration: none;">
+    <a href="{{PropertyUrl}}" (click)="goback()" style="text-align: left;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: black;
+    padding: 7px;
+    border-radius: 10px;
+    color: #ffff;">
       <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
   </a>
     <h3 style=" font-weight: bold; margin-top: 20px; ">Thank You For Booking with {{businessUser.name }}!</h3>
@@ -294,7 +312,7 @@
 
             <tr *ngIf="booking.extraChildCharge">
               <td style="color: black !important;">
-                Extra Child Charges ({{this.bookinddata.noOfExtraChild}})
+                Extra Child Charges ({{this.extraChildCharge}})
               </td>
               <td style="color: black !important; text-align: right;">
                 {{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}
