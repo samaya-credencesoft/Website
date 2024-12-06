@@ -207,6 +207,7 @@ export class BookingComponent implements OnInit {
   calculatedServices: any;
   totalServiceCost: number =0;
   bookingRoomPrice: any;
+  noOfExtraChild:any;
   enquiriesNo: any;
   url: string;
   activeGoogleCenter: boolean = false;
@@ -307,6 +308,13 @@ export class BookingComponent implements OnInit {
 
     }
 
+
+ if (this.token.saveExtraPerson(this.booking.noOfExtraChild) !== null) {
+      this.noOfExtraChild = this.token.getExtraChildCharge();
+
+
+
+    }
 
 
   this.calculateserviceprice();
@@ -2018,6 +2026,7 @@ this.savedServices?.forEach(element => {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.paymentLoader = true;
     this.hotelBookingService
