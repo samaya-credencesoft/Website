@@ -306,6 +306,7 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
+    this.booking.totalRoomTariffBeforeDiscount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
     this.booking.fromTime = Number(this.token.getFromTime());
