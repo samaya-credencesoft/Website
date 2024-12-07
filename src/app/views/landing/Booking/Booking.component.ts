@@ -139,7 +139,7 @@ export class BookingComponent implements OnInit {
   contentDialog: any;
 
   ngbDate: any;
-  mobileHasError: boolean = true;
+  mobileHasError: boolean = false;
   taxPercentage = 0;
   subTotalAmount: number = 0;
   totalAmount: number = 0;
@@ -382,6 +382,22 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       loadAngularFunction: () => this.stripePaymentSuccess(),
     };
   }
+  validateMobile(): void {
+    const mobile = this.booking.mobile;
+    // Allow only numbers and ensure exactly 10 digits
+    if (mobile && /^[0-10]{1,10}$/.test(mobile)) {
+      this.mobileHasError = mobile.length !== 10; // Error if not exactly 10 digits
+    } else {
+      this.mobileHasError = true; // Error for invalid input
+    }
+  }
+  validateForm(): boolean {
+    const mobile = this.booking.mobile;
+    // Ensure the phone number is exactly 10 digits
+    this.mobileHasError = !(mobile && /^\d{10}$/.test(mobile));
+    // Return true if there are no validation errors
+    return !this.mobileHasError;
+  }
 
   setApi() {
     if (this.token.getCountry() === 'New Zealand') {
@@ -484,6 +500,7 @@ this.externalReservationdto =res.body
         console.log("this.businessOfferDto: ", data.body);
       });
   }
+
   applyPromoCode(offer) {
     if (offer !== "") {
       const f = new Date(this.booking.fromDate);
