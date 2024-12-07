@@ -216,6 +216,7 @@ export class BookingComponent implements OnInit {
   totalPercentage: number;
   netAmount: number;
   taxAmountBooking: number;
+  bookingroomPrice: string;
 
   constructor(
     private token: TokenStorage,
@@ -314,6 +315,10 @@ export class BookingComponent implements OnInit {
 
 
 
+    }
+
+    if(this.token.saveRoomPrice(this.booking.roomPrice) !== null){
+           this.bookingroomPrice = this.token.getRoomPrice();
     }
 
 
@@ -1165,6 +1170,7 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
   }
 
   payAndCheckout() {
+    this.bookingroomPrice = this.token.getRoomPrice();
     this.submitFormOne();
 
     this.payment.callbackUrl = environment.callbackUrl + this.booking.propertyReservationNumber + "&BookingEngine=true";
