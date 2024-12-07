@@ -109,9 +109,9 @@ export class ConfirmBookingComponent implements OnInit {
         });
                   }, 1000);
 
-    if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
+    if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
     {
-      this.booking = this.token.getBookingData();
+      this.booking = this.token.getBookingDataObj();
       this.bookinddata =  this.booking
       // console.log("this.booking" + JSON.stringify(this.booking))
       this.taxAmountOne = this.booking.taxAmount
@@ -133,8 +133,8 @@ export class ConfirmBookingComponent implements OnInit {
     if (this.token.getServiceData() !== null) {
       this.addServiceList = this.token.getServiceData();
     }
-    if (this.token.getBookingData() !== null) {
-      this.bookingData = this.token.getBookingData();
+    if (this.token.getBookingDataObj() !== null) {
+      this.bookingData = this.token.getBookingDataObj();
       this.booking = this.bookingData;
       this.fromDate = new NgbDate(
         this.mileSecondToNGBDate(this.booking.fromDate).year,
@@ -227,10 +227,10 @@ export class ConfirmBookingComponent implements OnInit {
     this.extraChildCharge = this.token.getExtraChildCharge(); 
   }
   ngAfterViewInit() {
-    if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
+    if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
       {
         setTimeout(() => {
-          this.booking = this.token.getBookingData();
+          this.booking = this.token.getBookingDataObj();
           this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
                     }, 500);
 
@@ -924,6 +924,6 @@ this.externalReservationdto =res.body
   }
 
   goback(){
-    this.token.clearBookingData();
+    this.token.clearBookingDataObj();
   }
 }
