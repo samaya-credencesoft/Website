@@ -42,6 +42,8 @@
 
               <p>Number Of Rooms</p>
               <p>Room Price</p>
+              <p>Extra Pax Charge ({{booking.noOfExtraPerson}})</p>
+              <p>Extra Child Charge ({{booking.noOfExtraChild}})</p>
             </div>
             <div class="col-6 text-right"  style="font-weight: bold;">
               <p> {{booking.bookingStatus}}</p>
@@ -52,6 +54,8 @@
 
               <p>{{booking.noOfRooms}}</p>
               <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
+              <p>{{booking.extraPersonCharge}}</p>
+              <p>{{booking.extraChildCharge}}</p>
             </div>
           </div>
         </div>
@@ -104,6 +108,24 @@
       </div>
 
       <hr> -->
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-6">
+          <p>Total Booking Amount</p>
+        </div>
+        <div class="col-6 text-right">
+          <p >{{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <p>Tax Amount</p>
+        </div>
+        <div class="col-6 text-right">
+          <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+        </div>
+      </div>
       <h4 style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
       <table style=" border: none; width:100%">
         <tr *ngFor="let fac of services">
@@ -134,24 +156,6 @@
         </tr>
 
       </table>
-      <div class="row" style="margin-top: 10px;">
-        <div class="col-6">
-          <p>Total Booking Amount</p>
-        </div>
-        <div class="col-6 text-right">
-          <p >{{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-6">
-          <p>Tax Amount</p>
-        </div>
-        <div class="col-6 text-right">
-          <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
-        </div>
-      </div>
-
       <div class="row total-amount">
         <div class="col-6">
           <p>Total Payable Amount</p>
@@ -224,17 +228,21 @@
 
               <p>Number Of Rooms</p>
               <p>Room Price</p>
+              <p>Extra Pax Charge ({{booking.noOfExtraPerson}})</p>
+              <p>Extra Child Charge ({{booking.noOfExtraChild}})</p>
             </div>
             <div class="col-6 text-right"  style="font-weight: bold;">
               <p>{{booking.bookingStatus}}</p>
-              <p style="    font-size: 12px;
-">{{businessUser.name}}</p>
+              <p style="    font-size: 12px;">{{businessUser.name}}</p>
 <p>{{booking.roomName}}</p>
               <p>{{DiffDate}}</p>
               <p>{{booking.noOfPersons}}</p>
 
               <p>{{booking.noOfRooms}}</p>
               <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
+              <p>{{booking.extraPersonCharge}}</p>
+              <p>{{booking.extraChildCharge}}</p>
+            </div>
             </div>
           </div>
         </div>
@@ -306,6 +314,36 @@
       <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
     </div>
   </div>
+  <h4 style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
+  <table style=" border: none; width:100%">
+    <tr *ngFor="let fac of services">
+      <td style="width:50%;">
+       <div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+        <div style="display: flex; gap:4px;margin-top: 10px;">
+
+          <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
+
+
+          <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+          <br>
+
+          <p>{{fac.name }} * {{fac.count}} <br>
+
+            <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 &&  fac.taxAmount !== null && fac.taxAmount !== undefined">
+             ₹ {{fac.servicePrice}} +
+             ₹ {{fac.taxAmount }} ({{fac.taxPercentage}}% tax)
+          </b>
+          <b style="text-align: right;" *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0">₹ {{0 }}</b>
+
+          </p>
+        </div>
+      </div></td>
+      <td style="text-align: right;width:50%" *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined">₹ {{fac.afterTaxAmount * fac.count}}
+      </td>
+    </tr>
+
+  </table>
   <div class="row total-amount">
     <div class="col-6">
       <p>Total Payable Amount</p>
@@ -331,4 +369,4 @@
 
     </div>
   </div>
-</div>
+
