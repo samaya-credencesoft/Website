@@ -324,6 +324,7 @@ export class BookingCompleteComponent implements OnInit {
     this.totalPercentage = (this.percentage1 + this.percentage2);
 
     this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+    this.booking.roomPrice = Number(this.token.getRoomPrice());
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
 //   ele.count = ele.quantity;
