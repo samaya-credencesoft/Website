@@ -1,3 +1,4 @@
+import { HotelBookingService } from './../../../../services/hotel-booking.service';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +10,7 @@ import { Payment } from 'src/app/model/payment';
 import { BusinessUser } from 'src/app/model/user';
 import { OrderService } from 'src/app/services/order.service';
 import { environment } from 'src/environments/environment';
-import { HotelBookingService } from 'src/services/hotel-booking.service';
+// import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { ListingService } from 'src/services/listing.service';
 import { Logger } from 'src/services/logger.service';
 import { TokenStorage } from 'src/token.storage';
@@ -68,7 +69,9 @@ export class PaymentComponent implements OnInit {
   prvpaymentref: string;
   advPanyment: any;
   anotherpaymentBackup: any;
-
+  services: any;
+  totalServiceCost: number =0;
+  calculatedServices: any;
   constructor(
     private acRoute: ActivatedRoute,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -79,6 +82,7 @@ export class PaymentComponent implements OnInit {
     private datePipe: DatePipe,
     private router: Router,
     private ngZone: NgZone,
+    private bookingService :HotelBookingService,
     private hotelBookingService: HotelBookingService
   ) {
     this.businessServiceDto = new BusinessServiceDtoList();
@@ -153,6 +157,28 @@ export class PaymentComponent implements OnInit {
 
     // console.log('Difference in Days:', this.DiffDate);
   }
+  getAllServicesById(){
+    this.calculatedServices =[]
+    this.bookingService.getAllServicesByBooking(this.booking.id).subscribe(
+      (response1) => {
+        if (response1.status === 200) {
+          this.services = response1.body;
+
+          this.services?.forEach(element => {
+            let serviceCost = element.afterTaxAmount * element.count;
+            // console.log("total services" + element.quantity)
+            // console.log("total services" + element.quantity)
+            this.calculatedServices.push(serviceCost);
+            this.totalServiceCost += serviceCost; // Accumulating the total cost
+          });
+
+          //  if (this.totalServiceCost > 0) {
+          //   this.enquiry.totalAmount = this.enquiry.totalAmount + this.totalServiceCost
+          //  }
+
+        }
+      })
+  }
 
 
   getBookingDetails(bookingNumber: number, bookingEmail: string) {
@@ -163,7 +189,7 @@ export class PaymentComponent implements OnInit {
       .subscribe(
         (data) => {
           this.booking = data.body.bookingDetails;
-
+          this.getAllServicesById()
           this.getPropertyDetails(this.booking.propertyId);
           this.payment = data.body.paymentDetails[0];
           this.anotherpaymentBackup = data.body.paymentDetails[0];

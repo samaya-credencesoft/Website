@@ -70,7 +70,12 @@ export class HotelBookingService {
       { headers: headers }
     );
   }
-
+  getAllServicesByBooking(bookingId: number) {
+    return this.http.get<PropertyServiceDTO[]>(
+     this.API_URL + "/api/booking/findAllServices/" + bookingId,
+      { observe: "response" }
+    );
+  }
   addServicesToBooking(services: PropertyServiceDTO[], bookingId: number) {
     this.setApi();
     return this.http.post<PropertyServiceDTO[]>(
