@@ -306,7 +306,6 @@ export class BookingCompleteComponent implements OnInit {
     this.booking.groupBooking = false;
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
-    this.booking.totalRoomTariffBeforeDiscount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.paymentId = this.payment.id;
     this.booking.fromTime = Number(this.token.getFromTime());
@@ -326,6 +325,7 @@ export class BookingCompleteComponent implements OnInit {
 
     this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
     this.booking.roomPrice = Number(this.token.getRoomPrice());
+
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
 //   ele.count = ele.quantity;

@@ -407,6 +407,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       zone: this.ngZone,
       loadAngularFunction: () => this.stripePaymentSuccess(),
     };
+    this.token.clearBookingDataObj();
   }
 
   setApi() {
@@ -1710,6 +1711,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     this.payment.date = formatDate(new Date(), "yyyy-MM-dd", "en");
     this.payment.taxAmount = this.booking.gstAmount;
     this.booking.outstandingAmount = this.booking.payableAmount;
+    this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
+    console.log('pricessssssssssssssssss isssssss',this.booking.totalRoomTariffBeforeDiscount);
     this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
     this.booking.taxDetails.forEach(item=>{
       if(item.name === 'CGST'){
@@ -2034,6 +2037,9 @@ this.savedServices?.forEach(element => {
     this.booking.toTime = Number(this.token.getToTime());
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     Logger.log("createBooking ", JSON.stringify(this.booking));
+      console.log('price is',this.booking.roomPrice);
+    this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
+    console.log('price is',this.booking.roomPrice);
     this.paymentLoader = true;
     this.hotelBookingService
       .createBooking(this.booking)
@@ -2042,7 +2048,7 @@ this.savedServices?.forEach(element => {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
-          this.token.saveBookingData(this.booking);
+          this.token.saveBookingDataObj(this.booking);
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
           this.addServiceToBooking(this.booking.id,this.savedServices);

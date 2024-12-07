@@ -28,6 +28,7 @@ const BOOKSLOTDATA = 'slotbookdata';
 const CUSTOMER = 'Customer';
 const SLOTDATA = 'slotdata';
 const BOOKINGDATA = 'booking';
+const BOOKINGDATAOJC = 'BOOKINGDATAOJC';
 const BOOKINGCITY = 'bookingCity';
 const BOOKINGREFID = 'bookingRefId';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
@@ -246,6 +247,23 @@ export class TokenStorage {
     localStorage.setItem(CITY,  '{}');
     }
   }
+
+  public saveBookingDataObj(booking: Booking) {
+    sessionStorage.removeItem(BOOKINGDATAOJC);
+      if (booking !== null || booking !== undefined) {
+      sessionStorage.setItem(BOOKINGDATAOJC, JSON.stringify(booking));
+      } else {
+      sessionStorage.setItem(BOOKINGDATAOJC,  '{}');
+      }
+    }
+
+    public getBookingDataObj(): Booking {
+      return JSON.parse(sessionStorage.getItem(BOOKINGDATAOJC) as string);
+    }
+
+    public clearBookingDataObj() {
+      return sessionStorage.removeItem(BOOKINGDATAOJC);
+    }
   public getServiceData(): PropertyServiceDTO[] {
     return JSON.parse(localStorage.getItem(PROPERTY_SERVICE_DATA) as string);
   }
