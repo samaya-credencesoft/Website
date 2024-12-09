@@ -1717,7 +1717,12 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.netAmount = this.booking.netAmount;
     this.taxAmountBooking =  (this.booking.netAmount * this.booking.taxPercentage) / 100;
-    this.payment.transactionAmount = this.booking.totalAmount;
+    if(this.totalServiceCost != null && this.totalServiceCost != undefined && this.totalServiceCost > 0){
+      this.payment.transactionAmount = this.booking.netAmount + this.taxAmountBooking;
+      }else{
+        this.payment.transactionAmount = this.booking.totalAmount;
+      }
+
     this.payment.amount = this.booking.totalAmount;
     this.payment.propertyId = this.bookingData.propertyId;
     this.payment.email = this.booking.email;
@@ -1870,7 +1875,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
 
     addServiceToBooking(bookingId, savedServices: any[]) {
 this.savedServices?.forEach(element => {
-  element.count = element.quantity
+  element.count = element.quantity;
+  element.afterTaxAmount = element.quantity * element.servicePrice
 });
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
         (data) => {
