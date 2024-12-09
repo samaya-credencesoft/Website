@@ -106,7 +106,7 @@ export class PaymentComponent implements OnInit {
     });
     this.anotherpaymentBackup = this.token.getPayment2Data()
 
-    if (this.token.savePayment2Data != null && this.token.savePayment2Data != undefined ) {
+    if ((this.payment == null || this.payment === undefined) &&  this.token.savePayment2Data != null && this.token.savePayment2Data != undefined ) {
       this.hotelBookingService.savePayment(this.anotherpaymentBackup).subscribe(
         (res1) => {
 

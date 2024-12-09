@@ -176,7 +176,8 @@
           <p *ngIf="this.advPanyment > 0"> {{this.advPanyment| currency: currency:'symbol':'1.2-2' }}</p>
         </div>
       </div>
-      <button class="pay-now-btn" (click)="phonepay()" style="margin-bottom: 10px;">PAY NOW</button>
+      <button class="pay-now-btn" (click)="phonepay()" [disabled]="payment.status === 'Paid'" style="margin-bottom: 10px;"
+       [ngClass]="{'disabled-btn-pay': payment.status === 'Paid', 'enabled-btn-pay': payment.status !== 'Paid'}">PAY NOW</button>
 
     </div>
   </div>
