@@ -73,6 +73,7 @@ export class PaymentComponent implements OnInit {
   totalServiceCost: number =0;
   calculatedServices: any;
   noOfExtraChild: string;
+  showContent: boolean = false;
   constructor(
     private acRoute: ActivatedRoute,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -223,6 +224,9 @@ export class PaymentComponent implements OnInit {
     this.listingService.findByPropertyId(id).subscribe(
       (data) => {
         this.businessUser = data.body;
+        if (this.businessUser != null && this.businessUser != undefined ) {
+  this.showContent  = true
+        }
         this.currency = this.businessUser.localCurrency.toUpperCase();
         console.log(' this.businessUser ===='+JSON.stringify( this.businessUser));
         if (this.businessUser.taxDetails.length > 0) {
