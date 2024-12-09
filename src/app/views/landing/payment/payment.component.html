@@ -111,7 +111,7 @@
 
       <div class="row" style="margin-top: 10px;">
         <div class="col-6">
-          <p>Total Booking Amount</p>
+          <p>Total Net Amount</p>
         </div>
         <div class="col-6 text-right">
           <p >{{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</p>
@@ -126,8 +126,19 @@
           <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
         </div>
       </div>
-      <h4 style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
-      <table style=" border: none; width:100%">
+
+      <div class="row">
+        <div class="col-6">
+          <p>Total Booking Amount</p>
+        </div>
+        <div class="col-6 text-right">
+          <p > {{payment.netReceivableAmount +  payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+        </div>
+    
+     </div>
+
+      <h4 *ngIf="services && services.length > 0" style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
+      <table *ngIf="services && services.length > 0" style=" border: none; width:100%">
         <tr *ngFor="let fac of services">
           <td style="width:50%;">
            <div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
@@ -156,13 +167,14 @@
         </tr>
 
       </table>
+
       <div class="row total-amount">
         <div class="col-6">
           <p>Total Payable Amount</p>
         </div>
         <div class="col-6 text-right">
           <!-- <p *ngIf="this.advPanyment === 0 || this.advPanyment === 'null' ||  this.advPanyment === 'undefined'">  {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p> -->
-          <p > {{payment.netReceivableAmount +  payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+          <p > {{booking.payableAmount | currency: currency:'symbol':'1.2-2' }}</p>
         </div>
 
      </div>
@@ -300,7 +312,7 @@
 
   <div class="row" style="margin-top: 10px;">
     <div class="col-6">
-      <p>Total Booking Amount</p>
+      <p>Total Net Amount</p>
     </div>
     <div class="col-6 text-right">
       <p >{{payment.netReceivableAmount | currency: currency:'symbol':'1.2-2' }}</p>
@@ -315,6 +327,17 @@
       <p> {{payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-6">
+      <p>Total Booking Amount</p>
+    </div>
+    <div class="col-6 text-right">
+      <p > {{payment.netReceivableAmount +  payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+    </div>
+
+ </div>
+
   <h4 style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
   <table style=" border: none; width:100%">
     <tr *ngFor="let fac of services">
@@ -345,13 +368,14 @@
     </tr>
 
   </table>
+
   <div class="row total-amount">
     <div class="col-6">
       <p>Total Payable Amount</p>
     </div>
     <div class="col-6 text-right">
       <!-- <p *ngIf="this.advPanyment === 0 || this.advPanyment === 'null' ||  this.advPanyment === 'undefined'">  {{payment.transactionAmount | currency: currency:'symbol':'1.2-2' }}</p> -->
-      <p > {{payment.netReceivableAmount +  payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
+      <p > {{booking.payableAmount | currency: currency:'symbol':'1.2-2' }}</p>
     </div>
 
  </div>
