@@ -147,7 +147,7 @@ export class BookingComponent implements OnInit {
   contentDialog: any;
 
   ngbDate: any;
-  mobileHasError: boolean = true;
+  mobileHasError: boolean = false;
   taxPercentage = 0;
   subTotalAmount: number = 0;
   totalAmount: number = 0;
@@ -409,6 +409,22 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
     };
     this.token.clearBookingDataObj();
   }
+  validateMobile(): void {
+    const mobile = this.booking.mobile;
+    // Allow only numbers and ensure exactly 10 digits
+    if (mobile && /^[0-10]{1,10}$/.test(mobile)) {
+      this.mobileHasError = mobile.length !== 10; // Error if not exactly 10 digits
+    } else {
+      this.mobileHasError = true; // Error for invalid input
+    }
+  }
+  validateForm(): boolean {
+    const mobile = this.booking.mobile;
+    // Ensure the phone number is exactly 10 digits
+    this.mobileHasError = !(mobile && /^\d{10}$/.test(mobile));
+    // Return true if there are no validation errors
+    return !this.mobileHasError;
+  }
 
   setApi() {
     if (this.token.getCountry() === 'New Zealand') {
@@ -511,6 +527,7 @@ this.externalReservationdto =res.body
         console.log("this.businessOfferDto: ", data.body);
       });
   }
+
   applyPromoCode(offer) {
     if (offer !== "") {
       const f = new Date(this.booking.fromDate);
@@ -1700,7 +1717,12 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.netAmount = this.booking.netAmount;
     this.taxAmountBooking =  (this.booking.netAmount * this.booking.taxPercentage) / 100;
-    this.payment.transactionAmount = this.booking.totalAmount;
+    if(this.totalServiceCost != null && this.totalServiceCost != undefined && this.totalServiceCost > 0){
+      this.payment.transactionAmount = this.booking.netAmount + this.taxAmountBooking;
+      }else{
+        this.payment.transactionAmount = this.booking.totalAmount;
+      }
+
     this.payment.amount = this.booking.totalAmount;
     this.payment.propertyId = this.bookingData.propertyId;
     this.payment.email = this.booking.email;
@@ -1853,7 +1875,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
 
     addServiceToBooking(bookingId, savedServices: any[]) {
 this.savedServices?.forEach(element => {
-  element.count = element.quantity
+  element.count = element.quantity;
+  element.afterTaxAmount = element.quantity * element.servicePrice
 });
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
         (data) => {

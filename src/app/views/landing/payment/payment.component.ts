@@ -72,6 +72,7 @@ export class PaymentComponent implements OnInit {
   services: any;
   totalServiceCost: number =0;
   calculatedServices: any;
+  noOfExtraChild: string;
   constructor(
     private acRoute: ActivatedRoute,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -110,7 +111,7 @@ export class PaymentComponent implements OnInit {
 
         })
       }
-
+    this.noOfExtraChild = this.token.getExtraChildCharge();
   }
 
 
