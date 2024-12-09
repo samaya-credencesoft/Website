@@ -2857,7 +2857,7 @@ border-radius: 10px;">
    </div>
    <div style="margin: auto;padding: 20px;">
     <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
-    (click)="submitForm()">Enquiry Now</button>
+    (click)="onCashPaymentSubmit()">Pay At Hotel</button>
     <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
     <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
@@ -3091,7 +3091,7 @@ Invalid Phone number
 
 
       <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
-      (click)="submitForm()">Enquiry Now</button>
+      (click)="onCashPaymentSubmit()">Pay At Hotel</button>
       <button  class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()"  *ngIf="value === true && businessUser.paymentGateway != null"
       (click)="payAndCheckout()">Pay Now</button>
       <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
