@@ -1876,6 +1876,7 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
 this.savedServices?.forEach(element => {
   element.count = element.quantity;
   element.afterTaxAmount = element.quantity * element.servicePrice
+  element.date = new Date();
 });
       this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
         (data) => {
