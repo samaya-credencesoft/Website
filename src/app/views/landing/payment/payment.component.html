@@ -1,4 +1,4 @@
-<div class="main-wrapper payment-page desktop-view">
+<div class="main-wrapper payment-page desktop-view" *ngIf="showContent ===true">
   <!--Title Bar -->
   <title-bar title="Booking Details" subtitle=""></title-bar>
   <!-- Container -->
@@ -184,7 +184,7 @@
 
 
 
-<div class="main-wrapper payment-page mobile-view">
+<div class="main-wrapper payment-page mobile-view" *ngIf="showContent ===true">
   <!--Title Bar -->
   <title-bar title="Booking Details" subtitle=""></title-bar>
   <!-- Container -->
