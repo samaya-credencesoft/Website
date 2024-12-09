@@ -310,3 +310,11 @@ form.stripe {
   border-radius: 8px;
   border: 1px solid #ddd;
 }
+.disabled-btn-pay{
+  background-color: lightgray;
+  color: black;
+}
+.enabled-btn-pay{
+  background-color: black;
+  color: white;
+}

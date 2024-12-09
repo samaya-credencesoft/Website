@@ -54,8 +54,8 @@
 
               <p>{{booking.noOfRooms}}</p>
               <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
-              <p>{{booking.extraPersonCharge}}</p>
-              <p>{{booking.extraChildCharge}}</p>
+              <p>{{booking.extraPersonCharge | currency: currency:'symbol':'1.2-2'}}</p>
+              <p>{{booking.extraChildCharge | currency: currency:'symbol':'1.2-2'}}</p>
             </div>
           </div>
         </div>
@@ -176,7 +176,8 @@
           <p *ngIf="this.advPanyment > 0"> {{this.advPanyment| currency: currency:'symbol':'1.2-2' }}</p>
         </div>
       </div>
-      <button class="pay-now-btn" (click)="phonepay()" style="margin-bottom: 10px;">PAY NOW</button>
+      <button class="pay-now-btn" (click)="phonepay()" [disabled]="payment.status === 'Paid'" style="margin-bottom: 10px;"
+       [ngClass]="{'disabled-btn-pay': payment.status === 'Paid', 'enabled-btn-pay': payment.status !== 'Paid'}">PAY NOW</button>
 
     </div>
   </div>
@@ -240,8 +241,8 @@
 
               <p>{{booking.noOfRooms}}</p>
               <p>{{booking.roomPrice | currency: currency:'symbol':'1.2-2' }}</p>
-              <p>{{booking.extraPersonCharge}}</p>
-              <p>{{booking.extraChildCharge}}</p>
+              <p>{{booking.extraPersonCharge | currency: currency:'symbol':'1.2-2'}}</p>
+              <p>{{booking.extraChildCharge | currency: currency:'symbol':'1.2-2'}}</p>
             </div>
             </div>
           </div>

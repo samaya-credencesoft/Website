@@ -1734,7 +1734,6 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     this.payment.taxAmount = this.booking.gstAmount;
     this.booking.outstandingAmount = this.booking.payableAmount;
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
-    console.log('pricessssssssssssssssss isssssss',this.booking.totalRoomTariffBeforeDiscount);
     this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
     this.booking.taxDetails.forEach(item=>{
       if(item.name === 'CGST'){
@@ -2060,9 +2059,8 @@ this.savedServices?.forEach(element => {
     this.booking.toTime = Number(this.token.getToTime());
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     Logger.log("createBooking ", JSON.stringify(this.booking));
-      console.log('price is',this.booking.roomPrice);
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
-    console.log('price is',this.booking.roomPrice);
+    this.booking.advanceAmount = 0;
     this.paymentLoader = true;
     this.hotelBookingService
       .createBooking(this.booking)
