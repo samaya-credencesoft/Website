@@ -194,7 +194,18 @@
       <table style=" border: none; width:100%">
         <tr>
           <td style="color: black !important;">Total Payable Amount</td>
-          <td style="color: black !important; text-align: right;">{{booking.totalAmount | currency : currency : "symbol" : "1.2-2"}}</td>
+          <td style="color: black !important; text-align: right;">{{(booking.totalAmount + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
+        </tr>
+
+
+        <tr *ngIf="getDetailsData !== 100">
+          <td style="color: black !important;">Due Amount </td>
+          <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" : "1.2-2"}}</td>
+        </tr>
+
+        <tr *ngIf="getDetailsData == 100">
+          <td style="color: black !important;">Due Amount </td>
+          <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
         <!-- <tr>
           <td style="color: black !important;">Advance Amount ({{getDetailsData}}%)</td>
@@ -396,7 +407,7 @@ border-radius: 10px;">
           <table style=" border: none; width:100%">
             <tr>
               <td style="color: black !important;">Total Payable Amount</td>
-              <td style="color: black !important; text-align: right;">{{booking.totalAmount | currency : currency : "symbol" : "1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{(booking.totalAmount + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr>
             <!-- <tr>
               <td style="color: black !important;">Advance Amount ({{getDetailsData}}%)</td>

@@ -319,4 +319,11 @@ export class HotelBookingService {
       { observe: 'response' }
     );
   }
+
+  checkOutStandingAmountByBookingId(bookingId) {
+    return this.http.get<any>(
+      environment.apiUrl + "/api/booking/calculateOutstandingAmount/" + bookingId,
+      { observe: "response" }
+    );
+  }
 }
