@@ -1442,6 +1442,8 @@ if (this.city != null && this.city != undefined) {
     this.selectedServices.push(facility);
     this.token.saveSelectedServices(this.selectedServices);
     this.updateTokenStorage();
+    this.selectedServicesOne = this.selectedServices
+    this.changeDetectorRefs.detectChanges();
   }
 
   increaseQuantity(facility) {
