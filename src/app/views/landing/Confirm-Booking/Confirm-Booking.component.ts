@@ -115,7 +115,7 @@ export class ConfirmBookingComponent implements OnInit {
       this.bookinddata =  this.booking
       // console.log("this.booking" + JSON.stringify(this.booking))
       this.taxAmountOne = this.booking.taxAmount
-      this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
+      this.dueAmount = (this.booking.totalAmount + this.booking.totalServiceAmount) - this.booking.advanceAmount;
     }
 
     if (this.token.getPaymentData() != null && this.token.getPaymentData() != undefined)
@@ -125,7 +125,7 @@ export class ConfirmBookingComponent implements OnInit {
 
     if (this.token.getPayment2Data() != null && this.token.getPayment2Data() != undefined)
     {
-      this.payment2 = this.token.getPayment2Data();
+      this.payment2 = this.token?.getPayment2Data();
     }
 
 
@@ -224,14 +224,14 @@ export class ConfirmBookingComponent implements OnInit {
       this.bookingConfirmed = true;
     }
     this.currency = 'INR';
-    this.extraChildCharge = this.token.getExtraChildCharge(); 
+    this.extraChildCharge = this.token.getExtraChildCharge();
   }
   ngAfterViewInit() {
     if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
       {
         setTimeout(() => {
           this.booking = this.token.getBookingDataObj();
-          this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
+          this.dueAmount = (this.booking.totalAmount + this.booking.totalServiceAmount) - this.booking.advanceAmount;
                     }, 500);
 
       }
@@ -553,7 +553,7 @@ externalreservation.checkinDate = this.booking.fromDate;
 externalreservation.checkoutDate = this.booking.toDate;
 externalreservation.currency = this.booking.currency;
 externalreservation.email = this.booking.email;
-externalreservation.totalAmount = this.booking.totalAmount;
+externalreservation.totalAmount = (this.booking.totalAmount + this.booking.totalServiceAmount);
 externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
 externalreservation.channelId = "24";
 externalreservation.lastModifiedBy ='hotelmate';
@@ -608,6 +608,20 @@ this.externalReservationDtoList.push(externalreservation)
 this.externalReservationdto =res.body
      }
     });
+  }
+
+  addSeviceTopBookingPMS(bookingId, savedServices: any[]) {
+
+    this.hotelBookingService.saveBookingServicePMS(bookingId, savedServices).subscribe(
+      (data) => {
+
+        this.changeDetectorRefs.detectChanges();
+        // Logger.log(JSON.stringify( this.businessServices));
+      },
+      (error) => {
+
+      }
+    );
   }
   accommodationEnquiryBookingData(){
 

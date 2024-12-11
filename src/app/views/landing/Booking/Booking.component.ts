@@ -217,6 +217,7 @@ export class BookingComponent implements OnInit {
   netAmount: number;
   taxAmountBooking: number;
   bookingroomPrice: string;
+  calculateBookingId: any;
 
   constructor(
     private token: TokenStorage,
@@ -476,7 +477,7 @@ externalreservation.checkinDate = this.booking.fromDate;
 externalreservation.checkoutDate = this.booking.toDate;
 externalreservation.currency = this.booking.currency;
 externalreservation.email = this.booking.email;
-externalreservation.totalAmount = this.booking.totalAmount;
+externalreservation.totalAmount = (this.booking.totalAmount + this.booking.totalServiceAmount);
 externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
 externalreservation.channelId = "9";
 externalreservation.lastModifiedBy ='hotelmate';
@@ -2051,14 +2052,16 @@ this.savedServices?.forEach(element => {
     this.booking.businessName = this.businessUser.name;
     this.booking.businessEmail = this.businessUser.email;
     this.booking.roomBooking = true;
-    this.booking.bookingAmount = this.booking.totalAmount;
+    this.booking.bookingAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
     this.booking.groupBooking = false;
     this.booking.available = true;
-    this.booking.payableAmount = this.booking.totalAmount;
+    this.booking.payableAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
+    this.booking.totalAmount =  this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount ;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
+    this.booking.totalServiceAmount= this.totalServiceCost;
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
     this.booking.advanceAmount = 0;
@@ -2171,8 +2174,8 @@ this.savedServices?.forEach(element => {
         summary: 'The server is taking more than usual time,please try again after sometime.'
       });
     }, 25000); */
-  }
 
+  }
   onGoHome() {
     this.locationBack.back();
   }
@@ -2206,8 +2209,7 @@ this.savedServices?.forEach(element => {
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
     }
     this.payment.netReceivableAmount = this.netAmount;
-    this.enquiryForm.min = this.booking.totalAmount;
-    this.enquiryForm.max = this.booking.totalAmount;
+
     // this.enquiryForm.totalAmount = this.booking.totalAmount;
 
     this.enquiryForm.firstName = this.booking.firstName;
@@ -2215,6 +2217,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
     this.enquiryForm.taxAmount = this.taxAmountBooking;
+    this.enquiryForm.min = this.booking.totalAmount + this.booking.totalServiceAmount;
+    this.enquiryForm.max = this.booking.totalAmount + this.booking.totalServiceAmount;
 
     this.enquiryForm.checkOutDate = this.booking.toDate;
     this.enquiryForm.checkInDate = this.booking.fromDate;
@@ -2263,7 +2267,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
-    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.totalAmount = this.booking.totalAmount + this.booking.totalServiceAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
     let taxarray = this.token.getProperty().taxDetails;
