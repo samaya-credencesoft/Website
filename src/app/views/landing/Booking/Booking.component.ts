@@ -2052,10 +2052,10 @@ this.savedServices?.forEach(element => {
     this.booking.businessName = this.businessUser.name;
     this.booking.businessEmail = this.businessUser.email;
     this.booking.roomBooking = true;
-    this.booking.bookingAmount = this.booking.totalAmount;
+    this.booking.bookingAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
     this.booking.groupBooking = false;
     this.booking.available = true;
-    this.booking.payableAmount = this.booking.totalAmount;
+    this.booking.payableAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
     this.booking.totalAmount =  this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount ;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
@@ -2174,7 +2174,7 @@ this.savedServices?.forEach(element => {
         summary: 'The server is taking more than usual time,please try again after sometime.'
       });
     }, 25000); */
-    
+
   }
   onGoHome() {
     this.locationBack.back();
@@ -2209,7 +2209,7 @@ this.savedServices?.forEach(element => {
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
     }
     this.payment.netReceivableAmount = this.netAmount;
-   
+
     // this.enquiryForm.totalAmount = this.booking.totalAmount;
 
     this.enquiryForm.firstName = this.booking.firstName;

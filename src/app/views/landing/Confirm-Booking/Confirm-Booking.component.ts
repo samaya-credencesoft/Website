@@ -224,7 +224,7 @@ export class ConfirmBookingComponent implements OnInit {
       this.bookingConfirmed = true;
     }
     this.currency = 'INR';
-    this.extraChildCharge = this.token.getExtraChildCharge(); 
+    this.extraChildCharge = this.token.getExtraChildCharge();
   }
   ngAfterViewInit() {
     if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
@@ -608,6 +608,20 @@ this.externalReservationDtoList.push(externalreservation)
 this.externalReservationdto =res.body
      }
     });
+  }
+
+  addSeviceTopBookingPMS(bookingId, savedServices: any[]) {
+
+    this.hotelBookingService.saveBookingServicePMS(bookingId, savedServices).subscribe(
+      (data) => {
+
+        this.changeDetectorRefs.detectChanges();
+        // Logger.log(JSON.stringify( this.businessServices));
+      },
+      (error) => {
+
+      }
+    );
   }
   accommodationEnquiryBookingData(){
 

@@ -129,6 +129,13 @@ export class HotelBookingService {
       observe: "response",
     });
   }
+
+  saveBookingServicePMS(bookingId: number,planPropertyServicesList: PropertyServiceDTO[] ) {
+    return this.http.post<Booking>(environment.dashboardUrl + "/api/booking/add/services/"+bookingId, planPropertyServicesList, {
+      observe: "response",
+    });
+  }
+
   externalReservation(externalReservation: externalReservationDtoList[]) {
     this.setApi();
     return this.http.post<any[]>(
