@@ -1116,7 +1116,7 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
     this.enquiryForm.taxDetails.forEach(item=>{
@@ -2278,7 +2278,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.totalAmount = this.booking.totalAmount + this.booking.totalServiceAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
@@ -2608,7 +2608,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
