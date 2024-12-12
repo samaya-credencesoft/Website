@@ -168,7 +168,7 @@
  <button class="sticky-buttonmobile" style="display: none;" (click)="toggleCard()">
   <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
  </button>
- <div class="slide-up-card" id="slideCard">
+ <div class="slide-up-card" id="slideCard" >
   <div class="card-content">
     <div class="Bookingroominfo" style=" border: 1px solid black; border-radius: 8px;">
       <div class="Bookingroomdetails">
@@ -327,7 +327,7 @@
   </div>
 </div>
   <!-- Sticky card -->
-  <div class="sticky-card desktop-view-ui" id="stickyCard" >
+  <div class="sticky-card desktop-view-ui" id="stickyCard" style=" height: 88vh; overflow-y: scroll;">
      <!-- Date Section -->
      <div style="    display: flex;
      justify-content: end;
@@ -424,7 +424,6 @@
               <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
             </tr>
-            <!-- Add more rows dynamically based on your data -->
             <tr >
               <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
@@ -451,38 +450,40 @@
             | currency: currency:"symbol":"1.2-2"
             }}</td>
         </tr>
-        <ng-container  *ngIf="selectedServicesOne?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;
-          border-radius: 10px;">
-                      <h4 style="font-weight: bold;">Add-on Services</h4>
+            <!-- Add more rows dynamically based on your data -->
+            <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
+              <h4 style="font-weight: bold;">Add-on Services</h4>
 
-                        <tr *ngFor="let fac of selectedServicesOne">
-                          <td><div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-                            <div style="display: flex; gap:4px">
+                <tr *ngFor="let fac of selectedServicesOne">
+                  <td><div class="d-flex "  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                    <div style="display: flex; gap:4px">
 
-                              <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
-
-
-                              <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
-
-                              <br>
-
-                              <p>{{fac.name }} * {{fac.quantity}} <br>
-
-                                <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 &&  fac.taxAmount !== null && fac.taxAmount !== undefined">
-                                {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
-                                {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
-                              </b>
-                              <b style="text-align: right;" *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
-
-                              </p>
-                            </div>
-                          </div></td>
-                          <td style="text-align: right;" *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
-                          </td>
-                        </tr>
+                      <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
 
 
-         </ng-container>
+                      <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+                      <br>
+
+                      <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                        <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                        {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                        {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                      </b>
+                      <b *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined || fac.afterTaxAmount == 0" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+                      </p>
+                    </div>
+                  </div></td>
+
+                  <td *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount !== undefined || fac.afterTaxAmount == 0"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+                </tr>
+
+
+
+            </ng-container>
+
+
       </table>
       </div>
     </div>
