@@ -2856,7 +2856,9 @@ border-radius: 10px;">
   </div>
    </div>
    <div style="margin: auto;padding: 20px;">
-    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
+    <button   class="Fillpaybtn" type="button" style="font-size: 19px;"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false && businessUser.paymentGateway == null"
+      (click)="submitFormOne()">Enquiry Now</button>
+    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false && businessUser.paymentGateway != null"
     (click)="onCashPaymentSubmit()">Pay At Hotel</button>
     <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
@@ -3089,13 +3091,13 @@ Invalid Phone number
           <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
         </div>
 
-
-      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
+        <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false && businessUser.paymentGateway == null"
+      (click)="submitFormOne()">Enquiry Now</button>
+      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false && businessUser.paymentGateway != null"
       (click)="onCashPaymentSubmit()">Pay At Hotel</button>
       <button  class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()"  *ngIf="value === true && businessUser.paymentGateway != null"
       (click)="payAndCheckout()">Pay Now</button>
-      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
-      (click)="payAndCheckout()">Pay At Hotel</button>
+      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true">Pay At Hotel</button>
     </div>
   </form>
   </div>
