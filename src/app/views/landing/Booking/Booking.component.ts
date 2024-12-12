@@ -77,6 +77,7 @@ export class BookingComponent implements OnInit {
   parameterss3:Para[];
   socialmedialist:any;
   externalReservationDtoList:externalReservationDtoList[];
+  propertyServices:PropertyServiceDTO[];
   policies = [];
   businessTypeName: string;
   parameterss4:Para[];
@@ -503,6 +504,17 @@ roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
 externalreservation.roomDetails = this.reservationRoomDetails;
+this.propertyServices = this.savedServices;
+this.propertyServices?.forEach(ele => {
+  ele.count = ele.quantity;
+  ele.id = null;
+  ele.date = new Date().toISOString().split('T')[0];
+  ele.logoUrl = null;
+  ele.imageUrl = null;
+  ele.description = null;
+ele.organisationId = null;
+});
+externalreservation.services = this.propertyServices;
 externalreservation.taxAmount = this.booking.taxAmount;
 // externalreservation.lastModifiedDate = new Date().toString();
 externalreservation.noOfPerson = this.booking.noOfPersons.toString();
