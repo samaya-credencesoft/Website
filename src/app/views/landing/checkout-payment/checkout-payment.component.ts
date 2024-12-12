@@ -114,7 +114,7 @@ export class CheckoutPaymentComponent implements OnInit {
    this.locationBack.back();
    setTimeout(() => {
     window.location.reload();
-  }, 1000);
+  }, 100);
   }
 
   ngOnDestroy(): void {

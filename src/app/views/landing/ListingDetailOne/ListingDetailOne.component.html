@@ -168,7 +168,7 @@
  <button class="sticky-buttonmobile" style="display: none;" (click)="toggleCard()">
   <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
  </button>
- <div class="slide-up-card" id="slideCard">
+ <div class="slide-up-card" id="slideCard" >
   <div class="card-content">
     <div class="Bookingroominfo" style=" border: 1px solid black; border-radius: 8px;">
       <div class="Bookingroomdetails">
@@ -254,37 +254,6 @@
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
             </tr>
             <!-- Add more rows dynamically based on your data -->
-            <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
-              <h4 style="font-weight: bold;">Add-on Services</h4>
-
-                <tr *ngFor="let fac of selectedServicesOne">
-                  <td style="padding-left: 10px;display: flex;justify-content: center;"><div class="d-flex "  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-                    <div style="display: flex; gap:4px">
-
-                      <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
-
-
-                      <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
-
-                      <br>
-
-                      <p>{{fac.name }} * {{fac.quantity}} <br>
-
-                        <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
-                        {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
-                        {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
-                      </b>
-                      <b *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount == undefined || fac.afterTaxAmount == 0" style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
-                      </p>
-                    </div>
-                  </div></td>
-
-                  <td  *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount !== undefined || fac.afterTaxAmount == 0"  style="text-align: right;padding-right: 6px;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
-                </tr>
-
-
-
-            </ng-container>
             <tr >
               <td class="p-1" style="color: black !important;">Total Net Amount :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
@@ -358,7 +327,7 @@
   </div>
 </div>
   <!-- Sticky card -->
-  <div class="sticky-card desktop-view-ui" id="stickyCard" >
+  <div class="sticky-card desktop-view-ui" id="stickyCard" style=" height: 88vh; overflow-y: scroll;">
      <!-- Date Section -->
      <div style="    display: flex;
      justify-content: end;
@@ -446,7 +415,6 @@
 
               </tr>
             </ng-container>
-
             <tr *ngIf="booking.extraPersonCharge" >
               <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
@@ -456,6 +424,32 @@
               <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</td>
             </tr>
+            <tr >
+              <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+                booking.netAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}</td>
+            </tr>
+
+        <tr *ngIf="booking.taxPercentage">
+          <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            (this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100 | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
+
+        <tr >
+          <td class="p-1" style="color: black !important;">Total Amount  :</td>
+          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            (booking.netAmount + ((this.booking.netAmount *
+            this.booking.taxPercentage) /
+            100))+totalExtraAmount
+            | currency: currency:"symbol":"1.2-2"
+            }}</td>
+        </tr>
             <!-- Add more rows dynamically based on your data -->
             <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
               <h4 style="font-weight: bold;">Add-on Services</h4>
@@ -488,64 +482,8 @@
 
 
             </ng-container>
-            <tr >
-              <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-                booking.netAmount
-                | currency: currency:"symbol":"1.2-2"
-                }}</td>
-            </tr>
-
-        <tr *ngIf="booking.taxPercentage">
-          <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
-          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-            (this.booking.netAmount *
-            this.booking.taxPercentage) /
-            100 | currency: currency:"symbol":"1.2-2"
-            }}</td>
-        </tr>
-
-        <tr >
-          <td class="p-1" style="color: black !important;">Total Amount  :</td>
-          <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-            (booking.netAmount + ((this.booking.netAmount *
-            this.booking.taxPercentage) /
-            100))+totalExtraAmount
-            | currency: currency:"symbol":"1.2-2"
-            }}</td>
-        </tr>
-        <ng-container  *ngIf="selectedServicesOne?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;
-          border-radius: 10px;">
-                      <h4 style="font-weight: bold;">Add-on Services</h4>
-
-                        <tr *ngFor="let fac of selectedServicesOne">
-                          <td><div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-                            <div style="display: flex; gap:4px">
-
-                              <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
 
 
-                              <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
-
-                              <br>
-
-                              <p>{{fac.name }} * {{fac.quantity}} <br>
-
-                                <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 &&  fac.taxAmount !== null && fac.taxAmount !== undefined">
-                                {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
-                                {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
-                              </b>
-                              <b style="text-align: right;" *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
-
-                              </p>
-                            </div>
-                          </div></td>
-                          <td style="text-align: right;" *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
-                          </td>
-                        </tr>
-
-
-         </ng-container>
       </table>
       </div>
     </div>
@@ -2317,7 +2255,7 @@
                             {{ plan.showDetails ? 'View Less' : 'View More' }}
                           </a>
                               <div class="d-flex justify-content-center" style="margin:7px">
-                                <button class="btn plan-book" style="background-color:black; color: white; border-radius: 10px; font-weight: bold;" (click)="
+                                <button class="btn" style="background-color:black; color: white; border-radius: 10px; font-weight: bold;" (click)="
                             onPlanSelected(plan, room);
                             booking.roomName = rates.roomName;
                             selectedRoomName = rates.roomName;
@@ -2420,7 +2358,7 @@
                           {{ plan.showDetails ? 'View Less' : 'View More' }}
                         </a>
                             <div class="d-flex justify-content-center" style="margin:7px">
-                              <button class="btn plan-book" style="background-color: black; color: white; border-radius: 10px; font-weight: bold;" (click)="
+                              <button class="btn" style="background-color: black; color: white; border-radius: 10px; font-weight: bold;" (click)="
                     onPlanSelected(plan, room);
                     booking.roomName = rates.roomName;
                     selectedRoomName = rates.roomName;
@@ -2751,7 +2689,7 @@
                           {{ plan.showDetails ? 'View Less' : 'View More' }}
                         </a>
                             <div class="d-flex justify-content-center" style="margin: 7px;">
-                              <button class="btn text-white plan-book" style="    background-color: black;
+                              <button class="btn text-white" style="    background-color: black;
                               color:white !important;
                               border-radius: 10px;
                               font-weight: bold;" (click)="
@@ -2864,7 +2802,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div  class="d-flex justify-content-center" style="margin: 7px;">
-                            <button class="btn text-white plan-book" style="background-color: black; color: white !important; border-radius: 10px; font-weight: bold;" (click)="
+                            <button class="btn text-white" style="background-color: black; color: white !important; border-radius: 10px; font-weight: bold;" (click)="
                   onPlanSelected(plan, room);
                   booking.roomName = rates.roomName;
                   selectedRoomName = rates.roomName;
@@ -4845,7 +4783,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div class="d-flex justify-content-center" style="margin:7px">
-                            <button class="btn plan-book" style="background-color: black; color: white; border-radius: 10px; font-weight: bold;" (click)="
+                            <button class="btn" style="background-color: black; color: white; border-radius: 10px; font-weight: bold;" (click)="
                         onPlanSelected(plan, room);
                         booking.roomName = rates.roomName;
                         selectedRoomName = rates.roomName;
@@ -4948,7 +4886,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div class="d-flex justify-content-center" style="margin:7px">
-                            <button class="btn plan-book " style="background-color: black; color: white; border-radius: 10px; font-weight: bold;" (click)="
+                            <button class="btn" style="background-color: black; color: white; border-radius: 10px; font-weight: bold;" (click)="
                   onPlanSelected(plan, room);
                   booking.roomName = rates.roomName;
                   selectedRoomName = rates.roomName;
@@ -5357,7 +5295,7 @@
                         {{ plan.showDetails ? 'View Less' : 'View More' }}
                       </a>
                           <div class="d-flex justify-content-center" style="margin: 7px;">
-                            <button class="btn text-white plan-book" style="    background-color: black;
+                            <button class="btn text-white" style="    background-color: black;
                             color:white !important;
                             border-radius: 10px;
                             font-weight: bold;" (click)="
@@ -5469,7 +5407,7 @@
                       {{ plan.showDetails ? 'View Less' : 'View More' }}
                     </a>
                         <div  class="d-flex justify-content-center" style="margin: 7px;">
-                          <button class="btn text-white plan-book" style="background-color: black; color: white !important; border-radius: 10px; font-weight: bold;" (click)="
+                          <button class="btn text-white" style="background-color: black; color: white !important; border-radius: 10px; font-weight: bold;" (click)="
                 onPlanSelected(plan, room);
                 booking.roomName = rates.roomName;
                 selectedRoomName = rates.roomName;
@@ -5770,34 +5708,10 @@ padding-right: 10px;
     </div>
   </div>
 </footer>
-  <!-- Error Popup Modal -->
-  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="    width: 50% !important;
-    display: flex
-;
-    justify-content: center;
-    margin: auto;
-
-">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="errorModalLabel">Choose a Different Plan</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>{{ errorMessage }}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn  errorbutton" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 <!-- footer section ends -->
 </html>
 <!-- <router-outlet></router-outlet> -->
+
 
 
 
