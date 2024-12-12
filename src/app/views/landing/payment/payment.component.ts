@@ -105,13 +105,14 @@ export class PaymentComponent implements OnInit {
       this.getBookingDetails(this.bookingNumber, this.bookingEmail);
     });
     this.anotherpaymentBackup = this.token.getPayment2Data()
+    // console.log("this.anotherpaymentBackup ", this.anotherpaymentBackup )
 
-    if ((this.payment == null || this.payment === undefined) &&  this.token.savePayment2Data != null && this.token.savePayment2Data != undefined ) {
+    // if ((this.payment == null || this.payment === undefined) &&  this.token.savePayment2Data != null && this.token.savePayment2Data != undefined ) {
       this.hotelBookingService.savePayment(this.anotherpaymentBackup).subscribe(
         (res1) => {
 
         })
-      }
+      // }
     this.noOfExtraChild = this.token.getExtraChildCharge();
   }
 
@@ -194,12 +195,16 @@ export class PaymentComponent implements OnInit {
           this.getAllServicesById()
           this.getPropertyDetails(this.booking.propertyId);
           this.payment = data.body.paymentDetails[0];
-          this.anotherpaymentBackup = data.body.paymentDetails[0];
-          this.token.savePayment2Data(this.anotherpaymentBackup);
+          // console.log("this.anotherpaymentBackup", this.anotherpaymentBackup);
+          if( this.anotherpaymentBackup === null ||  this.anotherpaymentBackup === undefined) {
+            this.anotherpaymentBackup = data.body.paymentDetails[0];
+            this.token.savePayment2Data(this.anotherpaymentBackup);
+          }
+
           // this.room = data.body.roomDetails;
 
-          console.log(" this.payment =" + JSON.stringify(this.payment));
-          console.log(" this.booking =" + JSON.stringify(this.booking));
+          // console.log(" this.payment =" + JSON.stringify(this.payment));
+          // console.log(" this.booking =" + JSON.stringify(this.booking));
           //  Logger.log(' this.room ='+JSON.stringify( this.room));
           // this.payment.transactionChargeAmount = this.payment.transactionAmount;
           this.getDiffDate(
@@ -228,7 +233,7 @@ export class PaymentComponent implements OnInit {
   this.showContent  = true
         }
         this.currency = this.businessUser.localCurrency.toUpperCase();
-        console.log(' this.businessUser ===='+JSON.stringify( this.businessUser));
+        // console.log(' this.businessUser ===='+JSON.stringify( this.businessUser));
         if (this.businessUser.taxDetails.length > 0) {
           this.taxPercentage = this.businessUser.taxDetails[0].percentage;
         }
@@ -688,7 +693,7 @@ export class PaymentComponent implements OnInit {
       if (response.status === 200) {
         this.paymentLoader = false;
         this.payment = response.body;
-        console.log("payment Intent Response: " + response);
+        // console.log("payment Intent Response: " + response);
       } else{
         this.paymentLoader = false;
       }
@@ -773,7 +778,7 @@ export class PaymentComponent implements OnInit {
       this.paymentLoader = false;
       if (response.status === 200) {
         this.payment = response.body;
-        console.log("payment Intent Response: " + response);
+        // console.log("payment Intent Response: " + response);
 
         this.booking.paymentId = response.body.id;
         this.booking.modeOfPayment = this.payment.paymentMode;
