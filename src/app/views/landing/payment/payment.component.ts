@@ -113,8 +113,7 @@ export class PaymentComponent implements OnInit {
 
         })
       // }
-    this.noOfExtraChild = this.token.getExtraChildCharge();
-  }
+    }
 
 
   ngOnInit() {
