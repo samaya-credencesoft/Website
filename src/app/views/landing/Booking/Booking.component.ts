@@ -500,7 +500,7 @@ roomdetailss.noOfRooms = this.booking.noOfRooms;
 roomdetailss.noOfadult = this.booking.noOfPersons;
 roomdetailss.noOfchild = this.booking.noOfChildren;
 roomdetailss.plan = this.booking.roomRatePlanName;
-roomdetailss.roomRate = this.booking.roomTariffBeforeDiscount;
+roomdetailss.roomRate = (this.booking.roomTariffBeforeDiscount + this.booking.extraChildCharge + this.booking.extraPersonCharge);
 roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
@@ -2084,6 +2084,7 @@ this.savedServices?.forEach(element => {
     this.booking.totalServiceAmount= this.totalServiceCost;
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
+    this.booking.noOfExtraChild = this.booking.noOfExtraChild;
     this.booking.advanceAmount = 0;
     this.paymentLoader = true;
     this.hotelBookingService
