@@ -96,7 +96,7 @@ export class CheckoutPaymentComponent implements OnInit {
     }
   }
   notifyMerchantHandler = (eventType, data): void => {
-    console.log("MERCHANT NOTIFY LOG1", eventType, data);
+    // console.log("MERCHANT NOTIFY LOG1", eventType, data);
     if (eventType === "APP_CLOSED") {
       // Handle the popup close event
       this.paymentLoader = false; // Stop the loader
@@ -112,6 +112,9 @@ export class CheckoutPaymentComponent implements OnInit {
   };
   closewindow(){
    this.locationBack.back();
+   setTimeout(() => {
+    window.location.reload();
+  }, 1000);
   }
 
   ngOnDestroy(): void {

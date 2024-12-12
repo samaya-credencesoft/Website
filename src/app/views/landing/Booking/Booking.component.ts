@@ -219,6 +219,7 @@ export class BookingComponent implements OnInit {
   taxAmountBooking: number;
   bookingroomPrice: string;
   calculateBookingId: any;
+  loadingOne: boolean = false;
 
   constructor(
     private token: TokenStorage,
@@ -1723,6 +1724,7 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     });
   }
   onCashPaymentSubmit() {
+    this.loadingOne = true;
     this.payment.paymentMode = "Cash";
     this.payment.status = "NotPaid";
     this.payment.firstName = this.booking.firstName;
@@ -1957,18 +1959,22 @@ this.savedServices?.forEach(element => {
                 this.changeDetectorRefs.detectChanges();
               }
             );
+
           }
         } else {
           this.paymentLoader = false;
+          this.loadingOne = false;
           this.isSuccess = false;
           this.headerTitle = "Error!";
           this.bodyMessage = "Payment Failed! Code: " + response.status;
           this.showDanger(this.contentDialog);
           this.changeDetectorRefs.detectChanges();
+
         }
       },
       (error) => {
         this.paymentLoader = false;
+        this.loadingOne = false;
         this.isSuccess = false;
         this.headerTitle = "Error!";
         this.bodyMessage = "Payment Failed! Code: " + error.status;
@@ -1976,6 +1982,7 @@ this.savedServices?.forEach(element => {
         this.changeDetectorRefs.detectChanges();
       }
     );
+
   }
   cashOnDelivery() {
     this.cashPayment = true;
@@ -2059,6 +2066,7 @@ this.savedServices?.forEach(element => {
     );
   }
   createBooking() {
+
     this.booking.modeOfPayment = this.payment.paymentMode;
     this.booking.externalSite = "WebSite";
     this.booking.businessName = this.businessUser.name;
@@ -2094,6 +2102,7 @@ this.savedServices?.forEach(element => {
             this.accommodationEnquiryBookingData();
         }, 3000);
           this.router.navigate(['/Confirm-Booking']);
+          this.loadingOne = false;
           if (this.booking.id !== null) {
             this.submitButtonDisable = true;
             this.isSuccess = true;
@@ -2171,6 +2180,7 @@ this.savedServices?.forEach(element => {
           }
         } else {
           this.paymentLoader = false;
+          this.loadingOne = false;
           // this.msgs.push({
           //   severity: 'error',
           //   summary: response.statusText + ':' + response.statusText
