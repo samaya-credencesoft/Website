@@ -43,7 +43,7 @@
               <p>Number Of Rooms</p>
               <p>Room Price</p>
               <p>Extra Pax Charge ({{booking.noOfExtraPerson}})</p>
-              <p>Extra Child Charge ({{noOfExtraChild}})</p>
+              <p>Extra Child Charge ({{booking.noOfChildren}})</p>
             </div>
             <div class="col-6 text-right"  style="font-weight: bold;">
               <p> {{booking.bookingStatus}}</p>
@@ -134,7 +134,7 @@
         <div class="col-6 text-right">
           <p > {{payment.netReceivableAmount +  payment.taxAmount | currency: currency:'symbol':'1.2-2' }}</p>
         </div>
-    
+
      </div>
 
       <h4 *ngIf="services && services.length > 0" style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
@@ -242,7 +242,7 @@
               <p>Number Of Rooms</p>
               <p>Room Price</p>
               <p>Extra Pax Charge ({{booking.noOfExtraPerson}})</p>
-              <p>Extra Child Charge ({{noOfExtraChild}})</p>
+              <p>Extra Child Charge ({{booking.noOfChildren}})</p>
             </div>
             <div class="col-6 text-right"  style="font-weight: bold;">
               <p>{{booking.bookingStatus}}</p>
