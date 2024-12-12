@@ -104,12 +104,12 @@ export class ConfirmBookingComponent implements OnInit {
 
 
       setTimeout(() => {
-        this.businessUser?.socialMediaLinks.forEach(element => {
+        this.businessUser?.socialMediaLinks?.forEach(element => {
           this.socialmedialist=element
         });
                   }, 1000);
 
-    if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
+    if (this.token?.getBookingDataObj() != null && this.token?.getBookingDataObj() != undefined)
     {
       this.booking = this.token.getBookingDataObj();
       this.bookinddata =  this.booking
@@ -118,12 +118,12 @@ export class ConfirmBookingComponent implements OnInit {
       this.dueAmount = (this.booking.totalAmount + this.booking.totalServiceAmount) - this.booking.advanceAmount;
     }
 
-    if (this.token.getPaymentData() != null && this.token.getPaymentData() != undefined)
+    if (this.token?.getPaymentData() != null && this.token?.getPaymentData() != undefined)
     {
       this.payment = this.token.getPaymentData();
     }
 
-    if (this.token.getPayment2Data() != null && this.token.getPayment2Data() != undefined)
+    if (this.token?.getPayment2Data() != null && this.token?.getPayment2Data() != undefined)
     {
       this.payment2 = this.token?.getPayment2Data();
     }
