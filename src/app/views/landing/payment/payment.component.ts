@@ -117,11 +117,11 @@ export class PaymentComponent implements OnInit {
 
 
   ngOnInit() {
-    window["angularComponentReference"] = {
-      component: this,
-      zone: this.ngZone,
-      loadAngularFunction: () => this.stripePaymentSuccess(),
-    };
+    // window["angularComponentReference"] = {
+    //   component: this,
+    //   zone: this.ngZone,
+    //   loadAngularFunction: () => this.stripePaymentSuccess(),
+    // };
   }
 
   mileSecondToNGBDate(date: string) {
