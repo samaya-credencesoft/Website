@@ -90,6 +90,7 @@ export class Booking {
   roomTariffBeforeDiscount: number;
   totalBookingAmount: number;
   totalRoomTariffBeforeDiscount: number;
+  purposeOfVisit: string;
 length: any;
 paymentStatus: any;
 enquiryId:number;
