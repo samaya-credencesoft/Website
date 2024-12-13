@@ -74,6 +74,7 @@ export class PaymentComponent implements OnInit {
   calculatedServices: any;
   noOfExtraChild: string;
   showContent: boolean = false;
+  loadingOne: boolean = false;
   constructor(
     private acRoute: ActivatedRoute,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -191,6 +192,7 @@ export class PaymentComponent implements OnInit {
       .subscribe(
         (data) => {
           this.booking = data.body.bookingDetails;
+          console.log(this.booking, "this.booking")
           this.getAllServicesById()
           this.getPropertyDetails(this.booking.propertyId);
           this.payment = data.body.paymentDetails[0];
@@ -268,6 +270,7 @@ export class PaymentComponent implements OnInit {
     this.cashPayment = true;
   }
   phonepay(){
+    this.loadingOne = true;
     this.payment.callbackUrl = environment.callbackUrlPayment ;
 
     if (this.businessUser.paymentGateway === "paytm") {
@@ -349,6 +352,7 @@ export class PaymentComponent implements OnInit {
           }
         } else {
           this.paymentLoader = false;
+          this.loadingOne = false;
           this.isSuccess = false;
           this.headerTitle = "Error!";
           this.bodyMessage = "Payment Failed! Code: " + response.status;
@@ -373,11 +377,13 @@ export class PaymentComponent implements OnInit {
       this.paymentLoader = false;
       if (response.status === 200) {
         this.payment = response.body;
+
         this.token.saveBookingData(this.booking);
         this.token.savePaymentData(this.payment);
         this.token.savePropertyData(this.businessUser);
 
         this.router.navigate(["/checkout-payment"]);
+        this.loadingOne = false;
       }
     });
   }
