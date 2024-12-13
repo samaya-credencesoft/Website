@@ -192,6 +192,7 @@ export class PaymentComponent implements OnInit {
       .subscribe(
         (data) => {
           this.booking = data.body.bookingDetails;
+          this.token.saveReservationID(this.booking.message);
           console.log(this.booking, "this.booking")
           this.getAllServicesById()
           this.getPropertyDetails(this.booking.propertyId);

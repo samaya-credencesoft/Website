@@ -84,6 +84,7 @@ export const SMS_SUBSCRIPTION = "SMS Subscription";
 export const API_URL_NZ = environment.nzAPIUrl;
 export const API_URL_IN = environment.inAPIUrl;
 export const API_URL_PROMOTION = environment.apiUrlPromotion;
+export const API_URL_BOOKONE = environment.apiUrlOne;
 export const API_URL_ADDRESS = environment.apiUrlAddress;
 export const APP_ID = environment.appId;
 export const dashboardUrl = environment.dashboardUrl;
