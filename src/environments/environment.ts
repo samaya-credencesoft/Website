@@ -24,6 +24,7 @@ export const environment = {
   parentOrganisationId: 1,
   dashboardUrl: 'https://app.bookonelocal.in',
   apiUrl: "https://api.thehotelmate.com",
+  apiUrlOne: "https://api.bookonelocal.in/api-bookone",
   appUrl: 'https://thehotelmate.com',
   androidAppUrl: 'https://play.google.com/store/apps/details?id=nz.co.bookonelocal.customer',
   iosAppUrl: 'https://apps.apple.com/us/app/bookone-local/id1528910778',
