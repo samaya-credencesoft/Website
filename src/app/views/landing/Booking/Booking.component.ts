@@ -2086,6 +2086,7 @@ this.savedServices?.forEach(element => {
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
+    this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
     this.booking.advanceAmount = 0;
     this.paymentLoader = true;
     this.hotelBookingService
