@@ -66,5 +66,6 @@ import { TaxDetails } from "./TaxDetails";
     bookingId: number;
     taxAmount:number;
     extraChildCharge:number;
+    bookingCommissionAmount:number;
     // counterName:string;
   }

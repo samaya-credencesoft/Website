@@ -1179,6 +1179,7 @@ this.propertyDetails = this.token.getProperty();
     }
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
+    this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
     this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
@@ -2358,6 +2359,7 @@ this.savedServices?.forEach(element => {
     }
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
+    this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
     this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
@@ -2677,6 +2679,7 @@ this.savedServices?.forEach(element => {
     }
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
+    this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
 
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
