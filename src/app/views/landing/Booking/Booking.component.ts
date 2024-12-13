@@ -2360,6 +2360,7 @@ this.savedServices?.forEach(element => {
     }
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
+    this.enquiryForm.noOfExtraChild = Number(this.token.getExtraChildCharge());
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
     this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
