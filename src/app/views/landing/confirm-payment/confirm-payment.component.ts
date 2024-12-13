@@ -104,7 +104,7 @@ updatePaymentOne(){
   this.hotelBookingService
             .savePaymentOne(this.paymentOne)
             .subscribe((res) => {
-            this.payment= res.body;
+            this.paymentOne = res.body;
 })
 
 
