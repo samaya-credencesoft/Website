@@ -20,6 +20,7 @@ export class Booking {
   dayTrip: boolean;
   roomPrice: number;
   airportShuttlePrice: string;
+  message: string;
   customerId: number;
   customerAddress: Address;
   customerCompanyName: string;

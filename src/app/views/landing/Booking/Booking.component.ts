@@ -220,6 +220,7 @@ export class BookingComponent implements OnInit {
   bookingroomPrice: string;
   calculateBookingId: any;
   loadingOne: boolean = false;
+  saveResponseBooking: Booking;
 
   constructor(
     private token: TokenStorage,
@@ -263,7 +264,8 @@ export class BookingComponent implements OnInit {
     this.addServiceList = [];
     this.parameterss =[];
     this.parameterss2 =[];
-    this.externalReservationDtoList =[]
+    this.externalReservationDtoList =[];
+    this.externalReservationdto =[];
     this.parameterss3 =[];
     this.parameterss4 =[];
     if (this.token.getServiceData() !== null) {
@@ -472,6 +474,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   }
 }
   externalReservation(booking){
+
     this.reservationRoomDetails =[];
     let roomdetailss = new RoomDetail();
 let externalreservation = new externalReservationDtoList();
@@ -529,7 +532,11 @@ this.externalReservationDtoList.push(externalreservation)
     .externalReservation(this.externalReservationDtoList)
     .subscribe((res) => {
      if (res.status === 200) {
-this.externalReservationdto =res.body
+      this.externalReservationdto =res.body
+      setTimeout(() => {
+        this.createBookingReservation();
+                  }, 300);
+
      }
     });
   }
@@ -2096,6 +2103,7 @@ this.savedServices?.forEach(element => {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
+          this.saveResponseBooking = response.body;
           this.token.saveBookingDataObj(this.booking);
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
@@ -2199,6 +2207,21 @@ this.savedServices?.forEach(element => {
         summary: 'The server is taking more than usual time,please try again after sometime.'
       });
     }, 25000); */
+
+  }
+
+  createBookingReservation() {
+    this.externalReservationdto?.forEach(ele => {
+      this.saveResponseBooking.message = ele.otaReservationId;
+    }
+  )
+
+    this.hotelBookingService
+      .createBooking(this.saveResponseBooking)
+      .subscribe((response) => {
+
+      });
+
 
   }
   onGoHome() {

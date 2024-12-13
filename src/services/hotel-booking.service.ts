@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {  Injectable } from "@angular/core";
-import { API_URL_IN, API_URL_IO, API_URL_NZ, API_URL_PROMOTION, APP_ID } from "src/app/app.component";
+import { API_URL_BOOKONE, API_URL_IN, API_URL_IO, API_URL_NZ, API_URL_PROMOTION, APP_ID } from "src/app/app.component";
 import { MessageDto } from "src/app/model/MessageDto";
 import { PropertyServiceDTO } from "src/app/model/PropertyServices";
 import { Booking } from "src/app/model/booking";
@@ -20,6 +20,7 @@ import { TokenStorage } from "src/token.storage";
 })
 export class HotelBookingService {
   API_URL: string;
+  apiUrlOne: string;
   constructor(private http: HttpClient, private token: TokenStorage) {
     this.setApi();
     // this.API ="https://testapi.bookonelocal.co.nz/bookone-scheduler"
@@ -285,6 +286,17 @@ export class HotelBookingService {
       { observe: 'response' }
     );
   }
+
+  savePaymentOne(paymentDetails: Payment) {
+    this.setApi();
+    return this.http.post<Payment>(
+      API_URL_BOOKONE + '/api/website/savePayment',
+      paymentDetails,
+      { observe: 'response' }
+    );
+  }
+
+
   getPaymentByReffId(ref: string) {
     this.setApi();
     return this.http.get<Payment[]>(
@@ -293,6 +305,32 @@ export class HotelBookingService {
       { observe: 'response' }
     );
   }
+
+  getPaymentByReffIdOne(ref: any) {
+    this.setApi();
+    return this.http.get<any>(
+      API_URL_BOOKONE +
+      '/api/website/findByExternalBookingID?ExternalBookingId='+ ref,
+      { observe: 'response' }
+    );
+  }
+
+
+  getPaymentByReffIdTwo(ref: string) {
+    this.setApi();
+    return this.http.get<Payment[]>(
+      API_URL_BOOKONE +
+      '/api/website/findPaymentByReferenceNumber/' + ref,
+      { observe: 'response' }
+    );
+  }
+
+
+
+
+
+
+
   getOfferDetailsBySeoFriendlyName(seoName: string) {
     this.setApi();
     return this.http.get<any>(

@@ -48,6 +48,7 @@ const ROLES = "Roles";
 
 
 const ROOM_TYPES = "RoomDetails";
+const RESERVATIONID = "reservationId";
 const PROPERTY_ID = "PropertyId";
 const PROPERTY = 'property';
 const ROOMSDATA = 'roomsData';
@@ -138,6 +139,8 @@ export class TokenStorage {
     return JSON.parse(sessionStorage.getItem(SELECTED_SERVICE_DATA) as string);
 
     }
+
+
 
     public saveBookingRoomPrice(roomPrice: number) {
       localStorage.removeItem(BOOKINGROOMPRICE);
@@ -249,6 +252,15 @@ export class TokenStorage {
     }
   }
 
+  public saveReservationID(reservationId:any) {
+    localStorage.removeItem(RESERVATIONID);
+      if (reservationId !== null || reservationId !== undefined) {
+      localStorage.setItem(RESERVATIONID, reservationId);
+      } else {
+      localStorage.setItem(RESERVATIONID,  '{}');
+      }
+    }
+
   public saveBookingDataObj(booking: Booking) {
     sessionStorage.removeItem(BOOKINGDATAOJC);
       if (booking !== null || booking !== undefined) {
@@ -270,6 +282,9 @@ export class TokenStorage {
   }
   public getCity() {
     return localStorage.getItem(CITY);
+  }
+  public getreservationId() {
+    return localStorage.getItem(RESERVATIONID);
   }
   public getRoomsData(): Room[] {
     return JSON.parse(localStorage.getItem(ROOMSDATA) as string);
