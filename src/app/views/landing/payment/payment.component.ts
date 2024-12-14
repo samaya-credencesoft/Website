@@ -105,7 +105,10 @@ export class PaymentComponent implements OnInit {
       }
       this.getBookingDetails(this.bookingNumber, this.bookingEmail);
     });
-    this.anotherpaymentBackup = this.token.getPayment2Data()
+    if( this.token.getPayment2Data() != null && this.token.getPayment2Data() != undefined){
+      this.anotherpaymentBackup = this.token.getPayment2Data()
+    }
+
     // console.log("this.anotherpaymentBackup ", this.anotherpaymentBackup )
 
     // if ((this.payment == null || this.payment === undefined) &&  this.token.savePayment2Data != null && this.token.savePayment2Data != undefined ) {
@@ -274,7 +277,7 @@ export class PaymentComponent implements OnInit {
     this.loadingOne = true;
     this.payment.callbackUrl = environment.callbackUrlPayment ;
 
-    if (this.businessUser.paymentGateway === "paytm") {
+
       this.payment.paymentMode = "UPI";
       this.payment.status = "NotPaid";
       this.payment.businessServiceName = "Accommodation";
@@ -311,17 +314,19 @@ export class PaymentComponent implements OnInit {
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform( new Date().getTime(), "yyyy-MM-dd" );
       Logger.log("this.payment "+ JSON.stringify(this.payment));
+      // this.businessUser.paymentGateway = "paytm"
       this.token.saveBookingData(this.booking);
       this.token.savePaymentData(this.payment);
 
       this.payment.callbackUrl = environment.callbackUrlPayment;
 
-      this.processPaymentPayTM(this.payment);
+      // this.processPaymentPayTM(this.payment);
+      this.paymentIntentPayTm(this.payment);
       // this.processPaymentPayTM(this.payment);
 
       this.cardPaymentAvailable = true;
     }
-  }
+
   processPaymentPayTM(payment: Payment) {
     this.paymentLoader = true;
     this.changeDetectorRefs.detectChanges();

@@ -188,6 +188,15 @@
           <p *ngIf="this.advPanyment > 0"> {{this.advPanyment| currency: currency:'symbol':'1.2-2' }}</p>
         </div>
       </div>
+
+      <div style="text-align: center; color: red;
+     margin-top: 10px;
+    font-size: 17px;
+    font-weight: bold;
+      " *ngIf="payment.status === 'Paid'">
+        The advance amount has already been paid.
+      </div>
+
       <button class="pay-now-btn" (click)="phonepay()" [disabled]="payment.status === 'Paid'" style="margin-bottom: 10px;"
        [ngClass]="{'disabled-btn-pay': payment.status === 'Paid', 'enabled-btn-pay': payment.status !== 'Paid'}">PAY NOW</button>
 
@@ -389,8 +398,17 @@
       <p *ngIf="this.advPanyment > 0"> {{this.advPanyment| currency: currency:'symbol':'1.2-2' }}</p>
     </div>
   </div>
+  <div style="text-align: center; color: red;
+      margin-top: 10px;
+    font-size: 19px;
+    font-weight: bold;
+  " *ngIf="payment.status === 'Paid'">
+    The advance amount has already been paid.
+  </div>
  </div>
-      <button class="pay-now-btn" (click)="phonepay()" style="margin-bottom: 10px;">PAY NOW</button>
+      <button class="pay-now-btn" (click)="phonepay()" [disabled]="payment.status === 'Paid'" style="margin-bottom: 10px;"
+      [ngClass]="{'disabled-btn-pay': payment.status === 'Paid', 'enabled-btn-pay': payment.status !== 'Paid'}"
+      >PAY NOW</button>
 
     </div>
   </div>
