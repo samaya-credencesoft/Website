@@ -1032,8 +1032,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     if (EMAIL_Expression.test(this.booking.email) === true &&
       this.booking.firstName != null && this.booking.firstName != undefined && this.booking.firstName != '' &&
       this.booking.lastName != null && this.booking.lastName != undefined && this.booking.lastName != '' &&
-      this.booking.mobile != null && this.booking.mobile != undefined && this.booking.mobile != '' &&
-      this.mobileHasError)
+      this.booking.mobile != null && this.booking.mobile != undefined && this.booking.mobile != '' )
     {
       return true;
     }
