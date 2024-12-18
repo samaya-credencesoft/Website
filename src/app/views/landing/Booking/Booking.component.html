@@ -2847,7 +2847,7 @@ border-radius: 10px;">
 
           <div class="mb-3">
             <label for="notes">Special Notes</label>
-            <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
+            <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3" [(ngModel)]="booking.notes">{{booking.notes}}</textarea>
           </div>
 
         </div>
@@ -3088,7 +3088,7 @@ Invalid Phone number
 
         <div class="mb-3">
           <label for="notes">Special Notes</label>
-          <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
+          <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3"   [(ngModel)]="booking.notes">{{booking.notes}}</textarea>
         </div>
 
         <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm() || !validateFrom()" *ngIf="value === false"

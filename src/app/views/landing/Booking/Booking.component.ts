@@ -2093,6 +2093,7 @@ this.savedServices?.forEach(element => {
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
+    this.booking.notes = this.booking.notes;
     this.booking.advanceAmount = 0;
     this.paymentLoader = true;
     this.hotelBookingService
