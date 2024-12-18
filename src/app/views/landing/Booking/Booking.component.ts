@@ -2591,6 +2591,8 @@ this.savedServices?.forEach(element => {
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.planCode = this.booking.planCode;
 
     this.enquiryForm.firstName = this.booking.firstName;
     this.enquiryForm.lastName = this.booking.lastName;
@@ -2606,7 +2608,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
+    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
