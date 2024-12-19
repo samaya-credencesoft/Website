@@ -3162,5 +3162,26 @@ textarea {
   height: 3rem;
 }
 
+.coupons-giftcards {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+  max-width: fit-content;
+  transition: all 0.3s ease;
+}
 
+.coupons-giftcards i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+p-dialog .p-dialog-header .p-dialog-title{
+  text-align: center; 
+  color: #f44336; position: relative; 
+  background: linear-gradient(45deg, #ff4081, #ffeb3b); 
+  -webkit-background-clip: text; 
+  color: transparent; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
