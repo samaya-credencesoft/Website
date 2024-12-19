@@ -2169,10 +2169,19 @@
   <div *ngIf="bookingConfirmed && isEnquiry" style="padding-top: 15px ;">
 
     <div class="booking-checkout-web-view" style="padding-left: 40px; padding-top: 20px; padding-right: 40px;margin-top: 85px;">
-      <a href="{{PropertyUrl}}" style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+      <a href="{{PropertyUrl}}" style="text-align: left;
+      font-weight: 700;
+      margin-bottom: 20px;
+      margin-top: -7px;
+      cursor: pointer;
+      text-decoration: none;
+      background-color: black;
+      padding: 7px;
+      border-radius: 10px;
+      color: #fff;">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
     </a>
-      <h3 style=" font-weight: bold; ">Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h3>
+      <h3 style=" font-weight: bold; margin-top:15px;">Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h3>
       <p style=" font-weight: bold; ">This is not a confirmed booking.We want to assure
         you that we are diligently handling your booking request and will provide
         a response shortly.
@@ -2410,10 +2419,19 @@ border-radius: 10px;">
 
     <div class="booking-checkout-mobile-view">
       <div  style="padding-left: 15px; padding-top: 20px; padding-right: 15px;margin-top: 65px;">
-        <a href="{{PropertyUrl}}" style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+        <a href="{{PropertyUrl}}" style="text-align: left;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: -7px;
+        cursor: pointer;
+        text-decoration: none;
+        background-color: black;
+        padding: 7px;
+        border-radius: 10px;
+        color: #fff;">
           <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
       </a>
-        <h4  style=" font-weight: bold; "> Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h4>
+        <h4  style=" font-weight: bold; margin-top:15px;"> Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}</h4>
         <p style=" font-weight: bold; ">This is not a confirmed booking.We want to assure
           you that we are diligently handling your booking request and will provide
           a response shortly.
