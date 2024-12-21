@@ -320,8 +320,8 @@ export class PaymentComponent implements OnInit {
 
       this.payment.callbackUrl = environment.callbackUrlPayment;
 
-      // this.processPaymentPayTM(this.payment);
-      this.paymentIntentPayTm(this.payment);
+      this.processPaymentPayTM(this.payment);
+      // this.paymentIntentPayTm(this.payment);
       // this.processPaymentPayTM(this.payment);
 
       this.cardPaymentAvailable = true;
