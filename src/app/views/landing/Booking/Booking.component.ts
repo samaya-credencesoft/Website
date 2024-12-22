@@ -51,8 +51,6 @@ import { EnquiryForm } from "../onboarding-roomdetails-form/onboarding-roomdetai
 import { PropertyEnquiryDto } from "src/model/propertyEnquiryDto";
 import { externalReservationDtoList } from "src/app/model/externalReservation";
 import { RoomDetail } from "src/app/model/RoomDetail";
-import { MessageService } from 'primeng/api';
-
 
 declare var Stripe: any;
 
@@ -62,7 +60,7 @@ declare var window: any;
   templateUrl: "./Booking.component.html",
   styleUrls: ["./Booking.component.scss"],
   encapsulation: ViewEncapsulation.None,
-  providers: [DatePipe, MessageService],
+  providers: [DatePipe],
 })
 export class BookingComponent implements OnInit {
   PropertyUrl: string;
@@ -223,14 +221,6 @@ export class BookingComponent implements OnInit {
   calculateBookingId: any;
   loadingOne: boolean = false;
   saveResponseBooking: Booking;
-  visiblePromotion : boolean = false; // Used for handled when user open Offers dialog box
-  promocodeListChip : any[] = []; // Used for handled to get the promo list and stored in this variable.
-  showTheSelectedCoupon : boolean = false; // Usedd For handled to open the selected coupon section.
-  storedActualNetAmount : number; // Used For handled to stored the Current netAmount.
-  selectedCouponList : any; // Used For handled to store the selected coupon data.
-  storeNightPerRoom : number; // Used for handled to set the room price per night
-
-
 
   constructor(
     private token: TokenStorage,
@@ -241,8 +231,7 @@ export class BookingComponent implements OnInit {
     private listingService: ListingService,
     private router: Router,
     private http: HttpClient,
-    private hotelBookingService: HotelBookingService,
-    private messageService: MessageService
+    private hotelBookingService: HotelBookingService
   ) {
 
     this.message = new MessageDto();
@@ -437,9 +426,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   validateForm(): boolean {
     const mobile = this.booking.mobile;
     // Ensure the phone number is exactly 10 digits
-    if(mobile != null && mobile != ''){
-      this.mobileHasError = !(mobile && /^\d{10}$/.test(mobile));
-    }
+    this.mobileHasError = !(mobile && /^\d{10}$/.test(mobile));
     // Return true if there are no validation errors
     return !this.mobileHasError;
   }
@@ -553,115 +540,13 @@ this.externalReservationDtoList.push(externalreservation)
      }
     });
   }
-
   getOfferDetails() {
     this.hotelBookingService
       .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
       .subscribe((data) => {
         this.businessOfferDto = data.body;
-        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
-    });
-  }
-
-  // Used For handled to check coupons are valid ot not.
-  checkValidCouponOrNot(couponList?){
-    try{
-      const currentDate = new Date();
-      const validCoupons = [];
-      couponList.forEach((coupon) => {
-        if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
-          const startDate = new Date(coupon.startDate);
-          const endDate = new Date(coupon.endDate);
-          // Check if the current date is within the start and end date
-          if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
-            validCoupons.push(coupon);
-          }
-        }
+        console.log("this.businessOfferDto: ", data.body);
       });
-      return validCoupons;
-    }
-    catch(error){
-      console.error("Error in checkValidCouponOrNot : ",error);
-    }
-  }
-
-  isPresentCouponOffer(coupon?){
-    try{
-      if(coupon?.discountPercentage == this.selectedCouponList?.discountPercentage){
-        return true;
-      }
-      else{
-        return false;
-      }
-    }
-    catch(error){
-      console.error("Error in isPresentCouponOffer : ",error);
-    }
-  }
-
-  // Used For handled to set the selected coupon
-  selectedCoupon(coupon?){
-    try{
-      if(this.isPresentCouponOffer(coupon)){
-        this.messageService.add({ key: 'myKey', severity: 'info', summary: 'Info', detail: 'Coupon already applied' });
-        return;
-      }
-      this.selectedCouponList = coupon;
-      if(this.showTheSelectedCoupon){
-        this.bookingRoomPrice = this.storeNightPerRoom;
-        this.booking.netAmount = this.storedActualNetAmount;
-      }
-      this.storeNightPerRoom = this.bookingRoomPrice;
-      const nightPerPrice = this.calculateDiscountedPrice(this.bookingRoomPrice, coupon?.discountPercentage);
-      this.bookingRoomPrice = nightPerPrice;
-      this.storedActualNetAmount = this.booking.netAmount;
-      const finalPrice = this.calculateDiscountedPrice(this.booking.netAmount, coupon?.discountPercentage);
-      this.booking.netAmount = finalPrice;
-      this.booking.totalAmount = this.booking.netAmount + (this.booking.netAmount * this.booking.taxPercentage) / 100;
-      this.showTheSelectedCoupon = true;
-      this.visiblePromotion = false;
-      this.messageService.add({ key: 'myKey', severity: 'success', summary: 'Success', detail: 'Coupon applied successfully' });
-    }
-    catch(error){
-      console.error("Error in selectedCoupon : ",error);
-    }
-  }
-
-  // Used For handled to clear the selected offer
-  clearSelectedCoupons(){
-    try{
-      this.showTheSelectedCoupon = false;
-      this.selectedCouponList = [];
-      this.booking.netAmount = this.storedActualNetAmount;
-      this.bookingRoomPrice = this.storeNightPerRoom;
-      this.booking.totalAmount = this.booking.netAmount + ((this.booking.netAmount * this.booking.taxPercentage) / 100 );
-      this.visiblePromotion = false;
-    }
-    catch(error){
-      console.error("Error in clearSelectedCoupons : ",error);
-    }
-  }
-
-  // Used for handled to calculate the discount percentage
-  calculateDiscountedPrice(originalAmount: number, discountPercentage: number): number {
-    try{
-      const discountAmount = (originalAmount * discountPercentage) / 100;
-      const finalPrice = originalAmount - discountAmount;
-      return finalPrice;
-    }
-    catch(error){
-      console.error("Error in calculateDiscountedPrice : ",error);
-    }
-  }
-
-  // Method to open the modal
-  openPromoListData(): void {
-    try{
-      this.visiblePromotion = true;
-    }
-    catch(error){
-      console.error("Error in openPromoListData : ",error);
-    }
   }
 
   applyPromoCode(offer) {

@@ -112,8 +112,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.component';
-import { DialogModule } from 'primeng/dialog';
-import { ToastModule } from 'primeng/toast';
 
 
 
@@ -127,8 +125,7 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     NgbModule,
     CheckoutModule,
-    DialogModule,
-    ToastModule,
+
     MatCheckboxModule,
     MatInputModule,
     AgmCoreModule.forRoot({ apiKey: environment.googleKey }),

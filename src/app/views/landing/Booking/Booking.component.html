@@ -267,41 +267,6 @@
     </div>
   </div>
 </div>
-
-<p-dialog header="Exclusive Offers" [(visible)]="visiblePromotion" [style]="{width: '50vw'}">
-  <!-- Check the length of promocodeListChip -->
-  <div *ngIf="promocodeListChip.length > 0; else noCoupons" style="font-size: 14px; color: #333;">
-    <!-- Coupon List Inside Modal -->
-    <div *ngFor="let coupon of promocodeListChip;" style="background-color: #f9f9f9; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <strong *ngIf="coupon.couponCode">Coupon Code: {{ coupon.couponCode }}</strong><br>
-        <span *ngIf="coupon.discountPercentage" style="color: #4CAF50;">{{ coupon.discountPercentage }}% OFF</span><br>
-        <span *ngIf="coupon.minimumOrderAmount" style="color: #572def;">Minimum Order: {{coupon.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-        <span *ngIf="coupon.endDate" style="color: #2196f3;">Valid until: {{ coupon.endDate | date:'d MMMM y' }}</span>
-      </div>
-
-      <!-- Image on the right side -->
-      <img *ngIf="coupon.imageList?.[0]?.url" [src]="coupon.imageList[0].url" alt="image"
-        style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-left: 10px;">
-  
-      <button (click)="selectedCoupon(coupon)"
-        style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 8px 16px; cursor: pointer; font-size: 14px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
-        Apply
-      </button>
-    </div>
-  </div>
-
-  <ng-template #noCoupons>
-    <div style="text-align: center; margin: 40px; font-size: 20px; color: #2196f3;">
-      No coupons available.
-    </div>
-  </ng-template>
-</p-dialog>
-
-<div class="card">
-  <p-toast key="myKey"></p-toast>
-</div>
-
   <!-- <div class="container">
     <form #enquiryListForm="ngForm" *ngIf="successMessage === false">
       <h2 class="enquiryh2" style="font-weight: 600 !important;">Where do you want to go?</h2>
@@ -2885,35 +2850,6 @@ border-radius: 10px;">
             <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
           </div>
 
-          <!-- View Coupon section -->
-          <div class="coupons-giftcards" (click)="openPromoListData()">
-            <span>View Coupons & Gift Cards <i class="fas fa-chevron-right"></i></span>
-          </div>
-
-          <div style="text-align: left; font-size: 14px; color: #333; margin-top: 15px;" *ngIf="showTheSelectedCoupon">
-            <div
-              style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-              <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
-              <span *ngIf="selectedCouponList.discountPercentage" style="color: #4CAF50;">{{ selectedCouponList.discountPercentage }}% OFF</span><br>
-              <div style="display: flex; column-gap: 405px;">
-                <div>
-                  <span *ngIf="selectedCouponList.minimumOrderAmount" style="color: #572def;">Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-                  <span *ngIf="selectedCouponList.endDate" style="color: #2196f3;">Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
-                </div>
-                <!-- Image on the right side -->
-                <img *ngIf="selectedCouponList.imageList?.[0]?.url" [src]="selectedCouponList.imageList[0].url" alt="image"
-                  style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px; position: relative;">
-              </div>
-            </div>
-          </div>
-          
-          <div style="height: auto; text-align: center; display: flex; align-items: center; justify-content: right;"
-            *ngIf="showTheSelectedCoupon">
-            <span style="cursor: pointer; color: #f44336; font-size: 16px; font-weight: bold; text-decoration: underline;"
-              (click)="clearSelectedCoupons()">
-              Clear Coupons
-            </span>
-          </div>
         </div>
       </form>
 
@@ -3153,36 +3089,6 @@ Invalid Phone number
         <div class="mb-3">
           <label for="notes">Special Notes</label>
           <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
-        </div>
-
-        <!-- View Coupon section -->
-        <div class="coupons-giftcards" (click)="openPromoListData()">
-          <span>View Coupons & Gift Cards <i class="fas fa-chevron-right"></i></span>
-        </div>
-
-        <div style="text-align: left; font-size: 14px; color: #333; margin-top: 15px;" *ngIf="showTheSelectedCoupon">
-          <div
-            style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-            <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
-            <span *ngIf="selectedCouponList.discountPercentage" style="color: #4CAF50;">{{ selectedCouponList.discountPercentage }}% OFF</span><br>
-            <div style="display: flex; column-gap: 405px;">
-              <div>
-                <span *ngIf="selectedCouponList.minimumOrderAmount" style="color: #572def;">Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-                <span *ngIf="selectedCouponList.endDate" style="color: #2196f3;">Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
-              </div>
-              <!-- Image on the right side -->
-              <img *ngIf="selectedCouponList.imageList?.[0]?.url" [src]="selectedCouponList.imageList[0].url" alt="image"
-                style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px; position: relative;">
-            </div>
-          </div>
-        </div>
-        
-        <div style="height: auto; text-align: center; display: flex; align-items: center; justify-content: right;"
-          *ngIf="showTheSelectedCoupon">
-          <span style="cursor: pointer; color: #f44336; font-size: 16px; font-weight: bold; text-decoration: underline;"
-            (click)="clearSelectedCoupons()">
-            Clear Coupons
-          </span>
         </div>
 
         <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
