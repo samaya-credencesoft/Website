@@ -269,7 +269,7 @@
   </div>
 </div>
 
-<p-dialog header="Exclusive Offers" [(visible)]="visiblePromotion" [style]="{width: '50vw'}">
+<p-dialog header="Exclusive Offers" [(visible)]="visiblePromotion" class="dialogSection">
   <!-- Check the length of promocodeListChip -->
   <div *ngIf="promocodeListChip.length > 0; else noCoupons" style="font-size: 14px; color: #333;">
     <!-- Coupon List Inside Modal -->
@@ -298,6 +298,32 @@
     </div>
   </ng-template>
 </p-dialog>
+
+<!-- Used For handled to show the success message -->
+<div *ngIf="showingSuccessMessage" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-content: center; align-items: center;">
+  <div
+    style="background-color: white; padding: 20px; border-radius: 10px; width: 70%; max-width: 450px; position: relative;">
+
+    <!-- Success Icon in a Circular Background with Animation -->
+    <div class="checkmark-circle" style="font-size: 20px; color: white; text-align: center; margin-bottom: 20px; 
+       background-color: #4CAF50; border-radius: 50%; width: 80px; height: 80px; 
+       display: flex; justify-content: center; align-items: center; margin: 0 auto; margin-top: 10px;">
+      <div class="checkmark" style="font-size: 1.7em;">&#10004;</div> <!-- Success checkmark icon inside circle -->
+    </div>
+
+    <!-- Success Message with Close Icon in the top-right -->
+    <div style="font-size: 24px; margin-bottom: 20px; text-align: center; color: #4CAF50; position: relative;
+      background: linear-gradient(45deg, #4CAF50, #8BC34A);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">
+      <strong>
+        <span style="color: #FF5722;">{{selectedCouponList.couponCode}}</span> Coupon Applied <br> Successfully!
+      </strong>
+    </div>
+  </div>
+</div>
 
 <div class="card">
   <p-toast key="myKey"></p-toast>
@@ -2276,7 +2302,7 @@ border-radius: 10px;">
               <tr *ngIf="booking.netAmount">
                 <td>Total Net Amount</td>
                 <td style="text-align: right;">{{
-                  booking.netAmount
+                  storedActualNetAmount
                   | currency: currency:"symbol":"1.2-2"
                   }}</td>
 
@@ -2285,7 +2311,7 @@ border-radius: 10px;">
               <tr *ngIf="booking.taxPercentage">
                 <td>Tax ({{this.booking.taxPercentage}}%)</td>
                 <td style="text-align: right;">{{
-                  (this.booking.netAmount *
+                  (storedActualNetAmount *
                   this.booking.taxPercentage) /
                   100 | currency: currency:"symbol":"1.2-2"
                   }}</td>
@@ -2295,7 +2321,7 @@ border-radius: 10px;">
               <tr *ngIf="booking.taxPercentage">
                 <td>Total Room Amount</td>
                 <td style="text-align: right;">{{
-                  (booking.netAmount + ((this.booking.netAmount *
+                  (storedActualNetAmount + ((storedActualNetAmount *
                   this.booking.taxPercentage) /
                   100))+totalExtraAmount
                   | currency: currency:"symbol":"1.2-2"
@@ -2345,13 +2371,14 @@ border-radius: 10px;">
           <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
 border-radius: 10px;">
             <table style=" border: none; width:100%">
+              <tr *ngIf="showTheSelectedCoupon">
+                <td>Coupon Applied: </td>
+                <td style="text-align: right;">- {{appliedCoupon | currency : currency : "symbol" : "1.2-2"}}</td>
+              </tr>
               <tr>
                 <td>Total Payable Amount</td>
                 <td style="text-align: right;">{{booking.totalAmount | currency : currency : "symbol" : "1.2-2"}}</td>
               </tr>
-
-
-
             </table>
           </div>
         </div>
@@ -2560,7 +2587,7 @@ border-radius: 10px;">
             <tr *ngIf="booking.netAmount">
               <td>Total Net Amount</td>
               <td style="text-align: right;">{{
-                booking.netAmount
+                storedActualNetAmount
                 | currency: currency:"symbol":"1.2-2"
                 }}</td>
 
@@ -2569,7 +2596,7 @@ border-radius: 10px;">
             <tr *ngIf="booking.taxPercentage">
               <td>Tax ({{this.booking.taxPercentage}}%)</td>
               <td style="text-align: right;">{{
-                (this.booking.netAmount *
+                (storedActualNetAmount *
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
                 }}</td>
@@ -2579,7 +2606,7 @@ border-radius: 10px;">
             <tr *ngIf="booking.taxPercentage">
               <td>Total Room Amount</td>
               <td style="text-align: right;">{{
-                (booking.netAmount + ((this.booking.netAmount *
+                (storedActualNetAmount + ((storedActualNetAmount *
                 this.booking.taxPercentage) /
                 100))+totalExtraAmount
                 | currency: currency:"symbol":"1.2-2"
@@ -2626,13 +2653,14 @@ border-radius: 10px;">
 
         <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
           <table style=" border: none; width:100%">
+            <tr *ngIf="showTheSelectedCoupon">
+              <td>Coupon Applied: </td>
+              <td style="text-align: right;">- {{appliedCoupon | currency : currency : "symbol" : "1.2-2"}}</td>
+            </tr>
             <tr>
               <td>Total Payable Amount</td>
               <td style="text-align: right;">{{booking.totalAmount | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr>
-
-
-
           </table>
         </div>
 
@@ -2754,17 +2782,17 @@ border-radius: 10px;">
             <li *ngIf="activeGoogleCenter === false">Plan name: {{booking.roomRatePlanName}}  x {{DiffDate}} Night(s) x {{booking.noOfRooms}} Room(s)  <span>{{(bookingRoomPrice * booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</span></li>
             <li *ngIf="booking.extraPersonCharge">Extra Pax Charges({{booking.noOfExtraPerson}}) <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
             <li *ngIf="booking.extraChildCharge">Extra Child Charges({{booking.noOfExtraChild}}) <span>{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
-            <li *ngIf="booking.netAmount">Total Net Amount  <span>    {{
-              booking.netAmount
+            <li *ngIf="storedActualNetAmount">Total Net Amount  <span>    {{
+              storedActualNetAmount
               | currency: currency:"symbol":"1.2-2"
               }}</span></li>
             <li *ngIf="booking.taxPercentage">Tax ({{this.booking.taxPercentage}}%) <span> {{
-              (this.booking.netAmount *
+              (storedActualNetAmount *
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
               }}</span></li>
             <li>Total Room Amount  <span> {{
-              (booking.netAmount + ((this.booking.netAmount *
+              (storedActualNetAmount + ((storedActualNetAmount *
               this.booking.taxPercentage) /
               100))+totalExtraAmount
               | currency: currency:"symbol":"1.2-2"
@@ -2814,12 +2842,19 @@ border-radius: 10px;">
       <div class="paymentinfo" style="font-weight: bold;">
         <ul>
           <li>Total Payable Amount <span> {{
-            booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+            grandTotalAmount | currency : currency : "symbol" : "1.2-2"
             }}</span></li>
 
           <li>Due Amount  <span> {{
-            booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+            grandTotalAmount | currency : currency : "symbol" : "1.2-2"
             }}</span></li>
+
+          <li *ngIf="showTheSelectedCoupon">
+            Coupon Applied: <span> -{{appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
+          </li>
+          <li *ngIf="showTheSelectedCoupon">
+            To Pay: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
+          </li>
         </ul>
       </div>
 
@@ -2888,15 +2923,21 @@ border-radius: 10px;">
 
           <!-- View Coupon section -->
           <div class="coupons-giftcards" (click)="openPromoListData()">
-            <span>View Coupons & Gift Cards <i class="fas fa-chevron-right"></i></span>
+            <span>
+              <i class="fas fa-gift"></i>
+              View Coupons & Gift Cards
+            </span>
           </div>
 
-          <div style="text-align: left; font-size: 14px; color: #333; margin-top: 15px;" *ngIf="showTheSelectedCoupon">
+          <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon">
             <div
               style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-              <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
+              <div style="display: flex; column-gap: 205px;">
+                <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
+                <span *ngIf="showTheSelectedCoupon" style="height: 0px;" (click)="clearSelectedCoupons()"><i class="bi bi-trash"></i></span>
+              </div>
               <span *ngIf="selectedCouponList.discountPercentage" style="color: #4CAF50;">{{ selectedCouponList.discountPercentage }}% OFF</span><br>
-              <div style="display: flex; column-gap: 405px;">
+              <div style="display: flex; column-gap: 330px;">
                 <div>
                   <span *ngIf="selectedCouponList.minimumOrderAmount" style="color: #572def;">Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
                   <span *ngIf="selectedCouponList.endDate" style="color: #2196f3;">Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
@@ -2906,14 +2947,6 @@ border-radius: 10px;">
                   style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px; position: relative;">
               </div>
             </div>
-          </div>
-
-          <div style="height: auto; text-align: center; display: flex; align-items: center; justify-content: right;"
-            *ngIf="showTheSelectedCoupon">
-            <span style="cursor: pointer; color: #f44336; font-size: 16px; font-weight: bold; text-decoration: underline;"
-              (click)="clearSelectedCoupons()">
-              Clear Coupons
-            </span>
           </div>
         </div>
       </form>
@@ -3013,7 +3046,7 @@ border-radius: 10px;">
           <tr >
             <td class="p-1" style="color: black !important;">Total Net Amount  :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-              booking.netAmount
+              storedActualNetAmount
               | currency: currency:"symbol":"1.2-2"
               }}</td>
           </tr>
@@ -3021,7 +3054,7 @@ border-radius: 10px;">
           <tr *ngIf="booking.taxPercentage">
             <td class="p-1" style="color: black !important;" >Tax ({{this.booking.taxPercentage}}%) :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-              (this.booking.netAmount *
+              (storedActualNetAmount *
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
               }}</td>
@@ -3030,7 +3063,7 @@ border-radius: 10px;">
           <tr >
             <td class="p-1" style="color: black !important;">Total Room Amount  :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-              (booking.netAmount + ((this.booking.netAmount *
+              (storedActualNetAmount  + ((storedActualNetAmount  *
               this.booking.taxPercentage) /
               100))+totalExtraAmount
               | currency: currency:"symbol":"1.2-2"
@@ -3075,24 +3108,27 @@ border-radius: 10px;">
           </div></td>
           <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
-
       </table>
-
-
     </div>
-
 
 
     <!-- Payment Information -->
     <div class="paymentinfo">
       <ul>
         <li>Total Payable Amount <span> {{
-          booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+          grandTotalAmount | currency : currency : "symbol" : "1.2-2"
           }}</span></li>
 
         <li>Due Amount  <span> {{
-          booking.totalAmount | currency : currency : "symbol" : "1.2-2"
+          grandTotalAmount | currency : currency : "symbol" : "1.2-2"
           }}</span></li>
+
+          <li *ngIf="showTheSelectedCoupon">
+            Coupon Applied: <span> -{{appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
+          </li>
+          <li *ngIf="showTheSelectedCoupon">
+            To Pay: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
+          </li>
       </ul>
     </div>
 
@@ -3158,15 +3194,21 @@ Invalid Phone number
 
         <!-- View Coupon section -->
         <div class="coupons-giftcards" (click)="openPromoListData()">
-          <span>View Coupons & Gift Cards <i class="fas fa-chevron-right"></i></span>
+          <span>
+            <i class="fas fa-gift"></i>
+            View Coupons & Gift Cards
+          </span>
         </div>
 
-        <div style="text-align: left; font-size: 14px; color: #333; margin-top: 15px;" *ngIf="showTheSelectedCoupon">
+        <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon">
           <div
             style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-            <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
+            <div style="display: flex; column-gap: 60px;">
+              <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
+              <span *ngIf="showTheSelectedCoupon" style="height: 0px;" (click)="clearSelectedCoupons()"><i class="bi bi-trash"></i></span>
+            </div>
             <span *ngIf="selectedCouponList.discountPercentage" style="color: #4CAF50;">{{ selectedCouponList.discountPercentage }}% OFF</span><br>
-            <div style="display: flex; column-gap: 405px;">
+            <div style="display: flex; column-gap: 330px;">
               <div>
                 <span *ngIf="selectedCouponList.minimumOrderAmount" style="color: #572def;">Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
                 <span *ngIf="selectedCouponList.endDate" style="color: #2196f3;">Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
@@ -3178,15 +3220,7 @@ Invalid Phone number
           </div>
         </div>
 
-        <div style="height: auto; text-align: center; display: flex; align-items: center; justify-content: right;"
-          *ngIf="showTheSelectedCoupon">
-          <span style="cursor: pointer; color: #f44336; font-size: 16px; font-weight: bold; text-decoration: underline;"
-            (click)="clearSelectedCoupons()">
-            Clear Coupons
-          </span>
-        </div>
-
-        <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
+      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
       (click)="submitForm()">Enquiry Now</button>
       <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === true && businessUser.paymentGateway == null"
       (click)="onCashPaymentSubmit()">Pay Later</button>

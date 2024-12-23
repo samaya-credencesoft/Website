@@ -80,6 +80,12 @@ export class BookingComponent implements OnInit {
   storedActualNetAmount : number; // Used For handled to stored the Current netAmount.
   selectedCouponList : any; // Used For handled to store the selected coupon data.
   storeNightPerRoom : number; // Used for handled to set the room price per night
+  howingReceiptData : any;
+  showingSuccessMessage : boolean = false;
+  appliedCoupon : number;
+  grandTotalAmount : number;
+  actualTaxAmount : number;
+
   parameterss3:Para[];
   socialmedialist:any;
   externalReservationDtoList:externalReservationDtoList[];
@@ -389,7 +395,11 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   }
 
   ngOnInit() {
-// this.sendWhatsappMessageToPropertyOwner();
+    this.clearFormField(this.booking);
+    this.storedActualNetAmount = this.booking.netAmount;
+    this.actualTaxAmount = this.booking.gstAmount;
+    this.storeNightPerRoom = this.bookingRoomPrice;
+    // this.sendWhatsappMessageToPropertyOwner();
     this.accommodationData = this.propertyData.businessServiceDtoList?.filter(
       (entry) => entry.name === 'Accommodation'
     );
@@ -410,7 +420,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       this.totalBeforeTaxAmount =
         this.totalBeforeTaxAmount + element.beforeTaxAmount;
     });
-    this.booking.totalAmount =
+    this.grandTotalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount+this.totalServiceCost;
@@ -421,6 +431,20 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
     };
     this.token.clearBookingDataObj();
   }
+
+  clearFormField(bookingData?){
+    try{
+      bookingData.firstName = '';
+      bookingData.lastName = '';
+      bookingData.email = '';
+      bookingData.mobile = '';
+      if(this.booking.notes) bookingData.notes = '';
+    }
+    catch(error){
+      console.error("Error in clearFormField : ",error);
+    }
+  }
+
   validateMobile(): void {
     const mobile = this.booking.mobile;
     // Allow only numbers and ensure exactly 10 digits
@@ -430,6 +454,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       this.mobileHasError = true; // Error for invalid input
     }
   }
+
   validateForm(): boolean {
     const mobile = this.booking.mobile;
     // Ensure the phone number is exactly 10 digits
@@ -583,24 +608,22 @@ checkValidCouponOrNot(couponList?){
 selectedCoupon(coupon?){
   try{
     if(this.isPresentCouponOffer(coupon)){
-      this.messageService.add({ key: 'myKey', severity: 'info', summary: 'Info', detail: 'Coupon already applied' });
       return;
     }
-    this.selectedCouponList = coupon;
     if(this.showTheSelectedCoupon){
       this.bookingRoomPrice = this.storeNightPerRoom;
       this.booking.netAmount = this.storedActualNetAmount;
     }
-    this.storeNightPerRoom = this.bookingRoomPrice;
-    const nightPerPrice = this.calculateDiscountedPrice(this.bookingRoomPrice, coupon?.discountPercentage);
-    this.bookingRoomPrice = nightPerPrice;
-    this.storedActualNetAmount = this.booking.netAmount;
-    const finalPrice = this.calculateDiscountedPrice(this.booking.netAmount, coupon?.discountPercentage);
-    this.booking.netAmount = finalPrice;
-    this.booking.totalAmount = this.booking.netAmount + (this.booking.netAmount * this.booking.taxPercentage) / 100;
+    this.selectedCouponList = coupon;
+    const finalPrice = this.calculateDiscountedPrice(this.grandTotalAmount, coupon?.discountPercentage);
+    this.appliedCoupon = finalPrice;
+    this.booking.totalAmount = this.grandTotalAmount - this.appliedCoupon;
     this.showTheSelectedCoupon = true;
     this.visiblePromotion = false;
-    this.messageService.add({ key: 'myKey', severity: 'success', summary: 'Success', detail: 'Coupon applied successfully' });
+    this.showingSuccessMessage = true;
+    setTimeout(() => {
+      this.showingSuccessMessage = false;
+    }, 3000);
   }
   catch(error){
     console.error("Error in selectedCoupon : ",error);
@@ -624,8 +647,7 @@ clearSelectedCoupons(){
 calculateDiscountedPrice(originalAmount: number, discountPercentage: number): number {
   try{
     const discountAmount = (originalAmount * discountPercentage) / 100;
-    const finalPrice = originalAmount - discountAmount;
-    return finalPrice;
+    return discountAmount;
   }
   catch(error){
     console.error("Error in calculateDiscountedPrice : ",error);
@@ -1314,11 +1336,16 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
   }
 
   payAndCheckout() {
+    if(this.showTheSelectedCoupon){
+      this.booking.netAmount = (this.booking.netAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
+      this.booking.discountAmount = this.appliedCoupon;
+    }
+    console.log("Coupon Applied Data is  Pay and check==========>",this.booking);
     this.bookingroomPrice = this.token.getRoomPrice();
     this.submitFormOne();
-
     this.payment.callbackUrl = environment.callbackUrl + this.booking.propertyReservationNumber + "&BookingEngine=true";
-
     if (this.businessUser.paymentGateway === "paytm") {
       this.payment.paymentMode = "UPI";
       this.payment.status = "NotPaid";
@@ -1835,7 +1862,16 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       }
     });
   }
+
   onCashPaymentSubmit() {
+    console.log("Booking  PayLater==========>",this.booking);
+    if(this.showTheSelectedCoupon){
+      this.booking.netAmount = (this.booking.netAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
+      this.booking.discountAmount = this.appliedCoupon;
+    }
+    console.log("Coupon Applied Data is  PayLater==========>",this.booking.totalAmount);
     this.loadingOne = true;
     this.payment.paymentMode = "Cash";
     this.payment.status = "NotPaid";
@@ -2682,8 +2718,14 @@ this.savedServices?.forEach(element => {
     });
   }
   submitForm() {
+    if(this.showTheSelectedCoupon){
+      this.booking.netAmount = (this.booking.netAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
+      this.booking.discountAmount = this.appliedCoupon;
+    }
+    console.log("Coupon Applied Data is  Enquiry==========>",this.booking);
     this.enquiryForm = new EnquiryDto();
-
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
       this.token.getProperty().address.city != null && this.token.getProperty().address.city != undefined)
     {
