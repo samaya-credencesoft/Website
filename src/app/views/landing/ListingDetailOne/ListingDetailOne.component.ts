@@ -2379,13 +2379,37 @@ this.isHeaderVisible = true;
     });
   }
 
+  showAllTheOfferList : any[] = [];
   getOfferList(seo) {
     this.offerService
       .getOfferListFindBySeoFriendlyName(seo)
       .subscribe((data) => {
         this.offersList = data.body;
+        this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
     });
   }
+
+  // Used For handled to check coupons are valid ot not.
+checkValidCouponOrNot(couponList?){
+  try{
+    const currentDate = new Date();
+    const validCoupons = [];
+    couponList.forEach((coupon) => {
+      if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+        const startDate = new Date(coupon.startDate);
+        const endDate = new Date(coupon.endDate);
+        // Check if the current date is within the start and end date
+        if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+          validCoupons.push(coupon);
+        }
+      }
+    });
+    return validCoupons;
+  }
+  catch(error){
+    console.error("Error in checkValidCouponOrNot : ",error);
+  }
+}
 
   getSeverity(status: string) {
     switch (status) {

@@ -508,8 +508,8 @@
   </div>
 
   <!-- Offer Container Section -->
-    <div *ngIf="offersList.length > 0">
-      <p-carousel [value]="offersList" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions"
+    <div *ngIf="showAllTheOfferList?.length > 0">
+      <p-carousel [value]="showAllTheOfferList" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions"
         [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false" style="position: relative; top: 55px;">
         <ng-template let-product pTemplate="item">
           <div class="product-item">
@@ -520,7 +520,7 @@
                 <span class="pipe">|</span>
                 <div class="mobileviewSection">
                   <div class="promo-code-container" >
-                    <span class="use-code-text">Use code</span>
+                    <span class="use-code-text">Use code : </span>
                     <span class="promo-code">{{product.couponCode}}</span>
                   </div>
                   <button class="book-now-btn" (click)="selectedPromotionList(product)">Book
@@ -4428,7 +4428,7 @@ padding-right: 10px;
 </div>
 
 <!-- Add on service end -->
-<span *ngIf="selectedPromotion" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
+<span *ngIf="selectedPromotion" class="promoAppliedText" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
 
 <!-- review section button starts -->
   <div style="display: flex; justify-content: center; margin-top: 20px;" *ngIf="viewAddon" >

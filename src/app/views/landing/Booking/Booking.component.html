@@ -2371,7 +2371,7 @@ border-radius: 10px;">
 border-radius: 10px;">
             <table style=" border: none; width:100%">
               <tr *ngIf="showTheSelectedCoupon">
-                <td>Coupon Applied: </td>
+                <td>Coupon Applied: ({{this.booking.discountPercentage}}%) </td>
                 <td style="text-align: right;">- {{appliedCoupon | currency : currency : "symbol" : "1.2-2"}}</td>
               </tr>
               <tr>
@@ -2931,7 +2931,7 @@ border-radius: 10px;">
           <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon && !selectedPromotionCheck">
             <div
               style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-              <div style="display: flex; column-gap: 350px;">
+              <div style="display: flex; column-gap: 340px;">
                 <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }} (<span *ngIf="selectedCouponList.discountPercentage" style="color: red;">{{ selectedCouponList.discountPercentage }}% OFF)</span></strong>
                 <span *ngIf="showTheSelectedCoupon" style="height: 0px;" (click)="clearSelectedCoupons()"><i class="bi bi-trash"></i></span>
               </div>

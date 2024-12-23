@@ -115,7 +115,7 @@ export class ConfirmBookingComponent implements OnInit {
       this.bookinddata =  this.booking
       // console.log("this.booking" + JSON.stringify(this.booking))
       this.taxAmountOne = this.booking.taxAmount
-      this.dueAmount = (this.booking.totalAmount + this.booking.totalServiceAmount) - this.booking.advanceAmount;
+      this.dueAmount = (this.booking.storedActualNetAmount + this.booking.taxAmountBackUp + this.booking.totalServiceAmount) - this.booking.advanceAmount;
     }
 
     if (this.token?.getPaymentData() != null && this.token?.getPaymentData() != undefined)
@@ -167,7 +167,6 @@ export class ConfirmBookingComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.acRoute.queryParams.subscribe((params) => {
       if (params["businessUser"] !== undefined) {
         this.businessUser = JSON.parse(params["businessUser"]);
@@ -188,7 +187,6 @@ export class ConfirmBookingComponent implements OnInit {
 
       if (params["booking"] !== undefined) {
         this.booking = JSON.parse(params["booking"]);
-
         this.bookingData = this.booking;
         this.fromDate = new NgbDate(
           this.mileSecondToNGBDate(this.booking.fromDate).year,
@@ -226,16 +224,16 @@ export class ConfirmBookingComponent implements OnInit {
     this.currency = 'INR';
     this.extraChildCharge = this.token.getExtraChildCharge();
   }
-  ngAfterViewInit() {
-    if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
-      {
-        setTimeout(() => {
-          this.booking = this.token.getBookingDataObj();
-          this.dueAmount = (this.booking.totalAmount + this.booking.totalServiceAmount) - this.booking.advanceAmount;
-                    }, 500);
+  // ngAfterViewInit() {
+  //   if (this.token.getBookingDataObj() != null && this.token.getBookingDataObj() != undefined)
+  //     {
+  //       setTimeout(() => {
+  //         this.booking = this.token.getBookingDataObj();
+  //         this.dueAmount = (this.booking.totalAmount + this.booking.totalServiceAmount) - this.booking.advanceAmount;
+  //                   }, 500);
 
-      }
-  }
+  //     }
+  // }
   getPaymentInfoByReffId(referenceNumber){
     this.hotelBookingService.getPaymentByReffId(referenceNumber).subscribe((res) => {
       this.payment = res.body[0];

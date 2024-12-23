@@ -122,18 +122,18 @@
           </td>
           <td style="color: black !important; text-align: right;" >
             {{
-              booking.beforeTaxAmount
+              booking.storedActualNetAmount
               | currency: currency:"symbol":"1.2-2"
               }}
           </td>
         </tr>
-        <tr *ngIf="taxAmountOne">
+        <tr *ngIf="booking.taxAmountBackUp">
           <td style="color: black !important;">
             Tax
           </td>
           <td style="color: black !important; text-align: right;">
             {{
-              taxAmountOne | currency: currency:"symbol":"1.2-2"
+              booking.taxAmountBackUp | currency: currency:"symbol":"1.2-2"
               }}
           </td>
         </tr>
@@ -194,7 +194,7 @@
       <table style=" border: none; width:100%">
         <tr>
           <td style="color: black !important;">Total Payable Amount</td>
-          <td style="color: black !important; text-align: right;">{{(booking.totalAmount + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
+          <td style="color: black !important; text-align: right;">{{(booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
 
 
@@ -207,6 +207,17 @@
           <td style="color: black !important;">Due Amount </td>
           <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
+
+        <tr *ngIf="this.booking.discountPercentage > 0">
+          <td style="color: black !important;">Coupon Applied : ({{this.booking.discountPercentage}}%) </td>
+          <td style="color: black !important; text-align: right;">{{-((booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) * this.booking.discountPercentage) / 100 | currency : currency : "symbol" : "1.2-2"}}</td>
+        </tr>
+
+        <tr *ngIf="this.booking.discountPercentage > 0">
+          <td style="color: black !important;">To Pay :</td>
+          <td style="color: black !important; text-align: right;">{{(booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) - ((booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) * this.booking.discountPercentage) / 100 | currency : currency : "symbol" : "1.2-2"}}</td>
+        </tr>
+
         <!-- <tr>
           <td style="color: black !important;">Advance Amount ({{getDetailsData}}%)</td>
           <td style="color: black !important; text-align: right;">{{booking.advanceAmount | currency : currency : "symbol" : "1.2-2"}}</td>
@@ -335,18 +346,18 @@
               </td>
               <td style="color: black !important; text-align: right;" >
                 {{
-                  booking.beforeTaxAmount
+                  booking.storedActualNetAmount
                   | currency: currency:"symbol":"1.2-2"
                   }}
               </td>
             </tr>
-            <tr *ngIf="taxAmountOne">
+            <tr *ngIf="booking.taxAmountBackUp">
               <td style="color: black !important;">
                 Tax Amount
               </td>
               <td style="color: black !important; text-align: right;">
                 {{
-                  taxAmountOne | currency: currency:"symbol":"1.2-2"
+                  booking.taxAmountBackUp | currency: currency:"symbol":"1.2-2"
                   }}
               </td>
             </tr>
@@ -407,7 +418,7 @@ border-radius: 10px;">
           <table style=" border: none; width:100%">
             <tr>
               <td style="color: black !important;">Total Payable Amount</td>
-              <td style="color: black !important; text-align: right;">{{(booking.totalAmount + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{(booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr>
             <!-- <tr>
               <td style="color: black !important;">Advance Amount ({{getDetailsData}}%)</td>
@@ -416,12 +427,22 @@ border-radius: 10px;">
 
             <tr *ngIf="getDetailsData !== 100">
               <td style="color: black !important;">Due Amount </td>
-              <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" : "1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{dueAmount | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr>
 
             <tr *ngIf="getDetailsData == 100">
               <td style="color: black !important;">Due Amount </td>
               <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
+            </tr>
+
+            <tr *ngIf="this.booking.discountPercentage > 0">
+              <td style="color: black !important;">Coupon Applied : ({{this.booking.discountPercentage}}%) </td>
+              <td style="color: black !important; text-align: right;">{{-((booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) * this.booking.discountPercentage) / 100 | currency : currency : "symbol" : "1.2-2"}}</td>
+            </tr>
+
+            <tr *ngIf="this.booking.discountPercentage > 0">
+              <td style="color: black !important;">To Pay :</td>
+              <td style="color: black !important; text-align: right;">{{(booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) - ((booking.storedActualNetAmount + booking.taxAmountBackUp + booking.totalServiceAmount) * this.booking.discountPercentage) / 100 | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr>
 
             <!-- <tr>

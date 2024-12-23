@@ -5250,23 +5250,29 @@ color:#031EAA
   }
 
   .offer-text span {
-    font-size: 28px; /* Adjust the discount percentage for mobile */
+    font-size: 28px;
   }
 
   .promo-code {
-    font-size: 16px; /* Smaller font for promo code */
+    font-size: 16px;
   }
 
   .book-now-btn {
-    margin-top: 10px; /* Add space above button */
-    padding: 12px 25px; /* Adjust button size */
-    font-size: 14px; /* Adjust font size of the button */
+    margin-top: 10px;
+    padding: 12px 12px;
+    font-size: 14px;
   }
   .pipe {
-    display: none; /* Hide pipe on mobile */
+    display: none;
   }
   .promo-code-container{
     height: 50px;
+    column-gap: 0px;
+    margin-right: 5px;
+  }
+  .promoAppliedText{
+    display: flex;
+    margin-left: 15px;
   }
 }
 .mobileviewSection{
