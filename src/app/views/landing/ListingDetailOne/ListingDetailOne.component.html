@@ -478,15 +478,12 @@
 
                   <td *ngIf="fac.afterTaxAmount == null || fac.afterTaxAmount !== undefined || fac.afterTaxAmount == 0"  style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
                 </tr>
-
-
-
             </ng-container>
-
-
       </table>
       </div>
     </div>
+
+    <span *ngIf="selectedPromotion" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
 
     <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;" >
       <button class="reviewbtn" (click)="gotocheckout()">
@@ -510,9 +507,39 @@
     <!-- <button class="btn btn-danger" id="closeCardBtn">Close</button> -->
   </div>
 
+  <!-- Offer Container Section -->
+    <div *ngIf="offersList.length > 0">
+      <p-carousel [value]="offersList" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions"
+        [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false" style="position: relative; top: 55px;">
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <div class="product-item-content">
+              <div class="offer-container"
+                style="background-image: url('assets/images/promotion-banner.png'); background-size: cover;">
+                <span class="offer-text">Grab up to {{product.discountPercentage}}% off</span>
+                <span class="pipe">|</span>
+                <div class="mobileviewSection">
+                  <div class="promo-code-container" >
+                    <span class="use-code-text">Use code</span>
+                    <span class="promo-code">{{product.couponCode}}</span>
+                  </div>
+                  <button class="book-now-btn" (click)="selectedPromotionList(product)">Book
+                    Now</button>
+                </div>
+              </div>
+              <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
+              <div class="car-buttons mt-5">
+                <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
 
- <!-- Desktop view design starts -->
-  <div class="main-wrapper desktop-view-ui"  *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 79px; margin-left: 40px;
+  <!-- Desktop view design starts -->
+  <div class="main-wrapper desktop-view-ui"  *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 15px; margin-left: 40px;
     margin-right: 40px;">
  <!-- check availability section starts -->
  <div   *ngIf="(availableRooms?.length >=0 && availability ==true) || !availability">
@@ -4401,6 +4428,7 @@ padding-right: 10px;
 </div>
 
 <!-- Add on service end -->
+<span *ngIf="selectedPromotion" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
 
 <!-- review section button starts -->
   <div style="display: flex; justify-content: center; margin-top: 20px;" *ngIf="viewAddon" >

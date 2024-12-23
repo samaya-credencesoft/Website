@@ -275,10 +275,9 @@
     <!-- Coupon List Inside Modal -->
     <div *ngFor="let coupon of promocodeListChip;" style="background-color: #f9f9f9; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
       <div>
-        <strong *ngIf="coupon.couponCode">Coupon Code: {{ coupon.couponCode }}</strong><br>
-        <span *ngIf="coupon.discountPercentage" style="color: #4CAF50;">{{ coupon.discountPercentage }}% OFF</span><br>
-        <span *ngIf="coupon.minimumOrderAmount" style="color: #572def;">Minimum Order: {{coupon.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-        <span *ngIf="coupon.endDate" style="color: #2196f3;">Valid until: {{ coupon.endDate | date:'d MMMM y' }}</span>
+        <strong *ngIf="coupon.couponCode">Coupon Code: {{ coupon.couponCode }} (<span *ngIf="coupon.discountPercentage" style="color: red;">{{ coupon.discountPercentage }}% OFF</span>)</strong><br>
+        <span *ngIf="coupon.minimumOrderAmount" >Minimum Order: {{coupon.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
+        <span *ngIf="coupon.endDate" >Valid until: {{ coupon.endDate | date:'d MMMM y' }}</span>
       </div>
 
       <!-- Image on the right side -->
@@ -2850,7 +2849,7 @@ border-radius: 10px;">
             }}</span></li>
 
           <li *ngIf="showTheSelectedCoupon">
-            Coupon Applied: <span> -{{appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
+            Coupon Applied: ({{selectedCouponList.discountPercentage}}%) <span> -{{appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
           </li>
           <li *ngIf="showTheSelectedCoupon">
             To Pay: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
@@ -2922,25 +2921,24 @@ border-radius: 10px;">
           </div>
 
           <!-- View Coupon section -->
-          <div class="coupons-giftcards" (click)="openPromoListData()">
+          <div class="coupons-giftcards" (click)="openPromoListData()" *ngIf="!selectedPromotionCheck">
             <span>
               <i class="fas fa-gift"></i>
               View Coupons & Gift Cards
             </span>
           </div>
 
-          <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon">
+          <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon && !selectedPromotionCheck">
             <div
               style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-              <div style="display: flex; column-gap: 205px;">
-                <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
+              <div style="display: flex; column-gap: 350px;">
+                <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }} (<span *ngIf="selectedCouponList.discountPercentage" style="color: red;">{{ selectedCouponList.discountPercentage }}% OFF)</span></strong>
                 <span *ngIf="showTheSelectedCoupon" style="height: 0px;" (click)="clearSelectedCoupons()"><i class="bi bi-trash"></i></span>
               </div>
-              <span *ngIf="selectedCouponList.discountPercentage" style="color: #4CAF50;">{{ selectedCouponList.discountPercentage }}% OFF</span><br>
               <div style="display: flex; column-gap: 330px;">
                 <div>
-                  <span *ngIf="selectedCouponList.minimumOrderAmount" style="color: #572def;">Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-                  <span *ngIf="selectedCouponList.endDate" style="color: #2196f3;">Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
+                  <span *ngIf="selectedCouponList.minimumOrderAmount" >Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
+                  <span *ngIf="selectedCouponList.endDate" >Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
                 </div>
                 <!-- Image on the right side -->
                 <img *ngIf="selectedCouponList.imageList?.[0]?.url" [src]="selectedCouponList.imageList[0].url" alt="image"
@@ -2954,11 +2952,11 @@ border-radius: 10px;">
   </div>
    </div>
    <div style="margin: auto;padding: 20px;">
-    <button   class="Fillpaybtn" type="button" style="font-size: 19px;"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
+    <button   class="Fillpaybtn" type="button" style="font-size: 19px;"  [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()" *ngIf="value === false"
       (click)="submitForm()">Enquiry Now</button>
-    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === true && businessUser.paymentGateway == null"
+    <button   class="Fillpaybtn" type="button" style="font-size: 19px;" [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()" *ngIf="value === true && businessUser.paymentGateway == null"
     (click)="onCashPaymentSubmit()">Pay Later</button>
-    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()"  *ngIf="value === true && businessUser.paymentGateway != null"
+    <button  class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
     (click)="payAndCheckout()">Pay Now</button>
     <!-- <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
     >Pay At Hotel</button> -->
@@ -3124,7 +3122,7 @@ border-radius: 10px;">
           }}</span></li>
 
           <li *ngIf="showTheSelectedCoupon">
-            Coupon Applied: <span> -{{appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
+            Coupon Applied: ({{selectedCouponList.discountPercentage}}%)<span> -{{appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
           </li>
           <li *ngIf="showTheSelectedCoupon">
             To Pay: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
@@ -3193,25 +3191,24 @@ Invalid Phone number
         </div>
 
         <!-- View Coupon section -->
-        <div class="coupons-giftcards" (click)="openPromoListData()">
+        <div class="coupons-giftcards" (click)="openPromoListData()" *ngIf="!selectedPromotionCheck">
           <span>
             <i class="fas fa-gift"></i>
             View Coupons & Gift Cards
           </span>
         </div>
 
-        <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon">
+        <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;" *ngIf="showTheSelectedCoupon && !selectedPromotionCheck">
           <div
             style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
-            <div style="display: flex; column-gap: 60px;">
-              <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}</strong><br>
+            <div style="display: flex; column-gap: 45px;">
+              <strong *ngIf="selectedCouponList.couponCode">Coupon Code: {{ selectedCouponList.couponCode }}(<span *ngIf="selectedCouponList.discountPercentage" style="color: red;">{{ selectedCouponList.discountPercentage }}% OFF</span>)</strong>
               <span *ngIf="showTheSelectedCoupon" style="height: 0px;" (click)="clearSelectedCoupons()"><i class="bi bi-trash"></i></span>
             </div>
-            <span *ngIf="selectedCouponList.discountPercentage" style="color: #4CAF50;">{{ selectedCouponList.discountPercentage }}% OFF</span><br>
             <div style="display: flex; column-gap: 330px;">
               <div>
-                <span *ngIf="selectedCouponList.minimumOrderAmount" style="color: #572def;">Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-                <span *ngIf="selectedCouponList.endDate" style="color: #2196f3;">Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
+                <span *ngIf="selectedCouponList.minimumOrderAmount" >Minimum Order: {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
+                <span *ngIf="selectedCouponList.endDate" >Valid until: {{ selectedCouponList.endDate | date:'d MMMM y' }}</span>
               </div>
               <!-- Image on the right side -->
               <img *ngIf="selectedCouponList.imageList?.[0]?.url" [src]="selectedCouponList.imageList[0].url" alt="image"
@@ -3220,11 +3217,11 @@ Invalid Phone number
           </div>
         </div>
 
-      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === false"
+      <button   class="Fillpaybtn" type="button"  [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()" *ngIf="value === false"
       (click)="submitForm()">Enquiry Now</button>
-      <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" *ngIf="value === true && businessUser.paymentGateway == null"
+      <button   class="Fillpaybtn" type="button"  [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()" *ngIf="value === true && businessUser.paymentGateway == null"
       (click)="onCashPaymentSubmit()">Pay Later</button>
-      <button  class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()"  *ngIf="value === true && businessUser.paymentGateway != null"
+      <button  class="Fillpaybtn" type="button"  [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"  *ngIf="value === true && businessUser.paymentGateway != null"
       (click)="payAndCheckout()">Pay Now</button>
       <!-- <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true">Pay At Hotel</button> -->
     </div>

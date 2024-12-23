@@ -233,6 +233,7 @@ export class BookingComponent implements OnInit {
   calculateBookingId: any;
   loadingOne: boolean = false;
   saveResponseBooking: Booking;
+  selectedPromotionCheck : boolean = false;
 
   constructor(
     private token: TokenStorage,
@@ -429,6 +430,12 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       zone: this.ngZone,
       loadAngularFunction: () => this.stripePaymentSuccess(),
     };
+    const storedPromo = localStorage.getItem('selectPromo');
+    if(storedPromo == 'true'){
+      this.selectedPromotionCheck = true;
+      const selectedPromoData = localStorage.getItem('selectedPromoData');
+      this.selectedCoupon(JSON.parse(selectedPromoData));
+    }
     this.token.clearBookingDataObj();
   }
 
@@ -1158,8 +1165,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     if (EMAIL_Expression.test(this.booking.email) === true &&
       this.booking.firstName != null && this.booking.firstName != undefined && this.booking.firstName != '' &&
       this.booking.lastName != null && this.booking.lastName != undefined && this.booking.lastName != '' &&
-      this.booking.mobile != null && this.booking.mobile != undefined && this.booking.mobile != '' &&
-      this.mobileHasError)
+      this.booking.mobile != null && this.booking.mobile != undefined && this.booking.mobile != '' && this.validateForm())
     {
       return true;
     }
@@ -1336,6 +1342,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
   }
 
   payAndCheckout() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       this.booking.netAmount = (this.booking.netAmount * this.selectedCouponList.discountPercentage) / 100;
       this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
@@ -1865,13 +1873,15 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
 
   onCashPaymentSubmit() {
     console.log("Booking  PayLater==========>",this.booking);
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       this.booking.netAmount = (this.booking.netAmount * this.selectedCouponList.discountPercentage) / 100;
       this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
       this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
       this.booking.discountAmount = this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.booking.netAmount;
     }
-    console.log("Coupon Applied Data is  PayLater==========>",this.booking.totalAmount);
     this.loadingOne = true;
     this.payment.paymentMode = "Cash";
     this.payment.status = "NotPaid";
@@ -2718,6 +2728,8 @@ this.savedServices?.forEach(element => {
     });
   }
   submitForm() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       this.booking.netAmount = (this.booking.netAmount * this.selectedCouponList.discountPercentage) / 100;
       this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;

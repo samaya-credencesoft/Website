@@ -3164,10 +3164,9 @@ textarea {
 
 p-dialog .p-dialog-header .p-dialog-title{
   text-align: center;
-  color: #f44336; position: relative;
-  background: linear-gradient(45deg, #ff4081, #ffeb3b);
+  color: #f44336; 
+  position: relative;
   -webkit-background-clip: text;
-  color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -3175,7 +3174,7 @@ p-dialog .p-dialog-header .p-dialog-title{
   margin-top: 20px;
   background-color: #000;
   color: #fff;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 13px 25px;
   display: flex;
   align-items: center;
@@ -3183,7 +3182,6 @@ p-dialog .p-dialog-header .p-dialog-title{
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   width: 100%;
-  max-width: 350px;
   margin-bottom: 10px;
 }
 

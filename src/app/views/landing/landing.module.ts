@@ -116,7 +116,7 @@ import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.compo
 import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.component';
 import { MessageService } from 'primeng/api';
 // import { MessageService } from 'primeng/api/messageservice';
-
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -129,7 +129,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule,
     NgbModule,
     CheckoutModule,
-
+    CarouselModule,
     MatCheckboxModule,
     MatInputModule,
     AgmCoreModule.forRoot({ apiKey: environment.googleKey }),

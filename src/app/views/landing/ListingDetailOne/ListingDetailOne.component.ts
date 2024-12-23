@@ -704,6 +704,7 @@ export class ListingDetailOneComponent implements OnInit {
       }
     ]
   };
+  selectedPromotion : boolean = false;
 
   constructor(
     private listingService: ListingService,
@@ -926,7 +927,12 @@ this.selectedServices =[]
 
   }
   blogPosts$: Observable<any> | undefined;
+  responsiveOptions: any[];
+  
   ngOnInit() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
+    this.setResponsiveOption();
     if (this.hotelID != null && this.hotelID != undefined) {
       this.token.saveBookingEngineBoolean('googlehotelcenter')
 
@@ -2372,14 +2378,71 @@ this.isHeaderVisible = true;
       // Logger.log('this.branchList:' + JSON.stringify(this.branchList));
     });
   }
+
   getOfferList(seo) {
     this.offerService
       .getOfferListFindBySeoFriendlyName(seo)
       .subscribe((data) => {
         this.offersList = data.body;
-        // Logger.log('offersList: ' + JSON.stringify(this.offersList));
-      });
+    });
   }
+
+  getSeverity(status: string) {
+    switch (status) {
+        case 'INSTOCK':
+          return 'success';
+        case 'LOWSTOCK':
+          return 'warning';
+        case 'OUTOFSTOCK':
+          return 'danger';
+    }
+  }
+
+  setResponsiveOption(){
+    try{
+      this.responsiveOptions = [
+        {
+          breakpoint: '1024px',
+          numVisible: 1,
+          numScroll: 1
+        },
+        {
+          breakpoint: '768px',
+          numVisible: 1,
+          numScroll: 1
+        }
+      ];
+    }
+    catch(error){
+      console.error("Error in setResponsiveOption : ",error);
+    }
+  }
+
+  selectedPromotionList(promo){
+    try{
+      const offerSection = document.getElementById("accmdOne");
+      if (offerSection) {
+        offerSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+      const offerSection2 = document.getElementById("accmdtwo");
+      if (offerSection2) {
+        offerSection2.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+      this.selectedPromotion = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(promo));
+      localStorage.setItem('selectPromo', 'true');
+    }
+    catch(error){
+      console.error("Error in selectedPromotionList : ",error);
+    }
+  }
+  
   getReview(id) {
     this.loader = true;
     this.listingService.getAllReview(id).subscribe(
