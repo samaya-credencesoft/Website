@@ -5286,3 +5286,22 @@ color:#031EAA
   margin-left: 5px;
   padding: 7px 7px;
 }
+
+@media (min-width: 344px) and (max-width: 882px) {
+  .adjustButtonContainerSection{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .adjustRoomContainerSection{
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .button-section{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding: 8px !important;
+  }
+}

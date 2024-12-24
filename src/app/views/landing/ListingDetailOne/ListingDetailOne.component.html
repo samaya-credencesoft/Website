@@ -2987,7 +2987,7 @@
             <div class="col-4 pl-0 pr-0 float-right filter-card">
               <div class="container">
                 <div class="row">
-                  <div class="col-12 mb-3" *ngIf="this.activeForGoogleHotelCenter == true && !isLoading">
+                  <div class="col-12 mb-3 adjustRoomContainerSection" *ngIf="this.activeForGoogleHotelCenter == true && !isLoading">
                     <div class="card shadow customized-subcard" *ngFor="let room of sortedRooms">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length >= 0">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
@@ -2996,7 +2996,7 @@
                     </div>
                   </div>
 
-                  <div class="col-12 mb-3" *ngIf="!isLoading && this.activeForGoogleHotelCenter == false">
+                  <div class="col-12 mb-3 adjustRoomContainerSection" *ngIf="!isLoading && this.activeForGoogleHotelCenter == false">
                     <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
@@ -3010,9 +3010,8 @@
                     Loading...
                   </div>
 
-                  <div *ngIf="!isLoading" style="margin-top: -18px;
-                    margin-left: 15px;">
-                    <button class="shadow "
+                  <div *ngIf="!isLoading" style="margin-left: 15px;">
+                    <button class="shadow button-section"
                       *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true "
                       (click)="scrollToAccommodationDashmobile()" style="background-color: black;
                 padding: 4px;
@@ -3221,7 +3220,7 @@
               </div>
             </div>
 
-            <div class="col-12 my-2 button-container" style="display: flex; justify-content: center; gap:20px">
+            <div class="col-12 my-2 button-container adjustButtonContainerSection" style="display: flex; justify-content: center; gap:20px">
               <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"
                 [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
                 (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked()">
