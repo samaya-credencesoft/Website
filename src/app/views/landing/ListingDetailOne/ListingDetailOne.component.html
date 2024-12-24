@@ -483,7 +483,10 @@
       </div>
     </div>
 
-    <span *ngIf="selectedPromotion" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
+    <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
+    <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount" style="color: rgb(255, 50, 50);">
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+    </span>
 
     <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;" >
       <button class="reviewbtn" (click)="gotocheckout()">
@@ -527,7 +530,6 @@
                     Now</button>
                 </div>
               </div>
-              <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
             </div>
           </div>
         </ng-template>
@@ -4424,7 +4426,10 @@ padding-right: 10px;
 </div>
 
 <!-- Add on service end -->
-<span *ngIf="selectedPromotion" class="promoAppliedText" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
+<span class="warningSpan" *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount" style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
+<span class="warningSpan" *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount" style="color: rgb(255, 50, 50);">
+  The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+</span>
 
 <!-- review section button starts -->
   <div style="display: flex; justify-content: center; margin-top: 20px;" *ngIf="viewAddon" >

@@ -705,6 +705,7 @@ export class ListingDetailOneComponent implements OnInit {
     ]
   };
   selectedPromotion : boolean = false;
+  selectedPromotionCouponData : any;
 
   constructor(
     private listingService: ListingService,
@@ -2184,7 +2185,12 @@ this.isHeaderVisible = true;
       this.booking.taxAmount;
     this.token.saveServiceData(this.addServiceList);
   }
+
   gotocheckout(){
+    if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
+      localStorage.removeItem('selectedPromoData');
+      localStorage.removeItem('selectPromo');
+    }
     this.token.saveBookingRoomPrice(this.booking.roomPrice);
     this.router.navigate(['/booking']);
   }
@@ -2411,17 +2417,6 @@ checkValidCouponOrNot(couponList?){
   }
 }
 
-  getSeverity(status: string) {
-    switch (status) {
-        case 'INSTOCK':
-          return 'success';
-        case 'LOWSTOCK':
-          return 'warning';
-        case 'OUTOFSTOCK':
-          return 'danger';
-    }
-  }
-
   setResponsiveOption(){
     try{
       this.responsiveOptions = [
@@ -2444,6 +2439,7 @@ checkValidCouponOrNot(couponList?){
 
   selectedPromotionList(promo){
     try{
+      this.selectedPromotionCouponData = promo;
       const offerSection = document.getElementById("accmdOne");
       if (offerSection) {
         offerSection.scrollIntoView({
