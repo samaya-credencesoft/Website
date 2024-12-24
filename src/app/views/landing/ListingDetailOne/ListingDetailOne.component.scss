@@ -3925,7 +3925,6 @@ body {
 @media (min-width: 1181px) {
   .mobile-view-ui {
     display: none;
-
   }
 
   .sticky-buttonmobile  {
@@ -5153,7 +5152,7 @@ color:#031EAA
 /* Offer Container Section */
 .offer-container {
   position: relative;
-  top: 25px;
+  // top: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5274,7 +5273,11 @@ color:#031EAA
     display: flex;
     margin-left: 15px;
   }
+  .carousel-section{
+    top: 75px !important;
+  }
 }
+
 .mobileviewSection{
   display: flex;
 }

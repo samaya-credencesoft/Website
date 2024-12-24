@@ -509,8 +509,8 @@
 
   <!-- Offer Container Section -->
     <div *ngIf="showAllTheOfferList?.length > 0">
-      <p-carousel [value]="showAllTheOfferList" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions"
-        [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false" style="position: relative; top: 55px;">
+      <p-carousel class="carousel-section" [value]="showAllTheOfferList" [numVisible]="1" [numScroll]="1" [responsiveOptions]="responsiveOptions"
+        [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false" style="position: relative; top: 80px;">
         <ng-template let-product pTemplate="item">
           <div class="product-item">
             <div class="product-item-content">
@@ -528,10 +528,6 @@
                 </div>
               </div>
               <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
-              <div class="car-buttons mt-5">
-                <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
-                <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
-              </div>
             </div>
           </div>
         </ng-template>
@@ -539,7 +535,7 @@
     </div>
 
   <!-- Desktop view design starts -->
-  <div class="main-wrapper desktop-view-ui"  *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 15px; margin-left: 40px;
+  <div class="main-wrapper desktop-view-ui"  *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 50px; margin-left: 40px;
     margin-right: 40px;">
  <!-- check availability section starts -->
  <div   *ngIf="(availableRooms?.length >=0 && availability ==true) || !availability">
@@ -2674,7 +2670,7 @@
  <!-- Desktop view design ends -->
 
   <!-- mobile and tab view design starts -->
-  <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined">
+  <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="position: relative; top: 45px;">
     <h2 class="hero-heading">{{businessUser?.name}}</h2>
     <p class="hero-subheading" >{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
 
