@@ -69,7 +69,9 @@ const PROPERTY_URL = 'PropertyUrl';
 const REQUEST_HANDLE = "requestvalue";
 const BOOKINGROOMPRICE = 'bookingPrice';
 const NoOfExtraChild = 'noOfExtraChild';
-const BOOKROOMPRICE = 'bookRoomPrice'
+const BOOKROOMPRICE = 'bookRoomPrice';
+const NoOfNights = 'noOfNights';
+
 
 @Injectable()
 export class TokenStorage {
@@ -578,6 +580,20 @@ export class TokenStorage {
     localStorage.setItem(WEBSITE_BOOKING_URL, '{}');
     }
   }
+
+  public saveNoOfNights(noOfNights: string) {
+    localStorage.removeItem(NoOfNights);
+      if (noOfNights !== null || noOfNights !== undefined) {
+      localStorage.setItem(NoOfNights, noOfNights);
+      } else {
+      localStorage.setItem(NoOfNights, '{}');
+      }
+    }
+
+    public getNoOfNights() {
+      return localStorage.getItem(NoOfNights);
+     }
+
   public saveTime(getTime: string) {
     localStorage.removeItem(GETTIME);
       if (getTime !== null || getTime !== undefined) {
