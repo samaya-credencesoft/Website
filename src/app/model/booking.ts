@@ -97,5 +97,7 @@ paymentStatus: any;
 enquiryId:number;
 storedActualNetAmount : number;
 taxAmountBackUp : number;
+couponCode : string;
+promotionName : string;
   constructor() {}
 }

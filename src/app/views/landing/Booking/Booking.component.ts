@@ -1354,6 +1354,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       this.booking.beforeTaxAmount = this.booking.netAmount;
       const taxPrice = this.calculateDiscountedPrice(this.booking.taxAmount, this.selectedCouponList.discountPercentage);
       this.booking.taxAmount = this.taxAmountBackUp - taxPrice;
+      this.booking.couponCode = this.selectedCouponList.couponCode;
+      this.booking.promotionName = this.selectedCouponList.name;
     }
     else{
       this.booking.discountPercentage = 0;
@@ -1892,6 +1894,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       this.booking.beforeTaxAmount = this.booking.netAmount;
       const taxPrice = this.calculateDiscountedPrice(this.booking.taxAmount, this.selectedCouponList.discountPercentage);
       this.booking.taxAmount = this.taxAmountBackUp - taxPrice;
+      this.booking.couponCode = this.selectedCouponList.couponCode;
+      this.booking.promotionName = this.selectedCouponList.name;
     }
     else{
       this.booking.discountPercentage = 0;
@@ -2744,6 +2748,7 @@ this.savedServices?.forEach(element => {
       }
     });
   }
+
   submitForm() {
     localStorage.removeItem('selectedPromoData');
     localStorage.removeItem('selectPromo');
@@ -2756,6 +2761,8 @@ this.savedServices?.forEach(element => {
       this.booking.beforeTaxAmount = this.booking.netAmount;
       const taxPrice = this.calculateDiscountedPrice(this.booking.taxAmount, this.selectedCouponList.discountPercentage);
       this.booking.taxAmount = this.taxAmountBackUp - taxPrice;
+      this.booking.couponCode = this.selectedCouponList.couponCode;
+      this.booking.promotionName = this.selectedCouponList.name;
     }
     else{
       this.booking.discountPercentage = 0;
