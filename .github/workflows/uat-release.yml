@@ -5,7 +5,7 @@ on: [workflow_dispatch]
 env:
   # service info
   IMAGE_NAME: pms-website
-  SERVICE_NAME: pms-website
+  SERVICE_NAME: pms_website
 
   # cluster info
   stack_name: bookone_core
