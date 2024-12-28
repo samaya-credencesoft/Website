@@ -20,7 +20,7 @@ env:
   GCP_PROJECT: uat-bookone
   GCP_PROJECT_NUMBER: 271002230886
 
-  BRANCH: new-migration
+  BRANCH: release-uat
   
 
 
