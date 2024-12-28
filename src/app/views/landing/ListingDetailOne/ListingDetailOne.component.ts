@@ -707,6 +707,8 @@ export class ListingDetailOneComponent implements OnInit {
       }
     ]
   };
+  selectedPromotion : boolean = false;
+  selectedPromotionCouponData : any;
 
   constructor(
     private listingService: ListingService,
@@ -929,7 +931,12 @@ this.selectedServices =[]
 
   }
   blogPosts$: Observable<any> | undefined;
+  responsiveOptions: any[];
+  
   ngOnInit() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
+    this.setResponsiveOption();
     if (this.hotelID != null && this.hotelID != undefined) {
       this.token.saveBookingEngineBoolean('googlehotelcenter')
 
@@ -2181,26 +2188,12 @@ this.isHeaderVisible = true;
       this.booking.taxAmount;
     this.token.saveServiceData(this.addServiceList);
   }
+
   gotocheckout(){
-
-    this.availableRooms?.forEach((room) => {
-      room.ratesAndAvailabilityDtos?.forEach(ele => {
-        ele.roomRatePlans?.forEach(ele1 =>{
-          if (ele1.name === this.booking.roomRatePlanName) {
-            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
-              this.roomOccupancy = ele1.maximumOccupancy
-              this.showError = true;
-              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
-              this.showErrorPopup();
-            } else {
-              this.router.navigate(['/booking']);
-            }
-          }
-        })
-
-      })
-
-    });
+    if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
+      localStorage.removeItem('selectedPromoData');
+      localStorage.removeItem('selectPromo');
+    }
     this.token.saveBookingRoomPrice(this.booking.roomPrice);
 
     this.token.getFromTime();
@@ -2397,14 +2390,85 @@ this.isHeaderVisible = true;
       // Logger.log('this.branchList:' + JSON.stringify(this.branchList));
     });
   }
+
+  showAllTheOfferList : any[] = [];
   getOfferList(seo) {
     this.offerService
       .getOfferListFindBySeoFriendlyName(seo)
       .subscribe((data) => {
         this.offersList = data.body;
-        // Logger.log('offersList: ' + JSON.stringify(this.offersList));
-      });
+        this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
+    });
   }
+
+  // Used For handled to check coupons are valid ot not.
+checkValidCouponOrNot(couponList?){
+  try{
+    const currentDate = new Date();
+    const validCoupons = [];
+    couponList.forEach((coupon) => {
+      if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+        const startDate = new Date(coupon.startDate);
+        const endDate = new Date(coupon.endDate);
+        // Check if the current date is within the start and end date
+        if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+          validCoupons.push(coupon);
+        }
+      }
+    });
+    return validCoupons;
+  }
+  catch(error){
+    console.error("Error in checkValidCouponOrNot : ",error);
+  }
+}
+
+  setResponsiveOption(){
+    try{
+      this.responsiveOptions = [
+        {
+          breakpoint: '1024px',
+          numVisible: 1,
+          numScroll: 1
+        },
+        {
+          breakpoint: '768px',
+          numVisible: 1,
+          numScroll: 1
+        }
+      ];
+    }
+    catch(error){
+      console.error("Error in setResponsiveOption : ",error);
+    }
+  }
+
+  selectedPromotionList(promo){
+    try{
+      this.selectedPromotionCouponData = promo;
+      const offerSection = document.getElementById("accmdOne");
+      if (offerSection) {
+        offerSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+      const offerSection2 = document.getElementById("accmdtwo");
+      if (offerSection2) {
+        offerSection2.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+      this.selectedPromotion = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(promo));
+      localStorage.setItem('selectPromo', 'true');
+    }
+    catch(error){
+      console.error("Error in selectedPromotionList : ",error);
+    }
+  }
+  
   getReview(id) {
     this.loader = true;
     this.listingService.getAllReview(id).subscribe(
