@@ -21,7 +21,7 @@ env:
   GCP_PROJECT_NUMBER: 271002230886
 
   BRANCH: new-migration
-  angular_env: uat_test
+  
 
 
 
@@ -83,7 +83,7 @@ jobs:
       - name: Build Container Image
         id: build-container-image
         run: |
-         docker build --build-arg CONFIGURATION=uat_test -t ${{ env.IMAGE_URI }}:latest .
+         docker build -t ${{ env.IMAGE_URI }}:latest .
 
       - name: Push Container Image to Registry
         id: upload-container-image
