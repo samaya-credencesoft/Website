@@ -179,7 +179,6 @@ export class ConfirmBookingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("========================>",this.booking);
     this.acRoute.queryParams.subscribe((params) => {
       if (params['businessUser'] !== undefined) {
         this.businessUser = JSON.parse(params['businessUser']);

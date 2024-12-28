@@ -306,8 +306,7 @@
 
       <button (click)="selectedCoupon(coupon)" [disabled]="storedActualNetAmount <= coupon.minimumOrderAmount"
         style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 8px 16px; cursor: pointer; font-size: 14px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);"
-        [ngStyle]="{ 'background-color': (storedActualNetAmount <= coupon.minimumOrderAmount ? '#d3d3d3' : '#4CAF50'), 'cursor': (storedActualNetAmount <= coupon.minimumOrderAmount ? 'not-allowed' : 'pointer') }"
-        [disabled]="storedActualNetAmount <= coupon.minimumOrderAmount">
+        [ngStyle]="{ 'background-color': (storedActualNetAmount <= coupon.minimumOrderAmount ? '#d3d3d3' : '#4CAF50'), 'cursor': (storedActualNetAmount <= coupon.minimumOrderAmount ? 'not-allowed' : 'pointer') }">
         Apply
       </button>
     </div>
@@ -2334,7 +2333,7 @@ border-radius: 10px;">
 
               </tr>
 
-              <tr *ngIf="booking.taxPercentage">
+              <tr *ngIf="booking.taxPercentage && !showTheSelectedCoupon">
                 <td>Tax ({{this.booking.taxPercentage}}%)</td>
                 <td style="text-align: right;">{{
                   (storedActualNetAmount *
@@ -2344,7 +2343,7 @@ border-radius: 10px;">
 
               </tr>
 
-              <tr *ngIf="booking.taxPercentage">
+              <tr *ngIf="booking.taxPercentage && !showTheSelectedCoupon">
                 <td>Total Room Amount</td>
                 <td style="text-align: right;">{{
                   (storedActualNetAmount + ((storedActualNetAmount *
@@ -2352,10 +2351,12 @@ border-radius: 10px;">
                   100))+totalExtraAmount
                   | currency: currency:"symbol":"1.2-2"
                   }}</td>
-
               </tr>
 
-
+              <tr *ngIf="showTheSelectedCoupon">
+                <td class="p-1" style="color: black !important;">Coupon Applied: ({{selectedCouponList.discountPercentage}}%)</td>
+                <td class="p-1" colspan="2" style="color: black !important; text-align: right;"> -{{storedActualNetAmount - appliedCoupon | currency: currency:"symbol":"1.2-2"}}</td>
+              </tr>
 
             </table>
           </div>
@@ -2405,10 +2406,19 @@ border-radius: 10px;">
           <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
 border-radius: 10px;">
             <table style=" border: none; width:100%">
-              <tr *ngIf="showTheSelectedCoupon">
-                <td>Coupon Applied: ({{this.booking.discountPercentage}}%) </td>
-                <td style="text-align: right;">- {{appliedCoupon | currency : currency : "symbol" : "1.2-2"}}</td>
+
+              <tr *ngIf="booking.discountPercentage > 0">
+                <td style="color: black !important;">Taxable Amount </td>
+                <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
+                </td>
               </tr>
+  
+              <tr *ngIf="booking.discountPercentage > 0">
+                <td style="color: black !important;">Tax: ({{this.booking.taxPercentage}}%)</td>
+                <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
+                </td>
+              </tr>
+
               <tr>
                 <td>Total Payable Amount</td>
                 <td style="text-align: right;">{{booking.totalAmount | currency : currency : "symbol" : "1.2-2"}}</td>
@@ -2639,7 +2649,7 @@ border-radius: 10px;">
 
                 </tr>
 
-                <tr *ngIf="booking.taxPercentage">
+                <tr *ngIf="booking.taxPercentage && !showTheSelectedCoupon">
                   <td>Tax ({{this.booking.taxPercentage}}%)</td>
                   <td style="text-align: right;">{{
                     (storedActualNetAmount *
@@ -2649,7 +2659,7 @@ border-radius: 10px;">
 
                 </tr>
 
-                <tr *ngIf="booking.taxPercentage">
+                <tr *ngIf="booking.taxPercentage && !showTheSelectedCoupon">
                   <td>Total Room Amount</td>
                   <td style="text-align: right;">{{
                     (storedActualNetAmount + ((storedActualNetAmount *
@@ -2657,11 +2667,12 @@ border-radius: 10px;">
                     100))+totalExtraAmount
                     | currency: currency:"symbol":"1.2-2"
                     }}</td>
-
                 </tr>
 
-
-
+                <tr *ngIf="showTheSelectedCoupon">
+                  <td class="p-1" style="color: black !important;">Coupon Applied: ({{selectedCouponList.discountPercentage}}%)</td>
+                  <td class="p-1" colspan="2" style="color: black !important; text-align: right;"> -{{storedActualNetAmount - appliedCoupon | currency: currency:"symbol":"1.2-2"}}</td>
+                </tr>
               </table>
             </div>
 
@@ -2709,10 +2720,19 @@ border-radius: 10px;">
             <div class="col-12 "
               style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
               <table style=" border: none; width:100%">
-                <tr *ngIf="showTheSelectedCoupon">
-                  <td>Coupon Applied: </td>
-                  <td style="text-align: right;">- {{appliedCoupon | currency : currency : "symbol" : "1.2-2"}}</td>
+                
+                <tr *ngIf="booking.discountPercentage > 0">
+                  <td style="color: black !important;">Taxable Amount </td>
+                  <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
+                  </td>
                 </tr>
+    
+                <tr *ngIf="booking.discountPercentage > 0">
+                  <td style="color: black !important;">Tax: ({{this.booking.taxPercentage}}%)</td>
+                  <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
+                  </td>
+                </tr>
+
                 <tr>
                   <td>Total Payable Amount</td>
                   <td style="text-align: right;">{{booking.totalAmount | currency : currency : "symbol" : "1.2-2"}}</td>
@@ -2849,18 +2869,20 @@ border-radius: 10px;">
                       storedActualNetAmount
                       | currency: currency:"symbol":"1.2-2"
                       }}</span></li>
-                  <li *ngIf="booking.taxPercentage">Tax ({{this.booking.taxPercentage}}%) <span> {{
+                  <li *ngIf="booking.taxPercentage && !showTheSelectedCoupon">Tax ({{this.booking.taxPercentage}}%) <span> {{
                       (storedActualNetAmount *
                       this.booking.taxPercentage) /
                       100 | currency: currency:"symbol":"1.2-2"
                       }}</span></li>
-                  <li>Total Room Amount <span> {{
+                  <li *ngIf="!showTheSelectedCoupon">Total Room Amount <span> {{
                       (storedActualNetAmount + ((storedActualNetAmount *
                       this.booking.taxPercentage) /
                       100))+totalExtraAmount
                       | currency: currency:"symbol":"1.2-2"
                       }}</span></li>
-
+                  <li *ngIf="showTheSelectedCoupon">
+                    Coupon Applied: ({{selectedCouponList.discountPercentage}}%) <span> -{{storedActualNetAmount - appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -2901,31 +2923,31 @@ border-radius: 10px;">
                     style="text-align: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" :
                     "1.2-2"}}</td>
                 </tr>
-
               </table>
-
-
             </div>
-
-
 
             <!-- Payment Information -->
             <div class="paymentinfo" style="font-weight: bold;">
               <ul>
-                <li>Total Payable Amount <span> {{
+                <li *ngIf="!showTheSelectedCoupon">Total Payable Amount <span> {{
                     grandTotalAmount | currency : currency : "symbol" : "1.2-2"
                     }}</span></li>
 
-                <li>Due Amount <span> {{
+                <li *ngIf="!showTheSelectedCoupon">Due Amount <span> {{
                     grandTotalAmount | currency : currency : "symbol" : "1.2-2"
                     }}</span></li>
 
                 <li *ngIf="showTheSelectedCoupon">
-                  Coupon Applied: ({{selectedCouponList.discountPercentage}}%) <span> -{{appliedCoupon | currency:
+                  Taxable Amount: <span> {{appliedCoupon | currency:
                     currency:"symbol":"1.2-2"}} </span>
                 </li>
+
                 <li *ngIf="showTheSelectedCoupon">
-                  To Pay: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
+                  Tax: ({{this.booking.taxPercentage}}%) <span> {{(appliedCoupon * this.booking.taxPercentage)/100 | currency: currency:"symbol":"1.2-2"}} </span>
+                </li>
+
+                <li *ngIf="showTheSelectedCoupon">
+                  Total Payable Amount: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
                 </li>
               </ul>
             </div>
@@ -3135,7 +3157,7 @@ border-radius: 10px;">
                 }}</td>
             </tr>
 
-            <tr *ngIf="booking.taxPercentage">
+            <tr *ngIf="booking.taxPercentage  && !showTheSelectedCoupon">
               <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
                 (storedActualNetAmount *
@@ -3144,7 +3166,7 @@ border-radius: 10px;">
                 }}</td>
             </tr>
 
-            <tr>
+            <tr *ngIf="!showTheSelectedCoupon">
               <td class="p-1" style="color: black !important;">Total Room Amount :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
                 (storedActualNetAmount + ((storedActualNetAmount *
@@ -3153,9 +3175,12 @@ border-radius: 10px;">
                 | currency: currency:"symbol":"1.2-2"
                 }}</td>
             </tr>
+
+            <tr *ngIf="showTheSelectedCoupon">
+              <td class="p-1" style="color: black !important;">Coupon Applied: ({{selectedCouponList.discountPercentage}}%)</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;"> -{{storedActualNetAmount - appliedCoupon | currency: currency:"symbol":"1.2-2"}}</td>
+            </tr>
           </table>
-
-
 
           <!-- <button (click)="redirectToBooking()" class="editStyle">
           <i class="fas fa-edit"></i>
@@ -3206,20 +3231,25 @@ border-radius: 10px;">
       <!-- Payment Information -->
       <div class="paymentinfo">
         <ul>
-          <li>Total Payable Amount <span> {{
+          <li *ngIf="!showTheSelectedCoupon">Total Payable Amount <span> {{
               grandTotalAmount | currency : currency : "symbol" : "1.2-2"
               }}</span></li>
 
-          <li>Due Amount <span> {{
+          <li *ngIf="!showTheSelectedCoupon">Due Amount <span> {{
               grandTotalAmount | currency : currency : "symbol" : "1.2-2"
               }}</span></li>
 
           <li *ngIf="showTheSelectedCoupon">
-            Coupon Applied: ({{selectedCouponList.discountPercentage}}%)<span> -{{appliedCoupon | currency:
+            Taxable Amount: <span> -{{appliedCoupon | currency:
               currency:"symbol":"1.2-2"}} </span>
           </li>
+
           <li *ngIf="showTheSelectedCoupon">
-            To Pay: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
+            Tax: ({{this.booking.taxPercentage}}%) <span> {{(appliedCoupon * this.booking.taxPercentage)/100 | currency: currency:"symbol":"1.2-2"}} </span>
+          </li>
+
+          <li *ngIf="showTheSelectedCoupon">
+            Total Payable Amount: <span>{{booking.totalAmount | currency: currency:"symbol":"1.2-2"}}</span>
           </li>
         </ul>
       </div>

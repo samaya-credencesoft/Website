@@ -623,9 +623,9 @@ selectedCoupon(coupon?){
       this.booking.netAmount = this.storedActualNetAmount;
     }
     this.selectedCouponList = coupon;
-    const finalPrice = this.calculateDiscountedPrice(this.grandTotalAmount, coupon?.discountPercentage);
+    const finalPrice = this.calculateDiscountedPrice(this.booking.netAmount, coupon?.discountPercentage);
     this.appliedCoupon = finalPrice;
-    this.booking.totalAmount = this.grandTotalAmount - this.appliedCoupon;
+    this.booking.totalAmount = this.appliedCoupon + this.totalServiceCost + ((this.appliedCoupon * this.booking.taxPercentage)/100);
     this.showTheSelectedCoupon = true;
     this.visiblePromotion = false;
     this.showingSuccessMessage = true;
@@ -654,7 +654,7 @@ clearSelectedCoupons(){
 // Used for handled to calculate the discount percentage
 calculateDiscountedPrice(originalAmount: number, discountPercentage: number): number {
   try{
-    const discountAmount = (originalAmount * discountPercentage) / 100;
+    const discountAmount = this.storedActualNetAmount - ((originalAmount * discountPercentage) / 100);
     return discountAmount;
   }
   catch(error){
@@ -1347,13 +1347,12 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
-      this.booking.netAmount = this.storedActualNetAmount - finalPrice;
-      this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.netAmount = finalPrice;
+      this.booking.gstAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
-      this.booking.discountAmount = this.appliedCoupon;
-      this.booking.beforeTaxAmount = this.booking.netAmount;
-      const taxPrice = this.calculateDiscountedPrice(this.booking.taxAmount, this.selectedCouponList.discountPercentage);
-      this.booking.taxAmount = this.taxAmountBackUp - taxPrice;
+      this.booking.discountAmount = this.storedActualNetAmount - this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.storedActualNetAmount;
+      this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.booking.couponCode = this.selectedCouponList.couponCode;
       this.booking.promotionName = this.selectedCouponList.name;
     }
@@ -1887,13 +1886,12 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
     localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
-      this.booking.netAmount = this.storedActualNetAmount - finalPrice;
-      this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.netAmount = finalPrice;
+      this.booking.gstAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
-      this.booking.discountAmount = this.appliedCoupon;
-      this.booking.beforeTaxAmount = this.booking.netAmount;
-      const taxPrice = this.calculateDiscountedPrice(this.booking.taxAmount, this.selectedCouponList.discountPercentage);
-      this.booking.taxAmount = this.taxAmountBackUp - taxPrice;
+      this.booking.discountAmount = this.storedActualNetAmount - this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.storedActualNetAmount;
+      this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.booking.couponCode = this.selectedCouponList.couponCode;
       this.booking.promotionName = this.selectedCouponList.name;
     }
@@ -2252,7 +2250,12 @@ this.savedServices?.forEach(element => {
     this.booking.bookingAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
     this.booking.groupBooking = false;
     this.booking.available = true;
-    this.booking.payableAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
+    if(this.showTheSelectedCoupon){
+      this.booking.payableAmount = this.booking.totalAmount;
+    }
+    else{
+      this.booking.payableAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
+    }
     // this.booking.totalAmount =  this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount ;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
@@ -2273,8 +2276,6 @@ this.savedServices?.forEach(element => {
           this.paymentLoader = false;
           this.booking = response.body;
           this.saveResponseBooking = response.body;
-          this.booking['storedActualNetAmount'] = this.storedActualNetAmount;
-          this.booking['taxAmountBackUp'] = this.taxAmountBackUp;
           this.token.saveBookingDataObj(this.booking);
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
@@ -2486,7 +2487,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
-    this.enquiryForm.totalAmount = this.booking.totalAmount + this.booking.totalServiceAmount;
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
     let taxarray = this.token.getProperty().taxDetails;
@@ -2754,13 +2755,12 @@ this.savedServices?.forEach(element => {
     localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
-      this.booking.netAmount = this.storedActualNetAmount - finalPrice;
-      this.booking.gstAmount = (this.booking.gstAmount * this.selectedCouponList.discountPercentage) / 100;
+      this.booking.netAmount = finalPrice;
+      this.booking.gstAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
-      this.booking.discountAmount = this.appliedCoupon;
-      this.booking.beforeTaxAmount = this.booking.netAmount;
-      const taxPrice = this.calculateDiscountedPrice(this.booking.taxAmount, this.selectedCouponList.discountPercentage);
-      this.booking.taxAmount = this.taxAmountBackUp - taxPrice;
+      this.booking.discountAmount = this.storedActualNetAmount - this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.storedActualNetAmount;
+      this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.booking.couponCode = this.selectedCouponList.couponCode;
       this.booking.promotionName = this.selectedCouponList.name;
     }

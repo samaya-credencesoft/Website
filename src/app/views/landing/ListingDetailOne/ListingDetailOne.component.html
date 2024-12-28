@@ -435,7 +435,7 @@
         <!-- <button (click)="redirectToBooking()" class="editStyle">
           <i class="fas fa-edit"></i>
       </button> -->
-        <table style="border:none; width:100%">
+        <table style="border:none; width:100%; margin-bottom: 15px;">
           <tr>
             <td class="p-1">Room Type:</td>
             <td class="p-1" style="text-align: right;">{{ booking.roomType }}</td>
@@ -448,15 +448,7 @@
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{(booking.roomPrice *
               booking.noOfRooms * DiffDate)| currency: currency:"symbol":"1.2-2"}}</td>
           </tr>
-
-
-
-
-
-
           <h4 *ngIf="activeForGoogleHotelCenter === true" style="font-weight: bold;">Price BreakUps</h4>
-
-
           <ng-container *ngIf="activeForGoogleHotelCenter === true">
             <tr *ngFor="let item of daterangefilter; let i = index">
               <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
@@ -545,12 +537,13 @@
     </div>
 
     <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
-      style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
+      style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
+      The promo code will be applied at the time of booking checkout*
+    </span>
+    
     <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
-      style="color: rgb(255, 50, 50);">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is
-      {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is
-      {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;">
@@ -4771,15 +4764,14 @@ padding-right: 10px;
     </div>
 
     <!-- Add on service end -->
-    <span class="warningSpan"
-      *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
-      style="color: rgb(255, 50, 50);">The promo code will be applied at the time of booking checkout*</span>
-    <span class="warningSpan"
-      *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
-      style="color: rgb(255, 50, 50);">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is
-      {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is
-      {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+    <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
+      style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
+      The promo code will be applied at the time of booking checkout*
+    </span>
+    
+    <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
+      style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <!-- review section button starts -->
