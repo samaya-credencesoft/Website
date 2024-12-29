@@ -326,8 +326,8 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
     style="background-color: white; padding: 20px; border-radius: 10px; width: 70%; max-width: 450px; position: relative;">
 
     <!-- Success Icon in a Circular Background with Animation -->
-    <div class="checkmark-circle" style="font-size: 20px; color: white; text-align: center; margin-bottom: 20px; 
-       background-color: #4CAF50; border-radius: 50%; width: 80px; height: 80px; 
+    <div class="checkmark-circle" style="font-size: 20px; color: white; text-align: center; margin-bottom: 20px;
+       background-color: #4CAF50; border-radius: 50%; width: 80px; height: 80px;
        display: flex; justify-content: center; align-items: center; margin: 0 auto; margin-top: 10px;">
       <div class="checkmark" style="font-size: 1.7em;">&#10004;</div> <!-- Success checkmark icon inside circle -->
     </div>
@@ -2412,7 +2412,7 @@ border-radius: 10px;">
                 <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
                 </td>
               </tr>
-  
+
               <tr *ngIf="booking.discountPercentage > 0">
                 <td style="color: black !important;">Tax: ({{this.booking.taxPercentage}}%)</td>
                 <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
@@ -2720,13 +2720,13 @@ border-radius: 10px;">
             <div class="col-12 "
               style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
               <table style=" border: none; width:100%">
-                
+
                 <tr *ngIf="booking.discountPercentage > 0">
                   <td style="color: black !important;">Taxable Amount </td>
                   <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
                   </td>
                 </tr>
-    
+
                 <tr *ngIf="booking.discountPercentage > 0">
                   <td style="color: black !important;">Tax: ({{this.booking.taxPercentage}}%)</td>
                   <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
@@ -3303,21 +3303,9 @@ border-radius: 10px;">
             </span>
           </div>
 
-          <!-- <div class="Bookingdate-section">
-            <div class="Bookingdate">
-              <h6>Check-in Date</h6>
-              <h6>{{booking.fromDate  | date: 'dd MMM' }}</h6>
-            </div>
-            <div class="Bookingdate">
-              <h6>Check-out Date</h6>
-              <h6>{{booking.toDate  | date: 'dd MMM' }}</h6>
-             </div>
-
-          </div> -->
-
           <div class="mb-3">
             <label for="notes">Special Notes</label>
-            <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3" [(ngModel)]="booking.notes">{{booking.notes}}</textarea>
+            <textarea class="form-control" id="notes" placeholder="Special Notes" rows="3">{{booking.notes}}</textarea>
           </div>
 
           <!-- View Coupon section -->

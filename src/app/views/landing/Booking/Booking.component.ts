@@ -545,7 +545,7 @@ roomdetailss.noOfRooms = this.booking.noOfRooms;
 roomdetailss.noOfadult = this.booking.noOfPersons;
 roomdetailss.noOfchild = this.booking.noOfChildren;
 roomdetailss.plan = this.booking.roomRatePlanName;
-roomdetailss.roomRate = (((this.booking.roomTariffBeforeDiscount) * (this.booking.noOfRooms * this.booking.noOfNights)) + this.booking.extraChildCharge + this.booking.extraPersonCharge);
+roomdetailss.roomRate = (this.booking.roomTariffBeforeDiscount + this.booking.extraChildCharge + this.booking.extraPersonCharge);
 roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
@@ -2260,13 +2260,12 @@ this.savedServices?.forEach(element => {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
-    this.booking.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.DiffDate * this.booking.noOfRooms));
+    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     this.booking.totalServiceAmount= this.totalServiceCost;
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
-    this.booking.notes = this.booking.notes;
     this.booking.advanceAmount = 0;
     this.paymentLoader = true;
     this.hotelBookingService
@@ -2559,8 +2558,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.noOfExtraChild = Number(this.token.getExtraChildCharge());
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
-    this.enquiryForm.noOfNights = this.booking.noOfNights;
-    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.enquiryForm.noOfRooms * this.enquiryForm.noOfNights));
+    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
       this.paymentLoader = false;
@@ -2782,8 +2780,6 @@ this.savedServices?.forEach(element => {
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
-    this.enquiryForm.totalAmount = this.booking.totalAmount;
-    this.enquiryForm.planCode = this.booking.planCode;
 
     this.enquiryForm.firstName = this.booking.firstName;
     this.enquiryForm.lastName = this.booking.lastName;
@@ -2799,8 +2795,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
-    this.enquiryForm.noOfNights = this.booking.noOfNights;
-    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.enquiryForm.noOfRooms * this.enquiryForm.noOfNights));
+    this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
@@ -2939,7 +2934,7 @@ this.savedServices?.forEach(element => {
 
 
            this.http
-           .post<EnquiryForm>('https://api.bookone.io/api-lms/api/v1/propertyEnquiry', this.propertyenquiryone)
+           .post<EnquiryForm>('https://api.bookonelocal.in/api-lms/api/v1/propertyEnquiry', this.propertyenquiryone)
            .subscribe((response) => {
              this.success = response;
              Logger.log('sent ' + response);
