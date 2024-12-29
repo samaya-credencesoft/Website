@@ -28,7 +28,7 @@
   </app-Header-Listingdetailsone>
 
   <!-- Offer Container Section -->
-  <div *ngIf="showAllTheOfferList?.length > 0">
+  <div *ngIf="showAllTheOfferList?.length >= 0">
     <p-carousel class="carousel-section" [value]="showAllTheOfferList" [numVisible]="1" [numScroll]="1"
       [responsiveOptions]="responsiveOptions" [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false"
       style="position: relative; top: 80px;">
@@ -540,7 +540,7 @@
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The promo code will be applied at the time of booking checkout*
     </span>
-    
+
     <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
       The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
@@ -4768,7 +4768,7 @@ padding-right: 10px;
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The promo code will be applied at the time of booking checkout*
     </span>
-    
+
     <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
       The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum order is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
@@ -4982,3 +4982,4 @@ padding-right: 10px;
 
 </html>
 <!-- <router-outlet></router-outlet> -->
+
