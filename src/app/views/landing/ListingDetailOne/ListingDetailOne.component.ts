@@ -929,7 +929,7 @@ this.selectedServices =[]
   }
   blogPosts$: Observable<any> | undefined;
   responsiveOptions: any[];
-  
+
   ngOnInit() {
     localStorage.removeItem('selectedPromoData');
     localStorage.removeItem('selectPromo');
@@ -1834,6 +1834,7 @@ if (this.city != null && this.city != undefined) {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.getOfferList(this.businessUser.seoFriendlyName);
         this.getGoogleReview(this.businessUser.id)
         this.showStaticContent = true;
 this.isHeaderVisible = true;
@@ -2462,7 +2463,7 @@ checkValidCouponOrNot(couponList?){
       console.error("Error in selectedPromotionList : ",error);
     }
   }
-  
+
   getReview(id) {
     this.loader = true;
     this.listingService.getAllReview(id).subscribe(
