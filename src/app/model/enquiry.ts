@@ -15,7 +15,7 @@ import { TaxDetails } from "./TaxDetails";
     noOfNights:number;
     couponCode:string;
     promotionName:string;
-    discountPercentage: number;
+    discountAmountPercentage: number;
     firstName: string;
     totalAmount:number;
     bookingPropertyId:number;
