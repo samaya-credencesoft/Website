@@ -12,6 +12,8 @@ import { TaxDetails } from "./TaxDetails";
     toName: string;
     bccEmail: string;
     bccName: string;
+    couponCode:string;
+    promotionName:string;
     firstName: string;
     totalAmount:number;
     bookingPropertyId:number;
