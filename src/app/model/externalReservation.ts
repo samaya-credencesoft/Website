@@ -33,6 +33,8 @@ export class externalReservationDtoList {
   propertyBusinessEmail: string;
   propertyId: string;
   propertyName: string;
+  couponCode:string;
+  promotionName:string;
   resType: string;
   roomDetails: RoomDetail[];
   services:PropertyServiceDTO[];
