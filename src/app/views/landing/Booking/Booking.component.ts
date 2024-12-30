@@ -1259,6 +1259,7 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.couponCode = this.booking.couponCode;
     this.enquiryForm.promotionName = this.booking.promotionName;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 2629;
@@ -2801,7 +2802,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
     this.enquiryForm.externalSite="Website";
-    this.enquiryForm.source = "Bookone Connect"
+    this.enquiryForm.source = "Bookone Connect";
+
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
@@ -2895,6 +2897,11 @@ this.savedServices?.forEach(element => {
     ) {
       this.enquiryForm.alternativeLocation = '';
     }
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.couponCode = this.booking.couponCode;
+    this.enquiryForm.promotionName = this.booking.promotionName;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
+    this.enquiryForm.noOfNights = this.DiffDate;
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.enquiryForm.bookingCommissionAmount = 0;
