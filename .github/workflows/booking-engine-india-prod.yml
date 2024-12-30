@@ -1,20 +1,31 @@
-name: Release Booking Engine India Prod
+name: Booking Engine Release UAT (only build)
 
 on: [workflow_dispatch]
 
 env:
-  ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/booking_engine
-  service_name: booking_engine
-  depl_cluster_name: webui
+  # service info
+  IMAGE_NAME: booking-engine
+  SERVICE_NAME: booking_engine
 
-  AWS_ROLE: arn:aws:iam::912195358089:role/webui-india_prod-deployment-role
-  AWS_REGION: ap-south-1
-  deployment_variables: webui_india_prod_deployment_api_credentials
+  # cluster info
+  stack_name: bookone_core
+  IDENTITY_POOL_NAME: release
+  GCP_SERVICE_ACCOUNT: build-manager@bookone-445706.iam.gserviceaccount.com
+  PROVIDER_NAME: github-provider
 
-  BRANCH: release-india-prod-bookine-engine
-  depl_username: aa
-  depl_password: aa
-  depl_url: aa
+  # environment info
+  REGION: asia-south1
+  GCP_PROJECT: bookone-445706
+  GCP_PROJECT_NUMBER: 876146436140
+
+
+  BRANCH: booking-engine-india-prod
+
+
+  # generated do not touch
+  # IDENTITY_PROVIDER: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.IDENTITY_POOL_NAME }}/providers/${PROVIDER_NAME}
+  # CONTAINER_REGISTRY: ${{ env.REGION }}-docker.pkg.dev
+  # IMAGE_URI: ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.IMAGE_NAME }}/release
 
 permissions:
   contents: read
@@ -26,66 +37,147 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Generate Derived Environment Variables
+        id: set-env-vars
+        run: |
+          echo "IDENTITY_PROVIDER=projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${IDENTITY_POOL_NAME}/providers/${PROVIDER_NAME}" >> $GITHUB_ENV
+          echo "CONTAINER_REGISTRY=${REGION}-docker.pkg.dev" >> $GITHUB_ENV
+          echo "IMAGE_URI=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${IMAGE_NAME}/release" >> $GITHUB_ENV
+
+      - name: Verify Environment Variables
+        run: |
+          echo "IDENTITY_PROVIDER: $IDENTITY_PROVIDER"
+          echo "CONTAINER_REGISTRY: $CONTAINER_REGISTRY"
+          echo "IMAGE_URI: $IMAGE_URI"
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.BRANCH }}
 
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v1
         with:
-          role-to-assume: ${{ env.AWS_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
+          workload_identity_provider: ${{ env.IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+      - name: Docker Login to Registry
+        run: |
+          yes | gcloud auth configure-docker asia-south1-docker.pkg.dev
 
       - name: Build Container Image
-        id: build-conatainer-image
+        id: build-container-image
         run: |
-          docker build -t $ECR_REPOSITORY:latest .
+          docker build -t ${{ env.IMAGE_URI }}:latest .
 
-      - name: Push Container Image to ECR
-        id: upload-conatainer-image
+      - name: Push Container Image to Registry
+        id: upload-container-image
         run: |
-          docker push $ECR_REPOSITORY:latest
+          docker push ${{ env.IMAGE_URI }}:latest
 
-  deploy:
-    needs: build
-    name: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: ${{ env.AWS_ROLE }}
-          aws-region: ${{ env.AWS_REGION }}
 
-      - name: Fetch deployment credentials from aws secrets
-        uses: aws-actions/aws-secretsmanager-get-secrets@v2
-        with:
-          secret-ids: ${{ env.deployment_variables }}
-          parse-json-secrets: true
-          name-transformation: none
 
-      - name: Set environment variables
-        run: |
-          username_var="${deployment_variables}_username"
-          password_var="${deployment_variables}_password"
-          url_var="${deployment_variables}_url"
 
-          echo "depl_username=${!username_var}" >> $GITHUB_ENV
-          echo "depl_password=${!password_var}" >> $GITHUB_ENV
-          echo "depl_url=${!url_var}" >> $GITHUB_ENV
 
-      - name: deploy
-        id: deploy
-        run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$depl_username:$depl_password" -d "service_to_update=$service_name" "$depl_url/job/$depl_cluster_name/buildWithParameters")
-          if [ "$response" -eq 201 ]; then
-            echo "Success! The response code is $response."
-          else
-            echo "Failed! The response code is $response."
-            exit 1
-          fi
+
+
+
+
+
+
+
+
+
+
+# name: Release Booking Engine India Prod
+
+# on: [workflow_dispatch]
+
+# env:
+#   ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/booking_engine
+#   service_name: booking_engine
+#   depl_cluster_name: webui
+
+#   AWS_ROLE: arn:aws:iam::912195358089:role/webui-india_prod-deployment-role
+#   AWS_REGION: ap-south-1
+#   deployment_variables: webui_india_prod_deployment_api_credentials
+
+#   BRANCH: release-india-prod-bookine-engine
+#   depl_username: aa
+#   depl_password: aa
+#   depl_url: aa
+
+# permissions:
+#   contents: read
+#   id-token: write
+
+# jobs:
+#   build:
+#     name: build
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#         with:
+#           ref: ${{ env.BRANCH }}
+
+#       - name: configure aws credentials
+#         uses: aws-actions/configure-aws-credentials@v3
+#         with:
+#           role-to-assume: ${{ env.AWS_ROLE }}
+#           aws-region: ${{ env.AWS_REGION }}
+
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v1
+
+#       - name: Build Container Image
+#         id: build-conatainer-image
+#         run: |
+#           docker build -t $ECR_REPOSITORY:latest .
+
+#       - name: Push Container Image to ECR
+#         id: upload-conatainer-image
+#         run: |
+#           docker push $ECR_REPOSITORY:latest
+
+#   deploy:
+#     needs: build
+#     name: deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: configure aws credentials
+#         uses: aws-actions/configure-aws-credentials@v3
+#         with:
+#           role-to-assume: ${{ env.AWS_ROLE }}
+#           aws-region: ${{ env.AWS_REGION }}
+
+#       - name: Fetch deployment credentials from aws secrets
+#         uses: aws-actions/aws-secretsmanager-get-secrets@v2
+#         with:
+#           secret-ids: ${{ env.deployment_variables }}
+#           parse-json-secrets: true
+#           name-transformation: none
+
+#       - name: Set environment variables
+#         run: |
+#           username_var="${deployment_variables}_username"
+#           password_var="${deployment_variables}_password"
+#           url_var="${deployment_variables}_url"
+
+#           echo "depl_username=${!username_var}" >> $GITHUB_ENV
+#           echo "depl_password=${!password_var}" >> $GITHUB_ENV
+#           echo "depl_url=${!url_var}" >> $GITHUB_ENV
+
+#       - name: deploy
+#         id: deploy
+#         run: |
+#           response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$depl_username:$depl_password" -d "service_to_update=$service_name" "$depl_url/job/$depl_cluster_name/buildWithParameters")
+#           if [ "$response" -eq 201 ]; then
+#             echo "Success! The response code is $response."
+#           else
+#             echo "Failed! The response code is $response."
+#             exit 1
+#           fi
