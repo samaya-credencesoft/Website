@@ -1,4 +1,4 @@
-name: Booking Engine Release UAT (only build)
+name: Booking Engine Release india prod (only build)
 
 on: [workflow_dispatch]
 
@@ -19,7 +19,7 @@ env:
   GCP_PROJECT_NUMBER: 876146436140
 
 
-  BRANCH: booking-engine-india-prod
+  BRANCH: release-india-prod-bookine-engine
 
 
   # generated do not touch
