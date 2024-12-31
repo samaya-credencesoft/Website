@@ -575,6 +575,8 @@ export class ConfirmBookingComponent implements OnInit {
     externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
     externalreservation.channelId = '24';
     externalreservation.lastModifiedBy = 'hotelmate';
+    externalreservation.couponCode = this.booking.couponCode;
+externalreservation.promotionName = this.booking.promotionName;
     externalreservation.modeOfPayment = 'Cash';
     externalreservation.externalTransactionId = 'THM-' + this.booking.id;
     externalreservation.otaReservationId = 'THM-' + this.booking.id;
@@ -655,6 +657,7 @@ export class ConfirmBookingComponent implements OnInit {
       this.enquiryForm.address = this.token.getProperty().address;
       this.enquiryForm.country = this.token.getProperty().address.country;
       this.enquiryForm.location = this.token.getProperty().address.city;
+
       this.enquiryForm.alternativeLocation =
         this.token.getProperty().address.city;
     }
@@ -662,6 +665,8 @@ export class ConfirmBookingComponent implements OnInit {
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
     this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.couponCode = this.booking.couponCode;
+    this.enquiryForm.promotionName = this.booking.promotionName;
     this.enquiryForm.advanceAmount = this.booking.advanceAmount;
 
     this.enquiryForm.firstName = this.booking.firstName;
