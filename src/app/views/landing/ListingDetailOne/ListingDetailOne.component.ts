@@ -704,6 +704,8 @@ export class ListingDetailOneComponent implements OnInit {
       }
     ]
   };
+  selectedPromotion : boolean = false;
+  selectedPromotionCouponData : any;
 
   constructor(
     private listingService: ListingService,
@@ -926,7 +928,12 @@ this.selectedServices =[]
 
   }
   blogPosts$: Observable<any> | undefined;
+  responsiveOptions: any[];
+
   ngOnInit() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
+    this.setResponsiveOption();
     if (this.hotelID != null && this.hotelID != undefined) {
       this.token.saveBookingEngineBoolean('googlehotelcenter')
 
@@ -1827,6 +1834,7 @@ if (this.city != null && this.city != undefined) {
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.getOfferList(this.businessUser.seoFriendlyName);
         this.getGoogleReview(this.businessUser.id)
         this.showStaticContent = true;
 this.isHeaderVisible = true;
@@ -2178,7 +2186,12 @@ this.isHeaderVisible = true;
       this.booking.taxAmount;
     this.token.saveServiceData(this.addServiceList);
   }
+
   gotocheckout(){
+    if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
+      localStorage.removeItem('selectedPromoData');
+      localStorage.removeItem('selectPromo');
+    }
     this.token.saveBookingRoomPrice(this.booking.roomPrice);
     this.router.navigate(['/booking']);
   }
@@ -2372,14 +2385,85 @@ this.isHeaderVisible = true;
       // Logger.log('this.branchList:' + JSON.stringify(this.branchList));
     });
   }
+
+  showAllTheOfferList : any[] = [];
   getOfferList(seo) {
     this.offerService
       .getOfferListFindBySeoFriendlyName(seo)
       .subscribe((data) => {
         this.offersList = data.body;
-        // Logger.log('offersList: ' + JSON.stringify(this.offersList));
-      });
+        this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
+    });
   }
+
+  // Used For handled to check coupons are valid ot not.
+checkValidCouponOrNot(couponList?){
+  try{
+    const currentDate = new Date();
+    const validCoupons = [];
+    couponList.forEach((coupon) => {
+      if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+        const startDate = new Date(coupon.startDate);
+        const endDate = new Date(coupon.endDate);
+        // Check if the current date is within the start and end date
+        if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+          validCoupons.push(coupon);
+        }
+      }
+    });
+    return validCoupons;
+  }
+  catch(error){
+    console.error("Error in checkValidCouponOrNot : ",error);
+  }
+}
+
+  setResponsiveOption(){
+    try{
+      this.responsiveOptions = [
+        {
+          breakpoint: '1024px',
+          numVisible: 1,
+          numScroll: 1
+        },
+        {
+          breakpoint: '768px',
+          numVisible: 1,
+          numScroll: 1
+        }
+      ];
+    }
+    catch(error){
+      console.error("Error in setResponsiveOption : ",error);
+    }
+  }
+
+  selectedPromotionList(promo){
+    try{
+      this.selectedPromotionCouponData = promo;
+      const offerSection = document.getElementById("accmdOne");
+      if (offerSection) {
+        offerSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+      const offerSection2 = document.getElementById("accmdtwo");
+      if (offerSection2) {
+        offerSection2.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+      this.selectedPromotion = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(promo));
+      localStorage.setItem('selectPromo', 'true');
+    }
+    catch(error){
+      console.error("Error in selectedPromotionList : ",error);
+    }
+  }
+
   getReview(id) {
     this.loader = true;
     this.listingService.getAllReview(id).subscribe(

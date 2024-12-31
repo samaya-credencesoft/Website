@@ -51,7 +51,7 @@ import { EnquiryForm } from "../onboarding-roomdetails-form/onboarding-roomdetai
 import { PropertyEnquiryDto } from "src/model/propertyEnquiryDto";
 import { externalReservationDtoList } from "src/app/model/externalReservation";
 import { RoomDetail } from "src/app/model/RoomDetail";
-
+import { MessageService } from 'primeng/api';
 declare var Stripe: any;
 
 declare var window: any;
@@ -74,6 +74,18 @@ export class BookingComponent implements OnInit {
   parameterss2:Para[];
   tokenFromTime: number;
   tokenToTime:number;
+  visiblePromotion : boolean = false; // Used for handled when user open Offers dialog box
+  promocodeListChip : any[] = []; // Used for handled to get the promo list and stored in this variable.
+  showTheSelectedCoupon : boolean = false; // Usedd For handled to open the selected coupon section.
+  storedActualNetAmount : number; // Used For handled to stored the Current netAmount.
+  selectedCouponList : any; // Used For handled to store the selected coupon data.
+  storeNightPerRoom : number; // Used for handled to set the room price per night
+  howingReceiptData : any;
+  showingSuccessMessage : boolean = false;
+  appliedCoupon : number;
+  grandTotalAmount : number;
+  actualTaxAmount : number;
+
   parameterss3:Para[];
   socialmedialist:any;
   externalReservationDtoList:externalReservationDtoList[];
@@ -221,6 +233,7 @@ export class BookingComponent implements OnInit {
   calculateBookingId: any;
   loadingOne: boolean = false;
   saveResponseBooking: Booking;
+  selectedPromotionCheck : boolean = false;
 
   constructor(
     private token: TokenStorage,
@@ -230,6 +243,7 @@ export class BookingComponent implements OnInit {
     private datePipe: DatePipe,
     private listingService: ListingService,
     private router: Router,
+    private messageService: MessageService,
     private http: HttpClient,
     private hotelBookingService: HotelBookingService
   ) {
@@ -382,7 +396,12 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
   }
 
   ngOnInit() {
-// this.sendWhatsappMessageToPropertyOwner();
+    this.clearFormField(this.booking);
+    this.storedActualNetAmount = this.booking.netAmount;
+    this.actualTaxAmount = this.booking.gstAmount;
+    this.storeNightPerRoom = this.bookingRoomPrice;
+    this.taxAmountBackUp = this.booking.taxAmount;
+    // this.sendWhatsappMessageToPropertyOwner();
     this.accommodationData = this.propertyData.businessServiceDtoList?.filter(
       (entry) => entry.name === 'Accommodation'
     );
@@ -403,7 +422,7 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       this.totalBeforeTaxAmount =
         this.totalBeforeTaxAmount + element.beforeTaxAmount;
     });
-    this.booking.totalAmount =
+    this.grandTotalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
       this.booking.taxAmount+this.totalServiceCost;
@@ -412,8 +431,28 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       zone: this.ngZone,
       loadAngularFunction: () => this.stripePaymentSuccess(),
     };
+    const storedPromo = localStorage.getItem('selectPromo');
+    if(storedPromo == 'true'){
+      this.selectedPromotionCheck = true;
+      const selectedPromoData = localStorage.getItem('selectedPromoData');
+      this.selectedCoupon(JSON.parse(selectedPromoData));
+    }
     this.token.clearBookingDataObj();
   }
+
+  clearFormField(bookingData?){
+    try{
+      bookingData.firstName = '';
+      bookingData.lastName = '';
+      bookingData.email = '';
+      bookingData.mobile = '';
+      if(this.booking.notes) bookingData.notes = '';
+    }
+    catch(error){
+      console.error("Error in clearFormField : ",error);
+    }
+  }
+
   validateMobile(): void {
     const mobile = this.booking.mobile;
     // Allow only numbers and ensure exactly 10 digits
@@ -423,10 +462,13 @@ this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice())
       this.mobileHasError = true; // Error for invalid input
     }
   }
+
   validateForm(): boolean {
     const mobile = this.booking.mobile;
     // Ensure the phone number is exactly 10 digits
-    this.mobileHasError = !(mobile && /^\d{10}$/.test(mobile));
+    if(mobile != null && mobile != ''){
+      this.mobileHasError = !(mobile && /^\d{10}$/.test(mobile));
+    }
     // Return true if there are no validation errors
     return !this.mobileHasError;
   }
@@ -482,6 +524,8 @@ externalreservation.checkinDate = this.booking.fromDate;
 externalreservation.checkoutDate = this.booking.toDate;
 externalreservation.currency = this.booking.currency;
 externalreservation.email = this.booking.email;
+externalreservation.couponCode = this.booking.couponCode;
+externalreservation.promotionName = this.booking.promotionName;
 externalreservation.totalAmount = this.booking.totalAmount;
 externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
 externalreservation.channelId = "9";
@@ -545,10 +589,102 @@ this.externalReservationDtoList.push(externalreservation)
       .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
       .subscribe((data) => {
         this.businessOfferDto = data.body;
-        console.log("this.businessOfferDto: ", data.body);
+        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
+
       });
   }
-
+// Used For handled to check coupons are valid ot not.
+checkValidCouponOrNot(couponList?){
+  try{
+    const currentDate = new Date();
+    const validCoupons = [];
+    couponList.forEach((coupon) => {
+      if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+        const startDate = new Date(coupon.startDate);
+        const endDate = new Date(coupon.endDate);
+        // Check if the current date is within the start and end date
+        if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+          validCoupons.push(coupon);
+        }
+      }
+    });
+    return validCoupons;
+  }
+  catch(error){
+    console.error("Error in checkValidCouponOrNot : ",error);
+  }
+}
+// Used For handled to set the selected coupon
+selectedCoupon(coupon?){
+  try{
+    if(this.isPresentCouponOffer(coupon)){
+      return;
+    }
+    if(this.showTheSelectedCoupon){
+      this.bookingRoomPrice = this.storeNightPerRoom;
+      this.booking.netAmount = this.storedActualNetAmount;
+    }
+    this.selectedCouponList = coupon;
+    const finalPrice = this.calculateDiscountedPrice(this.booking.netAmount, coupon?.discountPercentage);
+    this.appliedCoupon = finalPrice;
+    this.booking.totalAmount = this.appliedCoupon + this.totalServiceCost + ((this.appliedCoupon * this.booking.taxPercentage)/100);
+    this.showTheSelectedCoupon = true;
+    this.visiblePromotion = false;
+    this.showingSuccessMessage = true;
+    setTimeout(() => {
+      this.showingSuccessMessage = false;
+    }, 3000);
+  }
+  catch(error){
+    console.error("Error in selectedCoupon : ",error);
+  }
+}
+// Used For handled to clear the selected offer
+clearSelectedCoupons(){
+  try{
+    this.showTheSelectedCoupon = false;
+    this.selectedCouponList = [];
+    this.booking.netAmount = this.storedActualNetAmount;
+    this.bookingRoomPrice = this.storeNightPerRoom;
+    this.booking.totalAmount = this.booking.netAmount + ((this.booking.netAmount * this.booking.taxPercentage) / 100 );
+    this.visiblePromotion = false;
+  }
+  catch(error){
+    console.error("Error in clearSelectedCoupons : ",error);
+  }
+}
+// Used for handled to calculate the discount percentage
+calculateDiscountedPrice(originalAmount: number, discountPercentage: number): number {
+  try{
+    const discountAmount = this.storedActualNetAmount - ((originalAmount * discountPercentage) / 100);
+    return discountAmount;
+  }
+  catch(error){
+    console.error("Error in calculateDiscountedPrice : ",error);
+  }
+}
+// Method to open the modal
+openPromoListData(): void {
+  try{
+    this.visiblePromotion = true;
+  }
+  catch(error){
+    console.error("Error in openPromoListData : ",error);
+  }
+}
+isPresentCouponOffer(coupon?){
+  try{
+    if(coupon?.discountPercentage == this.selectedCouponList?.discountPercentage){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  catch(error){
+    console.error("Error in isPresentCouponOffer : ",error);
+  }
+}
   applyPromoCode(offer) {
     if (offer !== "") {
       const f = new Date(this.booking.fromDate);
@@ -1032,8 +1168,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     if (EMAIL_Expression.test(this.booking.email) === true &&
       this.booking.firstName != null && this.booking.firstName != undefined && this.booking.firstName != '' &&
       this.booking.lastName != null && this.booking.lastName != undefined && this.booking.lastName != '' &&
-      this.booking.mobile != null && this.booking.mobile != undefined && this.booking.mobile != '' &&
-      this.mobileHasError)
+      this.booking.mobile != null && this.booking.mobile != undefined && this.booking.mobile != '' && this.validateForm())
     {
       return true;
     }
@@ -1122,6 +1257,9 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
     this.enquiryForm.noOfChildren = this.booking.noOfChildren;
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
+    this.enquiryForm.couponCode = this.booking.couponCode;
+    this.enquiryForm.promotionName = this.booking.promotionName;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
@@ -1210,11 +1348,26 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
   }
 
   payAndCheckout() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
+    if(this.showTheSelectedCoupon){
+      const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
+      this.booking.netAmount = finalPrice;
+      this.booking.gstAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+      this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
+      this.booking.discountAmount = this.storedActualNetAmount - this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.storedActualNetAmount;
+      this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+      this.booking.couponCode = this.selectedCouponList.couponCode;
+      this.booking.promotionName = this.selectedCouponList.name;
+    }
+    else{
+      this.booking.discountPercentage = 0;
+    }
+    console.log("Coupon Applied Data is  Pay and check==========>",this.booking);
     this.bookingroomPrice = this.token.getRoomPrice();
     this.submitFormOne();
-
     this.payment.callbackUrl = environment.callbackUrl + this.booking.propertyReservationNumber + "&BookingEngine=true";
-
     if (this.businessUser.paymentGateway === "paytm") {
       this.payment.paymentMode = "UPI";
       this.payment.status = "NotPaid";
@@ -1731,7 +1884,26 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       }
     });
   }
+
+  taxAmountBackUp : number;
   onCashPaymentSubmit() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
+    if(this.showTheSelectedCoupon){
+      const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
+      this.booking.netAmount = finalPrice;
+      this.booking.gstAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+      this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
+      this.booking.discountAmount = this.storedActualNetAmount - this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.storedActualNetAmount;
+      this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+      this.booking.couponCode = this.selectedCouponList.couponCode;
+      this.booking.promotionName = this.selectedCouponList.name;
+    }
+    else{
+      this.booking.discountPercentage = 0;
+    }
+    console.log("Coupon Applied Data is  PayLater==========>",this.booking);
     this.loadingOne = true;
     this.payment.paymentMode = "Cash";
     this.payment.status = "NotPaid";
@@ -2083,8 +2255,13 @@ this.savedServices?.forEach(element => {
     this.booking.bookingAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
     this.booking.groupBooking = false;
     this.booking.available = true;
-    this.booking.payableAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
-    this.booking.totalAmount =  this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount ;
+    if(this.showTheSelectedCoupon){
+      this.booking.payableAmount = this.booking.totalAmount;
+    }
+    else{
+      this.booking.payableAmount = this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount;
+    }
+    // this.booking.totalAmount =  this.booking.netAmount + this.booking.gstAmount - this.booking.discountAmount ;
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
@@ -2315,7 +2492,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
-    this.enquiryForm.totalAmount = this.booking.totalAmount + this.booking.totalServiceAmount;
+
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
     let taxarray = this.token.getProperty().taxDetails;
@@ -2577,9 +2755,26 @@ this.savedServices?.forEach(element => {
       }
     });
   }
-  submitForm() {
-    this.enquiryForm = new EnquiryDto();
 
+  submitForm() {
+    localStorage.removeItem('selectedPromoData');
+    localStorage.removeItem('selectPromo');
+    if(this.showTheSelectedCoupon){
+      const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
+      this.booking.netAmount = finalPrice;
+      this.booking.gstAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+      this.booking.discountPercentage = this.selectedCouponList.discountPercentage;
+      this.booking.discountAmount = this.storedActualNetAmount - this.appliedCoupon;
+      this.booking.beforeTaxAmount = this.storedActualNetAmount;
+      this.booking.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+      this.booking.couponCode = this.selectedCouponList.couponCode;
+      this.booking.promotionName = this.selectedCouponList.name;
+    }
+    else{
+      this.booking.discountPercentage = 0;
+    }
+    console.log("Coupon Applied Data is  Enquiry==========>",this.booking);
+    this.enquiryForm = new EnquiryDto();
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
       this.token.getProperty().address.city != null && this.token.getProperty().address.city != undefined)
     {
@@ -2608,7 +2803,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
     this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
     this.enquiryForm.externalSite="Website";
-    this.enquiryForm.source = "Bookone Connect"
+    this.enquiryForm.source = "Bookone Connect";
+
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
@@ -2702,6 +2898,11 @@ this.savedServices?.forEach(element => {
     ) {
       this.enquiryForm.alternativeLocation = '';
     }
+    this.enquiryForm.totalAmount = this.booking.totalAmount;
+    this.enquiryForm.couponCode = this.booking.couponCode;
+    this.enquiryForm.promotionName = this.booking.promotionName;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
+    this.enquiryForm.noOfNights = this.DiffDate;
     this.enquiryForm.foodOptions = '';
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.enquiryForm.bookingCommissionAmount = 0;

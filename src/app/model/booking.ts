@@ -95,5 +95,9 @@ export class Booking {
 length: any;
 paymentStatus: any;
 enquiryId:number;
+storedActualNetAmount : number;
+taxAmountBackUp : number;
+couponCode : string;
+promotionName : string;
   constructor() {}
 }

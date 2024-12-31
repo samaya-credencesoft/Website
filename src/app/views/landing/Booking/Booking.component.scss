@@ -3162,5 +3162,123 @@ textarea {
   height: 3rem;
 }
 
+p-dialog .p-dialog-header .p-dialog-title{
+  text-align: center;
+  color: #f44336; 
+  position: relative;
+  -webkit-background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
+.coupons-giftcards {
+  margin-top: 20px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 10px;
+  padding: 13px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 10px;
+}
 
+.coupons-giftcards:hover {
+  background-color: #333;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.coupons-giftcards span {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.coupons-giftcards i {
+  margin-right: 10px;
+  font-size: 24px;
+  color: #f39c12;
+}
+
+@media (max-width: 768px) {
+  .coupons-giftcards {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .coupons-giftcards i {
+    font-size: 20px;
+  }
+
+  .dialogSection .p-dialog-mask .p-dialog{
+    width: 95vw !important;
+  }
+}
+
+.dialogSection .p-dialog-mask .p-dialog{
+  width: 50vw;
+}
+
+@media (max-width: 480px) {
+  .coupons-giftcards {
+    padding: 10px 15px;
+    font-size: 12px;
+  }
+
+  .coupons-giftcards i {
+    font-size: 18px;
+  }
+}
+
+/* Delete icon styling */
+.bi.bi-trash {
+  font-size: 24px;
+  color: #e74c3c;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.bi.bi-trash:hover {
+  color: #c0392b;
+}
+
+.checkmark-circle {
+  animation: circleGrow 0.5s ease-out forwards;
+}
+
+/* Checkmark Animation */
+.checkmark {
+  animation: checkmarkDraw 1s ease-out forwards;
+  opacity: 0;
+  transform: scale(0);
+}
+
+@keyframes circleGrow {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkDraw {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

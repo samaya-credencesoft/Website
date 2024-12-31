@@ -1,4 +1,4 @@
-<div   class="mobile-view-ui">
+<div class="mobile-view-ui">
 
   <div style="padding-left: 10px; padding-top: 20px; padding-right: 10px;margin-top: 10px;">
     <a href="{{PropertyUrl}}" (click)="goback()" style="text-align: left;
@@ -12,132 +12,154 @@
     border-radius: 10px;
     color: #ffff;">
       <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
-  </a>
+    </a>
     <h4 style=" font-weight: bold; margin-top: 16px; ">Thank You For Booking with {{businessUser.name }}!</h4>
-    <p style=" font-weight: bold; ">You will get a confirmation with the booking details in your mail and mobile number.</p>
+    <p style=" font-weight: bold; ">You will get a confirmation with the booking details in your mail and mobile number.
+    </p>
     <p style=" font-weight: bold; ">For assistance, contact
-      <b style="color: #000C7A;">'Our Service Team'</b> <br/> </p>
-      <div class="d-flex align-items-center">
-        <a [href]="'tel:' + businessUser.whatsApp" style="text-decoration: none; color: inherit; cursor: pointer;">
-            <i class="fa fa-phone" style="font-size: 24px; color: black; margin-right: 10px;"></i>
-            <p style="font-size: 18px; color: #000C7A; margin: 0; display: inline; font-weight: bold;" >{{businessUser.whatsApp}}</p>
-        </a>
+      <b style="color: #000C7A;">'Our Service Team'</b> <br />
+    </p>
+    <div class="d-flex align-items-center">
+      <a [href]="'tel:' + businessUser.whatsApp" style="text-decoration: none; color: inherit; cursor: pointer;">
+        <i class="fa fa-phone" style="font-size: 24px; color: black; margin-right: 10px;"></i>
+        <p style="font-size: 18px; color: #000C7A; margin: 0; display: inline; font-weight: bold;">
+          {{businessUser.whatsApp}}</p>
+      </a>
     </div>
 
     <h3 style=" font-weight: bold; margin-top: 20px;">Your Booking Details</h3>
 
     <div class="card" style="background-color: black; ">
       <div style="margin: 15px;">
-      <h3 style="color:#fff; font-weight: bold;">{{businessUser.name}}</h3>
-      <h5 style="color:#fff; font-weight: bold;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</h5>
-      <div class="d-flex">
-      <div class="col-12 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
-        <div class="col-6" style="border-right: 1px solid black; ">
-          <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;" >
-            Check-In-Date
-          </label> <br/>
-          <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.fromDate | date: 'dd MMM' }}</p>
+        <h3 style="color:#fff; font-weight: bold;">{{businessUser.name}}</h3>
+        <h5 style="color:#fff; font-weight: bold;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}},
+          {{businessUser.address?.state}}, {{businessUser.address?.country}}</h5>
+        <div class="d-flex">
+          <div class="col-12 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
+            <div class="col-6" style="border-right: 1px solid black; ">
+              <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;">
+                Check-In-Date
+              </label> <br />
+              <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.fromDate | date: 'dd MMM' }}</p>
 
+
+            </div>
+            <div class="col-6">
+              <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;">
+                Check-Out-Date
+              </label> <br />
+              <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.toDate | date: 'dd MMM' }}</p>
+
+
+            </div>
+
+          </div>
 
         </div>
-        <div  class="col-6">
-          <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;" >
-            Check-Out-Date
-          </label> <br/>
-          <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.toDate | date: 'dd MMM' }}</p>
-
-
+        <div style="margin-top: 10px; margin-bottom: 15px; color:#fff">
+          <table style=" border: none; width:100%">
+            <tr>
+              <td>Reservation ID :</td>
+              <td>{{booking.propertyReservationNumber}}</td>
+            </tr>
+            <tr>
+              <td>Guest Name :</td>
+              <td>{{booking.firstName}} {{booking.lastName}}</td>
+            </tr>
+            <tr>
+              <td>Email Address :</td>
+              <td>{{booking.email}}</td>
+            </tr>
+            <tr>
+              <td>Phone Number :</td>
+              <td>{{booking.mobile}}</td>
+            </tr>
+          </table>
         </div>
 
-      </div>
+        <div class="col-12 "
+          style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px; margin-bottom: 15px;">
+          <table style=" border: none; width:100%">
+            <tr>
+              <td style="color: black !important;">No. Of Guests</td>
+              <td style="color: black !important; text-align: right;">{{booking.noOfPersons}} Adults,
+                {{booking.noOfChildren}} Children</td>
+            </tr>
+            <tr>
+              <td style="color: black !important;">Number of nights:</td>
+              <td style="color: black !important; text-align: right;">{{booking.noOfNights}}</td>
+            </tr>
 
-    </div>
-    <div style="margin-top: 10px; margin-bottom: 15px; color:#fff">
-      <table style=" border: none; width:100%">
-        <tr>
-          <td>Reservation ID :</td>
-          <td>{{booking.propertyReservationNumber}}</td>
-        </tr>
-        <tr>
-          <td>Guest Name :</td>
-          <td>{{booking.firstName}}  {{booking.lastName}}</td>
-        </tr>
-        <tr>
-          <td>Email Address :</td>
-          <td>{{booking.email}}</td>
-        </tr>
-        <tr>
-          <td>Phone Number :</td>
-          <td>{{booking.mobile}}</td>
-        </tr>
-      </table>
-    </div>
+            <tr>
+              <td style="color: black !important;">Number of Rooms:</td>
+              <td style="color: black !important; text-align: right;">{{booking.noOfRooms}}</td>
+            </tr>
 
-    <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px; margin-bottom: 15px;">
-      <table style=" border: none; width:100%">
-        <tr >
-          <td style="color: black !important;">No. Of Guests</td>
-          <td style="color: black !important; text-align: right;">{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</td>
-        </tr>
-        <tr>
-          <td style="color: black !important;">Number of nights:</td>
-          <td style="color: black !important; text-align: right;">{{booking.noOfNights}}</td>
-        </tr>
+            <tr>
+              <td style="color: black !important;">Room Type:</td>
+              <td style="color: black !important; text-align: right;">{{booking.roomName}}</td>
+            </tr>
 
-        <tr>
-          <td style="color: black !important;">Number of Rooms:</td>
-          <td style="color: black !important; text-align: right;">{{booking.noOfRooms}}</td>
-        </tr>
+          </table>
+        </div>
 
-        <tr>
-          <td style="color: black !important;">Room Type:</td>
-          <td style="color: black !important; text-align: right;">{{booking.roomName}}</td>
-        </tr>
+        <div class="col-12 "
+          style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px;">
+          <table style=" border: none; width:100%">
+            <tr>
+              <td style="color: black !important;">Plan name: {{booking?.roomRatePlanName}} x {{booking?.noOfNights}}
+                Night(s) x {{booking?.noOfRooms}} Room(s)</td>
+              <td style="color: black !important; text-align: right;"> {{(booking.roomTariffBeforeDiscount *
+                booking?.noOfRooms * booking?.noOfNights)| currency: currency:"symbol":"1.2-2"}}</td>
+            </tr>
+            <tr *ngIf="booking.extraPersonCharge">
+              <td style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}})</td>
+              <td style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency:
+                currency:"symbol":"1.2-2"}}</td>
+            </tr>
 
-      </table>
-    </div>
+            <tr *ngIf="booking.extraChildCharge">
+              <td style="color: black !important;">
+                Extra Child Charges ({{this.extraChildCharge}})
+              </td>
+              <td style="color: black !important; text-align: right;">
+                {{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}
+              </td>
+            </tr>
+            <tr>
+              <td style="color: black !important;">
+                Total Net Amount
+              </td>
+              <td style="color: black !important; text-align: right;">
+                {{
+                booking.beforeTaxAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}
+              </td>
+            </tr>
+            <tr *ngIf="taxAmountOne && booking.discountPercentage == 0">
+              <td style="color: black !important;">
+                Tax
+              </td>
+              <td style="color: black !important; text-align: right;">
+                {{
+                taxAmountOne | currency: currency:"symbol":"1.2-2"
+                }}
+              </td>
+            </tr>
 
-    <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px;">
-      <table style=" border: none; width:100%">
-        <tr>
-          <td style="color: black !important;">Plan name: {{booking?.roomRatePlanName}}  x {{booking?.noOfNights}} Night(s) x {{booking?.noOfRooms}} Room(s)</td>
-          <td style="color: black !important; text-align: right;"> {{(booking.roomTariffBeforeDiscount  * booking?.noOfRooms * booking?.noOfNights)| currency: currency:"symbol":"1.2-2"}}</td>
-        </tr>
-        <tr *ngIf="booking.extraPersonCharge">
-          <td style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}})</td>
-          <td style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
-        </tr>
-
-        <tr *ngIf="booking.extraChildCharge">
-          <td style="color: black !important;">
-            Extra Child Charges ({{this.extraChildCharge}})
-          </td>
-          <td style="color: black !important; text-align: right;">
-            {{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}
-          </td>
-        </tr>
-        <tr>
-          <td style="color: black !important;">
-            Total Net Amount
-          </td>
-          <td style="color: black !important; text-align: right;" >
-            {{
-              booking.beforeTaxAmount
-              | currency: currency:"symbol":"1.2-2"
-              }}
-          </td>
-        </tr>
-        <tr *ngIf="taxAmountOne">
-          <td style="color: black !important;">
-            Tax
-          </td>
-          <td style="color: black !important; text-align: right;">
-            {{
-              taxAmountOne | currency: currency:"symbol":"1.2-2"
-              }}
-          </td>
-        </tr>
-        <!-- <tr>
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">
+                Coupon Applied: ({{booking.discountPercentage}}%)
+              </td>
+              <td style="color: black !important; text-align: right;">
+                -{{
+                booking.discountAmount | currency: currency:"symbol":"1.2-2"
+                }}
+              </td>
+            </tr>
+            
+            <!-- <tr>
           <td style="color: black !important;">
             Total Room Amount
           </td>
@@ -153,66 +175,95 @@
 
 
 
-      </table>
-    </div>
+          </table>
+        </div>
 
-    <div class="col-12 " *ngIf="savedServices?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    ">
-      <h4 style="font-weight: bold;">Add-on Services</h4>
-      <table style=" border: none; width:100%">
-        <tr *ngFor="let fac of savedServices">
-          <td><div class="d-flex "   *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-            <div style="display: flex; gap:4px">
+        <div class="col-12 " *ngIf="savedServices?.length > 0"
+          style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    ">
+          <h4 style="font-weight: bold;">Add-on Services</h4>
+          <table style=" border: none; width:100%">
+            <tr *ngFor="let fac of savedServices">
+              <td>
+                <div class="d-flex "
+                  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                  <div style="display: flex; gap:4px">
 
-              <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
-
-
-              <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
-
-              <br>
-
-              <p>{{fac.name }} * {{fac.quantity}} <br>
-
-                <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 &&  fac.taxAmount !== null && fac.taxAmount !== undefined">
-                {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
-                {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
-              </b>
-              <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0" style="float: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
-
-              </p>
-            </div>
-          </div></td>
-          <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="float: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
-          </td>
-        </tr>
-
-      </table>
-    </div>
+                    <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                      style=" width: 26px;height: 23px;">
 
 
+                    <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
 
-    <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
-      <table style=" border: none; width:100%">
-        <tr>
-          <td style="color: black !important;">Total Payable Amount</td>
-          <td style="color: black !important; text-align: right;">{{(booking.totalAmount + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
-        </tr>
+                    <br>
+
+                    <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                      <b
+                        *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 &&  fac.taxAmount !== null && fac.taxAmount !== undefined">
+                        {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                        {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                      </b>
+                      <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
+                        style="float: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="float: right;">
+                {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+          </table>
+        </div>
 
 
-        <tr *ngIf="getDetailsData !== 100">
-          <td style="color: black !important;">Due Amount </td>
-          <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" : "1.2-2"}}</td>
-        </tr>
 
-        <tr *ngIf="getDetailsData == 100">
-          <td style="color: black !important;">Due Amount </td>
-          <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
-        </tr>
-        <!-- <tr>
+        <div class="col-12 "
+          style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
+          <table style=" border: none; width:100%">
+            <tr *ngIf="booking.discountPercentage == 0">
+              <td style="color: black !important;">Total Payable Amount</td>
+              <td style="color: black !important; text-align: right;">{{(booking.totalAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
+            </tr>
+
+            <tr *ngIf="getDetailsData !== 100 && booking.discountPercentage == 0">
+              <td style="color: black !important;">Due Amount </td>
+              <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" :
+                "1.2-2"}}</td>
+            </tr>
+
+            <tr *ngIf="getDetailsData == 100 && booking.discountPercentage == 0">
+              <td style="color: black !important;">Due Amount </td>
+              <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">Taxable Amount </td>
+              <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">Tax </td>
+              <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">Total Payable Amount  </td>
+              <td style="color: black !important; text-align: right;">{{ booking.totalAmount  | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <!-- <tr>
           <td style="color: black !important;">Advance Amount ({{getDetailsData}}%)</td>
           <td style="color: black !important; text-align: right;">{{booking.advanceAmount | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr> -->
 
-        <!-- <tr *ngIf="getDetailsData !== 100">
+            <!-- <tr *ngIf="getDetailsData !== 100">
           <td style="color: black !important;">Due Amount </td>
           <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
@@ -222,32 +273,33 @@
           <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr> -->
 
-        <!-- <tr>
+            <!-- <tr>
           <td>Due Amount </td>
           <td>{{booking.advanceAmount | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr> -->
 
-      </table>
-    </div>
+          </table>
+        </div>
 
-    </div>
+      </div>
     </div>
 
     <div style="margin-top: 20px;margin-bottom: 10px;">
-      <div class="card" style="background-color: var(--secondary); color:var(--tertiary) !important;padding: 10px; font-weight: bold;" >
+      <div class="card"
+        style="background-color: var(--secondary); color:var(--tertiary) !important;padding: 10px; font-weight: bold;">
         Would you like to pre-book your meals and tour packages?
       </div>
 
       <div class="row" style="gap:10px; justify-content: center; margin-top: 10px;">
         <div class="card col-3" *ngFor="let fac of businessUser?.propertyServicesList">
-          <ng-container *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+          <ng-container
+            *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
             <div style="margin: auto; padding: 10px; ">
-          <img *ngIf="!fac.imageUrl"
-          src="https://static.thenounproject.com/png/3421816-200.png"
-          alt="icon" style=" width: 34px;height: 30px; justify-content: center;">
-          <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 34px;height: 30px;">
-        </div>
-        </ng-container>
+              <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                style=" width: 34px;height: 30px; justify-content: center;">
+              <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 34px;height: 30px;">
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -255,8 +307,8 @@
 
   </div>
 </div>
-<div  class="desktop-view-ui">
-  <div  style="padding-left: 20px; padding-top: 20px; padding-right: 20px;margin-top: 20px;
+<div class="desktop-view-ui">
+  <div style="padding-left: 20px; padding-top: 20px; padding-right: 20px;margin-top: 20px;
     padding: 20px">
     <a href="{{PropertyUrl}}" (click)="goback()" style="text-align: left;
     font-weight: 700;
@@ -269,16 +321,19 @@
     border-radius: 10px;
     color: #ffff;">
       <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
-  </a>
+    </a>
     <h3 style=" font-weight: bold; margin-top: 20px; ">Thank You For Booking with {{businessUser.name }}!</h3>
-    <p style=" font-weight: bold; ">You will get a confirmation with the booking details in your mail and mobile number.</p>
+    <p style=" font-weight: bold; ">You will get a confirmation with the booking details in your mail and mobile number.
+    </p>
     <p style=" font-weight: bold; ">For assistance, contact
-      <b style="color: #000C7A;">'Our Service Team'</b> <br/> </p>
-      <div class="d-flex align-items-center">
-        <a [href]="'tel:' + businessUser.whatsApp" style="text-decoration: none; color: inherit; cursor: pointer;">
-            <i class="fa fa-phone" style="font-size: 24px; color: black; margin-right: 10px;"></i>
-            <p style="font-size: 18px; color: #000C7A; margin: 0; display: inline; font-weight: bold;" >{{businessUser.whatsApp}}</p>
-        </a>
+      <b style="color: #000C7A;">'Our Service Team'</b> <br />
+    </p>
+    <div class="d-flex align-items-center">
+      <a [href]="'tel:' + businessUser.whatsApp" style="text-decoration: none; color: inherit; cursor: pointer;">
+        <i class="fa fa-phone" style="font-size: 24px; color: black; margin-right: 10px;"></i>
+        <p style="font-size: 18px; color: #000C7A; margin: 0; display: inline; font-weight: bold;">
+          {{businessUser.whatsApp}}</p>
+      </a>
     </div>
 
     <h3 style=" font-weight: bold; margin-top: 20px;">Your Booking Details</h3>
@@ -286,39 +341,43 @@
       <div class="col-6">
         <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
         border-radius: 10px;">
-                      <table style=" border: none; width:100%">
-                        <tr >
-                          <td style="color: black !important;">No. Of Guests</td>
-                          <td style="color: black !important; text-align: right;">{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</td>
-                        </tr>
-                        <tr>
-                          <td style="color: black !important;">Number of nights:</td>
-                          <td style="color: black !important; text-align: right;">{{booking.noOfNights}}</td>
-                        </tr>
+          <table style=" border: none; width:100%">
+            <tr>
+              <td style="color: black !important;">No. Of Guests</td>
+              <td style="color: black !important; text-align: right;">{{booking.noOfPersons}} Adults,
+                {{booking.noOfChildren}} Children</td>
+            </tr>
+            <tr>
+              <td style="color: black !important;">Number of nights:</td>
+              <td style="color: black !important; text-align: right;">{{booking.noOfNights}}</td>
+            </tr>
 
-                        <tr>
-                          <td style="color: black !important;">Number of Rooms:</td>
-                          <td style="color: black !important; text-align: right;">{{booking.noOfRooms}}</td>
-                        </tr>
+            <tr>
+              <td style="color: black !important;">Number of Rooms:</td>
+              <td style="color: black !important; text-align: right;">{{booking.noOfRooms}}</td>
+            </tr>
 
-                        <tr>
-                          <td style="color: black !important;">Room Type:</td>
-                          <td style="color: black !important; text-align: right;">{{booking.roomName}}</td>
-                        </tr>
+            <tr>
+              <td style="color: black !important;">Room Type:</td>
+              <td style="color: black !important; text-align: right;">{{booking.roomName}}</td>
+            </tr>
 
-                      </table>
-                    </div>
+          </table>
+        </div>
 
         <div class="col-12 " style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;     border: 2px solid;
             border-radius: 10px;">
           <table style=" border: none; width:100%">
             <tr>
-              <td style="color: black !important;">Plan name: {{booking?.roomRatePlanName}}  x {{booking?.noOfNights}} Night(s) x {{booking?.noOfRooms}} Room(s)</td>
-              <td style="color: black !important; text-align: right;"> {{(booking.roomTariffBeforeDiscount * booking?.noOfRooms * booking?.noOfNights)| currency: currency:"symbol":"1.2-2"}}</td>
+              <td style="color: black !important;">Plan name: {{booking?.roomRatePlanName}} x {{booking?.noOfNights}}
+                Night(s) x {{booking?.noOfRooms}} Room(s)</td>
+              <td style="color: black !important; text-align: right;"> {{(booking.roomTariffBeforeDiscount *
+                booking?.noOfRooms * booking?.noOfNights)| currency: currency:"symbol":"1.2-2"}}</td>
             </tr>
             <tr *ngIf="booking.extraPersonCharge">
               <td style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}})</td>
-              <td style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{booking.extraPersonCharge | currency:
+                currency:"symbol":"1.2-2"}}</td>
             </tr>
 
             <tr *ngIf="booking.extraChildCharge">
@@ -333,21 +392,31 @@
               <td style="color: black !important;">
                 Total Net Amount
               </td>
-              <td style="color: black !important; text-align: right;" >
+              <td style="color: black !important; text-align: right;">
                 {{
-                  booking.beforeTaxAmount
-                  | currency: currency:"symbol":"1.2-2"
-                  }}
+                booking.beforeTaxAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}
               </td>
             </tr>
-            <tr *ngIf="taxAmountOne">
+            <tr *ngIf="taxAmountOne && booking.discountPercentage == 0">
               <td style="color: black !important;">
                 Tax Amount
               </td>
               <td style="color: black !important; text-align: right;">
                 {{
-                  taxAmountOne | currency: currency:"symbol":"1.2-2"
-                  }}
+                taxAmountOne | currency: currency:"symbol":"1.2-2"
+                }}
+              </td>
+            </tr>
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">
+                Coupon Applied: ({{booking.discountPercentage}}%)
+              </td>
+              <td style="color: black !important; text-align: right;">
+                -{{
+                booking.discountAmount | currency: currency:"symbol":"1.2-2"
+                }}
               </td>
             </tr>
             <!-- <tr>
@@ -369,59 +438,86 @@
 
 
 
-        <div class="col-12 " *ngIf="savedServices?.length > 0"  style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
+        <div class="col-12 " *ngIf="savedServices?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
           border-radius: 10px;">
-                        <h4 style="font-weight: bold;">Add-on Services</h4>
-                        <table style=" border: none; width:100%">
-                          <tr *ngFor="let fac of savedServices">
-                            <td ><div class="d-flex " *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
-                              <div style="display: flex; gap:4px">
+          <h4 style="font-weight: bold;">Add-on Services</h4>
+          <table style=" border: none; width:100%">
+            <tr *ngFor="let fac of savedServices">
+              <td>
+                <div class="d-flex "
+                  *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                  <div style="display: flex; gap:4px">
 
-                                <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon" style=" width: 26px;height: 23px;">
+                    <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                      style=" width: 26px;height: 23px;">
 
 
-                                <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+                    <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
 
-                                <br>
+                    <br>
 
-                                <p>{{fac.name }} * {{fac.quantity}} <br>
+                    <p>{{fac.name }} * {{fac.quantity}} <br>
 
-                                  <b *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined  && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
-                                  {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
-                                  {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
-                                </b>
-                                <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
-                                </p>
-                              </div>
-                            </div></td>
+                      <b
+                        *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined  && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                        {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                        {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                      </b>
+                      <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0">{{0
+                        | currency : currency : "symbol" : "1.2-2"}}</b>
+                    </p>
+                  </div>
+                </div>
+              </td>
 
-                            <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="float: right;">{{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
-                            </td>
-                          </tr>
+              <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="float: right;">
+                {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
 
-                        </table>
-                      </div>
+          </table>
+        </div>
 
         <div class="col-12" style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;    border: 2px solid;
 border-radius: 10px;">
           <table style=" border: none; width:100%">
-            <tr>
+            <tr *ngIf="booking.discountPercentage == 0">
               <td style="color: black !important;">Total Payable Amount</td>
-              <td style="color: black !important; text-align: right;">{{(booking.totalAmount + booking.totalServiceAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{(booking.totalAmount) | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr>
             <!-- <tr>
               <td style="color: black !important;">Advance Amount ({{getDetailsData}}%)</td>
               <td style="color: black !important; text-align: right;">{{booking.advanceAmount | currency : currency : "symbol" : "1.2-2"}}</td>
             </tr> -->
 
-            <tr *ngIf="getDetailsData !== 100">
+            <tr *ngIf="getDetailsData !== 100 && booking.discountPercentage == 0">
               <td style="color: black !important;">Due Amount </td>
-              <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" : "1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{this.dueAmount| currency : currency : "symbol" :
+                "1.2-2"}}</td>
             </tr>
 
-            <tr *ngIf="getDetailsData == 100">
+            <tr *ngIf="getDetailsData == 100 && booking.discountPercentage == 0">
               <td style="color: black !important;">Due Amount </td>
-              <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</td>
+              <td style="color: black !important; text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">Taxable Amount </td>
+              <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">Tax </td>
+              <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
+              </td>
+            </tr>
+
+            <tr *ngIf="booking.discountPercentage > 0">
+              <td style="color: black !important;">Total Payable Amount  </td>
+              <td style="color: black !important; text-align: right;">{{ booking.totalAmount  | currency : currency : "symbol" : "1.2-2"}}
+              </td>
             </tr>
 
             <!-- <tr>
@@ -435,60 +531,63 @@ border-radius: 10px;">
       <div class="col-6">
         <div class="card" style="background-color: black; ">
           <div style="margin: 15px;">
-          <h3 style="color:#fff; font-weight: bold;">{{businessUser.name}}</h3>
-          <h5 style="color:#fff; font-weight: bold;">{{businessUser.address?.streetName}}, {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</h5>
-          <div class="d-flex">
-          <div class="col-12 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
-            <div class="col-6" style="border-right: 1px solid black; ">
-              <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;" >
-                Check-In-Date
-              </label> <br/>
-              <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.fromDate | date: 'dd MMM' }}</p>
+            <h3 style="color:#fff; font-weight: bold;">{{businessUser.name}}</h3>
+            <h5 style="color:#fff; font-weight: bold;">{{businessUser.address?.streetName}},
+              {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</h5>
+            <div class="d-flex">
+              <div class="col-12 d-flex" style="background-color: #fff; padding-top: 10px; padding-bottom: 10px;">
+                <div class="col-6" style="border-right: 1px solid black; ">
+                  <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;">
+                    Check-In-Date
+                  </label> <br />
+                  <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.fromDate | date: 'dd MMM' }}
+                  </p>
 
+
+                </div>
+                <div class="col-6">
+                  <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;">
+                    Check-Out-Date
+                  </label> <br />
+                  <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.toDate | date: 'dd MMM' }}
+                  </p>
+
+
+                </div>
+
+              </div>
 
             </div>
-            <div  class="col-6">
-              <label for="checkin" class="label_heading1 checkAva4" style="color:#615D5D; font-weight: bold;" >
-                Check-Out-Date
-              </label> <br/>
-              <p style="color:#000C7A; font-weight: bold;padding-left:25px;">{{ booking.toDate | date: 'dd MMM' }}</p>
-
-
+            <div style="margin-top: 10px; margin-bottom: 15px; color:#fff">
+              <table style=" border: none; width:100%">
+                <tr>
+                  <td>Reservation ID :</td>
+                  <td>{{booking.propertyReservationNumber}}</td>
+                </tr>
+                <tr>
+                  <td>Guest Name :</td>
+                  <td>{{booking.firstName}} {{booking.lastName}}</td>
+                </tr>
+                <tr>
+                  <td>Email Address :</td>
+                  <td>{{booking.email}}</td>
+                </tr>
+                <tr>
+                  <td>Phone Number :</td>
+                  <td>{{booking.mobile}}</td>
+                </tr>
+              </table>
             </div>
+
+
+
+
+
+
+
+
 
           </div>
-
-        </div>
-        <div style="margin-top: 10px; margin-bottom: 15px; color:#fff">
-          <table style=" border: none; width:100%">
-            <tr>
-              <td>Reservation ID :</td>
-              <td>{{booking.propertyReservationNumber}}</td>
-            </tr>
-            <tr>
-              <td>Guest Name :</td>
-              <td>{{booking.firstName}}  {{booking.lastName}}</td>
-            </tr>
-            <tr>
-              <td>Email Address :</td>
-              <td>{{booking.email}}</td>
-            </tr>
-            <tr>
-              <td>Phone Number :</td>
-              <td>{{booking.mobile}}</td>
-            </tr>
-          </table>
-        </div>
-
-
-
-
-
-
-
-
-
-        </div>
         </div>
       </div>
     </div>
@@ -498,7 +597,8 @@ border-radius: 10px;">
 
     <div style="margin-top: 30px;margin-bottom: 10px;">
       <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-        <div class="card" style="background-color: var(--secondary); color:var(--tertiary) !important; padding: 10px; font-weight: bold; width:80%" >
+        <div class="card"
+          style="background-color: var(--secondary); color:var(--tertiary) !important; padding: 10px; font-weight: bold; width:80%">
           Would you like to pre-book your meals and tour packages?
         </div>
 
@@ -506,14 +606,14 @@ border-radius: 10px;">
 
       <div class="row" style="gap:10px; justify-content: center; margin-top: 10px;">
         <div class="card col-3" *ngFor="let fac of businessUser?.propertyServicesList">
-          <ng-container *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+          <ng-container
+            *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
             <div style="margin: auto; padding: 10px; ">
-          <img *ngIf="!fac.imageUrl"
-          src="https://static.thenounproject.com/png/3421816-200.png"
-          alt="icon" style=" width: 34px;height: 30px; justify-content: center;">
-          <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 34px;height: 30px;">
-        </div>
-        </ng-container>
+              <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                style=" width: 34px;height: 30px; justify-content: center;">
+              <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 34px;height: 30px;">
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

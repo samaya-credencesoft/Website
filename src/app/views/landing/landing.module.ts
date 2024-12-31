@@ -51,6 +51,8 @@ import { IntroNineComponent } from './components/intro-nine/intro-nine.component
 import { LandingV9Component } from './landing-v9/landing-v9.component';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 import { IntroTenComponent } from './components/intro-ten/intro-ten.component';
 import { LandingV10Component } from './landing-v10/landing-v10.component';
@@ -112,7 +114,9 @@ import { PaymentComponent } from './payment/payment.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.component';
-
+import { MessageService } from 'primeng/api';
+// import { MessageService } from 'primeng/api/messageservice';
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -125,13 +129,15 @@ import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.compo
     ReactiveFormsModule,
     NgbModule,
     CheckoutModule,
-
+    CarouselModule,
     MatCheckboxModule,
     MatInputModule,
     AgmCoreModule.forRoot({ apiKey: environment.googleKey }),
     SlickCarouselModule,
     FormsModule,
     MatSelectModule,
+    DialogModule,
+    ToastModule,
     MatRadioModule,
     MatFormFieldModule,
     MatTableModule,
@@ -226,6 +232,7 @@ EnquiryComponent,
 
   ],
   providers: [WINDOW_PROVIDERS,
+    MessageService,
     DatePipe,
     ],
   exports: [
