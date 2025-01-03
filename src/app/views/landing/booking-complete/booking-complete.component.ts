@@ -101,6 +101,7 @@ export class BookingCompleteComponent implements OnInit {
   parameterss3:Para[];
   parameterss5:Para[];
   parameterss15:Para[];
+  bookingId: number;
 
 
 
@@ -396,6 +397,7 @@ export class BookingCompleteComponent implements OnInit {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
+          this.bookingId = response.body.id;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
 
@@ -458,6 +460,9 @@ this.hotelBookingService
 
     this.token.clearHotelBooking();
     this.sendWhatsappMessageToTHM();
+    this.sendWhatsappMessageToTHM1();
+    this.sendWhatsappMessageToTHM2();
+    this.sendWhatsappMessageToTHM3();
     // this.showSuccess(this.contentDialog);
 
     this.paymentLoader = true;
@@ -970,115 +975,495 @@ this.externalReservationdto =res.body
     this.router.navigate(["/booking"]);
   }
 
-  sendWhatsappMessageToTHM(){
-        console.log('hello',this.whatsappForm);
-        this.whatsappForm.messaging_product = 'whatsapp';
-        this.whatsappForm.recipient_type ='individual';
-        this.template.name = "";
-        this.template.name = "booking_confirm";
-        this.language.code = 'en',
-        this.template.language = this.language;
-        this.componentstype.type= 'header',
-        this.parametertype.type = 'text',
-        this.parametertype.text = this.booking.businessName;
-        this.parameterss.push(this.parametertype);
-        this.componentstype.parameters =this.parameterss;
-        this.components.push(this.componentstype);
-        this.componentstype2.type= 'body',
-        this.parametertype2 = new Para()
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.booking.firstName ;
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para()
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.businessUser.name;
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.booking.fromDate;
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.booking.toDate;
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.booking.noOfRooms.toString();
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = (this.booking.noOfPersons).toString();
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = (this.booking.noOfChildren).toString();
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text';
-        this.parametertype2.text = (this.booking.noOfChildren).toString();
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text';
-        if(this.booking.noOfExtraPerson != null && this.booking.noOfExtraPerson != undefined  && this.booking.noOfExtraPerson != 0){
-          this.parametertype2.text = (this.booking.noOfExtraPerson).toString();
-        }else{
-          this.parametertype2.text = '0'
-        }
+            sendWhatsappMessageToTHM(){
+              this.whatsappForm.messaging_product = 'whatsapp';
+              this.whatsappForm.recipient_type ='individual';
+              this.template.name = "";
+              this.template.name = "booking_confirm";
+              this.language.code = 'en',
+              this.template.language = this.language;
+              this.componentstype.type= 'header',
+              this.parametertype.type = 'text',
+              this.parametertype.text = this.booking.businessName;
+              this.parameterss.push(this.parametertype);
+              this.componentstype.parameters =this.parameterss;
+              this.components.push(this.componentstype);
+              this.componentstype2.type= 'body',
+              this.parametertype2 = new Para()
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = this.booking.firstName ;
+              this.parameterss2.push(this.parametertype2);
 
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text';
-        if(this.booking.noOfExtraChild != null && this.booking.noOfExtraChild != undefined  && this.booking.noOfExtraChild != 0){
-          this.parametertype2.text = ( this.booking.noOfExtraChild).toString();
-        }else{
-          this.parametertype2.text = '0'
-        }
-        this.parameterss2.push(this.parametertype2);
+              this.parametertype2 = new Para()
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = this.businessUser.name;
+              this.parameterss2.push(this.parametertype2);
 
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text';
-        if (this.booking.notes != null && this.booking.notes != undefined) {
-          this.parametertype2.text = this.booking.notes;
-        } else {
-          this.parametertype2.text = "  ";
-        }
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.booking.totalAmount.toString();
-        this.parameterss2.push(this.parametertype2);
-        this.parametertype2 = new Para();
-        this.parametertype2.type = 'text',
-        this.parametertype2.text = this.booking.totalAmount.toString();
-        this.parameterss2.push(this.parametertype2);
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = String(this.bookingId);
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = this.booking.fromDate;
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = this.booking.toDate;
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text';
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text';
+              this.parametertype2.text = this.booking.roomName;
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text';
+              this.parametertype2.text = String(this.booking.noOfPersons);
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text';
+              this.parametertype2.text = String(this.booking.noOfChildren);
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = this.booking.totalAmount.toString();
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = String(this.booking.advanceAmount);
+              this.parameterss2.push(this.parametertype2);
 
 
-        this.componentstype2.parameters =this.parameterss2;
-        this.components.push(this.componentstype2);
+              this.componentstype2.parameters =this.parameterss2;
+              this.components.push(this.componentstype2);
 
-        this.componentstype9.index = '0';
-        this.componentstype9.sub_type = "url";
-        this.componentstype9.type = "button";
+              this.componentstype9.index = '0';
+              this.componentstype9.sub_type = "url";
+              this.componentstype9.type = "button";
 
-        this.parametertype20 = new Para();
-        this.parametertype20.type = 'text',
-        this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
-        this.parameterss15.push(this.parametertype20);
-        this.componentstype9.parameters = this.parameterss15;
-        this.components.push(this.componentstype9);
+              this.parametertype20 = new Para();
+              this.parametertype20.type = 'text',
+              this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+              this.parameterss15.push(this.parametertype20);
+              this.componentstype9.parameters = this.parameterss15;
+              this.components.push(this.componentstype9);
 
 
-        this.template.components = this.components;
-        this.whatsappForm.template =this.template;
-        this.whatsappForm.to = this.booking.mobile,
-        this.whatsappForm.type = 'template',
-        console.log('whatsform is',this.whatsappForm);
-          this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
-            this.paymentLoader = false;
-            console.log('whatsform is',this.whatsappForm);
+              this.template.components = this.components;
+              this.whatsappForm.template =this.template;
+              this.whatsappForm.to = "9337930186",
+              this.whatsappForm.type = 'template',
+                this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
+                  this.paymentLoader = false;
 
-          }, error => {
-            this.paymentLoader = false;
-          });
-        }
+                }, error => {
+                  this.paymentLoader = false;
+                });
+              }
+
+              sendWhatsappMessageToTHM1(){
+                this.whatsappForm = new WhatsappDto();
+                this.template =new Template();
+                this.language = new Language();
+                this.componentstype = new Components();
+                this.parametertype = new Para();
+                this.images = new Images();
+                this.componentstype2 = new Components();
+                this.componentstype9 = new Components();
+                this.parametertype2 = new Para();
+                this.parametertype20 = new Para();
+                this.parametertype3 = new Para()
+                this.componentstype9 = new Components();
+                this.componentstype10 = new Components();
+                this.parameterss2 =[];
+                this.parameterss3 = [];
+                this.parameterss15 = [];
+                this.components = [];
+                this.parameterss =[];
+                this.parameterss1 = [];
+
+                this.whatsappForm.messaging_product = 'whatsapp';
+                this.whatsappForm.recipient_type ='individual';
+                this.template.name = "";
+                this.template.name = "booking_confirm";
+                this.language.code = 'en',
+                this.template.language = this.language;
+                this.componentstype.type= 'header',
+                this.parametertype.type = 'text',
+                this.parametertype.text = this.booking.businessName;
+                this.parameterss.push(this.parametertype);
+                this.componentstype.parameters =this.parameterss;
+                this.components.push(this.componentstype);
+                this.componentstype2.type= 'body',
+                this.parametertype2 = new Para()
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = this.booking.firstName ;
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para()
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = this.businessUser.name;
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = String(this.bookingId);
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = this.booking.fromDate;
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = " ";
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = this.booking.toDate;
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = " ";
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text';
+                this.parametertype2.text = " ";
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text';
+                this.parametertype2.text = this.booking.roomName;
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text';
+                this.parametertype2.text = String(this.booking.noOfPersons);
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text';
+                this.parametertype2.text = String(this.booking.noOfChildren);
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+                this.parametertype2.text = this.booking.totalAmount.toString();
+                this.parameterss2.push(this.parametertype2);
+
+                this.parametertype2 = new Para();
+                this.parametertype2.type = 'text',
+
+                this.parametertype2.text = (this.booking.advanceAmount.toString());
+                this.parameterss2.push(this.parametertype2);
+
+
+                this.componentstype2.parameters =this.parameterss2;
+                this.components.push(this.componentstype2);
+
+                this.componentstype9.index = '0';
+                this.componentstype9.sub_type = "url";
+                this.componentstype9.type = "button";
+
+                this.parametertype20 = new Para();
+                this.parametertype20.type = 'text',
+                this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+                this.parameterss15.push(this.parametertype20);
+                this.componentstype9.parameters = this.parameterss15;
+                this.components.push(this.componentstype9);
+
+
+                this.template.components = this.components;
+                this.whatsappForm.template =this.template;
+                this.whatsappForm.to = "6372198255",
+                this.whatsappForm.type = 'template',
+                  this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
+                    this.paymentLoader = false;
+
+                  }, error => {
+                    this.paymentLoader = false;
+                  });
+                }
+
+                sendWhatsappMessageToTHM2(){
+                  this.whatsappForm = new WhatsappDto();
+                this.template =new Template();
+                this.language = new Language();
+                this.componentstype = new Components();
+                this.parametertype = new Para();
+                this.images = new Images();
+                this.componentstype2 = new Components();
+                this.componentstype9 = new Components();
+                this.parametertype2 = new Para();
+                this.parametertype20 = new Para();
+                this.parametertype3 = new Para()
+                this.componentstype9 = new Components();
+                this.componentstype10 = new Components();
+                this.parameterss2 =[];
+                this.parameterss3 = [];
+                this.parameterss15 = [];
+                this.components = [];
+                this.parameterss =[];
+                this.parameterss1 = [];
+
+                  this.whatsappForm.messaging_product = 'whatsapp';
+                  this.whatsappForm.recipient_type ='individual';
+                  this.template.name = "";
+                  this.template.name = "booking_confirm";
+                  this.language.code = 'en',
+                  this.template.language = this.language;
+                  this.componentstype.type= 'header',
+                  this.parametertype.type = 'text',
+                  this.parametertype.text = this.booking.businessName;
+                  this.parameterss.push(this.parametertype);
+                  this.componentstype.parameters =this.parameterss;
+                  this.components.push(this.componentstype);
+                  this.componentstype2.type= 'body',
+                  this.parametertype2 = new Para()
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = this.booking.firstName ;
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para()
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = this.businessUser.name;
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = String(this.bookingId);
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = this.booking.fromDate;
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = " ";
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = this.booking.toDate;
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = " ";
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text';
+                  this.parametertype2.text = " ";
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text';
+                  this.parametertype2.text = this.booking.roomName;
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text';
+                  this.parametertype2.text = String(this.booking.noOfPersons);
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text';
+                  this.parametertype2.text = String(this.booking.noOfChildren);
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+                  this.parametertype2.text = this.booking.totalAmount.toString();
+                  this.parameterss2.push(this.parametertype2);
+
+                  this.parametertype2 = new Para();
+                  this.parametertype2.type = 'text',
+
+                  this.parametertype2.text = (this.booking.advanceAmount.toString());
+                  this.parameterss2.push(this.parametertype2);
+
+
+                  this.componentstype2.parameters =this.parameterss2;
+                  this.components.push(this.componentstype2);
+
+                  this.componentstype9.index = '0';
+                  this.componentstype9.sub_type = "url";
+                  this.componentstype9.type = "button";
+
+                  this.parametertype20 = new Para();
+                  this.parametertype20.type = 'text',
+                  this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+                  this.parameterss15.push(this.parametertype20);
+                  this.componentstype9.parameters = this.parameterss15;
+                  this.components.push(this.componentstype9);
+
+
+                  this.template.components = this.components;
+                  this.whatsappForm.template =this.template;
+                  this.whatsappForm.to = "9777141738",
+                  this.whatsappForm.type = 'template',
+                    this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
+                      this.paymentLoader = false;
+
+                    }, error => {
+                      this.paymentLoader = false;
+                    });
+                  }
+
+                  sendWhatsappMessageToTHM3(){
+                    this.whatsappForm = new WhatsappDto();
+                this.template =new Template();
+                this.language = new Language();
+                this.componentstype = new Components();
+                this.parametertype = new Para();
+                this.images = new Images();
+                this.componentstype2 = new Components();
+                this.componentstype9 = new Components();
+                this.parametertype2 = new Para();
+                this.parametertype20 = new Para();
+                this.parametertype3 = new Para()
+                this.componentstype9 = new Components();
+                this.componentstype10 = new Components();
+                this.parameterss2 =[];
+                this.parameterss3 = [];
+                this.parameterss15 = [];
+                this.components = [];
+                this.parameterss =[];
+                this.parameterss1 = [];
+
+                    this.whatsappForm.messaging_product = 'whatsapp';
+                    this.whatsappForm.recipient_type ='individual';
+                    this.template.name = "";
+                    this.template.name = "booking_confirm";
+                    this.language.code = 'en',
+                    this.template.language = this.language;
+                    this.componentstype.type= 'header',
+                    this.parametertype.type = 'text',
+                    this.parametertype.text = this.booking.businessName;
+                    this.parameterss.push(this.parametertype);
+                    this.componentstype.parameters =this.parameterss;
+                    this.components.push(this.componentstype);
+                    this.componentstype2.type= 'body',
+                    this.parametertype2 = new Para()
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = this.booking.firstName ;
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para()
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = this.businessUser.name;
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = String(this.bookingId);
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = this.booking.fromDate;
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = " ";
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = this.booking.toDate;
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = " ";
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text';
+                    this.parametertype2.text = " ";
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text';
+                    this.parametertype2.text = this.booking.roomName;
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text';
+                    this.parametertype2.text = String(this.booking.noOfPersons);
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text';
+                    this.parametertype2.text = String(this.booking.noOfChildren);
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+                    this.parametertype2.text = this.booking.totalAmount.toString();
+                    this.parameterss2.push(this.parametertype2);
+
+                    this.parametertype2 = new Para();
+                    this.parametertype2.type = 'text',
+
+                    this.parametertype2.text = (this.booking.advanceAmount.toString());
+                    this.parameterss2.push(this.parametertype2);
+
+
+                    this.componentstype2.parameters =this.parameterss2;
+                    this.components.push(this.componentstype2);
+
+                    this.componentstype9.index = '0';
+                    this.componentstype9.sub_type = "url";
+                    this.componentstype9.type = "button";
+
+                    this.parametertype20 = new Para();
+                    this.parametertype20.type = 'text',
+                    this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+                    this.parameterss15.push(this.parametertype20);
+                    this.componentstype9.parameters = this.parameterss15;
+                    this.components.push(this.componentstype9);
+
+
+                    this.template.components = this.components;
+                    this.whatsappForm.template =this.template;
+                    this.whatsappForm.to = "9040785705",
+                    this.whatsappForm.type = 'template',
+                      this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
+                        this.paymentLoader = false;
+
+                      }, error => {
+                        this.paymentLoader = false;
+                      });
+                    }
+
 }
