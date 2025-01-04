@@ -326,8 +326,8 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
     style="background-color: white; padding: 20px; border-radius: 10px; width: 70%; max-width: 450px; position: relative;">
 
     <!-- Success Icon in a Circular Background with Animation -->
-    <div class="checkmark-circle" style="font-size: 20px; color: white; text-align: center; margin-bottom: 20px; 
-       background-color: #4CAF50; border-radius: 50%; width: 80px; height: 80px; 
+    <div class="checkmark-circle" style="font-size: 20px; color: white; text-align: center; margin-bottom: 20px;
+       background-color: #4CAF50; border-radius: 50%; width: 80px; height: 80px;
        display: flex; justify-content: center; align-items: center; margin: 0 auto; margin-top: 10px;">
       <div class="checkmark" style="font-size: 1.7em;">&#10004;</div> <!-- Success checkmark icon inside circle -->
     </div>
@@ -2253,10 +2253,19 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
     <div class="booking-checkout-web-view"
       style="padding-left: 40px; padding-top: 20px; padding-right: 40px;margin-top: 85px;">
       <a href="{{PropertyUrl}}"
-        style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+        style="text-align: left;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: -20px;
+        cursor: pointer;
+        text-decoration: none;
+        background-color: black;
+        padding: 7px;
+        border-radius: 10px;
+        color: #ffff;">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
       </a>
-      <h3 style=" font-weight: bold; ">Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}
+      <h3 style=" font-weight: bold; margin-top: 10px; ">Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo }}
       </h3>
       <p style=" font-weight: bold; ">This is not a confirmed booking.We want to assure
         you that we are diligently handling your booking request and will provide
@@ -2412,7 +2421,7 @@ border-radius: 10px;">
                 <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
                 </td>
               </tr>
-  
+
               <tr *ngIf="booking.discountPercentage > 0">
                 <td style="color: black !important;">Tax: ({{this.booking.taxPercentage}}%)</td>
                 <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
@@ -2520,10 +2529,19 @@ border-radius: 10px;">
     <div class="booking-checkout-mobile-view">
       <div style="padding-left: 15px; padding-top: 20px; padding-right: 15px;margin-top: 65px;">
         <a href="{{PropertyUrl}}"
-          style="text-align: left; font-weight: 700; margin-bottom: 10px; margin-top: -10px; cursor: pointer; text-decoration: none;">
+          style="text-align: left;
+          font-weight: 700;
+          margin-bottom: 20px;
+          margin-top: -20px;
+          cursor: pointer;
+          text-decoration: none;
+          background-color: black;
+          padding: 7px;
+          border-radius: 10px;
+          color: #ffff;">
           <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
         </a>
-        <h4 style=" font-weight: bold; "> Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo
+        <h4 style=" font-weight: bold; margin-top: 10px;"> Thank You For Enquiry with "{{businessUser.name }}" Enquiry No: #{{ enquiryNo
           }}</h4>
         <p style=" font-weight: bold; ">This is not a confirmed booking.We want to assure
           you that we are diligently handling your booking request and will provide
@@ -2720,13 +2738,13 @@ border-radius: 10px;">
             <div class="col-12 "
               style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;">
               <table style=" border: none; width:100%">
-                
+
                 <tr *ngIf="booking.discountPercentage > 0">
                   <td style="color: black !important;">Taxable Amount </td>
                   <td style="color: black !important; text-align: right;">{{ booking.beforeTaxAmount - booking.discountAmount | currency : currency : "symbol" : "1.2-2"}}
                   </td>
                 </tr>
-    
+
                 <tr *ngIf="booking.discountPercentage > 0">
                   <td style="color: black !important;">Tax: ({{this.booking.taxPercentage}}%)</td>
                   <td style="color: black !important; text-align: right;">{{ booking.taxAmount  | currency : currency : "symbol" : "1.2-2"}}
