@@ -1260,6 +1260,7 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.couponCode = this.booking.couponCode;
     this.enquiryForm.promotionName = this.booking.promotionName;
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
+    this.enquiryForm.discountAmount = this.booking.discountAmount;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
@@ -2492,7 +2493,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
-
+    this.enquiryForm.discountAmount = this.booking.discountAmount;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
     // this.enquiryForm.currency = this.token.getProperty().localCurrency;
