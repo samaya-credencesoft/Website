@@ -2801,7 +2801,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
+    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect";
 
