@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenStorage } from 'src/token.storage';
 
 @Component({
   selector: 'app-booking-voucher',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./booking-voucher.component.scss']
 })
 export class BookingVoucherComponent {
+propertyDetails: any;
+constructor(private token :TokenStorage){
+  this.propertyDetails = this.token.getProperty();
+}
 
+ngOnInIt(){
+
+}
 }

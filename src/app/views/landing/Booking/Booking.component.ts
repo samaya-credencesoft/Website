@@ -2908,6 +2908,7 @@ this.savedServices?.forEach(element => {
       this.submitButtonDisable = true;
       this.bookingConfirmed = true;
       this.enquiryNo = "THM-"+response.body.enquiryId;
+      this.token.saveBookingData(this.booking)
       this.propertyenquiryemails()
       this.hotelBookingService.emailEnquire(this.enquiryForm).subscribe((response) => {
         this.paymentLoader = false;
