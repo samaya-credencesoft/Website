@@ -247,25 +247,25 @@
                   width: 26px;"
                 > Guest Details</h5>
                 <table style="width: 88%;">
-                  <tr>
+                  <tr *ngIf="booking.firstName != null && booking.firstName != undefined">
                     <td>Guest Name:
                     </td>
                     <td>{{booking.firstName}}{{booking.lastName}}</td>
                   </tr>
 
-                  <tr>
+                  <tr *ngIf="booking.email != null && booking.email != undefined">
                     <td>Email Address:
                     </td>
                     <td>{{booking.email}}</td>
                   </tr>
 
-                  <tr>
+                  <tr *ngIf="booking.mobile != null && booking.mobile != undefined">
                     <td>Phone Number:
                     </td>
                     <td>{{booking.mobile}}</td>
                   </tr>
 
-                  <tr>
+                  <tr *ngIf="booking.notes != null && booking.notes != undefined">
                     <td>Notes:
                     </td>
                     <td>{{booking.notes}}</td>
