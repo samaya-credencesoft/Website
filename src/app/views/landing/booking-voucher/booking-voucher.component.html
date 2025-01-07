@@ -77,14 +77,14 @@
                       style="margin-right: 3px; transform: rotate(3deg);"
                     >
           </div>
-          <div>
+          <div *ngIf="booking.fromDate">
             <b>  Check-in date </b>  <br/>
             <p>{{booking.fromDate}}</p>
           </div>
         </div>
     </div>
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%;text-align: center;">
+    flex: 0 0 40%;text-align: center;" *ngIf="booking.toDate">
       <div>
         <b> Check-in date </b>  <br/>
         <p>{{booking.toDate}}</p>
@@ -92,38 +92,38 @@
     </div>
 
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%; text-align: center; ">
+    flex: 0 0 40%; text-align: center; " *ngIf="booking.noOfPersons ||  booking.noOfChildren">
         <div>
        <b> Occupancy: </b>
         </div>
     </div>
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%;text-align: center;">
+    flex: 0 0 40%;text-align: center;"  *ngIf="booking.noOfPersons ||  booking.noOfChildren">
       <div>
         <p>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</p>
          </div>
     </div>
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%; text-align: center; ">
+    flex: 0 0 40%; text-align: center; " *ngIf="booking.noOfRooms">
         <div>
        <b> Rooms: </b>
         </div>
     </div>
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%;text-align: center;">
+    flex: 0 0 40%;text-align: center;" *ngIf="booking.noOfRooms">
       <div>
         <p>{{booking.noOfRooms}}</p>
          </div>
     </div>
 
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%; text-align: center; ">
+    flex: 0 0 40%; text-align: center; " *ngIf="booking.noOfNights">
         <div>
        <b> Nights: </b>
         </div>
     </div>
     <div class="col-md-6" style="min-width: 40% !important;
-    flex: 0 0 40%;text-align: center;">
+    flex: 0 0 40%;text-align: center;" *ngIf="booking.noOfNights">
       <div>
         <p>{{booking.noOfNights}} </p>
          </div>
