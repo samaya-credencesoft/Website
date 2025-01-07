@@ -139,7 +139,7 @@
   color: #000 !important;
   font-size: 35px !important;">{{propertyDetails.name}}</h2>
   <h5>{{propertyDetails.address.city}},{{propertyDetails.address.state}}, {{propertyDetails.address.country}}</h5>
-  <h4 style=" font-size: 15px;">This is the property description.</h4>
+  <h4 class="text-muted" style=" font-size: 15px;" [innerHTML]="propertyDetails.businessDescription">{{propertyDetails.businessDescription}}</h4>
 </div>
 </div>
 </div>
