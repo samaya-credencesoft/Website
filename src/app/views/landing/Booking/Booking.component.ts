@@ -2747,6 +2747,7 @@ this.savedServices?.forEach(element => {
   }
 
   submitForm() {
+
     localStorage.removeItem('selectedPromoData');
     localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
@@ -2773,6 +2774,7 @@ this.savedServices?.forEach(element => {
       this.enquiryForm.location = this.token.getProperty().address.city;
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
     }
+    this.token.saveBookingData(this.booking)
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
@@ -2908,7 +2910,7 @@ this.savedServices?.forEach(element => {
       this.submitButtonDisable = true;
       this.bookingConfirmed = true;
       this.enquiryNo = "THM-"+response.body.enquiryId;
-      this.token.saveBookingData(this.booking)
+
       this.propertyenquiryemails()
       this.hotelBookingService.emailEnquire(this.enquiryForm).subscribe((response) => {
         this.paymentLoader = false;

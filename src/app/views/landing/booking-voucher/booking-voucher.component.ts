@@ -1,3 +1,4 @@
+import { Booking } from './../../../model/booking';
 import { Component } from '@angular/core';
 import { TokenStorage } from 'src/token.storage';
 
@@ -8,11 +9,14 @@ import { TokenStorage } from 'src/token.storage';
 })
 export class BookingVoucherComponent {
 propertyDetails: any;
+booking:Booking;
 constructor(private token :TokenStorage){
   this.propertyDetails = this.token.getProperty();
+ this.booking = this.token.getBookingData()
 }
 
 ngOnInIt(){
 
 }
+
 }

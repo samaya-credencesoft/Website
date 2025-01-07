@@ -79,7 +79,7 @@
           </div>
           <div>
             <b>  Check-in date </b>  <br/>
-            <p>15 OCT</p>
+            <p>{{booking.fromDate}}</p>
           </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
     flex: 0 0 40%;text-align: center;">
       <div>
         <b> Check-in date </b>  <br/>
-        <p>15 OCT</p>
+        <p>{{booking.toDate}}</p>
          </div>
     </div>
 
@@ -100,7 +100,7 @@
     <div class="col-md-6" style="min-width: 40% !important;
     flex: 0 0 40%;text-align: center;">
       <div>
-        <p>2 Adults, 0 Children</p>
+        <p>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</p>
          </div>
     </div>
     <div class="col-md-6" style="min-width: 40% !important;
@@ -112,7 +112,7 @@
     <div class="col-md-6" style="min-width: 40% !important;
     flex: 0 0 40%;text-align: center;">
       <div>
-        <p>1</p>
+        <p>{{booking.noOfRooms}}</p>
          </div>
     </div>
 
@@ -125,7 +125,7 @@
     <div class="col-md-6" style="min-width: 40% !important;
     flex: 0 0 40%;text-align: center;">
       <div>
-        <p>2 </p>
+        <p>{{booking.noOfNights}} </p>
          </div>
     </div>
 </div>
