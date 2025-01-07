@@ -2289,7 +2289,7 @@ this.savedServices?.forEach(element => {
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
         }, 3000);
-          this.router.navigate(['/Confirm-Booking']);
+        this.router.navigate(["/confirm"]);
           this.loadingOne = false;
           if (this.booking.id !== null) {
             this.submitButtonDisable = true;
@@ -2508,16 +2508,6 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
-    // this.enquiryForm.taxDetails.forEach(item=>{
-    //   if(item.name === 'CGST'){
-    //     this.percentage1 = item.percentage;
-    //   }
-
-    //   if(item.name === 'SGST'){
-    //     this.percentage2 = item.percentage;
-    //   }
-    // })
-    // this.totalPercentage = (this.percentage1 + this.percentage2);
 
 
     const TO_EMAIL = 'support@thehotelmate.com';
@@ -2773,7 +2763,7 @@ this.savedServices?.forEach(element => {
     else{
       this.booking.discountPercentage = 0;
     }
-    console.log("Coupon Applied Data is  Enquiry==========>",this.booking);
+    // console.log("Coupon Applied Data is  Enquiry==========>",this.booking);
     this.enquiryForm = new EnquiryDto();
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
       this.token.getProperty().address.city != null && this.token.getProperty().address.city != undefined)
@@ -2921,18 +2911,18 @@ this.savedServices?.forEach(element => {
       this.propertyenquiryemails()
       this.hotelBookingService.emailEnquire(this.enquiryForm).subscribe((response) => {
         this.paymentLoader = false;
-
+        this.router.navigate(["/confirm"]);
       }, error => {
         this.paymentLoader = false;
       });
-
+      this.sendenquirytoproperty(this.enquiryForm)
+      this.sendWhatsappMessageToCustomer();
+      this.sendWhatsappMessageToPropertyOwner();
 
     }, error => {
       this.paymentLoader = false;
     });
-    this.sendenquirytoproperty(this.enquiryForm)
-    this.sendWhatsappMessageToCustomer();
-    this.sendWhatsappMessageToPropertyOwner();
+
   }
   propertyenquiryemails(){
     // console.log(this.equitycreatedData.enquiryId)
