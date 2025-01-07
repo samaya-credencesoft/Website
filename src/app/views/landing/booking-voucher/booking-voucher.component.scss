@@ -50,6 +50,21 @@ margin-bottom: 10px;
   border-radius: 5px;
 }
 
+.note-section {
+  margin-top: 30px;
+  padding: 20px;
+  margin-left: 60px;
+  margin-right: 60px;
+
+  border-radius: 5px;
+}
+
+.note-sectionOne {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
 
 .note-section h5 {
   font-weight: bold;
@@ -122,5 +137,11 @@ margin-bottom: 10px;
   }
 }
 
+
+@media (min-width: 769px){
+.mobile-view-booking-voucher {
+  display: none;
+}
+}
 
 
