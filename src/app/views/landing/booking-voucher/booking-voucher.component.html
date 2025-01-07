@@ -204,20 +204,21 @@
 
 
 
-                <p style="font-size: 21px;">STANDARD AC ROOM x 1</p>
+                <p style="font-size: 21px;">{{booking.roomName}} x {{booking.noOfRooms}}</p>
                 <table style="width: 88%; margin-top: -0.7rem;">
                   <tr>
-                    <td>CP Room Plan x 1</td>
-                    <td>₹5093</td>
+                    <td>{{booking.roomRatePlanName}} </td>
+                    <td>₹{{booking.roomTariffBeforeDiscount}}</td>
                   </tr>
                   <tr>
-                    <td>Extra Pax Charges</td>
-                    <td>₹0</td>
+                    <td>Extra Person Charges</td>
+                    <td>₹{{booking.extraPersonCharge}}</td>
                   </tr>
                   <tr>
-                    <td>Tax + Services (12%)</td>
-                    <td>₹612</td>
+                    <td>Extra Child Charges</td>
+                    <td>₹{{booking.extraChildCharge}}</td>
                   </tr>
+
                 </table>
 
                 <hr style="margin-top: 10px; margin-bottom: 10px;">
@@ -239,19 +240,19 @@
                 <tr>
                   <td>Total Payable Amount
                   </td>
-                  <td>₹ 6,255</td>
+                  <td>₹ {{booking.totalAmount}}</td>
                 </tr>
 
                 <tr>
-                  <td>Tax Amount (50%)
+                  <td>Tax Amount ({{booking.taxPercentage}}%)
                   </td>
-                  <td>₹ 3,128</td>
+                  <td>₹ {{booking.taxAmount}}</td>
                 </tr>
 
                 <tr>
                   <td>Due Amount
                   </td>
-                  <td>₹ 3,127</td>
+                  <td>₹{{booking.totalAmount}}</td>
                 </tr>
 
               </table>
