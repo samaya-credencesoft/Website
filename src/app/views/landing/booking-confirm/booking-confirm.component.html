@@ -1,0 +1,1000 @@
+<div class="desktop-view-booking-voucher">
+  <div class="responsive-wrapper">
+    <div class="row">
+      <div class="col-12 col-md-6 offset-md-6">
+        <div class="assistance-section">
+          <div style="display: flex">
+            <div><strong>Need Assistance?</strong></div>
+            <div
+              class="contact-info"
+              style="display: flex; margin-top: 0px; margin-left: 10px"
+            >
+              <span
+                ><img
+                  src="assets/images/Phone-call.png"
+                  alt=""
+                  height="20px"
+                  width="20px"
+                  style="margin-right: 3px; transform: rotate(3deg)"
+                />
+                7689345790</span
+              >
+              <span
+                ><img
+                  src="assets/images/chatsym.png"
+                  alt=""
+                  height="20px"
+                  width="20px"
+                  style="margin-right: 3px; transform: rotate(3deg)"
+                />
+                7689345790</span
+              >
+            </div>
+          </div>
+          <p style="margin-bottom: -19px; margin-top: -12px" *ngIf="accommodationService[0]?.checkInTime">
+            Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-4">
+      <span
+        style="
+          font-weight: bold !important;
+          color: #000 !important;
+          font-size: 35px !important;
+        "
+        >Thank you!</span
+      >
+      <p
+        class="mb-0"
+        style="
+          font-weight: bold !important;
+          color: #000 !important;
+          font-size: 21px !important;
+          margin-top: -7px;
+        "
+      >
+      Your reservation is currently on hold.
+      </p>
+      <p class="mb-0" style="margin-top: -3px; font-size: 18px; color: #615d5d">
+        A copy of this reservation has been sent to {{booking.email}}.
+
+      </p>
+      <p
+        style="
+          color: #615d5d;
+          font-weight: bold;
+          margin-top: -3px;
+          font-size: 17px;
+        "
+      >
+      Note: Please check your spam folder if you don't see it, or find it on WhatsApp.
+      </p>
+    </div>
+
+    <div class="row mb-4" style="justify-content: center">
+      <div
+        class="col-md-4"
+        style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
+      >
+        <p class="mb-1"><span class="highlight-text">Booking ID</span></p>
+        <p class="mb-0">{{booking.enquiryId}}</p>
+      </div>
+      <div
+        class="col-md-4"
+        style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
+      >
+        <p class="mb-1"><span class="highlight-text">Payment Status</span></p>
+        <p class="mb-0">
+          <span class="status-badge status-unpaid" style="font-size: 13px"
+            >Unpaid</span
+          >
+        </p>
+      </div>
+      <div
+        class="col-md-4"
+        style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
+      >
+        <p class="mb-1">
+          <span class="highlight-text">Reservation Status</span>
+        </p>
+        <p class="mb-0">
+          <span class="status-badge status-enquiry" style="font-size: 13px"
+            >On Hold</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <div
+          class="row mb-3"
+          style="display: flex; justify-content: center; margin-top: 15px"
+        >
+
+          <div
+            class="col-md-6"
+            style="
+              min-width: 40% !important;
+              flex: 0 0 40%;
+              text-align: center;
+              border-right: 2px solid #d9d9d9;
+            "
+          >
+
+            <div style="display: flex; gap: 26px; justify-content: center">
+              <div>
+                <img
+                  src="assets/images/CalendarVoucher.png"
+                  alt=""
+                  height="20px"
+                  width="20px"
+                  style="margin-right: 3px; transform: rotate(3deg)"
+                />
+              </div>
+              <div *ngIf="booking.checkInDate">
+                <b> Check-in date </b> <br />
+                <p>{{ booking.checkInDate }}</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.checkOutDate"
+          >
+            <div>
+              <b> Check-in date </b> <br />
+              <p>{{ booking.checkOutDate }}</p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.noOfPersons || booking.noOfChildren"
+          >
+            <div>
+              <b> Occupancy: </b>
+            </div>
+          </div>
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.noOfPersons || booking.noOfChildren"
+          >
+            <div>
+              <p>
+                {{ booking.noOfPersons }} Adults,
+                {{ booking.noOfChildren }} Children
+              </p>
+            </div>
+          </div>
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.noOfRooms"
+          >
+            <div>
+              <b> Rooms: </b>
+            </div>
+          </div>
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.noOfRooms"
+          >
+            <div>
+              <p>{{ booking.noOfRooms }}</p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.noOfNights"
+          >
+            <div>
+              <b> Nights: </b>
+            </div>
+          </div>
+          <div
+            class="col-md-6"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            *ngIf="booking.noOfNights"
+          >
+            <div>
+              <p>{{ booking.noOfNights }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4" style="margin-top: 20px">
+        <div>
+          <h2
+            style="
+              font-weight: bold !important;
+              color: #000 !important;
+              font-size: 35px !important;
+            "
+          >
+            {{ propertyDetails.name }}
+          </h2>
+          <h5>
+            {{ propertyDetails.address.city }},{{
+              propertyDetails.address.state
+            }}, {{ propertyDetails.address.country }}
+          </h5>
+          <h4
+            class="text-muted"
+            style="font-size: 15px"
+            [innerHTML]="propertyDetails.businessDescription"
+          >
+            {{ propertyDetails.businessDescription }}
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="row mb-4"
+      style="display: flex; justify-content: center; gap: 30px"
+    >
+      <div class="col-8" style="flex: 0 0 38%; max-width: 38%">
+        <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
+
+        <div class="details-card">
+          <p style="font-size: 21px">
+            {{ booking.roomName }} x {{ booking.noOfRooms }}
+          </p>
+          <table style="width: 88%; margin-top: -0.7rem">
+            <tr>
+              <td>{{ booking.roomRatePlanName }}</td>
+              <td>₹{{ booking.roomPrice }}</td>
+            </tr>
+            <tr *ngIf="booking.extraPersonCharge > 0">
+              <td>Extra Person Charges</td>
+              <td>₹{{ booking.extraPersonCharge }}</td>
+            </tr>
+            <tr *ngIf="booking.extraChildCharge > 0">
+              <td>Extra Child Charges</td>
+              <td>₹{{ booking.extraChildCharge }}</td>
+            </tr>
+          </table>
+
+          <hr style="margin-top: 10px; margin-bottom: 10px" />
+
+          <!-- <p style="font-size: 18px">Add-on Services:</p> -->
+          <div class="addon-services" *ngIf="savedServices?.length >0">
+            <h4 style="font-weight: bold;">Add-on Services</h4>
+            <table style=" border: none; width:100%">
+              <tr *ngFor="let fac of savedServices">
+                <td>
+                  <div class="d-flex "
+                    *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+                    <div style="display: flex; gap:4px">
+
+                      <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                        style=" width: 26px;height: 23px;">
+
+
+                      <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+                      <br>
+
+                      <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                        <b
+                          *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                          {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                          {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                        </b>
+                        <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
+                          style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
+                  {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+
+        <div class="details-card" style="margin-top: 20px">
+          <table style="width: 88%">
+            <tr>
+              <td>Tax Amount ({{ booking.taxPercentage }}%)</td>
+              <td>₹ {{ booking.taxAmount }}</td>
+            </tr>
+
+            <tr>
+              <td>Total Payable Amount</td>
+              <td>₹ {{ booking.totalAmount }}</td>
+            </tr>
+            <tr>
+              <td>Due Amount</td>
+              <td>₹{{ booking.totalAmount }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="coupon-box mb-4">
+          <div style="display: flex; gap: 10px">
+            <div>
+              <img
+                src="assets/images/Tag.png"
+                alt=""
+                style="
+                  margin-right: 0px;
+                  transform: rotate(-2deg);
+                  height: 43px;
+                  width: 43px;
+                  margin-top: 10px;
+                "
+              />
+            </div>
+            <div  *ngIf="promocodeListChip.length >0 ">
+              <h5 style="color: #fff; font-weight: bold; font-size: 24px">
+                Save More On Your Booking!
+              </h5>
+              <ul>
+                <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
+                  <li *ngIf="i === 0 || showMore">
+                    <p style="margin-top: -7px">
+                      Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
+                    </p>
+                    <p style="margin-top: -10px">
+                      Share this coupon code when confirming your reservation to save
+                      {{ coupon.discountPercentage }}%!
+                    </p>
+                  </li>
+                </ng-container>
+              </ul>
+
+
+
+
+              <!-- View More / View Less Button -->
+              <span  style="float:right" (click)="toggleView()">
+                {{ showMore ? 'View Less..' : 'View More..' }}
+              </span>
+
+            </div>
+             <!-- No Coupons Message -->
+    <!-- No Coupons Card -->
+    <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
+          <strong style="font-size: 18px;">No Coupon Available  :(</strong>
+
+        <p style="margin: 0; font-size: 14px;">
+          Unfortunately, this property does not have any active coupons at the moment.
+        </p>
+        <!-- <a
+          href="/deals"
+          style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
+        >
+          Explore Other Deals
+        </a> -->
+
+    </div>
+    <div *ngIf="selectedPromo">
+      <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
+Applied!</strong>
+<p style="margin: 0; font-size: 14px;">
+  You’re Saving ₹ {{booking.discountAmount}} on this booking!
+</p>
+
+<p>
+  Complete your booking now to save big on your stay.
+</p>
+</div>
+
+          </div>
+
+        </div>
+
+        <div
+          style="background-color: #f5f5f5; padding: 20px; border-radius: 15px"
+        >
+          <h5>
+            <img
+              src="assets/images/User.png"
+              alt=""
+              style="height: 26px; width: 26px"
+            />
+            Guest Details
+          </h5>
+          <table style="width: 88%">
+            <tr
+              *ngIf="
+                booking.firstName != null && booking.firstName != undefined
+              "
+            >
+              <td>Guest Name:</td>
+              <td>{{ booking.firstName }}{{ booking.lastName }}</td>
+            </tr>
+
+            <tr *ngIf="booking.email != null && booking.email != undefined">
+              <td>Email Address:</td>
+              <td>{{ booking.email }}</td>
+            </tr>
+
+            <tr *ngIf="booking.mobile != null && booking.mobile != undefined">
+              <td>Phone Number:</td>
+              <td>{{ booking.mobile }}</td>
+            </tr>
+
+            <tr *ngIf="booking.notes != null && booking.notes != undefined">
+              <td>Notes:</td>
+              <td>{{ booking.notes }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-link">
+      <a href="#" style="font-weight: bold; font-size: 18px"
+        >Go back to home page</a
+      >
+      <div style="display: flex; justify-content: center">
+        <div style="width: 181px; border-bottom: 2px solid gray"></div>
+      </div>
+    </div>
+    <p class="mt-2" style="text-align: center">
+      For urgent bookings (same-day or next-morning check-ins), please call us
+      directly at <strong>079652 01321</strong> for prompt assistance.
+    </p>
+  </div>
+  <div class="note-section">
+    <h5>Please note:</h5>
+    <ul>
+      <li>
+        Confirmation: The Hotel Mate team will contact you to confirm your
+        booking.
+      </li>
+      <li>
+        Price Changes: Prices are subject to change due to hotel demand. We will
+        do our best to offer the Best Available Rate.
+      </li>
+      <li>
+        Room Availability: If rooms are unavailable, we may offer alternative
+        accommodations upon your request.
+      </li>
+      <li>
+        Advance Payment: In accordance with the hotel’s policy, you may be
+        required to pay an advance amount (minimum 20% to full payment).
+      </li>
+      <li>
+        Payment and Booking Confirmation: We will provide you with a payment
+        link or scanner. Once payment is received, we will confirm your
+        reservation and send a booking confirmation voucher via email and/or
+        WhatsApp.
+      </li>
+      <li>
+        Last Minute Bookings: If this is a last-minute booking, meaning the
+        check-in date is the same as the date of booking or early check-in the
+        next day, please call us.
+      </li>
+      <li>
+        Paid Booking: In the event that payment has already been made, and we
+        are unable to confirm the booking, we will refund the full amount (minus
+        payment gateway charges).
+      </li>
+      <li>
+        Email Confirmation: Please check your spam folder for the email
+        confirmation, as it may sometimes be found there.
+      </li>
+    </ul>
+    <p class="property-rules">Property rules:</p>
+  </div>
+</div>
+
+<div class="mobile-view-booking-voucher">
+  <div style="margin-top: 10px">
+    <div style="display: flex; justify-content: right; font-size: 12px">
+      <div><strong>Need Assistance?</strong></div>
+      <div
+        class="contact-info"
+        style="
+          display: flex;
+          margin-top: 0px;
+          margin-left: 10px;
+          gap: 10px;
+          font-size: 12px;
+        "
+      >
+        <span
+          ><img
+            src="assets/images/Phone-call.png"
+            alt=""
+            height="15px"
+            width="15px"
+            style="margin-right: 3px; transform: rotate(3deg)"
+          />
+          7689345790</span
+        >
+        <span
+          ><img
+            src="assets/images/chatsym.png"
+            alt=""
+            height="15px"
+            width="15px"
+            style="margin-right: 3px; transform: rotate(3deg)"
+          />
+          7689345790</span
+        >
+      </div>
+    </div>
+    <p
+      style="
+        margin-bottom: -19px;
+        text-align: right;
+        font-size: 12px;
+        margin-right: 5px;
+      " *ngIf="accommodationService[0]?.checkInTime"
+    >
+      Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
+    </p>
+  </div>
+
+  <div class="text-center mb-4" style="margin-top: 30px">
+    <span
+      style="
+        font-weight: bold !important;
+        color: #000 !important;
+        font-size: 25px !important;
+      "
+      >Thank you!</span
+    >
+    <p
+      class="mb-0"
+      style="
+        font-weight: bold !important;
+        color: #000 !important;
+        font-size: 16px !important;
+        margin-top: -7px;
+      "
+    >
+      We’ve received your reservation enquiry.
+    </p>
+    <p class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
+      A copy of your enquiry has been sent to your email.
+    </p>
+    <p
+      style="
+        color: #615d5d;
+        font-weight: bold;
+        margin-top: -3px;
+        font-size: 13px;
+      "
+    >
+      Note: Please check your spam folder if you don’t see it, or find it on
+      WhatsApp.
+    </p>
+  </div>
+
+  <div style="display: flex; justify-content: center; gap: 20px">
+    <div style="color: #615d5d; font-size: 18px">Booking ID</div>
+    <div style="font-weight: bold; font-size: 17px">
+      {{booking.enquiryId}}
+      <img
+        src="assets/images/CopyVoucher.png"
+        alt=""
+        height="15px"
+        width="15px"
+        style="margin-right: 3px"
+      />
+      <span style="margin-left: 5px; font-size: 13px; color: #1465cf"
+        >Check Details</span
+      >
+    </div>
+  </div>
+
+  <div
+    class="details-cardOne"
+    style="margin-left: 10px; margin-right: 10px; margin-top: 18px"
+  >
+    <div style="display: flex; justify-content: center; gap: 45px">
+      <div>
+        <div>Payment Status</div>
+        <div style="display: flex; justify-content: center; margin-top: 5px">
+          <p class="mb-0">
+            <span class="status-badge status-unpaid" style="font-size: 13px"
+              >Unpaid</span
+            >
+          </p>
+        </div>
+      </div>
+      <div>
+        <div>Reservation Status</div>
+        <div style="display: flex; justify-content: center; margin-top: 5px">
+          <p class="mb-0">
+            <span class="status-badge status-enquiry" style="font-size: 13px"
+              > On Hold</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-left: 20px; margin-top: 20px">
+    <h2
+      style="
+        font-weight: bold !important;
+        color: #000 !important;
+        font-size: 20px !important;
+        margin-bottom: 0px;
+      "
+    >
+    {{propertyDetails.name}}
+    </h2>
+    <h5 style="font-size: 15px; margin-bottom: 0px">{{propertyDetails.address.city}},{{propertyDetails.address.state}}, {{propertyDetails.address.country}}</h5>
+    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="propertyDetails.businessDescription">
+      {{propertyDetails.businessDescription}}
+    </h4>
+  </div>
+
+  <div class="mb-3">
+    <div style="display: flex; margin-top: 20px">
+      <div
+        class="col-md-6"
+        style="
+          min-width: 50% !important;
+          flex: 0 0 50%;
+          text-align: center;
+          border-right: 2px solid #d9d9d9;
+        "
+      >
+        <div style="display: flex; gap: 26px; justify-content: center">
+          <div>
+            <img
+              src="assets/images/CalendarVoucher.png"
+              alt=""
+              height="20px"
+              width="20px"
+              style="margin-right: 3px"
+            />
+          </div>
+          <div style="font-size: 14px">
+            <b> Check-in date </b> <br />
+            <p>{{booking.checkInDate}}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div style="font-size: 14px">
+          <b> Check-Out date </b> <br />
+          <p>{{booking.checkOutDate}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; margin-top: 10px">
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div>
+          <b> Occupancy: </b>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div>
+          <p>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; margin-top: 10px">
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div>
+          <b> Rooms: </b>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div>
+          <p>{{booking.noOfRooms}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; margin-top: 10px">
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div>
+          <b> Nights: </b>
+        </div>
+      </div>
+      <div
+        class="col-md-6"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+      >
+        <div>
+          <p>{{booking.noOfNights}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p
+    style="
+      color: #615d5d;
+      text-align: right;
+      margin-bottom: 3px;
+      margin-right: 18px;
+      font-size: 12px;
+    "
+  >
+ Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
+  </p>
+  <div
+    style="
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 15px;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 15px;
+    "
+  >
+    <h5>
+      <img
+        src="assets/images/User.png"
+        alt=""
+        style="height: 26px; width: 26px"
+      />
+      Guest Details
+    </h5>
+    <table style="width: 88%">
+      <tr>
+        <td>Guest Name:</td>
+        <td>{{booking.firstName}}{{booking.lastName}}</td>
+      </tr>
+
+      <tr>
+        <td>Email Address:</td>
+        <td>{{booking.email}}</td>
+      </tr>
+
+      <tr>
+        <td>Phone Number:</td>
+        <td>{{booking.mobile}}</td>
+      </tr>
+
+      <tr>
+        <td>Notes:</td>
+        <td>{{booking.notes}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-12">
+    <div class="details-cardOne">
+      <p style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</p>
+      <table style="width: 88%; margin-top: -0.7rem">
+        <tr>
+          <td>{{booking.roomRatePlanName}}</td>
+          <td>₹{{booking.roomPrice}}</td>
+        </tr>
+        <tr>
+          <td>Extra Pax Charges</td>
+          <td>₹{{booking.extraPersonCharge}}</td>
+        </tr>
+        <tr>
+          <td>Extra Child Charges</td>
+          <td>₹{{booking.extraChildCharge}}</td>
+        </tr>
+      </table>
+
+      <hr style="margin-top: 10px; margin-bottom: 10px" />
+
+      <div *ngIf="savedServices?.length >0">
+        <p style="font-size: 18px">Add-on Services:</p>
+
+      <table style=" border: none; width:100%">
+        <tr *ngFor="let fac of savedServices">
+          <td>
+            <div class="d-flex "
+              *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+              <div style="display: flex; gap:4px">
+
+                <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                  style=" width: 26px;height: 23px;">
+
+
+                <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+                <br>
+
+                <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                  <b
+                    *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                    {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                    {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                  </b>
+                  <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
+                    style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+
+                </p>
+              </div>
+            </div>
+          </td>
+          <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
+            {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+
+    <div class="coupon-box mb-4" style="margin-top: 20px">
+      <div style="display: flex; gap: 10px">
+        <div>
+          <img
+            src="assets/images/Tag.png"
+            alt=""
+            style="
+              margin-right: 0px;
+              transform: rotate(-2deg);
+              width: 85px;
+              margin-top: 9px !important;
+            "
+          />
+        </div>
+        <div  *ngIf="promocodeListChip.length >0 ">
+          <h5 style="color: #fff; font-weight: bold; font-size: 24px">
+            Save More On Your Booking!
+          </h5>
+          <ul>
+            <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
+              <li *ngIf="i === 0 || showMore">
+                <p style="margin-top: -7px">
+                  Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
+                </p>
+                <p style="margin-top: -10px">
+                  Share this coupon code when confirming your reservation to save
+                  {{ coupon.discountPercentage }}%!
+                </p>
+              </li>
+            </ng-container>
+          </ul>
+
+
+
+
+          <!-- View More / View Less Button -->
+          <span  style="float:right" (click)="toggleView()">
+            {{ showMore ? 'View Less..' : 'View More..' }}
+          </span>
+
+        </div>
+         <!-- No Coupons Message -->
+<!-- No Coupons Card -->
+<div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
+      <strong style="font-size: 18px;">No Coupon Available :(</strong>
+
+    <p style="margin: 0; font-size: 14px;">
+      Unfortunately, this property does not have any active coupons at the moment.
+    </p>
+    <!-- <a
+      href="/deals"
+      style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
+    >
+      Explore Other Deals
+    </a> -->
+
+</div>
+<div *ngIf="selectedPromo">
+  <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
+Applied!</strong>
+<p style="margin: 0; font-size: 14px;">
+You’re Saving ₹ {{booking.discountAmount}} on this booking!
+</p>
+
+<p>
+Complete your booking now to save big on your stay.
+</p>
+</div>
+      </div>
+    </div>
+
+    <div class="details-cardOne" style="margin-top: 20px">
+      <table style="width: 88%">
+        <tr>
+          <td>Tax Amount ({{booking.taxPercentage}}%)</td>
+          <td>₹ {{booking.taxAmount}}</td>
+        </tr>
+        <tr>
+          <td>Total Payable Amount</td>
+          <td>₹ {{booking.totalAmount}}</td>
+        </tr>
+
+
+
+        <tr>
+          <td>Due Amount</td>
+          <td>₹ {{booking.totalAmount}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="footer-link">
+      <a href="#" style="font-weight: bold; font-size: 16px"
+        >Go back to home page</a
+      >
+      <div style="display: flex; justify-content: center">
+        <div style="width: 181px; border-bottom: 2px solid gray"></div>
+      </div>
+    </div>
+    <p class="mt-2" style="text-align: center">
+      For urgent bookings (same-day or next-morning check-ins), please call us
+      directly at <strong>079652 01321</strong> for prompt assistance.
+    </p>
+
+    <div class="note-sectionOne">
+      <h5 style=" font-weight: bold;">Please note:</h5>
+      <ul>
+        <li>
+          Confirmation: The Hotel Mate team will contact you to confirm your
+          booking.
+        </li>
+        <li>
+          Price Changes: Prices are subject to change due to hotel demand. We will
+          do our best to offer the Best Available Rate.
+        </li>
+        <li>
+          Room Availability: If rooms are unavailable, we may offer alternative
+          accommodations upon your request.
+        </li>
+        <li>
+          Advance Payment: In accordance with the hotel’s policy, you may be
+          required to pay an advance amount (minimum 20% to full payment).
+        </li>
+        <li>
+          Payment and Booking Confirmation: We will provide you with a payment
+          link or scanner. Once payment is received, we will confirm your
+          reservation and send a booking confirmation voucher via email and/or
+          WhatsApp.
+        </li>
+        <li>
+          Last Minute Bookings: If this is a last-minute booking, meaning the
+          check-in date is the same as the date of booking or early check-in the
+          next day, please call us.
+        </li>
+        <li>
+          Paid Booking: In the event that payment has already been made, and we
+          are unable to confirm the booking, we will refund the full amount (minus
+          payment gateway charges).
+        </li>
+        <li>
+          Email Confirmation: Please check your spam folder for the email
+          confirmation, as it may sometimes be found there.
+        </li>
+      </ul>
+      <p class="property-rules">Property rules:</p>
+    </div>
+  </div>
+</div>
