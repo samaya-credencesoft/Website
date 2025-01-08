@@ -1887,8 +1887,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
 
   taxAmountBackUp : number;
   onCashPaymentSubmit() {
-    localStorage.removeItem('selectedPromoData');
-    localStorage.removeItem('selectPromo');
+    // localStorage.removeItem('selectedPromoData');
+    // localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
       this.booking.netAmount = finalPrice;

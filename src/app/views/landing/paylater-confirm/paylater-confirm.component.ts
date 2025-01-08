@@ -21,13 +21,14 @@ savedServices: any;
   selectedPromo: any;
   accommodationCheckInTime: any;
   accommodationService: any;
+  bookingone: import("f:/GitHub/Website/src/app/model/booking").Booking;
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
       this.businessOfferDto = new BusinessOfferDto();
 
   this.propertyDetails = this.token.getProperty();
- this.booking = this.token.getBookingData();
+ this.bookingone = this.token.getBookingData();
  this.booking = this.token.getBookingDataObj();
  this.savedServices = this.token.getSelectedServices();
  this.currency = this.propertyDetails.localCurrency.toUpperCase();
