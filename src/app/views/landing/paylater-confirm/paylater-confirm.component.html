@@ -45,7 +45,7 @@
           color: #000 !important;
           font-size: 35px !important;
         "
-        >Thank you!</span
+        >Almost There!</span
       >
       <p
         class="mb-0"
@@ -137,7 +137,7 @@
               </div>
               <div *ngIf="booking.fromDate">
                 <b> Check-in date </b> <br />
-                <p>{{ booking.fromDate }}</p>
+                <p>{{ booking.fromDate | date:'dd-MM-YYYY'}}</p>
               </div>
             </div>
           </div>
@@ -147,8 +147,8 @@
             *ngIf="booking.toDate"
           >
             <div>
-              <b> Check-in date </b> <br />
-              <p>{{ booking.toDate }}</p>
+              <b> Check-Out date</b> <br />
+              <p>{{ booking.toDate | date:'dd-MM-YYYY'}}</p>
             </div>
           </div>
 
@@ -245,7 +245,7 @@
       style="display: flex; justify-content: center; gap: 30px"
     >
       <div class="col-8" style="flex: 0 0 38%; max-width: 38%">
-        <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
+        <!-- <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div> -->
 
         <div class="details-card">
           <p style="font-size: 21px">
@@ -454,44 +454,32 @@ Applied!</strong>
       directly at <strong>079652 01321</strong> for prompt assistance.
     </p>
   </div>
-  <div class="note-section">
+  <div class="note-sectionOne">
     <h5>Please note:</h5>
     <ul>
       <li>
-        Confirmation: The Hotel Mate team will contact you to confirm your
-        booking.
+        Confirmation: The Hotel Mate team will contact you to confirm your booking.
       </li>
       <li>
-        Price Changes: Prices are subject to change due to hotel demand. We will
-        do our best to offer the Best Available Rate.
+        Price Changes:  Prices are subject to change due to hotel demand. We will do our best to offer the Best Available Rate.
       </li>
       <li>
-        Room Availability: If rooms are unavailable, we may offer alternative
-        accommodations upon your request.
+        Room Availability: If rooms are unavailable, we may offer alternative accommodations upon your request.
       </li>
       <li>
-        Advance Payment: In accordance with the hotel’s policy, you may be
-        required to pay an advance amount (minimum 20% to full payment).
+        Advance Payment:  In accordance with the hotel's policy, you may be required to pay an advance amount (minimum 20% to full payment).
       </li>
       <li>
-        Payment and Booking Confirmation: We will provide you with a payment
-        link or scanner. Once payment is received, we will confirm your
-        reservation and send a booking confirmation voucher via email and/or
-        WhatsApp.
+        Payment and Booking Confirmation: We will provide you with a payment link or scanner. Once payment is received, we will confirm your reservation and send a booking confirmation voucher via email and/or WhatsApp.
       </li>
       <li>
-        Last Minute Bookings: If this is a last-minute booking, meaning the
-        check-in date is the same as the date of booking or early check-in the
-        next day, please call us.
+        Last Minute Bookings: If this is a last minute booking, meaning the check-in date is the same as the date of booking or early check-in the next day, please call us.
       </li>
       <li>
-        Paid Booking: In the event that payment has already been made, and we
-        are unable to confirm the booking, we will refund the full amount (minus
-        payment gateway charges).
+        Paid Booking: In the event that payment has already been made, and we are unable to confirm the booking, we will refund the full amount (minus payment gateway charges).
       </li>
       <li>
-        Email Confirmation: Please check your spam folder for the email
-        confirmation, as it may sometimes be found there.
+        Email Confirmation: Please check your spam folder for the email confirmation, as it may sometimes be found there.
       </li>
     </ul>
     <p class="property-rules">Property rules:</p>
@@ -553,7 +541,7 @@ Applied!</strong>
         color: #000 !important;
         font-size: 25px !important;
       "
-      >Thank you!</span
+      >Almost There!</span
     >
     <p
       class="mb-0"
@@ -564,10 +552,10 @@ Applied!</strong>
         margin-top: -7px;
       "
     >
-      We’ve received your reservation enquiry.
+       Your reservation is currently on hold.
     </p>
     <p class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
-      A copy of your enquiry has been sent to your email.
+      A copy of this reservation has been sent to {{booking.email}}.
     </p>
     <p
       style="
@@ -577,8 +565,7 @@ Applied!</strong>
         font-size: 13px;
       "
     >
-      Note: Please check your spam folder if you don’t see it, or find it on
-      WhatsApp.
+    Note: Please check your spam folder if you don't see it, or find it on WhatsApp.
     </p>
   </div>
 
@@ -667,7 +654,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>{{booking.fromDate}}</p>
+            <p>{{booking.fromDate | date:'dd-MM-YYYY'}}</p>
           </div>
         </div>
       </div>
@@ -677,7 +664,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>{{booking.toDate}}</p>
+          <p>{{booking.toDate | date:'dd-MM-YYYY'}}</p>
         </div>
       </div>
     </div>
@@ -739,7 +726,7 @@ Applied!</strong>
       </div>
     </div>
   </div>
-  <p
+  <!-- <p
     style="
       color: #615d5d;
       text-align: right;
@@ -749,7 +736,7 @@ Applied!</strong>
     "
   >
  Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
-  </p>
+  </p> -->
   <div
     style="
       background-color: #f5f5f5;
@@ -799,11 +786,11 @@ Applied!</strong>
           <td>{{booking.roomRatePlanName}}</td>
           <td>₹{{booking.roomPrice}}</td>
         </tr>
-        <tr>
-          <td>Extra Pax Charges</td>
+        <tr *ngIf="booking.extraPersonCharge > 0">
+          <td>Extra Person Charges</td>
           <td>₹{{booking.extraPersonCharge}}</td>
         </tr>
-        <tr>
+        <tr *ngIf="booking.extraChildCharge > 0">
           <td>Extra Child Charges</td>
           <td>₹{{booking.extraChildCharge}}</td>
         </tr>
@@ -955,43 +942,31 @@ Complete your booking now to save big on your stay.
     </p>
 
     <div class="note-sectionOne">
-      <h5 style=" font-weight: bold;">Please note:</h5>
+      <h5>Please note:</h5>
       <ul>
         <li>
-          Confirmation: The Hotel Mate team will contact you to confirm your
-          booking.
+          Confirmation: The Hotel Mate team will contact you to confirm your booking.
         </li>
         <li>
-          Price Changes: Prices are subject to change due to hotel demand. We will
-          do our best to offer the Best Available Rate.
+          Price Changes:  Prices are subject to change due to hotel demand. We will do our best to offer the Best Available Rate.
         </li>
         <li>
-          Room Availability: If rooms are unavailable, we may offer alternative
-          accommodations upon your request.
+          Room Availability: If rooms are unavailable, we may offer alternative accommodations upon your request.
         </li>
         <li>
-          Advance Payment: In accordance with the hotel’s policy, you may be
-          required to pay an advance amount (minimum 20% to full payment).
+          Advance Payment:  In accordance with the hotel's policy, you may be required to pay an advance amount (minimum 20% to full payment).
         </li>
         <li>
-          Payment and Booking Confirmation: We will provide you with a payment
-          link or scanner. Once payment is received, we will confirm your
-          reservation and send a booking confirmation voucher via email and/or
-          WhatsApp.
+          Payment and Booking Confirmation: We will provide you with a payment link or scanner. Once payment is received, we will confirm your reservation and send a booking confirmation voucher via email and/or WhatsApp.
         </li>
         <li>
-          Last Minute Bookings: If this is a last-minute booking, meaning the
-          check-in date is the same as the date of booking or early check-in the
-          next day, please call us.
+          Last Minute Bookings: If this is a last minute booking, meaning the check-in date is the same as the date of booking or early check-in the next day, please call us.
         </li>
         <li>
-          Paid Booking: In the event that payment has already been made, and we
-          are unable to confirm the booking, we will refund the full amount (minus
-          payment gateway charges).
+          Paid Booking: In the event that payment has already been made, and we are unable to confirm the booking, we will refund the full amount (minus payment gateway charges).
         </li>
         <li>
-          Email Confirmation: Please check your spam folder for the email
-          confirmation, as it may sometimes be found there.
+          Email Confirmation: Please check your spam folder for the email confirmation, as it may sometimes be found there.
         </li>
       </ul>
       <p class="property-rules">Property rules:</p>
