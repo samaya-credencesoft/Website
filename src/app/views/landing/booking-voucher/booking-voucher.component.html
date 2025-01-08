@@ -581,7 +581,7 @@ Applied!</strong>
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Enquiry ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      CIB-56-7890
+      {{booking.enquiryId}}
       <img
         src="assets/images/CopyVoucher.png"
         alt=""
@@ -615,7 +615,7 @@ Applied!</strong>
         <div style="display: flex; justify-content: center; margin-top: 5px">
           <p class="mb-0">
             <span class="status-badge status-enquiry" style="font-size: 13px"
-              >Enquiry</span
+              >{{booking.status}}</span
             >
           </p>
         </div>
@@ -632,11 +632,11 @@ Applied!</strong>
         margin-bottom: 0px;
       "
     >
-      Hotel Indian Spices
+    {{propertyDetails.name}}
     </h2>
-    <h5 style="font-size: 15px; margin-bottom: 0px">Mumbai, India</h5>
-    <h4 style="font-size: 15px; margin-bottom: 0px">
-      This is the property description.
+    <h5 style="font-size: 15px; margin-bottom: 0px">{{propertyDetails.address.city}},{{propertyDetails.address.state}}, {{propertyDetails.address.country}}</h5>
+    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="propertyDetails.businessDescription">
+      {{propertyDetails.businessDescription}}
     </h4>
   </div>
 
@@ -663,7 +663,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>15 OCT</p>
+            <p>{{booking.checkInDate}}</p>
           </div>
         </div>
       </div>
@@ -673,7 +673,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>15 OCT</p>
+          <p>{{booking.checkOutDate}}</p>
         </div>
       </div>
     </div>
@@ -692,7 +692,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>2 Adults, 0 Children</p>
+          <p>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</p>
         </div>
       </div>
     </div>
@@ -711,7 +711,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>1</p>
+          <p>{{booking.noOfRooms}}</p>
         </div>
       </div>
     </div>
@@ -730,7 +730,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>2</p>
+          <p>{{booking.noOfNights}}</p>
         </div>
       </div>
     </div>
@@ -767,56 +767,83 @@ Applied!</strong>
     <table style="width: 88%">
       <tr>
         <td>Guest Name:</td>
-        <td>Atashi</td>
+        <td>{{booking.firstName}}{{booking.lastName}}</td>
       </tr>
 
       <tr>
         <td>Email Address:</td>
-        <td>atashi</td>
+        <td>{{booking.email}}</td>
       </tr>
 
       <tr>
         <td>Phone Number:</td>
-        <td>7689345790</td>
+        <td>{{booking.mobile}}</td>
       </tr>
 
       <tr>
         <td>Notes:</td>
-        <td>Please</td>
+        <td>{{booking.notes}}</td>
       </tr>
     </table>
   </div>
 
   <div class="col-12">
     <div class="details-cardOne">
-      <p style="font-size: 17px; font-weight: bold">STANDARD AC ROOM x 1</p>
+      <p style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</p>
       <table style="width: 88%; margin-top: -0.7rem">
         <tr>
-          <td>CP Room Plan x 1</td>
-          <td>₹5093</td>
+          <td>{{booking.roomRatePlanName}}</td>
+          <td>₹{{booking.roomPrice}}</td>
         </tr>
         <tr>
           <td>Extra Pax Charges</td>
-          <td>₹0</td>
+          <td>₹{{booking.extraPersonCharge}}</td>
         </tr>
         <tr>
-          <td>Tax + Services (12%)</td>
-          <td>₹612</td>
+          <td>Extra Child Charges</td>
+          <td>₹{{booking.extraChildCharge}}</td>
         </tr>
       </table>
 
       <hr style="margin-top: 10px; margin-bottom: 10px" />
 
-      <p style="font-size: 18px">Add-on Services:</p>
-      <table style="width: 88%; margin-top: -1rem">
-        <tr>
+      <div *ngIf="savedServices?.length >0">
+        <p style="font-size: 18px">Add-on Services:</p>
+
+      <table style=" border: none; width:100%">
+        <tr *ngFor="let fac of savedServices">
           <td>
-            Pick-up & Drop off <br />
-            ₹500 + ₹50 (10% tax)
+            <div class="d-flex "
+              *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
+              <div style="display: flex; gap:4px">
+
+                <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
+                  style=" width: 26px;height: 23px;">
+
+
+                <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
+                <br>
+
+                <p>{{fac.name }} * {{fac.quantity}} <br>
+
+                  <b
+                    *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
+                    {{fac.servicePrice | currency : currency : "symbol" : "1.2-2"}} +
+                    {{fac.taxAmount | currency : currency : "symbol" : "1.2-2"}} ({{fac.taxPercentage}}% tax)
+                  </b>
+                  <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
+                    style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+
+                </p>
+              </div>
+            </div>
           </td>
-          <td>₹5093</td>
+          <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
+            {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
       </table>
+      </div>
     </div>
 
     <div class="coupon-box mb-4" style="margin-top: 20px">
@@ -833,35 +860,79 @@ Applied!</strong>
             "
           />
         </div>
-        <div>
-          <h5 style="color: #fff; font-weight: bold; font-size: 17px">
+        <div  *ngIf="promocodeListChip.length >0 ">
+          <h5 style="color: #fff; font-weight: bold; font-size: 24px">
             Save More On Your Booking!
           </h5>
-          <p style="margin-top: -7px; font-size: 13px">
-            Claim Coupon Code: <strong>NEWYEAR</strong>
-          </p>
-          <p style="margin-top: -10px; font-size: 12px">
-            Share this coupon code when confirming your reservation to save 20%!
-          </p>
+          <ul>
+            <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
+              <li *ngIf="i === 0 || showMore">
+                <p style="margin-top: -7px">
+                  Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
+                </p>
+                <p style="margin-top: -10px">
+                  Share this coupon code when confirming your reservation to save
+                  {{ coupon.discountPercentage }}%!
+                </p>
+              </li>
+            </ng-container>
+          </ul>
+
+
+
+
+          <!-- View More / View Less Button -->
+          <span  style="float:right" (click)="toggleView()">
+            {{ showMore ? 'View Less..' : 'View More..' }}
+          </span>
+
         </div>
+         <!-- No Coupons Message -->
+<!-- No Coupons Card -->
+<div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
+      <strong style="font-size: 18px;">No Coupon Applied :(</strong>
+
+    <p style="margin: 0; font-size: 14px;">
+      Unfortunately, this property does not have any active coupons at the moment.
+    </p>
+    <a
+      href="/deals"
+      style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
+    >
+      Explore Other Deals
+    </a>
+
+</div>
+<div>
+  <strong style="font-size: 18px;"> {{selectedPromo.couponCode}} Coupon Code is
+Applied!</strong>
+<p style="margin: 0; font-size: 14px;">
+You’re Saving ₹ {{booking.discountAmount}} on this booking!
+</p>
+
+<p>
+Complete your booking now to save big on your stay.
+</p>
+</div>
       </div>
     </div>
 
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
+          <td>Tax Amount ({{booking.taxPercentage}}%)</td>
+          <td>₹ {{booking.taxAmount}}</td>
+        </tr>
+        <tr>
           <td>Total Payable Amount</td>
-          <td>₹ 6,255</td>
+          <td>₹ {{booking.totalAmount}}</td>
         </tr>
 
-        <tr>
-          <td>Tax Amount (50%)</td>
-          <td>₹ 3,128</td>
-        </tr>
+
 
         <tr>
           <td>Due Amount</td>
-          <td>₹ 3,127</td>
+          <td>₹ {{booking.totalAmount}}</td>
         </tr>
       </table>
     </div>
