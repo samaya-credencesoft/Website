@@ -10,9 +10,14 @@ import { TokenStorage } from 'src/token.storage';
 export class BookingVoucherComponent {
 propertyDetails: any;
 booking:Booking;
+savedServices: any;
+  currency: any;
+
 constructor(private token :TokenStorage){
   this.propertyDetails = this.token.getProperty();
- this.booking = this.token.getBookingData()
+ this.booking = this.token.getBookingData();
+ this.savedServices = this.token.getSelectedServices();
+ this.currency = this.propertyDetails.localCurrency.toUpperCase();
 }
 
 ngOnInIt(){
