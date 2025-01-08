@@ -31,7 +31,7 @@
               >
             </div>
           </div>
-          <p style="margin-bottom: -19px; margin-top: -12px">
+          <p style="margin-bottom: -19px; margin-top: -12px" *ngIf="accommodationService[0]?.checkInTime">
             Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
           </p>
         </div>
@@ -540,7 +540,7 @@ Applied!</strong>
         text-align: right;
         font-size: 12px;
         margin-right: 5px;
-      "
+      " *ngIf="accommodationService[0]?.checkInTime"
     >
       Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
     </p>
