@@ -2289,7 +2289,7 @@ this.savedServices?.forEach(element => {
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
         }, 3000);
-        this.router.navigate(["/confirm"]);
+        this.router.navigate(["/reservation-confirm"]);
           this.loadingOne = false;
           if (this.booking.id !== null) {
             this.submitButtonDisable = true;
