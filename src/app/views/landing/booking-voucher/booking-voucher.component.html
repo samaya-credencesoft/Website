@@ -338,7 +338,7 @@
                 "
               />
             </div>
-            <div >
+            <div  *ngIf="promocodeListChip.length >0 ">
               <h5 style="color: #fff; font-weight: bold; font-size: 24px">
                 Save More On Your Booking!
               </h5>
@@ -365,7 +365,25 @@
               </span>
 
             </div>
+             <!-- No Coupons Message -->
+    <!-- No Coupons Card -->
+    <div *ngIf="promocodeListChip.length === 0">
+          <strong style="font-size: 18px;">No Coupon Applied :(</strong>
+
+        <p style="margin: 0; font-size: 14px;">
+          Unfortunately, this property does not have any active coupons at the moment.
+        </p>
+        <a
+          href="/deals"
+          style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
+        >
+          Explore Other Deals
+        </a>
+
+    </div>
+
           </div>
+
         </div>
 
         <div
