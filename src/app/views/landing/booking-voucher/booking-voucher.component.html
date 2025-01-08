@@ -338,17 +338,19 @@
                 "
               />
             </div>
-            <div>
+            <div >
               <h5 style="color: #fff; font-weight: bold; font-size: 24px">
                 Save More On Your Booking!
               </h5>
-              <p style="margin-top: -7px">
-                Claim Coupon Code: <strong>NEWYEAR</strong>
-              </p>
-              <p style="margin-top: -10px">
-                Share this coupon code when confirming your reservation to save
-                20%!
-              </p>
+<div *ngFor="let coupon of promocodeListChip;">
+  <p style="margin-top: -7px">
+    Claim Coupon Code: <strong>{{coupon.couponCode}}</strong>
+  </p>
+  <p style="margin-top: -10px">
+    Share this coupon code when confirming your reservation to save
+    {{coupon.discountPercentage}}%!
+  </p>
+</div>
             </div>
           </div>
         </div>
