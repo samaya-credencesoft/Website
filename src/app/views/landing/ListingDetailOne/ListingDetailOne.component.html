@@ -28,7 +28,7 @@
   </app-Header-Listingdetailsone>
 
   <!-- Offer Container Section -->
-  <div *ngIf="showAllTheOfferList?.length >= 0">
+  <div *ngIf="showAllTheOfferList?.length > 0">
     <p-carousel class="carousel-section" [value]="showAllTheOfferList" [numVisible]="1" [numScroll]="1"
       [responsiveOptions]="responsiveOptions" [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false"
       style="position: relative; top: 80px;">

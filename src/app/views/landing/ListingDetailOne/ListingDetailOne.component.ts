@@ -851,7 +851,6 @@ this.selectedServices =[]
       this.children = 0;
       this.noOfrooms = 1;
       this.rooms = 1;
-
     }
     if (
       this.token.getBookingData()?.roomName != null &&
@@ -1059,7 +1058,6 @@ if (this.city != null && this.city != undefined) {
 
       if (this.data.id === undefined) {
         this.getPropertyDetailsBySeoName(this.data);
-
       }
       this.changeDetectorRefs.detectChanges();
 
@@ -1079,6 +1077,7 @@ if (this.city != null && this.city != undefined) {
 
 
 
+    this.getDiffDate(this.toDate, this.fromDate);
     setTimeout(() => {
       if(this.activeForGoogleHotelCenter == true){
         this.fetchAndProcessRoomsDataOne();
@@ -1798,7 +1797,6 @@ if (this.city != null && this.city != undefined) {
   //   this.router.navigate(["/blogpost"]);
   // }
   getDiffDate(toDate, fromDate) {
-    // debugger
     this.enddate = new Date(toDate?.year, toDate?.month - 1, toDate?.day);
 
     this.startDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
@@ -2205,8 +2203,6 @@ this.isHeaderVisible = true;
       (data) => {
         if (data.status === 200) {
           this.businessUser = data.body;
-
-          this.getDiffDate(this.toDate, this.fromDate);
          this.getGoogleReview(this.businessUser.id)
           this.showStaticContent = true
           // this.businessUser.businessServiceDtoList.filter(ele =>
@@ -3914,6 +3910,5 @@ clicked(){
     }
   }
 }
-
 
 
