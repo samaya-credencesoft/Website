@@ -117,6 +117,8 @@ import { ConfirmBookingComponent } from './Confirm-Booking/Confirm-Booking.compo
 import { MessageService } from 'primeng/api';
 // import { MessageService } from 'primeng/api/messageservice';
 import { CarouselModule } from 'primeng/carousel';
+import { BookingVoucherComponent } from './booking-voucher/booking-voucher.component';
+import { PaylaterConfirmComponent } from './paylater-confirm/paylater-confirm.component';
 
 
 @NgModule({
@@ -228,7 +230,9 @@ EnquiryComponent,
     SubscribeEmailComponent,
     PrivacyComponent,
     PrivacyPolicyComponent,
-    ConfirmPaymentComponent
+    ConfirmPaymentComponent,
+    BookingVoucherComponent,
+    PaylaterConfirmComponent
 
   ],
   providers: [WINDOW_PROVIDERS,
