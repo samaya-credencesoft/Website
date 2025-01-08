@@ -17,7 +17,7 @@ promocodeListChip : any[] = []; // Used for handled to get the promo list and st
 savedServices: any;
   currency: any;
   businessOfferDto: BusinessOfferDto;
-
+  showMore:boolean  =false
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
@@ -63,4 +63,8 @@ checkValidCouponOrNot(couponList?){
     console.error("Error in checkValidCouponOrNot : ",error);
   }
 }
+toggleView(): void {
+  this.showMore = !this.showMore;
+}
+
 }

@@ -342,15 +342,28 @@
               <h5 style="color: #fff; font-weight: bold; font-size: 24px">
                 Save More On Your Booking!
               </h5>
-<div *ngFor="let coupon of promocodeListChip;">
-  <p style="margin-top: -7px">
-    Claim Coupon Code: <strong>{{coupon.couponCode}}</strong>
-  </p>
-  <p style="margin-top: -10px">
-    Share this coupon code when confirming your reservation to save
-    {{coupon.discountPercentage}}%!
-  </p>
-</div>
+              <ul>
+                <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
+                  <li *ngIf="i === 0 || showMore">
+                    <p style="margin-top: -7px">
+                      Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
+                    </p>
+                    <p style="margin-top: -10px">
+                      Share this coupon code when confirming your reservation to save
+                      {{ coupon.discountPercentage }}%!
+                    </p>
+                  </li>
+                </ng-container>
+              </ul>
+
+
+
+
+              <!-- View More / View Less Button -->
+              <span  style="float:right" (click)="toggleView()">
+                {{ showMore ? 'View Less..' : 'View More..' }}
+              </span>
+
             </div>
           </div>
         </div>
