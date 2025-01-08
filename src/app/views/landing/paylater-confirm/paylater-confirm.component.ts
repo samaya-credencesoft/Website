@@ -28,6 +28,7 @@ constructor(private token :TokenStorage,
 
   this.propertyDetails = this.token.getProperty();
  this.booking = this.token.getBookingData();
+ this.booking = this.token.getBookingDataObj();
  this.savedServices = this.token.getSelectedServices();
  this.currency = this.propertyDetails.localCurrency.toUpperCase();
  this.storedPromo = localStorage.getItem('selectPromo');

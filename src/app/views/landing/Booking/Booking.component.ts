@@ -2280,6 +2280,7 @@ this.savedServices?.forEach(element => {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
+
           this.saveResponseBooking = response.body;
           this.token.saveBookingDataObj(this.booking);
           this.booking.fromDate = this.bookingData.fromDate;
