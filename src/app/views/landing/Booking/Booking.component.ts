@@ -2774,7 +2774,7 @@ this.savedServices?.forEach(element => {
       this.enquiryForm.location = this.token.getProperty().address.city;
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
     }
-    this.token.saveBookingData(this.booking)
+
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.enquiryForm.min = this.booking.totalAmount;
     this.enquiryForm.max = this.booking.totalAmount;
@@ -2899,9 +2899,10 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
-
+    this.enquiryForm.taxPercentage  = this.booking.taxPercentage
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.equitycreatedData = response.body;
+      this.token.saveBookingData(this.equitycreatedData)
 // console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       this.isEnquiry = true;
       this.paymentLoader = false;

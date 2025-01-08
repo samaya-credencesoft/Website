@@ -80,7 +80,7 @@
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
         <p class="mb-1"><span class="highlight-text">Enquiry ID</span></p>
-        <p class="mb-0">CIB-56-7890</p>
+        <p class="mb-0">{{booking.enquiryId}}</p>
       </div>
       <div
         class="col-md-4"
@@ -102,7 +102,7 @@
         </p>
         <p class="mb-0">
           <span class="status-badge status-enquiry" style="font-size: 13px"
-            >Enquiry</span
+            >{{booking.status}}</span
           >
         </p>
       </div>
@@ -133,20 +133,20 @@
                   style="margin-right: 3px; transform: rotate(3deg)"
                 />
               </div>
-              <div *ngIf="booking.fromDate">
+              <div *ngIf="booking.checkInDate">
                 <b> Check-in date </b> <br />
-                <p>{{ booking.fromDate }}</p>
+                <p>{{ booking.checkInDate }}</p>
               </div>
             </div>
           </div>
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.toDate"
+            *ngIf="booking.checkOutDate"
           >
             <div>
               <b> Check-in date </b> <br />
-              <p>{{ booking.toDate }}</p>
+              <p>{{ booking.checkOutDate }}</p>
             </div>
           </div>
 
@@ -250,7 +250,7 @@
           <table style="width: 88%; margin-top: -0.7rem">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{ booking.roomTariffBeforeDiscount }}</td>
+              <td>₹{{ booking.roomPrice }}</td>
             </tr>
             <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>

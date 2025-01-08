@@ -9,7 +9,7 @@ import { TokenStorage } from 'src/token.storage';
 })
 export class BookingVoucherComponent {
 propertyDetails: any;
-booking:Booking;
+booking:any;
 savedServices: any;
   currency: any;
 
