@@ -114,6 +114,7 @@
           class="row mb-3"
           style="display: flex; justify-content: center; margin-top: 15px"
         >
+
           <div
             class="col-md-6"
             style="
@@ -123,6 +124,7 @@
               border-right: 2px solid #d9d9d9;
             "
           >
+
             <div style="display: flex; gap: 26px; justify-content: center">
               <div>
                 <img
@@ -243,6 +245,8 @@
       style="display: flex; justify-content: center; gap: 30px"
     >
       <div class="col-8" style="flex: 0 0 38%; max-width: 38%">
+        <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
+
         <div class="details-card">
           <p style="font-size: 21px">
             {{ booking.roomName }} x {{ booking.noOfRooms }}
@@ -368,17 +372,17 @@
              <!-- No Coupons Message -->
     <!-- No Coupons Card -->
     <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-          <strong style="font-size: 18px;">No Coupon Applied :(</strong>
+          <strong style="font-size: 18px;">No Coupon Available  :(</strong>
 
         <p style="margin: 0; font-size: 14px;">
           Unfortunately, this property does not have any active coupons at the moment.
         </p>
-        <a
+        <!-- <a
           href="/deals"
           style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
         >
           Explore Other Deals
-        </a>
+        </a> -->
 
     </div>
     <div>
@@ -744,7 +748,7 @@ Applied!</strong>
       font-size: 12px;
     "
   >
-    Enquiry created at 12.00AM, 05/01/2025
+ Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
   </p>
   <div
     style="
@@ -890,7 +894,7 @@ Applied!</strong>
          <!-- No Coupons Message -->
 <!-- No Coupons Card -->
 <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-      <strong style="font-size: 18px;">No Coupon Applied :(</strong>
+      <strong style="font-size: 18px;">No Coupon Available :(</strong>
 
     <p style="margin: 0; font-size: 14px;">
       Unfortunately, this property does not have any active coupons at the moment.
