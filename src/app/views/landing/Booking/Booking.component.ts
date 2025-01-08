@@ -2748,8 +2748,8 @@ this.savedServices?.forEach(element => {
 
   submitForm() {
 
-    localStorage.removeItem('selectedPromoData');
-    localStorage.removeItem('selectPromo');
+    // localStorage.removeItem('selectedPromoData');
+    // localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
       this.booking.netAmount = finalPrice;
@@ -2796,7 +2796,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect";
-
+    this.enquiryForm.discountAmount =  this.booking.discountAmount;
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;

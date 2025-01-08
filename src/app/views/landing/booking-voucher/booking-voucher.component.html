@@ -367,7 +367,7 @@
             </div>
              <!-- No Coupons Message -->
     <!-- No Coupons Card -->
-    <div *ngIf="promocodeListChip.length === 0">
+    <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
           <strong style="font-size: 18px;">No Coupon Applied :(</strong>
 
         <p style="margin: 0; font-size: 14px;">
@@ -381,6 +381,17 @@
         </a>
 
     </div>
+    <div>
+      <strong style="font-size: 18px;"> {{selectedPromo.couponCode}} Coupon Code is
+Applied!</strong>
+<p style="margin: 0; font-size: 14px;">
+  You’re Saving ₹ {{booking.discountAmount}} on this booking!
+</p>
+
+<p>
+  Complete your booking now to save big on your stay.
+</p>
+</div>
 
           </div>
 

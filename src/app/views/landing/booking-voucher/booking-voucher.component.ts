@@ -18,6 +18,8 @@ savedServices: any;
   currency: any;
   businessOfferDto: BusinessOfferDto;
   showMore:boolean  =false
+  storedPromo: string;
+  selectedPromo: any;
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
@@ -27,7 +29,17 @@ constructor(private token :TokenStorage,
  this.booking = this.token.getBookingData();
  this.savedServices = this.token.getSelectedServices();
  this.currency = this.propertyDetails.localCurrency.toUpperCase();
- this.getOfferDetails();
+ this.storedPromo = localStorage.getItem('selectPromo');
+ if(this.storedPromo == 'true'){
+  const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
+  this.selectedPromo = selectedPromoData
+  // this.businessOfferDto = selectedPromoData
+console.log(selectedPromoData)
+}else{
+  this.getOfferDetails();
+}
+
+
 }
 
 ngOnInIt(){

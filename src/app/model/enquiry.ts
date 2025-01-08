@@ -10,6 +10,7 @@ import { TaxDetails } from "./TaxDetails";
     toEmail: string;
     fromName: string;
     toName: string;
+    discountAmount:number;
     taxPercentage:number;
     bccEmail: string;
     bccName: string;
