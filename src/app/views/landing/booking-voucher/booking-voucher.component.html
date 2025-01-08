@@ -32,7 +32,7 @@
             </div>
           </div>
           <p style="margin-bottom: -19px; margin-top: -12px">
-            Working Hours: <span>08:00 AM to 10:00 PM</span>
+            Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
           </p>
         </div>
       </div>
@@ -385,8 +385,8 @@
         </a> -->
 
     </div>
-    <div>
-      <strong style="font-size: 18px;"> {{selectedPromo.couponCode}} Coupon Code is
+    <div *ngIf="selectedPromo">
+      <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
 <p style="margin: 0; font-size: 14px;">
   You’re Saving ₹ {{booking.discountAmount}} on this booking!
@@ -542,7 +542,7 @@ Applied!</strong>
         margin-right: 5px;
       "
     >
-      Working Hours: <span>08:00 AM to 10:00 PM</span>
+      Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
     </p>
   </div>
 
@@ -907,8 +907,8 @@ Applied!</strong>
     </a> -->
 
 </div>
-<div>
-  <strong style="font-size: 18px;"> {{selectedPromo.couponCode}} Coupon Code is
+<div *ngIf="selectedPromo">
+  <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
 <p style="margin: 0; font-size: 14px;">
 You’re Saving ₹ {{booking.discountAmount}} on this booking!

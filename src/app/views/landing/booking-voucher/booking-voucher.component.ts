@@ -20,6 +20,8 @@ savedServices: any;
   showMore:boolean  =false
   storedPromo: string;
   selectedPromo: any;
+  accommodationCheckInTime: any;
+  accommodationService: any;
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
@@ -39,11 +41,16 @@ console.log(selectedPromoData)
   this.getOfferDetails();
 }
 
-
+this.calculateServiceHours();
 }
 
 ngOnInIt(){
 
+
+}
+calculateServiceHours (){
+  this.accommodationService = this.propertyDetails.businessServiceDtoList.filter(service => service.name === "Accommodation");
+  console.log(" this.accommodationService" + JSON.stringify( this.accommodationService))
 }
 getOfferDetails() {
   this.hotelBookingService
