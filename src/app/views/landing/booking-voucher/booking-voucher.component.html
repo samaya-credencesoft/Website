@@ -150,7 +150,7 @@
               </div>
               <div *ngIf="booking?.checkInDate">
                 <b> Check-in date </b> <br />
-                <div>{{ booking?.checkInDate | date:'dd-MM-YYYY' }}</div>
+                <div>{{ booking?.checkInDate | date: 'd MMM' }}</div>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@
           >
             <div>
               <b> Check-in date </b> <br />
-              <div>{{ booking?.checkOutDate | date:'dd-MM-YYYY' }}</div>
+              <div>{{ booking?.checkOutDate | date: 'd MMM' }}</div>
             </div>
           </div>
 
@@ -699,7 +699,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <div>{{booking?.checkInDate | date:'dd-MM-YYYY'}}</div>
+            <div>{{booking?.checkInDate | date: 'd MMM'}}</div>
           </div>
         </div>
       </div>
@@ -709,7 +709,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <div>{{booking?.checkOutDate | date:'dd-MM-YYYY' }}</div>
+          <div>{{booking?.checkOutDate | date: 'd MMM' }}</div>
         </div>
       </div>
     </div>
