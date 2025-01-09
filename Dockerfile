@@ -1,5 +1,5 @@
 # Use official Node.js image as base
-FROM node:18-alpine AS build
+FROM node:16-alpine AS build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -14,7 +14,7 @@ RUN npm install --force
 COPY . .
 
 # Build the Angular app for production with SSR
-RUN npm run build 
+RUN npm run build
 RUN npm run build:ssr
 
 # Stage 2: Use a small image for production
