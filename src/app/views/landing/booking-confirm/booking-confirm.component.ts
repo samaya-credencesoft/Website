@@ -553,7 +553,7 @@ this.hotelBookingService
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
-
+        this.calculateServiceHours()
         this.businessUser?.socialMediaLinks.forEach(element => {
           this.socialmedialist=element
         });
