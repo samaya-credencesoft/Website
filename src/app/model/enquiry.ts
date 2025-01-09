@@ -32,7 +32,7 @@ import { TaxDetails } from "./TaxDetails";
     noOfChildren: number;
     noOfPets: number;
     location: string;
-    createdDate:Date;
+    createdDate:any;
     country: string;
     alternativeLocation: string;
     phone: string;
