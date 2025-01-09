@@ -4,11 +4,11 @@ import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { TokenStorage } from 'src/token.storage';
 
 @Component({
-  selector: 'app-paylater-confirm',
-  templateUrl: './paylater-confirm.component.html',
-  styleUrls: ['./paylater-confirm.component.scss']
+  selector: 'app-booking-confirm',
+  templateUrl: './booking-confirm.component.html',
+  styleUrls: ['./booking-confirm.component.scss']
 })
-export class PaylaterConfirmComponent {
+export class BookingConfirmComponent {
 propertyDetails: any;
 booking:any;
 promocodeListChip : any[] = []; // Used for handled to get the promo list and stored in this variable.
@@ -21,15 +21,13 @@ savedServices: any;
   selectedPromo: any;
   accommodationCheckInTime: any;
   accommodationService: any;
-  bookingone: import("f:/GitHub/Website/src/app/model/booking").Booking;
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
       this.businessOfferDto = new BusinessOfferDto();
 
   this.propertyDetails = this.token.getProperty();
- this.bookingone = this.token.getBookingData();
- this.booking = this.token.getBookingDataObj();
+ this.booking = this.token.getBookingData();
  this.savedServices = this.token.getSelectedServices();
  this.currency = this.propertyDetails.localCurrency.toUpperCase();
  this.storedPromo = localStorage.getItem('selectPromo');
@@ -86,5 +84,4 @@ checkValidCouponOrNot(couponList?){
 toggleView(): void {
   this.showMore = !this.showMore;
 }
-
 }

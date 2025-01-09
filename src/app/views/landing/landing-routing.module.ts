@@ -131,6 +131,10 @@ const routes: Routes = [
     component:PaylaterConfirmComponent
   },
   {
+    path:'booking-confirm',
+    component:PaylaterConfirmComponent
+  },
+  {
     path:'confirm-payment',
     component:ConfirmPaymentComponent
   },

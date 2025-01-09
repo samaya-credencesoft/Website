@@ -1887,8 +1887,8 @@ console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
 
   taxAmountBackUp : number;
   onCashPaymentSubmit() {
-    localStorage.removeItem('selectedPromoData');
-    localStorage.removeItem('selectPromo');
+    // localStorage.removeItem('selectedPromoData');
+    // localStorage.removeItem('selectPromo');
     if(this.showTheSelectedCoupon){
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
       this.booking.netAmount = finalPrice;
@@ -2280,6 +2280,7 @@ this.savedServices?.forEach(element => {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
+
           this.saveResponseBooking = response.body;
           this.token.saveBookingDataObj(this.booking);
           this.booking.fromDate = this.bookingData.fromDate;
@@ -2289,7 +2290,7 @@ this.savedServices?.forEach(element => {
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
         }, 3000);
-        this.router.navigate(["/confirm"]);
+        this.router.navigate(["/reservation-confirm"]);
           this.loadingOne = false;
           if (this.booking.id !== null) {
             this.submitButtonDisable = true;
@@ -2793,7 +2794,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.extraPersonCharge=this.booking.extraPersonCharge;
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild=this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice=(this.booking.netAmount / this.DiffDate);
+    this.enquiryForm.roomPrice=Number(this.token.getBookingRoomPrice());
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect";
     this.enquiryForm.discountAmount =  this.booking.discountAmount;

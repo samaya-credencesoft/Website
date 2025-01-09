@@ -22,6 +22,9 @@ savedServices: any;
   selectedPromo: any;
   accommodationCheckInTime: any;
   accommodationService: any;
+  copyTextOne:boolean=false;
+  textToCopy: string = 'This is some text to copy';
+
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
@@ -42,6 +45,38 @@ console.log(selectedPromoData)
 }
 
 this.calculateServiceHours();
+}
+
+copyText() {
+
+  // Find the element
+  const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+  if (textToCopy) {
+    // Create a temporary textarea element
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+
+    // Add to the document body
+    document.body.appendChild(textarea);
+
+    // Select and copy the content
+    textarea.select();
+    document.execCommand('copy');
+
+    // Remove the textarea element
+    document.body.removeChild(textarea);
+
+    // Notify the user
+    // alert('Enquiry ID copied to clipboard!');
+    this.copyTextOne = true;
+    setTimeout(() => {
+      this.copyTextOne = false;
+    }, 1000);
+  } else {
+    // alert('Failed to copy text.');
+    this.copyTextOne = false;
+  }
 }
 
 ngOnInIt(){
