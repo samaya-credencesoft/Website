@@ -127,7 +127,7 @@ export class ContactFormComponent implements OnInit {
     const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
     // const API_URL = 'https://api.bookonepms.com:8443/api-bookone/';
-    const API_URL = 'https://api.bookone.io/api-bookone/';
+    const API_URL = 'https://api.bookonelocal.in/api-bookone/';
 
     // const API_URL = 'http://localhost:8080';
 
