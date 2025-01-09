@@ -275,7 +275,7 @@
             </tr>
           </table>
 
-          <hr style="margin-top: 10px; margin-bottom: 10px" />
+
 
           <!-- <p style="font-size: 18px">Add-on Services:</p> -->
           <div class="addon-services" *ngIf="savedServices?.length >0">
@@ -824,7 +824,7 @@ Applied!</strong>
         </tr>
       </table>
 
-      <hr style="margin-top: 10px; margin-bottom: 10px" />
+
 
       <div *ngIf="savedServices?.length >0">
         <div style="font-size: 18px">Add-on Services:</div>
@@ -1014,5 +1014,13 @@ Complete your booking now to save big on your stay.
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<div class="popup-container" *ngIf="copyTextOne">
+  <div class="popup-content">
+    Booking ID copied successfully!
+
   </div>
 </div>
