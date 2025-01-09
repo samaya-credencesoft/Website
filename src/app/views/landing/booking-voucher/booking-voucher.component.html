@@ -82,7 +82,7 @@
         <p class="mb-1"><span class="highlight-text">Enquiry ID</span></p>
         <!-- <p class="mb-0">{{booking.enquiryId}}</p> -->
         <div style="font-weight: bold; font-size: 17px">
-          THM-<b id="textToCopy" style="margin-right: 7px;">{{booking.enquiryId}}</b>
+          THM-<b id="textToCopy" style="margin-right: 7px;">{{booking?.enquiryId}}</b>
           <img
             src="assets/images/CopyVoucher.png"
             alt=""
@@ -115,7 +115,7 @@
         </p>
         <p class="mb-0">
           <span class="status-badge status-enquiry" style="font-size: 13px"
-            >{{booking.status}}</span
+            >{{booking?.status}}</span
           >
         </p>
       </div>
@@ -148,27 +148,27 @@
                   style="margin-right: 3px; transform: rotate(3deg)"
                 />
               </div>
-              <div *ngIf="booking.checkInDate">
+              <div *ngIf="booking?.checkInDate">
                 <b> Check-in date </b> <br />
-                <p>{{ booking.checkInDate }}</p>
+                <p>{{ booking?.checkInDate }}</p>
               </div>
             </div>
           </div>
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.checkOutDate"
+            *ngIf="booking?.checkOutDate"
           >
             <div>
               <b> Check-in date </b> <br />
-              <p>{{ booking.checkOutDate }}</p>
+              <p>{{ booking?.checkOutDate }}</p>
             </div>
           </div>
 
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.noOfPersons || booking.noOfChildren"
+            *ngIf="booking?.noOfPersons || booking?.noOfChildren"
           >
             <div>
               <b> Occupancy: </b>
@@ -177,19 +177,19 @@
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.noOfPersons || booking.noOfChildren"
+            *ngIf="booking?.noOfPersons || booking?.noOfChildren"
           >
             <div>
               <p>
-                {{ booking.noOfPersons }} Adults,
-                {{ booking.noOfChildren }} Children
+                {{ booking?.noOfPersons }} Adults,
+                {{ booking?.noOfChildren }} Children
               </p>
             </div>
           </div>
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.noOfRooms"
+            *ngIf="booking?.noOfRooms"
           >
             <div>
               <b> Rooms: </b>
@@ -198,17 +198,17 @@
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.noOfRooms"
+            *ngIf="booking?.noOfRooms"
           >
             <div>
-              <p>{{ booking.noOfRooms }}</p>
+              <p>{{ booking?.noOfRooms }}</p>
             </div>
           </div>
 
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.noOfNights"
+            *ngIf="booking?.noOfNights"
           >
             <div>
               <b> Nights: </b>
@@ -217,10 +217,10 @@
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.noOfNights"
+            *ngIf="booking?.noOfNights"
           >
             <div>
-              <p>{{ booking.noOfNights }}</p>
+              <p>{{ booking?.noOfNights }}</p>
             </div>
           </div>
         </div>
@@ -235,7 +235,7 @@
               font-size: 35px !important;
             "
           >
-            {{ propertyDetails.name }}
+            {{ propertyDetails?.name }}
           </h2>
           <h5>
             {{ propertyDetails.address.city }},{{
@@ -247,7 +247,7 @@
             style="font-size: 15px"
             [innerHTML]="propertyDetails.businessDescription"
           >
-            {{ propertyDetails.businessDescription }}
+            {{ propertyDetails?.businessDescription }}
           </h4>
         </div>
       </div>
@@ -258,24 +258,24 @@
       style="display: flex; justify-content: center; gap: 30px"
     >
       <div class="col-8" style="flex: 0 0 38%; max-width: 38%">
-        <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
+        <div style="text-align: right;">Enquiry created at {{ booking?.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
 
         <div class="details-card">
           <p style="font-size: 21px">
-            {{ booking.roomName }} x {{ booking.noOfRooms }}
+            {{ booking?.roomName }} x {{ booking?.noOfRooms }}
           </p>
           <table style="width: 88%; margin-top: -0.7rem">
             <tr>
-              <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{ booking.roomPrice }}</td>
+              <td>{{ booking?.roomRatePlanName }}</td>
+              <td>₹{{ booking?.roomPrice }}</td>
             </tr>
-            <tr *ngIf="booking.extraPersonCharge > 0">
+            <tr *ngIf="booking?.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
-              <td>₹{{ booking.extraPersonCharge }}</td>
+              <td>₹{{ booking?.extraPersonCharge }}</td>
             </tr>
-            <tr *ngIf="booking.extraChildCharge > 0">
+            <tr *ngIf="booking?.extraChildCharge > 0">
               <td>Extra Child Charges</td>
-              <td>₹{{ booking.extraChildCharge }}</td>
+              <td>₹{{ booking?.extraChildCharge }}</td>
             </tr>
           </table>
 
@@ -324,17 +324,17 @@
         <div class="details-card" style="margin-top: 20px">
           <table style="width: 88%">
             <tr>
-              <td>Tax Amount ({{ booking.taxPercentage }}%)</td>
-              <td>₹ {{ booking.taxAmount }}</td>
+              <td>Tax Amount ({{ booking?.taxPercentage }}%)</td>
+              <td>₹ {{ booking?.taxAmount }}</td>
             </tr>
 
             <tr>
               <td>Total Payable Amount</td>
-              <td>₹ {{ booking.totalAmount }}</td>
+              <td>₹ {{ booking?.totalAmount }}</td>
             </tr>
             <tr>
               <td>Due Amount</td>
-              <td>₹{{ booking.totalAmount }}</td>
+              <td>₹{{ booking?.totalAmount }}</td>
             </tr>
           </table>
         </div>
@@ -402,7 +402,7 @@
       <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
 <p style="margin: 0; font-size: 14px;">
-  You’re Saving ₹ {{booking.discountAmount}} on this booking!
+  You’re Saving ₹ {{booking?.discountAmount}} on this booking!
 </p>
 
 <p>
@@ -428,26 +428,26 @@ Applied!</strong>
           <table style="width: 88%">
             <tr
               *ngIf="
-                booking.firstName != null && booking.firstName != undefined
+                booking?.firstName != null && booking?.firstName != undefined
               "
             >
               <td>Guest Name:</td>
-              <td>{{ booking.firstName }}{{ booking.lastName }}</td>
+              <td>{{ booking?.firstName }}{{ booking?.lastName }}</td>
             </tr>
 
-            <tr *ngIf="booking.email != null && booking.email != undefined">
+            <tr *ngIf="booking?.email != null && booking?.email != undefined">
               <td>Email Address:</td>
-              <td>{{ booking.email }}</td>
+              <td>{{ booking?.email }}</td>
             </tr>
 
-            <tr *ngIf="booking.mobile != null && booking.mobile != undefined">
+            <tr *ngIf="booking?.mobile != null && booking?.mobile != undefined">
               <td>Phone Number:</td>
-              <td>{{ booking.mobile }}</td>
+              <td>{{ booking?.mobile }}</td>
             </tr>
 
-            <tr *ngIf="booking.notes != null && booking.notes != undefined">
+            <tr *ngIf="booking?.notes != null && booking?.notes != undefined">
               <td>Notes:</td>
-              <td>{{ booking.notes }}</td>
+              <td>{{ booking?.notes }}</td>
             </tr>
           </table>
         </div>
@@ -605,7 +605,7 @@ Applied!</strong>
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Enquiry ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      THM-<b id="textToCopy" style="margin-right: 7px;"> {{booking.enquiryId}}</b>
+      THM-<b id="textToCopy" style="margin-right: 7px;"> {{booking?.enquiryId}}</b>
       <img
         src="assets/images/CopyVoucher.png"
         alt=""
@@ -639,7 +639,7 @@ Applied!</strong>
         <div style="display: flex; justify-content: center; margin-top: 5px">
           <p class="mb-0">
             <span class="status-badge status-enquiry" style="font-size: 13px"
-              >{{booking.status}}</span
+              >{{booking?.status}}</span
             >
           </p>
         </div>
@@ -658,8 +658,8 @@ Applied!</strong>
     >
     {{propertyDetails.name}}
     </h2>
-    <h5 style="font-size: 15px; margin-bottom: 0px">{{propertyDetails.address.city}},{{propertyDetails.address.state}}, {{propertyDetails.address.country}}</h5>
-    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="propertyDetails.businessDescription">
+    <h5 style="font-size: 15px; margin-bottom: 0px">{{propertyDetails?.address.city}},{{propertyDetails?.address.state}}, {{propertyDetails?.address.country}}</h5>
+    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="propertyDetails?.businessDescription">
       {{propertyDetails.businessDescription}}
     </h4>
   </div>
@@ -687,7 +687,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>{{booking.checkInDate}}</p>
+            <p>{{booking?.checkInDate}}</p>
           </div>
         </div>
       </div>
@@ -697,7 +697,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>{{booking.checkOutDate}}</p>
+          <p>{{booking?.checkOutDate}}</p>
         </div>
       </div>
     </div>
@@ -716,7 +716,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</p>
+          <p>{{booking?.noOfPersons}} Adults, {{booking?.noOfChildren}} Children</p>
         </div>
       </div>
     </div>
@@ -735,7 +735,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>{{booking.noOfRooms}}</p>
+          <p>{{booking?.noOfRooms}}</p>
         </div>
       </div>
     </div>
@@ -754,7 +754,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>{{booking.noOfNights}}</p>
+          <p>{{booking?.noOfNights}}</p>
         </div>
       </div>
     </div>
@@ -768,7 +768,7 @@ Applied!</strong>
       font-size: 12px;
     "
   >
- Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
+ Enquiry created at {{ booking?.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
   </p>
   <div
     style="
@@ -791,41 +791,41 @@ Applied!</strong>
     <table style="width: 88%">
       <tr>
         <td>Guest Name:</td>
-        <td>{{booking.firstName}}{{booking.lastName}}</td>
+        <td>{{booking?.firstName}}{{booking?.lastName}}</td>
       </tr>
 
       <tr>
         <td>Email Address:</td>
-        <td>{{booking.email}}</td>
+        <td>{{booking?.email}}</td>
       </tr>
 
       <tr>
         <td>Phone Number:</td>
-        <td>{{booking.mobile}}</td>
+        <td>{{booking?.mobile}}</td>
       </tr>
 
       <tr>
         <td>Notes:</td>
-        <td>{{booking.notes}}</td>
+        <td>{{booking?.notes}}</td>
       </tr>
     </table>
   </div>
 
   <div class="col-12">
     <div class="details-cardOne">
-      <p style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</p>
+      <p style="font-size: 17px; font-weight: bold">{{booking?.roomName}} x {{booking?.noOfRooms}}</p>
       <table style="width: 88%; margin-top: -0.7rem">
         <tr>
-          <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{booking.roomPrice}}</td>
+          <td>{{booking?.roomRatePlanName}}</td>
+          <td>₹{{booking?.roomPrice}}</td>
         </tr>
         <tr>
           <td>Extra Pax Charges</td>
-          <td>₹{{booking.extraPersonCharge}}</td>
+          <td>₹{{booking?.extraPersonCharge}}</td>
         </tr>
         <tr>
           <td>Extra Child Charges</td>
-          <td>₹{{booking.extraChildCharge}}</td>
+          <td>₹{{booking?.extraChildCharge}}</td>
         </tr>
       </table>
 
@@ -931,11 +931,11 @@ Applied!</strong>
   <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
 <p style="margin: 0; font-size: 14px;">
-You’re Saving ₹ {{booking.discountAmount}} on this booking!
+You’re Saving ₹ {{booking?.discountAmount}} on this booking?!
 </p>
 
 <p>
-Complete your booking now to save big on your stay.
+Complete your booking? now to save big on your stay.
 </p>
 </div>
       </div>
@@ -944,19 +944,19 @@ Complete your booking now to save big on your stay.
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
-          <td>Tax Amount ({{booking.taxPercentage}}%)</td>
-          <td>₹ {{booking.taxAmount}}</td>
+          <td>Tax Amount ({{booking?.taxPercentage}}%)</td>
+          <td>₹ {{booking?.taxAmount}}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+          <td>₹ {{booking?.totalAmount}}</td>
         </tr>
 
 
 
         <tr>
           <td>Due Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+          <td>₹ {{booking?.totalAmount}}</td>
         </tr>
       </table>
     </div>

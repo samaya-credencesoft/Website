@@ -58,6 +58,7 @@ export class BookingConfirmComponent {
   totalBeforeTaxAmount: number = 0;
   addServiceList: any[];
   enquiryForm: any;
+  showMore:boolean =false;
   enquiryResponse: EnquiryForm;
   successMessage: boolean;
   reservationRoomDetails:RoomDetail[];
@@ -141,7 +142,7 @@ export class BookingConfirmComponent {
      const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
      this.selectedPromo = selectedPromoData
      // this.businessOfferDto = selectedPromoData
-   console.log(selectedPromoData)
+  //  console.log(selectedPromoData)
    }else{
      this.getOfferDetails();
    }
@@ -325,7 +326,9 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
   }
 
 
-
+  toggleView(): void {
+    this.showMore = !this.showMore;
+  }
 
   mileSecondToNGBDate(date: string) {
     const dsd = new Date(date);

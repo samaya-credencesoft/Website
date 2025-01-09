@@ -45,7 +45,7 @@
           color: #000 !important;
           font-size: 35px !important;
         "
-        >Thank you!</span
+        >Great News!</span
       >
       <p
         class="mb-0"
@@ -56,10 +56,10 @@
           margin-top: -7px;
         "
       >
-      Your reservation is currently on hold.
+      Your booking is confirmed.
       </p>
       <p class="mb-0" style="margin-top: -3px; font-size: 18px; color: #615d5d">
-        A copy of this reservation has been sent to {{booking.email}}.
+       A confirmation has been sent to {{booking.email}}.
 
       </p>
       <p
@@ -70,7 +70,7 @@
           font-size: 17px;
         "
       >
-      Note: Please check your spam folder if you don't see it, or find it on WhatsApp.
+      Note: Please check your spam folder or WhatsApp if you don’t see it.
       </p>
     </div>
 
@@ -88,7 +88,7 @@
       >
         <p class="mb-1"><span class="highlight-text">Payment Status</span></p>
         <p class="mb-0">
-          <span class="status-badge status-unpaid" style="font-size: 13px"
+          <span class="status-badge status-paid" style="font-size: 13px"
             >Paid</span
           >
         </p>
@@ -101,7 +101,7 @@
           <span class="highlight-text">Reservation Status</span>
         </p>
         <p class="mb-0">
-          <span class="status-badge status-enquiry" style="font-size: 13px"
+          <span class="status-badge status-confirm" style="font-size: 13px"
             >Confirmed</span
           >
         </p>
@@ -311,8 +311,8 @@
         <div class="details-card" style="margin-top: 20px">
           <table style="width: 88%">
             <tr>
-              <td>Tax Amount ({{ booking.taxPercentage }}%)</td>
-              <td>₹ {{ booking.taxAmount }}</td>
+              <td>Tax Amount ({{ bookinddata.taxPercentage }}%)</td>
+              <td>₹ {{ bookinddata.taxAmount }}</td>
             </tr>
 
             <tr>
@@ -557,7 +557,7 @@ Applied!</strong>
         color: #000 !important;
         font-size: 25px !important;
       "
-      >Thank you!</span
+      >Great News!</span
     >
     <p
       class="mb-0"
@@ -568,10 +568,10 @@ Applied!</strong>
         margin-top: -7px;
       "
     >
-    Your reservation is currently on hold.
+    Your booking is confirmed.
     </p>
     <p class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
-      A copy of this reservation has been sent to {{booking.email}}.
+     A confirmation has been sent to {{booking.email}}.
     </p>
     <p
       style="
@@ -581,7 +581,7 @@ Applied!</strong>
         font-size: 13px;
       "
     >
-    Note: Please check your spam folder if you don't see it, or find it on WhatsApp.
+    Note: Please check your spam folder or WhatsApp if you don’t see it.
     </p>
   </div>
 
@@ -611,7 +611,7 @@ Applied!</strong>
         <div>Payment Status</div>
         <div style="display: flex; justify-content: center; margin-top: 5px">
           <p class="mb-0">
-            <span class="status-badge status-unpaid" style="font-size: 13px"
+            <span class="status-badge status-paid" style="font-size: 13px"
               >Paid</span
             >
           </p>
@@ -621,7 +621,7 @@ Applied!</strong>
         <div>Reservation Status</div>
         <div style="display: flex; justify-content: center; margin-top: 5px">
           <p class="mb-0">
-            <span class="status-badge status-enquiry" style="font-size: 13px"
+            <span class="status-badge status-confirm" style="font-size: 13px"
               > Confirmed</span
             >
           </p>
@@ -927,8 +927,8 @@ Complete your booking now to save big on your stay.
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
-          <td>Tax Amount ({{booking.taxPercentage}}%)</td>
-          <td>₹ {{booking.taxAmount}}</td>
+          <td>Tax Amount ({{bookinddata.taxPercentage}}%)</td>
+          <td>₹ {{bookinddata.taxAmount}}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
