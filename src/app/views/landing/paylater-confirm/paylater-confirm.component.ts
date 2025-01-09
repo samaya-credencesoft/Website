@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Booking } from 'src/app/model/booking';
 import { BusinessOfferDto } from 'src/app/model/businessOfferDto';
+import { BusinessUser } from 'src/app/model/user';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
+import { ListingService } from 'src/services/listing.service';
 import { TokenStorage } from 'src/token.storage';
 
 @Component({
@@ -23,11 +26,19 @@ savedServices: any;
   accommodationCheckInTime: any;
   accommodationService: any;
   bookingone:Booking;
+  copyTextOne:boolean=false;
+   businessUser: BusinessUser;
+  isReadMore: boolean[] = [];
+  policies = [];
+  loader: boolean;
+  propertyServiceListData: any[] = [];
 constructor(private token :TokenStorage,
-      private hotelBookingService: HotelBookingService
+      private hotelBookingService: HotelBookingService,
+      private listingService: ListingService,
+      private router: Router,
 ){
       this.businessOfferDto = new BusinessOfferDto();
-
+this.businessUser = new BusinessUser();
   this.propertyDetails = this.token.getProperty();
  this.bookingone = this.token.getBookingData();
  this.booking = this.token.getBookingDataObj();
@@ -44,6 +55,11 @@ console.log(selectedPromoData)
 }
 
 this.calculateServiceHours();
+this.isReadMore = this.policies.map(() => false);
+if (this.booking?.bookingPropertyId != null && this.booking?.bookingPropertyId != undefined) {
+  this.getPropertyDetailsById(this.booking.bookingPropertyId);
+console.log("this.booking.proprtyId", this.booking.bookingPropertyId)
+}
 }
 
 ngOnInIt(){
@@ -53,6 +69,73 @@ ngOnInIt(){
 calculateServiceHours (){
   this.accommodationService = this.propertyDetails.businessServiceDtoList.filter(service => service.name === "Accommodation");
   console.log(" this.accommodationService" + JSON.stringify( this.accommodationService))
+}
+
+async getPropertyDetailsById(id: number) {
+  // debugger
+  // this.token.saveBookingEngineBoolean('googlehotelcenter')
+
+  // //console.log("id isequal to" + id)
+  try {
+    const data = await this.listingService?.findByPropertyId(id).toPromise();
+    if (data.status === 200) {
+      this.businessUser = data.body;
+      this.policies = this.businessUser.businessServiceDtoList.filter(
+        (ele) => ele.name === 'Accommodation'
+      );
+
+
+
+      this.businessUser.propertyServicesList.forEach(ele => {
+
+        if (ele.id != null && ele.id != undefined) {
+          this.propertyServiceListData.push(ele)
+        }
+      });
+
+    } else {
+      this.router.navigate(["/404"]);
+    }
+  } catch (error) {
+    this.loader = false;
+    // Handle the error appropriately, if needed.
+  }
+}
+toggleReadMore(index: number) {
+  // Toggle the read more/less flag for the clicked policy
+  this.isReadMore[index] = !this.isReadMore[index];
+}
+
+copyText() {
+
+  // Find the element
+  const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+  if (textToCopy) {
+    // Create a temporary textarea element
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+
+    // Add to the document body
+    document.body.appendChild(textarea);
+
+    // Select and copy the content
+    textarea.select();
+    document.execCommand('copy');
+
+    // Remove the textarea element
+    document.body.removeChild(textarea);
+
+    // Notify the user
+    // alert('Enquiry ID copied to clipboard!');
+    this.copyTextOne = true;
+    setTimeout(() => {
+      this.copyTextOne = false;
+    }, 1000);
+  } else {
+    // alert('Failed to copy text.');
+    this.copyTextOne = false;
+  }
 }
 getOfferDetails() {
   this.hotelBookingService
