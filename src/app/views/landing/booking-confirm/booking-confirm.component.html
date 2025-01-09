@@ -135,20 +135,20 @@
                   style="margin-right: 3px; transform: rotate(3deg)"
                 />
               </div>
-              <div *ngIf="booking.checkInDate">
+              <div *ngIf="booking.fromDate">
                 <b> Check-in date </b> <br />
-                <p>{{ booking.checkInDate }}</p>
+                <p>{{ booking.fromDate }}</p>
               </div>
             </div>
           </div>
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
-            *ngIf="booking.checkOutDate"
+            *ngIf="booking.toDate"
           >
             <div>
               <b> Check-in date </b> <br />
-              <p>{{ booking.checkOutDate }}</p>
+              <p>{{ booking.toDate }}</p>
             </div>
           </div>
 
@@ -222,19 +222,19 @@
               font-size: 35px !important;
             "
           >
-            {{ propertyDetails.name }}
+            {{ businessUser.name }}
           </h2>
           <h5>
-            {{ propertyDetails.address.city }},{{
-              propertyDetails.address.state
-            }}, {{ propertyDetails.address.country }}
+            {{ businessUser.address.city }},{{
+              businessUser.address.state
+            }}, {{ businessUser.address.country }}
           </h5>
           <h4
             class="text-muted"
             style="font-size: 15px"
-            [innerHTML]="propertyDetails.businessDescription"
+            [innerHTML]="businessUser.businessDescription"
           >
-            {{ propertyDetails.businessDescription }}
+            {{ businessUser.businessDescription }}
           </h4>
         </div>
       </div>
@@ -635,11 +635,11 @@ Applied!</strong>
         margin-bottom: 0px;
       "
     >
-    {{propertyDetails.name}}
+    {{businessUser.name}}
     </h2>
-    <h5 style="font-size: 15px; margin-bottom: 0px">{{propertyDetails.address.city}},{{propertyDetails.address.state}}, {{propertyDetails.address.country}}</h5>
-    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="propertyDetails.businessDescription">
-      {{propertyDetails.businessDescription}}
+    <h5 style="font-size: 15px; margin-bottom: 0px">{{businessUser.address.city}},{{businessUser.address.state}}, {{businessUser.address.country}}</h5>
+    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="businessUser.businessDescription">
+      {{businessUser.businessDescription}}
     </h4>
   </div>
 
@@ -666,7 +666,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>{{booking.checkInDate}}</p>
+            <p>{{booking.fromDate}}</p>
           </div>
         </div>
       </div>
@@ -676,7 +676,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>{{booking.checkOutDate}}</p>
+          <p>{{booking.toDate}}</p>
         </div>
       </div>
     </div>
