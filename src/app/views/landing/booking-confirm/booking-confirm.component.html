@@ -245,7 +245,7 @@
       style="display: flex; justify-content: center; gap: 30px"
     >
       <div class="col-8" style="flex: 0 0 38%; max-width: 38%">
-        <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
+        <div style="text-align: right;" *ngIf="booking.createdDate != null">Booking created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div>
 
         <div class="details-card">
           <p style="font-size: 21px">
@@ -254,7 +254,7 @@
           <table style="width: 88%; margin-top: -0.7rem">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{ booking.roomPrice }}</td>
+              <td>₹{{bookingRoomPrice}}</td>
             </tr>
             <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
@@ -320,8 +320,12 @@
               <td>₹ {{ booking.totalAmount }}</td>
             </tr>
             <tr>
+              <td>Advance Amount</td>
+               <td>₹{{ booking.advanceAmount | number: '1.2-2'}}</td>
+            </tr>
+            <tr>
               <td>Due Amount</td>
-              <td>₹{{ booking.totalAmount }}</td>
+              <td>₹{{ booking.totalAmount - booking.advanceAmount | number: '1.2-2'}}</td>
             </tr>
           </table>
         </div>
@@ -745,9 +749,9 @@ Applied!</strong>
       margin-bottom: 3px;
       margin-right: 18px;
       font-size: 12px;
-    "
+    "  *ngIf="booking.createdDate != null"
   >
- Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
+ Booking created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
   </p>
   <div
     style="
@@ -796,7 +800,7 @@ Applied!</strong>
       <table style="width: 88%; margin-top: -0.7rem">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{booking.roomPrice}}</td>
+          <td>₹{{bookingRoomPrice}}</td>
         </tr>
         <tr>
           <td>Extra Pax Charges</td>
@@ -930,12 +934,15 @@ Complete your booking now to save big on your stay.
           <td>Total Payable Amount</td>
           <td>₹ {{booking.totalAmount}}</td>
         </tr>
-
+        <tr>
+          <td>Advance Amount</td>
+           <td>₹{{ booking.advanceAmount | number: '1.2-2'}}</td>
+        </tr>
 
 
         <tr>
           <td>Due Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+           <td>₹{{ booking.totalAmount - booking.advanceAmount | number: '1.2-2'}}</td>
         </tr>
       </table>
     </div>

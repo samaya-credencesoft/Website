@@ -317,11 +317,11 @@ checkValidCouponOrNot(couponList?){
       }
     });
 
-    if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
-      this.bookingRoomPrice = this.token.getBookingRoomPrice();
+
+      this.bookingRoomPrice = this.token.getRoomPrice();
+console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
 
 
-    }
   }
 
 
