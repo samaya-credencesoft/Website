@@ -1,7 +1,10 @@
 import { Booking } from './../../../model/booking';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { BusinessOfferDto } from 'src/app/model/businessOfferDto';
+import { BusinessUser } from 'src/app/model/user';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
+import { ListingService } from 'src/services/listing.service';
 import { TokenStorage } from 'src/token.storage';
 
 @Component({
@@ -21,16 +24,23 @@ savedServices: any;
   showMore:boolean  =false
   storedPromo: string;
   selectedPromo: any;
+  loader: boolean;
+  policies = [];
   accommodationCheckInTime: any;
   accommodationService: any;
   copyTextOne:boolean=false;
+  isReadMore: boolean[] = [];
+    businessUser: BusinessUser;
+    propertyServiceListData: any[] = [];
   textToCopy: string = 'This is some text to copy';
 
 constructor(private token :TokenStorage,
-      private hotelBookingService: HotelBookingService
+      private hotelBookingService: HotelBookingService,
+       private listingService: ListingService,
+         private router: Router,
 ){
       this.businessOfferDto = new BusinessOfferDto();
-
+this.businessUser = new BusinessUser();
   this.propertyDetails = this.token.getProperty();
  this.booking = this.token.getEnquiryData();
  this.savedServices = this.token.getSelectedServices();
@@ -47,6 +57,55 @@ console.log(selectedPromoData)
 
 this.calculateServiceHours();
 this.PropertyUrl = this.token.getPropertyUrl();
+this.isReadMore = this.policies.map(() => false);
+if (this.booking.bookingPropertyId != null && this.booking.bookingPropertyId != undefined) {
+  this.getPropertyDetailsById(this.booking.bookingPropertyId);
+console.log("this.booking.proprtyId", this.booking.bookingPropertyId)
+}
+}
+
+
+
+
+
+ngOnInIt(){
+
+
+}
+
+async getPropertyDetailsById(id: number) {
+  // debugger
+  // this.token.saveBookingEngineBoolean('googlehotelcenter')
+
+  // //console.log("id isequal to" + id)
+  try {
+    const data = await this.listingService?.findByPropertyId(id).toPromise();
+    if (data.status === 200) {
+      this.businessUser = data.body;
+      this.policies = this.businessUser.businessServiceDtoList.filter(
+        (ele) => ele.name === 'Accommodation'
+      );
+
+
+
+      this.businessUser.propertyServicesList.forEach(ele => {
+
+        if (ele.id != null && ele.id != undefined) {
+          this.propertyServiceListData.push(ele)
+        }
+      });
+
+    } else {
+      this.router.navigate(["/404"]);
+    }
+  } catch (error) {
+    this.loader = false;
+    // Handle the error appropriately, if needed.
+  }
+}
+toggleReadMore(index: number) {
+  // Toggle the read more/less flag for the clicked policy
+  this.isReadMore[index] = !this.isReadMore[index];
 }
 
 copyText() {
@@ -79,11 +138,6 @@ copyText() {
     // alert('Failed to copy text.');
     this.copyTextOne = false;
   }
-}
-
-ngOnInIt(){
-
-
 }
 calculateServiceHours (){
   this.accommodationService = this.propertyDetails.businessServiceDtoList.filter(service => service.name === "Accommodation");

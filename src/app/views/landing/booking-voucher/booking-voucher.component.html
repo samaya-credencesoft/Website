@@ -134,6 +134,7 @@
               flex: 0 0 40%;
               text-align: center;
               border-right: 2px solid #d9d9d9;
+
             "
           >
 
@@ -166,7 +167,7 @@
 
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking?.noOfPersons || booking?.noOfChildren"
           >
             <div>
@@ -175,7 +176,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking?.noOfPersons || booking?.noOfChildren"
           >
             <div>
@@ -187,7 +188,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking?.noOfRooms"
           >
             <div>
@@ -196,7 +197,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking?.noOfRooms"
           >
             <div>
@@ -206,7 +207,7 @@
 
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking?.noOfNights"
           >
             <div>
@@ -215,7 +216,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking?.noOfNights"
           >
             <div>
@@ -360,10 +361,10 @@
               <ul>
                 <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
                   <li *ngIf="i === 0 || showMore">
-                    <div >
+                    <div style="color:#fff !important">
                       Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
                     </div>
-                    <div >
+                    <div style="color:#fff !important">
                       Share this coupon code when confirming your reservation to save
                       {{ coupon.discountPercentage }}%!
                     </div>
@@ -382,10 +383,10 @@
             </div>
              <!-- No Coupons Message -->
     <!-- No Coupons Card -->
-    <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-          <strong style="font-size: 18px;">No Coupon Available  :(</strong>
+    <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) " style="color:#fff !important">
+          <strong style="font-size: 18px;color: #fff !important">No Coupon Available  :(</strong>
 
-        <div style="margin: 0; font-size: 14px;">
+        <div style="margin: 0; font-size: 14px;color:#fff">
           Unfortunately, this property does not have any active coupons at the moment.
         </div>
         <!-- <a
@@ -396,14 +397,14 @@
         </a> -->
 
     </div>
-    <div *ngIf="selectedPromo">
+    <div *ngIf="selectedPromo" style="color:#fff !important">
       <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
-<div style="margin: 0; font-size: 14px;">
+<div style="margin: 0; font-size: 14px;color:#fff">
   You’re Saving ₹ {{booking?.discountAmount}} on this booking!
 </div>
 
-<div>
+<div style="color:#fff !important">
   Complete your booking now to save big on your stay.
 </div>
 </div>
@@ -505,7 +506,22 @@ Applied!</strong>
         confirmation, as it may sometimes be found there.
       </li>
     </ul>
-    <div class="property-rules">Property rules:</div>
+    <div *ngFor="let bServiceDtoList of policies; let i = index">
+      <div *ngIf="bServiceDtoList?.policy">
+        <div class="property-rules" *ngIf="policies">Property rules:</div>
+
+        <div style="padding: 20px;">
+          <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+          </div>
+          <div style="padding: 10px;">
+            <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right"
+              (click)="toggleReadMore(i)">
+              {{ isReadMore[i] ? 'View Less' : 'View More' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -887,10 +903,10 @@ Applied!</strong>
           <ul>
             <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
               <li *ngIf="i === 0 || showMore">
-                <div >
+                <div style="color:#fff !important">
                   Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
                 </div>
-                <div >
+                <div style="color:#fff !important">
                   Share this coupon code when confirming your reservation to save
                   {{ coupon.discountPercentage }}%!
                 </div>
@@ -910,9 +926,9 @@ Applied!</strong>
          <!-- No Coupons Message -->
 <!-- No Coupons Card -->
 <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-      <strong style="font-size: 18px;">No Coupon Available :(</strong>
+      <strong style="font-size: 18px;color: #fff !important">No Coupon Available :(</strong>
 
-    <div style="margin: 0; font-size: 14px;">
+    <div style="margin: 0; font-size: 14px;color: #fff !important">
       Unfortunately, this property does not have any active coupons at the moment.
     </div>
     <!-- <a
@@ -924,13 +940,13 @@ Applied!</strong>
 
 </div>
 <div *ngIf="selectedPromo">
-  <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
+  <strong style="font-size: 18px;color: #fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
-<div style="margin: 0; font-size: 14px;">
+<div style="margin: 0; font-size: 14px;color: #fff !important">
 You’re Saving ₹ {{booking?.discountAmount}} on this booking?!
 </div>
 
-<div>
+<div style="color:#fff !important">
 Complete your booking? now to save big on your stay.
 </div>
 </div>
@@ -1010,7 +1026,23 @@ Complete your booking? now to save big on your stay.
           confirmation, as it may sometimes be found there.
         </li>
       </ul>
-      <div class="property-rules">Property rules:</div>
+      <div *ngFor="let bServiceDtoList of policies; let i = index">
+        <div *ngIf="bServiceDtoList?.policy">
+          <div class="property-rules" *ngIf="policies">Property rules:</div>
+
+          <div style="padding: 20px;">
+            <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+            </div>
+            <div style="padding: 10px;">
+              <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right"
+                (click)="toggleReadMore(i)">
+                {{ isReadMore[i] ? 'View Less' : 'View More' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
