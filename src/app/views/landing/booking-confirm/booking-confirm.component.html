@@ -422,8 +422,8 @@ Applied!</strong>
                 booking.firstName != null && booking.firstName != undefined
               "
             >
-              <td>Guest Name:</td>
-              <td>{{ booking.firstName }}{{ booking.lastName }}</td>
+            <td>Guest Name:</td>
+            <td>{{ booking.firstName }} {{ booking.lastName }}</td>
             </tr>
 
             <tr *ngIf="booking.email != null && booking.email != undefined">
@@ -774,7 +774,7 @@ Applied!</strong>
     <table style="width: 88%">
       <tr>
         <td>Guest Name:</td>
-        <td>{{booking.firstName}}{{booking.lastName}}</td>
+        <td>{{ booking.firstName }} {{ booking.lastName }}</td>
       </tr>
 
       <tr>
