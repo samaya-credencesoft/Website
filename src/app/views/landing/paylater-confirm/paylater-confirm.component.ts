@@ -31,6 +31,7 @@ savedServices: any;
   isReadMore: boolean[] = [];
   policies = [];
   loader: boolean;
+  PropertyUrl: string;
   propertyServiceListData: any[] = [];
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService,
@@ -39,6 +40,7 @@ constructor(private token :TokenStorage,
 ){
       this.businessOfferDto = new BusinessOfferDto();
 this.businessUser = new BusinessUser();
+this.PropertyUrl = this.token.getPropertyUrl();
   this.propertyDetails = this.token.getProperty();
  this.bookingone = this.token.getBookingData();
  this.booking = this.token.getBookingDataObj();
@@ -56,9 +58,9 @@ console.log(selectedPromoData)
 
 this.calculateServiceHours();
 this.isReadMore = this.policies.map(() => false);
-if (this.booking?.bookingPropertyId != null && this.booking?.bookingPropertyId != undefined) {
-  this.getPropertyDetailsById(this.booking.bookingPropertyId);
-console.log("this.booking.proprtyId", this.booking.bookingPropertyId)
+if (this.booking?.propertyId != null && this.booking?.propertyId != undefined) {
+  this.getPropertyDetailsById(this.booking.propertyId);
+console.log("this.booking.proprtyId", this.booking.propertyId)
 }
 }
 

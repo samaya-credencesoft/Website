@@ -250,7 +250,7 @@
           <div style="font-size: 21px">
             {{ booking.roomName }} x {{ booking.noOfRooms }}
           </div>
-          <table style="width: 88%; margin-top: -0.7rem">
+          <table style="width: 88%">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
               <td>₹{{ booking.roomPrice }}</td>
@@ -418,7 +418,7 @@ Applied!</strong>
               "
             >
               <td>Guest Name:</td>
-              <td>{{ booking.firstName }}{{ booking.lastName }}</td>
+              <td>{{ booking.firstName }} {{ booking.lastName }}</td>
             </tr>
 
             <tr *ngIf="booking.email != null && booking.email != undefined">
@@ -441,7 +441,7 @@ Applied!</strong>
     </div>
 
     <div class="footer-link">
-      <a href="#" style="font-weight: bold; font-size: 18px"
+      <a href="{{PropertyUrl}}" style="font-weight: bold; font-size: 18px"
         >Go back to home page</a
       >
       <div style="display: flex; justify-content: center">
@@ -616,11 +616,11 @@ Applied!</strong>
       <div>
         <div>Reservation Status</div>
         <div style="display: flex; justify-content: center; margin-top: 5px">
-          <p class="mb-0">
+          <div class="mb-0">
             <span class="status-badge status-enquiry" style="font-size: 13px"
               > On Hold</span
             >
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -666,7 +666,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>{{booking.fromDate | date:'dd-MM-YYYY'}}</p>
+            <div>{{booking.fromDate | date:'dd-MM-YYYY'}}</div>
           </div>
         </div>
       </div>
@@ -676,7 +676,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>{{booking.toDate | date:'dd-MM-YYYY'}}</p>
+          <div>{{booking.toDate | date:'dd-MM-YYYY'}}</div>
         </div>
       </div>
     </div>
@@ -695,7 +695,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</p>
+          <div>{{booking.noOfPersons}} Adults, {{booking.noOfChildren}} Children</div>
         </div>
       </div>
     </div>
@@ -714,7 +714,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>{{booking.noOfRooms}}</p>
+          <div>{{booking.noOfRooms}}</div>
         </div>
       </div>
     </div>
@@ -733,7 +733,7 @@ Applied!</strong>
         style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
       >
         <div>
-          <p>{{booking.noOfNights}}</p>
+          <div>{{booking.noOfNights}}</div>
         </div>
       </div>
     </div>
@@ -770,7 +770,7 @@ Applied!</strong>
     <table style="width: 88%">
       <tr>
         <td>Guest Name:</td>
-        <td>{{booking.firstName}}{{booking.lastName}}</td>
+        <td>{{booking.firstName}} {{booking.lastName}}</td>
       </tr>
 
       <tr>
@@ -792,8 +792,8 @@ Applied!</strong>
 
   <div class="col-12">
     <div class="details-cardOne">
-      <p style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</p>
-      <table style="width: 88%; margin-top: -0.7rem">
+      <div style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</div>
+      <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
           <td>₹{{booking.roomPrice}}</td>
@@ -811,7 +811,7 @@ Applied!</strong>
       <hr style="margin-top: 10px; margin-bottom: 10px" />
 
       <div *ngIf="savedServices?.length >0">
-        <p style="font-size: 18px">Add-on Services:</p>
+        <div style="font-size: 18px">Add-on Services:</div>
 
       <table style=" border: none; width:100%">
         <tr *ngFor="let fac of savedServices">
@@ -828,7 +828,7 @@ Applied!</strong>
 
                 <br>
 
-                <p>{{fac.name }} * {{fac.quantity}} <br>
+                <div>{{fac.name }} * {{fac.quantity}} <br>
 
                   <b
                     *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
@@ -838,7 +838,7 @@ Applied!</strong>
                   <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
                     style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
 
-                </p>
+                </div>
               </div>
             </div>
           </td>
@@ -870,13 +870,13 @@ Applied!</strong>
           <ul>
             <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
               <li *ngIf="i === 0 || showMore">
-                <p style="margin-top: -7px">
+                <div style="color: #fff !important;">
                   Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
-                </p>
-                <p style="margin-top: -10px">
+                </div>
+                <div style="color: #fff !important;">
                   Share this coupon code when confirming your reservation to save
                   {{ coupon.discountPercentage }}%!
-                </p>
+                </div>
               </li>
             </ng-container>
           </ul>
@@ -893,11 +893,11 @@ Applied!</strong>
          <!-- No Coupons Message -->
 <!-- No Coupons Card -->
 <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-      <strong style="font-size: 18px;">No Coupon Available :(</strong>
+      <strong style="font-size: 18px; color:#fff !important">No Coupon Available :(</strong>
 
-    <p style="margin: 0; font-size: 14px;">
+    <div style="margin: 0; font-size: 14px;color:#fff !important">
       Unfortunately, this property does not have any active coupons at the moment.
-    </p>
+    </div>
     <!-- <a
       href="/deals"
       style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
@@ -907,15 +907,15 @@ Applied!</strong>
 
 </div>
 <div *ngIf="selectedPromo">
-  <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
+  <strong style="font-size: 18px;color:#fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
-<p style="margin: 0; font-size: 14px;">
+<div style=" font-size: 14px;color:#fff !important">
 You’re Saving ₹ {{booking.discountAmount}} on this booking!
-</p>
+</div>
 
-<p>
+<div style="color:#fff !important">
 Complete your booking now to save big on your stay.
-</p>
+</div>
 </div>
       </div>
     </div>
@@ -941,7 +941,7 @@ Complete your booking now to save big on your stay.
     </div>
 
     <div class="footer-link">
-      <a href="#" style="font-weight: bold; font-size: 16px"
+      <a href="{{PropertyUrl}}" style="font-weight: bold; font-size: 16px"
         >Go back to home page</a
       >
       <div style="display: flex; justify-content: center">
