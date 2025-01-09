@@ -16,6 +16,9 @@ export class PaylaterConfirmComponent {
 propertyDetails: any;
 booking:any;
 promocodeListChip : any[] = []; // Used for handled to get the promo list and stored in this variable.
+textToCopy: string = 'This is some text to copy';
+textToCopyOne: string = 'This is some text to copy';
+
 
 savedServices: any;
   currency: any;
@@ -117,6 +120,37 @@ copyText() {
     // Create a temporary textarea element
     const textarea = document.createElement('textarea');
     textarea.value = textToCopy;
+
+    // Add to the document body
+    document.body.appendChild(textarea);
+
+    // Select and copy the content
+    textarea.select();
+    document.execCommand('copy');
+
+    // Remove the textarea element
+    document.body.removeChild(textarea);
+
+    // Notify the user
+    // alert('Enquiry ID copied to clipboard!');
+    this.copyTextOne = true;
+    setTimeout(() => {
+      this.copyTextOne = false;
+    }, 1000);
+  } else {
+    // alert('Failed to copy text.');
+    this.copyTextOne = false;
+  }
+}
+copyTextone() {
+
+  // Find the element
+  const textToCopyOne = document.getElementById('textToCopyOne')?.innerText.trim();
+
+  if (textToCopyOne) {
+    // Create a temporary textarea element
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopyOne;
 
     // Add to the document body
     document.body.appendChild(textarea);
