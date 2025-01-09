@@ -46,6 +46,8 @@ export class BookingConfirmComponent {
   alertType: string;
   bookingConfirmed = false;
   fromDate: any;
+  copyTextOne:boolean=false;
+
   toDate: any;
   adults: number;
   children: number;
@@ -58,6 +60,8 @@ export class BookingConfirmComponent {
   totalBeforeTaxAmount: number = 0;
   addServiceList: any[];
   enquiryForm: any;
+  textToCopy: string = 'This is some text to copy';
+textToCopyOne: string = 'This is some text to copy';
   showMore:boolean =false;
   enquiryResponse: EnquiryForm;
   successMessage: boolean;
@@ -956,6 +960,68 @@ this.externalReservationdto =res.body
 
     this.paymentLoader = false;
 
+  }
+  copyText() {
+
+    // Find the element
+    const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+    if (textToCopy) {
+      // Create a temporary textarea element
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+
+      // Add to the document body
+      document.body.appendChild(textarea);
+
+      // Select and copy the content
+      textarea.select();
+      document.execCommand('copy');
+
+      // Remove the textarea element
+      document.body.removeChild(textarea);
+
+      // Notify the user
+      // alert('Enquiry ID copied to clipboard!');
+      this.copyTextOne = true;
+      setTimeout(() => {
+        this.copyTextOne = false;
+      }, 1000);
+    } else {
+      // alert('Failed to copy text.');
+      this.copyTextOne = false;
+    }
+  }
+  copyTextone() {
+
+    // Find the element
+    const textToCopyOne = document.getElementById('textToCopyOne')?.innerText.trim();
+
+    if (textToCopyOne) {
+      // Create a temporary textarea element
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopyOne;
+
+      // Add to the document body
+      document.body.appendChild(textarea);
+
+      // Select and copy the content
+      textarea.select();
+      document.execCommand('copy');
+
+      // Remove the textarea element
+      document.body.removeChild(textarea);
+
+      // Notify the user
+      // alert('Enquiry ID copied to clipboard!');
+      this.copyTextOne = true;
+      setTimeout(() => {
+        this.copyTextOne = false;
+      }, 1000);
+    } else {
+      // alert('Failed to copy text.');
+      this.copyTextOne = false;
+    }
   }
   setApi() {
     if (this.token.getCountry() === 'New Zealand') {

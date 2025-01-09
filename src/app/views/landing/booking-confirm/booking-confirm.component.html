@@ -80,7 +80,18 @@
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
         <p class="mb-1"><span class="highlight-text">Booking ID</span></p>
-        <p class="mb-0">{{booking.propertyReservationNumber}}</p>
+        <p class="mb-0"><b id="textToCopyOne">{{booking?.propertyReservationNumber}}</b>
+          <img
+          src="assets/images/CopyVoucher.png"
+          alt=""
+          height="15px"
+          width="15px"
+          style="margin-right: 3px"
+          (click)="copyTextone()"
+        />
+        <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
+        >Check Details</a>
+      </p>
       </div>
       <div
         class="col-md-4"
@@ -501,7 +512,12 @@ Applied!</strong>
     <p class="property-rules">Property rules:</p>
   </div>
 </div>
+<div class="popup-container" *ngIf="copyTextOne">
+  <div class="popup-content">
+    Reservation ID copied successfully!
 
+  </div>
+</div>
 <div class="mobile-view-booking-voucher">
   <div style="margin-top: 10px">
     <div style="display: flex; justify-content: right; font-size: 12px">
@@ -588,17 +604,17 @@ Applied!</strong>
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Booking ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      {{booking.propertyReservationNumber}}
+      <b id="textToCopy">{{booking?.propertyReservationNumber}}</b>
       <img
-        src="assets/images/CopyVoucher.png"
-        alt=""
-        height="15px"
-        width="15px"
-        style="margin-right: 3px"
-      />
-      <span style="margin-left: 5px; font-size: 13px; color: #1465cf"
-        >Check Details</span
-      >
+      src="assets/images/CopyVoucher.png"
+      alt=""
+      height="15px"
+      width="15px"
+      style="margin-right: 3px"
+      (click)="copyText()"
+    />
+    <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
+    >Check Details</a>
     </div>
   </div>
 
