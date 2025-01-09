@@ -156,6 +156,7 @@ import { BookingConfirmComponent } from './booking-confirm/booking-confirm.compo
     ServicesComponent,
     ConfirmBookingComponent,
     CheckoutPaymentComponent,
+
     ServicesCauroselComponent,
     TestimonialComponent,
     TestimonialCauroselComponent,

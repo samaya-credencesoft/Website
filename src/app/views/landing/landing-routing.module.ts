@@ -43,6 +43,7 @@ import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.co
 import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
 import { BookingVoucherComponent } from './booking-voucher/booking-voucher.component';
 import { PaylaterConfirmComponent } from './paylater-confirm/paylater-confirm.component';
+import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -132,7 +133,7 @@ const routes: Routes = [
   },
   {
     path:'booking-confirm',
-    component:PaylaterConfirmComponent
+    component:BookingConfirmComponent
   },
   {
     path:'confirm-payment',
