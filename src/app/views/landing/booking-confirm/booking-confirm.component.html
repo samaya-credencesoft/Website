@@ -80,7 +80,7 @@
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
         <p class="mb-1"><span class="highlight-text">Booking ID</span></p>
-        <p class="mb-0"><b id="textToCopyOne">{{booking?.propertyReservationNumber}}</b>
+        <p class="mb-0"><b id="textToCopyOne">{{booking?.propertyReservationNumber }}</b>
           <img
           src="assets/images/CopyVoucher.png"
           alt=""
@@ -148,7 +148,7 @@
               </div>
               <div *ngIf="booking.fromDate">
                 <b> Check-In date </b> <br />
-                <p>{{ booking.fromDate }}</p>
+                <p>{{ booking.fromDate  | date: 'd MMM' }}</p>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@
           >
             <div>
               <b> Check-Out date </b> <br />
-              <p>{{ booking.toDate }}</p>
+              <p>{{ booking.toDate  | date: 'd MMM' }}</p>
             </div>
           </div>
 
@@ -604,7 +604,7 @@ Applied!</strong>
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Booking ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      <b id="textToCopy">{{booking?.propertyReservationNumber}}</b>
+      <b id="textToCopy">{{booking?.propertyReservationNumber  }}</b>
       <img
       src="assets/images/CopyVoucher.png"
       alt=""
@@ -686,7 +686,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>{{booking.fromDate}}</p>
+            <p>{{booking.fromDate  | date: 'd MMM'}}</p>
           </div>
         </div>
       </div>
@@ -696,7 +696,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>{{booking.toDate}}</p>
+          <p>{{booking.toDate  | date: 'd MMM'}}</p>
         </div>
       </div>
     </div>
