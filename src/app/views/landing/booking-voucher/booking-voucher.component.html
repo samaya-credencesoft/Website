@@ -431,7 +431,7 @@ Applied!</strong>
               "
             >
               <td>Guest Name:</td>
-              <td>{{ booking?.firstName }} {{ booking?.lastName }}</td>
+              <td>{{ booking?.firstName }}&nbsp;{{ booking?.lastName }}</td>
             </tr>
 
             <tr *ngIf="booking?.email != null && booking?.email != undefined">
@@ -803,7 +803,7 @@ Applied!</strong>
     <table style="width: 88%">
       <tr>
         <td>Guest Name:</td>
-        <td>{{booking?.firstName}} {{booking?.lastName}}</td>
+        <td>{{ booking?.firstName }}&nbsp;{{ booking?.lastName }}</td>
       </tr>
 
       <tr>
