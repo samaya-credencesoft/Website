@@ -58,7 +58,7 @@ console.log(selectedPromoData)
 this.calculateServiceHours();
 this.PropertyUrl = this.token.getPropertyUrl();
 this.isReadMore = this.policies.map(() => false);
-if (this.booking.bookingPropertyId != null && this.booking.bookingPropertyId != undefined) {
+if (this.booking?.bookingPropertyId != null && this.booking?.bookingPropertyId != undefined) {
   this.getPropertyDetailsById(this.booking.bookingPropertyId);
 console.log("this.booking.proprtyId", this.booking.bookingPropertyId)
 }
