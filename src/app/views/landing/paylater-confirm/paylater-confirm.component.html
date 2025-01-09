@@ -77,8 +77,18 @@
         class="col-md-4"
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
-        <div class="mb-1"><span class="highlight-text">Booking ID</span></div>
+        <div class="mb-1"><span class="highlight-text">Reservation ID</span></div>
         <div class="mb-0">{{booking?.propertyReservationNumber}}</div>
+        <img
+        src="assets/images/CopyVoucher.png"
+        alt=""
+        height="15px"
+        width="15px"
+        style="margin-right: 3px"
+        (click)="copyText()"
+      />
+      <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
+      >Check Details</a>
       </div>
       <div
         class="col-md-4"
@@ -499,6 +509,12 @@ Applied!</strong>
     </div>
   </div>
 </div>
+<div class="popup-container" *ngIf="copyTextOne">
+  <div class="popup-content">
+    Reservation ID copied successfully!
+
+  </div>
+</div>
 
 <div class="mobile-view-booking-voucher">
   <div style="margin-top: 10px">
@@ -582,19 +598,19 @@ Applied!</strong>
   </div>
 
   <div style="display: flex; justify-content: center; gap: 20px">
-    <div style="color: #615d5d; font-size: 18px">Booking ID</div>
+    <div style="color: #615d5d; font-size: 18px">Reservation ID</div>
     <div style="font-weight: bold; font-size: 17px">
       {{booking.propertyReservationNumber}}
       <img
-        src="assets/images/CopyVoucher.png"
-        alt=""
-        height="15px"
-        width="15px"
-        style="margin-right: 3px"
-      />
-      <span style="margin-left: 5px; font-size: 13px; color: #1465cf"
-        >Check Details</span
-      >
+            src="assets/images/CopyVoucher.png"
+            alt=""
+            height="15px"
+            width="15px"
+            style="margin-right: 3px"
+            (click)="copyText()"
+          />
+          <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
+          >Check Details</a>
     </div>
   </div>
 
