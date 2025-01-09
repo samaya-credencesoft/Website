@@ -8,6 +8,8 @@ import { EnquiryDto } from 'src/app/model/enquiry';
 import { BusinessUser } from 'src/app/model/user';
 import { Booking } from 'src/app/model/booking';
 import { Payment } from 'src/app/model/payment';
+import { Location, DatePipe } from '@angular/common';
+
 import { externalReservationDtoList } from 'src/app/model/externalReservation';
 import { PropertyServiceDTO } from 'src/app/model/PropertyServices';
 import { BusinessServiceDtoList } from 'src/app/model/businessServiceDtoList';
@@ -551,7 +553,7 @@ this.hotelBookingService
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
-
+        this.calculateServiceHours()
         this.businessUser?.socialMediaLinks.forEach(element => {
           this.socialmedialist=element
         });
