@@ -47,31 +47,30 @@
         "
         >Great News!</span
       >
-      <p
+      <div
         class="mb-0"
         style="
           font-weight: bold !important;
           color: #000 !important;
           font-size: 21px !important;
-          margin-top: -7px;
+
         "
       >
       Your booking is confirmed.
-      </p>
-      <p class="mb-0" style="margin-top: -3px; font-size: 18px; color: #615d5d">
+      </div>
+      <div class="mb-0" style="font-size: 18px; color: #615d5d">
        A confirmation has been sent to {{booking.email}}.
 
-      </p>
-      <p
+      </div>
+      <div
         style="
           color: #615d5d;
           font-weight: bold;
-          margin-top: -3px;
           font-size: 17px;
         "
       >
       Note: Please check your spam folder or WhatsApp if you don’t see it.
-      </p>
+      </div>
     </div>
 
     <div class="row mb-4" style="justify-content: center">
@@ -79,37 +78,49 @@
         class="col-md-4"
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
-        <p class="mb-1"><span class="highlight-text">Booking ID</span></p>
-        <p class="mb-0">{{booking.propertyReservationNumber}}</p>
+        <div class="mb-1"><span class="highlight-text">Booking ID</span></div>
+        <div class="mb-0"><b id="textToCopyOne">{{booking?.propertyReservationNumber}}</b>
+          <img
+          src="assets/images/CopyVoucher.png"
+          alt=""
+          height="15px"
+          width="15px"
+          style="margin-right: 3px"
+          (click)="copyTextfour()"
+        />
+        <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
+        >Check Details</a>
+      </div>
       </div>
       <div
         class="col-md-4"
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
-        <p class="mb-1"><span class="highlight-text">Payment Status</span></p>
-        <p class="mb-0">
+        <div class="mb-1"><span class="highlight-text">Payment Status</span></div>
+        <div class="mb-0">
           <span class="status-badge status-paid" style="font-size: 13px"
             >Paid</span
           >
-        </p>
+        </div>
       </div>
       <div
         class="col-md-4"
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
-        <p class="mb-1">
+        <div class="mb-1">
           <span class="highlight-text">Reservation Status</span>
-        </p>
-        <p class="mb-0">
+        </div>
+        <div class="mb-0">
           <span class="status-badge status-confirm" style="font-size: 13px"
             >Confirmed</span
           >
-        </p>
+        </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-8">
+      <div class="col-8" style=" flex: 0 0 58%;
+    max-width: 58%;">
         <div
           class="row mb-3"
           style="display: flex; justify-content: center; margin-top: 15px"
@@ -136,8 +147,8 @@
                 />
               </div>
               <div *ngIf="booking.fromDate">
-                <b> Check-in date </b> <br />
-                <p>{{ booking.fromDate }}</p>
+                <b> Check-In date </b> <br />
+                <p>{{ booking.fromDate  | date: 'd MMM' }}</p>
               </div>
             </div>
           </div>
@@ -147,14 +158,14 @@
             *ngIf="booking.toDate"
           >
             <div>
-              <b> Check-in date </b> <br />
-              <p>{{ booking.toDate }}</p>
+              <b> Check-Out date </b> <br />
+              <p>{{ booking.toDate  | date: 'd MMM' }}</p>
             </div>
           </div>
 
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking.noOfPersons || booking.noOfChildren"
           >
             <div>
@@ -163,7 +174,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking.noOfPersons || booking.noOfChildren"
           >
             <div>
@@ -175,7 +186,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking.noOfRooms"
           >
             <div>
@@ -184,7 +195,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking.noOfRooms"
           >
             <div>
@@ -194,7 +205,7 @@
 
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking.noOfNights"
           >
             <div>
@@ -203,7 +214,7 @@
           </div>
           <div
             class="col-md-6"
-            style="min-width: 40% !important; flex: 0 0 40%; text-align: center"
+            style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
             *ngIf="booking.noOfNights"
           >
             <div>
@@ -219,7 +230,7 @@
             style="
               font-weight: bold !important;
               color: #000 !important;
-              font-size: 35px !important;
+              font-size: 26px !important;
             "
           >
             {{ businessUser.name }}
@@ -251,7 +262,7 @@
           <p style="font-size: 21px">
             {{ booking.roomName }} x {{ booking.noOfRooms }}
           </p>
-          <table style="width: 88%; margin-top: -0.7rem">
+          <table style="width: 88%;">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
               <td>₹{{bookingRoomPrice}}</td>
@@ -266,7 +277,7 @@
             </tr>
           </table>
 
-          <hr style="margin-top: 10px; margin-bottom: 10px" />
+
 
           <!-- <p style="font-size: 18px">Add-on Services:</p> -->
           <div class="addon-services" *ngIf="savedServices?.length >0">
@@ -286,7 +297,7 @@
 
                       <br>
 
-                      <p>{{fac.name }} * {{fac.quantity}} <br>
+                      <div>{{fac.name }} * {{fac.quantity}} <br>
 
                         <b
                           *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
@@ -296,7 +307,7 @@
                         <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
                           style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
 
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -376,11 +387,11 @@
              <!-- No Coupons Message -->
     <!-- No Coupons Card -->
     <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-          <strong style="font-size: 18px;">No Coupon Available  :(</strong>
+          <strong style="font-size: 18px; color: #fff !important">No Coupon Available  :(</strong>
 
-        <p style="margin: 0; font-size: 14px;">
+        <div style=" font-size: 14px; color: #fff !important">
           Unfortunately, this property does not have any active coupons at the moment.
-        </p>
+        </div>
         <!-- <a
           href="/deals"
           style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
@@ -390,15 +401,15 @@
 
     </div>
     <div *ngIf="selectedPromo">
-      <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
+      <strong style="font-size: 18px;color: #fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
-<p style="margin: 0; font-size: 14px;">
+<div style="font-size: 14px;color: #fff !important">
   You’re Saving ₹ {{booking.discountAmount}} on this booking!
-</p>
+</div>
 
-<p>
+<div>
   Complete your booking now to save big on your stay.
-</p>
+</div>
 </div>
 
           </div>
@@ -446,19 +457,19 @@ Applied!</strong>
     </div>
 
     <div class="footer-link">
-      <a href="#" style="font-weight: bold; font-size: 18px"
+      <a href="{{PropertyUrl}}" style="font-weight: bold; font-size: 18px"
         >Go back to home page</a
       >
       <div style="display: flex; justify-content: center">
         <div style="width: 181px; border-bottom: 2px solid gray"></div>
       </div>
     </div>
-    <p class="mt-2" style="text-align: center">
+    <div class="mt-2" style="text-align: center">
       For urgent bookings (same-day or next-morning check-ins), please call us
       directly at <strong>079652 01321</strong> for prompt assistance.
-    </p>
+    </div>
   </div>
-  <div class="note-section">
+  <div class="note-section" style="padding-left: 80px; padding-right: 80px;">
     <h5>Please note:</h5>
     <ul>
       <li>
@@ -501,7 +512,12 @@ Applied!</strong>
     <p class="property-rules">Property rules:</p>
   </div>
 </div>
+<div class="popup-container" *ngIf="copyTextOne">
+  <div class="popup-content">
+    Booking ID copied successfully!
 
+  </div>
+</div>
 <div class="mobile-view-booking-voucher">
   <div style="margin-top: 10px">
     <div style="display: flex; justify-content: right; font-size: 12px">
@@ -538,7 +554,7 @@ Applied!</strong>
         >
       </div>
     </div>
-    <p
+    <div
       style="
         margin-bottom: -19px;
         text-align: right;
@@ -547,7 +563,7 @@ Applied!</strong>
       " *ngIf="accommodationService[0]?.checkInTime"
     >
       Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
-    </p>
+    </div>
   </div>
 
   <div class="text-center mb-4" style="margin-top: 30px">
@@ -559,46 +575,44 @@ Applied!</strong>
       "
       >Great News!</span
     >
-    <p
+    <div
       class="mb-0"
       style="
         font-weight: bold !important;
         color: #000 !important;
         font-size: 16px !important;
-        margin-top: -7px;
       "
     >
     Your booking is confirmed.
-    </p>
-    <p class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
+    </div>
+    <div class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
      A confirmation has been sent to {{booking.email}}.
-    </p>
-    <p
+    </div>
+    <div
       style="
         color: #615d5d;
         font-weight: bold;
-        margin-top: -3px;
         font-size: 13px;
       "
     >
     Note: Please check your spam folder or WhatsApp if you don’t see it.
-    </p>
+    </div>
   </div>
 
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Booking ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      {{booking.propertyReservationNumber}}
+      <b id="textToCopy">{{booking?.propertyReservationNumber  }}</b>
       <img
-        src="assets/images/CopyVoucher.png"
-        alt=""
-        height="15px"
-        width="15px"
-        style="margin-right: 3px"
-      />
-      <span style="margin-left: 5px; font-size: 13px; color: #1465cf"
-        >Check Details</span
-      >
+      src="assets/images/CopyVoucher.png"
+      alt=""
+      height="15px"
+      width="15px"
+      style="margin-right: 3px"
+      (click)="copyTexttwo()"
+    />
+    <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
+    >Check Details</a>
     </div>
   </div>
 
@@ -610,21 +624,21 @@ Applied!</strong>
       <div>
         <div>Payment Status</div>
         <div style="display: flex; justify-content: center; margin-top: 5px">
-          <p class="mb-0">
+          <div class="mb-0">
             <span class="status-badge status-paid" style="font-size: 13px"
               >Paid</span
             >
-          </p>
+          </div>
         </div>
       </div>
       <div>
         <div>Reservation Status</div>
         <div style="display: flex; justify-content: center; margin-top: 5px">
-          <p class="mb-0">
+          <div class="mb-0">
             <span class="status-badge status-confirm" style="font-size: 13px"
               > Confirmed</span
             >
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -670,7 +684,7 @@ Applied!</strong>
           </div>
           <div style="font-size: 14px">
             <b> Check-in date </b> <br />
-            <p>{{booking.fromDate}}</p>
+            <p>{{booking.fromDate  | date: 'd MMM'}}</p>
           </div>
         </div>
       </div>
@@ -680,7 +694,7 @@ Applied!</strong>
       >
         <div style="font-size: 14px">
           <b> Check-Out date </b> <br />
-          <p>{{booking.toDate}}</p>
+          <p>{{booking.toDate  | date: 'd MMM'}}</p>
         </div>
       </div>
     </div>
@@ -715,10 +729,10 @@ Applied!</strong>
       </div>
       <div
         class="col-md-6"
-        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center; "
       >
         <div>
-          <p>{{booking.noOfRooms}}</p>
+          <div>{{booking.noOfRooms}}</div>
         </div>
       </div>
     </div>
@@ -726,7 +740,7 @@ Applied!</strong>
     <div style="display: flex; margin-top: 10px">
       <div
         class="col-md-6"
-        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center;  "
       >
         <div>
           <b> Nights: </b>
@@ -734,15 +748,15 @@ Applied!</strong>
       </div>
       <div
         class="col-md-6"
-        style="min-width: 50% !important; flex: 0 0 50%; text-align: center"
+        style="min-width: 50% !important; flex: 0 0 50%; text-align: center;  "
       >
         <div>
-          <p>{{booking.noOfNights}}</p>
+          <div>{{booking.noOfNights}}</div>
         </div>
       </div>
     </div>
   </div>
-  <p
+  <div
     style="
       color: #615d5d;
       text-align: right;
@@ -752,7 +766,7 @@ Applied!</strong>
     "  *ngIf="booking.createdDate != null"
   >
  Booking created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}
-  </p>
+  </div>
   <div
     style="
       background-color: #f5f5f5;
@@ -797,7 +811,7 @@ Applied!</strong>
   <div class="col-12">
     <div class="details-cardOne">
       <p style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</p>
-      <table style="width: 88%; margin-top: -0.7rem">
+      <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
           <td>₹{{bookingRoomPrice}}</td>
@@ -812,7 +826,7 @@ Applied!</strong>
         </tr>
       </table>
 
-      <hr style="margin-top: 10px; margin-bottom: 10px" />
+
 
       <div *ngIf="savedServices?.length >0">
         <p style="font-size: 18px">Add-on Services:</p>
@@ -874,13 +888,13 @@ Applied!</strong>
           <ul>
             <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
               <li *ngIf="i === 0 || showMore">
-                <p style="margin-top: -7px">
+                <div style="color: #fff !important">
                   Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
-                </p>
-                <p style="margin-top: -10px">
+                </div>
+                <div style="color: #fff !important">
                   Share this coupon code when confirming your reservation to save
                   {{ coupon.discountPercentage }}%!
-                </p>
+                </div>
               </li>
             </ng-container>
           </ul>
@@ -897,11 +911,11 @@ Applied!</strong>
          <!-- No Coupons Message -->
 <!-- No Coupons Card -->
 <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-      <strong style="font-size: 18px;">No Coupon Available :(</strong>
+      <strong style="font-size: 18px;color: #fff !important">No Coupon Available :(</strong>
 
-    <p style="margin: 0; font-size: 14px;">
+    <div style=" font-size: 14px;color: #fff !important">
       Unfortunately, this property does not have any active coupons at the moment.
-    </p>
+    </div>
     <!-- <a
       href="/deals"
       style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
@@ -911,15 +925,15 @@ Applied!</strong>
 
 </div>
 <div *ngIf="selectedPromo">
-  <strong style="font-size: 18px;"> {{selectedPromo?.couponCode}} Coupon Code is
+  <strong style="font-size: 18px;color: #fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
 Applied!</strong>
-<p style="margin: 0; font-size: 14px;">
+<div style=" font-size: 14px;color: #fff !important">
 You’re Saving ₹ {{booking.discountAmount}} on this booking!
-</p>
+</div>
 
-<p>
+<div>
 Complete your booking now to save big on your stay.
-</p>
+</div>
 </div>
       </div>
     </div>
@@ -948,17 +962,17 @@ Complete your booking now to save big on your stay.
     </div>
 
     <div class="footer-link">
-      <a href="#" style="font-weight: bold; font-size: 16px"
+      <a href="{{PropertyUrl}}" style="font-weight: bold; font-size: 16px"
         >Go back to home page</a
       >
       <div style="display: flex; justify-content: center">
         <div style="width: 181px; border-bottom: 2px solid gray"></div>
       </div>
     </div>
-    <p class="mt-2" style="text-align: center">
+    <div class="mt-2" style="text-align: center">
       For urgent bookings (same-day or next-morning check-ins), please call us
       directly at <strong>079652 01321</strong> for prompt assistance.
-    </p>
+    </div>
 
     <div class="note-sectionOne">
       <h5 style=" font-weight: bold;">Please note:</h5>

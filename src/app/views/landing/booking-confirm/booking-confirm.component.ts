@@ -46,6 +46,8 @@ export class BookingConfirmComponent {
   alertType: string;
   bookingConfirmed = false;
   fromDate: any;
+  copyTextOne:boolean=false;
+
   toDate: any;
   adults: number;
   children: number;
@@ -58,6 +60,8 @@ export class BookingConfirmComponent {
   totalBeforeTaxAmount: number = 0;
   addServiceList: any[];
   enquiryForm: any;
+  textToCopy: string = 'This is some text to copy';
+textToCopyOne: string = 'This is some text to copy';
   showMore:boolean =false;
   enquiryResponse: EnquiryForm;
   successMessage: boolean;
@@ -84,6 +88,8 @@ export class BookingConfirmComponent {
   percentage1: number;
   percentage2: number;
   totalPercentage: number;
+  isReadMore: boolean[] = [];
+  policies = [];
 
   constructor(
     private http: HttpClient,
@@ -101,7 +107,7 @@ export class BookingConfirmComponent {
     this.payment = new Payment();
     this.externalReservationDtoList =[]
     this.PropertyUrl = this.token.getPropertyUrl();
-
+    this.isReadMore = this.policies.map(() => false);
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
     {
       this.businessUser = this.token.getPropertyData();
@@ -167,6 +173,9 @@ export class BookingConfirmComponent {
       this.children = this.booking.noOfChildren;
       // this.children3to5 = this.booking.noOfChildren3To5yrs;
       this.noOfrooms = this.booking.noOfRooms;
+    }
+    if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
+      this.getPropertyDetailsById(this.bookingData.propertyId);
     }
     setTimeout(() => {
       this.savedServices = this.token.getSelectedServices();
@@ -549,6 +558,13 @@ this.hotelBookingService
     );
   }
 
+
+  toggleReadMore(index: number) {
+    // Toggle the read more/less flag for the clicked policy
+    this.isReadMore[index] = !this.isReadMore[index];
+  }
+
+
   async getPropertyDetailsById(id: number) {
 
     try {
@@ -556,6 +572,9 @@ this.hotelBookingService
       const data = await this.listingService?.findByPropertyId(id).toPromise();
       if (data.status === 200) {
         this.businessUser = data.body;
+        this.policies = this.businessUser.businessServiceDtoList.filter(
+          (ele) => ele.name === 'Accommodation'
+        );
         this.calculateServiceHours()
         this.businessUser?.socialMediaLinks.forEach(element => {
           this.socialmedialist=element
@@ -956,6 +975,68 @@ this.externalReservationdto =res.body
 
     this.paymentLoader = false;
 
+  }
+  copyTexttwo() {
+
+    // Find the element
+    const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+    if (textToCopy) {
+      // Create a temporary textarea element
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+
+      // Add to the document body
+      document.body.appendChild(textarea);
+
+      // Select and copy the content
+      textarea.select();
+      document.execCommand('copy');
+
+      // Remove the textarea element
+      document.body.removeChild(textarea);
+
+      // Notify the user
+      // alert('Enquiry ID copied to clipboard!');
+      this.copyTextOne = true;
+      setTimeout(() => {
+        this.copyTextOne = false;
+      }, 1000);
+    } else {
+      // alert('Failed to copy text.');
+      this.copyTextOne = false;
+    }
+  }
+  copyTextfour() {
+
+    // Find the element
+    const textToCopyOne = document.getElementById('textToCopyOne')?.innerText.trim();
+
+    if (textToCopyOne) {
+      // Create a temporary textarea element
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopyOne;
+
+      // Add to the document body
+      document.body.appendChild(textarea);
+
+      // Select and copy the content
+      textarea.select();
+      document.execCommand('copy');
+
+      // Remove the textarea element
+      document.body.removeChild(textarea);
+
+      // Notify the user
+      // alert('Enquiry ID copied to clipboard!');
+      this.copyTextOne = true;
+      setTimeout(() => {
+        this.copyTextOne = false;
+      }, 1000);
+    } else {
+      // alert('Failed to copy text.');
+      this.copyTextOne = false;
+    }
   }
   setApi() {
     if (this.token.getCountry() === 'New Zealand') {
