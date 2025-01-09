@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Booking } from 'src/app/model/booking';
 import { BusinessOfferDto } from 'src/app/model/businessOfferDto';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { TokenStorage } from 'src/token.storage';
@@ -21,7 +22,7 @@ savedServices: any;
   selectedPromo: any;
   accommodationCheckInTime: any;
   accommodationService: any;
-  bookingone: import("f:/GitHub/Website/src/app/model/booking").Booking;
+  bookingone:Booking;
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService
 ){
