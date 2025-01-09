@@ -975,7 +975,7 @@ this.externalReservationdto =res.body
     this.paymentLoader = false;
 
   }
-  copyText() {
+  copyTexttwo() {
 
     // Find the element
     const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
@@ -1006,7 +1006,7 @@ this.externalReservationdto =res.body
       this.copyTextOne = false;
     }
   }
-  copyTextone() {
+  copyTextfour() {
 
     // Find the element
     const textToCopyOne = document.getElementById('textToCopyOne')?.innerText.trim();
