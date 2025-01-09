@@ -32,6 +32,8 @@ const BOOKINGDATA = 'booking';
 const BOOKINGDATAOJC = 'BOOKINGDATAOJC';
 const BOOKINGCITY = 'bookingCity';
 const BOOKINGREFID = 'bookingRefId';
+const GETTIME = 'getTime';
+const GETTOTIME = 'getToTime';
 const ENQUIRYDATA = 'enquiry';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
 const CHECK_BOOKING_ENGINE ='checkbookingengine';
@@ -574,13 +576,13 @@ export class TokenStorage {
 
 
 
-      //  clearFromTime() {
-      //   localStorage.removeItem(GETTIME);
-      //   }
+       clearFromTime() {
+        localStorage.removeItem(GETTIME);
+        }
 
-      //   clearToTime() {
-      //     localStorage.removeItem(GETTOTIME);
-      //     }
+        clearToTime() {
+          localStorage.removeItem(GETTOTIME);
+          }
 
   public savewebsitebookingURL(websitebookingURL: string){
     localStorage.removeItem(WEBSITE_BOOKING_URL);
@@ -604,31 +606,31 @@ export class TokenStorage {
       return localStorage.getItem(NoOfNights);
      }
 
-  // public saveTime(getTime: string) {
-  //   localStorage.removeItem(GETTIME);
-  //     if (getTime !== null || getTime !== undefined) {
-  //     localStorage.setItem(GETTIME, getTime);
-  //     } else {
-  //     localStorage.setItem(GETTIME, '{}');
-  //     }
-  //   }
+  public saveTime(getTime: string) {
+    localStorage.removeItem(GETTIME);
+      if (getTime !== null || getTime !== undefined) {
+      localStorage.setItem(GETTIME, getTime);
+      } else {
+      localStorage.setItem(GETTIME, '{}');
+      }
+    }
 
-    // public getFromTime() {
-    //     return localStorage.getItem(GETTIME);
-    //    }
+    public getFromTime() {
+        return localStorage.getItem(GETTIME);
+       }
 
-    // public saveToTime(getToTime: string) {
-    //   localStorage.removeItem(GETTOTIME);
-    //     if (getToTime !== null || getToTime !== undefined) {
-    //     localStorage.setItem(GETTOTIME, getToTime);
-    //     } else {
-    //     localStorage.setItem(GETTOTIME, '{}');
-    //     }
-    //   }
+    public saveToTime(getToTime: string) {
+      localStorage.removeItem(GETTOTIME);
+        if (getToTime !== null || getToTime !== undefined) {
+        localStorage.setItem(GETTOTIME, getToTime);
+        } else {
+        localStorage.setItem(GETTOTIME, '{}');
+        }
+      }
 
-    //   public getToTime() {
-    //     return localStorage.getItem(GETTOTIME);
-    //    }
+      public getToTime() {
+        return localStorage.getItem(GETTOTIME);
+       }
 
 
 
