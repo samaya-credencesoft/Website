@@ -1229,7 +1229,8 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.createdDate = new Date();
+
+    this.enquiryForm.createdDate = new Date().getTime();
 this.propertyDetails = this.token.getProperty();
     this.propertyDetails.businessServiceDtoList.forEach(item=>{
   if(item.name === "Accommodation"){
@@ -2462,7 +2463,9 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomName;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.createdDate = new Date();
+
+    this.enquiryForm.createdDate = new Date().getTime();
+
     this.propertyDetails = this.token.getProperty();
     this.propertyDetails.businessServiceDtoList.forEach(item=>{
   if(item.name === "Accommodation"){
@@ -2805,7 +2808,9 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.createdDate = new Date();
+
+this.enquiryForm.createdDate = new Date().getTime();
+
     this.propertyDetails = this.token.getProperty();
     this.propertyDetails.businessServiceDtoList.forEach(item=>{
   if(item.name === "Accommodation"){

@@ -11,6 +11,7 @@ import { TokenStorage } from 'src/token.storage';
 })
 export class BookingVoucherComponent {
 propertyDetails: any;
+PropertyUrl: string;
 booking:any;
 promocodeListChip : any[] = []; // Used for handled to get the promo list and stored in this variable.
 
@@ -45,6 +46,7 @@ console.log(selectedPromoData)
 }
 
 this.calculateServiceHours();
+this.PropertyUrl = this.token.getPropertyUrl();
 }
 
 copyText() {
