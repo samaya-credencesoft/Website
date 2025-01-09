@@ -90,6 +90,7 @@ textToCopyOne: string = 'This is some text to copy';
   totalPercentage: number;
   isReadMore: boolean[] = [];
   policies = [];
+
   constructor(
     private http: HttpClient,
     private token: TokenStorage,
