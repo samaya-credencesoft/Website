@@ -825,9 +825,9 @@ isPresentCouponOffer(coupon?){
 
 
 
-    if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
-      this.getPropertyDetailsById(this.bookingData.propertyId);
-    }
+    // if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
+    //   this.getPropertyDetailsById(this.bookingData.propertyId);
+    // }
     this.mobileWallet = this.businessUser.mobileWallet;
     this.bankAccount = this.businessUser.bankAccount;
     //  Logger.log(' this.businessUser ===='+JSON.stringify( this.businessUser));
@@ -1182,7 +1182,7 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
   }
 
   submitFormOne() {
-    console.log("taxxation", this.booking.taxAmount)
+    // console.log("taxxation", this.booking.taxAmount)
     this.enquiryForm = new EnquiryDto();
     console.log("this.token.getProperty().address", this.token.getProperty().address.city)
     if (this.token.getProperty().address != null && this.token.getProperty().address != undefined &&
@@ -2908,7 +2908,7 @@ this.enquiryForm.createdDate = new Date().getTime();
     this.enquiryForm.taxPercentage  = this.booking.taxPercentage
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.equitycreatedData = response.body;
-      this.token.saveBookingData(this.equitycreatedData)
+      this.token.saveEnquiryData(this.equitycreatedData)
 // console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
       this.isEnquiry = true;
       this.paymentLoader = false;

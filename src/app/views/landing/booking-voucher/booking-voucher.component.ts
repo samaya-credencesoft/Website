@@ -32,7 +32,7 @@ constructor(private token :TokenStorage,
       this.businessOfferDto = new BusinessOfferDto();
 
   this.propertyDetails = this.token.getProperty();
- this.booking = this.token.getBookingData();
+ this.booking = this.token.getEnquiryData();
  this.savedServices = this.token.getSelectedServices();
  this.currency = this.propertyDetails.localCurrency.toUpperCase();
  this.storedPromo = localStorage.getItem('selectPromo');

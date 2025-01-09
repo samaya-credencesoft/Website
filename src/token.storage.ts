@@ -20,6 +20,7 @@ import { Room } from './app/model/room';
 import { Router } from "@angular/router";
 import { BusinessService } from './app/model/businessService';
 import { Property } from './app/model/property';
+import { EnquiryDto } from './app/model/enquiry';
 // import { String } from 'cypress/types/lodash';
 
 const SELECTED_COUNTRY = 'selectedCountry';
@@ -31,6 +32,7 @@ const BOOKINGDATA = 'booking';
 const BOOKINGDATAOJC = 'BOOKINGDATAOJC';
 const BOOKINGCITY = 'bookingCity';
 const BOOKINGREFID = 'bookingRefId';
+const ENQUIRYDATA = 'enquiry';
 const WEBSITE_BOOKING_URL ='websitebookingURL';
 const CHECK_BOOKING_ENGINE ='checkbookingengine';
 const CITY = 'city';
@@ -204,7 +206,17 @@ export class TokenStorage {
     // window.localStorage.removeItem(BOOKSLOTDATA);
   localStorage.removeItem(BOOKINGDATA);
   }
-
+  public saveEnquiryData(enquiry: EnquiryDto) {
+    sessionStorage.removeItem(ENQUIRYDATA);
+      if (enquiry !== null || enquiry !== undefined) {
+      sessionStorage.setItem(ENQUIRYDATA, JSON.stringify(enquiry));
+      } else {
+      sessionStorage.setItem(ENQUIRYDATA,  '{}');
+      }
+    }
+    public getEnquiryData(): EnquiryDto {
+      return JSON.parse(sessionStorage.getItem(ENQUIRYDATA) as string);
+    }
   clearCountry() {
   localStorage.removeItem(COUNTRY);
   }
