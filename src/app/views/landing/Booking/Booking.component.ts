@@ -3104,7 +3104,6 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
   this.whatsappForm.type = 'template',
     this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
       this.paymentLoader = false;
-
     }, error => {
       this.paymentLoader = false;
     });
@@ -3172,7 +3171,6 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
       this.whatsappForm2.type = 'template';
       this.hotelBookingService.whatsAppMsg(this.whatsappForm2).subscribe((response) => {
         this.paymentLoader = false;
-
       }, error => {
         this.paymentLoader = false;
       });
