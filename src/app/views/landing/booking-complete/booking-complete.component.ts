@@ -102,6 +102,7 @@ export class BookingCompleteComponent implements OnInit {
   parameterss5:Para[];
   parameterss15:Para[];
   bookingId: number;
+  referenceNumber: Booking;
 
 
 
@@ -397,6 +398,7 @@ export class BookingCompleteComponent implements OnInit {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
+          this.referenceNumber = response.body;
           this.bookingId = response.body.id;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
@@ -979,7 +981,7 @@ this.externalReservationdto =res.body
               this.whatsappForm.messaging_product = 'whatsapp';
               this.whatsappForm.recipient_type ='individual';
               this.template.name = "";
-              this.template.name = "booking_confirm";
+              this.template.name = "uat_bookone_booking_confirm";
               this.language.code = 'en',
               this.template.language = this.language;
               this.componentstype.type= 'header',
@@ -1054,6 +1056,16 @@ this.externalReservationdto =res.body
               this.parametertype2.text = String(this.booking.advanceAmount);
               this.parameterss2.push(this.parametertype2);
 
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = "support@thehotelmate.com";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
 
               this.componentstype2.parameters =this.parameterss2;
               this.components.push(this.componentstype2);
@@ -1064,7 +1076,7 @@ this.externalReservationdto =res.body
 
               this.parametertype20 = new Para();
               this.parametertype20.type = 'text',
-              this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+              this.parametertype20.text = "https://uat.bookone.io/booking-confirmation-page?ReferenceNumber" + this.referenceNumber;
               this.parameterss15.push(this.parametertype20);
               this.componentstype9.parameters = this.parameterss15;
               this.components.push(this.componentstype9);
@@ -1106,7 +1118,7 @@ this.externalReservationdto =res.body
                 this.whatsappForm.messaging_product = 'whatsapp';
                 this.whatsappForm.recipient_type ='individual';
                 this.template.name = "";
-                this.template.name = "booking_confirm";
+                this.template.name = "uat_bookone_booking_confirm";
                 this.language.code = 'en',
                 this.template.language = this.language;
                 this.componentstype.type= 'header',
@@ -1182,6 +1194,16 @@ this.externalReservationdto =res.body
                 this.parametertype2.text = (this.booking.advanceAmount.toString());
                 this.parameterss2.push(this.parametertype2);
 
+                this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = "support@thehotelmate.com";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
 
                 this.componentstype2.parameters =this.parameterss2;
                 this.components.push(this.componentstype2);
@@ -1192,7 +1214,7 @@ this.externalReservationdto =res.body
 
                 this.parametertype20 = new Para();
                 this.parametertype20.type = 'text',
-                this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+                this.parametertype20.text = "https://uat.bookone.io/booking-confirmation-page?ReferenceNumber"+ this.referenceNumber;
                 this.parameterss15.push(this.parametertype20);
                 this.componentstype9.parameters = this.parameterss15;
                 this.components.push(this.componentstype9);
@@ -1234,7 +1256,7 @@ this.externalReservationdto =res.body
                   this.whatsappForm.messaging_product = 'whatsapp';
                   this.whatsappForm.recipient_type ='individual';
                   this.template.name = "";
-                  this.template.name = "booking_confirm";
+                  this.template.name = "uat_bookone_booking_confirm";
                   this.language.code = 'en',
                   this.template.language = this.language;
                   this.componentstype.type= 'header',
@@ -1310,6 +1332,16 @@ this.externalReservationdto =res.body
                   this.parametertype2.text = (this.booking.advanceAmount.toString());
                   this.parameterss2.push(this.parametertype2);
 
+                  this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = "support@thehotelmate.com";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
 
                   this.componentstype2.parameters =this.parameterss2;
                   this.components.push(this.componentstype2);
@@ -1320,7 +1352,7 @@ this.externalReservationdto =res.body
 
                   this.parametertype20 = new Para();
                   this.parametertype20.type = 'text',
-                  this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+                  this.parametertype20.text = "https://uat.bookone.io/booking-confirmation-page?ReferenceNumber"+ this.referenceNumber;
                   this.parameterss15.push(this.parametertype20);
                   this.componentstype9.parameters = this.parameterss15;
                   this.components.push(this.componentstype9);
@@ -1362,7 +1394,7 @@ this.externalReservationdto =res.body
                     this.whatsappForm.messaging_product = 'whatsapp';
                     this.whatsappForm.recipient_type ='individual';
                     this.template.name = "";
-                    this.template.name = "booking_confirm";
+                    this.template.name = "uat_bookone_booking_confirm";
                     this.language.code = 'en',
                     this.template.language = this.language;
                     this.componentstype.type= 'header',
@@ -1438,6 +1470,16 @@ this.externalReservationdto =res.body
                     this.parametertype2.text = (this.booking.advanceAmount.toString());
                     this.parameterss2.push(this.parametertype2);
 
+                    this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = "support@thehotelmate.com";
+              this.parameterss2.push(this.parametertype2);
+
+              this.parametertype2 = new Para();
+              this.parametertype2.type = 'text',
+              this.parametertype2.text = " ";
+              this.parameterss2.push(this.parametertype2);
+
 
                     this.componentstype2.parameters =this.parameterss2;
                     this.components.push(this.componentstype2);
@@ -1448,7 +1490,7 @@ this.externalReservationdto =res.body
 
                     this.parametertype20 = new Para();
                     this.parametertype20.type = 'text',
-                    this.parametertype20.text = "https://thehotelmate.com/booking-complete?ReferenceNumber="
+                    this.parametertype20.text = "https://uat.bookone.io/booking-confirmation-page?ReferenceNumber"+ this.referenceNumber;
                     this.parameterss15.push(this.parametertype20);
                     this.componentstype9.parameters = this.parameterss15;
                     this.components.push(this.componentstype9);
