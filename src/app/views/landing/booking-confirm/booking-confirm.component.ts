@@ -118,6 +118,8 @@ textToCopyOne: string = 'This is some text to copy';
   referenceNumber: string;
 
 
+  paymentSucess:boolean = false;
+  paymenterror: boolean;
 
   constructor(
     private http: HttpClient,
@@ -221,7 +223,7 @@ textToCopyOne: string = 'This is some text to copy';
       // this.children3to5 = this.booking.noOfChildren3To5yrs;
       this.noOfrooms = this.booking.noOfRooms;
     }
-    if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
+    if (this.bookingData?.propertyId != null && this.bookingData?.propertyId != undefined) {
       this.getPropertyDetailsById(this.bookingData.propertyId);
     }
     setTimeout(() => {
@@ -365,9 +367,9 @@ checkValidCouponOrNot(couponList?){
     this.hotelBookingService.getPaymentByReffId(referenceNumber).subscribe((res) => {
       this.payment = res.body[0];
       if (this.payment?.failureCode === null && this.payment.status == 'Paid') {
-        setTimeout(() => {
+
         this.createBookingPayTM();
-      }, 100);
+
       }else{
         // //Logger.log('create enquiry')
         this.createEnquiry();
@@ -507,6 +509,8 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
           this.payment.status = 'Paid';
           //Logger.log('payment ' + JSON.stringify(this.payment));
 
+            this.accommodationEnquiryBookingData();
+
           this.hotelBookingService
             .savePayment(this.payment)
             .subscribe((res) => {
@@ -553,6 +557,7 @@ this.hotelBookingService
     // this.paymentIntentPayTm(this.payment);
   } else {
     this.paymentLoader = false;
+    this.paymenterror = true;
   }
 });
 }
@@ -591,9 +596,7 @@ this.hotelBookingService
           summary: 'The server is taking more than usual time,please try again after sometime.'
         });
       }, 25000); */
-      setTimeout(() => {
-        this.accommodationEnquiryBookingData();
-    }, 3000);
+
   }
 
   addSeviceTopBooking(bookingId, savedServices: any[]) {
@@ -661,6 +664,7 @@ this.hotelBookingService
       // Handle the error appropriately, if needed.
     }
   }
+
 
   calculateServiceHours (){
     this.accommodationService = this.businessUser.businessServiceDtoList.filter(service => service.name === "Accommodation");
@@ -863,6 +867,9 @@ this.externalReservationdto =res.body
     this.enquiryForm.enquiryId = sessionStorage.getItem('enquiryNo');
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
+      if (this.enquiryForm != null &&  this.enquiryForm != undefined) {
+        this.paymentSucess = true
+      }
       this.paymentLoader = false;
       this.paymentLoader = false;
       this.isSuccess = true;

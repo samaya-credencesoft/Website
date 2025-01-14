@@ -45,6 +45,7 @@ export class Payment {
   businessServiceName: string;
   encryptedData: any;
   lastModifiedDate: any;
+  gatewayPaymentStatus: any;
     constructor() {
     }
 }

@@ -1,4 +1,4 @@
-<div class="desktop-view-booking-voucher">
+<div class="desktop-view-booking-voucher" *ngIf="paymentSucess === true">
   <div class="responsive-wrapper">
     <div class="row">
       <div class="col-12 col-md-6 offset-md-6">
@@ -61,7 +61,7 @@
       Your booking is confirmed.
       </div>
       <div class="mb-0" style="font-size: 18px; color: #615d5d">
-       A confirmation has been sent to {{booking.email}}.
+        A confirmation has been sent to {{booking.email}} & your reservation number is {{booking.propertyReservationNumber}}.
 
       </div>
       <div
@@ -81,7 +81,7 @@
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
         <div class="mb-1"><span class="highlight-text">Booking ID</span></div>
-        <div class="mb-0"><b id="textToCopyOne">{{booking?.propertyReservationNumber}}</b>
+        <div class="mb-0"><b id="textToCopyOne">{{this.booking.id}}</b>
           <img
           src="assets/images/CopyVoucher.png"
           alt=""
@@ -542,7 +542,7 @@ Applied!</strong>
 
   </div>
 </div>
-<div class="mobile-view-booking-voucher">
+<div class="mobile-view-booking-voucher" *ngIf="paymentSucess === true">
   <div style="margin-top: 10px">
     <div style="display: flex; justify-content: right; font-size: 12px">
       <div><strong>Need Assistance?</strong></div>
@@ -612,7 +612,7 @@ Applied!</strong>
     Your booking is confirmed.
     </div>
     <div class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
-     A confirmation has been sent to {{booking.email}}.
+      A confirmation has been sent to {{booking.email}} & your reservation number is {{booking.propertyReservationNumber}}.
     </div>
     <div
       style="
@@ -628,7 +628,7 @@ Applied!</strong>
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Booking ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      <b id="textToCopy">{{booking?.propertyReservationNumber  }}</b>
+      <b id="textToCopy">{{this.booking.id}}</b>
       <img
       src="assets/images/CopyVoucher.png"
       alt=""
@@ -1062,5 +1062,60 @@ Complete your booking now to save big on your stay.
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div *ngIf="paymentSucess === false && paymenterror === false" >
+  <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="card shadow-lg" style="width: 24rem;">
+      <div class="card-body text-center">
+        <div class="spinner-border text-primary mb-3" role="status">
+          <!-- <span class="visually-hidden">Loading...</span> -->
+        </div>
+        <!-- <h5 class="card-title">Notice</h5> -->
+        <p class="card-text" style="font-weight: bold;">Your payment is being processed. Please wait while we complete your booking.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container my-5 d-flex justify-content-center"  *ngIf="paymenterror === true" style="margin-top: 10rem !important;">
+  <div class="card shadow-lg" style="max-width: 500px; width: 100%; border-radius: 10px;">
+    <!-- Card Header -->
+    <div class="card-header bg-primary text-white text-center">
+      <h5 class="mb-0" style="color:#fff; font-size: 23px;">Important Notice</h5>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body text-center">
+      <p class="card-text text-muted">
+        We have received your payment but we are experiencing technical issues processing your booking. Please contact us at
+        <a href="tel:07965201321 " class="text-primary fw-bold text-decoration-none">07965201321</a>.
+      </p>
+
+      <a href="tel:07965201321" class="btn btn-primary btn-sm me-2" style="font-size: 14px;">Contact Support</a>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="container my-5 d-flex justify-content-center" *ngIf="payment?.gatewayPaymentStatus === 'Failed'" style="margin-top: 10rem !important;">
+  <div class="card shadow-lg" style="max-width: 500px; width: 100%; border-radius: 10px;">
+    <!-- Card Header -->
+    <div class="card-header bg-primary text-white text-center">
+      <h5 class="mb-0" style="color:#fff; font-size: 23px;">Important Notice</h5>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body text-center">
+      <p class="card-text text-muted">
+        We have not yet received your payment. Please ensure the payment is completed to proceed with your booking. For assistance, contact us at
+        <a href="tel:07965201321 " class="text-primary fw-bold text-decoration-none">07965201321</a>.
+      </p>
+      <a href="{{PropertyUrl}}" class="btn btn-primary btn-sm me-2" style="margin-right: 10px;font-size: 14px;">Retry booking</a>
+      <a href="tel:07965201321" class="btn btn-primary btn-sm me-2" style="font-size: 14px;">Contact Support</a>
+    </div>
+
+
   </div>
 </div>
