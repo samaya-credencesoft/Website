@@ -61,7 +61,7 @@
       Your booking is confirmed.
       </div>
       <div class="mb-0" style="font-size: 18px; color: #615d5d">
-       A confirmation has been sent to {{booking.email}}.
+        A confirmation has been sent to {{booking.email}} & your reservation number is {{booking.propertyReservationNumber}}.
 
       </div>
       <div
@@ -81,7 +81,7 @@
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
         <div class="mb-1"><span class="highlight-text">Booking ID</span></div>
-        <div class="mb-0"><b id="textToCopyOne">{{booking?.propertyReservationNumber}}</b>
+        <div class="mb-0"><b id="textToCopyOne">{{this.booking.id}}</b>
           <img
           src="assets/images/CopyVoucher.png"
           alt=""
@@ -512,7 +512,22 @@ Applied!</strong>
         confirmation, as it may sometimes be found there.
       </li>
     </ul>
-    <p class="property-rules">Property rules:</p>
+    <div *ngFor="let bServiceDtoList of policies; let i = index">
+      <div *ngIf="bServiceDtoList?.policy">
+        <h5 *ngIf="policies">Property rules:</h5>
+
+        <div style="padding: 20px;">
+          <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+          </div>
+          <div style="padding: 10px;">
+            <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right"
+              (click)="toggleReadMore(i)">
+              {{ isReadMore[i] ? 'View Less' : 'View More' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="popup-container" *ngIf="copyTextOne">
@@ -591,7 +606,7 @@ Applied!</strong>
     Your booking is confirmed.
     </div>
     <div class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
-     A confirmation has been sent to {{booking.email}}.
+      A confirmation has been sent to {{booking.email}} & your reservation number is {{booking.propertyReservationNumber}}.
     </div>
     <div
       style="
@@ -607,7 +622,7 @@ Applied!</strong>
   <div style="display: flex; justify-content: center; gap: 20px">
     <div style="color: #615d5d; font-size: 18px">Booking ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      <b id="textToCopy">{{booking?.propertyReservationNumber  }}</b>
+      <b id="textToCopy">{{this.booking.id}}</b>
       <img
       src="assets/images/CopyVoucher.png"
       alt=""
@@ -1019,7 +1034,22 @@ Complete your booking now to save big on your stay.
           confirmation, as it may sometimes be found there.
         </li>
       </ul>
-      <p class="property-rules">Property rules:</p>
+      <div *ngFor="let bServiceDtoList of policies; let i = index">
+        <div *ngIf="bServiceDtoList?.policy">
+          <h5 *ngIf="policies">Property rules:</h5>
+
+          <div style="padding: 20px;">
+            <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
+            </div>
+            <div style="padding: 10px;">
+              <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right"
+                (click)="toggleReadMore(i)">
+                {{ isReadMore[i] ? 'View Less' : 'View More' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

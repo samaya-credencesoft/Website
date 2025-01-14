@@ -613,6 +613,7 @@ this.hotelBookingService
     }
   }
 
+
   calculateServiceHours (){
     this.accommodationService = this.businessUser.businessServiceDtoList.filter(service => service.name === "Accommodation");
     console.log(" this.accommodationService" + JSON.stringify( this.accommodationService))
