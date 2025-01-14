@@ -512,28 +512,22 @@ Applied!</strong>
         confirmation, as it may sometimes be found there.
       </li>
     </ul>
-
     <div *ngFor="let bServiceDtoList of policies; let i = index">
-        <div *ngIf="bServiceDtoList?.policy">
-          <h5 *ngIf="policies">Property rules:</h5>
+      <div *ngIf="bServiceDtoList?.policy">
+        <h5 *ngIf="policies">Property rules:</h5>
 
-          <div style="padding: 20px;"  class="no-print">
-            <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
-            </div>
-            <div style="padding: 10px;">
-              <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right"
-                (click)="toggleReadMore(i)">
-                {{ isReadMore[i] ? 'View Less' : 'View More' }}
-              </span>
-            </div>
+        <div style="padding: 20px;">
+          <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
           </div>
-          <div style="padding: 20px;" class="printOne">
-            <div [innerHTML]="bServiceDtoList?.policy">
-            </div>
-
+          <div style="padding: 10px;">
+            <span style="color: #221950; font-weight: bold; font-size: 15px; cursor: pointer;float:right"
+              (click)="toggleReadMore(i)">
+              {{ isReadMore[i] ? 'View Less' : 'View More' }}
+            </span>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </div>
 <div class="popup-container" *ngIf="copyTextOne">
@@ -1044,7 +1038,7 @@ Complete your booking now to save big on your stay.
         <div *ngIf="bServiceDtoList?.policy">
           <h5 *ngIf="policies">Property rules:</h5>
 
-          <div style="padding: 20px;"  class="no-print">
+          <div style="padding: 20px;">
             <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
             </div>
             <div style="padding: 10px;">
@@ -1054,17 +1048,12 @@ Complete your booking now to save big on your stay.
               </span>
             </div>
           </div>
-          <div style="padding: 20px;" class="printOne">
-            <div [innerHTML]="bServiceDtoList?.policy">
-            </div>
-
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="paymentSucess === false && paymenterror === false" >
+<div *ngIf="paymentSucess === false && paymenterror === false && payment?.gatewayPaymentStatus != 'Failed'" >
   <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
     <div class="card shadow-lg" style="width: 24rem;">
       <div class="card-body text-center">

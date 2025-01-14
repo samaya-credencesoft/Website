@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
   DiffDate;
   currency: string;
   loadersnipper: boolean = true;
+  paymentFailed: boolean =false;
 
   constructor(
     private readonly checkoutService: CheckoutService,
@@ -92,6 +93,10 @@ export class CheckoutComponent implements OnInit {
   }
   notifyMerchantHandler = (eventType, data): void => {
     console.log("MERCHANT NOTIFY LOG", eventType, data);
+    if(data.body == null || data.body == undefined){
+      this.paymentFailed = true;
+      this.changeDetectorRefs.detectChanges();
+      }
     if (data.body !== undefined) {
       this.payment.failureCode = data?.body?.resultInfo?.resultCode;
       this.payment.failureMessage = data?.body?.resultInfo?.resultMsg;
@@ -179,7 +184,12 @@ export class CheckoutComponent implements OnInit {
     }, 3000);
   }
   onGoHome() {
+    const propertyUrl = this.token.getPropertyUrl();
+    if (propertyUrl) {
+      window.location.href = propertyUrl;
+  } else {
     this.router.navigate(["/"]);
-    // this.locationBack.back();
+  }
+
   }
 }
