@@ -106,7 +106,7 @@ export class BookingCompleteComponent implements OnInit {
   parameterss5:Para[];
   parameterss15:Para[];
   bookingId: number;
-  referenceNumber: Booking;
+  referenceNumber: number;
 
 
 
@@ -430,7 +430,7 @@ export class BookingCompleteComponent implements OnInit {
         if (response.status === 200) {
           this.paymentLoader = false;
           this.booking = response.body;
-          this.referenceNumber = response.body;
+          this.referenceNumber = Number(response.body.propertyReservationNumber);
           this.bookingId = response.body.id;
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
