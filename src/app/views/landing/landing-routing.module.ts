@@ -45,6 +45,7 @@ import { BookingVoucherComponent } from './booking-voucher/booking-voucher.compo
 import { PaylaterConfirmComponent } from './paylater-confirm/paylater-confirm.component';
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
+import { WhatsappPaylaterTemplateComponent } from './whatsapp-paylater-template/whatsapp-paylater-template.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
   {
@@ -131,6 +132,10 @@ const routes: Routes = [
   {
     path:'reservation-confirm',
     component:PaylaterConfirmComponent
+  },
+  {
+    path:'reservation-confirm-page',
+    component:WhatsappPaylaterTemplateComponent,
   },
   {
     path:'booking-confirm',
