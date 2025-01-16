@@ -36,6 +36,7 @@ savedServices: any;
   loader: boolean;
   PropertyUrl: string;
   propertyServiceListData: any[] = [];
+
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService,
       private listingService: ListingService,
@@ -43,6 +44,7 @@ constructor(private token :TokenStorage,
 ){
       this.businessOfferDto = new BusinessOfferDto();
 this.businessUser = new BusinessUser();
+
 this.PropertyUrl = this.token.getPropertyUrl();
   this.propertyDetails = this.token.getProperty();
  this.bookingone = this.token.getBookingData();
@@ -88,6 +90,7 @@ async getPropertyDetailsById(id: number) {
       this.policies = this.businessUser.businessServiceDtoList.filter(
         (ele) => ele.name === 'Accommodation'
       );
+      console.log('polices is',this.policies)
 
 
 
@@ -206,5 +209,4 @@ checkValidCouponOrNot(couponList?){
 toggleView(): void {
   this.showMore = !this.showMore;
 }
-
 }
