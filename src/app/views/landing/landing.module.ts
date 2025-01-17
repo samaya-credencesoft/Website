@@ -120,6 +120,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { BookingVoucherComponent } from './booking-voucher/booking-voucher.component';
 import { PaylaterConfirmComponent } from './paylater-confirm/paylater-confirm.component';
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
+import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
+import { WhatappPaylaterTemplateComponent } from './whatapp-paylater-template/whatapp-paylater-template.component';
 
 
 @NgModule({
@@ -235,7 +237,9 @@ EnquiryComponent,
     ConfirmPaymentComponent,
     BookingVoucherComponent,
     PaylaterConfirmComponent,
-    BookingConfirmComponent
+    BookingConfirmComponent,
+    WhatsappRedirectPageComponent,
+    WhatappPaylaterTemplateComponent
 
   ],
   providers: [WINDOW_PROVIDERS,

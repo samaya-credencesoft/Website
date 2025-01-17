@@ -1,0 +1,338 @@
+import { ChangeDetectorRef, Component, NgZone ,OnInit} from '@angular/core';
+import { API_URL_IN, API_URL_NZ } from 'src/app/app.component';
+import { BusinessOfferDto } from 'src/app/model/businessOfferDto';
+import { HotelBookingService } from 'src/services/hotel-booking.service';
+import { TokenStorage } from 'src/token.storage';
+import { EnquiryForm } from '../onboarding-roomdetails-form/onboarding-roomdetails-form.component';
+import { EnquiryDto } from 'src/app/model/enquiry';
+import { BusinessUser } from 'src/app/model/user';
+import { Booking } from 'src/app/model/booking';
+import { Payment } from 'src/app/model/payment';
+import { Location, DatePipe } from '@angular/common';
+
+
+import { externalReservationDtoList } from 'src/app/model/externalReservation';
+import { PropertyServiceDTO } from 'src/app/model/PropertyServices';
+import { BusinessServiceDtoList } from 'src/app/model/businessServiceDtoList';
+import { RoomDetail } from 'src/app/model/RoomDetail';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ListingService } from 'src/services/listing.service';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { Logger } from 'src/services/logger.service';
+import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
+import { WhatsappDto } from 'src/app/model/whatsappDto';
+import { Template } from 'src/app/model/template';
+import { Language } from 'src/app/model/language';
+import { Components } from 'src/app/model/components';
+import { Para } from 'src/app/model/parameters';
+import { Images } from 'src/app/model/image';
+import { OrderService } from 'src/app/services/order.service';
+@Component({
+  selector: 'app-whatsapp-redirect-page',
+  templateUrl: './whatsapp-redirect-page.component.html',
+  styleUrls: ['./whatsapp-redirect-page.component.css']
+})
+export class WhatsappRedirectPageComponent implements OnInit {
+  businessUser: BusinessUser;
+  booking: Booking;
+  payment: Payment;
+  PropertyUrl: string;
+  paymentLoader: boolean;
+  bookingData: any;
+  isSuccess: boolean;
+  headerTitle: string;
+  externalReservationdto: any;
+  bodyMessage: string;
+  storedPromo: string;
+  businessOfferDto: BusinessOfferDto;
+  selectedPromo: any;
+  externalReservationDtoList:externalReservationDtoList[];
+  showAlert: boolean = false;
+  alertType: string;
+  bookingConfirmed = false;
+  fromDate: any;
+  copyTextOne:boolean=false;
+
+
+  toDate: any;
+  adults: number;
+  children: number;
+  children3to5: number;
+  noOfrooms: number;
+  currency: string;
+  payment2: Payment;
+  totalExtraAmount: number = 0;
+  totalTaxAmount: number = 0;
+  totalBeforeTaxAmount: number = 0;
+  addServiceList: any[];
+  enquiryForm: any;
+  textToCopy: string = 'This is some text to copy';
+textToCopyOne: string = 'This is some text to copy';
+  showMore:boolean =false;
+  enquiryResponse: EnquiryForm;
+  successMessage: boolean;
+  reservationRoomDetails:RoomDetail[];
+  propertyServices:PropertyServiceDTO[];
+  API_URL: string;
+  accommodationService: any;
+  enquirySent: boolean = false;
+  submitButtonDisable: boolean;
+  savedServices: any[] = [];
+  businessServiceDtoList: any[] = [];
+  getDetailsData: any;
+  dueAmount: number;
+  businessServiceDto: BusinessServiceDtoList;
+  bookingRoomPrice: any;
+  socialmedialist:any;
+  promocodeListChip : any[] = [];
+  taxAmountOne: number;
+  bookinddata: Booking;
+  fromTimeDate: string = '';
+  toTimeDate: string = '';
+  combinedDateFromTime: number;
+  combinedDateToTime: number;
+  percentage1: number;
+  percentage2: number;
+  totalPercentage: number;
+  isReadMore: boolean[] = [];
+  policies = [];
+  whatsappForm:WhatsappDto;
+  template :Template;
+  language:Language;
+  componentstype:Components;
+  parametertype:Para;
+  parameterss:Para[];
+  components:Components[];
+  parametertype2:Para;
+  parameterss2:Para[];
+  componentstype2:Components;
+  componentstype9:Components;
+  componentstype10:Components;
+  parametertype20:Para;
+  parameterss15:Para[];
+  images:Images;
+  parametertype3:Para;
+  parameterss3:Para[];
+  parameterss1:Para[];
+  bookingId: string;
+bookingdetails: any;
+calculatedServices: any[];
+totalServiceCost: number = 0;
+bookingroomPrice: string;
+
+
+  constructor(
+    private http: HttpClient,
+    private token: TokenStorage,
+    private acRoute: ActivatedRoute,
+    private hotelBookingService: HotelBookingService,
+    private ngZone: NgZone,
+    private changeDetectorRefs: ChangeDetectorRef,
+    private location: Location,
+    private router: Router,
+    private listingService: ListingService,
+    private datePipe:DatePipe,
+    private hotelbooking:HotelBookingService,
+    private orderservice:OrderService
+
+  ) {
+    this.businessUser = new BusinessUser();
+    this.booking = new Booking();
+    this.payment = new Payment();
+    this.whatsappForm = new WhatsappDto();
+    this.template =new Template();
+    this.language = new Language();
+    this.componentstype = new Components();
+    this.parametertype = new Para();
+    this.parametertype2 = new Para();
+    this.componentstype2 = new Components();
+    this.componentstype9 = new Components();
+    this.componentstype10 = new Components();
+    this.parametertype20 = new Para();
+    this.parametertype3 = new Para()
+    this.parameterss =[];
+    this.components = [];
+    this.parameterss2 =[];
+    this.parameterss3 = [];
+    this.parameterss1 = [];
+
+
+    this.parameterss15 = [];
+    this.images = new Images();
+    this.externalReservationDtoList =[]
+    this.PropertyUrl = this.token.getPropertyUrl();
+    this.isReadMore = this.policies.map(() => false);
+
+
+    if(this.token.saveRoomPrice(this.booking.roomPrice) !== null){
+      this.bookingroomPrice = this.token.getRoomPrice();
+}
+
+  }
+
+  ngOnInit() {
+
+
+    this.acRoute.queryParams.subscribe((params) => {
+      console.log('params data is',params);
+      if (params["bookingId"] !== undefined) {
+        this.bookingId = params["bookingId"];
+        console.log('business data is',this.bookingId);
+      }
+    });
+    this.getBookingByid(this.bookingId);
+  }
+
+
+  async getBookingByid(bookingId:string) {
+
+
+    try {
+      const response = await this.hotelbooking.getBookingDetailsone(this.bookingId)?.toPromise();
+
+
+      if (response.body) {
+        this.bookingdetails = response.body;
+        console.log("dfghjkl;" + JSON.stringify(this.bookingdetails));
+        this.booking = this.bookingdetails.bookingDetails;
+        if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
+          this.bookingRoomPrice = this.token.getBookingRoomPrice();
+        }
+
+
+       console.log("booking issssssssss;" + JSON.stringify(this.booking));
+        await this.getpropertyByid(this.bookingdetails.bookingDetails.propertyId);
+        await this.getPropertyDetailsById(this.bookingdetails.bookingDetails.propertyId);
+      } else {
+        // Handle the case when the response body is empty or missing
+      }
+    } catch (error) {
+      // Handle errors, such as network errors or invalid responses
+      console.error("An error occurred:", error);
+    }
+  }
+
+
+  async getpropertyByid(id:number) {
+
+
+    try {
+      const response = await this.listingService.findByPropertyId(id).toPromise();
+      console.log("Response body: "+JSON.stringify(response.body));
+      if (response.body != null) {
+        this.businessUser = response.body;
+        this.calculateServiceHours();
+        console.log(JSON.stringify(this.businessUser));
+      } else {
+        // Handle the case when the response body is empty or missing
+      }
+    } catch (error) {
+      // Handle errors, such as network errors or invalid responses
+      console.error("An error occurred:", error);
+    }
+  }
+
+
+  calculateServiceHours (){
+    this.accommodationService = this.businessUser.businessServiceDtoList.filter(service => service.name === "Accommodation");
+    console.log(" this.accommodationService" + JSON.stringify( this.accommodationService))
+  }
+
+
+  addServiceToBooking(bookingId, savedServices: any[]) {
+    this.savedServices?.forEach(element => {
+      element.count = element.quantity;
+      element.afterTaxAmount = element.quantity * element.servicePrice
+      element.date = new Date();
+    });
+          this.hotelBookingService.saveBookingService(bookingId, savedServices).subscribe(
+            (data) => {
+
+
+              this.changeDetectorRefs.detectChanges();
+              // Logger.log(JSON.stringify( this.businessServices));
+            },
+            (error) => {
+
+
+            }
+          );
+        }
+
+
+        calculateserviceprice(){
+          this.calculatedServices =[]
+        if (this.savedServices != null && this.savedServices != undefined) {
+
+
+           this.savedServices?.forEach(element => {
+             let serviceCost = element.afterTaxAmount * element.quantity;
+             this.calculatedServices.push(serviceCost);
+             this.totalServiceCost += serviceCost; // Accumulating the total cost
+           });
+         }
+       }
+
+
+
+
+  toggleReadMore(index: number) {
+    this.isReadMore[index] = !this.isReadMore[index];
+  }
+
+
+       async getPropertyDetailsById(id: number) {
+
+
+        try {
+
+
+          const data = await this.listingService?.findByPropertyId(id).toPromise();
+          if (data.status === 200) {
+            this.businessUser = data.body;
+            console.log('businessUser is',this.businessUser);
+            this.policies = this.businessUser.businessServiceDtoList.filter(
+              (ele) => ele.name === 'Accommodation'
+            );
+            console.log('polices is',this.policies);
+            this.calculateServiceHours()
+            this.businessUser?.socialMediaLinks.forEach(element => {
+              this.socialmedialist=element
+            });
+
+
+
+
+            this.token.saveProperty(this.businessUser);
+            this.currency = this.businessUser.localCurrency.toUpperCase();
+
+
+            this.businessServiceDto = this.businessUser?.businessServiceDtoList.find(
+              (data) => data.name === this.businessUser.businessType
+            );
+
+
+            // if (this.businessUser.primaryColor !== undefined) {
+            //   this.changeTheme(
+            //     this.businessUser.primaryColor,
+            //     this.businessUser.secondaryColor,
+            //     this.businessUser.tertiaryColor
+            //   );
+            // }
+
+
+            this.changeDetectorRefs.detectChanges();
+          } else {
+            this.router.navigate(["/404"]);
+          }
+        } catch (error) {
+
+
+          // Handle the error appropriately, if needed.
+        }
+      }
+
+
+}
