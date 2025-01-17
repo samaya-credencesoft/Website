@@ -706,7 +706,9 @@ export class ListingDetailOneComponent implements OnInit {
   };
   selectedPromotion : boolean = false;
   selectedPromotionCouponData : any;
-
+  roomOccupancy:number;
+  showError : boolean =false;
+  errorMessage:string;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -2188,12 +2190,45 @@ this.isHeaderVisible = true;
   }
 
   gotocheckout(){
-    if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
-      localStorage.removeItem('selectedPromoData');
-      localStorage.removeItem('selectPromo');
+    this.availableRooms?.forEach((room) => {
+      room.ratesAndAvailabilityDtos?.forEach(ele => {
+        ele.roomRatePlans?.forEach(ele1 =>{
+          if (ele1.name === this.booking.roomRatePlanName) {
+            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy
+              this.showError = true;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
+              this.showErrorPopup();
+            } else {
+              if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
+                localStorage.removeItem('selectedPromoData');
+                localStorage.removeItem('selectPromo');
+              }
+              this.token.saveBookingRoomPrice(this.booking.roomPrice);
+              this.router.navigate(['/booking']);
+            }
+          }
+        })
+
+      })
+
+    });
+
+    // if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
+    //   localStorage.removeItem('selectedPromoData');
+    //   localStorage.removeItem('selectPromo');
+    // }
+    // this.token.saveBookingRoomPrice(this.booking.roomPrice);
+    // this.router.navigate(['/booking']);
+  }
+
+  showErrorPopup() {
+    const bootstrap = window['bootstrap'];
+    const modalElement = document.getElementById('errorModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
     }
-    this.token.saveBookingRoomPrice(this.booking.roomPrice);
-    this.router.navigate(['/booking']);
   }
 
   getPropertyDetailsBySeoName(seoName: string) {
@@ -2581,6 +2616,22 @@ checkValidCouponOrNot(couponList?){
   }
 
   onPlanSelected(plan, room) {
+    this.availableRooms?.forEach((room) => {
+      room.ratesAndAvailabilityDtos?.forEach(ele => {
+        ele.roomRatePlans?.forEach(ele1 =>{
+          if (ele1.name === this.booking.roomRatePlanName) {
+            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy
+              this.showError = true;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
+              this.showErrorPopup();
+            }
+          }
+        })
+
+      })
+
+    });
 
     // //console.log("ftgyhjkl"+JSON.stringify(this.booking))
     // //console.log("room"+JSON.stringify(room))

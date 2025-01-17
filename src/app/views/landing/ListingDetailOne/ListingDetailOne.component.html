@@ -697,7 +697,7 @@
                               </button>
                               <span class="stepper_display text-default" aria-hidden="true">{{ children }}</span>
                               <button class="btn btn-outline-default btn-sm" type="button"
-                                (click)="children = children + 1" [disabled]="children >= 30">
+                                (click)="children = children + 1" [disabled]="children >= 3">
                                 <span class="button_text">+</span>
                               </button>
                             </div>
@@ -3174,7 +3174,7 @@
                             </button>
                             <span class="stepper_display text-default" aria-hidden="true">{{ children }}</span>
                             <button class="btn btn-outline-default btn-sm" type="button"
-                              (click)="children = children + 1" [disabled]="children >= 30">
+                              (click)="children = children + 1" [disabled]="children >= 3">
                               <span class="button_text">+</span>
                             </button>
                           </div>
@@ -4939,7 +4939,30 @@ padding-right: 10px;
 
   <!-- mobile and tab view design ends -->
 
-
+  <!-- Error Popup Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style=" display: flex;
+    justify-content: center;
+    margin: auto;">
+      <div class="modal-content">
+        <div class="modal-header" style="justify-content: center !important;">
+          <h5 class="modal-title" id="errorModalLabel" style=" font-weight: bold; font-size: 23px;">Choose a Different Plan</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{ errorMessage }}</p>
+        </div>
+        <div class="modal-footer" style="justify-content: center !important;">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          style="width: 100px;
+          color: #fff !important;
+          background-color: black !important;
+          font-weight: bold;"
+          >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 <!-- footer section starts -->
