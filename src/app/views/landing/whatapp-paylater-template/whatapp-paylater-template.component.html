@@ -22,6 +22,7 @@
               </span>
             </a>
 
+
               <span
                 ><img
                   src="assets/images/chatsym.png"
@@ -30,6 +31,7 @@
                   width="20px"
                   style="margin-right: 3px; transform: rotate(3deg)"
                 />
+
 
                 9040785705</span
               >
@@ -41,6 +43,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="text-center mb-4">
       <span
@@ -62,7 +65,8 @@
       Your reservation is currently on hold.
       </div>
       <div class="mb-0" style=" font-size: 18px; color: #615d5d">
-        A copy of this reservation has been sent to {{booking.email}} & your reservation number is {{booking?.propertyReservationNumber}}.
+        A copy of this reservation has been sent to {{booking?.email}} & your reservation number is {{bookingId}}.
+
 
       </div>
       <div
@@ -76,22 +80,25 @@
       </div>
     </div>
 
+
     <div class="row mb-4" style="justify-content: center">
       <div
         class="col-md-4"
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
-        <div class="mb-1"><span class="highlight-text">Booking ID</span></div>
-        <div class="mb-0">   <b id="textToCopy" style="margin-right: 5px;">{{booking?.id}}</b>   <img
+        <div class="mb-1"><span class="highlight-text">Reservation ID</span></div>
+        <div class="mb-0">   <b id="textToCopy" style="margin-right: 5px;">{{booking.propertyReservationNumber}}</b>   <img
           src="assets/images/CopyVoucher.png"
           alt=""
           height="15px"
           width="15px"
           style="margin-right: 3px"
-          (click)="copyText()"
+
+
         />
         <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
         >Check Details</a> </div>
+
 
       </div>
       <div
@@ -120,6 +127,7 @@
       </div>
     </div>
 
+
     <div class="row">
       <div class="col-8" style=" flex: 0 0 58%;
     max-width: 58%;">
@@ -127,6 +135,7 @@
           class="row mb-3"
           style="display: flex; justify-content: center; margin-top: 15px"
         >
+
 
           <div
             class="col-md-6"
@@ -137,6 +146,7 @@
               border-right: 2px solid #d9d9d9;
             "
           >
+
 
             <div style="display: flex; gap: 26px; justify-content: center">
               <div>
@@ -164,6 +174,7 @@
               <div>{{ booking.toDate | date: 'd MMM'}}</div>
             </div>
           </div>
+
 
           <div
             class="col-md-6"
@@ -205,6 +216,7 @@
             </div>
           </div>
 
+
           <div
             class="col-md-6"
             style="min-width: 40% !important; flex: 0 0 40%; text-align: center; margin-top: 10px;"
@@ -226,6 +238,7 @@
         </div>
       </div>
 
+
       <div class="col-4" style="margin-top: 20px">
         <div>
           <h2
@@ -235,23 +248,24 @@
               font-size: 26px !important;
             "
           >
-            {{ propertyDetails.name }}
+            {{ businessUser.name }}
           </h2>
           <h5>
-            {{ propertyDetails.address.city }},{{
-              propertyDetails.address.state
-            }}, {{ propertyDetails.address.country }}
+            {{ businessUser.address.city }},{{
+              businessUser.address.state
+            }}, {{ businessUser.address.country }}
           </h5>
           <h4
             class="text-muted"
             style="font-size: 15px"
-            [innerHTML]="propertyDetails.businessDescription"
+            [innerHTML]="businessUser.businessDescription"
           >
-            {{ propertyDetails.businessDescription }}
+            {{ businessUser.businessDescription }}
           </h4>
         </div>
       </div>
     </div>
+
 
     <div
       class="row mb-4"
@@ -259,6 +273,7 @@
     >
       <div class="col-8" style="flex: 0 0 38%; max-width: 38%">
         <!-- <div style="text-align: right;">Enquiry created at {{ booking.createdDate | date: 'hh:mm a, dd/MM/yyyy' }}</div> -->
+
 
         <div class="details-card">
           <div style="font-size: 21px">
@@ -281,6 +296,9 @@
 
 
 
+
+
+
           <!-- <p style="font-size: 18px">Add-on Services:</p> -->
           <div class="addon-services" *ngIf="savedServices?.length >0">
             <h4 style="font-weight: bold;">Add-on Services</h4>
@@ -291,15 +309,21 @@
                     *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
                     <div style="display: flex; gap:4px">
 
+
                       <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
                         style=" width: 26px;height: 23px;">
 
 
+
+
                       <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
 
                       <br>
 
+
                       <div>{{fac.name }} * {{fac.quantity}} <br>
+
 
                         <b
                           *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
@@ -308,6 +332,7 @@
                         </b>
                         <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
                           style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+
 
                       </div>
                     </div>
@@ -319,14 +344,17 @@
             </table>
           </div>
 
+
         </div>
+
 
         <div class="details-card" style="margin-top: 20px">
           <table style="width: 88%">
             <tr>
-              <td>Tax Amount ({{ bookingone.taxPercentage }}%)</td>
+              <td>Tax Amount ({{ booking.taxPercentage }}%)</td>
               <td>₹ {{ booking.taxAmount }}</td>
             </tr>
+
 
             <tr>
               <td>Total Payable Amount</td>
@@ -376,16 +404,22 @@
 
 
 
+
+
+
+
               <!-- View More / View Less Button -->
               <span  style="float:right" (click)="toggleView()">
                 {{ showMore ? 'View Less..' : 'View More..' }}
               </span>
+
 
             </div>
              <!-- No Coupons Message -->
     <!-- No Coupons Card -->
     <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) " style="color: #fff !important">
           <strong style="font-size: 18px;color: #fff !important">No Coupon Available  :(</strong>
+
 
         <div style="margin: 0; font-size: 14px;color: #fff !important">
           Unfortunately, this property does not have any active coupons at the moment.
@@ -397,6 +431,7 @@
           Explore Other Deals
         </a> -->
 
+
     </div>
     <div *ngIf="selectedPromo">
       <strong style="font-size: 18px;color: #fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
@@ -405,14 +440,18 @@ Applied!</strong>
   You’re Saving ₹ {{booking.discountAmount}} on this booking!
 </div>
 
+
 <div style="color: #fff !important">
   Complete your booking now to save big on your stay.
 </div>
 </div>
 
+
           </div>
 
+
         </div>
+
 
         <div
           style="background-color: #f5f5f5; padding: 20px; border-radius: 15px"
@@ -435,15 +474,18 @@ Applied!</strong>
               <td>{{ booking.firstName }} {{ booking.lastName }}</td>
             </tr>
 
+
             <tr *ngIf="booking.email != null && booking.email != undefined">
               <td>Email Address:</td>
               <td>{{ booking.email }}</td>
             </tr>
 
+
             <tr *ngIf="booking.mobile != null && booking.mobile != undefined">
               <td>Phone Number:</td>
               <td>{{ booking.mobile }}</td>
             </tr>
+
 
             <tr *ngIf="booking.notes != null && booking.notes != undefined">
               <td>Notes:</td>
@@ -453,6 +495,7 @@ Applied!</strong>
         </div>
       </div>
     </div>
+
 
     <div class="footer-link">
       <a href="{{PropertyUrl}}" style="font-weight: bold; font-size: 18px"
@@ -501,6 +544,7 @@ Applied!</strong>
       <div *ngIf="bServiceDtoList?.policy">
         <div class="property-rules" *ngIf="policies">Property rules:</div>
 
+
         <div style="padding: 20px;">
           <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
           </div>
@@ -519,8 +563,10 @@ Applied!</strong>
   <div class="popup-content">
     Reservation ID copied successfully!
 
+
   </div>
 </div>
+
 
 <div class="mobile-view-booking-voucher">
   <div style="margin-top: 10px">
@@ -572,6 +618,7 @@ Applied!</strong>
     </div>
   </div>
 
+
   <div class="text-center mb-4" style="margin-top: 30px">
     <span
       style="
@@ -592,7 +639,7 @@ Applied!</strong>
        Your reservation is currently on hold.
     </div>
     <div class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
-      A copy of this reservation has been sent to {{booking.email}} & your reservation number is {{booking?.propertyReservationNumber}}.
+      A copy of this reservation has been sent to {{booking.email}} & your reservation number is {{bookingId}}.
     </div>
     <div
       style="
@@ -605,22 +652,25 @@ Applied!</strong>
     </div>
   </div>
 
+
   <div style="display: flex; justify-content: center; gap: 20px">
-    <div style="color: #615d5d; font-size: 18px">Booking ID</div>
+    <div style="color: #615d5d; font-size: 18px">Reservation ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      <b id="textToCopyOne" style="margin-right: 5px;" >{{booking?.id}}</b>
+      <b id="textToCopyOne" style="margin-right: 5px;" >{{booking?.propertyReservationNumber}}</b>
       <img
             src="assets/images/CopyVoucher.png"
             alt=""
             height="15px"
             width="15px"
             style="margin-right: 3px"
-            (click)="copyTextone()"
+
+
           />
           <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
           >Check Details</a>
     </div>
   </div>
+
 
   <div
     class="details-cardOne"
@@ -650,6 +700,7 @@ Applied!</strong>
     </div>
   </div>
 
+
   <div style="margin-left: 20px; margin-top: 20px">
     <h2
       style="
@@ -659,13 +710,14 @@ Applied!</strong>
         margin-bottom: 0px;
       "
     >
-    {{propertyDetails.name}}
+    {{businessUser.name}}
     </h2>
-    <h5 style="font-size: 15px; margin-bottom: 0px">{{propertyDetails.address.city}},{{propertyDetails.address.state}}, {{propertyDetails.address.country}}</h5>
-    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="propertyDetails.businessDescription">
-      {{propertyDetails.businessDescription}}
+    <h5 style="font-size: 15px; margin-bottom: 0px">{{businessUser.address.city}},{{businessUser.address.state}}, {{businessUser.address.country}}</h5>
+    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="businessUser.businessDescription">
+      {{businessUser.businessDescription}}
     </h4>
   </div>
+
 
   <div class="mb-3">
     <div style="display: flex; margin-top: 20px">
@@ -705,6 +757,7 @@ Applied!</strong>
       </div>
     </div>
 
+
     <div style="display: flex; margin-top: 10px">
       <div
         class="col-md-6"
@@ -724,6 +777,7 @@ Applied!</strong>
       </div>
     </div>
 
+
     <div style="display: flex; margin-top: 10px">
       <div
         class="col-md-6"
@@ -742,6 +796,7 @@ Applied!</strong>
         </div>
       </div>
     </div>
+
 
     <div style="display: flex; margin-top: 10px">
       <div
@@ -797,15 +852,18 @@ Applied!</strong>
         <td>{{booking.firstName}} {{booking.lastName}}</td>
       </tr>
 
+
       <tr>
         <td>Email Address:</td>
         <td>{{booking.email}}</td>
       </tr>
 
+
       <tr>
         <td>Phone Number:</td>
         <td>{{booking.mobile}}</td>
       </tr>
+
 
       <tr>
         <td>Notes:</td>
@@ -813,6 +871,7 @@ Applied!</strong>
       </tr>
     </table>
   </div>
+
 
   <div class="col-12">
     <div class="details-cardOne">
@@ -834,8 +893,12 @@ Applied!</strong>
 
 
 
+
+
+
       <div *ngIf="savedServices?.length >0">
         <div style="font-size: 18px">Add-on Services:</div>
+
 
       <table style=" border: none; width:100%">
         <tr *ngFor="let fac of savedServices">
@@ -844,15 +907,21 @@ Applied!</strong>
               *ngIf="fac.name !== null && fac.name !== undefined && fac.serviceType !== 'Distance' && fac.serviceType !== 'RestaurantHotel' && fac.serviceType !== 'DistanceRailway'">
               <div style="display: flex; gap:4px">
 
+
                 <img *ngIf="!fac.imageUrl" src="https://static.thenounproject.com/png/3421816-200.png" alt="icon"
                   style=" width: 26px;height: 23px;">
 
 
+
+
                 <img *ngIf="fac.imageUrl" [src]="fac.imageUrl" alt="icon" style="width: 26px;height: 23px;">
+
 
                 <br>
 
+
                 <div>{{fac.name }} * {{fac.quantity}} <br>
+
 
                   <b
                     *ngIf="fac.servicePrice !== null && fac.servicePrice !== undefined && fac.servicePrice > 0 && fac.taxAmount !== null && fac.taxAmount !== undefined">
@@ -861,6 +930,7 @@ Applied!</strong>
                   </b>
                   <b *ngIf="fac.servicePrice == null || fac.servicePrice == undefined || fac.servicePrice == 0"
                     style="text-align: right;">{{0 | currency : currency : "symbol" : "1.2-2"}}</b>
+
 
                 </div>
               </div>
@@ -872,6 +942,7 @@ Applied!</strong>
       </table>
       </div>
     </div>
+
 
     <div class="coupon-box mb-4" style="margin-top: 20px">
       <div style="display: flex; gap: 10px">
@@ -908,16 +979,22 @@ Applied!</strong>
 
 
 
+
+
+
+
           <!-- View More / View Less Button -->
           <span  style="float:right" (click)="toggleView()">
             {{ showMore ? 'View Less..' : 'View More..' }}
           </span>
+
 
         </div>
          <!-- No Coupons Message -->
 <!-- No Coupons Card -->
 <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
       <strong style="font-size: 18px; color:#fff !important">No Coupon Available :(</strong>
+
 
     <div style="margin: 0; font-size: 14px;color:#fff !important">
       Unfortunately, this property does not have any active coupons at the moment.
@@ -929,6 +1006,7 @@ Applied!</strong>
       Explore Other Deals
     </a> -->
 
+
 </div>
 <div *ngIf="selectedPromo">
   <strong style="font-size: 18px;color:#fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
@@ -937,6 +1015,7 @@ Applied!</strong>
 You’re Saving ₹ {{booking.discountAmount}} on this booking!
 </div>
 
+
 <div style="color:#fff !important">
 Complete your booking now to save big on your stay.
 </div>
@@ -944,10 +1023,11 @@ Complete your booking now to save big on your stay.
       </div>
     </div>
 
+
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
-          <td>Tax Amount ({{bookingone.taxPercentage}}%)</td>
+          <td>Tax Amount ({{booking.taxPercentage}}%)</td>
           <td>₹ {{booking.taxAmount}}</td>
         </tr>
         <tr>
@@ -957,12 +1037,16 @@ Complete your booking now to save big on your stay.
 
 
 
+
+
+
         <tr>
           <td>Due Amount</td>
           <td>₹ {{booking.totalAmount}}</td>
         </tr>
       </table>
     </div>
+
 
     <div class="footer-link">
       <a href="{{PropertyUrl}}" style="font-weight: bold; font-size: 16px"
@@ -976,6 +1060,7 @@ Complete your booking now to save big on your stay.
       For urgent bookings (same-day or next-morning check-ins), please call us
       directly at <strong>079652 01321</strong> for prompt assistance.
     </p>
+
 
     <div class="note-sectionOne">
       <h5>Please note:</h5>
@@ -1009,6 +1094,7 @@ Complete your booking now to save big on your stay.
         <div *ngIf="bServiceDtoList?.policy">
           <div class="property-rules" *ngIf="policies">Property rules:</div>
 
+
           <div style="padding: 20px;">
             <div [innerHTML]="isReadMore[i] ? bServiceDtoList?.policy : (bServiceDtoList?.policy | slice:0:200) + '...'">
             </div>
@@ -1024,6 +1110,12 @@ Complete your booking now to save big on your stay.
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 
 

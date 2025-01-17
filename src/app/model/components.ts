@@ -3,8 +3,9 @@ import { Para } from "./parameters";
 export class Components {
   type: string;
   parameters: Para[];
-  sub_type :string;
-  index: string;
+  index:string;
+  sub_type:string;
+
   constructor() {}
 
 }

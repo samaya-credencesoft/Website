@@ -28,98 +28,99 @@ import { Components } from 'src/app/model/components';
 import { Para } from 'src/app/model/parameters';
 import { Images } from 'src/app/model/image';
 import { OrderService } from 'src/app/services/order.service';
-
 @Component({
   selector: 'app-whatsapp-redirect-page',
   templateUrl: './whatsapp-redirect-page.component.html',
   styleUrls: ['./whatsapp-redirect-page.component.css']
 })
 export class WhatsappRedirectPageComponent implements OnInit {
-   businessUser: BusinessUser;
-    booking: Booking;
-    payment: Payment;
-    PropertyUrl: string;
-    paymentLoader: boolean;
-    bookingData: any;
-    isSuccess: boolean;
-    headerTitle: string;
-    externalReservationdto: any;
-    bodyMessage: string;
-    storedPromo: string;
-    businessOfferDto: BusinessOfferDto;
-    selectedPromo: any;
-    externalReservationDtoList:externalReservationDtoList[];
-    showAlert: boolean = false;
-    alertType: string;
-    bookingConfirmed = false;
-    fromDate: any;
-    copyTextOne:boolean=false;
+  businessUser: BusinessUser;
+  booking: Booking;
+  payment: Payment;
+  PropertyUrl: string;
+  paymentLoader: boolean;
+  bookingData: any;
+  isSuccess: boolean;
+  headerTitle: string;
+  externalReservationdto: any;
+  bodyMessage: string;
+  storedPromo: string;
+  businessOfferDto: BusinessOfferDto;
+  selectedPromo: any;
+  externalReservationDtoList:externalReservationDtoList[];
+  showAlert: boolean = false;
+  alertType: string;
+  bookingConfirmed = false;
+  fromDate: any;
+  copyTextOne:boolean=false;
 
-    toDate: any;
-    adults: number;
-    children: number;
-    children3to5: number;
-    noOfrooms: number;
-    currency: string;
-    payment2: Payment;
-    totalExtraAmount: number = 0;
-    totalTaxAmount: number = 0;
-    totalBeforeTaxAmount: number = 0;
-    addServiceList: any[];
-    enquiryForm: any;
-    textToCopy: string = 'This is some text to copy';
-  textToCopyOne: string = 'This is some text to copy';
-    showMore:boolean =false;
-    enquiryResponse: EnquiryForm;
-    successMessage: boolean;
-    reservationRoomDetails:RoomDetail[];
-    propertyServices:PropertyServiceDTO[];
-    API_URL: string;
-    accommodationService: any;
-    enquirySent: boolean = false;
-    submitButtonDisable: boolean;
-    savedServices: any[] = [];
-    businessServiceDtoList: any[] = [];
-    getDetailsData: any;
-    dueAmount: number;
-    businessServiceDto: BusinessServiceDtoList;
-    bookingRoomPrice: any;
-    socialmedialist:any;
-    promocodeListChip : any[] = [];
-    taxAmountOne: number;
-    bookinddata: Booking;
-    fromTimeDate: string = '';
-    toTimeDate: string = '';
-    combinedDateFromTime: number;
-    combinedDateToTime: number;
-    percentage1: number;
-    percentage2: number;
-    totalPercentage: number;
-    isReadMore: boolean[] = [];
-    policies = [];
-    whatsappForm:WhatsappDto;
-    template :Template;
-    language:Language;
-    componentstype:Components;
-    parametertype:Para;
-    parameterss:Para[];
-    components:Components[];
-    parametertype2:Para;
-    parameterss2:Para[];
-    componentstype2:Components;
-    componentstype9:Components;
-    componentstype10:Components;
-    parametertype20:Para;
-    parameterss15:Para[];
-    images:Images;
-    parametertype3:Para;
-    parameterss3:Para[];
-    parameterss1:Para[];
-    bookingId: string;
-  bookingdetails: any;
-  calculatedServices: any[];
-  totalServiceCost: number = 0;
-  bookingroomPrice: string;
+
+  toDate: any;
+  adults: number;
+  children: number;
+  children3to5: number;
+  noOfrooms: number;
+  currency: string;
+  payment2: Payment;
+  totalExtraAmount: number = 0;
+  totalTaxAmount: number = 0;
+  totalBeforeTaxAmount: number = 0;
+  addServiceList: any[];
+  enquiryForm: any;
+  textToCopy: string = 'This is some text to copy';
+textToCopyOne: string = 'This is some text to copy';
+  showMore:boolean =false;
+  enquiryResponse: EnquiryForm;
+  successMessage: boolean;
+  reservationRoomDetails:RoomDetail[];
+  propertyServices:PropertyServiceDTO[];
+  API_URL: string;
+  accommodationService: any;
+  enquirySent: boolean = false;
+  submitButtonDisable: boolean;
+  savedServices: any[] = [];
+  businessServiceDtoList: any[] = [];
+  getDetailsData: any;
+  dueAmount: number;
+  businessServiceDto: BusinessServiceDtoList;
+  bookingRoomPrice: any;
+  socialmedialist:any;
+  promocodeListChip : any[] = [];
+  taxAmountOne: number;
+  bookinddata: Booking;
+  fromTimeDate: string = '';
+  toTimeDate: string = '';
+  combinedDateFromTime: number;
+  combinedDateToTime: number;
+  percentage1: number;
+  percentage2: number;
+  totalPercentage: number;
+  isReadMore: boolean[] = [];
+  policies = [];
+  whatsappForm:WhatsappDto;
+  template :Template;
+  language:Language;
+  componentstype:Components;
+  parametertype:Para;
+  parameterss:Para[];
+  components:Components[];
+  parametertype2:Para;
+  parameterss2:Para[];
+  componentstype2:Components;
+  componentstype9:Components;
+  componentstype10:Components;
+  parametertype20:Para;
+  parameterss15:Para[];
+  images:Images;
+  parametertype3:Para;
+  parameterss3:Para[];
+  parameterss1:Para[];
+  bookingId: string;
+bookingdetails: any;
+calculatedServices: any[];
+totalServiceCost: number = 0;
+bookingroomPrice: string;
+
 
   constructor(
     private http: HttpClient,
@@ -134,39 +135,44 @@ export class WhatsappRedirectPageComponent implements OnInit {
     private datePipe:DatePipe,
     private hotelbooking:HotelBookingService,
     private orderservice:OrderService
+
   ) {
-     this.businessUser = new BusinessUser();
-        this.booking = new Booking();
-        this.payment = new Payment();
-        this.whatsappForm = new WhatsappDto();
-        this.template =new Template();
-        this.language = new Language();
-        this.componentstype = new Components();
-        this.parametertype = new Para();
-        this.parametertype2 = new Para();
-        this.componentstype2 = new Components();
-        this.componentstype9 = new Components();
-        this.componentstype10 = new Components();
-        this.parametertype20 = new Para();
-        this.parametertype3 = new Para()
-        this.parameterss =[];
-        this.components = [];
-        this.parameterss2 =[];
-        this.parameterss3 = [];
-        this.parameterss1 = [];
+    this.businessUser = new BusinessUser();
+    this.booking = new Booking();
+    this.payment = new Payment();
+    this.whatsappForm = new WhatsappDto();
+    this.template =new Template();
+    this.language = new Language();
+    this.componentstype = new Components();
+    this.parametertype = new Para();
+    this.parametertype2 = new Para();
+    this.componentstype2 = new Components();
+    this.componentstype9 = new Components();
+    this.componentstype10 = new Components();
+    this.parametertype20 = new Para();
+    this.parametertype3 = new Para()
+    this.parameterss =[];
+    this.components = [];
+    this.parameterss2 =[];
+    this.parameterss3 = [];
+    this.parameterss1 = [];
 
-        this.parameterss15 = [];
-        this.images = new Images();
-        this.externalReservationDtoList =[]
-        this.PropertyUrl = this.token.getPropertyUrl();
-        this.isReadMore = this.policies.map(() => false);
 
-        if(this.token.saveRoomPrice(this.booking.roomPrice) !== null){
-          this.bookingroomPrice = this.token.getRoomPrice();
-   }
-   }
+    this.parameterss15 = [];
+    this.images = new Images();
+    this.externalReservationDtoList =[]
+    this.PropertyUrl = this.token.getPropertyUrl();
+    this.isReadMore = this.policies.map(() => false);
+
+
+    if(this.token.saveRoomPrice(this.booking.roomPrice) !== null){
+      this.bookingroomPrice = this.token.getRoomPrice();
+}
+
+  }
 
   ngOnInit() {
+
 
     this.acRoute.queryParams.subscribe((params) => {
       console.log('params data is',params);
@@ -178,10 +184,13 @@ export class WhatsappRedirectPageComponent implements OnInit {
     this.getBookingByid(this.bookingId);
   }
 
+
   async getBookingByid(bookingId:string) {
+
 
     try {
       const response = await this.hotelbooking.getBookingDetailsone(this.bookingId)?.toPromise();
+
 
       if (response.body) {
         this.bookingdetails = response.body;
@@ -203,7 +212,9 @@ export class WhatsappRedirectPageComponent implements OnInit {
     }
   }
 
+
   async getpropertyByid(id:number) {
+
 
     try {
       const response = await this.listingService.findByPropertyId(id).toPromise();
@@ -257,13 +268,18 @@ export class WhatsappRedirectPageComponent implements OnInit {
        }
 
 
+
+
   toggleReadMore(index: number) {
     this.isReadMore[index] = !this.isReadMore[index];
   }
 
+
        async getPropertyDetailsById(id: number) {
 
+
         try {
+
 
           const data = await this.listingService?.findByPropertyId(id).toPromise();
           if (data.status === 200) {
@@ -279,8 +295,11 @@ export class WhatsappRedirectPageComponent implements OnInit {
             });
 
 
+
+
             this.token.saveProperty(this.businessUser);
             this.currency = this.businessUser.localCurrency.toUpperCase();
+
 
             this.businessServiceDto = this.businessUser?.businessServiceDtoList.find(
               (data) => data.name === this.businessUser.businessType
