@@ -10,12 +10,14 @@ export class RoomRatePlans {
   expiryDate: string;
   maximumLengthOfStay: number;
   minimumLengthOfStay: number;
+  maximumOccupancy:number;
   name: string;
   restriction: string;
   roomId: number;
   status: string;
   propertyServicesList: any[];
   otaPlanList:any[];
+  noOfChildren: number;
 
   constructor() {}
 }
