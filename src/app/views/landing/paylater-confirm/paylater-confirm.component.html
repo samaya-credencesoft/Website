@@ -62,7 +62,7 @@
       Your reservation is currently on hold.
       </div>
       <div class="mb-0" style=" font-size: 18px; color: #615d5d">
-        A copy of this reservation has been sent to {{booking?.email}}.
+        A copy of this reservation has been sent to {{booking.email}} & your reservation number is {{booking?.propertyReservationNumber}}.
 
       </div>
       <div
@@ -81,8 +81,8 @@
         class="col-md-4"
         style="text-align: center; flex: 0 0 25.333333%; max-width: 25.333333%"
       >
-        <div class="mb-1"><span class="highlight-text">Reservation ID</span></div>
-        <div class="mb-0">   <b id="textToCopy" style="margin-right: 5px;">{{booking?.propertyReservationNumber}}</b>   <img
+        <div class="mb-1"><span class="highlight-text">Booking ID</span></div>
+        <div class="mb-0">   <b id="textToCopy" style="margin-right: 5px;">{{booking?.id}}</b>   <img
           src="assets/images/CopyVoucher.png"
           alt=""
           height="15px"
@@ -592,7 +592,7 @@ Applied!</strong>
        Your reservation is currently on hold.
     </div>
     <div class="mb-0" style="margin-top: 10px; font-size: 13px; color: #615d5d">
-      A copy of this reservation has been sent to {{booking.email}}.
+      A copy of this reservation has been sent to {{booking.email}} & your reservation number is {{booking?.propertyReservationNumber}}.
     </div>
     <div
       style="
@@ -606,9 +606,9 @@ Applied!</strong>
   </div>
 
   <div style="display: flex; justify-content: center; gap: 20px">
-    <div style="color: #615d5d; font-size: 18px">Reservation ID</div>
+    <div style="color: #615d5d; font-size: 18px">Booking ID</div>
     <div style="font-weight: bold; font-size: 17px">
-      <b id="textToCopyOne" style="margin-right: 5px;" >{{booking?.propertyReservationNumber}}</b>
+      <b id="textToCopyOne" style="margin-right: 5px;" >{{booking?.id}}</b>
       <img
             src="assets/images/CopyVoucher.png"
             alt=""
