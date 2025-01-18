@@ -1275,7 +1275,7 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
     this.enquiryForm.taxDetails.forEach(item=>{
@@ -3023,7 +3023,7 @@ this.savedServices?.forEach(element => {
 
             this.template.components = this.components;
             this.whatsappForm.template =this.template;
-            this.whatsappForm.to = "7608935904",
+            this.whatsappForm.to = this.booking.mobile,
             this.whatsappForm.type = 'template',
               this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
                 this.paymentLoader = false;
@@ -3127,7 +3127,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
 
     this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
@@ -3474,7 +3474,7 @@ this.enquiryForm.createdDate = new Date().getTime();
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
