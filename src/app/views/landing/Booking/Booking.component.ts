@@ -1342,6 +1342,8 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
     this.enquiryForm.couponCode = this.booking.couponCode;
     this.enquiryForm.promotionName = this.booking.promotionName;
+    this.enquiryForm.discountAmount = this.booking.discountAmount;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.equitycreatedData = response.body;
 console.log("dfgvhbjnk"+ JSON.stringify(this.equitycreatedData))
@@ -3125,6 +3127,8 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
     this.enquiryForm.noOfChildren = this.booking.noOfChildren;
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
+    this.enquiryForm.discountAmount = this.booking.discountAmount;
+    this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
