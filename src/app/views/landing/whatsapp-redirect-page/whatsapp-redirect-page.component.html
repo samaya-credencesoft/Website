@@ -352,13 +352,13 @@
           <table style="width: 88%">
             <tr>
               <td>Tax Amount ({{ booking?.taxPercentage }}%)</td>
-              <td>₹ {{ booking?.taxAmount }}</td>
+              <td>₹ {{ booking?.taxAmount | number:'1.2-2' }}</td>
             </tr>
 
 
             <tr>
               <td>Total Payable Amount</td>
-              <td>₹ {{ booking.totalAmount }}</td>
+              <td>₹ {{ booking.totalAmount | number:'1.2-2'}}</td>
             </tr>
             <tr>
               <td>Advance Amount</td>
@@ -1044,11 +1044,11 @@ Complete your booking now to save big on your stay.
       <table style="width: 88%">
         <tr>
           <td>Tax Amount ({{booking?.taxPercentage}}%)</td>
-          <td>₹ {{booking?.taxAmount}}</td>
+          <td>₹ {{booking?.taxAmount | number:'1.2-2'}}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+          <td>₹ {{booking.totalAmount | number:'1.2-2'}}</td>
         </tr>
         <tr>
           <td>Advance Amount</td>

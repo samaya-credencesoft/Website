@@ -131,11 +131,11 @@ const routes: Routes = [
     component:BookingVoucherComponent
   },
   {
-    path:'reservation-confirm',
+    path:'reservation-confirm-page',
     component:PaylaterConfirmComponent
   },
   {
-    path:'reservation-confirm-page',
+    path:'reservation-confirm',
     component:WhatappPaylaterTemplateComponent,
       },
   {
