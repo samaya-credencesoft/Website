@@ -816,7 +816,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     this.enquiryForm.planCode = this.booking.planCode;
@@ -1254,7 +1254,7 @@ this.externalReservationdto =res.body
 
     this.template.components = this.components;
     this.whatsappForm.template =this.template;
-    this.whatsappForm.to = "9337930186",
+    this.whatsappForm.to = "7852978916",
     this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;

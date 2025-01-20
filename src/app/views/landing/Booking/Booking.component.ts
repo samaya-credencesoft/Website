@@ -1206,15 +1206,15 @@ console.log("this.totalServiceCost" + this.totalServiceCost)
       this.enquiryForm.alternativeLocation = this.token.getProperty().address.city;
     }
     this.payment.netReceivableAmount = this.booking.netAmount;
-    this.enquiryForm.min = this.booking.totalAmount;
-    this.enquiryForm.max = this.booking.totalAmount;
+    this.enquiryForm.min = Number(this.booking.totalAmount.toFixed(2));
+    this.enquiryForm.max = Number(this.booking.totalAmount.toFixed(2));
 
     this.enquiryForm.firstName = this.booking.firstName;
     this.enquiryForm.lastName = this.booking.lastName;
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
-    this.enquiryForm.checkOutDate = this.booking.toDate;
-    this.enquiryForm.checkInDate = this.booking.fromDate;
+    this.enquiryForm.checkOutDate = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY');
+    this.enquiryForm.checkInDate = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY');
     // const toDate = new Date(this.booking.toDate);
     // this.enquiryForm.toTime = toDate.getTime();
     // const fromDate = new Date(this.booking.fromDate);
@@ -1275,7 +1275,7 @@ this.propertyDetails = this.token.getProperty();
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
     this.enquiryForm.taxDetails.forEach(item=>{
@@ -3258,7 +3258,7 @@ this.savedServices?.forEach(element => {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
 
     this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
@@ -3543,15 +3543,15 @@ this.savedServices?.forEach(element => {
     }
 
     this.payment.netReceivableAmount = this.booking.netAmount;
-    this.enquiryForm.min = this.booking.totalAmount;
-    this.enquiryForm.max = this.booking.totalAmount;
+    this.enquiryForm.min = Number(this.booking.totalAmount.toFixed(2));
+    this.enquiryForm.max = Number(this.booking.totalAmount.toFixed(2));
 
     this.enquiryForm.firstName = this.booking.firstName;
     this.enquiryForm.lastName = this.booking.lastName;
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
-    this.enquiryForm.checkOutDate = this.booking.toDate;
-    this.enquiryForm.checkInDate = this.booking.fromDate;
+    this.enquiryForm.checkOutDate =this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY');
+    this.enquiryForm.checkInDate = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY');
     this.enquiryForm.noOfPerson = this.booking.noOfPersons;
     this.enquiryForm.noOfExtraPerson=this.booking.noOfExtraPerson;
     this.enquiryForm.roomId=this.booking.roomId;
@@ -3605,7 +3605,7 @@ this.enquiryForm.createdDate = new Date().getTime();
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
