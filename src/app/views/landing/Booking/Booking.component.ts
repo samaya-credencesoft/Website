@@ -2306,11 +2306,11 @@ this.savedServices?.forEach(element => {
           this.addServiceToBooking(this.booking.id,this.savedServices);
           this.externalReservation(this.booking);
           this.sendWhatsappMessageToTHM();
-          this.sendWhatsappMessageToTHM11();
-          this.sendWhatsappMessageToTHM1();
-          this.sendWhatsappMessageToTHM2();
-          this.sendWhatsappMessageToTHM3();
-          this.sendWhatsappMessageToTHM4();
+          // this.sendWhatsappMessageToTHM11();
+          // this.sendWhatsappMessageToTHM1();
+          // this.sendWhatsappMessageToTHM2();
+          // this.sendWhatsappMessageToTHM3();
+          // this.sendWhatsappMessageToTHM4();
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
         }, 3000);
@@ -2452,7 +2452,7 @@ this.savedServices?.forEach(element => {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY');
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2462,7 +2462,7 @@ this.savedServices?.forEach(element => {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = this.booking.toDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY');
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2492,7 +2492,7 @@ this.savedServices?.forEach(element => {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = this.booking.totalAmount.toString();
+    this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2522,7 +2522,7 @@ this.savedServices?.forEach(element => {
 
     this.template.components = this.components;
     this.whatsappForm.template =this.template;
-    this.whatsappForm.to = "7608935904",
+    this.whatsappForm.to = "7852978916",
     this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;
@@ -3809,11 +3809,11 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
-  this.parametertype2.text = this.booking.fromDate;
+  this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY');
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
-  this.parametertype2.text = this.booking.toDate;
+  this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY');
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
@@ -3855,11 +3855,11 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
-  this.parametertype2.text = this.booking.totalAmount.toString();
+  this.parametertype2.text = this.booking.totalAmount.toFixed(2);
   this.parameterss2.push(this.parametertype2);
   this.parametertype2 = new Para();
   this.parametertype2.type = 'text',
-  this.parametertype2.text = this.booking.totalAmount.toString();
+  this.parametertype2.text = this.booking.totalAmount.toFixed(2);
   this.parameterss2.push(this.parametertype2);
   this.componentstype2.parameters =this.parameterss2;
   this.components.push(this.componentstype2);
@@ -3895,11 +3895,11 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
       this.parameterss4.push(this.parametertype4);
       this.parametertype4 = new Para();
       this.parametertype4.type = 'text',
-      this.parametertype4.text = this.booking.fromDate;
+      this.parametertype4.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY');
       this.parameterss4.push(this.parametertype4);
       this.parametertype4 = new Para();
       this.parametertype4.type = 'text',
-      this.parametertype4.text = this.booking.toDate;
+      this.parametertype4.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY');
       this.parameterss4.push(this.parametertype4);
       this.parametertype4 = new Para();
       this.parametertype4.type = 'text',
@@ -3923,11 +3923,11 @@ this.images.link ='https://bookonelocal.in/cdn/BookOne.jpeg',
       this.parameterss4.push(this.parametertype4);
       this.parametertype4 = new Para();
       this.parametertype4.type = 'text',
-      this.parametertype4.text = this.booking.totalAmount.toString();
+      this.parametertype4.text = this.booking.totalAmount.toFixed(2);
       this.parameterss4.push(this.parametertype4);
       this.parametertype4 = new Para();
       this.parametertype4.type = 'text',
-      this.parametertype4.text = this.booking.totalAmount.toString();
+      this.parametertype4.text = this.booking.totalAmount.toFixed(2);
       this.parameterss4.push(this.parametertype4);
       this.componentstype4.parameters =this.parameterss4;
       this.components2.push(this.componentstype4);
