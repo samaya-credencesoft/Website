@@ -92,8 +92,8 @@
           alt=""
           height="15px"
           width="15px"
-          style="margin-right: 3px"
-
+          style="margin-right: 3px;cursor: pointer;"
+          (click)="copyText()"
 
         />
         <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
@@ -351,8 +351,8 @@
         <div class="details-card" style="margin-top: 20px">
           <table style="width: 88%">
             <tr>
-              <td>Tax Amount ({{ booking.taxPercentage }}%)</td>
-              <td>₹ {{ booking.taxAmount }}</td>
+              <td>Tax Amount ({{ totalPercentage }}%)</td>
+              <td>₹ {{ booking?.taxAmount }}</td>
             </tr>
 
 
@@ -570,7 +570,7 @@ Applied!</strong>
 
 <div class="mobile-view-booking-voucher">
   <div style="margin-top: 10px">
-    <div style="display: flex; justify-content: right; font-size: 12px">
+    <div style="display: flex; justify-content: right; font-size: 12px;margin-right: 5px;">
       <div><strong>Need Assistance?</strong></div>
       <div
         class="contact-info"
@@ -662,8 +662,8 @@ Applied!</strong>
             alt=""
             height="15px"
             width="15px"
-            style="margin-right: 3px"
-
+            style="margin-right: 3px;cursor: pointer;"
+            (click)="copyText()"
 
           />
           <a href="https://thehotelmate.com/history" style="margin-left: 5px; font-size: 13px; color: #1465cf; text-decoration: none;"
@@ -1027,8 +1027,8 @@ Complete your booking now to save big on your stay.
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
-          <td>Tax Amount ({{booking.taxPercentage}}%)</td>
-          <td>₹ {{booking.taxAmount}}</td>
+          <td>Tax Amount ({{totalPercentage}}%)</td>
+          <td>₹ {{booking?.taxAmount}}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
