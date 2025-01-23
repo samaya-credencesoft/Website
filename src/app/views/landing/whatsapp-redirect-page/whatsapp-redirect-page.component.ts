@@ -120,6 +120,8 @@ bookingdetails: any;
 calculatedServices: any[];
 totalServiceCost: number = 0;
 bookingroomPrice: string;
+  propertyDetails: any;
+
 
 
   constructor(
@@ -169,6 +171,16 @@ bookingroomPrice: string;
       this.bookingroomPrice = this.token.getRoomPrice();
 }
 
+this.storedPromo = localStorage.getItem('selectPromo');
+    if(this.storedPromo == 'true'){
+     const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
+     this.selectedPromo = selectedPromoData
+     // this.businessOfferDto = selectedPromoData
+   console.log(selectedPromoData)
+   }else{
+     this.getOfferDetails();
+   }
+
   }
 
   ngOnInit() {
@@ -196,6 +208,16 @@ bookingroomPrice: string;
         this.bookingdetails = response.body;
         console.log("dfghjkl;" + JSON.stringify(this.bookingdetails));
         this.booking = this.bookingdetails.bookingDetails;
+        this.booking.taxDetails.forEach(item=>{
+          if(item.name === 'CGST'){
+            this.percentage1 = item.percentage;
+          }
+
+          if(item.name === 'SGST'){
+            this.percentage2 = item.percentage;
+          }
+        })
+        this.totalPercentage =  this.percentage1 +  this.percentage2;
         if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
           this.bookingRoomPrice = this.token.getBookingRoomPrice();
         }
@@ -320,6 +342,69 @@ bookingroomPrice: string;
         } catch (error) {
 
           // Handle the error appropriately, if needed.
+        }
+      }
+
+      getOfferDetails() {
+        this.hotelbooking
+          .getOfferDetailsBySeoFriendlyName(this.propertyDetails?.seoFriendlyName)
+          .subscribe((data) => {
+            this.businessOfferDto = data.body;
+            this.promocodeListChip = this.checkValidCouponOrNot(data.body);
+
+          });
+      }
+
+      checkValidCouponOrNot(couponList?){
+        try{
+          const currentDate = new Date();
+          const validCoupons = [];
+          couponList.forEach((coupon) => {
+            if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+              const startDate = new Date(coupon.startDate);
+              const endDate = new Date(coupon.endDate);
+              // Check if the current date is within the start and end date
+              if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+                validCoupons.push(coupon);
+              }
+            }
+          });
+          return validCoupons;
+        }
+        catch(error){
+          console.error("Error in checkValidCouponOrNot : ",error);
+        }
+      }
+
+      copyText() {
+
+        // Find the element
+        const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+        if (textToCopy) {
+          // Create a temporary textarea element
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+
+          // Add to the document body
+          document.body.appendChild(textarea);
+
+          // Select and copy the content
+          textarea.select();
+          document.execCommand('copy');
+
+          // Remove the textarea element
+          document.body.removeChild(textarea);
+
+          // Notify the user
+          // alert('Enquiry ID copied to clipboard!');
+          this.copyTextOne = true;
+          setTimeout(() => {
+            this.copyTextOne = false;
+          }, 1000);
+        } else {
+          // alert('Failed to copy text.');
+          this.copyTextOne = false;
         }
       }
 

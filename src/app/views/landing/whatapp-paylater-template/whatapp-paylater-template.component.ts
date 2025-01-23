@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Booking } from 'src/app/model/booking';
+import { BusinessOfferDto } from 'src/app/model/businessOfferDto';
 import { BusinessUser } from 'src/app/model/user';
 import { HotelBookingService } from 'src/services/hotel-booking.service';
 import { ListingService } from 'src/services/listing.service';
@@ -28,8 +29,13 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
  policies = [];
  loader: boolean;
  propertyServiceListData: any[] = [];
-  propertyId: any;
-  isReadMore: boolean[] = [];
+ propertyId: any;
+ isReadMore: boolean[] = [];
+ businessOfferDto: BusinessOfferDto;
+ bookingOne:Booking;
+  percentage1: number;
+  percentage2: number;
+  totalPercentage: any;
 
 
   constructor(
@@ -40,7 +46,19 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
         private router: Router,
 
   ) {
-    this.businessUser = new BusinessUser()
+    this.businessUser = new BusinessUser();
+    this.bookingOne = this.token.getBookingData();
+    console.log('bookingone is',this.bookingOne);
+
+    this.storedPromo = localStorage.getItem('selectPromo');
+    if(this.storedPromo == 'true'){
+     const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
+     this.selectedPromo = selectedPromoData
+     // this.businessOfferDto = selectedPromoData
+   console.log(selectedPromoData)
+   }else{
+     this.getOfferDetails();
+   }
 
   }
 
@@ -67,6 +85,16 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
         this.bookingdetails = response.body;
         this.booking = this.bookingdetails.bookingDetails;
         console.log('booking is',this.booking);
+        this.booking.taxDetails.forEach(item=>{
+          if(item.name === 'CGST'){
+            this.percentage1 = item.percentage;
+          }
+
+          if(item.name === 'SGST'){
+            this.percentage2 = item.percentage;
+          }
+        })
+        this.totalPercentage =  this.percentage1 +  this.percentage2;
         if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
           this.bookingRoomPrice = this.token.getBookingRoomPrice();
         }
@@ -128,4 +156,66 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
     this.isReadMore[index] = !this.isReadMore[index];
   }
 
+  getOfferDetails() {
+    this.hotelbooking
+      .getOfferDetailsBySeoFriendlyName(this.propertyDetails.seoFriendlyName)
+      .subscribe((data) => {
+        this.businessOfferDto = data.body;
+        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
+
+      });
+  }
+
+  checkValidCouponOrNot(couponList?){
+    try{
+      const currentDate = new Date();
+      const validCoupons = [];
+      couponList.forEach((coupon) => {
+        if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+          const startDate = new Date(coupon.startDate);
+          const endDate = new Date(coupon.endDate);
+          // Check if the current date is within the start and end date
+          if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+            validCoupons.push(coupon);
+          }
+        }
+      });
+      return validCoupons;
+    }
+    catch(error){
+      console.error("Error in checkValidCouponOrNot : ",error);
+    }
+  }
+
+  copyText() {
+
+    // Find the element
+    const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+    if (textToCopy) {
+      // Create a temporary textarea element
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+
+      // Add to the document body
+      document.body.appendChild(textarea);
+
+      // Select and copy the content
+      textarea.select();
+      document.execCommand('copy');
+
+      // Remove the textarea element
+      document.body.removeChild(textarea);
+
+      // Notify the user
+      // alert('Enquiry ID copied to clipboard!');
+      this.copyTextOne = true;
+      setTimeout(() => {
+        this.copyTextOne = false;
+      }, 1000);
+    } else {
+      // alert('Failed to copy text.');
+      this.copyTextOne = false;
+    }
+  }
 }
