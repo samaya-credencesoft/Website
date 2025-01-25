@@ -116,7 +116,9 @@ textToCopyOne: string = 'This is some text to copy';
   parameterss1:Para[];
   bookingId: string;
   referenceNumber: string;
-
+  DiffDate;
+  enddate;
+  startDate;
   paymentSucess:boolean = false;
   paymenterror: boolean;
 
@@ -239,6 +241,12 @@ textToCopyOne: string = 'This is some text to copy';
                 if (this.bookingData.propertyId != null && this.bookingData.propertyId != undefined) {
                   this.getPropertyDetailsById(this.bookingData.propertyId);
                 }
+
+                if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
+                  this.bookingRoomPrice = this.token.getBookingRoomPrice();
+
+
+                }
   }
 
   ngOnInit() {
@@ -299,6 +307,7 @@ textToCopyOne: string = 'This is some text to copy';
       this.bookingConfirmed = true;
     }
     this.currency = 'INR';
+    this.getDiffDate(this.toDate, this.fromDate);
   }
   getOfferDetails() {
     this.hotelBookingService
@@ -667,6 +676,27 @@ this.hotelBookingService
     }
   }
 
+  getDiffDate(toDate, fromDate) {
+    this.enddate = new Date(toDate.year, toDate.month - 1, toDate.day);
+
+    this.startDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
+    // console.log('this.fromDate: ', this.startDate);
+    // console.log('this.toDate: ', this.enddate);
+    this.DiffDate = Math.floor(
+      (Date.UTC(
+        this.enddate.getFullYear(),
+        this.enddate.getMonth(),
+        this.enddate.getDate()
+      ) -
+        Date.UTC(
+          this.startDate.getFullYear(),
+          this.startDate.getMonth(),
+          this.startDate.getDate()
+        )) /
+        (1000 * 60 * 60 * 24)
+    );
+  }
+
 
   calculateServiceHours (){
     this.accommodationService = this.businessUser.businessServiceDtoList.filter(service => service.name === "Accommodation");
@@ -805,7 +835,9 @@ this.externalReservationdto =res.body
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.roomPrice = this.booking.roomTariffBeforeDiscount;
+    // this.enquiryForm.roomPrice = this.booking.roomTariffBeforeDiscount;
+    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
+    console.log('room price is',this.enquiryForm.roomPrice);
     this.enquiryForm.createdDate = new Date();
     this.enquiryForm.fromTime = Number(this.token.getFromTime());
     this.enquiryForm.toTime = Number(this.token.getToTime());
