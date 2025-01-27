@@ -643,6 +643,8 @@ export class ListingDetailOneComponent implements OnInit {
   distance: PropertyServiceDTO;
   isRestaurant: PropertyServiceDTO;
   DistanceRailway: PropertyServiceDTO;
+  isDistanceBusStop:PropertyServiceDTO;
+  isDistanceTouristPlace:PropertyServiceDTO;
   counterb = 0;
   counterl = 0;
   counterd = 0;
@@ -3459,6 +3461,13 @@ clicked(){
               if (fac.serviceType == 'DistanceRailway') {
                 this.DistanceRailway = fac;
               }
+              if(fac.serviceType == 'DistanceBusStop'){
+                this.isDistanceBusStop = fac;
+              }
+
+              if(fac.serviceType == 'DistanceTouristPlace'){
+                this.isDistanceTouristPlace = fac;
+              }
 
               if (fac.name == 'BreakFast, Lunch, Dinner') {
                 this.bld = fac;
@@ -3906,6 +3915,13 @@ clicked(){
               }
               if (fac.serviceType == 'DistanceRailway') {
                 this.DistanceRailway = fac;
+              }
+              if(fac.serviceType == 'DistanceBusStop'){
+                this.isDistanceBusStop = fac;
+              }
+
+              if(fac.serviceType == 'DistanceTouristPlace'){
+                this.isDistanceTouristPlace = fac;
               }
 
               if (fac.name == 'BreakFast, Lunch, Dinner') {
