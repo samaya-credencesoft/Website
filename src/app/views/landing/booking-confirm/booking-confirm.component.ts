@@ -119,6 +119,8 @@ textToCopyOne: string = 'This is some text to copy';
 
   paymentSucess:boolean = false;
   paymenterror: boolean;
+  bookingOne:Booking;
+
 
   constructor(
     private http: HttpClient,
@@ -130,6 +132,7 @@ textToCopyOne: string = 'This is some text to copy';
     private location: Location,
     private router: Router,
     private listingService: ListingService,
+    private datePipe: DatePipe,
   ) {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
@@ -357,6 +360,7 @@ checkValidCouponOrNot(couponList?){
       {
         setTimeout(() => {
           this.booking = this.token.getBookingData();
+          this.bookingOne = this.token.getBookingData();
           this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
                     }, 500);
 
@@ -455,7 +459,7 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
 
-    this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+     this.booking.taxAmount = this.bookingOne.taxAmount;
     this.booking.roomPrice = Number(this.token.getRoomPrice());
 
 //     this.propertyServices = this.savedServices;
@@ -485,11 +489,11 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
           this.sendWhatsappMessageToTHM();
-          this.sendWhatsappMessageToTHM1();
-          this.sendWhatsappMessageToTHM2();
-          this.sendWhatsappMessageToTHM3();
-          this.sendWhatsappMessageToTHM4();
-          this.sendWhatsappMessageToTHM5();
+          // this.sendWhatsappMessageToTHM1();
+          // this.sendWhatsappMessageToTHM2();
+          // this.sendWhatsappMessageToTHM3();
+          // this.sendWhatsappMessageToTHM4();
+          // this.sendWhatsappMessageToTHM5();
           this.payment.referenceNumber = this.booking.propertyReservationNumber;
           this.payment.externalReference = this.booking.externalBookingID;
           if (
@@ -815,7 +819,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     this.enquiryForm.planCode = this.booking.planCode;
@@ -1177,22 +1181,30 @@ this.externalReservationdto =res.body
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = " ";
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-    this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-    this.parametertype2.text = " ";
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -1217,12 +1229,12 @@ this.externalReservationdto =res.body
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = this.booking.totalAmount.toString();
+    this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = String(this.booking.advanceAmount);
+    this.parametertype2.text = String(this.booking.advanceAmount.toFixed(2));
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -1253,7 +1265,7 @@ this.externalReservationdto =res.body
 
     this.template.components = this.components;
     this.whatsappForm.template =this.template;
-    this.whatsappForm.to = "7608935904",
+    this.whatsappForm.to = "9337930186",
     this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;

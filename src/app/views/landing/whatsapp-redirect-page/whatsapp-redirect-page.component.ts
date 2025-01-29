@@ -121,7 +121,7 @@ bookingdetails: any;
 calculatedServices: any[];
 totalServiceCost: number = 0;
 bookingroomPrice: string;
-
+taxPercentage: number;
 
   constructor(
     private http: HttpClient,
@@ -176,10 +176,8 @@ bookingroomPrice: string;
 
 
     this.acRoute.queryParams.subscribe((params) => {
-      console.log('params data is',params);
       if (params["bookingId"] !== undefined) {
         this.bookingId = params["bookingId"];
-        console.log('business data is',this.bookingId);
       }
     });
     this.getBookingByid(this.bookingId);
@@ -195,14 +193,23 @@ bookingroomPrice: string;
 
       if (response.body) {
         this.bookingdetails = response.body;
-        console.log("dfghjkl;" + JSON.stringify(this.bookingdetails));
         this.booking = this.bookingdetails.bookingDetails;
         if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
           this.bookingRoomPrice = this.token.getBookingRoomPrice();
         }
 
+        this.bookingdetails.bookingDetails.taxDetails.forEach(item=>{
+          if(item.name === 'CGST'){
+            this.percentage1 = item.percentage;
+          }
 
-       console.log("booking issssssssss;" + JSON.stringify(this.booking));
+          if(item.name === 'SGST'){
+            this.percentage2 = item.percentage;
+          }
+        })
+        this.taxPercentage = (this.percentage1 + this.percentage2);
+
+
         await this.getpropertyByid(this.bookingdetails.bookingDetails.propertyId);
         await this.getPropertyDetailsById(this.bookingdetails.bookingDetails.propertyId);
       } else {
@@ -220,11 +227,42 @@ bookingroomPrice: string;
 
     try {
       const response = await this.listingService.findByPropertyId(id).toPromise();
-      console.log("Response body: "+JSON.stringify(response.body));
       if (response.body != null) {
         this.businessUser = response.body;
+
+        if (this.businessUser.taxDetails.length > 0) {
+          this.businessUser.taxDetails.forEach((element) => {
+            if (element.name === 'GST') {
+              this.booking.taxDetails = [];
+              this.booking.taxDetails.push(element);
+              this.taxPercentage = element.percentage;
+              this.booking.taxPercentage = this.taxPercentage;
+
+              if (element.taxSlabsList.length > 0) {
+                element.taxSlabsList.forEach((element2) => {
+                  if (
+                    element2.maxAmount > this.booking.roomPrice &&
+                    element2.minAmount < this.booking.roomPrice
+                  ) {
+                    this.taxPercentage = element2.percentage;
+                    this.booking.taxPercentage = this.taxPercentage;
+                  } else if (
+                    element2.maxAmount <
+                    this.booking.roomPrice
+                  ) {
+                    this.taxPercentage = element2.percentage;
+                    this.booking.taxPercentage = this.taxPercentage;
+                  }
+                });
+              }
+            }
+          });
+
+          // this.taxPercentage = this.booking.taxDetails[0].percentage;
+        }
+
+
         this.calculateServiceHours();
-        console.log(JSON.stringify(this.businessUser));
       } else {
         // Handle the case when the response body is empty or missing
       }
@@ -237,7 +275,6 @@ bookingroomPrice: string;
 
   calculateServiceHours (){
     this.accommodationService = this.businessUser.businessServiceDtoList.filter(service => service.name === "Accommodation");
-    console.log(" this.accommodationService" + JSON.stringify( this.accommodationService))
   }
 
 
@@ -292,11 +329,9 @@ bookingroomPrice: string;
           const data = await this.listingService?.findByPropertyId(id).toPromise();
           if (data.status === 200) {
             this.businessUser = data.body;
-            console.log('businessUser is',this.businessUser);
             this.policies = this.businessUser.businessServiceDtoList.filter(
               (ele) => ele.name === 'Accommodation'
             );
-            console.log('polices is',this.policies);
             this.calculateServiceHours()
             this.businessUser?.socialMediaLinks.forEach(element => {
               this.socialmedialist=element
@@ -334,5 +369,66 @@ bookingroomPrice: string;
         }
       }
 
+      copyText() {
+
+        // Find the element
+        const textToCopy = document.getElementById('textToCopy')?.innerText.trim();
+
+        if (textToCopy) {
+          // Create a temporary textarea element
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+
+          // Add to the document body
+          document.body.appendChild(textarea);
+
+          // Select and copy the content
+          textarea.select();
+          document.execCommand('copy');
+
+          // Remove the textarea element
+          document.body.removeChild(textarea);
+
+          // Notify the user
+          // alert('Enquiry ID copied to clipboard!');
+          this.copyTextOne = true;
+          setTimeout(() => {
+            this.copyTextOne = false;
+          }, 1000);
+        } else {
+          // alert('Failed to copy text.');
+          this.copyTextOne = false;
+        }
+      }
+
+      getOfferDetails() {
+        this.hotelbooking
+          .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
+          .subscribe((data) => {
+            this.businessOfferDto = data.body;
+            this.promocodeListChip = this.checkValidCouponOrNot(data.body);
+          });
+      }
+
+      checkValidCouponOrNot(couponList?){
+        try{
+          const currentDate = new Date();
+          const validCoupons = [];
+          couponList.forEach((coupon) => {
+            if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+              const startDate = new Date(coupon.startDate);
+              const endDate = new Date(coupon.endDate);
+              // Check if the current date is within the start and end date
+              if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+                validCoupons.push(coupon);
+              }
+            }
+          });
+          return validCoupons;
+        }
+        catch(error){
+          console.error("Error in checkValidCouponOrNot : ",error);
+        }
+      }
 
 }

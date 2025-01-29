@@ -267,7 +267,7 @@
           <table style="width: 88%">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{ booking.roomPrice }}</td>
+              <td>₹{{ booking.beforeTaxAmount | number:'1.2-2'}}</td>
             </tr>
             <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
@@ -325,16 +325,16 @@
           <table style="width: 88%">
             <tr>
               <td>Tax Amount ({{ bookingone.taxPercentage }}%)</td>
-              <td>₹ {{ booking.taxAmount }}</td>
+              <td>₹ {{ booking.taxAmount | number:'1.2-2' }}</td>
             </tr>
 
             <tr>
               <td>Total Payable Amount</td>
-              <td>₹ {{ booking.totalAmount }}</td>
+              <td>₹ {{ booking.totalAmount | number:'1.2-2' }}</td>
             </tr>
             <tr>
               <td>Due Amount</td>
-              <td>₹{{ booking.totalAmount }}</td>
+              <td>₹{{ booking.totalAmount | number:'1.2-2'}}</td>
             </tr>
           </table>
         </div>
@@ -820,7 +820,7 @@ Applied!</strong>
       <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{booking.roomPrice}}</td>
+          <td>₹{{booking.beforeTaxAmount | number:'1.2-2'}}</td>
         </tr>
         <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Person Charges</td>
@@ -948,18 +948,18 @@ Complete your booking now to save big on your stay.
       <table style="width: 88%">
         <tr>
           <td>Tax Amount ({{bookingone.taxPercentage}}%)</td>
-          <td>₹ {{booking.taxAmount}}</td>
+          <td>₹ {{booking.taxAmount | number:'1.2-2'}}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+          <td>₹ {{booking.totalAmount | number:'1.2-2'}}</td>
         </tr>
 
 
 
         <tr>
           <td>Due Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+          <td>₹ {{booking.totalAmount | number:'1.2-2'}}</td>
         </tr>
       </table>
     </div>
