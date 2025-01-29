@@ -29,13 +29,15 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
  policies = [];
  loader: boolean;
  propertyServiceListData: any[] = [];
-  propertyId: any;
-  isReadMore: boolean[] = [];
-  businessOfferDto: BusinessOfferDto;
+ propertyId: any;
+ isReadMore: boolean[] = [];
+ businessOfferDto: BusinessOfferDto;
+ bookingOne:Booking;
+  percentage1: number;
+  percentage2: number;
+  totalPercentage: any;
   currency: any;
   taxPercentage: number;
-  percentage1: number;
-  percentage2:number;
   // totalPercentage: number;
 
   constructor(
