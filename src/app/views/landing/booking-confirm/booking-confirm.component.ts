@@ -121,6 +121,8 @@ textToCopyOne: string = 'This is some text to copy';
   startDate;
   paymentSucess:boolean = false;
   paymenterror: boolean;
+  bookingOne:Booking;
+
 
   constructor(
     private http: HttpClient,
@@ -132,7 +134,7 @@ textToCopyOne: string = 'This is some text to copy';
     private location: Location,
     private router: Router,
     private listingService: ListingService,
-    private datePipe:DatePipe,
+    private datePipe: DatePipe,
   ) {
     this.businessUser = new BusinessUser();
     this.booking = new Booking();
@@ -367,6 +369,7 @@ checkValidCouponOrNot(couponList?){
       {
         setTimeout(() => {
           this.booking = this.token.getBookingData();
+          this.bookingOne = this.token.getBookingData();
           this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
                     }, 500);
 
@@ -465,7 +468,7 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
 
-    this.booking.taxAmount = (this.bookingRoomPrice * this.totalPercentage) / 100;
+     this.booking.taxAmount = this.bookingOne.taxAmount;
     this.booking.roomPrice = Number(this.token.getRoomPrice());
 
 //     this.propertyServices = this.savedServices;
@@ -1214,14 +1217,13 @@ this.externalReservationdto =res.body
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-              this.parametertype2.type = 'text';
-                  if (this.booking.fromTime) {
-                     this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
-                  } else {
-                     this.parametertype2.text = " ";
-                  }
-              this.parameterss2.push(this.parametertype2);
-
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
+    this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
@@ -1265,7 +1267,7 @@ this.externalReservationdto =res.body
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = String((this.booking.advanceAmount).toFixed(2));
+    this.parametertype2.text = String(this.booking.advanceAmount.toFixed(2));
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();

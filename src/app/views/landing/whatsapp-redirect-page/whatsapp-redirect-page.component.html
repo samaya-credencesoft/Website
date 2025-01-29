@@ -34,7 +34,7 @@
               >
             </div>
           </div>
-          <p style="margin-bottom: -19px; margin-top: -12px" *ngIf="accommodationService[0]?.checkInTime">
+          <p style="margin-bottom: -19px; margin-top: -12px" *ngIf="accommodationService?.length > 0  && accommodationService[0]?.checkInTime">
             Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
           </p>
         </div>
@@ -248,19 +248,19 @@
               font-size: 26px !important;
             "
           >
-            {{ businessUser.name }}
+            {{ businessUser?.name }}
           </h2>
           <h5>
-            {{ businessUser.address.city }},{{
-              businessUser.address.state
-            }}, {{ businessUser.address.country }}
+            {{ businessUser?.address?.city }},{{
+              businessUser?.address?.state
+            }}, {{ businessUser?.address?.country }}
           </h5>
           <h4
             class="text-muted"
             style="font-size: 15px"
-            [innerHTML]="businessUser.businessDescription"
+            [innerHTML]="businessUser?.businessDescription"
           >
-            {{ businessUser.businessDescription }}
+            {{ businessUser?.businessDescription }}
           </h4>
         </div>
       </div>
@@ -282,7 +282,7 @@
           <table style="width: 88%;">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{bookingRoomPrice}}</td>
+              <td>₹{{booking?.beforeTaxAmount}}</td>
             </tr>
             <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
@@ -628,7 +628,7 @@ Applied!</strong>
         text-align: right;
         font-size: 12px;
         margin-right: 5px;
-      " *ngIf="accommodationService[0]?.checkInTime"
+      " *ngIf="accommodationService?.length > 0  && accommodationService[0]?.checkInTime"
     >
       Working Hours: <span>{{accommodationService[0]?.checkInTime}} AM to {{accommodationService[0]?.checkOutTime}} PM</span>
     </div>
@@ -678,7 +678,7 @@ Applied!</strong>
       alt=""
       height="15px"
       width="15px"
-      style="margin-right: 3px !important; margin-left: 5px !important;"
+      style="margin-right: 3px !important; margin-left: 5px !important;cursor: pointer;"
       (click)="copyText()"
 
     />
@@ -726,11 +726,11 @@ Applied!</strong>
         margin-bottom: 0px;
       "
     >
-    {{businessUser.name}}
+    {{businessUser?.name}}
     </h2>
-    <h5 style="font-size: 15px; margin-bottom: 0px">{{businessUser.address.city}},{{businessUser.address.state}}, {{businessUser.address.country}}</h5>
-    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="businessUser.businessDescription">
-      {{businessUser.businessDescription}}
+    <h5 style="font-size: 15px; margin-bottom: 0px">{{businessUser?.address?.city}},{{businessUser?.address?.state}}, {{businessUser?.address?.country}}</h5>
+    <h4 style="font-size: 15px; margin-bottom: 0px" [innerHTML]="businessUser?.businessDescription">
+      {{businessUser?.businessDescription}}
     </h4>
   </div>
 
@@ -895,7 +895,7 @@ Applied!</strong>
       <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{bookingRoomPrice}}</td>
+          <td>₹{{booking?.beforeTaxAmount}}</td>
         </tr>
         <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Pax Charges</td>

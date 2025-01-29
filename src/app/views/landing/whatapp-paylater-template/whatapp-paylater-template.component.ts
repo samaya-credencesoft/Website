@@ -36,7 +36,9 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
   percentage1: number;
   percentage2: number;
   totalPercentage: any;
-
+  currency: any;
+  taxPercentage: number;
+  // totalPercentage: number;
 
   constructor(
     private acRoute: ActivatedRoute,
@@ -99,6 +101,18 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
           this.bookingRoomPrice = this.token.getBookingRoomPrice();
         }
 
+        this.bookingdetails.bookingDetails.taxDetails.forEach(item=>{
+          if(item.name === 'CGST'){
+            this.percentage1 = item.percentage;
+          }
+
+          if(item.name === 'SGST'){
+            this.percentage2 = item.percentage;
+          }
+        })
+        this.taxPercentage = (this.percentage1 + this.percentage2);
+
+
 
        this.propertyId = this.bookingdetails.bookingDetails.propertyId;
         await this.getpropertyByid(this.bookingdetails.bookingDetails.propertyId);
@@ -118,6 +132,47 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
       if (response.body != null) {
         this.businessUser = response.body;
         console.log('business user is',this.businessUser);
+        this.currency = this.businessUser.localCurrency.toUpperCase();
+        this.storedPromo = localStorage.getItem('selectPromo');
+        if(this.storedPromo == 'true'){
+         const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
+         this.selectedPromo = selectedPromoData
+       console.log(selectedPromoData)
+       }else{
+         this.getOfferDetails();
+       }
+       if (this.businessUser.taxDetails.length > 0) {
+        this.businessUser.taxDetails.forEach((element) => {
+          if (element.name === 'GST') {
+            this.booking.taxDetails = [];
+            this.booking.taxDetails.push(element);
+            this.taxPercentage = element.percentage;
+            this.booking.taxPercentage = this.taxPercentage;
+
+            // //console.log("room price :" +this.booking.roomPrice)
+            if (element.taxSlabsList.length > 0) {
+              element.taxSlabsList.forEach((element2) => {
+                if (
+                  element2.maxAmount > this.booking.roomPrice &&
+                  element2.minAmount < this.booking.roomPrice
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (
+                  element2.maxAmount <
+                  this.booking.roomPrice
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+              });
+            }
+          }
+        });
+
+        // this.taxPercentage = this.booking.taxDetails[0].percentage;
+      }
+
         this.calculateServiceHours();
         this.policies = this.businessUser.businessServiceDtoList.filter(
           (ele) => ele.name === 'Accommodation'
@@ -156,37 +211,6 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
     this.isReadMore[index] = !this.isReadMore[index];
   }
 
-  getOfferDetails() {
-    this.hotelbooking
-      .getOfferDetailsBySeoFriendlyName(this.propertyDetails.seoFriendlyName)
-      .subscribe((data) => {
-        this.businessOfferDto = data.body;
-        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
-
-      });
-  }
-
-  checkValidCouponOrNot(couponList?){
-    try{
-      const currentDate = new Date();
-      const validCoupons = [];
-      couponList.forEach((coupon) => {
-        if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
-          const startDate = new Date(coupon.startDate);
-          const endDate = new Date(coupon.endDate);
-          // Check if the current date is within the start and end date
-          if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
-            validCoupons.push(coupon);
-          }
-        }
-      });
-      return validCoupons;
-    }
-    catch(error){
-      console.error("Error in checkValidCouponOrNot : ",error);
-    }
-  }
-
   copyText() {
 
     // Find the element
@@ -218,4 +242,36 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
       this.copyTextOne = false;
     }
   }
+
+  getOfferDetails() {
+    this.hotelbooking
+      .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
+      .subscribe((data) => {
+        this.businessOfferDto = data.body;
+        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
+      });
+  }
+
+  checkValidCouponOrNot(couponList?){
+    try{
+      const currentDate = new Date();
+      const validCoupons = [];
+      couponList.forEach((coupon) => {
+        if (coupon.startDate && coupon.endDate && coupon.discountPercentage) {
+          const startDate = new Date(coupon.startDate);
+          const endDate = new Date(coupon.endDate);
+          // Check if the current date is within the start and end date
+          if (currentDate >= startDate && currentDate <= endDate && coupon.discountPercentage != 100) {
+            validCoupons.push(coupon);
+          }
+        }
+      });
+      return validCoupons;
+    }
+    catch(error){
+      console.error("Error in checkValidCouponOrNot : ",error);
+    }
+  }
+
+
 }
