@@ -282,7 +282,7 @@
           <table style="width: 88%">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{ booking.roomPrice }}</td>
+              <td>₹{{ booking.beforeTaxAmount | number:'1.2-2' }}</td>
             </tr>
             <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
@@ -351,18 +351,18 @@
         <div class="details-card" style="margin-top: 20px">
           <table style="width: 88%">
             <tr>
-              <td>Tax Amount ({{ totalPercentage }}%)</td>
-              <td>₹ {{ booking?.taxAmount | number:'1.2-2' }}</td>
+              <td>Tax Amount ({{ taxPercentage }}%)</td>
+              <td>₹ {{ booking.taxAmount | number:'1.2-2'}}</td>
             </tr>
 
 
             <tr>
               <td>Total Payable Amount</td>
-              <td>₹ {{ booking.totalAmount | number:'1.2-2' }}</td>
+              <td>₹ {{ booking.totalAmount | number:'1.2-2'}}</td>
             </tr>
             <tr>
               <td>Due Amount</td>
-              <td>₹{{ booking.totalAmount | number:'1.2-2' }}</td>
+              <td>₹{{ booking.totalAmount | number:'1.2-2'}}</td>
             </tr>
           </table>
         </div>
@@ -570,7 +570,7 @@ Applied!</strong>
 
 <div class="mobile-view-booking-voucher">
   <div style="margin-top: 10px">
-    <div style="display: flex; justify-content: right; font-size: 12px;margin-right: 5px;">
+    <div style="display: flex; justify-content: right; font-size: 12px;margin-right:5px;">
       <div><strong>Need Assistance?</strong></div>
       <div
         class="contact-info"
@@ -879,7 +879,7 @@ Applied!</strong>
       <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{booking.roomPrice}}</td>
+          <td>₹{{booking.beforeTaxAmount | number:'1.2-2'}}</td>
         </tr>
         <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Person Charges</td>
@@ -1027,8 +1027,8 @@ Complete your booking now to save big on your stay.
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
-          <td>Tax Amount ({{totalPercentage}}%)</td>
-          <td>₹ {{booking?.taxAmount | number:'1.2-2'}}</td>
+          <td>Tax Amount ({{taxPercentage}}%)</td>
+          <td>₹ {{booking.taxAmount | number:'1.2-2' }}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
