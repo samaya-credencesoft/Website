@@ -977,7 +977,7 @@ const currentTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds
         propertyName:propertyName,
         currentDate:currentTimeString,
       };
-      fetch('https://chatbot.uat.bookone.io/api/chatbot/receive-payload', {
+      fetch('https://chatbot.api.thehotelmate.com/api/chatbot/receive-payload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
