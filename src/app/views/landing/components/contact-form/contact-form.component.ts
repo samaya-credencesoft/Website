@@ -34,7 +34,7 @@ export class ContactFormComponent implements OnInit {
     {name: 'Booking Engine', value: 'Booking Engine'},
     {name: 'Booking Management', value: 'Booking Management'},
     {name: 'Channel Management', value: 'Channel Management'},
-    {name: 'Revenue Management', value: 'Resvenue Management'},
+    {name: 'Revenue Management', value: 'Revenue Management'},
     {name: 'Analytics', value: 'Analytics'},
     {name: 'Room Management', value: 'Room Management'},
     {name: 'Bookone Mobile App', value: 'Bookone Mobile App'},
@@ -123,23 +123,23 @@ export class ContactFormComponent implements OnInit {
     console.log("this is cliked ");
     console.log(JSON.stringify(this.subscriptions));
     const TO_EMAIL = 'samaya.muduli@credencesoft.co.nz';
-    
+
     const API_URL = 'https://api.bookonelocal.in/api-bookone/';
 
-    
+
 
     this.email.fromEmail = form.value.email;
     this.email.toEmail = TO_EMAIL;
     this.name = form.value.name;
-    
+
     this.serviceName = '' + this.subscriptions;
-    
+
     this.email.message = 'Name: ' + this.name + '\nEmail: ' + form.value.email + ' \nSelected Subscriptions: ' + this.serviceName + ' \nSubscriptions Term: ' + this.term + ' \nCountry: ' + this.country + ' \nProperty Size: ' + this.propertySize + ' \nNo Of Rooms: ' + this.noOfRoom + ' \nMessage: ' + form.value.message + '. \n*****this message is sent from BookOnePMS Website.******';
 
     console.log(this.subscriptions + ' ' + this.name);
     this.email.subject = '' + this.subjects ;
     console.log('form data ' + JSON.stringify(this.email));
-    
+
    this.http.post<Email>(API_URL + 'api/website/sendEmailFromWebSite', this.email ).
    subscribe(response => {
     this.success = response;
