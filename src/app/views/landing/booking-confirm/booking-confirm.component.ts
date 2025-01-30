@@ -369,7 +369,7 @@ checkValidCouponOrNot(couponList?){
       {
         setTimeout(() => {
           this.booking = this.token.getBookingData();
-          this.bookingOne = this.token.getBookingData();
+          // this.bookingOne = this.token.getBookingData();
           this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
                     }, 500);
 
@@ -468,7 +468,8 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
 
-     this.booking.taxAmount = this.bookingOne.taxAmount;
+     this.booking.taxAmount = this.booking?.taxAmount;
+     console.log('tax amount is',this.booking.taxAmount);
     this.booking.roomPrice = Number(this.token.getRoomPrice());
 
 //     this.propertyServices = this.savedServices;

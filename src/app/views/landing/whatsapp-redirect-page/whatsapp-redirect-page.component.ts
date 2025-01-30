@@ -204,16 +204,7 @@ this.storedPromo = localStorage.getItem('selectPromo');
       if (response.body) {
         this.bookingdetails = response.body;
         this.booking = this.bookingdetails.bookingDetails;
-        this.booking.taxDetails.forEach(item=>{
-          if(item.name === 'CGST'){
-            this.percentage1 = item.percentage;
-          }
 
-          if(item.name === 'SGST'){
-            this.percentage2 = item.percentage;
-          }
-        })
-        this.totalPercentage =  this.percentage1 +  this.percentage2;
         if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
           this.bookingRoomPrice = this.token.getBookingRoomPrice();
         }

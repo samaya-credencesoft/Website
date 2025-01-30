@@ -39,6 +39,7 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
   currency: any;
   taxPercentage: number;
   // totalPercentage: number;
+  showMore:boolean  =false
 
   constructor(
     private acRoute: ActivatedRoute,
@@ -52,15 +53,15 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
     this.bookingOne = this.token.getBookingData();
     console.log('bookingone is',this.bookingOne);
 
-    this.storedPromo = localStorage.getItem('selectPromo');
-    if(this.storedPromo == 'true'){
-     const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
-     this.selectedPromo = selectedPromoData
-     // this.businessOfferDto = selectedPromoData
-   console.log(selectedPromoData)
-   }else{
-     this.getOfferDetails();
-   }
+  //   this.storedPromo = localStorage.getItem('selectPromo');
+  //   if(this.storedPromo == 'true'){
+  //    const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
+  //    this.selectedPromo = selectedPromoData
+  //    // this.businessOfferDto = selectedPromoData
+  //  console.log(selectedPromoData)
+  //  }else{
+  //    this.getOfferDetails();
+  //  }
 
   }
 
@@ -273,5 +274,8 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
     }
   }
 
+  // toggleView(): void {
+  //   this.showMore = !this.showMore;
+  // }
 
 }
