@@ -13,25 +13,25 @@ export class AboutCredencesoftComponent implements OnInit {
 
   projectcountstop: any = setInterval(() => {
     this.projectcount++;
-    if (this.projectcount == 1000) {
+    if (this.projectcount == 2500) {
       clearInterval(this.projectcountstop);
     }
   }, 20);
   accuratecountstop: any = setInterval(() => {
     this.accuratecount++;
-    if (this.accuratecount == 500) {
+    if (this.accuratecount == 200) {
       clearInterval(this.accuratecountstop);
     }
   }, 20);
   clientcountstop: any = setInterval(() => {
     this.clientcount++;
-    if (this.clientcount == 4) {
+    if (this.clientcount == 12) {
       clearInterval(this.clientcountstop);
     }
   }, 10);
   customerfeedbackstop: any = setInterval(() => {
     this.customerfeedback++;
-    if (this.customerfeedback == 20) {
+    if (this.customerfeedback == 2000) {
       clearInterval(this.customerfeedbackstop);
     }
   }, 20);

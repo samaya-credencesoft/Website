@@ -383,7 +383,7 @@
                 "
               />
             </div>
-            <div  *ngIf="promocodeListChip.length >0 ">
+            <div  *ngIf="promocodeListChip.length >0">
               <h5 style="color: #fff; font-weight: bold; font-size: 24px">
                 Save More On Your Booking!
               </h5>
@@ -434,7 +434,7 @@
 
     </div>
     <div *ngIf="selectedPromo">
-      <strong style="font-size: 18px;color: #fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
+      <strong style="font-size: 18px;color: #fff !important"> {{booking?.couponCode}} Coupon Code is
 Applied!</strong>
 <div style="margin: 0; font-size: 14px;color: #fff !important">
   You’re Saving ₹ {{booking.discountAmount}} on this booking!

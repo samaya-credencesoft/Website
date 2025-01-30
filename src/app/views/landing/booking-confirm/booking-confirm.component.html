@@ -326,12 +326,12 @@
           <table style="width: 88%">
             <tr>
               <td>Tax Amount ({{ bookinddata.taxPercentage }}%)</td>
-              <td>₹ {{ bookinddata.taxAmount }}</td>
+              <td>₹ {{ bookinddata.taxAmount | number: '1.2-2'}}</td>
             </tr>
 
             <tr>
               <td>Total Payable Amount</td>
-              <td>₹ {{ booking.totalAmount }}</td>
+              <td>₹ {{ booking.totalAmount | number: '1.2-2'}}</td>
             </tr>
             <tr>
               <td>Advance Amount</td>
@@ -836,11 +836,11 @@ Applied!</strong>
           <td>{{booking.roomRatePlanName}}</td>
           <td>₹{{booking?.beforeTaxAmount}}</td>
         </tr>
-        <tr>
+        <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Pax Charges</td>
           <td>₹{{booking.extraPersonCharge}}</td>
         </tr>
-        <tr>
+        <tr *ngIf="booking.extraChildCharge > 0">
           <td>Extra Child Charges</td>
           <td>₹{{booking.extraChildCharge}}</td>
         </tr>
@@ -962,11 +962,11 @@ Complete your booking now to save big on your stay.
       <table style="width: 88%">
         <tr>
           <td>Tax Amount ({{bookinddata.taxPercentage}}%)</td>
-          <td>₹ {{bookinddata.taxAmount}}</td>
+          <td>₹ {{bookinddata.taxAmount | number: '1.2-2'}}</td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
-          <td>₹ {{booking.totalAmount}}</td>
+          <td>₹ {{booking.totalAmount | number: '1.2-2'}}</td>
         </tr>
         <tr>
           <td>Advance Amount</td>

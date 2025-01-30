@@ -643,6 +643,8 @@ export class BookingComponent implements OnInit {
       this.showTheSelectedCoupon = true;
       this.visiblePromotion = false;
       this.showingSuccessMessage = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(coupon));
+      localStorage.setItem('selectPromo', 'true');
       setTimeout(() => {
         this.showingSuccessMessage = false;
       }, 3000);
@@ -2527,7 +2529,7 @@ export class BookingComponent implements OnInit {
 
     this.template.components = this.components;
     this.whatsappForm.template = this.template;
-    this.whatsappForm.to = "7852978916",
+    this.whatsappForm.to = "9337930186",
       this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;

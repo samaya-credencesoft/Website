@@ -34,7 +34,7 @@ export class ContactFormComponent implements OnInit {
     {name: 'Booking Engine', value: 'Booking Engine'},
     {name: 'Booking Management', value: 'Booking Management'},
     {name: 'Channel Management', value: 'Channel Management'},
-    {name: 'Revenue Management', value: 'Resvenue Management'},
+    {name: 'Revenue Management', value: 'Revenue Management'},
     {name: 'Analytics', value: 'Analytics'},
     {name: 'Room Management', value: 'Room Management'},
     {name: 'Bookone Mobile App', value: 'Bookone Mobile App'},
