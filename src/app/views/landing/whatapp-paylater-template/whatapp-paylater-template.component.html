@@ -322,7 +322,7 @@
                       <br>
 
 
-                      <div>{{fac.name }} * {{fac.quantity}} <br>
+                      <div>{{fac.name }} * {{fac.servicePrice}} <br>
 
 
                         <b
@@ -339,7 +339,7 @@
                   </div>
                 </td>
                 <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
-                  {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+                  {{fac.afterTaxAmount | currency : currency : "symbol" : "1.2-2"}}</td>
               </tr>
             </table>
           </div>
@@ -383,7 +383,7 @@
                 "
               />
             </div>
-            <div  *ngIf="promocodeListChip.length >0">
+            <!-- <div  *ngIf="promocodeListChip.length >0">
               <h5 style="color: #fff; font-weight: bold; font-size: 24px">
                 Save More On Your Booking!
               </h5>
@@ -408,15 +408,13 @@
 
 
 
-              <!-- View More / View Less Button -->
               <span  style="float:right" (click)="toggleView()">
                 {{ showMore ? 'View Less..' : 'View More..' }}
               </span>
 
 
             </div>
-             <!-- No Coupons Message -->
-    <!-- No Coupons Card -->
+
     <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) " style="color: #fff !important">
           <strong style="font-size: 18px;color: #fff !important">No Coupon Available  :(</strong>
 
@@ -424,16 +422,8 @@
         <div style="margin: 0; font-size: 14px;color: #fff !important">
           Unfortunately, this property does not have any active coupons at the moment.
         </div>
-        <!-- <a
-          href="/deals"
-          style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
-        >
-          Explore Other Deals
-        </a> -->
-
-
-    </div>
-    <div *ngIf="selectedPromo">
+    </div> -->
+    <div>
       <strong style="font-size: 18px;color: #fff !important"> {{booking?.couponCode}} Coupon Code is
 Applied!</strong>
 <div style="margin: 0; font-size: 14px;color: #fff !important">
@@ -920,7 +910,7 @@ Applied!</strong>
                 <br>
 
 
-                <div>{{fac.name }} * {{fac.quantity}} <br>
+                <div>{{fac.name }} * {{fac.servicePrice}} <br>
 
 
                   <b
@@ -937,7 +927,7 @@ Applied!</strong>
             </div>
           </td>
           <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
-            {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+            {{fac.afterTaxAmount | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
       </table>
       </div>
@@ -958,7 +948,7 @@ Applied!</strong>
             "
           />
         </div>
-        <div  *ngIf="promocodeListChip.length >0 ">
+        <!-- <div  *ngIf="promocodeListChip.length >0 ">
           <h5 style="color: #fff; font-weight: bold; font-size: 24px">
             Save More On Your Booking!
           </h5>
@@ -975,23 +965,13 @@ Applied!</strong>
               </li>
             </ng-container>
           </ul>
-
-
-
-
-
-
-
-
-          <!-- View More / View Less Button -->
           <span  style="float:right" (click)="toggleView()">
             {{ showMore ? 'View Less..' : 'View More..' }}
           </span>
 
 
         </div>
-         <!-- No Coupons Message -->
-<!-- No Coupons Card -->
+
 <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
       <strong style="font-size: 18px; color:#fff !important">No Coupon Available :(</strong>
 
@@ -999,17 +979,9 @@ Applied!</strong>
     <div style="margin: 0; font-size: 14px;color:#fff !important">
       Unfortunately, this property does not have any active coupons at the moment.
     </div>
-    <!-- <a
-      href="/deals"
-      style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
-    >
-      Explore Other Deals
-    </a> -->
-
-
-</div>
-<div *ngIf="selectedPromo">
-  <strong style="font-size: 18px;color:#fff !important"> {{selectedPromo?.couponCode}} Coupon Code is
+</div> -->
+<div>
+  <strong style="font-size: 18px;color:#fff !important"> {{booking?.couponCode}} Coupon Code is
 Applied!</strong>
 <div style=" font-size: 14px;color:#fff !important">
 You’re Saving ₹ {{booking.discountAmount}} on this booking!
