@@ -51,7 +51,6 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
   ) {
     this.businessUser = new BusinessUser();
     this.bookingOne = this.token.getBookingData();
-    console.log('bookingone is',this.bookingOne);
 
   //   this.storedPromo = localStorage.getItem('selectPromo');
   //   if(this.storedPromo == 'true'){
@@ -67,10 +66,8 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
 
   ngOnInit() {
     this.acRoute.queryParams.subscribe((params) => {
-      console.log('params data is',params);
       if (params["bookingId"] !== undefined) {
         this.bookingId = params["bookingId"];
-        console.log('business data is',this.bookingId);
       }
     });
     this.getBookingByid(this.bookingId);
@@ -87,6 +84,7 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
       if (response.body) {
         this.bookingdetails = response.body;
         this.booking = this.bookingdetails.bookingDetails;
+        this.savedServices = this.bookingdetails.serviceDetails;
         console.log('booking is',this.booking);
         this.booking.taxDetails.forEach(item=>{
           if(item.name === 'CGST'){
@@ -132,13 +130,11 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
       const response = await this.listingService.findByPropertyId(this.propertyId).toPromise();
       if (response.body != null) {
         this.businessUser = response.body;
-        console.log('business user is',this.businessUser);
         this.currency = this.businessUser.localCurrency.toUpperCase();
         this.storedPromo = localStorage.getItem('selectPromo');
         if(this.storedPromo == 'true'){
          const selectedPromoData = JSON.parse( localStorage.getItem('selectedPromoData'));
          this.selectedPromo = selectedPromoData
-       console.log(selectedPromoData)
        }else{
          this.getOfferDetails();
        }
@@ -150,7 +146,6 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
             this.taxPercentage = element.percentage;
             this.booking.taxPercentage = this.taxPercentage;
 
-            // //console.log("room price :" +this.booking.roomPrice)
             if (element.taxSlabsList.length > 0) {
               element.taxSlabsList.forEach((element2) => {
                 if (
@@ -203,7 +198,6 @@ export class WhatappPaylaterTemplateComponent implements OnInit {
 
   calculateServiceHours (){
     this.accommodationService = this.businessUser?.businessServiceDtoList.filter(service => service.name === "Accommodation");
-    console.log(" this.accommodationService" + JSON.stringify( this.accommodationService))
   }
 
 
