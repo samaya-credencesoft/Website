@@ -383,20 +383,20 @@
                 "
               />
             </div>
-            <!-- <div  *ngIf="promocodeListChip.length >0">
+            <div  *ngIf="promocodeListChip.length >0 && (booking.promotionName == null || booking.promotionName == undefined) ">
               <h5 style="color: #fff; font-weight: bold; font-size: 24px">
                 Save More On Your Booking!
               </h5>
               <ul>
                 <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
                   <li *ngIf="i === 0 || showMore">
-                    <div style="color: #fff !important">
+                    <p style="margin-top: -7px">
                       Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
-                    </div>
-                    <div style="color: #fff !important">
+                    </p>
+                    <p style="margin-top: -10px">
                       Share this coupon code when confirming your reservation to save
                       {{ coupon.discountPercentage }}%!
-                    </div>
+                    </p>
                   </li>
                 </ng-container>
               </ul>
@@ -408,33 +408,44 @@
 
 
 
+              <!-- View More / View Less Button -->
               <span  style="float:right" (click)="toggleView()">
                 {{ showMore ? 'View Less..' : 'View More..' }}
               </span>
 
 
             </div>
+             <!-- No Coupons Message -->
+    <!-- No Coupons Card -->
+    <div *ngIf="promocodeListChip.length === 0 && (booking.promotionName == null || booking.promotionName == undefined)">
+          <strong style="font-size: 18px; color: #fff !important">No Coupon Available  :(</strong>
 
-    <div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) " style="color: #fff !important">
-          <strong style="font-size: 18px;color: #fff !important">No Coupon Available  :(</strong>
 
-
-        <div style="margin: 0; font-size: 14px;color: #fff !important">
+        <div style=" font-size: 14px; color: #fff !important">
           Unfortunately, this property does not have any active coupons at the moment.
         </div>
-    </div> -->
-    <div>
+        <!-- <a
+          href="/deals"
+          style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
+        >
+          Explore Other Deals
+        </a> -->
+
+
+    </div>
+    <div *ngIf="booking.promotionName">
       <strong style="font-size: 18px;color: #fff !important"> {{booking?.couponCode}} Coupon Code is
 Applied!</strong>
-<div style="margin: 0; font-size: 14px;color: #fff !important">
+<div style="font-size: 14px;color: #fff !important">
   You’re Saving ₹ {{booking.discountAmount}} on this booking!
 </div>
 
 
-<div style="color: #fff !important">
+<div>
   Complete your booking now to save big on your stay.
 </div>
 </div>
+
 
 
           </div>
@@ -948,47 +959,65 @@ Applied!</strong>
             "
           />
         </div>
-        <!-- <div  *ngIf="promocodeListChip.length >0 ">
+        <div  *ngIf="promocodeListChip.length >0 && (booking.promotionName == null || booking.promotionName == undefined)">
           <h5 style="color: #fff; font-weight: bold; font-size: 24px">
             Save More On Your Booking!
           </h5>
           <ul>
             <ng-container *ngFor="let coupon of promocodeListChip; let i = index">
               <li *ngIf="i === 0 || showMore">
-                <div style="color: #fff !important;">
+                <div style="color: #fff !important">
                   Claim Coupon Code: <strong>{{ coupon.couponCode }}</strong>
                 </div>
-                <div style="color: #fff !important;">
+                <div style="color: #fff !important">
                   Share this coupon code when confirming your reservation to save
                   {{ coupon.discountPercentage }}%!
                 </div>
               </li>
             </ng-container>
           </ul>
+
+
+
+
+
+
+
+
+          <!-- View More / View Less Button -->
           <span  style="float:right" (click)="toggleView()">
             {{ showMore ? 'View Less..' : 'View More..' }}
           </span>
 
 
         </div>
+         <!-- No Coupons Message -->
+<!-- No Coupons Card -->
+<div *ngIf="promocodeListChip.length === 0 && (booking.promotionName == null || booking.promotionName == undefined)">
+      <strong style="font-size: 18px;color: #fff !important">No Coupon Available :(</strong>
 
-<div *ngIf="promocodeListChip.length === 0 && (storedPromo == null || storedPromo == undefined) ">
-      <strong style="font-size: 18px; color:#fff !important">No Coupon Available :(</strong>
 
-
-    <div style="margin: 0; font-size: 14px;color:#fff !important">
+    <div style=" font-size: 14px;color: #fff !important">
       Unfortunately, this property does not have any active coupons at the moment.
     </div>
-</div> -->
-<div>
-  <strong style="font-size: 18px;color:#fff !important"> {{booking?.couponCode}} Coupon Code is
+    <!-- <a
+      href="/deals"
+      style="margin-top: 10px; display: inline-block; color: #0066cc; text-decoration: underline; font-weight: bold;"
+    >
+      Explore Other Deals
+    </a> -->
+
+
+</div>
+<div *ngIf="booking.promotionName">
+  <strong style="font-size: 18px;color: #fff !important"> {{booking?.couponCode}} Coupon Code is
 Applied!</strong>
-<div style=" font-size: 14px;color:#fff !important">
+<div style=" font-size: 14px;color: #fff !important">
 You’re Saving ₹ {{booking.discountAmount}} on this booking!
 </div>
 
 
-<div style="color:#fff !important">
+<div>
 Complete your booking now to save big on your stay.
 </div>
 </div>
