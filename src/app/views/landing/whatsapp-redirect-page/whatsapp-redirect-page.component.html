@@ -339,7 +339,7 @@
                   </div>
                 </td>
                 <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
-                  {{fac.afterTaxAmount * fac.servicePrice | currency : currency : "symbol" : "1.2-2"}}</td>
+                  {{fac.afterTaxAmount | currency : currency : "symbol" : "1.2-2"}}</td>
               </tr>
             </table>
           </div>
@@ -953,7 +953,7 @@ Applied!</strong>
             </div>
           </td>
           <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
-            {{fac.afterTaxAmount * fac.servicePrice | currency : currency : "symbol" : "1.2-2"}}</td>
+            {{fac.afterTaxAmount | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
       </table>
       </div>
