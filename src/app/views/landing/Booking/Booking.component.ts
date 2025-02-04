@@ -1363,8 +1363,7 @@ export class BookingComponent implements OnInit {
   }
 
   payAndCheckout() {
-    localStorage.removeItem('selectedPromoData');
-    localStorage.removeItem('selectPromo');
+
     if (this.showTheSelectedCoupon) {
       const finalPrice = this.calculateDiscountedPrice(this.storedActualNetAmount, this.selectedCouponList.discountPercentage);
       this.booking.netAmount = finalPrice;
