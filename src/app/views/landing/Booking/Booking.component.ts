@@ -3564,7 +3564,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.extraPersonCharge = this.booking.extraPersonCharge;
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild = this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice = Number(this.token.getBookingRoomPrice());
+    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
     this.enquiryForm.externalSite = "Website";
     this.enquiryForm.source = "Bookone Connect";
     this.enquiryForm.couponCode = this.booking.couponCode;
