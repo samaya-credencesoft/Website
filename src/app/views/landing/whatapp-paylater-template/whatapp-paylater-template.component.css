@@ -17,6 +17,13 @@
     border-radius: 21px;
     color: #fff;
 }
+.addon-services {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 2px solid lightgray;
+}
 
 
 .details-card {

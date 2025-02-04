@@ -301,7 +301,7 @@
 
           <!-- <p style="font-size: 18px">Add-on Services:</p> -->
           <div class="addon-services" *ngIf="savedServices?.length >0">
-            <h4 style="font-weight: bold;">Add-on Services</h4>
+            <h5 style="font-weight: bold;">Add-on Services</h5>
             <table style=" border: none; width:100%">
               <tr *ngFor="let fac of savedServices">
                 <td>
@@ -339,7 +339,7 @@
                   </div>
                 </td>
                 <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
-                  {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+                  {{fac.afterTaxAmount * fac.servicePrice | currency : currency : "symbol" : "1.2-2"}}</td>
               </tr>
             </table>
           </div>
@@ -953,7 +953,7 @@ Applied!</strong>
             </div>
           </td>
           <td *ngIf="fac.servicePrice !== null || fac.servicePrice !== undefined" style="text-align: right;">
-            {{fac.afterTaxAmount * fac.quantity | currency : currency : "symbol" : "1.2-2"}}</td>
+            {{fac.afterTaxAmount * fac.servicePrice | currency : currency : "symbol" : "1.2-2"}}</td>
         </tr>
       </table>
       </div>

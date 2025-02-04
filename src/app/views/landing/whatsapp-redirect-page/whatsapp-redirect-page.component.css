@@ -18,6 +18,13 @@
     color: #fff;
 }
 
+.addon-services {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 2px solid lightgray;
+}
 
 .details-card {
   box-shadow: 0px 6px 14px #888888;
