@@ -499,11 +499,11 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
           this.sendWhatsappMessageToTHM();
-          // this.sendWhatsappMessageToTHM1();
-          // this.sendWhatsappMessageToTHM2();
-          // this.sendWhatsappMessageToTHM3();
-          // this.sendWhatsappMessageToTHM4();
-          // this.sendWhatsappMessageToTHM5();
+          this.sendWhatsappMessageToTHM1();
+          this.sendWhatsappMessageToTHM2();
+          this.sendWhatsappMessageToTHM3();
+          this.sendWhatsappMessageToTHM4();
+          this.sendWhatsappMessageToTHM5();
           this.payment.referenceNumber = this.booking.propertyReservationNumber;
           this.payment.externalReference = this.booking.externalBookingID;
           if (
@@ -852,7 +852,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 443;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
     this.enquiryForm.planCode = this.booking.planCode;
@@ -1299,7 +1299,7 @@ this.externalReservationdto =res.body
 
     this.template.components = this.components;
     this.whatsappForm.template =this.template;
-    this.whatsappForm.to = "9337930186",
+    this.whatsappForm.to = "6372198255",
     this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;

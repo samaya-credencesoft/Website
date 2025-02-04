@@ -203,6 +203,7 @@ this.storedPromo = localStorage.getItem('selectPromo');
       if (response.body) {
         this.bookingdetails = response.body;
         this.booking = this.bookingdetails.bookingDetails;
+        this.savedServices = this.bookingdetails.serviceDetails;
 
         if (this.token.saveBookingRoomPrice(this.booking.roomPrice) !== null) {
           this.bookingRoomPrice = this.token.getBookingRoomPrice();
