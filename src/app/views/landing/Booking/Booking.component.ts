@@ -1211,8 +1211,8 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.lastName = this.booking.lastName;
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
-    this.enquiryForm.checkOutDate = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY');
-    this.enquiryForm.checkInDate = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY');
+    this.enquiryForm.checkOutDate = this.booking.toDate;
+    this.enquiryForm.checkInDate = this.booking.fromDate;
     // const toDate = new Date(this.booking.toDate);
     // this.enquiryForm.toTime = toDate.getTime();
     // const fromDate = new Date(this.booking.fromDate);
@@ -1492,6 +1492,57 @@ export class BookingComponent implements OnInit {
       this.processPaymentHDFC(this.payment);
 
       this.cardPaymentAvailable = true;
+    } else if (this.businessUser.paymentGateway === "phonepe") {
+      console.log("booking",this.booking);
+      this.payment.paymentMode = "UPI";
+      this.payment.status = "NotPaid";
+      this.payment.businessServiceName = "Accommodation";
+      this.payment.firstName = this.booking.firstName;
+      this.payment.lastName = this.booking.lastName;
+      this.payment.name = this.booking.firstName + " " + this.booking.lastName;
+
+      this.payment.email = this.booking.email;
+      this.payment.businessEmail = this.businessUser.email;
+      this.payment.currency = this.businessUser.localCurrency;
+      this.payment.propertyId = this.businessUser.id;
+      this.booking.taxAmount = ((this.booking.netAmount * this.booking.taxPercentage) / 100);
+      // this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+      // this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
+      // this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      // this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      // this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2)) + Number(((this.totalExtraAmount / 100) * 20).toFixed(2))).toFixed(2));
+      // this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2)) + Number(((this.totalExtraAmount /100) * 20).toFixed(2))).toFixed(2));
+      if(this.businessServiceDto.advanceAmountPercentage === 100){
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount)).toFixed(2)) + Number(((this.totalTaxAmount)).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount).toFixed(2))) + Number(((this.totalBeforeTaxAmount )).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+       }else{
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 20).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+       }
+      this.payment.referenceNumber = new Date().getTime().toString();
+      this.payment.deliveryChargeAmount = 0;
+      this.payment.date = this.datePipe.transform(
+        new Date().getTime(),
+        "yyyy-MM-dd"
+      );
+      Logger.log("this.payment " + JSON.stringify(this.payment));
+      // this.token.saveBookingData(this.booking);
+      // this.token.savePaymentData(this.payment);
+
+      // this.createBookingAtom();
+      this.payment.callbackUrl = environment.callbackUrl;
+      this.processPaymentPhonepe(this.payment);
+
+      this.cardPaymentAvailable = true;
     }
   }
   processPaymentPayTM(payment: Payment) {
@@ -1639,6 +1690,71 @@ export class BookingComponent implements OnInit {
         this.changeDetectorRefs.detectChanges();
       }
     );
+  }
+  processPaymentPhonepe(payment: Payment) {
+    this.paymentLoader = true;
+    this.changeDetectorRefs.detectChanges();
+
+    this.hotelBookingService.processPayment(payment).subscribe(
+      (response) => {
+        if (response.status === 200) {
+          if (response.body.failureMessage !== null) {
+            this.paymentLoader = false;
+            this.isSuccess = false;
+            this.headerTitle = "Error!";
+            this.bodyMessage =
+              "Unable to process payment" +
+              " Code: " +
+              response.body.failureMessage;
+            this.showDanger(this.contentDialog);
+
+            this.changeDetectorRefs.detectChanges();
+          } else {
+            this.paymentLoader = false;
+            this.payment = response.body;
+
+            //for post booking create
+
+            this.paymentIntentPhonepe(this.payment);
+
+            // for pre booking create
+
+            this.addServiceToBooking(this.booking.id,this.savedServices);
+          }
+        } else {
+          this.paymentLoader = false;
+          this.isSuccess = false;
+          this.headerTitle = "Error!";
+          this.bodyMessage = "Payment Failed! Code: " + response.status;
+          this.showDanger(this.contentDialog);
+          this.changeDetectorRefs.detectChanges();
+        }
+      },
+      (error) => {
+        this.paymentLoader = false;
+        this.isSuccess = false;
+        this.headerTitle = "Error!";
+        this.bodyMessage = "Payment Failed! Code: " + error.status;
+        this.showDanger(this.contentDialog);
+        this.changeDetectorRefs.detectChanges();
+      }
+    );
+  }
+  paymentIntentPhonepe(payment: Payment) {
+    this.paymentLoader = true;
+
+    this.hotelBookingService.paymentIntentPhonepe(payment).subscribe((response) => {
+      this.paymentLoader = false;
+      if (response.status === 200) {
+        this.payment = response.body;
+
+        this.token.saveBookingData(this.booking);
+        this.token.savePaymentData(this.payment);
+        this.token.savePropertyData(this.businessUser);
+
+        this.router.navigate(["/checkout-phonepe"]);
+      }
+    });
   }
   createBookingPayTM() {
     this.booking.modeOfPayment = this.payment.paymentMode;

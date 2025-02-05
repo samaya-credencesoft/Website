@@ -8,6 +8,7 @@ export class Payment {
     lastName: string;
     email: string;
     businessEmail: string;
+    phonePeUrl:string;
     amount: number;
     currency: string;
     state: string;
