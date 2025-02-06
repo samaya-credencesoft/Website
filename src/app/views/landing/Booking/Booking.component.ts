@@ -1337,7 +1337,11 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.organisationId = environment.parentOrganisationId;
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
-    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
+    if(this.booking.planCode === 'GHC'){
+      this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.DiffDate));
+    } else{
+      this.enquiryForm.roomPrice = this.booking.netAmount;
+    }
     this.enquiryForm.couponCode = this.booking.couponCode;
     this.enquiryForm.promotionName = this.booking.promotionName;
     this.enquiryForm.discountAmount = this.booking.discountAmount;
@@ -2395,7 +2399,11 @@ export class BookingComponent implements OnInit {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
-    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
+    if(this.booking.planCode === 'GHC'){
+      this.booking.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.DiffDate));
+    } else{
+      this.booking.roomPrice = this.booking.netAmount;
+    }
     this.booking.totalServiceAmount = this.totalServiceCost;
     this.booking.taxAmount = this.booking.taxAmount;
     Logger.log("createBooking ", JSON.stringify(this.booking));
@@ -3442,7 +3450,11 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.noOfExtraChild = Number(this.token.getExtraChildCharge());
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
-    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
+    if(this.booking.planCode === 'GHC'){
+      this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.DiffDate));
+    } else{
+      this.enquiryForm.roomPrice = this.booking.roomPrice;
+    }
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
       this.paymentLoader = false;
@@ -3680,7 +3692,11 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.extraPersonCharge = this.booking.extraPersonCharge;
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild = this.booking.noOfExtraChild;
-    this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
+    if(this.booking.planCode === 'GHC'){
+      this.enquiryForm.roomPrice =  (((this.booking.roomPrice) * (this.booking.noOfRooms * this.DiffDate)));
+    } else{
+      this.enquiryForm.roomPrice =  ((Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate)));
+    }
     this.enquiryForm.externalSite = "Website";
     this.enquiryForm.source = "Bookone Connect";
     this.enquiryForm.couponCode = this.booking.couponCode;

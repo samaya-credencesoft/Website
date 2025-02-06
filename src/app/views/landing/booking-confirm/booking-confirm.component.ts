@@ -470,7 +470,7 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
 
      this.booking.taxAmount = this.booking?.taxAmount;
      console.log('tax amount is',this.booking.taxAmount);
-    this.booking.roomPrice = Number(this.token.getRoomPrice());
+    this.booking.roomPrice = this.booking.beforeTaxAmount;
 
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
@@ -839,7 +839,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.roomPrice = ((this.booking.roomTariffBeforeDiscount) * (this.booking.noOfRooms * this.DiffDate));
+    this.enquiryForm.roomPrice = this.booking.beforeTaxAmount;
     // this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
     console.log('room price is',this.enquiryForm.roomPrice);
     this.enquiryForm.createdDate = new Date();

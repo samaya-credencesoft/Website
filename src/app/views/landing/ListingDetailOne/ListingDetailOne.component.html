@@ -321,7 +321,7 @@
                 | currency: currency:"symbol":"1.2-2"
                 }}</td>
             </tr>
-            <ng-container *ngIf="selectedServicesOne?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 10px; padding-bottom: 10px; margin-top: 15px;
+            <ng-container *ngIf="selectedServicesOne?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 15px; padding-bottom: 10px; margin-top: 15px;
           border-radius: 10px;">
               <h4 style="font-weight: bold;">Add-on Services</h4>
 
@@ -497,7 +497,7 @@
           </tr>
           <!-- Add more rows dynamically based on your data -->
           <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
-            <h4 style="font-weight: bold;">Add-on Services</h4>
+            <h4 style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
 
             <tr *ngFor="let fac of selectedServicesOne">
               <td>
@@ -1960,7 +1960,7 @@
                             <!-- Add on service Start -->
                             <div class="col-12" *ngIf="selectedRoomIndex === i  && viewAddon">
                               <div *ngIf="viewAddon">
-                                <h3 class="servicetitle" style="margin-left: 162px;">Add-On Services</h3>
+                                <h3 class="servicetitle" style="margin-left: 162px; margin-top: 25px;">Add-On Services</h3>
 
                                 <div class="row facrow1 ammmmi"
                                   style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
