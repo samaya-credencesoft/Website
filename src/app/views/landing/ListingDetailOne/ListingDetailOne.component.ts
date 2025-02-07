@@ -929,7 +929,7 @@ this.selectedServices =[]
     });
     // //console.log("sdfgh"+this.city)
 
-
+    this.booking.createdDate = new Date();
   }
   blogPosts$: Observable<any> | undefined;
   responsiveOptions: any[];

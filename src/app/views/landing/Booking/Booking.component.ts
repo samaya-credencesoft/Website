@@ -241,6 +241,7 @@ export class BookingComponent implements OnInit {
   parameterss15: Para[];
   componentstype10: Components;
   parameterss1: Para[];
+  valueHours: boolean = false;
 
   constructor(
     private token: TokenStorage,
@@ -516,6 +517,30 @@ export class BookingComponent implements OnInit {
       event.target.parentNode.parentNode.classList.add("payment-tab-active");
     }
   }
+
+  showPayNow(): boolean {
+    const fromDateTimestamp = new Date(this.booking.fromDate).getTime();
+    const createdDateTimestamp = new Date(this.booking.createdDate).getTime();
+    const hoursDifference = (fromDateTimestamp - createdDateTimestamp) / (1000 * 60 * 60);
+
+    return hoursDifference >= 48 && this.businessUser.paymentGateway != null;
+  }
+
+  showPayLater(): boolean {
+    const fromDateTimestamp = new Date(this.booking.fromDate).getTime();
+    const createdDateTimestamp = new Date(this.booking.createdDate).getTime();
+    const hoursDifference = (fromDateTimestamp - createdDateTimestamp) / (1000 * 60 * 60);
+    if (hoursDifference < 48) {
+      return true;
+    }
+
+    if (hoursDifference >= 48 && this.businessUser.paymentGateway == null) {
+      return true;
+    }
+
+    return false;
+  }
+
   calculateserviceprice() {
     this.calculatedServices = []
     if (this.savedServices != null && this.savedServices != undefined) {

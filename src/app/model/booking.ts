@@ -76,7 +76,7 @@ export class Booking {
   managerContactNo: string;
   roomBooking: boolean;
   groupBooking: boolean;
-  createdDate: string;
+  createdDate: any;
   lastModifiedDate: string;
   roomRatePlanName: string;
   planCode: string;
