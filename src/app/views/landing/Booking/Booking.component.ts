@@ -1431,7 +1431,17 @@ export class BookingComponent implements OnInit {
         this.payment.amount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
         this.booking.advanceAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
         this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
-      } else {
+      }
+      else if(this.businessServiceDto.advanceAmountPercentage === 50) {
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 50).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 50).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 50).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 50).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+       }
+      else {
         this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
         this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100) * 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
         this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));

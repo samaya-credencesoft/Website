@@ -164,6 +164,9 @@ textToCopyOne: string = 'This is some text to copy';
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
     {
       this.businessUser = this.token.getPropertyData();
+      this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
+        (data) => data.name === "Accommodation"
+      );
 
     }
 
@@ -534,20 +537,31 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
                 this.paymentLoader = false;
 
                 if (this.booking.payableAmount != this.payment.transactionAmount) {
-                  this.payment.id = undefined;
-                  this.payment.paymentMode = "Cash";
-                  this.payment.status = "NotPaid";
-                  this.booking.taxAmount =
-                    (this.booking.netAmount * this.booking.taxPercentage) / 100;
-                  this.payment.taxAmount = (this.booking.taxAmount / 100) * 80;
-                  this.payment.netReceivableAmount = (this.booking.netAmount /100) * 80;
-                  this.payment.transactionAmount = (this.booking.totalAmount / 100) * 80 ;
-                  this.payment.referenceNumber = this.booking.propertyReservationNumber;
-                  this.payment.amount = (this.booking.totalAmount / 100) * 80;
-                  this.booking.advanceAmount = (this.booking.totalAmount / 100) * 20;
-                  this.payment.propertyId = this.bookingData.propertyId;
-                  this.payment.transactionChargeAmount =
-(this.booking.totalAmount / 100)* 80;
+                  if (this.businessServiceDto.advanceAmountPercentage === 50) {
+                    this.payment.id = undefined;
+                    this.payment.paymentMode = 'Cash';
+                    this.payment.status = 'NotPaid';
+                    this.payment.taxAmount = (this.booking.taxAmount / 100) * 50;
+                    this.payment.netReceivableAmount = (this.booking.netAmount / 100) * 50;
+                    this.payment.transactionAmount = (this.booking.totalAmount / 100) * 50;
+                    this.payment.referenceNumber = this.booking.propertyReservationNumber;
+                    this.payment.amount = (this.booking.totalAmount / 100) * 50;
+                    this.booking.advanceAmount = (this.booking.totalAmount / 100) * 50;
+                    this.payment.propertyId = this.bookingData.propertyId;
+                    this.payment.transactionChargeAmount = (this.booking.totalAmount / 100) * 50;
+                  } else {
+                    this.payment.id = undefined;
+                    this.payment.paymentMode = 'Cash';
+                    this.payment.status = 'NotPaid';
+                    this.payment.taxAmount = (this.booking.taxAmount / 100) * 80;
+                    this.payment.netReceivableAmount = (this.booking.netAmount / 100) * 80;
+                    this.payment.transactionAmount = (this.booking.totalAmount / 100) * 80;
+                    this.payment.referenceNumber = this.booking.propertyReservationNumber;
+                    this.payment.amount = (this.booking.totalAmount / 100) * 80;
+                    this.booking.advanceAmount = (this.booking.totalAmount / 100) * 20;
+                    this.payment.propertyId = this.bookingData.propertyId;
+                    this.payment.transactionChargeAmount = (this.booking.totalAmount / 100) * 80;
+                  }
 this.hotelBookingService
 .processPayment(this.payment)
 .subscribe((response2) => {
