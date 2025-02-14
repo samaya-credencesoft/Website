@@ -383,7 +383,6 @@ export class BookingComponent implements OnInit {
     this.booking.dayTrip = false;
     this.booking.netAmount =
       this.booking.netAmount
-
     this.booking.gstAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.booking.taxAmount = this.booking.gstAmount;
@@ -850,8 +849,12 @@ export class BookingComponent implements OnInit {
         if (element.name === "GST") {
           this.booking.taxDetails = [];
           this.booking.taxDetails.push(element);
-          this.taxPercentage = element.percentage;
-          this.booking.taxPercentage = this.taxPercentage;
+          if(this.booking.taxPercentage === element.percentage){
+            this.taxPercentage = element.percentage;
+            this.booking.taxPercentage = this.taxPercentage;
+          } else{
+            this.booking.taxPercentage = this.booking.taxPercentage
+          }
           // console.log("this.taxPercentage0" +this.taxPercentage)
           // if (this.bookingCity != null && this.bookingCity != undefined) {
           //   this.booking.roomPrice = Number(this.bookingCity)
@@ -882,7 +885,6 @@ export class BookingComponent implements OnInit {
 
       // this.taxPercentage = this.booking.taxDetails[0].percentage;
     }
-
     this.booking.taxAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.booking.totalAmount =
@@ -1286,7 +1288,6 @@ export class BookingComponent implements OnInit {
       }
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
-
     this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.enquiryForm.planCode = this.booking.planCode;
 
@@ -2198,7 +2199,6 @@ export class BookingComponent implements OnInit {
       this.payment.email = this.booking.email;
       this.payment.businessEmail = this.businessUser.email;
       this.payment.currency = this.businessUser.localCurrency;
-
       this.booking.taxAmount =
         (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.payment.taxAmount = this.booking.taxAmount;
@@ -3519,7 +3519,7 @@ export class BookingComponent implements OnInit {
   }
 
   submitForm() {
-
+    
     // localStorage.removeItem('selectedPromoData');
     // localStorage.removeItem('selectPromo');
     if (this.showTheSelectedCoupon) {
