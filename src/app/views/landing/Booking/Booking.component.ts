@@ -1275,7 +1275,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
       if (item.name === 'CGST') {
         this.percentage1 = item.percentage;
@@ -3279,7 +3279,7 @@ export class BookingComponent implements OnInit {
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
 
 
     const TO_EMAIL = 'support@thehotelmate.com';
@@ -3612,7 +3612,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
       if (item.name === 'CGST') {
         this.percentage1 = item.percentage;

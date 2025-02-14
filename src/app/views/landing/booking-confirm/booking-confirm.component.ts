@@ -854,7 +854,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.specialNotes = this.booking.notes
     this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.planCode = this.booking.planCode;
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
     this.enquiryForm.bookingId = this.booking.id;
