@@ -8,7 +8,7 @@ export const environment = {
   nzAPIUrl: 'https://api.thehotelmate.com',
   inAPIUrl: 'https://api.thehotelmate.com',
   hdfcAPIUrl: 'https://payment.bookone.io',
-  apiScheduler: 'https://scheduler.api.bookone.io/',
+  apiScheduler: 'https://scheduler.api.bookone.io',
   apiUrlAddress: 'https://api.bookonelocal.in/api-address',
   apiUrlPromotion: 'https://api.bookonelocal.in/promotion-api',
   apiLms: 'https://api.bookonelocal.in/api-lms',
