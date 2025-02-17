@@ -164,6 +164,9 @@ textToCopyOne: string = 'This is some text to copy';
     if (this.token.getPropertyData() != null && this.token.getPropertyData() != undefined)
     {
       this.businessUser = this.token.getPropertyData();
+      this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
+        (data) => data.name === "Accommodation"
+      );
 
     }
 
@@ -470,7 +473,7 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
 
      this.booking.taxAmount = this.booking?.taxAmount;
      console.log('tax amount is',this.booking.taxAmount);
-    this.booking.roomPrice = Number(this.token.getRoomPrice());
+    this.booking.roomPrice = this.booking.beforeTaxAmount;
 
 //     this.propertyServices = this.savedServices;
 // this.propertyServices?.forEach(ele => {
@@ -534,20 +537,31 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
                 this.paymentLoader = false;
 
                 if (this.booking.payableAmount != this.payment.transactionAmount) {
-                  this.payment.id = undefined;
-                  this.payment.paymentMode = "Cash";
-                  this.payment.status = "NotPaid";
-                  this.booking.taxAmount =
-                    (this.booking.netAmount * this.booking.taxPercentage) / 100;
-                  this.payment.taxAmount = (this.booking.taxAmount / 100) * 80;
-                  this.payment.netReceivableAmount = (this.booking.netAmount /100) * 80;
-                  this.payment.transactionAmount = (this.booking.totalAmount / 100) * 80 ;
-                  this.payment.referenceNumber = this.booking.propertyReservationNumber;
-                  this.payment.amount = (this.booking.totalAmount / 100) * 80;
-                  this.booking.advanceAmount = (this.booking.totalAmount / 100) * 20;
-                  this.payment.propertyId = this.bookingData.propertyId;
-                  this.payment.transactionChargeAmount =
-(this.booking.totalAmount / 100)* 80;
+                  if (this.businessServiceDto.advanceAmountPercentage === 50) {
+                    this.payment.id = undefined;
+                    this.payment.paymentMode = 'Cash';
+                    this.payment.status = 'NotPaid';
+                    this.payment.taxAmount = (this.booking.taxAmount / 100) * 50;
+                    this.payment.netReceivableAmount = (this.booking.netAmount / 100) * 50;
+                    this.payment.transactionAmount = (this.booking.totalAmount / 100) * 50;
+                    this.payment.referenceNumber = this.booking.propertyReservationNumber;
+                    this.payment.amount = (this.booking.totalAmount / 100) * 50;
+                    this.booking.advanceAmount = (this.booking.totalAmount / 100) * 50;
+                    this.payment.propertyId = this.bookingData.propertyId;
+                    this.payment.transactionChargeAmount = (this.booking.totalAmount / 100) * 50;
+                  } else {
+                    this.payment.id = undefined;
+                    this.payment.paymentMode = 'Cash';
+                    this.payment.status = 'NotPaid';
+                    this.payment.taxAmount = (this.booking.taxAmount / 100) * 80;
+                    this.payment.netReceivableAmount = (this.booking.netAmount / 100) * 80;
+                    this.payment.transactionAmount = (this.booking.totalAmount / 100) * 80;
+                    this.payment.referenceNumber = this.booking.propertyReservationNumber;
+                    this.payment.amount = (this.booking.totalAmount / 100) * 80;
+                    this.booking.advanceAmount = (this.booking.totalAmount / 100) * 20;
+                    this.payment.propertyId = this.bookingData.propertyId;
+                    this.payment.transactionChargeAmount = (this.booking.totalAmount / 100) * 80;
+                  }
 this.hotelBookingService
 .processPayment(this.payment)
 .subscribe((response2) => {
@@ -839,7 +853,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.mobile=this.booking.mobile;
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
-    this.enquiryForm.roomPrice = ((this.booking.roomTariffBeforeDiscount) * (this.booking.noOfRooms * this.DiffDate));
+    this.enquiryForm.roomPrice = this.booking.beforeTaxAmount;
     // this.enquiryForm.roomPrice = (Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate));
     console.log('room price is',this.enquiryForm.roomPrice);
     this.enquiryForm.createdDate = new Date();
@@ -1447,7 +1461,7 @@ this.externalReservationdto =res.body
 
       this.template.components = this.components;
       this.whatsappForm.template =this.template;
-      this.whatsappForm.to = "9337930186",
+      this.whatsappForm.to = "7608935904",
       this.whatsappForm.type = 'template',
         this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
           this.paymentLoader = false;
@@ -1595,7 +1609,7 @@ this.externalReservationdto =res.body
 
         this.template.components = this.components;
         this.whatsappForm.template =this.template;
-        this.whatsappForm.to = "9337930186",
+        this.whatsappForm.to = "8328818871",
         this.whatsappForm.type = 'template',
           this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
             this.paymentLoader = false;
@@ -1743,7 +1757,7 @@ this.externalReservationdto =res.body
 
           this.template.components = this.components;
           this.whatsappForm.template =this.template;
-          this.whatsappForm.to = "9337930186",
+          this.whatsappForm.to = "9004146024",
           this.whatsappForm.type = 'template',
             this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
               this.paymentLoader = false;
@@ -2039,7 +2053,7 @@ this.externalReservationdto =res.body
 
               this.template.components = this.components;
               this.whatsappForm.template =this.template;
-              this.whatsappForm.to = "9337930186",
+              this.whatsappForm.to = "9040785705",
               this.whatsappForm.type = 'template',
                 this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
                   this.paymentLoader = false;

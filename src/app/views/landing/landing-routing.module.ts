@@ -46,6 +46,7 @@ import { PaylaterConfirmComponent } from './paylater-confirm/paylater-confirm.co
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 import { WhatappPaylaterTemplateComponent } from './whatapp-paylater-template/whatapp-paylater-template.component';
+import { CheckoutPhonepeComponentComponent } from './CheckoutPhonepeComponent/CheckoutPhonepeComponent.component';
 // import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
@@ -177,6 +178,9 @@ const routes: Routes = [
       path: 'manage-enquiry',component: EnquiryComponent,},
       {
         path: 'checkout',component: CheckoutComponent,},
+        {
+          path: 'checkout-phonepe',component: CheckoutPhonepeComponentComponent,},
+
   {
   path: 'onboardingCouponcode-form',component: OnboardingCouponcodeFormComponent,},
   {

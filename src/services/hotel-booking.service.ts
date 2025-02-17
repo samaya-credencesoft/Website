@@ -258,7 +258,7 @@ export class HotelBookingService {
   }
   paymentIntentPhonepe(paymentDetails: Payment) {
     return this.http.post<Payment>(
-      'https://payment.bookone.io/phonepe/api/phonepe/paymentIntent',
+      'https://phonepe.bookonepms.com/api/phonepe/paymentIntent',
       paymentDetails,
       { observe: 'response' }
     );

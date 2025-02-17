@@ -2524,11 +2524,11 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
           (click)="submitForm()">Enquiry Now</button>
         <button class="Fillpaybtn" type="button" style="font-size: 19px;"
           [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
-          *ngIf="value === true && businessUser.paymentGateway == null" (click)="onCashPaymentSubmit()">Pay
+          *ngIf="value === true && showPayLater()" (click)="onCashPaymentSubmit()">Pay
           Later</button>
         <button class="Fillpaybtn" type="button" style="font-size: 19px;"
           [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
-          *ngIf="value === true && businessUser.paymentGateway != null" (click)="payAndCheckout()">Pay Now</button>
+          *ngIf="value === true && showPayNow()" (click)="payAndCheckout()">Pay Now</button>
         <!-- <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
     >Pay At Hotel</button> -->
       </div>
@@ -2709,7 +2709,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
               }}</span></li>
 
           <li *ngIf="showTheSelectedCoupon">
-            Taxable Amount: <span> -{{appliedCoupon | currency:
+            Taxable Amount: <span> {{appliedCoupon | currency:
               currency:"symbol":"1.2-2"}} </span>
           </li>
 
@@ -2816,11 +2816,11 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
             (click)="submitForm()">Enquiry Now</button>
           <button class="Fillpaybtn" type="button"
             [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
-            *ngIf="value === true && businessUser.paymentGateway == null" (click)="onCashPaymentSubmit()">Pay
+            *ngIf="value === true && showPayLater()" (click)="onCashPaymentSubmit()">Pay
             Later</button>
           <button class="Fillpaybtn" type="button"
             [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
-            *ngIf="value === true && businessUser.paymentGateway != null" (click)="payAndCheckout()">Pay Now</button>
+            *ngIf="value === true && showPayNow()" (click)="payAndCheckout()">Pay Now</button>
           <!-- <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true">Pay At Hotel</button> -->
         </div>
       </form>
