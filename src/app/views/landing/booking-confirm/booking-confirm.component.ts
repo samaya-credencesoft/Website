@@ -459,7 +459,7 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
 
-    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST');
+    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.booking.taxDetails.forEach(item=>{
       if(item.name === 'CGST'){
         this.percentage1 = item.percentage;
