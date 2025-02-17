@@ -893,12 +893,12 @@ export class BookingComponent implements OnInit {
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
               if (
-                element2.maxAmount > this.booking.roomPrice &&
-                element2.minAmount < this.booking.roomPrice
+                element2.maxAmount > this.booking.netAmount &&
+                element2.minAmount < this.booking.netAmount
               ) {
                 this.taxPercentage = element2.percentage;
                 this.booking.taxPercentage = this.taxPercentage;
-              } else if (element2.maxAmount < this.booking.roomPrice) {
+              } else if (element2.maxAmount < this.booking.netAmount) {
                 this.taxPercentage = element2.percentage;
                 this.booking.taxPercentage = this.taxPercentage;
               }
@@ -2099,7 +2099,7 @@ export class BookingComponent implements OnInit {
     this.payment.taxAmount = this.booking.gstAmount;
     this.booking.outstandingAmount = this.booking.payableAmount;
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
-    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST');
+    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.booking.taxDetails.forEach(item => {
       if (item.name === 'CGST') {
         this.percentage1 = item.percentage;
