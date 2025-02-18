@@ -2708,14 +2708,14 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
               if (
-                element2.maxAmount > this.booking.roomPrice &&
-                element2.minAmount < this.booking.roomPrice
+                element2.maxAmount > this.booking.netAmount &&
+                element2.minAmount < this.booking.netAmount
               ) {
                 this.taxPercentage = element2.percentage;
                 this.booking.taxPercentage = this.taxPercentage;
               } else if (
                 element2.maxAmount <
-                this.booking.roomPrice
+                this.booking.netAmount
               ) {
                 this.taxPercentage = element2.percentage;
                 this.booking.taxPercentage = this.taxPercentage;
