@@ -325,7 +325,8 @@
         <div class="details-card" style="margin-top: 20px">
           <table style="width: 88%">
             <tr>
-              <td>Tax Amount ({{ bookinddata.taxPercentage }}%)</td>
+
+              <td>Tax Amount ({{ taxPercentage }}%)</td>
               <td>₹ {{ bookinddata.taxAmount | number: '1.2-2'}}</td>
             </tr>
 
@@ -961,7 +962,7 @@ Complete your booking now to save big on your stay.
     <div class="details-cardOne" style="margin-top: 20px">
       <table style="width: 88%">
         <tr>
-          <td>Tax Amount ({{bookinddata.taxPercentage}}%)</td>
+          <td>Tax Amount ({{taxPercentage }}%)</td>
           <td>₹ {{bookinddata.taxAmount | number: '1.2-2'}}</td>
         </tr>
         <tr>
