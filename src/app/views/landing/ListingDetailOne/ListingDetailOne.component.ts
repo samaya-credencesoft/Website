@@ -2706,7 +2706,6 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
         if (plan?.code === 'GHC' &&
           this.activeForGoogleHotelCenter === true) {
             if (element.name === 'GST') {
-              debugger
               this.booking.taxDetails = [];
               this.booking.taxDetails.push(element);
               this.taxPercentage = element.percentage;
@@ -2735,7 +2734,6 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
             }
           } else {
             if (element.name === 'GST') {
-              debugger
               this.booking.taxDetails = [];
               this.booking.taxDetails.push(element);
               this.taxPercentage = element.percentage;

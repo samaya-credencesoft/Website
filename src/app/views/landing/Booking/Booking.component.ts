@@ -2743,22 +2743,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2869,22 +2877,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2995,22 +3011,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3121,22 +3145,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3247,22 +3279,31 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
