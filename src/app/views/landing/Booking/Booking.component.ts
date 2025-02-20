@@ -889,16 +889,31 @@ export class BookingComponent implements OnInit {
           // debugger
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
-              if (
-                element2.maxAmount > this.booking.netAmount &&
-                element2.minAmount < this.booking.netAmount
-              ) {
-                this.taxPercentage = element2.percentage;
-                this.booking.taxPercentage = this.taxPercentage;
-              } else if (element2.maxAmount < this.booking.netAmount) {
-                this.taxPercentage = element2.percentage;
-                this.booking.taxPercentage = this.taxPercentage;
+              this.url = this.token.getBookingEngineBoolean();
+              if(this.url === "googlehotelcenter") {
+                if (
+                  element2.maxAmount > this.booking.roomPrice &&
+                  element2.minAmount < this.booking.roomPrice
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (element2.maxAmount < this.booking.roomPrice) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
               }
+              else{
+                if (
+                  element2.maxAmount > this.booking.netAmount &&
+                  element2.minAmount < this.booking.netAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (element2.maxAmount < this.booking.netAmount) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+            }
             });
           }
         }

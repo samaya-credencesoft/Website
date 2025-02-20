@@ -2705,63 +2705,42 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       this.businessUser.taxDetails.forEach((element) => {
         if (plan?.code === 'GHC' &&
           this.activeForGoogleHotelCenter === true) {
-            if (element.name === 'GST') {
-              this.booking.taxDetails = [];
-              this.booking.taxDetails.push(element);
-              this.taxPercentage = element.percentage;
-              this.booking.taxPercentage = this.taxPercentage;
-              console.log("this.booking.taxPercentage",this.booking.taxPercentage)
-              // //console.log("room price :" +this.booking.roomPrice)
-              if (element.taxSlabsList.length > 0) {
-                element.taxSlabsList.forEach((element2) => {
-                  if (
-                    element2.maxAmount > this.totalplanPrice &&
-                    element2.minAmount < this.totalplanPrice
-                  ) {
-                    this.taxPercentage = element2.percentage;
-                    this.booking.taxPercentage = this.taxPercentage;
-                    console.log("this.booking.taxPercentage",this.booking.taxPercentage)
-                  } else if (
-                    element2.maxAmount <
-                    this.totalplanPrice
-                  ) {
-                    this.taxPercentage = element2.percentage;
-                    this.booking.taxPercentage = this.taxPercentage;
-                    console.log("this.booking.taxPercentage",this.booking.taxPercentage)
-                  }
-                });
-              }
+            if (element.taxSlabsList.length > 0) {
+              element.taxSlabsList.forEach((element2) => {
+                if (
+                  element2.maxAmount > this.booking.roomPrice &&
+                  element2.minAmount < this.booking.roomPrice
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (
+                  element2.maxAmount <
+                  this.booking.roomPrice
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+              });
             }
-          } else {
-            if (element.name === 'GST') {
-              this.booking.taxDetails = [];
-              this.booking.taxDetails.push(element);
-              this.taxPercentage = element.percentage;
-              this.booking.taxPercentage = this.taxPercentage;
-              console.log("this.booking.taxPercentage",this.booking.taxPercentage)
-              // //console.log("room price :" +this.booking.roomPrice)
-              if (element.taxSlabsList.length > 0) {
-                element.taxSlabsList.forEach((element2) => {
-                  if (
-                    element2.maxAmount > this.booking.netAmount &&
-                    element2.minAmount < this.booking.netAmount
-                  ) {
-                    this.taxPercentage = element2.percentage;
-                    this.booking.taxPercentage = this.taxPercentage;
-                    console.log("this.booking.taxPercentage",this.booking.taxPercentage)
-                  } else if (
-                    element2.maxAmount <
-                    this.booking.netAmount
-                  ) {
-                    this.taxPercentage = element2.percentage;
-                    this.booking.taxPercentage = this.taxPercentage;
-                    console.log("this.booking.taxPercentage",this.booking.taxPercentage)
-                  }
-                });
-              }
+          } else{
+            if (element.taxSlabsList.length > 0) {
+              element.taxSlabsList.forEach((element2) => {
+                if (
+                  element2.maxAmount > this.booking.netAmount &&
+                  element2.minAmount < this.booking.netAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (
+                  element2.maxAmount <
+                  this.booking.netAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+              });
             }
           }
-
       });
 
       // this.taxPercentage = this.booking.taxDetails[0].percentage;

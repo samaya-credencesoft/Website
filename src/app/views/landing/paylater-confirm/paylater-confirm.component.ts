@@ -48,7 +48,7 @@ this.PropertyUrl = this.token.getPropertyUrl();
   this.propertyDetails = this.token.getProperty();
  this.bookingone = this.token.getBookingData();
  this.booking = this.token.getBookingDataObj();
- if (this.bookingone.taxDetails.length > 0) {
+ if (this.bookingone.taxDetails?.length > 0) {
   this.bookingone.taxDetails.forEach((element) => {
     if (element.name === 'GST') {
       this.booking.taxDetails = [];
