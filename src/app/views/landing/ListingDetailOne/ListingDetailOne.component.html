@@ -597,7 +597,7 @@
                     style="border: none; background: none !important;margin-top: -6px;" placeholder="Check-in"
                     name="dpFromDate3" [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
                     (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" required
-                    (click)="datepicker3.toggle()" autocomplete="off" />
+                    (click)="datepicker3.toggle()" autocomplete="off" [disabled]="checkAvailabilityDisabled"/>
 
                   <div class="form-group" style="height: 0px">
                     <input name="datepicker" class="form-control input-field-resize" ngbDatepicker
@@ -618,7 +618,7 @@
                     placeholder="Check-out" name="dpToDate3" [value]="formatter.format(toDate) | date: 'EEE, MMM d'"
                     style="border: none;background: none !important;margin-top: -6px;"
                     (input)="toDate = validateInput(toDate, dpToDate3.value)" required (click)="datepicker4.toggle()"
-                    autocomplete="off" />
+                    autocomplete="off" [disabled]="checkAvailabilityDisabled"/>
 
                   <div class="form-group" style="height: 0px">
                     <input name="datepicker" class="form-control input-field-resize" ngbDatepicker
@@ -632,7 +632,7 @@
                 <div data-visible="accommodation,flights" class="input-group guests">
                   <div data-component="index/guest-errors" data-id="main" data-view-id="accommodation" role="alert">
                   </div>
-                  <div class="input-box" (click)="toggleRoomsAndOccupancy()"
+                  <div class="input-box" (click)="checkAvailabilityDisabled ? null : toggleRoomsAndOccupancy()"
                     style="padding-bottom:9px;padding-top: 7px !important; ">
                     <label for="" style="margin-bottom:0px!important">No. of Guests</label> <br>
                     <label class="text-default "
@@ -3076,7 +3076,7 @@
                   style="border: none; background: none !important;margin-top: -6px;" placeholder="Check-in"
                   name="dpFromDate3" [value]="formatter.format(fromDate) | date: 'EEE, MMM d'"
                   (input)="fromDate = validateInput(fromDate, dpFromDate3.value)" required
-                  (click)="datepicker3.toggle()" autocomplete="off" />
+                  (click)="datepicker3.toggle()" autocomplete="off" [disabled]="checkAvailabilityDisabled"/>
 
                 <div class="form-group" style="height: 0px">
                   <input name="datepicker" class="form-control input-field-resize" ngbDatepicker
@@ -3097,7 +3097,7 @@
                   placeholder="Check-out" name="dpToDate3" [value]="formatter.format(toDate) | date: 'EEE, MMM d'"
                   style="border: none;background: none !important;margin-top: -6px;"
                   (input)="toDate = validateInput(toDate, dpToDate3.value)" required (click)="datepicker4.toggle()"
-                  autocomplete="off" />
+                  autocomplete="off" [disabled]="checkAvailabilityDisabled"/>
 
                 <div class="form-group" style="height: 0px">
                   <input name="datepicker" class="form-control input-field-resize" ngbDatepicker
@@ -3114,7 +3114,7 @@
             <div class="col-12 main-search-input-item " style="padding:0px">
               <div data-visible="accommodation,flights" class="input-group guests">
                 <div data-component="index/guest-errors" data-id="main" data-view-id="accommodation" role="alert"></div>
-                <div class="input-box" (click)="toggleRoomsAndOccupancy()"
+                <div class="input-box" (click)="checkAvailabilityDisabled ? null :toggleRoomsAndOccupancy()"
                   style="padding-bottom:9px;padding-top: 7px !important; ">
                   <label for="" style="margin-bottom:0px!important">No. of Guests</label> <br>
                   <label class="text-default "
