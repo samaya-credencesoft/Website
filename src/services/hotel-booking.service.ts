@@ -244,7 +244,7 @@ export class HotelBookingService {
   }
   paymentIntent(paymentDetails: Payment) {
     return this.http.post<Payment>(
-      "https://api.thehotelmate.com" + '/api/thm/paymentIntent',
+      "https://api.thehotelmate.co" + '/api/thm/paymentIntent',
       paymentDetails,
       { observe: 'response' }
     );
@@ -273,7 +273,7 @@ export class HotelBookingService {
   processPayment(paymentDetails: Payment) {
     this.setApi();
     return this.http.post<Payment>(
-      "https://api.thehotelmate.com" + '/api/thm/processPayment',
+      "https://api.thehotelmate.co" + '/api/thm/processPayment',
       paymentDetails,
       { observe: 'response' }
     );

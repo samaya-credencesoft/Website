@@ -980,7 +980,7 @@ const currentTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds
         propertyName:propertyName,
         currentDate:currentTimeString,
       };
-      fetch('https://chatbot.api.thehotelmate.com/api/chatbot/receive-payload', {
+      fetch('https://chatbot.api.thehotelmate.co/api/chatbot/receive-payload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1638,7 +1638,7 @@ if (this.city != null && this.city != undefined) {
     // debugger;
     //console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
-    const TO_EMAIL = "support@thehotelmate.com";
+    const TO_EMAIL = "rohit.nanda@thehotalmate.co";
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
     // const TO_EMAIL = "subhasmitatripathy37@gmail.com";
     this.email.fromEmail = this.fromEmail;
@@ -1674,7 +1674,7 @@ if (this.city != null && this.city != undefined) {
       this.sendemailtosupport(this.email);
   }
   sendemailtosupport(email){
-    email.toEmail ='support@thehotelmate.com'
+    email.toEmail ='rohit.nanda@thehotalmate.co'
    this.http
    .post<Email>(API_URL_NZ + '/api/thm/sendEmailFromWebSite',email)
    .subscribe((response) => {

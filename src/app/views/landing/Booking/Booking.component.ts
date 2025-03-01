@@ -1333,7 +1333,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
 
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'rohit.nanda@thehotalmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -3497,7 +3497,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
 
 
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'rohit.nanda@thehotalmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -3848,7 +3848,7 @@ export class BookingComponent implements OnInit {
     this.totalPercentage = (this.percentage1 + this.percentage2);
 
     this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'rohit.nanda@thehotalmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -3974,7 +3974,7 @@ export class BookingComponent implements OnInit {
 
   }
   sendenquirytoproperty(enquiryForm) {
-    this.enquiryForm.fromEmail = "support@thehotelmate.com";
+    this.enquiryForm.fromEmail = "rohit.nanda@thehotalmate.co";
     this.enquiryForm.phone = '';
     this.enquiryForm.email = '',
       this.enquiryForm.roomPrice = this.booking.totalAmount
