@@ -1638,7 +1638,7 @@ if (this.city != null && this.city != undefined) {
     // debugger;
     //console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
-    const TO_EMAIL = "rohit.nanda@thehotalmate.co";
+    const TO_EMAIL = "reservation@thehotelmate.co";
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
     // const TO_EMAIL = "subhasmitatripathy37@gmail.com";
     this.email.fromEmail = this.fromEmail;
@@ -1674,7 +1674,7 @@ if (this.city != null && this.city != undefined) {
       this.sendemailtosupport(this.email);
   }
   sendemailtosupport(email){
-    email.toEmail ='rohit.nanda@thehotalmate.co'
+    email.toEmail ='reservation@thehotelmate.co'
    this.http
    .post<Email>(API_URL_NZ + '/api/thm/sendEmailFromWebSite',email)
    .subscribe((response) => {

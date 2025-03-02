@@ -715,7 +715,7 @@ externalreservation.promotionName = this.booking.promotionName;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
 
-    const TO_EMAIL = 'rohit.nanda@thehotalmate.co';
+    const TO_EMAIL = 'reservation@thehotelmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
