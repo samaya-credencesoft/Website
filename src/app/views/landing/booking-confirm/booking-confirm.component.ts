@@ -122,7 +122,7 @@ textToCopyOne: string = 'This is some text to copy';
   paymentSucess:boolean = false;
   paymenterror: boolean;
   bookingOne:Booking;
-
+  taxPercentage: number;
 
   constructor(
     private http: HttpClient,
@@ -183,7 +183,37 @@ textToCopyOne: string = 'This is some text to copy';
     if (this.token.getBookingData() != null && this.token.getBookingData() != undefined)
     {
       this.booking = this.token.getBookingData();
-      this.bookinddata =  this.booking
+      this.bookinddata =  this.booking;
+      if (this.booking.taxDetails.length > 0 ) {
+        this.booking.taxDetails.forEach((element) => {
+          if (element.name === 'GST') {
+            this.booking.taxDetails = [];
+            this.booking.taxDetails.push(element);
+            this.taxPercentage = element.percentage;
+            this.booking.taxPercentage = this.taxPercentage;
+
+            if (element.taxSlabsList.length > 0) {
+              element.taxSlabsList.forEach((element2) => {
+                if (
+                  element2.maxAmount > this.booking.beforeTaxAmount &&
+                  element2.minAmount < this.booking.beforeTaxAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (
+                  element2.maxAmount <
+                  this.booking.beforeTaxAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+              });
+            }
+          }
+        });
+
+        // this.taxPercentage = this.booking.taxDetails[0].percentage;
+      }
       // console.log("this.booking" + JSON.stringify(this.booking))
       this.taxAmountOne = this.booking.taxAmount
       this.dueAmount = this.booking.totalAmount - this.booking.advanceAmount;
@@ -878,7 +908,7 @@ this.externalReservationdto =res.body
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
 
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'reservation@thehotelmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -1287,7 +1317,7 @@ this.externalReservationdto =res.body
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = 'support@thehotelmate.com';
+    this.parametertype2.text = 'reservation@thehotelmate.co';
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -1435,7 +1465,7 @@ this.externalReservationdto =res.body
 
       this.parametertype2 = new Para();
       this.parametertype2.type = 'text',
-      this.parametertype2.text = 'support@thehotelmate.com';
+      this.parametertype2.text = 'reservation@thehotelmate.co';
       this.parameterss2.push(this.parametertype2);
 
       this.parametertype2 = new Para();
@@ -1583,7 +1613,7 @@ this.externalReservationdto =res.body
 
         this.parametertype2 = new Para();
         this.parametertype2.type = 'text',
-        this.parametertype2.text = 'support@thehotelmate.com';
+        this.parametertype2.text = 'reservation@thehotelmate.co';
         this.parameterss2.push(this.parametertype2);
 
         this.parametertype2 = new Para();
@@ -1731,7 +1761,7 @@ this.externalReservationdto =res.body
 
           this.parametertype2 = new Para();
           this.parametertype2.type = 'text',
-          this.parametertype2.text = 'support@thehotelmate.com';
+          this.parametertype2.text = 'reservation@thehotelmate.co';
           this.parameterss2.push(this.parametertype2);
 
           this.parametertype2 = new Para();
@@ -1879,7 +1909,7 @@ this.externalReservationdto =res.body
 
             this.parametertype2 = new Para();
             this.parametertype2.type = 'text',
-            this.parametertype2.text = 'support@thehotelmate.com';
+            this.parametertype2.text = 'reservation@thehotelmate.co';
             this.parameterss2.push(this.parametertype2);
 
             this.parametertype2 = new Para();
@@ -2027,7 +2057,7 @@ this.externalReservationdto =res.body
 
               this.parametertype2 = new Para();
               this.parametertype2.type = 'text',
-              this.parametertype2.text = 'support@thehotelmate.com';
+              this.parametertype2.text = 'reservation@thehotelmate.co';
               this.parameterss2.push(this.parametertype2);
 
               this.parametertype2 = new Para();

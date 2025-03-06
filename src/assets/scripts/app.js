@@ -1,4 +1,4 @@
-const baseUrl = "http://testchatbot.thehotelmate.com";
+const baseUrl = "http://testchatbot.thehotelmate.co";
 
 class Chatbox {
   constructor() {

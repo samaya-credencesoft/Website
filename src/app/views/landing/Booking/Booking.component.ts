@@ -892,16 +892,31 @@ export class BookingComponent implements OnInit {
           // debugger
           if (element.taxSlabsList.length > 0) {
             element.taxSlabsList.forEach((element2) => {
-              if (
-                element2.maxAmount > this.booking.netAmount &&
-                element2.minAmount < this.booking.netAmount
-              ) {
-                this.taxPercentage = element2.percentage;
-                this.booking.taxPercentage = this.taxPercentage;
-              } else if (element2.maxAmount < this.booking.netAmount) {
-                this.taxPercentage = element2.percentage;
-                this.booking.taxPercentage = this.taxPercentage;
+              this.url = this.token.getBookingEngineBoolean();
+              if(this.url === "googlehotelcenter") {
+                if (
+                  element2.maxAmount > (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge) &&
+                  element2.minAmount < (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge)
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (element2.maxAmount < (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge)) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
               }
+              else{
+                if (
+                  element2.maxAmount > this.booking.netAmount &&
+                  element2.minAmount < this.booking.netAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (element2.maxAmount < this.booking.netAmount) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+            }
             });
           }
         }
@@ -1319,7 +1334,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
 
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'reservation@thehotelmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -1364,9 +1379,9 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
     if(this.booking.planCode === 'GHC'){
-      this.enquiryForm.roomPrice = (this.booking.netAmount -(this.booking.extraPersonCharge + this.booking.extraChildCharge));
+      this.enquiryForm.roomPrice = (this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
     } else{
-      this.enquiryForm.roomPrice = (this.booking.netAmount-(this.booking.extraPersonCharge + this.booking.extraChildCharge));
+      this.enquiryForm.roomPrice = (this.booking.netAmount) - (this.booking.extraPersonCharge + this.booking.extraChildCharge);
     }
     this.enquiryForm.couponCode = this.booking.couponCode;
     this.enquiryForm.promotionName = this.booking.promotionName;
@@ -2743,22 +2758,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2869,22 +2892,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2995,22 +3026,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3121,22 +3160,30 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
-
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3247,22 +3294,31 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.fromDate;
+    this.parametertype2.text = this.datePipe.transform(this.booking.fromDate, 'dd-MM-YYYY') + ",";
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text';
+        if (this.booking.fromTime) {
+           this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.fromTime).toLocaleTimeString([]);
+    this.parametertype2.text = this.datePipe.transform(this.booking.toDate, 'dd-MM-YYYY') + ",";
     this.parameterss2.push(this.parametertype2);
 
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.toDate;
-    this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-      this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString([]);;
+    this.parametertype2.type = 'text';
+        if (this.booking.toTime) {
+           this.parametertype2.text = new Date(this.booking.toTime).toLocaleTimeString();
+        } else {
+           this.parametertype2.text = " ";
+        }
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3441,7 +3497,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
 
 
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'reservation@thehotelmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -3728,7 +3784,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
     this.enquiryForm.noOfExtraChild = this.booking.noOfExtraChild;
     if(this.booking.planCode === 'GHC'){
-      this.enquiryForm.roomPrice =  (this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
+      this.enquiryForm.roomPrice =  (this.booking.netAmount) - (this.booking.extraPersonCharge + this.booking.extraChildCharge);
     } else{
       this.enquiryForm.roomPrice =  ((Number(this.token.getBookingRoomPrice()) * (this.booking.noOfRooms * this.DiffDate)));
     }
@@ -3792,7 +3848,7 @@ export class BookingComponent implements OnInit {
     this.totalPercentage = (this.percentage1 + this.percentage2);
 
     this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
-    const TO_EMAIL = 'support@thehotelmate.com';
+    const TO_EMAIL = 'reservation@thehotelmate.co';
     const TO_NAME = 'Support - The Hotel Mate';
     const bccEmail = 'samaya.muduli@credencesoft.co.nz';
     const bccEmail2 = 'info@bookonepms.com';
@@ -3918,7 +3974,7 @@ export class BookingComponent implements OnInit {
 
   }
   sendenquirytoproperty(enquiryForm) {
-    this.enquiryForm.fromEmail = "support@thehotelmate.com";
+    this.enquiryForm.fromEmail = "reservation@thehotelmate.co";
     this.enquiryForm.phone = '';
     this.enquiryForm.email = '',
       this.enquiryForm.roomPrice = this.booking.totalAmount

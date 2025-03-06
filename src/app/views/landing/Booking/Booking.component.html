@@ -2503,8 +2503,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
                     <div>
                       <span *ngIf="selectedCouponList.minimumOrderAmount">Minimum Order:
                         {{selectedCouponList.minimumOrderAmount | currency: currency:"symbol":"1.2-2"}}</span><br>
-                      <span *ngIf="selectedCouponList.endDate">Valid until: {{ selectedCouponList.endDate | date:'d MMMM
-                        y' }}</span>
+                      <span *ngIf="selectedCouponList.endDate">Valid until: {{ selectedCouponList.endDate | date:'d MMMMy' }}</span>
                     </div>
                     <!-- Image on the right side -->
                     <img *ngIf="selectedCouponList.imageList?.[0]?.url" [src]="selectedCouponList.imageList[0].url"
@@ -2526,7 +2525,10 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
           [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
           *ngIf="value === true && showPayLater()" (click)="onCashPaymentSubmit()">Pay
           Later</button>
-        <button class="Fillpaybtn" type="button" style="font-size: 19px;"
+          <!-- <button class="Fillpaybtn" type="button" style="font-size: 19px;"
+          [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
+          *ngIf="value === true && showPayNow()" (click)="onCashPaymentSubmit()">Pay Later</button> -->
+          <button class="Fillpaybtn" type="button" style="font-size: 19px;"
           [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
           *ngIf="value === true && showPayNow()" (click)="payAndCheckout()">Pay Now</button>
         <!-- <button   class="Fillpaybtn" type="button"  style="font-size: 19px;" [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true"
@@ -2818,7 +2820,10 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
             [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
             *ngIf="value === true && showPayLater()" (click)="onCashPaymentSubmit()">Pay
             Later</button>
-          <button class="Fillpaybtn" type="button"
+            <!-- <button class="Fillpaybtn" type="button"
+            [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
+            *ngIf="value === true && showPayNow()" (click)="onCashPaymentSubmit()">Pay Later</button> -->
+            <button class="Fillpaybtn" type="button"
             [disabled]=" (!paymentLoader || !submitButtonDisable) && !validateFrom()"
             *ngIf="value === true && showPayNow()" (click)="payAndCheckout()">Pay Now</button>
           <!-- <button   class="Fillpaybtn" type="button"  [disabled]=" paymentLoader || submitButtonDisable || !validateForm()" (click)="onCashPaymentSubmit()"  *ngIf="businessUser.paymentGateway == null && businessUser.website && value === true">Pay At Hotel</button> -->

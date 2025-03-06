@@ -848,6 +848,7 @@ this.selectedServices =[]
       this.rooms = this.booking.noOfRooms;
 
       this.taxPercentage = this.booking.taxPercentage;
+      console.log("this.booking.taxPercentage",this.booking.taxPercentage)
     } else {
       this.fromDate = this.calendar.getToday();
       this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
@@ -979,7 +980,7 @@ const currentTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds
         propertyName:propertyName,
         currentDate:currentTimeString,
       };
-      fetch('https://chatbot.api.thehotelmate.com/api/chatbot/receive-payload', {
+      fetch('https://chatbot.api.thehotelmate.co/api/chatbot/receive-payload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1637,7 +1638,7 @@ if (this.city != null && this.city != undefined) {
     // debugger;
     //console.log("this is clicked");
     Logger.log(JSON.stringify(this.subscriptions));
-    const TO_EMAIL = "support@thehotelmate.com";
+    const TO_EMAIL = "reservation@thehotelmate.co";
     // const TO_EMAIL = 'abir.sayeed@gmail.com';
     // const TO_EMAIL = "subhasmitatripathy37@gmail.com";
     this.email.fromEmail = this.fromEmail;
@@ -1673,7 +1674,7 @@ if (this.city != null && this.city != undefined) {
       this.sendemailtosupport(this.email);
   }
   sendemailtosupport(email){
-    email.toEmail ='support@thehotelmate.com'
+    email.toEmail ='reservation@thehotelmate.co'
    this.http
    .post<Email>(API_URL_NZ + '/api/thm/sendEmailFromWebSite',email)
    .subscribe((response) => {
@@ -1954,6 +1955,7 @@ this.isHeaderVisible = true;
           this.booking.taxPercentage != undefined
         ) {
           this.taxPercentage = this.booking.taxPercentage;
+          console.log("this.booking.taxPercentage",this.booking.taxPercentage)
         } else {
           this.taxPercentage = 0;
         }
@@ -2339,6 +2341,7 @@ this.isHeaderVisible = true;
             this.booking.taxPercentage != undefined
           ) {
             this.taxPercentage = this.booking.taxPercentage;
+            console.log("this.booking.taxPercentage",this.booking.taxPercentage)
             // //console.log('frodm' + this.taxPercentage);
           } else {
             this.taxPercentage = 0;
@@ -2618,6 +2621,7 @@ checkValidCouponOrNot(couponList?){
   }
 
   onPlanSelected(plan, room) {
+
     this.availableRooms?.forEach((room) => {
       room.ratesAndAvailabilityDtos?.forEach(ele => {
         ele.roomRatePlans?.forEach(ele1 =>{
@@ -2696,33 +2700,47 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       plan.amount * this.DiffDate * this.noOfrooms +
       this.booking.extraPersonCharge +
       this.booking.extraChildCharge;
+      console.log(" this.booking.netAmount", this.booking.netAmount)
     if (this.businessUser.taxDetails.length > 0) {
       this.businessUser.taxDetails.forEach((element) => {
-        if (element.name === 'GST') {
-          this.booking.taxDetails = [];
-          this.booking.taxDetails.push(element);
-          this.taxPercentage = element.percentage;
-          this.booking.taxPercentage = this.taxPercentage;
-
-          // //console.log("room price :" +this.booking.roomPrice)
-          if (element.taxSlabsList.length > 0) {
-            element.taxSlabsList.forEach((element2) => {
-              if (
-                element2.maxAmount > this.booking.roomPrice &&
-                element2.minAmount < this.booking.roomPrice
-              ) {
-                this.taxPercentage = element2.percentage;
-                this.booking.taxPercentage = this.taxPercentage;
-              } else if (
-                element2.maxAmount <
-                this.booking.roomPrice
-              ) {
-                this.taxPercentage = element2.percentage;
-                this.booking.taxPercentage = this.taxPercentage;
-              }
-            });
+        if (plan?.code === 'GHC' &&
+          this.activeForGoogleHotelCenter === true) {
+            if (element.taxSlabsList.length > 0) {
+              element.taxSlabsList.forEach((element2) => {
+                if (
+                  element2.maxAmount > (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge) &&
+                  element2.minAmount < (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge)
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (
+                  element2.maxAmount <
+                  (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge)
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+              });
+            }
+          } else{
+            if (element.taxSlabsList.length > 0) {
+              element.taxSlabsList.forEach((element2) => {
+                if (
+                  element2.maxAmount > this.booking.netAmount &&
+                  element2.minAmount < this.booking.netAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                } else if (
+                  element2.maxAmount <
+                  this.booking.netAmount
+                ) {
+                  this.taxPercentage = element2.percentage;
+                  this.booking.taxPercentage = this.taxPercentage;
+                }
+              });
+            }
           }
-        }
       });
 
       // this.taxPercentage = this.booking.taxDetails[0].percentage;
@@ -2739,6 +2757,7 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     }
 
     this.booking.taxPercentage = this.taxPercentage;
+    console.log("this.booking.taxPercentage",this.booking.taxPercentage)
     this.planDetails = plan;
     this.booking.planCode = plan.code;
     this.booking.roomRatePlanName = plan.name;

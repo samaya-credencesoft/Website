@@ -21,6 +21,7 @@ textToCopyOne: string = 'This is some text to copy';
 
 
 savedServices: any;
+taxPercentage: number;
   currency: any;
   businessOfferDto: BusinessOfferDto;
   showMore:boolean  =false
@@ -49,6 +50,36 @@ this.PropertyUrl = this.token.getPropertyUrl();
   this.propertyDetails = this.token.getProperty();
  this.bookingone = this.token.getBookingData();
  this.booking = this.token.getBookingDataObj();
+ if (this.bookingone.taxDetails?.length > 0) {
+  this.bookingone.taxDetails.forEach((element) => {
+    if (element.name === 'GST') {
+      this.booking.taxDetails = [];
+      this.booking.taxDetails.push(element);
+      this.taxPercentage = element.percentage;
+      this.booking.taxPercentage = this.taxPercentage;
+
+      if (element.taxSlabsList.length > 0) {
+        element.taxSlabsList.forEach((element2) => {
+          if (
+            element2.maxAmount > this.booking.roomPrice &&
+            element2.minAmount < this.booking.roomPrice
+          ) {
+            this.taxPercentage = element2.percentage;
+            this.booking.taxPercentage = this.taxPercentage;
+          } else if (
+            element2.maxAmount <
+            this.booking.roomPrice
+          ) {
+            this.taxPercentage = element2.percentage;
+            this.booking.taxPercentage = this.taxPercentage;
+          }
+        });
+      }
+    }
+  });
+
+  // this.taxPercentage = this.booking.taxDetails[0].percentage;
+}
  this.savedServices = this.token.getSelectedServices();
  this.currency = this.propertyDetails.localCurrency.toUpperCase();
  this.storedPromo = localStorage.getItem('selectPromo');
