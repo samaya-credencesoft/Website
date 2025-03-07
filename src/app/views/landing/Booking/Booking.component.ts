@@ -1268,11 +1268,14 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.externalSite = "Website";
     this.enquiryForm.source = "The Hotel Mate"
     this.enquiryForm.beforeTaxAmount = this.booking.beforeTaxAmount;
-    if (this.businessServiceDto.advanceAmountPercentage === 100) {
+    if(this.businessServiceDto.advanceAmountPercentage === 50){
+      this.enquiryForm.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+     } else if(this.businessServiceDto.advanceAmountPercentage === 100){
       this.enquiryForm.advanceAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
-    } else {
+     }
+     else{
       this.enquiryForm.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
-    }
+     }
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;
