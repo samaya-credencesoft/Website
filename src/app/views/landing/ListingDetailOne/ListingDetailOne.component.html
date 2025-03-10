@@ -6,7 +6,7 @@
 <!-- <i class="fa fa-whatsapp my-float"></i> -->
 <!-- </a> -->
 <a href="tel:+919040785705" class="float-two" target="_blank"
-  *ngIf="showHideFlag === false && showStaticContent === true && value === false">
+  *ngIf="showHideFlag === false">
   <i class="fa fa-phone my-float-one"></i>
 </a>
 
@@ -767,7 +767,7 @@
           <p class="hero-subheading" style="font-weight: bold !important;">{{businessUser.address?.streetName}},
             {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
           <ul style="display: flex; flex-wrap: wrap; margin-left: -3rem; margin-top: 5px;"
-            *ngIf="showHideFlag === false && showStaticContent === true && value === false">
+            *ngIf="showHideFlag === false ">
             <li class="property-number-section"><a href="tel:+919040785705"><span
                   style="color: #484848; text-decoration: underline; font-weight: bold;">
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
