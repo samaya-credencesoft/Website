@@ -2708,14 +2708,14 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
             if (element.taxSlabsList.length > 0) {
               element.taxSlabsList.forEach((element2) => {
                 if (
-                  element2.maxAmount > (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge) &&
-                  element2.minAmount < (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge)
+                  element2.maxAmount > (this.booking.roomPrice + (this.booking.extraPersonCharge + this.booking.extraChildCharge) / this.booking.noOfNights) &&
+                  element2.minAmount < (this.booking.roomPrice + (this.booking.extraPersonCharge + this.booking.extraChildCharge) / this.booking.noOfNights)
                 ) {
                   this.taxPercentage = element2.percentage;
                   this.booking.taxPercentage = this.taxPercentage;
                 } else if (
                   element2.maxAmount <
-                  (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge)
+                  (this.booking.roomPrice + (this.booking.extraPersonCharge + this.booking.extraChildCharge) / this.booking.noOfNights)
                 ) {
                   this.taxPercentage = element2.percentage;
                   this.booking.taxPercentage = this.taxPercentage;
@@ -3303,6 +3303,7 @@ clicked(){
     this.booking.noOfPersons = this.adults;
     this.booking.noOfChildren = this.children;
     this.booking.noOfRooms = this.rooms;
+    this.booking.noOfNights = this.DiffDate;
     this.token.saveBookingData(this.booking);
     // Logger.log('checkAvailability submit' + JSON.stringify(this.booking));
 
