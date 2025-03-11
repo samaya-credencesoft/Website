@@ -3473,6 +3473,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.consultantPerson = '';
     this.enquiryForm.noOfRooms = this.booking.noOfRooms;
     this.enquiryForm.noOfChildren = this.booking.noOfChildren;
+    this.enquiryForm.noOfNights = this.booking.noOfNights;
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.discountAmount = this.booking.discountAmount;
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
