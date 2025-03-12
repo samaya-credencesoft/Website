@@ -1316,7 +1316,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 763;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
@@ -2481,11 +2481,11 @@ export class BookingComponent implements OnInit {
           this.addServiceToBooking(this.booking.id, this.savedServices);
           this.externalReservation(this.booking);
           this.sendWhatsappMessageToTHM();
-          // this.sendWhatsappMessageToTHM11();
-          // this.sendWhatsappMessageToTHM1();
-          // this.sendWhatsappMessageToTHM2();
-          // this.sendWhatsappMessageToTHM3();
-          // this.sendWhatsappMessageToTHM4();
+          this.sendWhatsappMessageToTHM11();
+          this.sendWhatsappMessageToTHM1();
+          this.sendWhatsappMessageToTHM2();
+          this.sendWhatsappMessageToTHM3();
+          this.sendWhatsappMessageToTHM4();
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
           }, 3000);
@@ -3482,7 +3482,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 763;
+    this.enquiryForm.propertyId = 107;
 
     this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
@@ -3836,7 +3836,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 763;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
