@@ -1278,7 +1278,7 @@ export class BookingComponent implements OnInit {
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;
-    this.enquiryForm.mobile = this.booking.mobile;
+    this.enquiryForm.mobile = this.token.getProperty().whatsApp;
     this.enquiryForm.roomType = this.booking.roomType;
     this.enquiryForm.roomRatePlanName = this.booking.roomRatePlanName;
 
@@ -3441,7 +3441,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.externalSite = "Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount = this.booking.beforeTaxAmount;
-    this.enquiryForm.mobile = this.booking.mobile;
+    this.enquiryForm.mobile = this.token.getProperty().whatsApp;
     this.enquiryForm.roomType = this.booking.roomName;
     this.enquiryForm.roomRatePlanName = this.booking.roomRatePlanName;
 
@@ -3798,7 +3798,7 @@ export class BookingComponent implements OnInit {
     // this.enquiryForm.counterName=this.booking.counterName;
     // this.enquiryForm.modeOfPayment=this.booking.modeOfPayment;
     // this.enquiryForm.advanceAmount=this.booking.advanceAmount;
-    this.enquiryForm.mobile = this.booking.mobile;
+    this.enquiryForm.mobile = this.token.getProperty().whatsApp;
     this.enquiryForm.roomType = this.booking.roomType;
     this.enquiryForm.roomRatePlanName = this.booking.roomRatePlanName;
 
