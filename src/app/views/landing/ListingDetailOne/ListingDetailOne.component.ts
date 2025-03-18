@@ -650,6 +650,8 @@ export class ListingDetailOneComponent implements OnInit {
   counterd = 0;
   breakfastservice: any;
   planPrice: any;
+  minDateForCheckIn: NgbDate;
+  minDateForCheckOut: NgbDate;
   totalplanPrice: any;
   lunchservice: any;
   propertyData: BusinessUser;
@@ -738,6 +740,8 @@ export class ListingDetailOneComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private viewportScroller: ViewportScroller
   ) {
+    const today = new Date();
+    this.minDateForCheckIn = new NgbDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
     // this.checkAvailabilityDisabled = true;
     let currenturl = window.location.href
     this.token.savePropertyUrl(currenturl);
@@ -3546,21 +3550,26 @@ clicked(){
     );
   }
 
-  onDateSelection(date: NgbDate, type: 'checkin' | 'checkout') {
+  onDateSelection(date: NgbDate, type: string) {
     if (type === 'checkin') {
-      this.fromDate = date;
-      if (this.toDate && date.after(this.toDate)) {
-        this.toDate = null;
+      if (date.before(this.minDateForCheckIn)) {
+        return; // Prevent past date selection
       }
+      this.fromDate = date;
+      this.toDate = null;
+      this.minDateForCheckOut = date; // Disable dates before check-in for checkout
     } else if (type === 'checkout') {
       if (this.fromDate && date.after(this.fromDate)) {
         this.toDate = date;
-      } else {
       }
     }
 
-    this.getDiffDate(this.toDate, this.fromDate);
+    // Call only if both dates are selected
+    if (this.fromDate && this.toDate) {
+      this.getDiffDate(this.toDate, this.fromDate);
+    }
   }
+
 
 
 
