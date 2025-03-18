@@ -122,6 +122,7 @@ import { PaylaterConfirmComponent } from './paylater-confirm/paylater-confirm.co
 import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 import { WhatappPaylaterTemplateComponent } from './whatapp-paylater-template/whatapp-paylater-template.component';
+import { ErrorpageComponent } from './errorpage/errorpage.component';
 
 
 @NgModule({
@@ -239,7 +240,8 @@ EnquiryComponent,
     PaylaterConfirmComponent,
     BookingConfirmComponent,
     WhatsappRedirectPageComponent,
-    WhatappPaylaterTemplateComponent
+    WhatappPaylaterTemplateComponent,
+    ErrorpageComponent
 
   ],
   providers: [WINDOW_PROVIDERS,
