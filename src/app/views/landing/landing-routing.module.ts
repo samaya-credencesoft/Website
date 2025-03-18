@@ -47,6 +47,7 @@ import { BookingConfirmComponent } from './booking-confirm/booking-confirm.compo
 import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 import { WhatappPaylaterTemplateComponent } from './whatapp-paylater-template/whatapp-paylater-template.component';
 import { CheckoutPhonepeComponentComponent } from './CheckoutPhonepeComponent/CheckoutPhonepeComponent.component';
+import { ErrorpageComponent } from './errorpage/errorpage.component';
 // import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
@@ -193,6 +194,10 @@ const routes: Routes = [
   {
     path: 'submitted-form',
     component: OnboardingformSubmittedFormComponent,
+  },
+  {
+    path: 'error',
+    component: ErrorpageComponent
   },
   {
     path: 'company',

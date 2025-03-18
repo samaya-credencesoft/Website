@@ -1999,10 +1999,11 @@ this.isHeaderVisible = true;
         this.loader = false;
         this.changeDetectorRefs.detectChanges();
       } else {
-        this.router.navigate(["/404"]);
+        this.router.navigate(["/error"]);
       }
     } catch (error) {
       this.loader = false;
+      this.router.navigate(["/error"]);
       // Handle the error appropriately, if needed.
     }
   }
@@ -2414,11 +2415,12 @@ this.isHeaderVisible = true;
           this.changeDetectorRefs.detectChanges();
 
         } else {
-
+          this.router.navigate(["/error"]);
         }
       },
       (error) => {
         this.loader = false;
+        this.router.navigate(["/error"]);
         // this.router.navigate(["/error"]);
       }
     );

@@ -808,7 +808,7 @@ roomdetailss.noOfRooms = this.booking.noOfRooms;
 roomdetailss.noOfadult = this.booking.noOfPersons;
 roomdetailss.noOfchild = this.booking.noOfChildren;
 roomdetailss.plan = this.booking.roomRatePlanName;
-roomdetailss.roomRate = this.booking.roomTariffBeforeDiscount + this.booking.extraChildCharge + this.booking.extraPersonCharge;
+roomdetailss.roomRate = this.booking.beforeTaxAmount/ this.booking.noOfNights;
 roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
@@ -880,7 +880,11 @@ this.externalReservationdto =res.body
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
-    this.enquiryForm.mobile=this.booking.mobile;
+    if(this.token.getProperty().whatsApp === "" || this.token.getProperty().whatsApp === null || this.token.getProperty().whatsApp === undefined){
+      this.enquiryForm.mobile= this.token.getProperty().mobile;
+    } else {
+      this.enquiryForm.mobile = this.token.getProperty().whatsApp;
+    }
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.roomPrice = this.booking.beforeTaxAmount;
