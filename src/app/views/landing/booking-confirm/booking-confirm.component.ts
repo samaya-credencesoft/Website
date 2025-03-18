@@ -808,7 +808,7 @@ roomdetailss.noOfRooms = this.booking.noOfRooms;
 roomdetailss.noOfadult = this.booking.noOfPersons;
 roomdetailss.noOfchild = this.booking.noOfChildren;
 roomdetailss.plan = this.booking.roomRatePlanName;
-roomdetailss.roomRate = this.booking.roomTariffBeforeDiscount + this.booking.extraChildCharge + this.booking.extraPersonCharge;
+roomdetailss.roomRate = this.booking.beforeTaxAmount/ this.booking.noOfNights;
 roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
