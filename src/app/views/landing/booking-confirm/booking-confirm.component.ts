@@ -880,7 +880,11 @@ this.externalReservationdto =res.body
     this.enquiryForm.externalSite="Website";
     this.enquiryForm.source = "Bookone Connect"
     this.enquiryForm.beforeTaxAmount=this.booking.beforeTaxAmount;
-    this.enquiryForm.mobile=this.booking.mobile;
+    if(this.token.getProperty().whatsApp === "" || this.token.getProperty().whatsApp === null || this.token.getProperty().whatsApp === undefined){
+      this.enquiryForm.mobile= this.token.getProperty().mobile;
+    } else {
+      this.enquiryForm.mobile = this.token.getProperty().whatsApp;
+    }
     this.enquiryForm.roomType=this.booking.roomType;
     this.enquiryForm.roomRatePlanName=this.booking.roomRatePlanName;
     this.enquiryForm.roomPrice = this.booking.beforeTaxAmount;
