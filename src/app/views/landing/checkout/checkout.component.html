@@ -6,7 +6,7 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <!-- <div class="col-12" *ngIf="payment.failureMessage !== null" style="display: flex; justify-content: center;">
+                <div class="col-12" *ngIf="payment.failureMessage !== null" style="display: flex; justify-content: center;">
                   <div class="card shadow-lg" style="max-width: 500px; width: 100%; border-radius: 10px;margin-top: 10rem;">
 
                     <div class="card-header bg-primary text-white text-center">
@@ -18,8 +18,7 @@
                       <h2>ERROR: {{payment.failureCode}}</h2>
                       <p>{{payment.failureMessage}}</p>
                       <p class="card-text text-muted">
-                        Oops!! Seems your payment is not successful. Please try again later. Please contact us at
-                        <a href="tel:7608935904 " class="text-primary fw-bold text-decoration-none">7608935904</a>.
+                        Oops!! Seems your payment is not successful. Please try again later.
                       </p>
 
                       <a (click)="onGoHome()"class="btn btn-primary btn-sm me-2">Go Back</a>
@@ -28,7 +27,7 @@
 
                   </div>
 
-                </div> -->
+                </div>
                 <div class="col-12" *ngIf="paymentFailed === true && payment.failureMessage === null" style="display: flex; justify-content: center;">
                   <div class="card shadow-lg" style="max-width: 500px; width: 100%; border-radius: 10px;margin-top: 10rem;">
 
