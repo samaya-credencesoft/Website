@@ -5,10 +5,10 @@
 <!-- <a [href]="getWhatsappShareUrl()" class="float" target="_blank" *ngIf="isHeaderVisible === true"> -->
 <!-- <i class="fa fa-whatsapp my-float"></i> -->
 <!-- </a> -->
-<a href="tel:+919040785705" class="float-two" target="_blank"
-  *ngIf="showHideFlag === false && showStaticContent === true && value === false">
+<!-- <a href="tel:+919040785705" class="float-two" target="_blank"
+  *ngIf="showHideFlag === false">
   <i class="fa fa-phone my-float-one"></i>
-</a>
+</a> -->
 
 <head>
   <meta charset="UTF-8">
@@ -767,8 +767,8 @@
           <p class="hero-subheading" style="font-weight: bold !important;">{{businessUser.address?.streetName}},
             {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
           <ul style="display: flex; flex-wrap: wrap; margin-left: -3rem; margin-top: 5px;"
-            *ngIf="showHideFlag === false && showStaticContent === true && value === false">
-            <li class="property-number-section"><a href="tel:+919040785705"><span
+            *ngIf="showHideFlag === false ">
+            <!-- <li class="property-number-section"><a href="tel:+919040785705"><span
                   style="color: #484848; text-decoration: underline; font-weight: bold;">
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
@@ -776,7 +776,7 @@
             <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
                   style="color: #484848; text-decoration: underline; font-weight: bold;">
                   <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
-            </li>
+            </li> -->
 
             <!-- <li class="property-number-sectiontwo"><a href="tel:07965201321"><span style="color: #484848; text-decoration: underline; font-weight: bold;">
                 <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">07965201321</span></a>
@@ -2924,8 +2924,8 @@
     flex-wrap: wrap;
     margin-left: -1rem;
     margin-top: 5px;
-    gap: 9px;" *ngIf="showHideFlag === false && showStaticContent === true && value === false">
-      <li class="property-number-section"><a href="tel:+919040785705"><span
+    gap: 9px;" *ngIf="showHideFlag === false ">
+      <!-- <li class="property-number-section"><a href="tel:+919040785705"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
             <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
       </li>
@@ -2933,7 +2933,7 @@
       <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
             <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
-      </li>
+      </li> -->
 
       <!-- <li class="property-number-sectiontwo"><a href="tel:07965201321"><span style="color: #484848; text-decoration: underline; font-weight: bold;">
         <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">07965201321</span></a>

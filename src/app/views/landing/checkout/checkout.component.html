@@ -8,18 +8,17 @@
             <div class="row">
                 <div class="col-12" *ngIf="payment.failureMessage !== null" style="display: flex; justify-content: center;">
                   <div class="card shadow-lg" style="max-width: 500px; width: 100%; border-radius: 10px;margin-top: 10rem;">
-                    <!-- Card Header -->
+
                     <div class="card-header bg-primary text-white text-center">
                       <h5 class="mb-0" style="color:#fff !important">Important Notice</h5>
                     </div>
 
-                    <!-- Card Body -->
+
                     <div class="card-body text-center">
                       <h2>ERROR: {{payment.failureCode}}</h2>
                       <p>{{payment.failureMessage}}</p>
                       <p class="card-text text-muted">
-                        Oops!! Seems your payment is not successful. Please try again later. Please contact us at
-                        <a href="tel:07965201321 " class="text-primary fw-bold text-decoration-none">07965201321</a>.
+                        Oops!! Seems your payment is not successful. Please try again later.
                       </p>
 
                       <a (click)="onGoHome()"class="btn btn-primary btn-sm me-2">Go Back</a>
@@ -31,16 +30,16 @@
                 </div>
                 <div class="col-12" *ngIf="paymentFailed === true && payment.failureMessage === null" style="display: flex; justify-content: center;">
                   <div class="card shadow-lg" style="max-width: 500px; width: 100%; border-radius: 10px;margin-top: 10rem;">
-                    <!-- Card Header -->
+
                     <div class="card-header bg-primary text-white text-center">
                       <h5 class="mb-0" style="color: #fff !important">Important Notice</h5>
                     </div>
 
-                    <!-- Card Body -->
+
                     <div class="card-body text-center">
                       <p class="card-text text-muted">
-                        Oops!! Seems the Paytm payment gateway is not working. Please try another way. Please contact us at
-                        <a href="tel:07965201321 " class="text-primary fw-bold text-decoration-none">07965201321</a>.
+                        Oops!! Seems the Paytm payment gateway is not working. Please try another way.
+
                       </p>
 
                       <a (click)="onGoHome()"class="btn btn-primary btn-sm me-2">Go Back</a>
