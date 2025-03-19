@@ -1055,7 +1055,6 @@ if (this.city != null && this.city != undefined) {
       this.bookingCity = this.token.getBookingCity();
     }
     let businessSlug = this.acRoute.snapshot.params['detail'];
-
     if (this.urlLocation !== undefined && this.urlLocation !== null) {
       this.isHotelMate = false;
     }
@@ -2415,12 +2414,12 @@ this.isHeaderVisible = true;
           this.changeDetectorRefs.detectChanges();
 
         } else {
-          this.router.navigate(["/error"]);
+          // this.router.navigate(["/error"]);
         }
       },
       (error) => {
         this.loader = false;
-        this.router.navigate(["/error"]);
+        // this.router.navigate(["/error"]);
         // this.router.navigate(["/error"]);
       }
     );
