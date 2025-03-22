@@ -371,4 +371,10 @@ export class HotelBookingService {
       { observe: "response" }
     );
   }
+  getSubscriptions(propertyId:number){
+    return this.http.get<Booking[]>(
+      environment.inAPIUrl + "/api/thm/" + propertyId + "/subscriptions",
+      { observe: "response" }
+    )
+  }
 }

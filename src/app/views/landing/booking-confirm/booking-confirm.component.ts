@@ -123,6 +123,7 @@ textToCopyOne: string = 'This is some text to copy';
   paymenterror: boolean;
   bookingOne:Booking;
   taxPercentage: number;
+  allSubscription: any;
 
   constructor(
     private http: HttpClient,
@@ -550,7 +551,7 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
             );
           }
           this.addServiceToBooking(this.booking);
-          this.externalReservation(this.booking);
+          this.getSubscriptions(this.booking.propertyId);
           this.bookingConfirmed = true;
           this.paymentLoader = true;
           this.changeDetectorRefs.detectChanges();
@@ -775,6 +776,17 @@ this.hotelBookingService
     );
   }
 
+  getSubscriptions(propertyId:number){
+    this.hotelBookingService.getSubscriptions(this.booking.propertyId).subscribe((res=>{
+      this.allSubscription = res.body;
+      const foundSubscription = this.allSubscription.find(ele => ele.name === "BookOne Subscription");
+      if(foundSubscription){
+        this.externalReservation(this.booking);
+      } else {
+        console.log('subscription is not found');
+      }
+    }))
+  }
 
   externalReservation(booking){
     this.reservationRoomDetails =[];

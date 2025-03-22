@@ -242,6 +242,7 @@ export class BookingComponent implements OnInit {
   componentstype10: Components;
   parameterss1: Para[];
   valueHours: boolean = false;
+  allSubscription: any;
 
   constructor(
     private token: TokenStorage,
@@ -552,6 +553,19 @@ export class BookingComponent implements OnInit {
       });
     }
   }
+
+  getSubscriptions(propertyId:number){
+    this.hotelBookingService.getSubscriptions(this.booking.propertyId).subscribe((res=>{
+      this.allSubscription = res.body;
+      const foundSubscription = this.allSubscription.find(ele => ele.name === "BookOne Subscription");
+      if(foundSubscription){
+        this.externalReservation(this.booking);
+      } else {
+        console.log('subscription is not found');
+      }
+    }))
+  }
+
   externalReservation(booking) {
 
     this.reservationRoomDetails = [];
@@ -2483,7 +2497,7 @@ export class BookingComponent implements OnInit {
           this.booking.fromDate = this.bookingData.fromDate;
           this.booking.toDate = this.bookingData.toDate;
           this.addServiceToBooking(this.booking.id, this.savedServices);
-          this.externalReservation(this.booking);
+          this.getSubscriptions(this.booking.propertyId);
           this.sendWhatsappMessageToTHM();
           this.sendWhatsappMessageToTHM11();
           this.sendWhatsappMessageToTHM1();
