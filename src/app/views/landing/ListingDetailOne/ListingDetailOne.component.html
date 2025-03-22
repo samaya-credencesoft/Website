@@ -768,12 +768,12 @@
             {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
           <ul style="display: flex; flex-wrap: wrap; margin-left: -3rem; margin-top: 5px;"
             *ngIf="showHideFlag === false ">
-            <!-- <li class="property-number-section"><a href="tel:+919040785705"><span
+            <li class="property-number-section"><a href="tel:+919040785705"><span
                   style="color: #484848; text-decoration: underline; font-weight: bold;">
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
 
-            <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
+            <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
                   style="color: #484848; text-decoration: underline; font-weight: bold;">
                   <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
             </li> -->
@@ -1656,7 +1656,7 @@
                                 </div>
 
                               </div>
-                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold;">
+                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold;margin-top:35px;">
                                 <div class="mt-2" [innerHTML]="room.description">
                                 </div>
                               </div>
@@ -2139,7 +2139,7 @@
                               </div>
 
 
-                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold;">
+                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold; margin-top:35px;">
                                 <div class="mt-2" [innerHTML]="room.description">
                                 </div>
                               </div>
@@ -2627,7 +2627,7 @@
                               <div style=" padding:5px;padding-bottom: 4px;padding-top: 10px;">
 
                                 <!-- desktop view -->
-                                <div class="desktopone" style="font-weight: bold;">
+                                <div class="desktopone" style="font-weight: bold; margin-top:35px;">
                                   <div class="mt-2" [innerHTML]="room.description">
                                   </div>
                                 </div>
@@ -2925,12 +2925,12 @@
     margin-left: -1rem;
     margin-top: 5px;
     gap: 9px;" *ngIf="showHideFlag === false ">
-      <!-- <li class="property-number-section"><a href="tel:+919040785705"><span
+      <li class="property-number-section"><a href="tel:+919040785705"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
             <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
       </li>
 
-      <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
+      <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
             <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
       </li> -->
@@ -3884,7 +3884,7 @@
 
                             </div>
                             <!-- desktop view -->
-                            <div *ngIf="showDescription" class="desktopone" style="font-weight: bold;">
+                            <div *ngIf="showDescription" class="desktopone" style="font-weight: bold; margin-top:35px;">
                               <div class="mt-2" [innerHTML]="room.description">
                               </div>
                             </div>
@@ -4262,7 +4262,7 @@
 
                             </div>
                             <!-- desktop view -->
-                            <div *ngIf="showDescription" class="desktopone" style="font-weight: bold;">
+                            <div *ngIf="showDescription" class="desktopone" style="font-weight: bold; margin-top:35px;">
                               <div class="mt-2" [innerHTML]="room.description">
                               </div>
                             </div>
@@ -4434,7 +4434,7 @@
                               </div>
                             </div>
                             <div *ngIf="room.description && showFullDescription[i] " class="desktopone"
-                              style="font-weight: bold;">
+                              style="font-weight: bold; margin-top:35px;">
                               <div class="mt-2" [innerHTML]="room.description">
                               </div>
                             </div>
