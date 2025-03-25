@@ -2857,7 +2857,7 @@ export class BookingComponent implements OnInit {
 
     this.template.components = this.components;
     this.whatsappForm.template = this.template;
-    this.whatsappForm.to = "8328818871",
+    this.whatsappForm.to = "9337930186",
       this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;
