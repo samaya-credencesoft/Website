@@ -27,7 +27,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/sitemap.xml",
-              "src/robots.txt"
+              "src/robots.txt",
+              "src/bookone_sitemap.xml"
             ],
             "styles": ["src/assets/styles/app/_app.scss", "src/styles.css",
             "node_modules/slick-carousel/slick/slick.scss",
