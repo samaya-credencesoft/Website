@@ -3520,7 +3520,7 @@ export class BookingComponent implements OnInit {
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
 
 
     const TO_EMAIL = 'reservation@thehotelmate.co';
