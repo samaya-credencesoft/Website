@@ -1264,7 +1264,7 @@
                                           <div class="card-header"
                                             style=" padding-top: 5px;  padding-bottom: 1px; background-color: #4A4A4A !important; white-space: normal;">
                                             <h4 *ngIf="plan.name !== 'GHC'" class="planname"
-                                              style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
+                                              style=" font-size: 15px; color: #fff !important;    white-space: normal;">{{plan.name}}</h4>
                                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                             <h4 *ngIf="plan.name === 'GHC'"
                                               style=" font-size: 15px; color: #fff !important;">Economy</h4>
@@ -1746,7 +1746,7 @@
                                         <div class="card-header"
                                           style=" padding-top: 5px; padding-bottom: 1px; background-color: #4A4A4A !important; white-space: normal;">
                                           <h5 *ngIf="plan.name !== 'GHC'"
-                                            style=" font-size: 15px; color: #fff !important;" class="planname">
+                                            style=" font-size: 15px; color: #fff !important;    white-space: normal;" class="planname">
                                             {{plan.name}}</h5>
                                           <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                           <h5 *ngIf="plan.name === 'GHC'"
@@ -1860,7 +1860,7 @@
                                           <ng-container *ngIf="rates.roomRatePlans.length > 2 && plan.amount > 0">
                                             <div
                                               style="background-color: #343a40;  padding: 10px;  white-space: normal;">
-                                              <h5 style="margin: 0; color: #fff !important;">{{ plan.name }}</h5>
+                                              <h5 style="margin: 0; color: #fff !important;    white-space: normal;">{{ plan.name }}</h5>
                                             </div>
                                             <div style="padding-top: 10px;margin-left: 6px;">
                                               <span style="
@@ -2233,7 +2233,7 @@
                             padding-bottom: 1px;
                             background-color: #4A4A4A !important;">
                                           <h4 *ngIf="plan.name !== 'GHC'" class="planname"
-                                            style=" font-size: 15px; color: #fff !important;">{{plan.name}}</h4>
+                                            style=" font-size: 15px; color: #fff !important;    white-space: normal;">{{plan.name}}</h4>
                                           <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                           <h4 *ngIf="plan.name === 'GHC'"
                                             style=" font-size: 15px; color: #fff !important;">Economy</h4>
@@ -2353,7 +2353,7 @@
                                         onmouseout="this.style.transform='scale(1)'">
                                         <ng-container *ngIf="rates.roomRatePlans.length > 2 && plan.amount > 0">
                                           <div style="background-color: #343a40;  padding: 10px; white-space: normal;">
-                                            <h5 style="margin: 0;color: #fff !important;">{{ plan.name }}</h5>
+                                            <h5 style="margin: 0;color: #fff !important;    white-space: normal;">{{ plan.name }}</h5>
                                           </div>
 
                                           <div style="padding-top: 10px; margin-left: 6px;">
