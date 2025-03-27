@@ -2339,13 +2339,13 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
             <i class="fas fa-edit"></i>
         </button> -->
                 <ul>
-                  <li *ngIf="activeGoogleCenter === false">Plan name: {{booking.roomRatePlanName}} x {{DiffDate}}
+                  <!-- <li *ngIf="activeGoogleCenter === false">Plan name: {{booking.roomRatePlanName}} x {{DiffDate}}
                     Night(s) x {{booking.noOfRooms}} Room(s) <span>{{(bookingRoomPrice * booking.noOfRooms * DiffDate)|
-                      currency: currency:"symbol":"1.2-2"}}</span></li>
-                  <li *ngIf="booking.extraPersonCharge">Extra Pax Charges({{booking.noOfExtraPerson}})
+                      currency: currency:"symbol":"1.2-2"}}</span></li> -->
+                  <!-- <li *ngIf="booking.extraPersonCharge">Extra Pax Charges({{booking.noOfExtraPerson}})
                     <span>{{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
                   <li *ngIf="booking.extraChildCharge">Extra Child Charges({{booking.noOfExtraChild}})
-                    <span>{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</span></li>
+                    <span>{{booking.extraChildCharge | currency: currency:"symbol":"1.2-2"}}</span></li> -->
                   <li *ngIf="storedActualNetAmount">Total Net Amount <span> {{
                       storedActualNetAmount
                       | currency: currency:"symbol":"1.2-2"
