@@ -259,6 +259,11 @@
               <td>{{ booking.roomRatePlanName }}</td>
               <td>₹{{(booking?.beforeTaxAmount - (booking?.extraPersonCharge + booking?.extraChildCharge))}}</td>
             </tr>
+            <tr *ngIf="selectedPromo?.couponCode">
+              <td>Discount Amount:</td>
+
+              <td >-₹{{ booking.discountAmount | number: '1.2-2' }}</td>
+            </tr>
             <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
               <td>₹{{ booking.extraPersonCharge }}</td>
@@ -813,6 +818,11 @@ Applied!</strong>
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
           <td>₹{{(booking?.beforeTaxAmount - (booking?.extraPersonCharge + booking?.extraChildCharge))}}</td>
+        </tr>
+        <tr *ngIf="selectedPromo?.couponCode">
+          <td>Discount Amount:</td>
+
+          <td >-₹{{ booking.discountAmount | number: '1.2-2' }}</td>
         </tr>
         <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Pax Charges</td>

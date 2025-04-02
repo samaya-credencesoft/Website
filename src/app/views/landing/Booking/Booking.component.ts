@@ -52,6 +52,7 @@ import { PropertyEnquiryDto } from "src/model/propertyEnquiryDto";
 import { externalReservationDtoList } from "src/app/model/externalReservation";
 import { RoomDetail } from "src/app/model/RoomDetail";
 import { MessageService } from 'primeng/api';
+import { BusinessService } from 'src/services/business.service';
 declare var Stripe: any;
 
 declare var window: any;
@@ -192,7 +193,7 @@ export class BookingComponent implements OnInit {
 
   bankAccount: BankAccount;
   mobileWallet: MobileWallet;
-  businessOfferDto: BusinessOfferDto;
+  businessOfferDto: BusinessOfferDto[];
   promoCode: string;
   discountPercentage: number;
   promoMessage = "";
@@ -251,6 +252,7 @@ export class BookingComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef,
     private datePipe: DatePipe,
     private listingService: ListingService,
+    private offerService: BusinessService,
     private router: Router,
     private messageService: MessageService,
     private http: HttpClient,
@@ -275,7 +277,7 @@ export class BookingComponent implements OnInit {
     this.whatsappForm = new WhatsappDto();
     this.whatsappForm2 = new WhatsappDto();
     this.template = new Template()
-    this.businessOfferDto = new BusinessOfferDto();
+    // this.businessOfferDto = new BusinessOfferDto();
     // this.slotReservation = new SlotReservation();
     this.businessServiceDto = new BusinessServiceDtoList();
     this.businessUser = new BusinessUser();
@@ -296,6 +298,8 @@ export class BookingComponent implements OnInit {
     this.parameterss3 = [];
     this.parameterss4 = [];
     this.parameterss1 = [];
+    this.businessOfferDto = [];
+
     if (this.token.getServiceData() !== null) {
       this.addServiceList = this.token.getServiceData();
     }
@@ -589,7 +593,8 @@ export class BookingComponent implements OnInit {
     externalreservation.bookoneReservationId = this.booking.propertyReservationNumber;
     externalreservation.contactNumber = this.booking.mobile;
     externalreservation.propertyBusinessEmail = this.booking.businessEmail;
-    // externalreservation.externalTransactionId = this.booking.paymentId.toString();
+    externalreservation.discountAmount = this.booking.discountAmount;
+    externalreservation.externalTransactionId = "THM-"+this.booking.id;
     externalreservation.createdBy = 'hotelmate';
     roomdetailss.checkinDate = this.booking.fromDate;
     roomdetailss.checkoutDate = this.booking.toDate;
@@ -635,13 +640,24 @@ export class BookingComponent implements OnInit {
       });
   }
   getOfferDetails() {
-    this.hotelBookingService
-      .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
-      .subscribe((data) => {
-        this.businessOfferDto = data.body;
-        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
 
+    if (this.url === "googlehotelcenter") {
+      this.offerService.getOfferListFindByName("Platform Promotion").subscribe((response) => {
+        if (response.body && response.body.length > 0) {
+          this.businessOfferDto.push(response.body[0]);
+
+          this.promocodeListChip = this.checkValidCouponOrNot(this.businessOfferDto);
+          this.changeDetectorRefs.detectChanges();
+        }
       });
+    } else {
+      this.hotelBookingService
+        .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
+        .subscribe((data) => {
+          this.businessOfferDto = data.body;
+          this.promocodeListChip = this.checkValidCouponOrNot(data.body);
+        });
+    }
   }
   // Used For handled to check coupons are valid ot not.
   checkValidCouponOrNot(couponList?) {
@@ -664,6 +680,16 @@ export class BookingComponent implements OnInit {
       console.error("Error in checkValidCouponOrNot : ", error);
     }
   }
+
+  closeModal(): void {
+    try{
+      this.visiblePromotion = false;
+    }
+    catch(error){
+      console.error("Error in closeModal : ",error);
+    }
+  }
+
   // Used For handled to set the selected coupon
   selectedCoupon(coupon?) {
     try {
@@ -873,7 +899,9 @@ export class BookingComponent implements OnInit {
     console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
     this.currency = this.businessUser.localCurrency.toUpperCase();
-    this.getOfferDetails();
+    setTimeout(() => {
+      this.getOfferDetails();
+    }, 500);
 
 
 
@@ -888,12 +916,8 @@ export class BookingComponent implements OnInit {
         if (element.name === "GST") {
           this.booking.taxDetails = [];
           this.booking.taxDetails.push(element);
-          if(this.booking.taxPercentage === element.percentage){
-            this.taxPercentage = element.percentage;
-            this.booking.taxPercentage = this.taxPercentage;
-          } else{
-            this.booking.taxPercentage = this.booking.taxPercentage
-          }
+          // this.taxPercentage = element.percentage;
+          // this.booking.taxPercentage = this.taxPercentage;
           // console.log("this.taxPercentage0" +this.taxPercentage)
           // if (this.bookingCity != null && this.bookingCity != undefined) {
           //   this.booking.roomPrice = Number(this.bookingCity)
@@ -1336,7 +1360,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
@@ -3504,7 +3528,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
 
     this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
@@ -3862,7 +3886,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 443;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
     this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
