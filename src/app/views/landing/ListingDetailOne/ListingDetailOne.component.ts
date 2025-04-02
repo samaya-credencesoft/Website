@@ -2199,13 +2199,20 @@ this.isHeaderVisible = true;
 
   gotocheckout(){
     this.availableRooms?.forEach((room) => {
+      this.booking.roomType = room.name;
+
+      this.showError = false;
+
       room.ratesAndAvailabilityDtos?.forEach(ele => {
         ele.roomRatePlans?.forEach(ele1 =>{
           if (ele1.name === this.booking.roomRatePlanName) {
-            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
-              this.roomOccupancy = ele1.maximumOccupancy
+            const personsPerRoom = Math.ceil(this.booking.noOfPersons / this.booking.noOfRooms);
+            if (personsPerRoom > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy;
+              const requiredRooms = Math.ceil(this.booking.noOfPersons / ele1.maximumOccupancy);
+              const additionalRoomsNeeded = requiredRooms - this.booking.noOfRooms;
               this.showError = true;
-              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} per room. You need to add ${additionalRoomsNeeded} more room(s) or reduce the number of guests to match the plan occupancy.`;
               this.showErrorPopup();
             } else {
               if(this.booking?.netAmount <= this.selectedPromotionCouponData?.minimumOrderAmount){
@@ -2432,14 +2439,38 @@ this.isHeaderVisible = true;
   }
 
   showAllTheOfferList : any[] = [];
-  getOfferList(seo) {
-    this.offerService
-      .getOfferListFindBySeoFriendlyName(seo)
-      .subscribe((data) => {
-        this.offersList = data.body;
-        this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
-    });
-  }
+  // getOfferList(seo) {
+  //   this.offerService
+  //     .getOfferListFindBySeoFriendlyName(seo)
+  //     .subscribe((data) => {
+  //       this.offersList = data.body;
+  //       this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
+  //   });
+  // }
+
+  getOfferList(seo: string) {
+    if (this.activeForGoogleHotelCenter === true) {
+       this.offerService.getOfferListFindByName("Platform Promotion").subscribe((response) => {
+         if (response.body && response.body.length > 0) {
+           this.offersList.push(response.body[0]);
+         } else {
+           this.offersList = [];
+         }
+         this.showAllTheOfferList = this.checkValidCouponOrNot(this.offersList);
+         this.changeDetectorRefs.detectChanges();
+       });
+     } else {
+       this.offerService.getOfferListFindBySeoFriendlyName(seo).subscribe((data) => {
+         if (data.body && data.body.length > 0) {
+           this.offersList = data.body;
+         } else {
+           this.offersList = [];
+         }
+         this.showAllTheOfferList = this.checkValidCouponOrNot(this.offersList);
+         this.changeDetectorRefs.detectChanges();
+       });
+     }
+     }
 
   // Used For handled to check coupons are valid ot not.
 checkValidCouponOrNot(couponList?){
@@ -2500,7 +2531,11 @@ checkValidCouponOrNot(couponList?){
             block: "start"
         });
       }
-      this.selectedPromotion = true;
+      if (this.showPayLater() == false) {
+        this.selectedPromotion = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(promo));
+      localStorage.setItem('selectPromo', 'true');
+      }
       localStorage.setItem('selectedPromoData', JSON.stringify(promo));
       localStorage.setItem('selectPromo', 'true');
     }
@@ -2508,6 +2543,22 @@ checkValidCouponOrNot(couponList?){
       console.error("Error in selectedPromotionList : ",error);
     }
   }
+
+  showPayLater(): boolean {
+    const fromDateTimestamp = new Date(this.booking.fromDate).getTime();
+    const createdDateTimestamp = new Date(this.booking.createdDate).getTime();
+    const hoursDifference = (fromDateTimestamp - createdDateTimestamp) / (1000 * 60 * 60);
+    if (hoursDifference < 48) {
+      return true;
+    }
+
+    if (hoursDifference >= 48 && this.businessUser.paymentGateway == null) {
+      return true;
+    }
+
+    return false;
+  }
+
 
   getReview(id) {
     this.loader = true;
@@ -2626,15 +2677,23 @@ checkValidCouponOrNot(couponList?){
   }
 
   onPlanSelected(plan, room) {
+    this.booking.roomType = room.name;
+    this.booking.roomRatePlanName = plan.name;
 
+    // Reset previous error messages
+    this.showError = false;
+    this.errorMessage = '';
     this.availableRooms?.forEach((room) => {
       room.ratesAndAvailabilityDtos?.forEach(ele => {
         ele.roomRatePlans?.forEach(ele1 =>{
           if (ele1.name === this.booking.roomRatePlanName) {
-            if (this.booking.noOfPersons > ele1.maximumOccupancy) {
-              this.roomOccupancy = ele1.maximumOccupancy
+            const personsPerRoom = Math.ceil(this.booking.noOfPersons / this.booking.noOfRooms);
+            if (personsPerRoom > ele1.maximumOccupancy) {
+              this.roomOccupancy = ele1.maximumOccupancy;
+              const requiredRooms = Math.ceil(this.booking.noOfPersons / ele1.maximumOccupancy);
+              const additionalRoomsNeeded = requiredRooms - this.booking.noOfRooms;
               this.showError = true;
-              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} for this plan. Please select a different plan or change the adult count according to the plan occupancy  for book the Room.`;
+              this.errorMessage = `The number of persons exceeds the maximum occupancy of ${this.roomOccupancy} per room. You need to add ${additionalRoomsNeeded} more room(s) or reduce the number of guests to match the plan occupancy.`;
               this.showErrorPopup();
             }
           }

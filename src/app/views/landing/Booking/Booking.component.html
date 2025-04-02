@@ -286,11 +286,12 @@
   </div>
 </div>
 
-<p-dialog header="Exclusive Offers" [(visible)]="visiblePromotion" class="dialogSection">
+<p-dialog header="Exclusive Offers" [(visible)]="visiblePromotion" class="dialogSection" class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
   <!-- Check the length of promocodeListChip -->
-  <div *ngIf="promocodeListChip.length > 0; else noCoupons" style="font-size: 14px; color: #333;">
+  <div class="modal-body" *ngIf="promocodeListChip.length > 0; else noCoupons" style="font-size: 14px; color: #333;">
     <!-- Coupon List Inside Modal -->
-    <div *ngFor="let coupon of promocodeListChip;"
+    <div *ngFor="let coupon of promocodeListChip;" class="coupon-card"
       style="background-color: #f9f9f9; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center;">
       <div>
         <strong *ngIf="coupon.couponCode">Coupon Code: {{ coupon.couponCode }} (<span *ngIf="coupon.discountPercentage"
@@ -317,6 +318,7 @@
       No coupons available.
     </div>
   </ng-template>
+  </div>
 </p-dialog>
 
 <!-- Used For handled to show the success message -->
@@ -2493,7 +2495,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
               </div>
 
               <!-- View Coupon section -->
-              <div class="coupons-giftcards" (click)="openPromoListData()" *ngIf="!selectedPromotionCheck">
+              <div class="coupons-giftcards" (click)="openPromoListData()" *ngIf="!showPayLater()">
                 <span>
                   <i class="fas fa-gift"></i>
                   View Coupons & Gift Cards
@@ -2501,7 +2503,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
               </div>
 
               <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;"
-                *ngIf="showTheSelectedCoupon && !selectedPromotionCheck">
+                *ngIf="showTheSelectedCoupon">
                 <div
                   style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
                   <div style="display: flex; column-gap: 340px;">
@@ -2792,7 +2794,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
           </div>
 
           <!-- View Coupon section -->
-          <div class="coupons-giftcards" (click)="openPromoListData()" *ngIf="!selectedPromotionCheck">
+          <div class="coupons-giftcards" (click)="openPromoListData()" *ngIf="!showPayLater()">
             <span>
               <i class="fas fa-gift"></i>
               View Coupons & Gift Cards
@@ -2800,7 +2802,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
           </div>
 
           <div style="width: 100%; text-align: left; font-size: 14px; color: #333; margin-top: 10px;"
-            *ngIf="showTheSelectedCoupon && !selectedPromotionCheck">
+            *ngIf="showTheSelectedCoupon">
             <div
               style="background-color: #ffffff; border-radius: 10px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);">
               <div style="display: flex; column-gap: 45px;">

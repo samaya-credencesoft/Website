@@ -180,6 +180,11 @@ export class BusinessService {
       { observe: 'response' }
     );
   }
+
+  getOfferListFindByName(name){
+    return this.http.get<any[]>(API_URL_PROMOTION + '/api/offer/findByPromotionType/' + name +'/', { observe: 'response' });
+  }
+
   getOfferById(offerId) {
     this.setApi();
     return this.http.get<any[]>(

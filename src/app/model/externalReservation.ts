@@ -42,5 +42,6 @@ export class externalReservationDtoList {
   taxAmount: Number;
   totalAmount: Number;
   updatedTimestamp: string;
+  discountAmount:number;
   constructor() {}
 }
