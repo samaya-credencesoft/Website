@@ -2523,11 +2523,11 @@ export class BookingComponent implements OnInit {
           this.addServiceToBooking(this.booking.id, this.savedServices);
           this.getSubscriptions(this.booking.propertyId);
           this.sendWhatsappMessageToTHM();
-          this.sendWhatsappMessageToTHM11();
-          this.sendWhatsappMessageToTHM1();
-          this.sendWhatsappMessageToTHM2();
-          this.sendWhatsappMessageToTHM3();
-          this.sendWhatsappMessageToTHM4();
+          // this.sendWhatsappMessageToTHM11();
+          // this.sendWhatsappMessageToTHM1();
+          // this.sendWhatsappMessageToTHM2();
+          // this.sendWhatsappMessageToTHM3();
+          // this.sendWhatsappMessageToTHM4();
           setTimeout(() => {
             this.accommodationEnquiryBookingData();
           }, 3000);
@@ -2747,7 +2747,7 @@ export class BookingComponent implements OnInit {
 
     this.template.components = this.components;
     this.whatsappForm.template = this.template;
-    this.whatsappForm.to = "6372198255",
+    this.whatsappForm.to = "9337930186",
       this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;
@@ -3544,7 +3544,7 @@ export class BookingComponent implements OnInit {
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item =>item.name === 'GST');
 
 
     const TO_EMAIL = 'reservation@thehotelmate.co';
@@ -3889,7 +3889,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.propertyId = 763;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item =>item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
       if (item.name === 'CGST') {
         this.percentage1 = item.percentage;
