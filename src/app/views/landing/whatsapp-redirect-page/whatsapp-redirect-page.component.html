@@ -280,6 +280,10 @@
               <td>Extra Child Charges</td>
               <td>₹{{ booking.extraChildCharge }}</td>
             </tr>
+            <tr *ngIf="booking.discountAmount > 0">
+              <td>Discount Amount</td>
+              <td>-₹{{booking?.discountAmount}}</td>
+            </tr>
           </table>
 
 
@@ -880,6 +884,10 @@ Applied!</strong>
         <tr *ngIf="booking.extraChildCharge > 0">
           <td>Extra Child Charges</td>
           <td>₹{{booking.extraChildCharge}}</td>
+        </tr>
+        <tr *ngIf="booking.discountAmount > 0">
+          <td>Discount Amount</td>
+          <td>-₹{{booking?.discountAmount}}</td>
         </tr>
       </table>
 

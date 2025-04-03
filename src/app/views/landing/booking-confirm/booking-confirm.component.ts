@@ -489,8 +489,10 @@ console.log("this.bookingRoomPrice" +this.bookingRoomPrice)
     this.booking.paymentId = this.payment.id;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
+    this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice());
+    this.booking.totalRoomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice());
 
-    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
+    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item=>item.name === 'GST');
     this.booking.taxDetails.forEach(item=>{
       if(item.name === 'CGST'){
         this.percentage1 = item.percentage;
@@ -825,6 +827,7 @@ roomdetailss.roomTypeId = this.booking.roomId.toString();
 roomdetailss.roomTypeName = this.booking.roomName;
 this.reservationRoomDetails.push(roomdetailss);
 externalreservation.roomDetails = this.reservationRoomDetails;
+externalreservation.discountAmount = this.booking.discountAmount;
 
 this.propertyServices = this.savedServices;
 this.propertyServices?.forEach(ele => {
@@ -841,7 +844,7 @@ externalreservation.taxAmount = this.booking.taxAmount;
 // externalreservation.lastModifiedDate = new Date().toString();
 externalreservation.noOfPerson = this.booking.noOfPersons.toString();
 externalreservation.resType ='';
-externalreservation.otaName = 'Thehotelmate.com'
+externalreservation.otaName = 'WebSite'
 externalreservation.bookingStatus ='Confirmed';
 externalreservation.payloadType ='json';
 this.externalReservationDtoList.push(externalreservation)
@@ -912,9 +915,9 @@ this.externalReservationdto =res.body
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 107;
+    this.enquiryForm.propertyId = 763;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails;
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item =>item.name === 'GST');
     this.enquiryForm.planCode = this.booking.planCode;
     this.enquiryForm.bookingReservationId = this.booking.propertyReservationNumber;
     this.enquiryForm.bookingId = this.booking.id;
