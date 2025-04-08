@@ -95,6 +95,8 @@ export class ListingDetailOneComponent implements OnInit {
   selectedServicesOne: any;
   checkAvailabilityDisabled: boolean;
   Googlehotelsortrooms: any[];
+  serviceTypeData: any;
+  showAddonButton: boolean = false;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -1864,7 +1866,18 @@ this.isHeaderVisible = true;
         });
 
         this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
-          if(this.selectedServices != null &&  this.selectedServices != undefined ){
+
+        // Check if there's any service with a valid price (greater than 0)
+        const hasValidServicePrice = this.propertyServiceListDataOne.some(item => item.servicePrice > 0);
+
+        if (hasValidServicePrice) {
+            this.showAddonButton = true;
+        } else {
+            this.showAddonButton = false;
+        }
+
+
+        if(this.selectedServices != null &&  this.selectedServices != undefined ){
             this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
               this.propertyServiceListDataOne.forEach(val => {
                 if (ele.name === val.name) {
@@ -2327,6 +2340,17 @@ this.isHeaderVisible = true;
             this.checkingAvailability();
           }
           this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
+
+          // Check if there's any service with a valid price (greater than 0)
+          const hasValidServicePrice = this.propertyServiceListDataOne.some(item => item.servicePrice > 0);
+
+          if (hasValidServicePrice) {
+              this.showAddonButton = true;
+          } else {
+              this.showAddonButton = false;
+          }
+
+
           if(this.selectedServices != null &&  this.selectedServices != undefined ){
           this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
             this.propertyServiceListDataOne?.forEach(val => {

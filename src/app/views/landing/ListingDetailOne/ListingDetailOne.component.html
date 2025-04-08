@@ -325,7 +325,7 @@
             </tr>
             <ng-container *ngIf="selectedServicesOne?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 15px; padding-bottom: 10px; margin-top: 15px;
           border-radius: 10px;">
-              <h4 style="font-weight: bold;">Add-on Services</h4>
+              <h4 style="font-weight: bold;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">Add-on Services</h4>
 
               <tr *ngFor="let fac of selectedServicesOne">
                 <td>
@@ -499,7 +499,7 @@
           </tr>
           <!-- Add more rows dynamically based on your data -->
           <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
-            <h4 style="font-weight: bold;margin-top: 10px;">Add-on Services</h4>
+            <h4 style="font-weight: bold;margin-top: 10px;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">Add-on Services</h4>
 
             <tr *ngFor="let fac of selectedServicesOne">
               <td>
@@ -1931,7 +1931,7 @@
                             <!-- Add on service Start -->
                             <div class="col-12" *ngIf="selectedRoomIndex === i  && viewAddon">
                               <div *ngIf="viewAddon">
-                                <h3 class="servicetitle" *ngIf="propertyServiceListDataOne.length > 0" style="margin-left: 162px; margin-top: 25px;">Add-On Services</h3>
+                                <h3 class="servicetitle" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton" style="margin-left: 162px; margin-top: 25px;">Add-On Services</h3>
 
                                 <div class="row facrow1 ammmmi"
                                   style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
@@ -2008,7 +2008,7 @@
 
                                 <!-- View More / View Less Button -->
                                 <div class="text-center mt-3">
-                                  <button (click)="toggleViewMore()" class="btn btn-link">
+                                  <button (click)="toggleViewMore()" class="btn btn-link" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">
                                     {{ viewMoreOne ? 'View Less' : 'View More' }}
                                   </button>
                                 </div>
@@ -2424,7 +2424,7 @@
 
                             <div class="col-12" *ngIf="selectedRoomIndex === i  && viewAddon">
                               <div *ngIf="viewAddon">
-                                <h3 class="servicetitle" style="margin-left:130px !important;">Add-On Services</h3>
+                                <h3 class="servicetitle" style="margin-left:130px !important;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">Add-On Services</h3>
 
                                 <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; ">
                                   <ng-container
@@ -2498,7 +2498,7 @@
                                 </div>
                                 <!-- View More / View Less Button -->
                                 <div class="text-center mt-3">
-                                  <button (click)="toggleViewMore()" class="btn btn-link">
+                                  <button (click)="toggleViewMore()" class="btn btn-link" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">
                                     {{ viewMoreOne ? 'View Less' : 'View More' }}
                                   </button>
                                 </div>
@@ -4638,7 +4638,7 @@
 
     <div id="serv">
       <div class="servicecdiv" *ngIf="viewAddon ">
-        <h3 class="servicetitle" style="margin-left:30px !important;">Add-On Services</h3>
+        <h3 class="servicetitle" style="margin-left:30px !important;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">Add-On Services</h3>
         <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; ">
           <ng-container
             *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMore ? propertyServiceListDataOne.length : 4); let i = index">
@@ -4706,7 +4706,7 @@ padding-right: 10px;
 
         <!-- View More / View Less Toggle -->
         <div class="text-center ">
-          <button style="    font-weight: bold; cursor: pointer; font-size: 16px; text-decoration: none;"
+          <button style="    font-weight: bold; cursor: pointer; font-size: 16px; text-decoration: none;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton"
             class="btn btn-link" (click)="viewMore = !viewMore">
             {{ viewMore ? 'View Less' : 'View More' }}
           </button>
