@@ -4689,10 +4689,10 @@
 
     <!-- Add on service Start -->
 
-    <div id="serv">
+    <div id="serv" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">
       <div class="servicecdiv" *ngIf="viewAddon ">
-        <h3 class="servicetitle" style="margin-left:30px !important;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">Add-On Services</h3>
-        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; ">
+        <h3 class="servicetitle" style="margin-left:30px !important;" *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">Add-On Servicesp2</h3>
+        <div class="row facrow1 ammmmi" style="flex-wrap: wrap; justify-content: left; " *ngIf="propertyServiceListDataOne.length > 0 && showAddonButton">
           <ng-container
             *ngFor="let fac of propertyServiceListDataOne | slice:0:(viewMore ? propertyServiceListDataOne.length : 4); let i = index">
             <div class="col-lg-12 col-12 p-2" style="margin-bottom: 15px;display: flex;justify-content: space-between;"

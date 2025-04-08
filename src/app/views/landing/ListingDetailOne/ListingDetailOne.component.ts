@@ -3356,6 +3356,15 @@ clicked(){
           this.availableRooms = response.body.roomList;
           this.shortrooms =  response.body.roomList;
           let facilities = this.businessUser.propertyServicesList;
+          console.log('facilities is',facilities);
+          const validFacilities = facilities.filter(item => item.servicePrice === null);
+
+          validFacilities.forEach(item => {
+            console.log('service is', item.servicePrice);
+            this.showAddonButton = false;
+            console.log('item is', this.showAddonButton);
+          });
+
           if (
             this.availableRooms !== null &&
             this.availableRooms !== undefined
