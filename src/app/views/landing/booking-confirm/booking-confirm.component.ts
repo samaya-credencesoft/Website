@@ -1269,7 +1269,7 @@ this.externalReservationdto =res.body
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = String(this.bookingId);
+    this.parametertype2.text = String(this.referenceNumber);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -1563,7 +1563,7 @@ this.externalReservationdto =res.body
 
         this.parametertype2 = new Para();
         this.parametertype2.type = 'text',
-        this.parametertype2.text = String(this.bookingId);
+        this.parametertype2.text = String(this.referenceNumber);
         this.parameterss2.push(this.parametertype2);
 
         this.parametertype2 = new Para();
@@ -1711,7 +1711,7 @@ this.externalReservationdto =res.body
 
           this.parametertype2 = new Para();
           this.parametertype2.type = 'text',
-          this.parametertype2.text = String(this.bookingId);
+          this.parametertype2.text = String(this.referenceNumber);
           this.parameterss2.push(this.parametertype2);
 
           this.parametertype2 = new Para();
@@ -1859,7 +1859,7 @@ this.externalReservationdto =res.body
 
             this.parametertype2 = new Para();
             this.parametertype2.type = 'text',
-            this.parametertype2.text = String(this.bookingId);
+            this.parametertype2.text = String(this.referenceNumber);
             this.parameterss2.push(this.parametertype2);
 
             this.parametertype2 = new Para();
@@ -2007,7 +2007,7 @@ this.externalReservationdto =res.body
 
               this.parametertype2 = new Para();
               this.parametertype2.type = 'text',
-              this.parametertype2.text = String(this.bookingId);
+              this.parametertype2.text = String(this.referenceNumber);
               this.parameterss2.push(this.parametertype2);
 
               this.parametertype2 = new Para();
