@@ -1722,22 +1722,22 @@ if (this.city != null && this.city != undefined) {
     if (this.businessUser.businessDescription != null && this.businessUser.businessDescription != undefined) {
       this.description = this.businessUser.businessDescription;
     } else {
-      this.description = "Contact No: +91-8328818871";
+      this.description = "Contact No: +91-9040785705";
     }
     let title =
       this.businessUser.name +
       ' | Bookone PMS' +
-      ' | Contact No: +91-8328818871';
+      ' | Contact No: +91-9040785705';
 
     let ogTitle =
       this.businessUser.name +
       ' | Bookone PMS' +
-      ' | Contact No: +91-8328818871';
+      ' | Contact No: +91-9040785705';
 
     if (this.businessUser.businessDescription != null && this.businessUser.businessDescription != undefined) {
       this.ogDescription = this.businessUser.businessDescription;
     } else {
-      this.ogDescription = "Contact No: +91-8328818871";
+      this.ogDescription = "Contact No: +91-9040785705";
     }
 
     let ogImage = this.businessUser.logoUrl;
