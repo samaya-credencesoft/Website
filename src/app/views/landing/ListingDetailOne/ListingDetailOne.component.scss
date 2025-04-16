@@ -5131,7 +5131,7 @@ color:#031EAA
   border-top-right-radius: 20px;
   padding: 20px;
   transition: bottom 0.3s ease-in-out;
-  z-index: 999;
+  z-index: 1002;
 }
 
 .slide-up-card.active {
@@ -5308,4 +5308,35 @@ color:#031EAA
     padding-right: 0px !important;
     padding: 8px !important;
   }
+}
+.info-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 5px; /* slight space from price if you move it before the price */
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 100%; /* place it to the left */
+  transform: translateY(-50%);
+  white-space: nowrap;
+
+  /* Optional: fade-in effect */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.info-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }

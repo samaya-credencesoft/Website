@@ -279,13 +279,38 @@
             <ng-container *ngIf="activeForGoogleHotelCenter === true && booking.roomRatePlanName == 'Economy'">
               <tr *ngFor="let item of daterangefilter; let i = index">
                 <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
-                <td style="color: black;padding:5px ;float: right;" *ngFor="let price of [planPrice[i]]">
-                  <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div>
+                <td style="color: black;padding:5px ;text-align: right;" *ngFor="let price of [planPrice[i]]">
+                  <!-- <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div> -->
+
+                  <div *ngIf="daterangefilter && daterangefilter.length">
+                    ₹{{ price | number: '1.2-2' }}
+                    <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0" class="info-tooltip">
+                      🛈
+                      <span class="tooltip-text">
+                        Includes
+                        <span *ngIf="booking.extraPersonCharge > 0">
+                          Extra person ₹{{ (booking.extraPersonCharge / booking.noOfNights) | number:'1.2-2' }}
+                        </span>
+                        <span *ngIf="booking.extraPersonCharge > 0 && booking.extraChildCharge > 0">, </span>
+                        <span *ngIf="booking.extraChildCharge > 0">
+                          Extra child ₹{{ (booking.extraChildCharge / booking.noOfNights) | number:'1.2-2' }}
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+
+
+                  <div *ngIf="taxArray && taxArray.length">
+                    <small style="color: black;">
+                      Tax Fee: ₹{{ taxArray[i] | number:'1.2-2' }}
+                    </small>
+                  </div>
+
                 </td>
 
               </tr>
             </ng-container>
-            <tr *ngIf="booking.extraPersonCharge">
+            <!-- <tr *ngIf="booking.extraPersonCharge">
               <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
                 {{booking.extraPersonCharge | currency: currency:"symbol":"1.2-2"}}</td>
@@ -295,33 +320,70 @@
               <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge
                 | currency: currency:"symbol":"1.2-2"}}</td>
-            </tr>
+            </tr> -->
             <!-- Add more rows dynamically based on your data -->
             <tr>
               <td class="p-1" style="color: black !important;">Total Net Amount :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                <!-- {{
                 booking.netAmount
                 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+
+                {{
+                  (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+                  | currency: currency:"symbol":"1.2-2"
+                }}
+                 <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0"
+                  class="info-tooltip">
+              🛈
+              <span class="tooltip-text">
+                Includes
+                <span *ngIf="booking.extraPersonCharge > 0">
+                  Extra person ₹{{ (booking.extraPersonCharge) | number:'1.2-2' }}
+                </span>
+                <span *ngIf="booking.extraPersonCharge > 0 && booking.extraChildCharge > 0">, </span>
+                <span *ngIf="booking.extraChildCharge > 0">
+                  Extra child ₹{{ (booking.extraChildCharge) | number:'1.2-2' }}
+                </span>
+              </span>
+            </span>
+                </td>
             </tr>
 
             <tr *ngIf="booking.taxPercentage">
-              <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" style="color: black !important;">Total Tax Amount :</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                <!-- {{
                 (this.booking.netAmount *
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+                ₹{{
+                  activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                    ? (getTotalTaxFee() | number:'1.2-2')
+                    : (((booking.netAmount * this.booking.taxPercentage) / 100)
+                  | currency: currency:"symbol":"1.2-2")
+                }}
+                </td>
             </tr>
 
             <tr>
               <td class="p-1" style="color: black !important;">Total Amount :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                <!-- {{
                 (booking.netAmount + ((this.booking.netAmount *
                 this.booking.taxPercentage) /
                 100))+totalExtraAmount
                 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+                {{
+                  activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                    ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
+                    : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
+                  | currency: currency:"symbol":"1.2-2")
+                }}
+                </td>
             </tr>
             <ng-container *ngIf="selectedServicesOne?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 15px; padding-bottom: 10px; margin-top: 15px;
           border-radius: 10px;">
@@ -419,8 +481,9 @@
                 Children(s): <br />
                 {{booking.noOfChildren}}
               </td>
-              <td>
-
+              <td style="color:black">
+                No Of Room(s): <br />
+                {{booking?.noOfRooms}}
               </td>
             </tr>
 
@@ -454,13 +517,37 @@
           <ng-container *ngIf="activeForGoogleHotelCenter === true && booking.roomRatePlanName == 'Economy'">
             <tr *ngFor="let item of daterangefilter; let i = index">
               <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
-              <td style="color: black;padding:5px ;float: right;" *ngFor="let price of [planPrice[i]]">
-                <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div>
+              <td style="color: black;padding:5px ;text-align: right;" *ngFor="let price of [planPrice[i]]">
+                <!-- <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div> -->
+
+                <div *ngIf="daterangefilter && daterangefilter.length">
+                  ₹{{ price | number: '1.2-2' }}
+                  <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0" class="info-tooltip">
+                    🛈
+                    <span class="tooltip-text">
+                      Includes
+                      <span *ngIf="booking.extraPersonCharge > 0">
+                        Extra person ₹{{ (booking.extraPersonCharge / booking.noOfNights) | number:'1.2-2' }}
+                      </span>
+                      <span *ngIf="booking.extraPersonCharge > 0 && booking.extraChildCharge > 0">, </span>
+                      <span *ngIf="booking.extraChildCharge > 0">
+                        Extra child ₹{{ (booking.extraChildCharge / booking.noOfNights) | number:'1.2-2' }}
+                      </span>
+                    </span>
+                  </span>
+                </div>
+
+
+                <div *ngIf="taxArray && taxArray.length">
+                  <small style="color: black;">
+                    Tax Fee: ₹{{ taxArray[i] | number:'1.2-2' }}
+                  </small>
+                </div>
               </td>
 
             </tr>
           </ng-container>
-          <tr *ngIf="booking.extraPersonCharge">
+          <!-- <tr *ngIf="booking.extraPersonCharge">
             <td class="p-1" style="color: black !important;">Extra Pax Charges({{booking.noOfExtraPerson}}) :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraPersonCharge
               | currency: currency:"symbol":"1.2-2"}}</td>
@@ -470,32 +557,69 @@
             <td class="p-1" style="color: black !important;">Extra Child Charges({{booking.noOfExtraChild}}) :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{booking.extraChildCharge |
               currency: currency:"symbol":"1.2-2"}}</td>
-          </tr>
+          </tr> -->
           <tr>
             <td class="p-1" style="color: black !important;">Total Net Amount :</td>
-            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+              <!-- {{
               booking.netAmount
               | currency: currency:"symbol":"1.2-2"
-              }}</td>
+              }} -->
+
+              {{
+                (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+                | currency: currency:"symbol":"1.2-2"
+              }}
+              <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0"
+                class="info-tooltip">
+            🛈
+            <span class="tooltip-text">
+              Includes
+              <span *ngIf="booking.extraPersonCharge > 0">
+                Extra person ₹{{ (booking.extraPersonCharge) | number:'1.2-2' }}
+              </span>
+              <span *ngIf="booking.extraPersonCharge > 0 && booking.extraChildCharge > 0">, </span>
+              <span *ngIf="booking.extraChildCharge > 0">
+                Extra child ₹{{ (booking.extraChildCharge) | number:'1.2-2' }}
+              </span>
+            </span>
+          </span>
+              </td>
           </tr>
 
           <tr *ngIf="booking.taxPercentage">
-            <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
-            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            <td class="p-1" style="color: black !important;">Total Tax Amount:</td>
+            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+              <!-- {{
               (this.booking.netAmount *
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
-              }}</td>
+              }} -->
+              {{
+                activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                  ? (getTotalTaxFee() | number:'1.2-2')
+                  : (((booking.netAmount * this.booking.taxPercentage) / 100)
+                | currency: currency:"symbol":"1.2-2")
+              }}
+              </td>
           </tr>
 
           <tr>
             <td class="p-1" style="color: black !important;">Total Amount :</td>
-            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+              <!-- {{
               (booking.netAmount + ((this.booking.netAmount *
               this.booking.taxPercentage) /
               100))+totalExtraAmount
               | currency: currency:"symbol":"1.2-2"
-              }}</td>
+              }} -->
+              {{
+                activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                  ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
+                  : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
+                | currency: currency:"symbol":"1.2-2")
+              }}
+              </td>
           </tr>
           <!-- Add more rows dynamically based on your data -->
           <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
@@ -1730,13 +1854,15 @@
                                 font-style: normal;
                                 font-weight: 600;
                                 font-size: 20px;
-                                color: black;">{{
+                                color: black;">
+                                {{
                                             plan.amount * DiffDate * rooms
                                             | currency
                                             : currency
                                             : "symbol"
                                             : "1.2-2"
-                                            }}</span> <br>
+                                            }}
+                                            </span> <br>
                                           <span style="
                                   font-style: normal;
                                   font-weight: 400;

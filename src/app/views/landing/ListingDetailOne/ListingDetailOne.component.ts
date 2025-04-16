@@ -97,6 +97,7 @@ export class ListingDetailOneComponent implements OnInit {
   Googlehotelsortrooms: any[];
   serviceTypeData: any;
   showAddonButton: boolean = false;
+  taxAmount: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -715,6 +716,11 @@ export class ListingDetailOneComponent implements OnInit {
   roomOccupancy:number;
   showError : boolean =false;
   errorMessage:string;
+  taxArray: any[];
+  extraPersonChargee: any;
+  extraChildChargee: string;
+  allExtraPersonCharge: any;
+  allExtraChildCharge: number;
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -854,7 +860,6 @@ this.selectedServices =[]
       this.rooms = this.booking.noOfRooms;
 
       this.taxPercentage = this.booking.taxPercentage;
-      console.log("this.booking.taxPercentage",this.booking.taxPercentage)
     } else {
       this.fromDate = this.calendar.getToday();
       this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
@@ -937,6 +942,7 @@ this.selectedServices =[]
     // //console.log("sdfgh"+this.city)
 
     this.booking.createdDate = new Date();
+    this.token.clearLandingPrice();
   }
   blogPosts$: Observable<any> | undefined;
   responsiveOptions: any[];
@@ -1724,22 +1730,22 @@ if (this.city != null && this.city != undefined) {
     if (this.businessUser.businessDescription != null && this.businessUser.businessDescription != undefined) {
       this.description = this.businessUser.businessDescription;
     } else {
-      this.description = "Contact No: +91-8328818871";
+      this.description = "Contact No: +91-9040785705";
     }
     let title =
       this.businessUser.name +
       ' | Bookone PMS' +
-      ' | Contact No: +91-8328818871';
+      ' | Contact No: +91-9040785705';
 
     let ogTitle =
       this.businessUser.name +
       ' | Bookone PMS' +
-      ' | Contact No: +91-8328818871';
+      ' | Contact No: +91-9040785705';
 
     if (this.businessUser.businessDescription != null && this.businessUser.businessDescription != undefined) {
       this.ogDescription = this.businessUser.businessDescription;
     } else {
-      this.ogDescription = "Contact No: +91-8328818871";
+      this.ogDescription = "Contact No: +91-9040785705";
     }
 
     let ogImage = this.businessUser.logoUrl;
@@ -1971,7 +1977,6 @@ this.isHeaderVisible = true;
           this.booking.taxPercentage != undefined
         ) {
           this.taxPercentage = this.booking.taxPercentage;
-          console.log("this.booking.taxPercentage",this.booking.taxPercentage)
         } else {
           this.taxPercentage = 0;
         }
@@ -2376,7 +2381,6 @@ this.isHeaderVisible = true;
             this.booking.taxPercentage != undefined
           ) {
             this.taxPercentage = this.booking.taxPercentage;
-            console.log("this.booking.taxPercentage",this.booking.taxPercentage)
             // //console.log('frodm' + this.taxPercentage);
           } else {
             this.taxPercentage = 0;
@@ -2788,7 +2792,6 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       plan.amount * this.DiffDate * this.noOfrooms +
       this.booking.extraPersonCharge +
       this.booking.extraChildCharge;
-      console.log(" this.booking.netAmount", this.booking.netAmount)
     if (this.businessUser.taxDetails.length > 0) {
       this.businessUser.taxDetails.forEach((element) => {
         if(element.name === 'GST'){
@@ -2851,7 +2854,6 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     }
 
     this.booking.taxPercentage = this.taxPercentage;
-    console.log("this.booking.taxPercentage",this.booking.taxPercentage)
     this.planDetails = plan;
     this.booking.planCode = plan.code;
     this.booking.roomRatePlanName = plan.name;
@@ -2889,6 +2891,10 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       });
 
     this.token.saveServiceData(anotherServiceList);
+    this.allExtraPersonCharge = this.booking.extraPersonCharge;
+    this.allExtraChildCharge = this.booking.extraChildCharge;
+    this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
+    this.token.saveChildCharge(this.allExtraChildCharge);
 
     // if (
     //   serviceList.length > 0 &&
@@ -3514,15 +3520,37 @@ clicked(){
             });
           });
           this.planPrice = [];
+          this.taxArray = [];
+
           this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
                 if(element2.otaName ==='GHC'){
                   this.planPrice.push(element2.price);
+
+                  let extraPerson = Number(this.extraPersonChargee);
+                  let extraChild = Number(this.extraChildChargee);
+                  let noOfNights = Number(this.booking.noOfNights);
+
+                  let totalPrice = Number(element2.price) + ((extraPerson + extraChild) / noOfNights);
+                  // let totalPrice = Number(element2.price) + Number((this.extraPersonChargee) + Number(this.extraChildChargee) / (this.booking.noOfNights));
+                          if(totalPrice < 7500){
+                            this.taxAmount = ((totalPrice) * 12) / 100;
+                            this.taxArray.push(this.taxAmount);
+                          }
+
+                          if(totalPrice >= 7500){
+                            this.taxAmount = ((totalPrice) * 18) / 100;
+                            this.taxArray.push(this.taxAmount);
+                          }
+
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
                 );
+                if(this.activeForGoogleHotelCenter === true && element.otaPlanList.length > 0){
+                  this.token.saveLandingPrice(this.totalplanPrice);
+                  }
                 }
                 // //console.log(
                 //   'ota price is equa;' + JSON.stringify(this.planPrice)
@@ -3625,6 +3653,15 @@ clicked(){
         }
       );
   }
+  getTotalTaxFee(): number {
+    if (!this.taxArray || !this.taxArray.length) return 0;
+    const totaltax =  this.taxArray.reduce((acc, curr) => acc + Number(curr || 0), 0);
+
+    this.token.saveAllTaxAray(totaltax);
+
+    return totaltax;
+  }
+
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
   }
@@ -3708,7 +3745,9 @@ clicked(){
 
     this.token.saveProperty(this.businessUser);
     this.token.saveBookingData(this.booking);
-
+    this.extraPersonChargee = this.token.getExtraPersonCharge();
+    this.extraChildChargee = this.token.getChildCharge();
+    this.checkingAvailability();
   }
 
   validateNoOfrooms(event: number, no) {
