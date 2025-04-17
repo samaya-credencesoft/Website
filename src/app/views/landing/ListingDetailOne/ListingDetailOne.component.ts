@@ -4006,6 +4006,7 @@ clicked(){
           }
           this.checkAvailabilityStatus = response.body.available;
           this.booking.bookingAmount = response.body.bookingAmount;
+          console.log('amount is',this.booking.bookingAmount);
           // this.booking.extraPersonCharge = response.body.extraPersonCharge;
           this.maxSelectRoom = response.body.numberOfRooms;
           // this.selectedRoomMaximumOccupancy = response.body.noOfPersons;
