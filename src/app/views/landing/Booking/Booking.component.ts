@@ -4231,6 +4231,7 @@ export class BookingComponent implements OnInit {
       .subscribe(
         (response) => {
           this.availableRooms = response.body.roomList;
+          console.log('availableRooms is',this.availableRooms);
           let facilities = this.businessUser.propertyServicesList;
           if (
             this.availableRooms !== null &&
