@@ -247,6 +247,8 @@ export class BookingComponent implements OnInit {
   googleCenter: string;
   otaPlanPrice: any;
   otaTaxAmountValue: any;
+  extraPersonChargee: string;
+  extraChildChargee:string;
 
 
   constructor(
@@ -419,8 +421,10 @@ export class BookingComponent implements OnInit {
     this.otaPlanPrice = this.token.getLandingPrice();
     this.otaTaxAmount = this.token.getAllTaxArray();
     this.googleCenter = this.token.getBookingEngineBoolean();
-    if(this.otaPlanPrice > 0){
-      const OtaPlanAllPrice = Number(this.otaPlanPrice);
+    this.extraPersonChargee = this.token.getExtraPersonCharge();
+    this.extraChildChargee = this.token.getChildCharge();
+    if(this.otaPlanPrice > 0 && (this.extraPersonChargee !== null && this.extraPersonChargee !== undefined) && (this.extraChildChargee !== null && this.extraChildChargee !== undefined)){
+      const OtaPlanAllPrice = (Number(this.otaPlanPrice) + Number(this.extraChildChargee) + Number(this.extraPersonChargee));
       this.storedActualNetAmount = (OtaPlanAllPrice) ;
       this.otaTaxAmountValue = this.otaTaxAmount;
     } else {
