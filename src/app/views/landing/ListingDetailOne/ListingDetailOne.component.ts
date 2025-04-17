@@ -3336,6 +3336,7 @@ clicked(){
         (response) => {
           this.loaderHotelBooking = false;
           this.availableRooms = response.body.roomList;
+          console.log('availableRooms is',this.availableRooms);
           this.shortrooms =  response.body.roomList;
           let facilities = this.businessUser.propertyServicesList;
           if (
