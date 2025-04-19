@@ -28,6 +28,7 @@
   </app-Header-Listingdetailsone>
 
   <!-- Offer Container Section -->
+ <div *ngIf="this.showPayLater() == false">
   <div *ngIf="showAllTheOfferList?.length > 0">
     <p-carousel class="carousel-section" [value]="showAllTheOfferList" [numVisible]="1" [numScroll]="1"
       [responsiveOptions]="responsiveOptions" [autoplay]="true" [autoplayInterval]="3000" [showNavigators]="false"
@@ -53,6 +54,7 @@
       </ng-template>
     </p-carousel>
   </div>
+ </div>
 
   <div class="sticky-button " style="display: none;">
     <button class="btn desktop-view-ui" id="toggleCardBtn"

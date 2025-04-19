@@ -1643,6 +1643,22 @@ if (this.city != null && this.city != undefined) {
     // this.token.saveProperty(this.businessUser);
     this.router.navigate(['privacy']);
   }
+
+  showPayLater(): boolean {
+    const fromDateTimestamp = new Date(this.booking.fromDate).getTime();
+    const createdDateTimestamp = new Date(this.booking.createdDate).getTime();
+    const hoursDifference = (fromDateTimestamp - createdDateTimestamp) / (1000 * 60 * 60);
+    if (hoursDifference < 48) {
+      return true;
+    }
+
+    if (hoursDifference >= 48 && this.businessUser.paymentGateway == null) {
+      return true;
+    }
+
+    return false;
+  }
+
   submitForm(form: NgForm) {
     // debugger;
     //console.log("this is clicked");
@@ -2504,9 +2520,11 @@ checkValidCouponOrNot(couponList?){
             block: "start"
         });
       }
-      this.selectedPromotion = true;
-      localStorage.setItem('selectedPromoData', JSON.stringify(promo));
-      localStorage.setItem('selectPromo', 'true');
+      if(this.showPayLater() == false){
+        this.selectedPromotion = true;
+        localStorage.setItem('selectedPromoData', JSON.stringify(promo));
+        localStorage.setItem('selectPromo', 'true');
+      }
     }
     catch(error){
       console.error("Error in selectedPromotionList : ",error);
