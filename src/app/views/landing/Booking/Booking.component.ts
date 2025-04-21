@@ -249,6 +249,7 @@ export class BookingComponent implements OnInit {
   otaTaxAmountValue: any;
   extraPersonChargee: string;
   extraChildChargee:string;
+  landingPageTax: string;
 
 
   constructor(
@@ -399,6 +400,11 @@ export class BookingComponent implements OnInit {
     this.booking.beforeTaxAmount =
       this.booking.netAmount - this.booking.discountAmount;
     this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice());
+    this.otaPlanPrice = this.token.getLandingPrice();
+    this.otaTaxAmount = this.token.getAllTaxArray();
+    this.googleCenter = this.token.getBookingEngineBoolean();
+    this.extraPersonChargee = this.token.getExtraPersonCharge();
+    this.extraChildChargee = this.token.getChildCharge();
     this.getPropertyDetails(this.booking.propertyId);
 
     this.payment.expYear = "";
@@ -958,10 +964,16 @@ export class BookingComponent implements OnInit {
 
     this.booking.taxAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
-    this.booking.totalAmount =
-      this.booking.netAmount +
-      this.booking.gstAmount -
-      this.booking.discountAmount + this.totalServiceCost;
+      if(this.booking.planCode === 'GHC')
+        {
+          this.booking.totalAmount =  Number(this.booking.netAmount + this.booking.extraPersonCharge + this.booking.extraChildCharge + (+this.otaTaxAmount));
+        }
+        else {
+          this.booking.totalAmount =
+          this.booking.netAmount +
+          this.booking.gstAmount -
+          this.booking.discountAmount + this.totalServiceCost;
+        }
     console.log("this.totalServiceCost" + this.totalServiceCost)
     this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
       (data) => data.name === "Accommodation"
@@ -2135,7 +2147,12 @@ export class BookingComponent implements OnInit {
     this.payment.lastName = this.booking.lastName;
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.netAmount = this.booking.netAmount;
-    this.taxAmountBooking = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+    this.landingPageTax = this.token.getAllTaxArray();
+    if(this.landingPageTax !== null && this.landingPageTax !== undefined){
+        this.taxAmountBooking = Number(this.landingPageTax);
+    } else {
+      this.taxAmountBooking = (this.booking.netAmount * this.booking.taxPercentage) / 100;
+    }
     if (this.totalServiceCost != null && this.totalServiceCost != undefined && this.totalServiceCost > 0) {
       this.payment.transactionAmount = this.booking.netAmount + this.taxAmountBooking;
     } else {
@@ -2495,7 +2512,11 @@ export class BookingComponent implements OnInit {
       this.booking.roomPrice = this.booking.netAmount;
     }
     this.booking.totalServiceAmount = this.totalServiceCost;
-    this.booking.taxAmount = this.booking.taxAmount;
+    if(this.booking.planCode === 'GHC' && this.googleCenter && this.otaTaxAmount !== null){
+      this.booking.taxAmount = this.otaTaxAmount;
+    } else{
+      this.booking.taxAmount = this.booking.taxAmount;
+    }
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
@@ -3538,7 +3559,7 @@ export class BookingComponent implements OnInit {
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
 
 
     const TO_EMAIL = 'reservation@thehotelmate.co';

@@ -941,6 +941,7 @@ this.selectedServices =[]
 
     this.booking.createdDate = new Date();
     this.token.clearLandingPrice();
+    this,token.clearAllTaxArray();
   }
   blogPosts$: Observable<any> | undefined;
   responsiveOptions: any[];
