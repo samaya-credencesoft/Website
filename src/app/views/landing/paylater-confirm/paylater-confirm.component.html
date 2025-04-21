@@ -799,10 +799,10 @@ Applied!</strong>
   <div class="col-12">
     <div class="details-cardOne">
       <div style="font-size: 17px; font-weight: bold">{{booking.roomName}} x {{booking.noOfRooms}}</div>
-      <table style="width: 128%">
+      <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{(landingPagePrice && landingPagePrice !== 'NaN') ? (landingPagePrice | number:'1.2-2') : (bookingObj.roomPrice + bookingObj.extraPersonCharge + bookingObj.extraChildCharge) | number:'1.2-2'}}</td>
+          <td style="float: right; margin-right: 16px;">₹{{(landingPagePrice && landingPagePrice !== 'NaN') ? (landingPagePrice | number:'1.2-2') : (bookingObj.roomPrice + bookingObj.extraPersonCharge + bookingObj.extraChildCharge) | number:'1.2-2'}}</td>
         </tr>
         <!-- <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Person Charges</td>
