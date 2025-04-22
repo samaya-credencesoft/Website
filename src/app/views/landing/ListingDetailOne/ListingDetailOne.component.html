@@ -847,9 +847,9 @@
                           <div class="col-6" style="    padding-right: 5px; padding-left: 5px;">
                             <table style="width:100%">
                               <tr>
-                                <td style="padding-bottom: 30px; font-weight: bold;">Occupancy:</td>
+                                <td style="padding-bottom: 30px; font-weight: bold;">Min. Occupancy:</td>
                                 <td style="text-align: right;padding-bottom: 30px; font-weight: bold;">
-                                  {{room.maximumOccupancy}} Adults</td>
+                                  {{room.minimumOccupancy}} Adults</td>
                               </tr>
                               <tr>
                                 <td style="padding-bottom: 30px; font-weight: bold;">Rooms Available:</td>
@@ -882,9 +882,9 @@
                           <div class="col-6" style="padding-right: 5px; padding-left: 5px;">
                             <table style="width:100%">
                               <tr>
-                                <td style="padding-bottom: 30px; font-weight: bold;">Occupancy:</td>
+                                <td style="padding-bottom: 30px; font-weight: bold;">Min. Occupancy:</td>
                                 <td style="text-align: right; padding-bottom: 30px; font-weight: bold;">{{
-                                  room.maximumOccupancy }} Adults</td>
+                                  room.minimumOccupancy }} Adults</td>
                               </tr>
                               <tr>
                                 <td style="padding-bottom: 30px; font-weight: bold;">Rooms Available:</td>
@@ -1159,40 +1159,40 @@
                               <h3 *ngIf="room.ratesAndAvailabilityDtos?.length>=0 "
                                 style=" font-weight: bold; margin-left: 6px;">{{room.name}}</h3>
                               <div style=" padding: 5px;padding-bottom: 4px;padding-top: 10px;">
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img src="assets/images/icons/b1.png" alt="1 guest">
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                                  <b>Occupancy: </b>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                                  <b>Min. Occupancy: </b>
                                   <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                                  <span>x {{room.maximumOccupancy}} Guests</span>
+                                  <span>x {{room.minimumOccupancy}} Guests</span>
                                 </div>
 
 
@@ -1675,40 +1675,40 @@
                                   style=" font-weight: bold; margin-left:38px;">{{room.name}}</h3>
                                 <div class="row" style=" margin-left:25px;">
                                   <div class="col-12">
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                                      <b>Occupancy: </b> <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                                      <b>Min. Occupancy: </b> <span>{{room.minimumOccupancy}} Guests </span>
                                       <img src="assets/images/icons/b1.png" alt="1 guest">
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
 
                                       <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                                      <b>Occupancy: </b>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                                      <b>Min. Occupancy: </b>
                                       <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                                      <span>x {{room.maximumOccupancy}} Guests</span>
+                                      <span>x {{room.minimumOccupancy}} Guests</span>
                                     </div>
 
                                   </div>
@@ -2155,40 +2155,40 @@
                               <h3 *ngIf="room.ratesAndAvailabilityDtos?.length>0 "
                                 style=" font-weight: bold; margin-left: 38px;">{{room.name}}</h3>
                               <div style="    margin-left: 38px;">
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img src="assets/images/icons/b1.png" alt="1 guest">
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                                  <b>Occupancy: </b>
-                                  <span>{{room.maximumOccupancy}} Guests </span>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                                  <b>Min. Occupancy: </b>
+                                  <span>{{room.minimumOccupancy}} Guests </span>
                                   <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                                 </div>
-                                <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                                  <b>Occupancy: </b>
+                                <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                                  <b>Min. Occupancy: </b>
                                   <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                                  <span>x {{room.maximumOccupancy}} Guests</span>
+                                  <span>x {{room.minimumOccupancy}} Guests</span>
                                 </div>
 
                                 <div style="padding-top: 4px;">
@@ -2649,40 +2649,40 @@
                                   style=" font-weight: bold; margin-left:38px;">{{room.name}}</h3>
                                 <div class="row" style=" margin-left:25px;">
                                   <div class="col-12">
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                                      <b>Occupancy: </b> <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                                      <b>Min. Occupancy: </b> <span>{{room.minimumOccupancy}} Guests </span>
                                       <img src="assets/images/icons/b1.png" alt="1 guest">
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
 
                                       <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                                      <b>Occupancy: </b>
-                                      <span>{{room.maximumOccupancy}} Guests </span>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                                      <b>Min. Occupancy: </b>
+                                      <span>{{room.minimumOccupancy}} Guests </span>
                                       <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                                     </div>
-                                    <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                                      <b>Occupancy: </b>
+                                    <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                                      <b>Min. Occupancy: </b>
                                       <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                                      <span>x {{room.maximumOccupancy}} Guests</span>
+                                      <span>x {{room.minimumOccupancy}} Guests</span>
                                     </div>
 
                                   </div>
@@ -3414,40 +3414,40 @@
                         </div>
                         <div class="col-12">
                           <div style=" padding: 5px;padding-bottom: 4px;padding-top: 10px;">
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img src="assets/images/icons/b1.png" alt="1 guest">
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                              <b>Occupancy: </b>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                              <b>Min. Occupancy: </b>
                               <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                              <span>x {{room.maximumOccupancy}} Guests</span>
+                              <span>x {{room.minimumOccupancy}} Guests</span>
                             </div>
 
 
@@ -3828,40 +3828,40 @@
 
                               <div class="row" style="gap:10px">
                                 <div class="col-12">
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                                    <b>Occupancy: </b> <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                                    <b>Min. Occupancy: </b> <span>{{room.minimumOccupancy}} Guests </span>
                                     <img src="assets/images/icons/b1.png" alt="1 guest">
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
 
                                     <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                                    <b>Occupancy: </b>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                                    <b>Min. Occupancy: </b>
                                     <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                                    <span>x {{room.maximumOccupancy}} Guests</span>
+                                    <span>x {{room.minimumOccupancy}} Guests</span>
                                   </div>
                                 </div>
                                 <div style="background-color: #fff !important;"
@@ -4206,40 +4206,40 @@
 
                               <div class="row" style="gap:10px">
                                 <div class="col-12">
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                                    <b>Occupancy: </b> <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                                    <b>Min. Occupancy: </b> <span>{{room.minimumOccupancy}} Guests </span>
                                     <img src="assets/images/icons/b1.png" alt="1 guest">
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
 
                                     <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                                    <b>Occupancy: </b>
-                                    <span>{{room.maximumOccupancy}} Guests </span>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                                    <b>Min. Occupancy: </b>
+                                    <span>{{room.minimumOccupancy}} Guests </span>
                                     <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                                   </div>
-                                  <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                                    <b>Occupancy: </b>
+                                  <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                                    <b>Min. Occupancy: </b>
                                     <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                                    <span>x {{room.maximumOccupancy}} Guests</span>
+                                    <span>x {{room.minimumOccupancy}} Guests</span>
                                   </div>
                                 </div>
                                 <div style="background-color: #fff !important;"
@@ -4376,40 +4376,40 @@
                         </div>
                         <div class="col-12">
                           <div style="padding: 05px;padding-bottom: 4px;padding-top: 10px;">
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 1">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 1">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img src="assets/images/icons/b1.png" alt="1 guest">
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 2">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 2">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b2.png" alt="2 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 3">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 3">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b3.png" alt="3 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 4">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 4">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b4.png" alt="4 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 5">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 5">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/b5.png" alt="5 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy === 6">
-                              <b>Occupancy: </b>
-                              <span>{{room.maximumOccupancy}} Guests </span>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy === 6">
+                              <b>Min. Occupancy: </b>
+                              <span>{{room.minimumOccupancy}} Guests </span>
                               <img style="margin:auto" src="assets/images/icons/g6.png" alt="6 guests" />
                             </div>
-                            <div style="margin:auto" *ngIf="room.maximumOccupancy > 6">
-                              <b>Occupancy: </b>
+                            <div style="margin:auto" *ngIf="room.minimumOccupancy > 6">
+                              <b>Min. Occupancy: </b>
                               <img style="margin:auto" src="assets/images/icons/b1.png" alt="6 guests" />
-                              <span>x {{room.maximumOccupancy}} Guests</span>
+                              <span>x {{room.minimumOccupancy}} Guests</span>
                             </div>
 
                             <div style="padding-top: 4px;">
