@@ -254,16 +254,23 @@
           <table style="width: 88%">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td>₹{{ booking.roomPrice | number:'1.2-2'}}</td>
+              <td style="text-align: center;">₹{{ (landingPagePrice && landingPagePrice !== 'NaN') ? (landingPagePrice | number:'1.2-2') : (booking.roomPrice - (booking.extraPersonCharge + booking.extraChildCharge)) | number:'1.2-2' }}
+              </td>
             </tr>
-            <tr *ngIf="booking.extraPersonCharge > 0">
+
+            <tr *ngIf="selectedPromo?.couponCode || (booking.discountAmount > 0)">
+              <td>Discount Amount:</td>
+
+              <td style="text-align: right;">-₹{{ booking.discountAmount | number:'1.2-2' }}</td>
+            </tr>
+            <!-- <tr *ngIf="booking.extraPersonCharge > 0">
               <td>Extra Person Charges</td>
               <td>₹{{ booking.extraPersonCharge }}</td>
             </tr>
             <tr *ngIf="booking.extraChildCharge > 0">
               <td>Extra Child Charges</td>
               <td>₹{{ booking.extraChildCharge }}</td>
-            </tr>
+            </tr> -->
           </table>
 
 
@@ -312,16 +319,20 @@
           <table style="width: 88%">
             <tr>
               <td>Tax Fees:</td>
-              <td>₹ {{ booking.taxAmount | number:'1.2-2' }}</td>
+              <td>₹{{
+                (googleCenter && bookingObj.planCode === 'GHC' && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined ))
+                  ? (taAmountLanding | number:'1.2-2')
+                  : ((booking.roomPrice * booking.taxPercentage) / 100 | number:'1.2-2')
+              }}</td>
             </tr>
 
             <tr>
               <td>Total Payable Amount</td>
-              <td>₹ {{ booking.totalAmount | number:'1.2-2' }}</td>
+              <td>₹{{((bookingObj.planCode === 'GHC' && googleCenter  && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined )) ? ((+taAmountLanding) + (+landingPagePrice)) : booking.totalAmount) | number:'1.2-2'}}</td>
             </tr>
             <tr>
               <td>Due Amount</td>
-              <td>₹{{ booking.totalAmount | number:'1.2-2'}}</td>
+              <td>₹{{((bookingObj.planCode === 'GHC' && googleCenter  && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined )) ? ((+taAmountLanding) + (+landingPagePrice)) : booking.totalAmount) | number:'1.2-2'}}</td>
             </tr>
           </table>
         </div>
@@ -795,16 +806,24 @@ Applied!</strong>
       <table style="width: 88%">
         <tr>
           <td>{{booking.roomRatePlanName}}</td>
-          <td>₹{{booking.roomPrice | number:'1.2-2'}}</td>
+          <td style="text-align: right;">
+            ₹{{ (landingPagePrice && landingPagePrice !== 'NaN') ? (landingPagePrice | number:'1.2-2') : (booking.roomPrice - (booking.extraPersonCharge + booking.extraChildCharge)) | number:'1.2-2' }}
+          </td>
         </tr>
-        <tr *ngIf="booking.extraPersonCharge > 0">
+
+        <tr *ngIf="selectedPromo?.couponCode ||  (booking.discountAmount > 0)">
+          <td>Discount Amount:</td>
+
+          <td style="text-align: right;">-₹{{ booking.discountAmount | number:'1.2-2' }}</td>
+        </tr>
+        <!-- <tr *ngIf="booking.extraPersonCharge > 0">
           <td>Extra Person Charges</td>
           <td>₹{{booking.extraPersonCharge}}</td>
         </tr>
         <tr *ngIf="booking.extraChildCharge > 0">
           <td>Extra Child Charges</td>
           <td>₹{{booking.extraChildCharge}}</td>
-        </tr>
+        </tr> -->
       </table>
 
 
@@ -923,18 +942,25 @@ Complete your booking now to save big on your stay.
       <table style="width: 88%">
         <tr>
           <td>Tax Fees:</td>
-          <td>₹ {{booking.taxAmount | number:'1.2-2'}}</td>
+          <!-- <td>₹ {{booking.taxAmount | number:'1.2-2'}}</td> -->
+          <td style="text-align: right;">
+            ₹{{
+              (googleCenter && bookingObj.planCode === 'GHC' && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined ))
+                ? (taAmountLanding | number:'1.2-2')
+                : ((booking.roomPrice * booking.taxPercentage) / 100 | number:'1.2-2')
+            }}
+          </td>
         </tr>
         <tr>
           <td>Total Payable Amount</td>
-          <td>₹ {{booking.totalAmount | number:'1.2-2'}}</td>
+          <td>₹{{((bookingObj.planCode === 'GHC' && googleCenter  && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined )) ? ((+taAmountLanding) + (+landingPagePrice)) : booking.totalAmount) | number:'1.2-2'}}</td>
         </tr>
 
 
 
         <tr>
           <td>Due Amount</td>
-          <td>₹ {{booking.totalAmount | number:'1.2-2'}}</td>
+          <td>₹{{((bookingObj.planCode === 'GHC' && googleCenter  && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined )) ? ((+taAmountLanding) + (+landingPagePrice)) : booking.totalAmount) | number:'1.2-2'}}</td>
         </tr>
       </table>
     </div>

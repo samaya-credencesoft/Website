@@ -713,6 +713,15 @@ export class ListingDetailOneComponent implements OnInit {
   roomOccupancy:number;
   showError : boolean =false;
   errorMessage:string;
+  taxArray: any[];
+  extraPersonChargee: any;
+  saveExtraPersonCharge: any;
+  saveChildCharge: any;
+  extraChildChargee: string;
+  taxAmount:number;
+  allExtraPersonCharge: any;
+  allExtraChildCharge: number;
+
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -1637,6 +1646,31 @@ if (this.city != null && this.city != undefined) {
     // this.token.saveProperty(this.businessUser);
     this.router.navigate(['privacy']);
   }
+
+  showPayLater(): boolean {
+    const fromDateTimestamp = new Date(this.booking.fromDate).getTime();
+    const createdDateTimestamp = new Date(this.booking.createdDate).getTime();
+    const hoursDifference = (fromDateTimestamp - createdDateTimestamp) / (1000 * 60 * 60);
+    if (hoursDifference < 48) {
+      return true;
+    }
+
+    if (hoursDifference >= 48 && this.businessUser.paymentGateway == null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  getTotalTaxFee(): number {
+    if (!this.taxArray || !this.taxArray.length) return 0;
+    const totaltax =  this.taxArray.reduce((acc, curr) => acc + Number(curr || 0), 0);
+
+    this.token.saveAllTaxAray(totaltax);
+
+    return totaltax;
+  }
+
   submitForm(form: NgForm) {
     // debugger;
     //console.log("this is clicked");
@@ -2807,6 +2841,11 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
 
     this.token.saveServiceData(anotherServiceList);
 
+    this.allExtraPersonCharge = this.booking.extraPersonCharge;
+    this.allExtraChildCharge = this.booking.extraChildCharge;
+    this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
+    this.token.saveChildCharge(this.allExtraChildCharge);
+
     // if (
     //   serviceList.length > 0 &&
     //   serviceList !== undefined &&
@@ -3384,6 +3423,7 @@ clicked(){
                   const otaName = otaPlan.otaName;
                   const price = otaPlan.price;
                   this.otaPlans.push({ otaName, price });
+
                 });
 
                 if (
@@ -3431,15 +3471,37 @@ clicked(){
             });
           });
           this.planPrice = [];
+          this.taxArray = [];
+
           this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
                 if(element2.otaName ==='GHC'){
                   this.planPrice.push(element2.price);
+
+                  let extraPerson = Number(this.extraPersonChargee);
+                  let extraChild = Number(this.extraChildChargee);
+                  let noOfNights = Number(this.booking.noOfNights);
+
+                  let totalPrice = Number(element2.price) + ((extraPerson + extraChild) / noOfNights);
+
+                  // let totalPrice = Number(element2.price) + Number((this.extraPersonChargee) + Number(this.extraChildChargee) / (this.booking.noOfNights));
+                          if(totalPrice < 7500){
+                            this.taxAmount = ((totalPrice) * 12) / 100;
+                            this.taxArray.push(this.taxAmount);
+                          }
+
+                          if(totalPrice >= 7500){
+                            this.taxAmount = ((totalPrice) * 18) / 100;
+                            this.taxArray.push(this.taxAmount);
+                          }
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
                 );
+                if(this.activeForGoogleHotelCenter === true && element.otaPlanList.length > 0){
+                  this.token.saveLandingPrice(this.totalplanPrice);
+                  }
                 }
                 // //console.log(
                 //   'ota price is equa;' + JSON.stringify(this.planPrice)
@@ -3625,7 +3687,9 @@ clicked(){
 
     this.token.saveProperty(this.businessUser);
     this.token.saveBookingData(this.booking);
-
+    this.extraPersonChargee = this.token.getExtraPersonCharge();
+    this.extraChildChargee = this.token.getChildCharge();
+    this.checkingAvailability();
   }
 
   validateNoOfrooms(event: number, no) {

@@ -37,6 +37,11 @@ taxPercentage: number;
   loader: boolean;
   PropertyUrl: string;
   propertyServiceListData: any[] = [];
+  bookingObj: Booking;
+  landingPagePrice: any;
+  taAmountLanding: string;
+  googleCenter: string;
+
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService,
       private listingService: ListingService,
@@ -96,6 +101,11 @@ if (this.booking?.propertyId != null && this.booking?.propertyId != undefined) {
   this.getPropertyDetailsById(this.booking.propertyId);
 console.log("this.booking.proprtyId", this.booking.propertyId)
 }
+
+this.bookingObj = this.token.getBookingData();
+  this.landingPagePrice = this.token.getLandingPrice();
+  this.taAmountLanding = this.token.getAllTaxArray();
+  this.googleCenter = this.token.getBookingEngineBoolean();
 }
 
 ngOnInIt(){
