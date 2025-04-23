@@ -2496,6 +2496,7 @@ export class BookingComponent implements OnInit {
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
     this.booking.advanceAmount = 0;
     this.paymentLoader = true;
+    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
     this.hotelBookingService
       .createBooking(this.booking)
       .subscribe((response) => {
