@@ -44,6 +44,7 @@ taxPercentage: number;
   extraPersonChargee: number;
   extraChildChargee: number;
 
+
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService,
       private listingService: ListingService,

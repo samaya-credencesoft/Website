@@ -73,8 +73,8 @@ const BOOKINGROOMPRICE = 'bookingPrice';
 const NoOfExtraChild = 'noOfExtraChild';
 const BOOKROOMPRICE = 'bookRoomPrice';
 const NoOfNights = 'noOfNights';
-const CHECK_LANDING_PRICE ='landingrice';
 const ALL_TAXARRAY = 'allTaxAray';
+const CHECK_LANDING_PRICE ='landingrice';
 const Save_Extra_PersonCharge = 'saveExtraPersonCharge';
 const Save_Child_Charge = 'saveChildCharge';
 
@@ -311,55 +311,40 @@ export class TokenStorage {
     return localStorage.getItem(COUNTRY);
   }
 
-  public saveAllTaxAray(allTaxAray:any){
-    localStorage.removeItem(ALL_TAXARRAY);
-    if (allTaxAray !== null || allTaxAray !== undefined) {
-      localStorage.setItem(ALL_TAXARRAY, allTaxAray);
+  public saveExtraPersonCharge(saveExtraPersonCharge:any){
+    localStorage.removeItem(Save_Extra_PersonCharge);
+    if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
+      localStorage.setItem(Save_Extra_PersonCharge, saveExtraPersonCharge);
     } else {
-      localStorage.setItem(ALL_TAXARRAY, '{}');
+      localStorage.setItem(Save_Extra_PersonCharge, '{}');
     }
   }
 
-  public getAllTaxArray() {
-    return localStorage.getItem(ALL_TAXARRAY);
+  public getExtraPersonCharge(){
+    return localStorage.getItem(Save_Extra_PersonCharge);
   }
 
-  clearAllTaxArray() {
-    localStorage.removeItem(ALL_TAXARRAY);
-    }
-    public saveExtraPersonCharge(saveExtraPersonCharge:any){
-      localStorage.removeItem(Save_Extra_PersonCharge);
-      if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
-        localStorage.setItem(Save_Extra_PersonCharge, saveExtraPersonCharge);
-      } else {
-        localStorage.setItem(Save_Extra_PersonCharge, '{}');
-      }
+  clearExtraPersonCharge() {
+    localStorage.removeItem(Save_Extra_PersonCharge);
     }
 
-    public getExtraPersonCharge(){
-      return localStorage.getItem(Save_Extra_PersonCharge);
+  public saveChildCharge(saveChildCharge:any){
+    localStorage.removeItem(Save_Child_Charge);
+    if (saveChildCharge !== null || saveChildCharge !== undefined) {
+      localStorage.setItem(Save_Child_Charge, saveChildCharge);
+    } else {
+      localStorage.setItem(Save_Child_Charge, '{}');
+    }
+  }
+
+  public getChildCharge(){
+    return localStorage.getItem(Save_Child_Charge);
+  }
+
+ clearExtraChildCharge() {
+    localStorage.removeItem(Save_Child_Charge);
     }
 
-    clearExtraPersonCharge() {
-      localStorage.removeItem(Save_Extra_PersonCharge);
-      }
-
-    public saveChildCharge(saveChildCharge:any){
-      localStorage.removeItem(Save_Child_Charge);
-      if (saveChildCharge !== null || saveChildCharge !== undefined) {
-        localStorage.setItem(Save_Child_Charge, saveChildCharge);
-      } else {
-        localStorage.setItem(Save_Child_Charge, '{}');
-      }
-    }
-
-    public getChildCharge(){
-      return localStorage.getItem(Save_Child_Charge);
-    }
-
-   clearExtraChildCharge() {
-      localStorage.removeItem(Save_Child_Charge);
-      }
   // public getPropertyData(): BusinessUser {
   //   return JSON.parse(localStorage.getItem(PROPERTY) as string);
   // }
@@ -815,4 +800,21 @@ public saveSelectedCountry(countryCode: string) {
 // public getDeliveryOption(): DeliveryOption {
 //   return JSON.parse(localStorage.getItem(DELIVERY_OPTION) as string);
 // }
+
+public saveAllTaxAray(allTaxAray:any){
+  localStorage.removeItem(ALL_TAXARRAY);
+  if (allTaxAray !== null || allTaxAray !== undefined) {
+    localStorage.setItem(ALL_TAXARRAY, allTaxAray);
+  } else {
+    localStorage.setItem(ALL_TAXARRAY, '{}');
+  }
+}
+
+public getAllTaxArray() {
+  return localStorage.getItem(ALL_TAXARRAY);
+}
+
+clearAllTaxArray() {
+  localStorage.removeItem(ALL_TAXARRAY);
+  }
 }

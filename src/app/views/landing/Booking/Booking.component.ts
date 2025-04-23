@@ -252,7 +252,6 @@ export class BookingComponent implements OnInit {
   extraChildChargee:string;
   landingPageTax: string;
 
-
   constructor(
     private token: TokenStorage,
     private ngZone: NgZone,
@@ -430,15 +429,12 @@ export class BookingComponent implements OnInit {
     this.otaPlanPrice = this.token.getLandingPrice();
     this.otaTaxAmount = this.token.getAllTaxArray();
     this.googleCenter = this.token.getBookingEngineBoolean();
-    this.extraPersonChargee = this.token.getExtraPersonCharge();
-    this.extraChildChargee = this.token.getChildCharge();
-    if(this.otaPlanPrice > 0 && (this.extraPersonChargee !== null && this.extraPersonChargee !== undefined) && (this.extraChildChargee !== null && this.extraChildChargee !== undefined)){
-      const OtaPlanAllPrice = (Number(this.otaPlanPrice) + Number(this.extraChildChargee) + Number(this.extraPersonChargee));
+    if(this.otaPlanPrice > 0){
+      const OtaPlanAllPrice = Number(this.otaPlanPrice);
       this.storedActualNetAmount = (OtaPlanAllPrice) ;
       this.otaTaxAmountValue = this.otaTaxAmount;
     } else {
       this.storedActualNetAmount = this.booking.netAmount;
-
     }
     this.actualTaxAmount = this.booking.gstAmount;
     this.storeNightPerRoom = this.bookingRoomPrice;

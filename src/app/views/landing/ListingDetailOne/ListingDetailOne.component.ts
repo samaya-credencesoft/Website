@@ -719,6 +719,9 @@ export class ListingDetailOneComponent implements OnInit {
   extraChildChargee: string;
   allExtraPersonCharge: any;
   allExtraChildCharge: number;
+  saveExtraPersonCharge: any;
+  saveChildCharge: any;
+
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -2832,6 +2835,11 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
     this.token.saveChildCharge(this.allExtraChildCharge);
 
+    this.allExtraPersonCharge = this.booking.extraPersonCharge;
+    this.allExtraChildCharge = this.booking.extraChildCharge;
+    this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
+    this.token.saveChildCharge(this.allExtraChildCharge);
+
     // if (
     //   serviceList.length > 0 &&
     //   serviceList !== undefined &&
@@ -3409,6 +3417,7 @@ clicked(){
                   const otaName = otaPlan.otaName;
                   const price = otaPlan.price;
                   this.otaPlans.push({ otaName, price });
+
                 });
 
                 if (
@@ -3479,7 +3488,6 @@ clicked(){
                             this.taxAmount = ((totalPrice) * 18) / 100;
                             this.taxArray.push(this.taxAmount);
                           }
-
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
