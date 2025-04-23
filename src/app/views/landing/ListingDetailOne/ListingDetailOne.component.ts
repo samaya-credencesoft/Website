@@ -2247,6 +2247,11 @@ this.isHeaderVisible = true;
                 localStorage.removeItem('selectPromo');
               }
               this.token.saveBookingRoomPrice(this.booking.roomPrice);
+              if (this.booking.planCode === 'GHC') {
+                this.token.saveLandingPrice(this.totalplanPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge);
+              } else {
+                this.token.saveLandingPrice(this.booking.netAmount)
+              }
               this.router.navigate(['/booking']);
             }
           }
