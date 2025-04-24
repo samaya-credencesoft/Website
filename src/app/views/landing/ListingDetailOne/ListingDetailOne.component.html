@@ -500,6 +500,7 @@
         <!-- <button (click)="redirectToBooking()" class="editStyle">
           <i class="fas fa-edit"></i>
       </button> -->
+      <div style="max-height:300px; overflow-y: auto; border: 1px solid #000; border-radius: 5px 5px 5px 5px;margin-top:10px;">
         <table style="border:none; width:100%; margin-bottom: 15px;">
           <tr>
             <td class="p-1">Room Type:</td>
@@ -517,7 +518,7 @@
           <ng-container *ngIf="activeForGoogleHotelCenter === true && booking.roomRatePlanName == 'Economy'">
             <tr *ngFor="let item of daterangefilter; let i = index">
               <td style="color: black;padding:5px" *ngIf="daterangefilter && daterangefilter.length ">{{ item }}</td>
-              <td style="color: black;padding:5px ;float: right;" *ngFor="let price of [planPrice[i]]">
+              <td style="color: black;padding:5px ;text-align: right;" *ngFor="let price of [planPrice[i]]">
                 <!-- <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div> -->
 
                 <div *ngIf="daterangefilter && daterangefilter.length">
@@ -658,6 +659,7 @@
             </tr>
           </ng-container>
         </table>
+      </div>
       </div>
     </div>
 
