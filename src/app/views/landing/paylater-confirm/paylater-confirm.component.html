@@ -251,10 +251,10 @@
           <div style="font-size: 21px">
             {{ booking.roomName }} x {{ booking.noOfRooms }}
           </div>
-          <table style="width: 88%">
+          <table style="width: 71%">
             <tr>
               <td>{{ booking.roomRatePlanName }}</td>
-              <td style="text-align: center;">₹{{ (landingPagePrice && landingPagePrice !== 'NaN') ? (landingPagePrice | number:'1.2-2') : (booking.roomPrice - (booking.extraPersonCharge + booking.extraChildCharge)) | number:'1.2-2' }}
+              <td style="text-align: right;">₹{{ (landingPagePrice && landingPagePrice !== 'NaN') ? (landingPagePrice | number:'1.2-2') : (booking.roomPrice - (booking.extraPersonCharge + booking.extraChildCharge)) | number:'1.2-2' }}
               </td>
             </tr>
 
@@ -943,7 +943,7 @@ Complete your booking now to save big on your stay.
         <tr>
           <td>Tax Fees:</td>
           <!-- <td>₹ {{booking.taxAmount | number:'1.2-2'}}</td> -->
-          <td style="text-align: right;">
+          <td>
             ₹{{
               (googleCenter && bookingObj.planCode === 'GHC' && (landingPagePrice !== "NaN" && landingPagePrice !== null && landingPagePrice !== undefined ))
                 ? (taAmountLanding | number:'1.2-2')
