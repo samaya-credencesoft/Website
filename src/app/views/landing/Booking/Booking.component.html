@@ -2362,7 +2362,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
                           {{
                             (booking.planCode === 'GHC' && googleCenter && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
                             ? (otaTaxAmountValue | currency: currency:"symbol":"1.2-2")
-                            : (storedActualNetAmount * booking.taxPercentage) / 100 | currency: currency:"symbol":"1.2-2"
+                            : (storedActualNetAmount * bookingDataObj.taxPercentage) / 100 | currency: currency:"symbol":"1.2-2"
                           }}
                         </span>
                       </li>
@@ -2377,7 +2377,7 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
                       {{
                         (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
                         ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
-                        : ((+storedActualNetAmount + (+storedActualNetAmount * +booking.taxPercentage) / 100) + totalExtraAmount)
+                        : ((+storedActualNetAmount + (+storedActualNetAmount * +bookingDataObj.taxPercentage) / 100) + totalExtraAmount)
                         | currency: currency : 'symbol' : '1.2-2'
                       }}
                       </span></li>
