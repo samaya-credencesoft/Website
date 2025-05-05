@@ -2533,7 +2533,7 @@ export class BookingComponent implements OnInit {
       this.booking.roomPrice = (this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
     }
     this.booking.totalServiceAmount = this.totalServiceCost;
-    if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.booking.planCode === 'GHC')){
+    if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.booking.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN')){
       this.booking.taxAmount = this.otaTaxAmount;
     } else {
       this.booking.taxAmount = this.booking.taxAmount;
@@ -3505,7 +3505,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
     this.bookingObj = this.token.getBookingData();
-    if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.bookingObj.planCode === 'GHC')){
+    if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.bookingObj.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN')){
       this.enquiryForm.taxAmount = this.otaTaxAmount;
     } else {
       this.enquiryForm.taxAmount = this.taxAmountBooking;
@@ -3637,9 +3637,9 @@ export class BookingComponent implements OnInit {
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     console.log('price is',this.booking.roomPrice);
     if(this.booking.planCode === 'GHC'){
-      this.enquiryForm.roomPrice = (this.booking.roomPrice);
+      this.enquiryForm.roomPrice = ((this.booking.roomPrice) * (this.DiffDate * this.booking.noOfRooms));
     } else{
-      this.enquiryForm.roomPrice = (this.booking.roomPrice);
+      this.enquiryForm.roomPrice = ((this.booking.roomPrice) * (this.DiffDate * this.booking.noOfRooms));
     }
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
