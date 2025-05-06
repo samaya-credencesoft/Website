@@ -991,8 +991,9 @@ export class BookingComponent implements OnInit {
     }
     this.booking.taxAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
-      if((this.booking.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN') && (this.otaTaxAmount !== null && this.otaTaxAmount !== undefined)){
-         this.booking.totalAmount = this.booking.roomPrice + (+this.otaTaxAmount);
+      this.booking.roomPrice = Number(this.token.getRoomPrice());
+      if((this.booking.planCode === 'GHC') && (this.otaPlanPrice !== null) && (this.otaTaxAmount !== null && this.otaTaxAmount !== undefined)){
+         this.booking.totalAmount = (this.booking.roomPrice + this.booking.extraPersonCharge) + (+this.otaTaxAmount);
       } else {
         this.booking.totalAmount =
           this.booking.netAmount +
