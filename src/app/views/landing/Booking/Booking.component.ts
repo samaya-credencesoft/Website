@@ -957,11 +957,15 @@ export class BookingComponent implements OnInit {
 
     this.booking.taxAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
-    this.booking.totalAmount =
-      this.booking.netAmount +
-      this.booking.gstAmount -
-      this.booking.discountAmount + this.totalServiceCost;
-    console.log("this.totalServiceCost" + this.totalServiceCost)
+      if((this.booking.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN') && (this.otaTaxAmount !== null && this.otaTaxAmount !== undefined)){
+         this.booking.totalAmount = this.booking.roomPrice + (+this.otaTaxAmount);
+      } else {
+        this.booking.totalAmount =
+          this.booking.netAmount +
+          this.booking.gstAmount -
+          this.booking.discountAmount + this.totalServiceCost;
+        console.log("this.totalServiceCost" + this.totalServiceCost)
+      }
     this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
       (data) => data.name === "Accommodation"
     );
