@@ -597,11 +597,7 @@ export class BookingComponent implements OnInit {
     externalreservation.couponCode = this.booking.couponCode;
     externalreservation.promotionName = this.booking.promotionName;
     externalreservation.totalAmount = this.booking.totalAmount;
-    if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
-       externalreservation.amountBeforeTax = (this.booking.beforeTaxAmount * this.booking.noOfNights);
-    } else {
-      externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
-    }
+    externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
     externalreservation.channelId = "9";
     externalreservation.lastModifiedBy = 'hotelmate';
     externalreservation.modeOfPayment = "Cash";
@@ -2516,7 +2512,7 @@ export class BookingComponent implements OnInit {
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
     this.booking.advanceAmount = 0;
-    this.booking.beforeTaxAmount = (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge);
+    this.booking.beforeTaxAmount = ((this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge) * this.booking.noOfNights);
     if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
       this.booking.totalAmount = ((this.booking.roomPrice * this.booking.noOfNights) + (+this.booking.taxAmount));
       this.booking.roomTariffBeforeDiscount = (this.booking.roomPrice);
