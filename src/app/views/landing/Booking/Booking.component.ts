@@ -2497,7 +2497,7 @@ export class BookingComponent implements OnInit {
     if(this.booking.planCode === 'GHC'){
       this.booking.roomPrice = (this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
     } else{
-      this.booking.roomPrice = (this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
+      this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
     }
     this.booking.totalServiceAmount = this.totalServiceCost;
     if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.booking.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN')){
@@ -2510,6 +2510,7 @@ export class BookingComponent implements OnInit {
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
     this.booking.advanceAmount = 0;
+    this.booking.beforeTaxAmount = (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge);
     this.paymentLoader = true;
     this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
     this.hotelBookingService
