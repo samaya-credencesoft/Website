@@ -250,6 +250,7 @@ export class BookingComponent implements OnInit {
   bookingObj: Booking;
   bookingDataObj: Booking;
   bookingObjData: Booking;
+  allTaxArray: string;
 
   constructor(
     private token: TokenStorage,
@@ -596,7 +597,11 @@ export class BookingComponent implements OnInit {
     externalreservation.couponCode = this.booking.couponCode;
     externalreservation.promotionName = this.booking.promotionName;
     externalreservation.totalAmount = this.booking.totalAmount;
-    externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
+    if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
+       externalreservation.amountBeforeTax = (this.booking.beforeTaxAmount * this.booking.noOfNights);
+    } else {
+      externalreservation.amountBeforeTax = this.booking.beforeTaxAmount;
+    }
     externalreservation.channelId = "9";
     externalreservation.lastModifiedBy = 'hotelmate';
     externalreservation.modeOfPayment = "Cash";
@@ -2494,8 +2499,9 @@ export class BookingComponent implements OnInit {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
-    if(this.booking.planCode === 'GHC'){
-      this.booking.roomPrice = (this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
+    this.allTaxArray = this.token.getAllTaxArray();
+    if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
+      this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
     } else{
       this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
     }
@@ -2511,8 +2517,16 @@ export class BookingComponent implements OnInit {
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
     this.booking.advanceAmount = 0;
     this.booking.beforeTaxAmount = (this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge);
+    if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
+      this.booking.totalAmount = ((this.booking.roomPrice * this.booking.noOfNights) + (+this.booking.taxAmount));
+      this.booking.roomTariffBeforeDiscount = (this.booking.roomPrice);
+      this.booking.totalRoomTariffBeforeDiscount = (this.booking.roomPrice * this.booking.noOfNights);
+    } else {
+      this.booking.totalAmount = this.booking.roomPrice + (+this.booking.taxAmount);
+    }
     this.paymentLoader = true;
     this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
+      this.booking.payableAmount = this.booking.totalAmount;
     this.hotelBookingService
       .createBooking(this.booking)
       .subscribe((response) => {
@@ -3604,7 +3618,6 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
     this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
-    console.log('price is',this.booking.roomPrice);
     if(this.booking.planCode === 'GHC'){
       this.enquiryForm.roomPrice = ((this.booking.roomPrice) * (this.DiffDate * this.booking.noOfRooms));
     } else{
