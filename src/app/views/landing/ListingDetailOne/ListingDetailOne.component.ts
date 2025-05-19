@@ -713,6 +713,11 @@ export class ListingDetailOneComponent implements OnInit {
   roomOccupancy:number;
   showError : boolean =false;
   errorMessage:string;
+  totalAmount: any;
+  totalAmountParam: any;
+  taxAmountParam: any;
+  googleUrl: string;
+
   constructor(
     private listingService: ListingService,
     private reviewService: ReviewService,
@@ -877,6 +882,7 @@ this.selectedServices =[]
       }
     });
 
+    this.googleUrl = this.token.getPropertyUrl();
     if ( this.activeForGoogleHotelCenter === true) {
       this.showDiv = false
     }
@@ -922,6 +928,14 @@ this.selectedServices =[]
         this.currency = params['userCurrency'];
       }
 
+       if (params['taxAmount'] !== undefined) {
+        this.taxAmountParam = params['taxAmount'];
+      }
+
+      if (params['totalAmount'] !== undefined) {
+        this.totalAmountParam = params['totalAmount'];
+      }
+
       if (this.hotelID != null && this.hotelID != undefined) {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
@@ -932,6 +946,12 @@ this.selectedServices =[]
       // //console.log(this.adults);
       // this.updateTag();
     });
+    let url = new URL(this.googleUrl);
+    let params = new URLSearchParams(url.search);
+
+    // Get the taxAmount value if it exists
+    let taxAmount = params.get('taxAmount');
+    let totaltax: number;
     // //console.log("sdfgh"+this.city)
 
     this.booking.createdDate = new Date();
