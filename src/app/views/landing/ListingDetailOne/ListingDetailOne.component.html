@@ -157,8 +157,9 @@
           <!-- Add more rows dynamically based on your data -->
           <tr>
             <td class="p-1" style="color: black !important;">Total Net Amount :</td>
-            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
-              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+              {{
+              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? ((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) * booking.noOfRooms) : booking.netAmount)
               | currency: currency:"symbol":"1.2-2"
             }}</td>
           </tr>
@@ -285,7 +286,7 @@
                   <!-- <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div> -->
 
                   <div *ngIf="daterangefilter && daterangefilter.length">
-                    ₹{{ price | number: '1.2-2' }}
+                    ₹{{ (price * booking.noOfRooms) | number: '1.2-2' }}
                     <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0" class="info-tooltip">
                       🛈
                       <span class="tooltip-text">
@@ -331,7 +332,7 @@
                 | currency: currency:"symbol":"1.2-2"
                 }} -->
                 {{
-                  (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+                  (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? ((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) * booking.noOfRooms) : booking.netAmount)
                   | currency: currency:"symbol":"1.2-2"
                 }}
                  <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0"
@@ -374,7 +375,7 @@
                 }} -->
                 {{
                   activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                    ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
+                    ? ((((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) * booking.noOfRooms) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
                     : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
                   | currency: currency:"symbol":"1.2-2")
                 }}
@@ -516,7 +517,7 @@
                 <!-- <div *ngIf="daterangefilter && daterangefilter.length  "> ₹{{ price | number:'1.2-2' }}</div> -->
 
                 <div *ngIf="daterangefilter && daterangefilter.length">
-                  ₹{{ price | number: '1.2-2' }}
+                  ₹{{ (price * booking.noOfRooms) | number: '1.2-2' }}
                   <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0" class="info-tooltip">
                     🛈
                     <span class="tooltip-text">
@@ -561,7 +562,7 @@
               | currency: currency:"symbol":"1.2-2"
               }} -->
               {{
-                (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+                (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? ((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) * booking.noOfRooms) : booking.netAmount)
                 | currency: currency:"symbol":"1.2-2"
               }}
               <span *ngIf="booking.extraPersonCharge > 0 || booking.extraChildCharge > 0"
@@ -609,7 +610,7 @@
               }} -->
               {{
                 activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                  ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
+                  ? ((((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) * booking.noOfRooms) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
                   : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
                 | currency: currency:"symbol":"1.2-2")
               }}
@@ -1856,7 +1857,7 @@
                                             }} -->
                                             {{
                                               (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                             ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                             ? ((this.totalplanPrice * rooms)  | currency: currency:"symbol":"1.2-2")
                                              : (plan.amount * DiffDate * rooms
                                              | currency: currency:"symbol":"1.2-2")
                                            }}
@@ -1971,7 +1972,7 @@
                                                 }}  -->
                                                 {{
                                                   (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                                 ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                                 ? ((this.totalplanPrice * rooms)  | currency: currency:"symbol":"1.2-2")
                                                  : (plan.amount * DiffDate * rooms
                                                  | currency: currency:"symbol":"1.2-2")
                                                }}
@@ -2357,7 +2358,7 @@
                                             }}  -->
                                             {{
                                               (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                             ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                             ? ((this.totalplanPrice * rooms) | currency: currency:"symbol":"1.2-2")
                                              : (plan.amount * DiffDate * rooms
                                              | currency: currency:"symbol":"1.2-2")
                                            }}
@@ -2481,7 +2482,7 @@
                                               }} -->
                                               {{
                                                 (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                               ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                               ? ((this.totalplanPrice * rooms)  | currency: currency:"symbol":"1.2-2")
                                                : (plan.amount * DiffDate * rooms
                                                | currency: currency:"symbol":"1.2-2")
                                              }}
@@ -4033,7 +4034,7 @@
                                     }} -->
                                     {{
                                       (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                     ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                     ? ((this.totalplanPrice * rooms)  | currency: currency:"symbol":"1.2-2")
                                      : (plan.amount * DiffDate * rooms
                                      | currency: currency:"symbol":"1.2-2")
                                    }}
@@ -4147,7 +4148,7 @@
                                   }} -->
                                   {{
                                     (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                   ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                   ? ((this.totalplanPrice * rooms)  | currency: currency:"symbol":"1.2-2")
                                    : (plan.amount * DiffDate * rooms
                                    | currency: currency:"symbol":"1.2-2")
                                  }}
@@ -4597,7 +4598,7 @@
                                       }}  -->
                                       {{
                                         (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                       ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                       ? ((this.totalplanPrice * rooms)  | currency: currency:"symbol":"1.2-2")
                                        : (plan.amount * DiffDate * rooms
                                        | currency: currency:"symbol":"1.2-2")
                                      }}
@@ -4720,7 +4721,7 @@
                                     }} -->
                                     {{
                                       (activeForGoogleHotelCenter && plan.code === 'GHC')
-                                      ? (this.totalplanPrice | currency: currency:"symbol":"1.2-2")
+                                      ? ((this.totalplanPrice * rooms) | currency: currency:"symbol":"1.2-2")
                                       : (plan.amount * DiffDate * rooms
                                       | currency: currency:"symbol":"1.2-2")
                                     }}

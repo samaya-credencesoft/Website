@@ -424,11 +424,13 @@ export class BookingComponent implements OnInit {
     this.otaTaxAmount = this.token.getAllTaxArray();
     this.googleCenter = this.token.getBookingEngineBoolean();
     if(this.otaPlanPrice > 0){
-      const OtaPlanAllPrice = Number(this.otaPlanPrice);
+      const OtaPlanAllPrice = Number((this.otaPlanPrice) * this.booking.noOfRooms);
       this.storedActualNetAmount = (OtaPlanAllPrice) ;
+      console.log('storedActualNetAmount is',this.storedActualNetAmount);
       this.otaTaxAmountValue = this.otaTaxAmount;
     } else {
       this.storedActualNetAmount = this.booking.netAmount;
+      console.log('storedActualNetAmount is',this.storedActualNetAmount);
     }
     this.actualTaxAmount = this.booking.gstAmount;
     this.storeNightPerRoom = this.bookingRoomPrice;
@@ -2497,9 +2499,16 @@ export class BookingComponent implements OnInit {
     this.booking.toTime = Number(this.token.getToTime());
     this.allTaxArray = this.token.getAllTaxArray();
     if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
+      debugger
       this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
-    } else{
+      console.log('.room price is',this.booking.roomPrice);
+    } else if(this.booking.planCode === 'GHC' && this.allTaxArray != null && this.booking.noOfRooms > 1){
+      this.booking.roomPrice = ((this.booking.netAmount) / this.booking.noOfNights);
+        console.log('.room price is',this.booking.roomPrice);
+    }
+    else{
       this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
+        console.log('.room price is',this.booking.roomPrice);
     }
     this.booking.totalServiceAmount = this.totalServiceCost;
     if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.booking.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN')){
