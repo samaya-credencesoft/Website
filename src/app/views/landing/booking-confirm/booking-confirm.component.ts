@@ -1250,7 +1250,7 @@ this.externalReservationdto =res.body
     this.whatsappForm.messaging_product = 'whatsapp';
     this.whatsappForm.recipient_type ='individual';
     this.template.name = "";
-    this.template.name = "bookone_bookone_confirm";
+    this.template.name = "payment_confirmation_1";
     this.language.code = 'en',
     this.template.language = this.language;
     this.componentstype.type= 'header',
@@ -1334,14 +1334,14 @@ this.externalReservationdto =res.body
     this.parametertype2.text = String(this.booking.advanceAmount.toFixed(2));
     this.parameterss2.push(this.parametertype2);
 
-    this.parametertype2 = new Para();
-    this.parametertype2.type = 'text',
-    this.parametertype2.text = 'reservation@thehotelmate.co';
-    this.parameterss2.push(this.parametertype2);
+    // this.parametertype2 = new Para();
+    // this.parametertype2.type = 'text',
+    // this.parametertype2.text = 'reservation@thehotelmate.co';
+    // this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-    this.parametertype2.text = " ";
+    this.parametertype2.text = this.businessUser.name;
     this.parameterss2.push(this.parametertype2);
 
 
@@ -1396,7 +1396,7 @@ this.externalReservationdto =res.body
     //   this.whatsappForm.messaging_product = 'whatsapp';
     //   this.whatsappForm.recipient_type ='individual';
     //   this.template.name = "";
-    //   this.template.name = "bookone_bookone_confirm";
+    //   this.template.name = "payment_confirmation_1";
     //   this.language.code = 'en',
     //   this.template.language = this.language;
     //   this.componentstype.type= 'header',
@@ -1544,7 +1544,7 @@ this.externalReservationdto =res.body
       //   this.whatsappForm.messaging_product = 'whatsapp';
       //   this.whatsappForm.recipient_type ='individual';
       //   this.template.name = "";
-      //   this.template.name = "bookone_bookone_confirm";
+      //   this.template.name = "payment_confirmation_1";
       //   this.language.code = 'en',
       //   this.template.language = this.language;
       //   this.componentstype.type= 'header',
@@ -1692,7 +1692,7 @@ this.externalReservationdto =res.body
           this.whatsappForm.messaging_product = 'whatsapp';
           this.whatsappForm.recipient_type ='individual';
           this.template.name = "";
-          this.template.name = "bookone_bookone_confirm";
+          this.template.name = "payment_confirmation_1";
           this.language.code = 'en',
           this.template.language = this.language;
           this.componentstype.type= 'header',
@@ -1778,14 +1778,14 @@ this.externalReservationdto =res.body
           this.parametertype2.text = String((this.booking.advanceAmount).toFixed(2));
           this.parameterss2.push(this.parametertype2);
 
-          this.parametertype2 = new Para();
-          this.parametertype2.type = 'text',
-          this.parametertype2.text = 'reservation@thehotelmate.co';
-          this.parameterss2.push(this.parametertype2);
+          // this.parametertype2 = new Para();
+          // this.parametertype2.type = 'text',
+          // this.parametertype2.text = 'reservation@thehotelmate.co';
+          // this.parameterss2.push(this.parametertype2);
 
           this.parametertype2 = new Para();
           this.parametertype2.type = 'text',
-          this.parametertype2.text = " ";
+          this.parametertype2.text = this.businessUser.name;
           this.parameterss2.push(this.parametertype2);
 
 
@@ -1840,7 +1840,7 @@ this.externalReservationdto =res.body
             this.whatsappForm.messaging_product = 'whatsapp';
             this.whatsappForm.recipient_type ='individual';
             this.template.name = "";
-            this.template.name = "bookone_bookone_confirm";
+            this.template.name = "payment_confirmation_1";
             this.language.code = 'en',
             this.template.language = this.language;
             this.componentstype.type= 'header',
@@ -1926,14 +1926,14 @@ this.externalReservationdto =res.body
             this.parametertype2.text = String((this.booking.advanceAmount).toFixed(2));
             this.parameterss2.push(this.parametertype2);
 
-            this.parametertype2 = new Para();
-            this.parametertype2.type = 'text',
-            this.parametertype2.text = 'reservation@thehotelmate.co';
-            this.parameterss2.push(this.parametertype2);
+            // this.parametertype2 = new Para();
+            // this.parametertype2.type = 'text',
+            // this.parametertype2.text = 'reservation@thehotelmate.co';
+            // this.parameterss2.push(this.parametertype2);
 
             this.parametertype2 = new Para();
             this.parametertype2.type = 'text',
-            this.parametertype2.text = " ";
+            this.parametertype2.text = this.businessUser.name;
             this.parameterss2.push(this.parametertype2);
 
 
@@ -1988,7 +1988,7 @@ this.externalReservationdto =res.body
               this.whatsappForm.messaging_product = 'whatsapp';
               this.whatsappForm.recipient_type ='individual';
               this.template.name = "";
-              this.template.name = "bookone_bookone_confirm";
+              this.template.name = "payment_confirmation_1";
               this.language.code = 'en',
               this.template.language = this.language;
               this.componentstype.type= 'header',
@@ -2074,14 +2074,14 @@ this.externalReservationdto =res.body
               this.parametertype2.text = String((this.booking.advanceAmount).toFixed(2));
               this.parameterss2.push(this.parametertype2);
 
-              this.parametertype2 = new Para();
-              this.parametertype2.type = 'text',
-              this.parametertype2.text = 'reservation@thehotelmate.co';
-              this.parameterss2.push(this.parametertype2);
+              // this.parametertype2 = new Para();
+              // this.parametertype2.type = 'text',
+              // this.parametertype2.text = 'reservation@thehotelmate.co';
+              // this.parameterss2.push(this.parametertype2);
 
               this.parametertype2 = new Para();
               this.parametertype2.type = 'text',
-              this.parametertype2.text = " ";
+              this.parametertype2.text = this.businessUser.name;
               this.parameterss2.push(this.parametertype2);
 
 
