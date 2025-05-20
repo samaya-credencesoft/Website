@@ -312,7 +312,7 @@
                 100 | currency: currency:"symbol":"1.2-2"
                 }} -->
 {{
-   (totalAmountPrice != this.booking.netAmount)
+   (totalAmountPrice != booking.netAmount)
        ? taxAmountParam
        : (booking.netAmount * booking.taxPercentage) / 100
    | currency: currency : "symbol":"1.2-2"
@@ -495,7 +495,7 @@
               100 | currency: currency:"symbol":"1.2-2"
               }} -->
              {{
-    (totalAmountPrice != this.booking.natAmount)
+    (totalAmountPrice != booking.netAmount)
        ? taxAmountParam
        : (booking.netAmount * booking.taxPercentage) / 100
    | currency: currency : "symbol":"1.2-2"
