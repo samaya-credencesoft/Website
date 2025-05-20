@@ -37,14 +37,6 @@ taxPercentage: number;
   loader: boolean;
   PropertyUrl: string;
   propertyServiceListData: any[] = [];
-  landingPagePrice: any;
-  taAmountLanding: string;
-  googleCenter: string;
-  bookingObj: Booking;
-  extraPersonChargee: number;
-  extraChildChargee: number;
-
-
 constructor(private token :TokenStorage,
       private hotelBookingService: HotelBookingService,
       private listingService: ListingService,
@@ -52,7 +44,6 @@ constructor(private token :TokenStorage,
 ){
       this.businessOfferDto = new BusinessOfferDto();
 this.businessUser = new BusinessUser();
-
 this.PropertyUrl = this.token.getPropertyUrl();
   this.propertyDetails = this.token.getProperty();
  this.bookingone = this.token.getBookingData();
@@ -105,13 +96,6 @@ if (this.booking?.propertyId != null && this.booking?.propertyId != undefined) {
   this.getPropertyDetailsById(this.booking.propertyId);
 console.log("this.booking.proprtyId", this.booking.propertyId)
 }
-
-this.bookingObj = this.token.getBookingData();
-this.landingPagePrice = this.token.getLandingPrice();
-this.taAmountLanding = this.token.getAllTaxArray();
-this.googleCenter = this.token.getBookingEngineBoolean();
-this.extraPersonChargee = Number(this.bookingObj.extraPersonCharge);
-this.extraChildChargee = Number(this.bookingObj.extraChildCharge);
 }
 
 ngOnInIt(){
@@ -135,7 +119,6 @@ async getPropertyDetailsById(id: number) {
       this.policies = this.businessUser.businessServiceDtoList.filter(
         (ele) => ele.name === 'Accommodation'
       );
-      console.log('polices is',this.policies)
 
 
 
@@ -254,4 +237,5 @@ checkValidCouponOrNot(couponList?){
 toggleView(): void {
   this.showMore = !this.showMore;
 }
+
 }
