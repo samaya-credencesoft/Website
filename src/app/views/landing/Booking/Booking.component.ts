@@ -1,3 +1,4 @@
+
 import { CallToActionComponent } from './../../../../views/landing/components/call-to-action/call-to-action.component';
 // import { Components } from './../../model/components';
 // import { Template } from './../../model/template';
@@ -52,7 +53,6 @@ import { PropertyEnquiryDto } from "src/model/propertyEnquiryDto";
 import { externalReservationDtoList } from "src/app/model/externalReservation";
 import { RoomDetail } from "src/app/model/RoomDetail";
 import { MessageService } from 'primeng/api';
-import { BusinessService } from 'src/services/business.service';
 declare var Stripe: any;
 
 declare var window: any;
@@ -193,7 +193,7 @@ export class BookingComponent implements OnInit {
 
   bankAccount: BankAccount;
   mobileWallet: MobileWallet;
-  businessOfferDto: BusinessOfferDto[];
+  businessOfferDto: BusinessOfferDto;
   promoCode: string;
   discountPercentage: number;
   promoMessage = "";
@@ -244,17 +244,6 @@ export class BookingComponent implements OnInit {
   parameterss1: Para[];
   valueHours: boolean = false;
   allSubscription: any;
-  otaTaxAmount: any;
-  googleCenter: string;
-  otaPlanPrice: any;
-  otaTaxAmountValue: any;
-  extraPersonChargee: string;
-  extraChildChargee:string;
-  landingPageTax: string;
-  bookingObj: Booking;
-  bookingDataObj: Booking;
-  bookingObjData: Booking;
-  allTaxArray: string;
 
   constructor(
     private token: TokenStorage,
@@ -263,7 +252,6 @@ export class BookingComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef,
     private datePipe: DatePipe,
     private listingService: ListingService,
-    private offerService: BusinessService,
     private router: Router,
     private messageService: MessageService,
     private http: HttpClient,
@@ -288,7 +276,7 @@ export class BookingComponent implements OnInit {
     this.whatsappForm = new WhatsappDto();
     this.whatsappForm2 = new WhatsappDto();
     this.template = new Template()
-    // this.businessOfferDto = new BusinessOfferDto();
+    this.businessOfferDto = new BusinessOfferDto();
     // this.slotReservation = new SlotReservation();
     this.businessServiceDto = new BusinessServiceDtoList();
     this.businessUser = new BusinessUser();
@@ -309,8 +297,6 @@ export class BookingComponent implements OnInit {
     this.parameterss3 = [];
     this.parameterss4 = [];
     this.parameterss1 = [];
-    this.businessOfferDto = [];
-
     if (this.token.getServiceData() !== null) {
       this.addServiceList = this.token.getServiceData();
     }
@@ -400,17 +386,13 @@ export class BookingComponent implements OnInit {
     this.booking.dayTrip = false;
     this.booking.netAmount =
       this.booking.netAmount
+
     this.booking.gstAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.booking.taxAmount = this.booking.gstAmount;
     this.booking.beforeTaxAmount =
       this.booking.netAmount - this.booking.discountAmount;
     this.booking.roomTariffBeforeDiscount = Number(this.token.getBookingRoomPrice());
-    this.otaPlanPrice = this.token.getLandingPrice();
-    this.otaTaxAmount = this.token.getAllTaxArray();
-    this.googleCenter = this.token.getBookingEngineBoolean();
-    this.extraPersonChargee = this.token.getExtraPersonCharge();
-    this.extraChildChargee = this.token.getChildCharge();
     this.getPropertyDetails(this.booking.propertyId);
 
     this.payment.expYear = "";
@@ -429,18 +411,8 @@ export class BookingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bookingDataObj = this.token.getBookingData();
     this.clearFormField(this.booking);
-    this.otaPlanPrice = this.token.getLandingPrice();
-    this.otaTaxAmount = this.token.getAllTaxArray();
-    this.googleCenter = this.token.getBookingEngineBoolean();
-    if(this.otaPlanPrice > 0){
-      const OtaPlanAllPrice = Number(this.otaPlanPrice);
-      this.storedActualNetAmount = (OtaPlanAllPrice) ;
-      this.otaTaxAmountValue = this.otaTaxAmount;
-    } else {
-      this.storedActualNetAmount = this.booking.netAmount;
-    }
+    this.storedActualNetAmount = this.booking.netAmount;
     this.actualTaxAmount = this.booking.gstAmount;
     this.storeNightPerRoom = this.bookingRoomPrice;
     this.taxAmountBackUp = this.booking.taxAmount;
@@ -465,7 +437,6 @@ export class BookingComponent implements OnInit {
       this.totalBeforeTaxAmount =
         this.totalBeforeTaxAmount + element.beforeTaxAmount;
     });
-    this.booking.taxAmount = (this.storedActualNetAmount * this.bookingDataObj.taxPercentage) / 100 ;
     this.grandTotalAmount =
       this.booking.beforeTaxAmount +
       this.totalExtraAmount +
@@ -620,8 +591,7 @@ export class BookingComponent implements OnInit {
     externalreservation.bookoneReservationId = this.booking.propertyReservationNumber;
     externalreservation.contactNumber = this.booking.mobile;
     externalreservation.propertyBusinessEmail = this.booking.businessEmail;
-    externalreservation.discountAmount = this.booking.discountAmount;
-    externalreservation.externalTransactionId = "THM-"+this.booking.id;
+    // externalreservation.externalTransactionId = this.booking.paymentId.toString();
     externalreservation.createdBy = 'hotelmate';
     roomdetailss.checkinDate = this.booking.fromDate;
     roomdetailss.checkoutDate = this.booking.toDate;
@@ -667,24 +637,13 @@ export class BookingComponent implements OnInit {
       });
   }
   getOfferDetails() {
+    this.hotelBookingService
+      .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
+      .subscribe((data) => {
+        this.businessOfferDto = data.body;
+        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
 
-    if (this.url === "googlehotelcenter") {
-      this.offerService.getOfferListFindByName("Platform Promotion").subscribe((response) => {
-        if (response.body && response.body.length > 0) {
-          this.businessOfferDto.push(response.body[0]);
-
-          this.promocodeListChip = this.checkValidCouponOrNot(this.businessOfferDto);
-          this.changeDetectorRefs.detectChanges();
-        }
       });
-    } else {
-      this.hotelBookingService
-        .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
-        .subscribe((data) => {
-          this.businessOfferDto = data.body;
-          this.promocodeListChip = this.checkValidCouponOrNot(data.body);
-        });
-    }
   }
   // Used For handled to check coupons are valid ot not.
   checkValidCouponOrNot(couponList?) {
@@ -707,16 +666,6 @@ export class BookingComponent implements OnInit {
       console.error("Error in checkValidCouponOrNot : ", error);
     }
   }
-
-  closeModal(): void {
-    try{
-      this.visiblePromotion = false;
-    }
-    catch(error){
-      console.error("Error in closeModal : ",error);
-    }
-  }
-
   // Used For handled to set the selected coupon
   selectedCoupon(coupon?) {
     try {
@@ -926,9 +875,7 @@ export class BookingComponent implements OnInit {
     console.log("dfghvalue" + JSON.stringify(this.accommodationvalue))
     // console.log("accommodation value is :"+JSON.stringify(this.accommodationvalue));
     this.currency = this.businessUser.localCurrency.toUpperCase();
-    setTimeout(() => {
-      this.getOfferDetails();
-    }, 500);
+    this.getOfferDetails();
 
 
 
@@ -943,8 +890,8 @@ export class BookingComponent implements OnInit {
         if (element.name === "GST") {
           this.booking.taxDetails = [];
           this.booking.taxDetails.push(element);
-          // this.taxPercentage = element.percentage;
-          // this.booking.taxPercentage = this.taxPercentage;
+          this.taxPercentage = element.percentage;
+          this.booking.taxPercentage = this.taxPercentage;
           // console.log("this.taxPercentage0" +this.taxPercentage)
           // if (this.bookingCity != null && this.bookingCity != undefined) {
           //   this.booking.roomPrice = Number(this.bookingCity)
@@ -990,18 +937,14 @@ export class BookingComponent implements OnInit {
 
       // this.taxPercentage = this.booking.taxDetails[0].percentage;
     }
+
     this.booking.taxAmount =
       (this.booking.netAmount * this.booking.taxPercentage) / 100;
-      this.booking.roomPrice = Number(this.token.getRoomPrice());
-      if((this.booking.planCode === 'GHC') && (this.otaPlanPrice !== null) && (this.otaTaxAmount !== null && this.otaTaxAmount !== undefined)){
-         this.booking.totalAmount = (this.booking.roomPrice + this.booking.extraPersonCharge) + (+this.otaTaxAmount);
-      } else {
-        this.booking.totalAmount =
-          this.booking.netAmount +
-          this.booking.gstAmount -
-          this.booking.discountAmount + this.totalServiceCost;
-        console.log("this.totalServiceCost" + this.totalServiceCost)
-      }
+    this.booking.totalAmount =
+      this.booking.netAmount +
+      this.booking.gstAmount -
+      this.booking.discountAmount + this.totalServiceCost;
+    console.log("this.totalServiceCost" + this.totalServiceCost)
     this.businessServiceDto = this.businessUser.businessServiceDtoList.find(
       (data) => data.name === "Accommodation"
     );
@@ -1392,9 +1335,9 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 763;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.currency = this.token.getProperty().localCurrency;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item =>item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
       if (item.name === 'CGST') {
         this.percentage1 = item.percentage;
@@ -1405,6 +1348,7 @@ export class BookingComponent implements OnInit {
       }
     })
     this.totalPercentage = (this.percentage1 + this.percentage2);
+
     this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100;
     this.enquiryForm.planCode = this.booking.planCode;
 
@@ -2173,8 +2117,7 @@ export class BookingComponent implements OnInit {
     this.payment.lastName = this.booking.lastName;
     this.payment.netReceivableAmount = this.booking.netAmount;
     this.netAmount = this.booking.netAmount;
-    this.bookingObjData = this.token.getBookingData();
-    this.taxAmountBooking = (this.booking.netAmount * this.bookingObjData.taxPercentage) / 100;
+    this.taxAmountBooking = (this.booking.netAmount * this.booking.taxPercentage) / 100;
     if (this.totalServiceCost != null && this.totalServiceCost != undefined && this.totalServiceCost > 0) {
       this.payment.transactionAmount = this.booking.netAmount + this.taxAmountBooking;
     } else {
@@ -2447,6 +2390,7 @@ export class BookingComponent implements OnInit {
       this.payment.email = this.booking.email;
       this.payment.businessEmail = this.businessUser.email;
       this.payment.currency = this.businessUser.localCurrency;
+
       this.booking.taxAmount =
         (this.booking.netAmount * this.booking.taxPercentage) / 100;
       this.payment.taxAmount = this.booking.taxAmount;
@@ -2527,34 +2471,19 @@ export class BookingComponent implements OnInit {
     this.booking.currency = this.businessUser.localCurrency;
     this.booking.fromTime = Number(this.token.getFromTime());
     this.booking.toTime = Number(this.token.getToTime());
-    this.allTaxArray = this.token.getAllTaxArray();
-    if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
-      this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
+    if(this.booking.planCode === 'GHC'){
+      this.booking.roomPrice = this.booking.netAmount;
     } else{
-      this.booking.roomPrice = ((this.booking.netAmount - (this.booking.extraPersonCharge + this.booking.extraChildCharge)) / this.booking.noOfNights);
+      this.booking.roomPrice = this.booking.netAmount;
     }
     this.booking.totalServiceAmount = this.totalServiceCost;
-    if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.booking.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN')){
-      this.booking.taxAmount = this.otaTaxAmount;
-    } else {
-      this.booking.taxAmount = this.booking.taxAmount;
-    }
+    this.booking.taxAmount = this.booking.taxAmount;
     Logger.log("createBooking ", JSON.stringify(this.booking));
     this.booking.totalRoomTariffBeforeDiscount = this.booking.roomPrice;
     this.booking.noOfExtraChild = this.booking.noOfExtraChild;
     this.booking.purposeOfVisit = this.booking.noOfExtraChild.toString();
     this.booking.advanceAmount = 0;
-    this.booking.beforeTaxAmount = ((this.booking.roomPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge) * this.booking.noOfNights);
-    if(this.booking.planCode === 'GHC' && this.allTaxArray != null){
-      this.booking.totalAmount = ((this.booking.roomPrice * this.booking.noOfNights) + (+this.booking.taxAmount));
-      this.booking.roomTariffBeforeDiscount = (this.booking.roomPrice);
-      this.booking.totalRoomTariffBeforeDiscount = (this.booking.roomPrice * this.booking.noOfNights);
-    } else {
-      this.booking.totalAmount = this.booking.roomPrice + (+this.booking.taxAmount);
-    }
     this.paymentLoader = true;
-    this.booking.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
-      this.booking.payableAmount = this.booking.totalAmount;
     this.hotelBookingService
       .createBooking(this.booking)
       .subscribe((response) => {
@@ -2571,6 +2500,7 @@ export class BookingComponent implements OnInit {
           this.addServiceToBooking(this.booking.id, this.savedServices);
           this.getSubscriptions(this.booking.propertyId);
           this.sendWhatsappMessageToTHM();
+          // this.sendWhatsappMessageToTHM11();
           this.sendWhatsappMessageToTHM1();
           this.sendWhatsappMessageToTHM2();
           this.sendWhatsappMessageToTHM3();
@@ -2794,7 +2724,7 @@ export class BookingComponent implements OnInit {
 
     this.template.components = this.components;
     this.whatsappForm.template = this.template;
-    this.whatsappForm.to = "9337930186",
+    this.whatsappForm.to = "6372198255",
       this.whatsappForm.type = 'template',
       this.hotelBookingService.whatsAppMsg(this.whatsappForm).subscribe((response) => {
         this.paymentLoader = false;
@@ -3514,13 +3444,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.lastName = this.booking.lastName;
     this.enquiryForm.email = this.booking.email;
     this.enquiryForm.phone = this.booking.mobile;
-    this.bookingObj = this.token.getBookingData();
-    if((this.otaTaxAmount !== null && this.otaTaxAmount !==undefined) && (this.bookingObj.planCode === 'GHC') && (this.otaPlanPrice !== 'NaN')){
-      this.enquiryForm.taxAmount = this.otaTaxAmount;
-    } else {
-      this.enquiryForm.taxAmount = this.taxAmountBooking;
-    }
-    // this.enquiryForm.taxAmount = this.taxAmountBooking;
+    this.enquiryForm.taxAmount = this.taxAmountBooking;
     this.enquiryForm.min = this.booking.totalAmount + this.booking.totalServiceAmount;
     this.enquiryForm.max = this.booking.totalAmount + this.booking.totalServiceAmount;
 
@@ -3581,7 +3505,7 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.discountAmountPercentage = this.booking.discountPercentage;
     this.enquiryForm.status = "Booked";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 763;
+    this.enquiryForm.propertyId = 107;
 
     this.enquiryForm.totalAmount = this.booking.totalAmount;
     // this.enquiryForm.taxDetails = this.booking.taxDetails;
@@ -3597,7 +3521,7 @@ export class BookingComponent implements OnInit {
 
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
 
 
     const TO_EMAIL = 'reservation@thehotelmate.co';
@@ -3644,11 +3568,10 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.noOfExtraChild = Number(this.token.getExtraChildCharge());
     this.enquiryForm.bookingCommissionAmount = 0;
     this.paymentLoader = true;
-    this.booking.roomPrice = Number(this.token.getBookingRoomPrice());
     if(this.booking.planCode === 'GHC'){
-      this.enquiryForm.roomPrice = ((this.booking.roomPrice) * (this.DiffDate * this.booking.noOfRooms));
+      this.enquiryForm.roomPrice = (this.booking.roomPrice - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
     } else{
-      this.enquiryForm.roomPrice = ((this.booking.roomPrice) * (this.DiffDate * this.booking.noOfRooms));
+      this.enquiryForm.roomPrice = (this.booking.roomPrice - (this.booking.extraPersonCharge + this.booking.extraChildCharge));
     }
     this.hotelBookingService.accommodationEnquiry(this.enquiryForm).subscribe((response) => {
       this.enquiryForm = response.body;
@@ -3940,10 +3863,10 @@ export class BookingComponent implements OnInit {
     this.enquiryForm.accommodationType = this.token.getProperty().businessType;
     this.enquiryForm.status = "Enquiry";
     this.enquiryForm.specialNotes = this.booking.notes
-    this.enquiryForm.propertyId = 763;
+    this.enquiryForm.propertyId = 107;
     this.enquiryForm.bookingPropertyId = this.token.getProperty().id;
     this.enquiryForm.propertyName = this.token.getProperty().name;
-    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item =>item.name === 'GST');
+    this.enquiryForm.taxDetails = this.token.getProperty().taxDetails.filter(item => item.name === 'CGST' || item.name === 'SGST' || item.name === 'GST');
     this.enquiryForm.taxDetails.forEach(item => {
       if (item.name === 'CGST') {
         this.percentage1 = item.percentage;
@@ -4274,6 +4197,7 @@ export class BookingComponent implements OnInit {
     this.whatsappForm2.type = 'template';
     this.hotelBookingService.whatsAppMsg(this.whatsappForm2).subscribe((response) => {
       this.paymentLoader = false;
+
     }, error => {
       this.paymentLoader = false;
     });
