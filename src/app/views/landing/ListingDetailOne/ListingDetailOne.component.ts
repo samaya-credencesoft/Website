@@ -97,6 +97,7 @@ export class ListingDetailOneComponent implements OnInit {
   Googlehotelsortrooms: any[];
   ghcOverrideClicked: boolean = false;
   totalAmountPrice: string;
+  allTaxAmount: boolean = false;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -3566,6 +3567,10 @@ clicked(){
         }
       );
       // this.getTaxAmount();
+  }
+
+  landingTaxAmount(){
+    this.allTaxAmount = true;
   }
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
