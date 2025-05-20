@@ -311,12 +311,13 @@
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
                 }} -->
-                 {{
-                   ((activeForGoogleHotelCenter && booking.planCode === 'GHC' && this.isSuccess === false)
-                       ? taxAmountParam
-                       : (booking.netAmount * booking.taxPercentage) / 100)
-                       | currency: currency:"symbol":"1.2-2"
-               }}
+{{
+    (!landingTaxAmount() && activeGoogleHotelCenter && booking.planCode === 'GHC')
+       ? ((taxAmountParam) | currency: currency : "symbol":"1.2-2")
+       : (booking.netAmount * booking.taxPercentage) / 100
+   | currency: currency : "symbol":"1.2-2"
+}}
+
                 </td>
             </tr>
 
@@ -493,12 +494,13 @@
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
               }} -->
-              {{
-                   ((activeForGoogleHotelCenter && booking.planCode === 'GHC' && this.isSuccess === false)
-                       ? taxAmountParam
-                       : (booking.netAmount * booking.taxPercentage) / 100)
-                       | currency: currency:"symbol":"1.2-2"
-               }}
+             {{
+    (!landingTaxAmount() && activeGoogleHotelCenter && booking.planCode === 'GHC')
+       ? ((taxAmountParam) |  currency: currency : "symbol":"1.2-2")
+       : (booking.netAmount * booking.taxPercentage) / 100
+   | currency: currency : "symbol":"1.2-2"
+}}
+
               </td>
           </tr>
 
@@ -757,7 +759,7 @@
 
                 <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"
                   [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
-                  (click)="checkingAvailability(); scrollToAccommodationDash();clicked()">
+                  (click)="checkingAvailability(); scrollToAccommodationDash();clicked() ; landingTaxAmount()">
                   <!-- {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }} -->
                   Check Availability
                 </button>
@@ -3292,7 +3294,7 @@
             <div class="col-12 my-2 button-container adjustButtonContainerSection" style="display: flex; justify-content: center; gap:20px">
               <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"
                 [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
-                (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked()">
+                (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked(); landingTaxAmount()">
                 <!-- {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }} -->
                 Check Availability
               </button>
