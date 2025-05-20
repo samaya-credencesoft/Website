@@ -304,19 +304,20 @@
             </tr>
 
             <tr *ngIf="booking.taxPercentage">
-              <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
+              <td class="p-1" style="color: black !important;">Tax Amount:</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
                 <!-- {{
                 (this.booking.netAmount *
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
                 }} -->
-                 {{
-                   ((activeForGoogleHotelCenter && booking.planCode === 'GHC' && this.isSuccess === false)
-                       ? taxAmountParam
-                       : (booking.netAmount * booking.taxPercentage) / 100)
-                       | currency: currency:"symbol":"1.2-2"
-               }}
+{{
+   (totalAmountPrice != this.booking.netAmount)
+       ? taxAmountParam
+       : (booking.netAmount * booking.taxPercentage) / 100
+   | currency: currency : "symbol":"1.2-2"
+}}
+
                 </td>
             </tr>
 
@@ -486,19 +487,20 @@
           </tr>
 
           <tr *ngIf="booking.taxPercentage">
-            <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
+            <td class="p-1" style="color: black !important;">Tax Amount:</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
               <!-- {{
               (this.booking.netAmount *
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
               }} -->
-              {{
-                   ((activeForGoogleHotelCenter && booking.planCode === 'GHC' && this.isSuccess === false)
-                       ? taxAmountParam
-                       : (booking.netAmount * booking.taxPercentage) / 100)
-                       | currency: currency:"symbol":"1.2-2"
-               }}
+             {{
+    (totalAmountPrice != this.booking.natAmount)
+       ? taxAmountParam
+       : (booking.netAmount * booking.taxPercentage) / 100
+   | currency: currency : "symbol":"1.2-2"
+}}
+
               </td>
           </tr>
 

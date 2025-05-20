@@ -95,6 +95,8 @@ export class ListingDetailOneComponent implements OnInit {
   selectedServicesOne: any;
   checkAvailabilityDisabled: boolean;
   Googlehotelsortrooms: any[];
+  ghcOverrideClicked: boolean = false;
+  totalAmountPrice: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -764,6 +766,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.bookingMinDate = calendar.getToday();
     this.bookingengineurl = this.token.getwebsitebookingURL()
     sessionStorage.removeItem('enquiryNo');
+    this.totalAmountPrice = this.token.getRoomPrice();
 
 this.selectedServicesOne = this.token?.getSelectedServices();
 setTimeout(() => {
@@ -3279,6 +3282,7 @@ clicked(){
     this.isSuccess = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
+    this.ghcOverrideClicked = true;
 
     this.showSuccess(this.contentDialog);
     setTimeout(() => {
@@ -3561,6 +3565,7 @@ clicked(){
           }
         }
       );
+      // this.getTaxAmount();
   }
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
