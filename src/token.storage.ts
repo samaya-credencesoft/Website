@@ -70,7 +70,11 @@ const PROPERTY_URL = 'PropertyUrl';
 const REQUEST_HANDLE = "requestvalue";
 const BOOKINGROOMPRICE = 'bookingPrice';
 const NoOfExtraChild = 'noOfExtraChild';
-const BOOKROOMPRICE = 'bookRoomPrice'
+const BOOKROOMPRICE = 'bookRoomPrice';
+const ALL_TAXARRAY = 'allTaxAray';
+const Save_Extra_PersonCharge = 'saveExtraPersonCharge';
+const Save_Child_Charge = 'saveChildCharge';
+
 
 @Injectable()
 export class TokenStorage {
@@ -288,6 +292,47 @@ export class TokenStorage {
     public clearBookingDataObj() {
       return sessionStorage.removeItem(BOOKINGDATAOJC);
     }
+
+
+  public saveAllTaxAray(allTaxAray:any){
+      localStorage.removeItem(ALL_TAXARRAY);
+      if (allTaxAray !== null || allTaxAray !== undefined) {
+        localStorage.setItem(ALL_TAXARRAY, allTaxAray);
+      } else {
+        localStorage.setItem(ALL_TAXARRAY, '{}');
+      }
+    }
+
+    public getAllTaxArray() {
+      return localStorage.getItem(ALL_TAXARRAY);
+    }
+
+       public saveExtraPersonCharge(saveExtraPersonCharge:any){
+        localStorage.removeItem(Save_Extra_PersonCharge);
+        if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
+          localStorage.setItem(Save_Extra_PersonCharge, saveExtraPersonCharge);
+        } else {
+          localStorage.setItem(Save_Extra_PersonCharge, '{}');
+        }
+      }
+
+      public getExtraPersonCharge(){
+        return localStorage.getItem(Save_Extra_PersonCharge);
+      }
+
+       public saveChildCharge(saveChildCharge:any){
+        localStorage.removeItem(Save_Child_Charge);
+        if (saveChildCharge !== null || saveChildCharge !== undefined) {
+          localStorage.setItem(Save_Child_Charge, saveChildCharge);
+        } else {
+          localStorage.setItem(Save_Child_Charge, '{}');
+        }
+      }
+
+      public getChildCharge(){
+        return localStorage.getItem(Save_Child_Charge);
+      }
+
   public getServiceData(): PropertyServiceDTO[] {
     return JSON.parse(localStorage.getItem(PROPERTY_SERVICE_DATA) as string);
   }
