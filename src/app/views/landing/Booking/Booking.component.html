@@ -2350,17 +2350,34 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
                       storedActualNetAmount
                       | currency: currency:"symbol":"1.2-2"
                       }}</span></li>
-                  <li *ngIf="booking.taxPercentage && !showTheSelectedCoupon">Tax ({{this.booking.taxPercentage}}%) <span> {{
+                  <li *ngIf="booking.taxPercentage && !showTheSelectedCoupon">Tax Amount <span>
+                    <!-- {{
                       (storedActualNetAmount *
                       this.booking.taxPercentage) /
                       100 | currency: currency:"symbol":"1.2-2"
-                      }}</span></li>
-                  <li *ngIf="!showTheSelectedCoupon">Total Room Amount <span> {{
+                      }} -->
+                      {{
+                            (booking.planCode === 'GHC' && googleCenter && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                            ? (otaTaxAmountValue | currency: currency:"symbol":"1.2-2")
+                            : (storedActualNetAmount * booking.taxPercentage) / 100 | currency: currency:"symbol":"1.2-2"
+                          }}
+                      </span></li>
+                  <li *ngIf="!showTheSelectedCoupon">Total Room Amount <span>
+                    <!-- {{
                       (storedActualNetAmount + ((storedActualNetAmount *
                       this.booking.taxPercentage) /
                       100))+totalExtraAmount
                       | currency: currency:"symbol":"1.2-2"
-                      }}</span></li>
+                      }} -->
+                       {{
+                  (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                  ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
+                : (storedActualNetAmount + ((storedActualNetAmount *
+                this.booking.taxPercentage) /
+                100))+totalExtraAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}
+                      </span></li>
                   <li *ngIf="showTheSelectedCoupon">
                     Coupon Applied: ({{selectedCouponList.discountPercentage}}%) <span> -{{storedActualNetAmount - appliedCoupon | currency: currency:"symbol":"1.2-2"}} </span>
                   </li>
@@ -2410,13 +2427,27 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
             <!-- Payment Information -->
             <div class="paymentinfo" style="font-weight: bold;">
               <ul>
-                <li *ngIf="!showTheSelectedCoupon">Total Payable Amount <span> {{
+                <li *ngIf="!showTheSelectedCoupon">Total Payable Amount <span>
+                  <!-- {{
                     grandTotalAmount | currency : currency : "symbol" : "1.2-2"
-                    }}</span></li>
+                    }} -->
+                    {{
+                     (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                     ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
+                    : grandTotalAmount | currency : currency : "symbol" : "1.2-2"
+                    }}
+                    </span></li>
 
-                <li *ngIf="!showTheSelectedCoupon">Due Amount <span> {{
+                <li *ngIf="!showTheSelectedCoupon">Due Amount <span>
+                  <!-- {{
                     grandTotalAmount | currency : currency : "symbol" : "1.2-2"
-                    }}</span></li>
+                    }} -->
+                    {{
+                    (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                    ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
+                    : grandTotalAmount | currency : currency : "symbol" : "1.2-2"
+                    }}
+                    </span></li>
 
                 <li *ngIf="showTheSelectedCoupon">
                   Taxable Amount: <span> {{appliedCoupon | currency:
@@ -2646,22 +2677,39 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
             </tr>
 
             <tr *ngIf="booking.taxPercentage  && !showTheSelectedCoupon">
-              <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" style="color: black !important;">Tax Amount:</td>
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                <!-- {{
                 (storedActualNetAmount *
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+                {{
+                            (booking.planCode === 'GHC' && googleCenter && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                            ? (otaTaxAmountValue | currency: currency:"symbol":"1.2-2")
+                            : (storedActualNetAmount * booking.taxPercentage) / 100 | currency: currency:"symbol":"1.2-2"
+                          }}
+                </td>
             </tr>
 
             <tr *ngIf="!showTheSelectedCoupon">
               <td class="p-1" style="color: black !important;">Total Room Amount :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                <!-- {{
                 (storedActualNetAmount + ((storedActualNetAmount *
                 this.booking.taxPercentage) /
                 100))+totalExtraAmount
                 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+                 {{
+                  (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                  ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
+                : (storedActualNetAmount + ((storedActualNetAmount *
+                this.booking.taxPercentage) /
+                100))+totalExtraAmount
+                | currency: currency:"symbol":"1.2-2"
+                }}
+                </td>
             </tr>
 
             <tr *ngIf="showTheSelectedCoupon">
@@ -2719,13 +2767,27 @@ background-color: rgba(0, 0, 0, 0.5); z-index: 1000; display: flex; justify-cont
       <!-- Payment Information -->
       <div class="paymentinfo">
         <ul>
-          <li *ngIf="!showTheSelectedCoupon">Total Payable Amount <span> {{
+          <li *ngIf="!showTheSelectedCoupon">Total Payable Amount <span>
+            <!-- {{
               grandTotalAmount | currency : currency : "symbol" : "1.2-2"
-              }}</span></li>
+              }} -->
+              {{
+                     (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                     ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
+                    : grandTotalAmount | currency : currency : "symbol" : "1.2-2"
+                    }}
+              </span></li>
 
-          <li *ngIf="!showTheSelectedCoupon">Due Amount <span> {{
+          <li *ngIf="!showTheSelectedCoupon">Due Amount <span>
+            <!-- {{
               grandTotalAmount | currency : currency : "symbol" : "1.2-2"
-              }}</span></li>
+              }} -->
+              {{
+                    (googleCenter && booking.planCode === 'GHC' && (otaPlanPrice !== "NaN" && otaPlanPrice !== null && otaPlanPrice !== undefined ))
+                    ? (+storedActualNetAmount + (+otaTaxAmountValue) | currency: currency : 'symbol' : '1.2-2')
+                    : grandTotalAmount | currency : currency : "symbol" : "1.2-2"
+                    }}
+              </span></li>
 
           <li *ngIf="showTheSelectedCoupon">
             Taxable Amount: <span> {{appliedCoupon | currency:

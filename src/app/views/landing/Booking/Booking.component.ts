@@ -243,6 +243,11 @@ export class BookingComponent implements OnInit {
   parameterss1: Para[];
   valueHours: boolean = false;
   allSubscription: any;
+  otaTaxAmountValue: any;
+  googleCenter: string;
+  otaPlanPrice: any;
+  OtaPlanAllPrice: number;
+  otaTaxAmount: any;
 
   constructor(
     private token: TokenStorage,
@@ -411,7 +416,17 @@ export class BookingComponent implements OnInit {
 
   ngOnInit() {
     this.clearFormField(this.booking);
-    this.storedActualNetAmount = this.booking.netAmount;
+     this.otaPlanPrice = this.token.getLandingPrice();
+    this.otaTaxAmount = this.token.getAllTaxArray();
+    this.googleCenter = this.token.getBookingEngineBoolean();
+    if(this.otaPlanPrice > 0){
+      const OtaPlanAllPrice = Number(this.otaPlanPrice);
+      this.storedActualNetAmount = (OtaPlanAllPrice) ;
+      this.otaTaxAmountValue = this.otaTaxAmount;
+    } else {
+      this.storedActualNetAmount = this.booking.netAmount;
+    }
+    // this.storedActualNetAmount = this.booking.netAmount;
     this.actualTaxAmount = this.booking.gstAmount;
     this.storeNightPerRoom = this.bookingRoomPrice;
     this.taxAmountBackUp = this.booking.taxAmount;

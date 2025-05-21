@@ -313,8 +313,8 @@
                 }} -->
           {{
                   activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                 ? (getTotalTaxFee() | number:'1.2-2')
-                  : (((booking.netAmount * this.booking.taxPercentage) / 100))
+                 ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
+                  : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
           }}
 
                 </td>
@@ -506,8 +506,8 @@
                 {{booking.planCode}} -->
              {{
                   activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                  ? (getTotalTaxFee() | number:'1.2-2')
-                  : (((booking.netAmount * this.booking.taxPercentage) / 100))
+                  ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
+                  : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
               }}
 
               </td>

@@ -71,6 +71,7 @@ const REQUEST_HANDLE = "requestvalue";
 const BOOKINGROOMPRICE = 'bookingPrice';
 const NoOfExtraChild = 'noOfExtraChild';
 const BOOKROOMPRICE = 'bookRoomPrice';
+const CHECK_LANDING_PRICE ='landingrice';
 const ALL_TAXARRAY = 'allTaxAray';
 const Save_Extra_PersonCharge = 'saveExtraPersonCharge';
 const Save_Child_Charge = 'saveChildCharge';
@@ -332,6 +333,23 @@ export class TokenStorage {
       public getChildCharge(){
         return localStorage.getItem(Save_Child_Charge);
       }
+
+       public saveLandingPrice(landingrice: any){
+    localStorage.removeItem(CHECK_LANDING_PRICE);
+    if (landingrice !== null || landingrice !== undefined) {
+      localStorage.setItem(CHECK_LANDING_PRICE, landingrice);
+    } else {
+      localStorage.setItem(CHECK_LANDING_PRICE, '{}');
+    }
+  }
+
+  public getLandingPrice() {
+    return localStorage.getItem(CHECK_LANDING_PRICE);
+  }
+
+  clearLandingPrice() {
+    localStorage.removeItem(CHECK_LANDING_PRICE);
+    }
 
   public getServiceData(): PropertyServiceDTO[] {
     return JSON.parse(localStorage.getItem(PROPERTY_SERVICE_DATA) as string);
