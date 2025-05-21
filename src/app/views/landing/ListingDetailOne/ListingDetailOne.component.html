@@ -304,31 +304,38 @@
             </tr>
 
             <tr *ngIf="booking.taxPercentage">
-              <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
+              <td class="p-1" style="color: black !important;">Tax Amount :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
                 <!-- {{
                 (this.booking.netAmount *
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
                 }} -->
-{{
-    (!landingTaxAmount() && activeGoogleHotelCenter && booking.planCode === 'GHC')
-       ? ((taxAmountParam) | currency: currency : "symbol":"1.2-2")
-       : (booking.netAmount * booking.taxPercentage) / 100
-   | currency: currency : "symbol":"1.2-2"
-}}
+          {{
+                  activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                 ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
+                  : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
+          }}
 
                 </td>
             </tr>
 
             <tr>
               <td class="p-1" style="color: black !important;">Total Amount :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                <!-- {{
                 (booking.netAmount + ((this.booking.netAmount *
                 this.booking.taxPercentage) /
                 100))+totalExtraAmount
                 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+                {{
+                activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                  ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
+                  : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
+                | currency: currency:"symbol":"1.2-2")
+              }}
+                </td>
             </tr>
             <ng-container *ngIf="selectedServicesOne?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 15px; padding-bottom: 10px; margin-top: 15px;
           border-radius: 10px;">
@@ -487,31 +494,41 @@
           </tr>
 
           <tr *ngIf="booking.taxPercentage">
-            <td class="p-1" style="color: black !important;">Tax ({{this.booking.taxPercentage}}%) :</td>
+            <td class="p-1" style="color: black !important;">Tax Amount :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
               <!-- {{
               (this.booking.netAmount *
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
               }} -->
+               <!-- {{taxAmountParam}}
+                {{(booking.netAmount * booking.taxPercentage) / 100}}
+                {{booking.planCode}} -->
              {{
-    (!landingTaxAmount() && activeGoogleHotelCenter && booking.planCode === 'GHC')
-       ? ((taxAmountParam) |  currency: currency : "symbol":"1.2-2")
-       : (booking.netAmount * booking.taxPercentage) / 100
-   | currency: currency : "symbol":"1.2-2"
-}}
+                  activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                  ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
+                  : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
+              }}
 
               </td>
           </tr>
 
           <tr>
             <td class="p-1" style="color: black !important;">Total Amount :</td>
-            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+              <!-- {{
               (booking.netAmount + ((this.booking.netAmount *
               this.booking.taxPercentage) /
               100))+totalExtraAmount
               | currency: currency:"symbol":"1.2-2"
-              }}</td>
+              }} -->
+              {{
+                activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                  ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
+                  : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
+                | currency: currency:"symbol":"1.2-2")
+              }}
+              </td>
           </tr>
           <!-- Add more rows dynamically based on your data -->
           <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">

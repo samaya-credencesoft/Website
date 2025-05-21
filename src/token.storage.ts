@@ -295,6 +295,64 @@ export class TokenStorage {
     public clearBookingDataObj() {
       return sessionStorage.removeItem(BOOKINGDATAOJC);
     }
+
+
+  public saveAllTaxAray(allTaxAray:any){
+      localStorage.removeItem(ALL_TAXARRAY);
+      if (allTaxAray !== null || allTaxAray !== undefined) {
+        localStorage.setItem(ALL_TAXARRAY, allTaxAray);
+      } else {
+        localStorage.setItem(ALL_TAXARRAY, '{}');
+      }
+    }
+
+    public getAllTaxArray() {
+      return localStorage.getItem(ALL_TAXARRAY);
+    }
+
+       public saveExtraPersonCharge(saveExtraPersonCharge:any){
+        localStorage.removeItem(Save_Extra_PersonCharge);
+        if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
+          localStorage.setItem(Save_Extra_PersonCharge, saveExtraPersonCharge);
+        } else {
+          localStorage.setItem(Save_Extra_PersonCharge, '{}');
+        }
+      }
+
+      public getExtraPersonCharge(){
+        return localStorage.getItem(Save_Extra_PersonCharge);
+      }
+
+       public saveChildCharge(saveChildCharge:any){
+        localStorage.removeItem(Save_Child_Charge);
+        if (saveChildCharge !== null || saveChildCharge !== undefined) {
+          localStorage.setItem(Save_Child_Charge, saveChildCharge);
+        } else {
+          localStorage.setItem(Save_Child_Charge, '{}');
+        }
+      }
+
+      public getChildCharge(){
+        return localStorage.getItem(Save_Child_Charge);
+      }
+
+       public saveLandingPrice(landingrice: any){
+    localStorage.removeItem(CHECK_LANDING_PRICE);
+    if (landingrice !== null || landingrice !== undefined) {
+      localStorage.setItem(CHECK_LANDING_PRICE, landingrice);
+    } else {
+      localStorage.setItem(CHECK_LANDING_PRICE, '{}');
+    }
+  }
+
+  public getLandingPrice() {
+    return localStorage.getItem(CHECK_LANDING_PRICE);
+  }
+
+  clearLandingPrice() {
+    localStorage.removeItem(CHECK_LANDING_PRICE);
+    }
+
   public getServiceData(): PropertyServiceDTO[] {
     return JSON.parse(localStorage.getItem(PROPERTY_SERVICE_DATA) as string);
   }
@@ -311,35 +369,35 @@ export class TokenStorage {
     return localStorage.getItem(COUNTRY);
   }
 
-  public saveExtraPersonCharge(saveExtraPersonCharge:any){
-    localStorage.removeItem(Save_Extra_PersonCharge);
-    if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
-      localStorage.setItem(Save_Extra_PersonCharge, saveExtraPersonCharge);
-    } else {
-      localStorage.setItem(Save_Extra_PersonCharge, '{}');
-    }
-  }
+  // public saveExtraPersonCharge(saveExtraPersonCharge:any){
+  //   localStorage.removeItem(Save_Extra_PersonCharge);
+  //   if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
+  //     localStorage.setItem(Save_Extra_PersonCharge, saveExtraPersonCharge);
+  //   } else {
+  //     localStorage.setItem(Save_Extra_PersonCharge, '{}');
+  //   }
+  // }
 
-  public getExtraPersonCharge(){
-    return localStorage.getItem(Save_Extra_PersonCharge);
-  }
+  // public getExtraPersonCharge(){
+  //   return localStorage.getItem(Save_Extra_PersonCharge);
+  // }
 
   clearExtraPersonCharge() {
     localStorage.removeItem(Save_Extra_PersonCharge);
     }
 
-  public saveChildCharge(saveChildCharge:any){
-    localStorage.removeItem(Save_Child_Charge);
-    if (saveChildCharge !== null || saveChildCharge !== undefined) {
-      localStorage.setItem(Save_Child_Charge, saveChildCharge);
-    } else {
-      localStorage.setItem(Save_Child_Charge, '{}');
-    }
-  }
+  // public saveChildCharge(saveChildCharge:any){
+  //   localStorage.removeItem(Save_Child_Charge);
+  //   if (saveChildCharge !== null || saveChildCharge !== undefined) {
+  //     localStorage.setItem(Save_Child_Charge, saveChildCharge);
+  //   } else {
+  //     localStorage.setItem(Save_Child_Charge, '{}');
+  //   }
+  // }
 
-  public getChildCharge(){
-    return localStorage.getItem(Save_Child_Charge);
-  }
+  // public getChildCharge(){
+  //   return localStorage.getItem(Save_Child_Charge);
+  // }
 
  clearExtraChildCharge() {
     localStorage.removeItem(Save_Child_Charge);
@@ -690,22 +748,22 @@ export class TokenStorage {
   localStorage.removeItem(WEBSITE_BOOKING_URL);
   }
 
-  public saveLandingPrice(landingrice: any){
-    localStorage.removeItem(CHECK_LANDING_PRICE);
-    if (landingrice !== null || landingrice !== undefined) {
-      localStorage.setItem(CHECK_LANDING_PRICE, landingrice);
-    } else {
-      localStorage.setItem(CHECK_LANDING_PRICE, '{}');
-    }
-  }
+  // public saveLandingPrice(landingrice: any){
+  //   localStorage.removeItem(CHECK_LANDING_PRICE);
+  //   if (landingrice !== null || landingrice !== undefined) {
+  //     localStorage.setItem(CHECK_LANDING_PRICE, landingrice);
+  //   } else {
+  //     localStorage.setItem(CHECK_LANDING_PRICE, '{}');
+  //   }
+  // }
 
-  public getLandingPrice() {
-    return localStorage.getItem(CHECK_LANDING_PRICE);
-  }
+  // public getLandingPrice() {
+  //   return localStorage.getItem(CHECK_LANDING_PRICE);
+  // }
 
-  clearLandingPrice() {
-    localStorage.removeItem(CHECK_LANDING_PRICE);
-    }
+  // clearLandingPrice() {
+  //   localStorage.removeItem(CHECK_LANDING_PRICE);
+  //   }
   // public getRoomsData(): Room[] {
   //   return JSON.parse(localStorage.getItem(ROOMSDATA) as string);
   // }
@@ -801,18 +859,18 @@ public saveSelectedCountry(countryCode: string) {
 //   return JSON.parse(localStorage.getItem(DELIVERY_OPTION) as string);
 // }
 
-public saveAllTaxAray(allTaxAray:any){
-  localStorage.removeItem(ALL_TAXARRAY);
-  if (allTaxAray !== null || allTaxAray !== undefined) {
-    localStorage.setItem(ALL_TAXARRAY, allTaxAray);
-  } else {
-    localStorage.setItem(ALL_TAXARRAY, '{}');
-  }
-}
+// public saveAllTaxAray(allTaxAray:any){
+//   localStorage.removeItem(ALL_TAXARRAY);
+//   if (allTaxAray !== null || allTaxAray !== undefined) {
+//     localStorage.setItem(ALL_TAXARRAY, allTaxAray);
+//   } else {
+//     localStorage.setItem(ALL_TAXARRAY, '{}');
+//   }
+// }
 
-public getAllTaxArray() {
-  return localStorage.getItem(ALL_TAXARRAY);
-}
+// public getAllTaxArray() {
+//   return localStorage.getItem(ALL_TAXARRAY);
+// }
 
 clearAllTaxArray() {
   localStorage.removeItem(ALL_TAXARRAY);

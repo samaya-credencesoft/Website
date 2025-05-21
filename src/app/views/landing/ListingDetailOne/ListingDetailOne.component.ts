@@ -98,6 +98,13 @@ export class ListingDetailOneComponent implements OnInit {
   ghcOverrideClicked: boolean = false;
   totalAmountPrice: string;
   allTaxAmount: boolean = false;
+  bookingPrice: string;
+  diffAmount: number;
+  activeGoogleHotelCenter: string;
+  googleUrlToken: this;
+  allTaxAmountPrice: any;
+  taxAmount: any;
+  landingrice: number;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -720,6 +727,11 @@ export class ListingDetailOneComponent implements OnInit {
   totalAmountParam: any;
   taxAmountParam: any;
   googleUrl: string;
+  extraPersonChargee: any;
+  extraChildChargee: string;
+  taxArray: any[];
+  allExtraPersonCharge: any;
+  allExtraChildCharge: number;
 
   constructor(
     private listingService: ListingService,
@@ -886,6 +898,9 @@ this.selectedServices =[]
       }
     });
 
+    this.bookingPrice = this.token.getBookingRoomPrice();
+    this.googleUrlToken = this,token.getBookingEngineBoolean();
+
     this.googleUrl = this.token.getPropertyUrl();
     if ( this.activeForGoogleHotelCenter === true) {
       this.showDiv = false
@@ -940,6 +955,10 @@ this.selectedServices =[]
         this.totalAmountParam = params['totalAmount'];
       }
 
+      this.landingrice = Number((this.totalAmountParam - this.taxAmountParam).toFixed(2));
+      this.token.saveLandingPrice((this.landingrice));
+
+
       if (this.hotelID != null && this.hotelID != undefined) {
         this.getPropertyDetailsById(this.hotelID);
         this.personChange();
@@ -950,6 +969,12 @@ this.selectedServices =[]
       // //console.log(this.adults);
       // this.updateTag();
     });
+
+     this.allExtraPersonCharge = this.booking.extraPersonCharge;
+    this.allExtraChildCharge = this.booking.extraChildCharge;
+    this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
+    this.token.saveChildCharge(this.allExtraChildCharge);
+
     let url = new URL(this.googleUrl);
     let params = new URLSearchParams(url.search);
 
@@ -959,6 +984,9 @@ this.selectedServices =[]
     // //console.log("sdfgh"+this.city)
 
     this.booking.createdDate = new Date();
+
+    this.extraPersonChargee = this.token.getExtraPersonCharge();
+    this.extraChildChargee = this.token.getChildCharge();
   }
   blogPosts$: Observable<any> | undefined;
   responsiveOptions: any[];
@@ -3456,11 +3484,33 @@ clicked(){
             });
           });
           this.planPrice = [];
+          this.taxArray = [];
           this.roomWithGHCPlan[0]?.ratesAndAvailabilityDtos.forEach((e) => {
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
                 if(element2.otaName ==='GHC'){
                   this.planPrice.push(element2.price);
+
+
+
+          let extraPerson = Number(this.extraPersonChargee);
+          let extraChild = Number(this.extraChildChargee);
+          let noOfNights = Number(this.booking.noOfNights);
+
+          let totalPrice = Number(element2.price) + ((extraPerson + extraChild) / noOfNights);
+              console.log('taxamount is',totalPrice)
+          // let totalPrice = Number(element2.price) + Number((this.extraPersonChargee) + Number(this.extraChildChargee) / (this.booking.noOfNights));
+                  if(totalPrice <= 7500){
+                    this.taxAmount = ((totalPrice) * 12) / 100;
+                    this.taxArray.push(this.taxAmount);
+                  }
+
+                  if(totalPrice > 7501){
+                    this.taxAmount = ((totalPrice) * 18) / 100;
+                    this.taxArray.push(this.taxAmount);
+                  }
+
+
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
@@ -3566,11 +3616,32 @@ clicked(){
           }
         }
       );
-      // this.getTaxAmount();
+      this.getTotalTaxFee();
+  }
+
+   getTotalTaxFee(): number {
+    let url = new URL(this.googleUrl);
+    let params = new URLSearchParams(url.search);
+
+    // Get the taxAmount value if it exists
+    let taxAmount = params.get('taxAmount');
+    let totaltax: number;
+
+    if (taxAmount !== null && this.isSuccess === false) {
+      totaltax = Number(taxAmount);
+    } else {
+      if (!this.taxArray || !this.taxArray.length) return 0;
+      totaltax = this.taxArray.reduce((acc, curr) => acc + Number(curr || 0), 0);
+    }
+
+    this.token.saveAllTaxAray(totaltax);
+
+    return totaltax;
   }
 
   landingTaxAmount(){
     this.allTaxAmount = true;
+    this.token.clearLandingPrice();
   }
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
@@ -3655,7 +3726,6 @@ clicked(){
 
     this.token.saveProperty(this.businessUser);
     this.token.saveBookingData(this.booking);
-
   }
 
   validateNoOfrooms(event: number, no) {
