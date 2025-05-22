@@ -1147,8 +1147,8 @@ if (this.city != null && this.city != undefined) {
     }, 3000);
     // this.adults = this.adults;
     // this.checkingAvailability();
+    //  this.getTotalTaxFee();
   }
-
 
 
   fetchAndProcessRoomsData() {
@@ -1498,6 +1498,7 @@ if (this.city != null && this.city != undefined) {
         behavior: 'smooth'
       });
     }, 100);
+     this.getTotalTaxFee();
    }
 
   backClicked() {
@@ -3625,9 +3626,10 @@ clicked(){
 
     // Get the taxAmount value if it exists
     let taxAmount = params.get('taxAmount');
+    console.log('taxamount is',taxAmount);
     let totaltax: number;
 
-    if (taxAmount !== null && this.isSuccess === false) {
+    if (taxAmount !== null && this.allTaxAmount === false) {
       totaltax = Number(taxAmount);
     } else {
       if (!this.taxArray || !this.taxArray.length) return 0;
@@ -3642,6 +3644,7 @@ clicked(){
   landingTaxAmount(){
     this.allTaxAmount = true;
     this.token.clearLandingPrice();
+    this.getTotalTaxFee();
   }
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
