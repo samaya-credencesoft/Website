@@ -1,31 +1,39 @@
-name: Booking Engine Release india prod (only build)
-
+name: Release India Prod
 on: [workflow_dispatch]
 
 env:
-  # service info
+  # build
   IMAGE_NAME: booking-engine
-  SERVICE_NAME: booking_engine
-
-  # cluster info
-  stack_name: bookone_core
-  IDENTITY_POOL_NAME: release
-  GCP_SERVICE_ACCOUNT: build-manager@bookone-445706.iam.gserviceaccount.com
-  PROVIDER_NAME: github-provider
-
-  # environment info
-  REGION: asia-south1
+  
+  GCP_REGION: asia-south1
   GCP_PROJECT: bookone-445706
   GCP_PROJECT_NUMBER: 876146436140
 
+  GCP_IDENTITY_POOL_NAME: release
+  GCP_IDENTITY_PROVIDER_NAME: github-provider
+  GCP_SERVICE_ACCOUNT: build-manager@bookone-445706.iam.gserviceaccount.com
+  
+
+  # deployment
+  NAMESPACE: NNN
+  SERVICE_NAME: booking-engine
+  
+  AWS_ROLE: arn:aws:iam::153432822124:role/bookone-prod-deployment-role
+  AWS_REGION: ap-south-1
+  # AWS_SECRET: bookone_prod_deployment_credentials
 
   BRANCH: release-india-prod-bookine-engine
 
-
+  CLOUDFRONT_DIST_ID: E2SNHJK2QY5BJC
+  
   # generated do not touch
-  # IDENTITY_PROVIDER: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.IDENTITY_POOL_NAME }}/providers/${PROVIDER_NAME}
-  # CONTAINER_REGISTRY: ${{ env.REGION }}-docker.pkg.dev
-  # IMAGE_URI: ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.IMAGE_NAME }}/release
+  # IDENTITY_PROVIDER: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.GCP_IDENTITY_POOL_NAME }}/providers/${GCP_IDENTITY_PROVIDER_NAME}
+  # CONTAINER_REGISTRY: ${{ env.GCP_REGION }}-docker.pkg.dev
+  # IMAGE_URI: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.IMAGE_NAME }}/release
+  # depl_username: aa
+  # depl_password: aa
+  # depl_url: aa
+
 
 permissions:
   contents: read
@@ -33,27 +41,50 @@ permissions:
 
 jobs:
   build:
-    name: build
+    name: Build
     runs-on: ubuntu-latest
+    outputs:
+      IDENTITY_PROVIDER: ${{ steps.set-env-vars.outputs.IDENTITY_PROVIDER }}
+      IMAGE_URI: ${{ steps.set-env-vars.outputs.IMAGE_URI }}
+      COMMIT_ID: ${{ steps.set-env-vars.outputs.COMMIT_ID }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.BRANCH }}
+          fetch-depth: 1
+  
       - name: Generate Derived Environment Variables
         id: set-env-vars
         run: |
-          echo "IDENTITY_PROVIDER=projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${IDENTITY_POOL_NAME}/providers/${PROVIDER_NAME}" >> $GITHUB_ENV
-          echo "CONTAINER_REGISTRY=${REGION}-docker.pkg.dev" >> $GITHUB_ENV
-          echo "IMAGE_URI=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${IMAGE_NAME}/release" >> $GITHUB_ENV
+          # echo "IDENTITY_PROVIDER=projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_IDENTITY_POOL_NAME}/providers/${GCP_IDENTITY_PROVIDER_NAME}" >> $GITHUB_ENV
+          # echo "CONTAINER_REGISTRY=${GCP_REGION}-docker.pkg.dev" >> $GITHUB_ENV
+          # echo "IMAGE_URI=${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT}/${IMAGE_NAME}/release" >> $GITHUB_ENV
+          # echo "COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+          IDENTITY_PROVIDER="projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_IDENTITY_POOL_NAME}/providers/${GCP_IDENTITY_PROVIDER_NAME}"
+          CONTAINER_REGISTRY="${GCP_REGION}-docker.pkg.dev"
+          IMAGE_URI="${CONTAINER_REGISTRY}/${GCP_PROJECT}/${IMAGE_NAME}/release"
+          COMMIT_ID=$(git rev-parse --short HEAD)
+      
+          echo "IDENTITY_PROVIDER=$IDENTITY_PROVIDER" >> $GITHUB_ENV
+          echo "CONTAINER_REGISTRY=$CONTAINER_REGISTRY" >> $GITHUB_ENV
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+          echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_ENV
+      
+          echo "IDENTITY_PROVIDER=$IDENTITY_PROVIDER" >> $GITHUB_OUTPUT
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
+          echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_OUTPUT
+
 
       - name: Verify Environment Variables
         run: |
           echo "IDENTITY_PROVIDER: $IDENTITY_PROVIDER"
           echo "CONTAINER_REGISTRY: $CONTAINER_REGISTRY"
           echo "IMAGE_URI: $IMAGE_URI"
+          echo "COMMIT_ID: $COMMIT_ID"
 
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.BRANCH }}
 
       - name: Authenticate to Google Cloud
         id: auth
@@ -66,118 +97,50 @@ jobs:
         run: |
           yes | gcloud auth configure-docker asia-south1-docker.pkg.dev
 
+
       - name: Build Container Image
         id: build-container-image
         run: |
-          docker build -t ${{ env.IMAGE_URI }}:latest .
+          docker build -t ${{ env.IMAGE_URI }}:latest -t ${{ env.IMAGE_URI }}:${{ env.COMMIT_ID }} .
 
       - name: Push Container Image to Registry
         id: upload-container-image
         run: |
           docker push ${{ env.IMAGE_URI }}:latest
+          docker push ${{ env.IMAGE_URI }}:${{ env.COMMIT_ID }}
 
 
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ needs.build.outputs.IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
 
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image=${{ needs.build.outputs.IMAGE_URI }}:${{ needs.build.outputs.COMMIT_ID }} \
+            --region=${{ env.GCP_REGION }} \
+            --project=${{ env.GCP_PROJECT }} \
+            --platform=managed \
+            --quiet
 
+  invalidate:
+    needs: deploy
+    name: Invalidate
+    runs-on: ubuntu-latest
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}
+          aws-region: ${{ env.AWS_REGION }}
 
-
-
-
-
-
-
-
-
-
-
-# name: Release Booking Engine India Prod
-
-# on: [workflow_dispatch]
-
-# env:
-#   ECR_REPOSITORY: 912195358089.dkr.ecr.ap-south-1.amazonaws.com/booking_engine
-#   service_name: booking_engine
-#   depl_cluster_name: webui
-
-#   AWS_ROLE: arn:aws:iam::912195358089:role/webui-india_prod-deployment-role
-#   AWS_REGION: ap-south-1
-#   deployment_variables: webui_india_prod_deployment_api_credentials
-
-#   BRANCH: release-india-prod-bookine-engine
-#   depl_username: aa
-#   depl_password: aa
-#   depl_url: aa
-
-# permissions:
-#   contents: read
-#   id-token: write
-
-# jobs:
-#   build:
-#     name: build
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
-#         with:
-#           ref: ${{ env.BRANCH }}
-
-#       - name: configure aws credentials
-#         uses: aws-actions/configure-aws-credentials@v3
-#         with:
-#           role-to-assume: ${{ env.AWS_ROLE }}
-#           aws-region: ${{ env.AWS_REGION }}
-
-#       - name: Login to Amazon ECR
-#         id: login-ecr
-#         uses: aws-actions/amazon-ecr-login@v1
-
-#       - name: Build Container Image
-#         id: build-conatainer-image
-#         run: |
-#           docker build -t $ECR_REPOSITORY:latest .
-
-#       - name: Push Container Image to ECR
-#         id: upload-conatainer-image
-#         run: |
-#           docker push $ECR_REPOSITORY:latest
-
-#   deploy:
-#     needs: build
-#     name: deploy
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: configure aws credentials
-#         uses: aws-actions/configure-aws-credentials@v3
-#         with:
-#           role-to-assume: ${{ env.AWS_ROLE }}
-#           aws-region: ${{ env.AWS_REGION }}
-
-#       - name: Fetch deployment credentials from aws secrets
-#         uses: aws-actions/aws-secretsmanager-get-secrets@v2
-#         with:
-#           secret-ids: ${{ env.deployment_variables }}
-#           parse-json-secrets: true
-#           name-transformation: none
-
-#       - name: Set environment variables
-#         run: |
-#           username_var="${deployment_variables}_username"
-#           password_var="${deployment_variables}_password"
-#           url_var="${deployment_variables}_url"
-
-#           echo "depl_username=${!username_var}" >> $GITHUB_ENV
-#           echo "depl_password=${!password_var}" >> $GITHUB_ENV
-#           echo "depl_url=${!url_var}" >> $GITHUB_ENV
-
-#       - name: deploy
-#         id: deploy
-#         run: |
-#           response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -u "$depl_username:$depl_password" -d "service_to_update=$service_name" "$depl_url/job/$depl_cluster_name/buildWithParameters")
-#           if [ "$response" -eq 201 ]; then
-#             echo "Success! The response code is $response."
-#           else
-#             echo "Failed! The response code is $response."
-#             exit 1
-#           fi
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DIST_ID }} --paths "/*"
