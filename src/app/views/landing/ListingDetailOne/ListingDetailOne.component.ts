@@ -3499,7 +3499,6 @@ clicked(){
           let noOfNights = Number(this.booking.noOfNights);
 
           let totalPrice = Number(element2.price) + ((extraPerson + extraChild) / noOfNights);
-              console.log('taxamount is',totalPrice)
           // let totalPrice = Number(element2.price) + Number((this.extraPersonChargee) + Number(this.extraChildChargee) / (this.booking.noOfNights));
                   if(totalPrice <= 7500){
                     this.taxAmount = ((totalPrice) * 12) / 100;

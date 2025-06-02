@@ -1184,7 +1184,15 @@
 
                               </div>
 
+                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold;margin-top:35px;">
+                                <div class="mt-2" [innerHTML]="room.description">
+                                </div>
+                              </div>
 
+                              <div *ngIf="room.description" class=" col-12 mobile-one" style="font-weight: bold;">
+                                <div class="mt-2" [innerHTML]="room.description">
+                                </div>
+                              </div>
 
 
                             </div>
@@ -3709,8 +3717,16 @@
                                     BOOK</button>
                                 </div>
 
-
                               </div>
+                              <div *ngIf="room.description" class="desktopone" style="font-weight: bold; margin-top:35px;">
+                              <div class="mt-2" [innerHTML]="room.description">
+                              </div>
+                            </div>
+
+                            <div *ngIf="room.description" class="mobile-one" style="font-weight: bold;">
+                              <div class="mt-2" [innerHTML]="room.description">
+                              </div>
+                            </div>
                             </div>
                           </div>
                         </div>
