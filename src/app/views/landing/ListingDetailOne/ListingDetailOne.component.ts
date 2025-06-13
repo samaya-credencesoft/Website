@@ -2489,7 +2489,10 @@ this.isHeaderVisible = true;
       .getOfferListFindBySeoFriendlyName(seo)
       .subscribe((data) => {
         this.offersList = data.body;
-        this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
+         const filteredOffers = data.body.filter(
+        (offer) => offer.promotionAppliedFor !== 'Private'
+      );
+        this.showAllTheOfferList = this.checkValidCouponOrNot(filteredOffers);
     });
   }
 
@@ -3623,7 +3626,6 @@ clicked(){
 
     // Get the taxAmount value if it exists
     let taxAmount = params.get('taxAmount');
-    console.log('taxamount is',taxAmount);
     let totaltax: number;
 
     if (taxAmount !== null && this.allTaxAmount === false) {
