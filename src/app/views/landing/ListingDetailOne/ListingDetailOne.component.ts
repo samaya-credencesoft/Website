@@ -2520,7 +2520,8 @@ this.isHeaderVisible = true;
         (offer) => offer.promotionAppliedFor !== 'Private'
       );
 
-       this.showAllTheOfferList.push(publicOffers);
+      //  this.showAllTheOfferList.push(publicOffers);
+       this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
       // // Filter private offers (where user must enter the coupon)
       // const privateOffers = allOffers.filter(
       //   (offer) => offer.promotionAppliedFor === 'Private'
