@@ -810,7 +810,7 @@
 
                  <li style="margin-left: auto;">
                    <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
-                   <label for="" style="padding-top: 0px !important; cursor: pointer;">Choose Your Private Coupon</label>
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
                    </div>
                 </li>
 
@@ -3038,6 +3038,23 @@
             style="color: #484848; text-decoration: underline; font-weight: bold;">
             <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
       </li>
+
+         <li style="margin-left: auto;">
+                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
+                   </div>
+                </li>
+
+
+                <div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
+  </div>
+  <!-- <button (click)="closePopup()">Close</button> -->
+    <div class="popup-buttons">
+      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
+    </div>
+</div>
 
       <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
