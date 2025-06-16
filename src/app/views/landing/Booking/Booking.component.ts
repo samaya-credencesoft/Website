@@ -248,6 +248,7 @@ export class BookingComponent implements OnInit {
   otaPlanPrice: any;
   OtaPlanAllPrice: number;
   otaTaxAmount: any;
+  validCoupons: any[];
 
   constructor(
     private token: TokenStorage,
@@ -655,8 +656,8 @@ export class BookingComponent implements OnInit {
       .getOfferDetailsBySeoFriendlyName(this.businessUser.seoFriendlyName)
       .subscribe((data) => {
         this.businessOfferDto = data.body;
-        this.promocodeListChip = this.checkValidCouponOrNot(data.body);
-
+        this.validCoupons = this.checkValidCouponOrNot(data.body);
+         this.promocodeListChip = this.validCoupons.filter(coupon => coupon.promotionAppliedFor !== 'Private');
       });
   }
   // Used For handled to check coupons are valid ot not.

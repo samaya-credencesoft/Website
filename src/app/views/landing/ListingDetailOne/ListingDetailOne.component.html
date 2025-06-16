@@ -571,14 +571,14 @@
       </div>
     </div>
 
-    <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The coupon code will take effect on the next page*
     </span>
 
-    <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount <= selectedPromotionCouponData?.minimumOrderAmount))"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;">
@@ -808,23 +808,36 @@
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
 
-            <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
-                  style="color: #484848; text-decoration: underline; font-weight: bold;">
-                  <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
-            </li> -->
-
-            <!-- <li class="property-number-sectiontwo"><a href="tel:07965201321"><span style="color: #484848; text-decoration: underline; font-weight: bold;">
-                <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">07965201321</span></a>
-              </li> -->
-
-            <!-- <li class="property-number-sectionthree" style="margin-top: -2px;"><a [href]="getWhatsappShareUrl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
-                <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."></span></a> -->
-            <!-- +91-9082741973 -->
-            <!-- </li> -->
+                <div class="input-box" (click)="privtePromotion()"
+                  style="padding-top: 7px !important; ">
+                  <label for="" style="margin-bottom:0px!important">Click Here</label>
+                </div>
           </ul>
         </div>
       </div>
     </div>
+
+    <!-- <div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+   <input type="text" placeholder="Enter coupon code here">
+    <p>This is the valid email.</p>
+   <div class="button-group">
+      <button (click)="onYes()">Yes</button>
+      <button (click)="onNo()">No</button>
+      <button (click)="closePopup()">Close</button>
+    </div>
+  </div>
+</div> -->
+
+<div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
+  </div>
+  <!-- <button (click)="closePopup()">Close</button> -->
+    <div class="popup-buttons">
+      <button (click)="onYesClick(privateOffers)">Verify the code.</button>
+    </div>
+</div>
 
     <div class="container" style="max-width: 1500px !important;">
       <div class="row mr-0 ml-0">
@@ -4934,16 +4947,16 @@ padding-right: 10px;
     </div>
 
     <!-- Add on service end -->
-    <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The coupon code will take effect on the next page*
     </span>
 
 
 
-    <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount <= selectedPromotionCouponData?.minimumOrderAmount))"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <!-- review section button starts -->
