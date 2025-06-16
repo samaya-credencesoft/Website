@@ -808,36 +808,34 @@
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
 
-                <div class="input-box" (click)="privtePromotion()"
-                  style="padding-top: 7px !important; ">
-                  <label for="" style="margin-bottom:0px!important">Click Here</label>
-                </div>
-          </ul>
-        </div>
-      </div>
-    </div>
+                 <li style="margin-left: auto;">
+                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;">Choose Your Private Coupon</label>
+                   </div>
+                </li>
 
-    <!-- <div *ngIf="isPopupOpen" class="popup-overlay">
-  <div class="popup-content">
-   <input type="text" placeholder="Enter coupon code here">
-    <p>This is the valid email.</p>
-   <div class="button-group">
-      <button (click)="onYes()">Yes</button>
-      <button (click)="onNo()">No</button>
-      <button (click)="closePopup()">Close</button>
-    </div>
-  </div>
-</div> -->
-
-<div *ngIf="isPopupOpen" class="popup-overlay">
+                <div *ngIf="isPopupOpen" class="popup-overlay">
   <div class="popup-content">
   <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
   </div>
   <!-- <button (click)="closePopup()">Close</button> -->
     <div class="popup-buttons">
-      <button (click)="onYesClick(privateOffers)">Verify the code.</button>
+      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
     </div>
 </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<!-- <div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
+  </div>
+    <div class="popup-buttons">
+      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
+    </div>
+</div> -->
 
     <div class="container" style="max-width: 1500px !important;">
       <div class="row mr-0 ml-0">

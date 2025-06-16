@@ -3362,6 +3362,7 @@ resetForm(){
     this.fromDate = this.calendar.getToday();
     this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
     this.isPopupOpen = false;
+    this.enteredCoupon = '';
 }
 clicked(){
   this.checkAvailabilityDisabled = true;
