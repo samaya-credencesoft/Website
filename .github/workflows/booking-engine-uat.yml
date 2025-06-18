@@ -77,17 +77,6 @@ jobs:
         run: |
           yes | gcloud auth configure-docker asia-south1-docker.pkg.dev
 
-      - name: Set up JDK 8
-        uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          java-version: "8"
-
-      - name: Generate Java Jar file
-        id: generate-jar-file
-        run: |
-          mvn -U clean package -DskipTests
-
       - name: Build Container Image
         id: build-container-image
         run: |
