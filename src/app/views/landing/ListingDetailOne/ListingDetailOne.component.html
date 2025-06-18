@@ -59,10 +59,10 @@
       style="font-size: 23px;background-color: black;color:white;font-weight: bold;">Booking Summary</button>
   </div>
 
-    <!-- <div class="sticky-button-left ">
+    <div class="sticky-button-left ">
     <button class="btn desktop-view-ui" id="toggleCardPrivate"
-      style="font-size: 23px;background-color: black;color:white;font-weight: bold;">Get Private Coupon</button>
-  </div> -->
+      style="font-size: 23px;background-color: black;color:white;font-weight: bold;" (click)="validateAndCloseCard()">Get Private Coupon</button>
+  </div>
   <div class="sticky-card mobile-view-ui" id="stickyCardone">
     <!-- Date Section -->
     <!-- <div (click)="toggleCard()">
@@ -610,7 +610,7 @@
 
 
 
-    <!-- <div class="sticky-card-left desktop-view-ui" id="stickyPrivate" style=" height: 50vh; overflow-y: scroll;">
+    <div class="sticky-card-left desktop-view-ui" id="stickyPrivate" style=" height: 30vh; overflow-y: scroll;">
     <div style="    display: flex;
      justify-content: end;
      margin-top: -8px;
@@ -623,7 +623,31 @@
       font-size: 14px;
       font-weight: bold;" id="closeCardPrivate">x</button>
     </div>
-  </div> -->
+                <li style="margin-left: auto;">
+                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
+                   </div>
+                </li>
+
+              <div class="popup-overlay">
+                  <div class="popup-content">
+                  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
+                </div>
+                <div class="popup-buttons" id="closeCardPrivateCopuon">
+                   <!-- <button (click)="onYesClick(privateOffers)" [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">
+                       {{ enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon !== validCouponCode ? 'Invalid coupon code' : 'Valid coupon code.' }}
+                   </button> -->
+                   <button
+  (click)="onYesClick(); validateAndCloseCard()"
+  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">
+  {{ enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon !== validCouponCode
+      ? 'Invalid coupon code'
+      : 'Valid coupon code.' }}
+</button>
+
+                </div>
+             </div>
+  </div>
 
 
   <!-- Desktop view design starts -->
@@ -831,7 +855,7 @@
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
 
-                 <li style="margin-left: auto;">
+                 <!-- <li style="margin-left: auto;">
                    <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
                    <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
                    </div>
@@ -841,11 +865,10 @@
   <div class="popup-content">
   <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
   </div>
-  <!-- <button (click)="closePopup()">Close</button> -->
     <div class="popup-buttons">
       <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
     </div>
-</div>
+</div> -->
           </ul>
         </div>
       </div>
@@ -3065,7 +3088,6 @@
   <div class="popup-content">
   <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
   </div>
-  <!-- <button (click)="closePopup()">Close</button> -->
     <div class="popup-buttons">
       <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
     </div>
