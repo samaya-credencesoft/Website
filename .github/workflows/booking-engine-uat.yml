@@ -1,4 +1,4 @@
-name: Release UAT
+name: Release UAT Booking Engine
 
 on: [workflow_dispatch]
 
