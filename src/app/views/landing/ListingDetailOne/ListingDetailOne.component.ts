@@ -1015,10 +1015,24 @@ this.selectedServices =[]
       stickyCard.classList.toggle('show');
     });
 
-    // Close the card when the 'Close' button is clicked
     closeCardBtn.addEventListener('click', function() {
       stickyCard.classList.remove('show');
     });
+
+    const toggleCardPrivate = document.getElementById('toggleCardPrivate');
+    const closeCardPrivate = document.getElementById('closeCardPrivate');
+    const stickyPrivate = document.getElementById('stickyPrivate');
+
+    toggleCardPrivate.addEventListener('click', function() {
+      stickyPrivate.classList.toggle('show');
+    });
+
+     closeCardPrivate.addEventListener('click', function() {
+      stickyPrivate.classList.remove('show');
+    });
+
+    // Close the card when the 'Close' button is clicked
+
     this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
@@ -3011,6 +3025,13 @@ console.log("lkjhgfgh")
     this.viewMoreOne = !this.viewMoreOne;
   }
 
+  scrollToPrivate(){
+    const element = document.getElementById('serv');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = this.businessUser.whatsApp;
@@ -4216,14 +4237,12 @@ clicked(){
 
        if (this.enteredCoupon === this.validCouponCode) {
     this.isValidPrivateCoupon = true;
+     localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+      localStorage.setItem('selectPromo', 'true');
     this.isPopupOpen = false;
   } else {
     // alert('Invalid coupon code. Please try again.');
   }
-
-   localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
-      localStorage.setItem('selectPromo', 'true');
-
 }
 
 

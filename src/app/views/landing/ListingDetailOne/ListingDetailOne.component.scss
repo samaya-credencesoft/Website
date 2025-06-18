@@ -4528,6 +4528,17 @@ font-size: 23px !important;
   z-index: 9999;
 }
 
+.sticky-button-left {
+  position: fixed;
+  top: 40%;
+  left:-210px;
+  font-size: 23px !important;
+  transform: translateY(-50%) rotate(270deg); /* Rotate button vertically */
+  transform-origin: right center;
+  z-index: 9999;
+}
+
+
 .sticky-card {
   position: fixed;
   top: 52%;
@@ -4546,6 +4557,37 @@ font-size: 23px !important;
 .sticky-card.show {
   right: 70px; /* Slides into view */
 }
+
+.sticky-card-left {
+  position: fixed;
+  top: 70%;
+  left:-214px;
+  transform: translateY(-50%);
+  width: 430px;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 9998;
+}
+.sticky-card-left.show {
+  left: 70px; /* Slides into view */
+}
+
+#stickyPrivate {
+  display: none;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+#stickyPrivate.show {
+  display: block;
+  opacity: 1;
+}
+
+
 .rotate {
   transition: transform 0.5s ease;
   transform: rotate(180deg); /* Rotates 180 degrees */
