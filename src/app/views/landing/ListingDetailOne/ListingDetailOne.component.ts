@@ -1019,17 +1019,17 @@ this.selectedServices =[]
       stickyCard.classList.remove('show');
     });
 
-    const toggleCardPrivate = document.getElementById('toggleCardPrivate');
-    const closeCardPrivate = document.getElementById('closeCardPrivate');
-    const stickyPrivate = document.getElementById('stickyPrivate');
+    // const toggleCardPrivate = document.getElementById('toggleCardPrivate');
+    // const closeCardPrivate = document.getElementById('closeCardPrivate');
+    // const stickyPrivate = document.getElementById('stickyPrivate');
 
-    toggleCardPrivate.addEventListener('click', function() {
-      stickyPrivate.classList.toggle('show');
-    });
+    // toggleCardPrivate.addEventListener('click', function() {
+    //   stickyPrivate.classList.toggle('show');
+    // });
 
-     closeCardPrivate.addEventListener('click', function() {
-      stickyPrivate.classList.remove('show');
-    });
+    //  closeCardPrivate.addEventListener('click', function() {
+    //   stickyPrivate.classList.remove('show');
+    // });
 
     // Close the card when the 'Close' button is clicked
 
