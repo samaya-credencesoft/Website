@@ -4235,6 +4235,10 @@ clicked(){
         });
       }
 
+      this.selectedPromotion = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+      localStorage.setItem('selectPromo', 'true');
+
        if (this.enteredCoupon === this.validCouponCode) {
     this.isValidPrivateCoupon = true;
      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
