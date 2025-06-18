@@ -105,6 +105,14 @@ export class ListingDetailOneComponent implements OnInit {
   allTaxAmountPrice: any;
   taxAmount: any;
   landingrice: number;
+  isPopupOpen: boolean = false;
+  enteredCoupon: any;
+  isValidPrivateCoupon: boolean;
+  validCoupon: ' ';
+  validCouponCode: any;
+  privateOffers2: any[];
+  privateOffersMinimumAmount: any;
+  privatePromotionData: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -1008,10 +1016,24 @@ this.selectedServices =[]
       stickyCard.classList.toggle('show');
     });
 
-    // Close the card when the 'Close' button is clicked
     closeCardBtn.addEventListener('click', function() {
       stickyCard.classList.remove('show');
     });
+
+    // const toggleCardPrivate = document.getElementById('toggleCardPrivate');
+    // const closeCardPrivate = document.getElementById('closeCardPrivate');
+    // const stickyPrivate = document.getElementById('stickyPrivate');
+
+    // toggleCardPrivate.addEventListener('click', function() {
+    //   stickyPrivate.classList.toggle('show');
+    // });
+
+    //  closeCardPrivate.addEventListener('click', function() {
+    //   stickyPrivate.classList.remove('show');
+    // });
+
+    // Close the card when the 'Close' button is clicked
+
     this.isReadMore = this.policies.map(() => false);
     window.addEventListener('df-request-sent', (event) => {
       this.propertyusername = this.businessUser.name;
@@ -1885,6 +1907,10 @@ if (this.city != null && this.city != undefined) {
     }
   }
 
+  // privtePromotion(){
+
+  // }
+
   async getPropertyDetailsById(id: number) {
     // debugger
     // this.token.saveBookingEngineBoolean('googlehotelcenter')
@@ -2485,14 +2511,66 @@ this.isHeaderVisible = true;
   }
 
   showAllTheOfferList : any[] = [];
-  getOfferList(seo) {
-    this.offerService
-      .getOfferListFindBySeoFriendlyName(seo)
-      .subscribe((data) => {
-        this.offersList = data.body;
-        this.showAllTheOfferList = this.checkValidCouponOrNot(data.body);
+  // getOfferList(seo) {
+  //   this.offerService
+  //     .getOfferListFindBySeoFriendlyName(seo)
+  //     .subscribe((data) => {
+  //       this.offersList = data.body;
+  //        const filteredOffers = data.body.filter(
+  //       (offer) => offer.promotionAppliedFor !== 'Private'
+  //     );
+  //       this.showAllTheOfferList = this.checkValidCouponOrNot(filteredOffers);
+  //   });
+  // }
+  getOfferList(seo: string) {
+  this.offerService
+    .getOfferListFindBySeoFriendlyName(seo)
+    .subscribe((data) => {
+      // const allOffers = data.body;
+      // this.offersList = allOffers;
+      this.offersList = data.body;
+
+      // // Filter public offers
+      const publicOffers = this.offersList.filter(
+        (offer) => offer.promotionAppliedFor !== 'Private'
+      );
+
+      //  this.showAllTheOfferList.push(publicOffers);
+       this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
+      // // Filter private offers (where user must enter the coupon)
+      // const privateOffers = allOffers.filter(
+      //   (offer) => offer.promotionAppliedFor === 'Private'
+      // );
+
+      // // Check if the entered coupon matches any private offers
+      // const matchedPrivateOffer = privateOffers.find(
+      //   (offer) => offer.couponCode?.toLowerCase() === this.enteredCoupon?.toLowerCase()
+      // );
+
+      // // Combine public offers + matched private offer (if any)
+      // this.showAllTheOfferList = [...publicOffers];
+      // if (matchedPrivateOffer) {
+      //   this.showAllTheOfferList.push(matchedPrivateOffer);
+      // }
     });
-  }
+}
+
+
+  // onYesClick(){
+  //   const hasPrivateOffer = this.offersList?.some(
+  //   (offer) => offer.promotionAppliedFor === 'Private'
+  // );
+  // console.log('hasPrivateOffer is',hasPrivateOffer);
+
+  //  const offerSection = document.getElementById("accmdOne");
+  //     if (offerSection) {
+  //       offerSection.scrollIntoView({
+  //           behavior: "smooth",
+  //           block: "start"
+  //       });
+  //     }
+  //     this.isPopupOpen = false;
+  // }
 
   // Used For handled to check coupons are valid ot not.
 checkValidCouponOrNot(couponList?){
@@ -2948,6 +3026,13 @@ console.log("lkjhgfgh")
     this.viewMoreOne = !this.viewMoreOne;
   }
 
+  scrollToPrivate(){
+    const element = document.getElementById('serv');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   customerwhatsappurl(): string {
     const baseUrl = "https://api.whatsapp.com/send";
     const phoneNumber = this.businessUser.whatsApp;
@@ -3299,6 +3384,8 @@ resetForm(){
     this.rooms = 1;
     this.fromDate = this.calendar.getToday();
     this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 1);
+    this.isPopupOpen = false;
+    this.enteredCoupon = '';
 }
 clicked(){
   this.checkAvailabilityDisabled = true;
@@ -3625,7 +3712,6 @@ clicked(){
 
     // Get the taxAmount value if it exists
     let taxAmount = params.get('taxAmount');
-    console.log('taxamount is',taxAmount);
     let totaltax: number;
 
     if (taxAmount !== null && this.allTaxAmount === false) {
@@ -4114,6 +4200,74 @@ clicked(){
       return `with: ${reason}`;
     }
   }
+
+  //    privtePromotion() {
+  //   this.isPopupOpen = true;
+  // }
+
+  privtePromotion() {
+  this.isPopupOpen = true;
+  this.isValidPrivateCoupon = false; // reset the flag
+
+
+  const privateOffers = this.offersList.filter(
+    (offer) => offer.promotionAppliedFor === 'Private'
+  );
+
+   if (privateOffers.length > 0) {
+     this.validCouponCode = privateOffers[0].couponCode;
+  }
+}
+
+  onYesClick() {
+
+     this.privateOffers2 = this.offersList.filter(
+    (offer) => offer.promotionAppliedFor === 'Private'
+  );
+  this.privateOffers2.forEach(item1=>{
+     this.privatePromotionData = item1;
+     this.privateOffersMinimumAmount = item1.minimumOrderAmount;
+  })
+
+  const offerSection23 = document.getElementById("accmdOne");
+      if (offerSection23) {
+        offerSection23.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+      }
+
+      this.selectedPromotion = true;
+      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+      localStorage.setItem('selectPromo', 'true');
+
+       if (this.enteredCoupon === this.validCouponCode) {
+    this.isValidPrivateCoupon = true;
+     localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+      localStorage.setItem('selectPromo', 'true');
+    this.isPopupOpen = false;
+  } else {
+    // alert('Invalid coupon code. Please try again.');
+  }
+}
+
+
+  onNoClick(){
+    console.log('data is not present');
+    this.isPopupOpen = false;
+  }
+
+  closePopup() {
+    this.isPopupOpen = false;
+  }
+  onYes() {
+   this.isPopupOpen = false;
+}
+
+onNo() {
+   this.isPopupOpen = false;
+}
+
 }
 
 

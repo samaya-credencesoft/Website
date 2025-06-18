@@ -58,6 +58,11 @@
     <button class="btn desktop-view-ui" id="toggleCardBtn"
       style="font-size: 23px;background-color: black;color:white;font-weight: bold;">Booking Summary</button>
   </div>
+
+    <!-- <div class="sticky-button-left ">
+    <button class="btn desktop-view-ui" id="toggleCardPrivate"
+      style="font-size: 23px;background-color: black;color:white;font-weight: bold;">Get Private Coupon</button>
+  </div> -->
   <div class="sticky-card mobile-view-ui" id="stickyCardone">
     <!-- Date Section -->
     <!-- <div (click)="toggleCard()">
@@ -571,14 +576,14 @@
       </div>
     </div>
 
-    <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The coupon code will take effect on the next page*
     </span>
 
-    <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount <= selectedPromotionCouponData?.minimumOrderAmount))"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;">
@@ -602,6 +607,24 @@
     </div>
     <!-- <button class="btn btn-danger" id="closeCardBtn">Close</button> -->
   </div>
+
+
+
+    <!-- <div class="sticky-card-left desktop-view-ui" id="stickyPrivate" style=" height: 50vh; overflow-y: scroll;">
+    <div style="    display: flex;
+     justify-content: end;
+     margin-top: -8px;
+     margin-bottom: 7px;">
+      <button style="    border: 1px solid black;
+      padding: 5px;
+      border-radius: 26px;
+      padding-top: 0;
+      padding-bottom: 0;
+      font-size: 14px;
+      font-weight: bold;" id="closeCardPrivate">x</button>
+    </div>
+  </div> -->
+
 
   <!-- Desktop view design starts -->
   <div class="main-wrapper desktop-view-ui" *ngIf="businessUser != null || businessUser != undefined" style="margin-top: 50px; margin-left: 40px;
@@ -808,23 +831,26 @@
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
 
-            <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
-                  style="color: #484848; text-decoration: underline; font-weight: bold;">
-                  <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
-            </li> -->
+                 <li style="margin-left: auto;">
+                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
+                   </div>
+                </li>
 
-            <!-- <li class="property-number-sectiontwo"><a href="tel:07965201321"><span style="color: #484848; text-decoration: underline; font-weight: bold;">
-                <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">07965201321</span></a>
-              </li> -->
-
-            <!-- <li class="property-number-sectionthree" style="margin-top: -2px;"><a [href]="getWhatsappShareUrl()"> <span style="color: #484848; text-decoration: underline; font-size: 14px;">
-                <img src="assets/images/whatsapp.svg" alt="" height="35px" width="35px" style="object-fit: fill;" title="Click here to chat with Us."></span></a> -->
-            <!-- +91-9082741973 -->
-            <!-- </li> -->
+                <div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
+  </div>
+  <!-- <button (click)="closePopup()">Close</button> -->
+    <div class="popup-buttons">
+      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
+    </div>
+</div>
           </ul>
         </div>
       </div>
     </div>
+
 
     <div class="container" style="max-width: 1500px !important;">
       <div class="row mr-0 ml-0">
@@ -3028,6 +3054,23 @@
             <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
       </li>
 
+         <li style="margin-left: auto;">
+                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
+                   </div>
+                </li>
+
+
+                <div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
+  </div>
+  <!-- <button (click)="closePopup()">Close</button> -->
+    <div class="popup-buttons">
+      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
+    </div>
+</div>
+
       <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
             <img src=" assets/images/phone-dark.png" alt="" height="18px" width="25px">+91-7608935904</span></a>
@@ -4934,16 +4977,16 @@ padding-right: 10px;
     </div>
 
     <!-- Add on service end -->
-    <span *ngIf="selectedPromotion && booking?.netAmount >= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The coupon code will take effect on the next page*
     </span>
 
 
 
-    <span *ngIf="selectedPromotion && booking?.netAmount <= selectedPromotionCouponData.minimumOrderAmount"
+    <span *ngIf="((selectedPromotion && booking?.netAmount <= selectedPromotionCouponData?.minimumOrderAmount))"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <!-- review section button starts -->
