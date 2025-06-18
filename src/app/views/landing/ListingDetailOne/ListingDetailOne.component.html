@@ -629,7 +629,7 @@
                    </div>
                 </li>
 
-              <div class="popup-overlay">
+              <div *ngIf="isPopupOpen" class="popup-overlay">
                   <div class="popup-content">
                   <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
                 </div>
