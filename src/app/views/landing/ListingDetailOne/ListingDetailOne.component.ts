@@ -115,6 +115,7 @@ export class ListingDetailOneComponent implements OnInit {
   privatePromotionData: any;
   isCardVisible: boolean;
   couponApplied: boolean;
+  couponSuccessApplied: boolean = false;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -742,6 +743,8 @@ export class ListingDetailOneComponent implements OnInit {
   taxArray: any[];
   allExtraPersonCharge: any;
   allExtraChildCharge: number;
+  successMessagePrivate = ' ';
+
 
   constructor(
     private listingService: ListingService,
@@ -4223,38 +4226,73 @@ clicked(){
   }
 }
 
-  onYesClick() {
+//   onYesClick() {
 
-     this.privateOffers2 = this.offersList.filter(
+//      this.privateOffers2 = this.offersList.filter(
+//     (offer) => offer.promotionAppliedFor === 'Private'
+//   );
+//   this.privateOffers2.forEach(item1=>{
+//      this.privatePromotionData = item1;
+//      this.privateOffersMinimumAmount = item1.minimumOrderAmount;
+//   })
+//   this.successMessagePrivate = 'Coupon applied successfully!';
+
+//   const offerSection23 = document.getElementById("accmdOne");
+//       if (offerSection23) {
+//         offerSection23.scrollIntoView({
+//             behavior: "smooth",
+//             block: "start"
+//         });
+//       }
+
+//       this.selectedPromotion = true;
+//       localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+//       localStorage.setItem('selectPromo', 'true');
+
+//        if (this.enteredCoupon === this.validCouponCode) {
+//     this.isValidPrivateCoupon = true;
+//       this.couponApplied = true;
+//      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+//       localStorage.setItem('selectPromo', 'true');
+//     this.isPopupOpen = false;
+//   } else {
+//     // alert('Invalid coupon code. Please try again.');
+//   }
+//   this.isPopupOpen = false;
+// }
+
+onYesClick() {
+  this.privateOffers2 = this.offersList.filter(
     (offer) => offer.promotionAppliedFor === 'Private'
   );
-  this.privateOffers2.forEach(item1=>{
-     this.privatePromotionData = item1;
-     this.privateOffersMinimumAmount = item1.minimumOrderAmount;
-  })
 
-  const offerSection23 = document.getElementById("accmdOne");
+  this.privateOffers2.forEach(item1 => {
+    this.privatePromotionData = item1;
+    this.privateOffersMinimumAmount = item1.minimumOrderAmount;
+  });
+
+  if (this.enteredCoupon.trim().toUpperCase() === this.validCouponCode.toUpperCase()) {
+    this.successMessagePrivate = 'Applied';
+    this.selectedPromotion = true;
+    this.isValidPrivateCoupon = true;
+    this.couponApplied = true;
+    this.couponSuccessApplied = true;
+
+    localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+    localStorage.setItem('selectPromo', 'true');
+
+    // Optional: delay scroll and close
+    setTimeout(() => {
+      this.isPopupOpen = false;
+      const offerSection23 = document.getElementById("accmdOne");
       if (offerSection23) {
         offerSection23.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+          behavior: "smooth",
+          block: "start"
         });
       }
-
-      this.selectedPromotion = true;
-      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
-      localStorage.setItem('selectPromo', 'true');
-
-       if (this.enteredCoupon === this.validCouponCode) {
-    this.isValidPrivateCoupon = true;
-      this.couponApplied = true;
-     localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
-      localStorage.setItem('selectPromo', 'true');
-    this.isPopupOpen = false;
-  } else {
-    // alert('Invalid coupon code. Please try again.');
+    }, 1500);
   }
-  this.isPopupOpen = false;
 }
 
 validateAndCloseCard(){
@@ -4265,6 +4303,10 @@ validateAndCloseCard(){
       card.style.display = 'none'; // hide the card
     }
   }
+}
+
+clearEnteredCoupon(){
+  this.enteredCoupon = ' ';
 }
 
 

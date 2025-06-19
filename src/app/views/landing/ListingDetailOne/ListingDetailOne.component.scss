@@ -4528,15 +4528,100 @@ font-size: 23px !important;
   z-index: 9999;
 }
 
+// .sticky-button-left {
+//   position: fixed;
+//   top: 60%;
+//   left:-210px;
+//   font-size: 23px !important;
+//   transform: translateY(-50%) rotate(270deg); /* Rotate button vertically */
+//   transform-origin: right center;
+//   z-index: 9999;
+// }
+/* Sticky Button Left */
 .sticky-button-left {
   position: fixed;
   top: 60%;
-  left:-210px;
-  font-size: 23px !important;
-  transform: translateY(-50%) rotate(270deg); /* Rotate button vertically */
+  left: -210px;
+  transform: translateY(-50%) rotate(270deg);
   transform-origin: right center;
   z-index: 9999;
 }
+
+/* CSS Styles */
+.apply-btn {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+}
+
+.disabled-btn {
+  background-color: gray !important;
+  pointer-events: none; /* optional: to block clicking */
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50; /* green background */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  z-index: 1000;
+}
+
+
+/* Popup Styles */
+.coupon-popup {
+  position: fixed;
+  top: 15px !important;
+  left: 10px;
+  width: 40%;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9998;
+  animation: slideDown 0.5s forwards !important;
+}
+
+/* Slide animation */
+@keyframes slideDown {
+  to {
+    top: 0;
+  }
+}
+
+.coupon-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.coupon-content input {
+  padding: 10px;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.popup-buttons button {
+  margin: 5px;
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.popup-buttons .close-btn {
+  background-color: red;
+}
+
 
 
 .sticky-card {
