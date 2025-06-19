@@ -4270,7 +4270,7 @@ onYesClick() {
   });
 
   if (this.enteredCoupon.trim().toUpperCase() === this.validCouponCode.toUpperCase()) {
-    this.successMessagePrivate = 'Coupon applied successfully!';
+    this.successMessagePrivate = 'Applied';
     this.selectedPromotion = true;
     this.isValidPrivateCoupon = true;
     this.couponApplied = true;
@@ -4301,6 +4301,10 @@ validateAndCloseCard(){
       card.style.display = 'none'; // hide the card
     }
   }
+}
+
+clearEnteredCoupon(){
+  this.enteredCoupon = ' ';
 }
 
 

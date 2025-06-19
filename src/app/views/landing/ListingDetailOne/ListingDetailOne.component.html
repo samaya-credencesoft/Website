@@ -72,51 +72,39 @@
   </button>
 </div>
 
-<!-- Slide-in Coupon Popup -->
-<!-- <div class="coupon-popup" *ngIf="isPopupOpen">
-  <div class="coupon-content">
-    <h3>Apply Your Coupon</h3>
-    <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code">
-    <div class="popup-buttons">
-      <button (click)="onYesClick()">Apply</button>
-      <button class="close-btn" (click)="closePopup()">Close</button>
-    </div>
-  </div>
-</div> -->
 <div class="coupon-popup" *ngIf="isPopupOpen">
   <div class="coupon-content">
     <h3>Apply Your Coupon</h3>
     <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code" />
 
-    <!-- Invalid Message -->
-    <div style="margin-top: 10px; color: red;"
+       <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"
+            style="margin-left: 10px; color: green; font-size: 20px;">
+        ✔
+      </span>
+
+      <!-- Cross Icon -->
+      <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
+        (click)="clearEnteredCoupon()"
+            style="margin-left: 10px; color: red; font-size: 20px;">
+        ✖
+      </span>
+
+    <!-- <div style="margin-top: 10px; color: red;"
          *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()">
       Invalid coupon code
     </div>
 
-    <!-- Valid Message -->
     <div style="margin-top: 10px; color: green;"
          *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()">
       Valid coupon code.
-    </div>
+    </div> -->
 
-    <div style="margin-top: 10px; color: blue;"
+    <!-- <div style="margin-top: 10px; color: blue;"
      *ngIf="couponSuccessApplied">
   {{ successMessagePrivate }}
-</div>
+</div> -->
 
     <div class="popup-buttons">
-    <!-- <button
-  (click)="onYesClick()"
-  [disabled]="!enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
-  [style.backgroundColor]="
-    !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
-      ? 'gray'
-      : 'black'"
-  [style.color]="'white'"
->
-  Apply
-</button> -->
 <button
   (click)="onYesClick()"
   [ngClass]="{
@@ -124,11 +112,8 @@
     'disabled-btn': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
   }"
 >
-  Apply
+    {{ couponSuccessApplied ? 'Applied' : 'Apply' }}
 </button>
-
-
-
       <button class="close-btn" (click)="closePopup()">Close</button>
     </div>
   </div>
