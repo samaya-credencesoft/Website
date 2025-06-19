@@ -4554,6 +4554,21 @@ font-size: 23px !important;
   z-index: 9998;
 }
 
+.success-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 18px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
 .sticky-card.show {
   right: 70px; /* Slides into view */
 }

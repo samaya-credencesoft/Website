@@ -114,6 +114,7 @@ export class ListingDetailOneComponent implements OnInit {
   privateOffersMinimumAmount: any;
   privatePromotionData: any;
   isCardVisible: boolean;
+  couponApplied: boolean;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -4244,6 +4245,7 @@ clicked(){
 
        if (this.enteredCoupon === this.validCouponCode) {
     this.isValidPrivateCoupon = true;
+      this.couponApplied = true;
      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
       localStorage.setItem('selectPromo', 'true');
     this.isPopupOpen = false;
