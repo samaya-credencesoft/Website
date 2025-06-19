@@ -61,7 +61,7 @@
 
     <div class="sticky-button-left ">
     <button class="btn desktop-view-ui" id="toggleCardPrivate"
-      style="font-size: 23px;background-color: black;color:white;font-weight: bold;" (click)="validateAndCloseCard()">Get Private Coupon</button>
+      style="font-size: 23px;background-color: black;color:white;font-weight: bold;" (click)="validateAndCloseCard() ; isCardVisible = true ; isPopupOpen = true ; privtePromotion()">Get Private Coupon</button>
   </div>
   <div class="sticky-card mobile-view-ui" id="stickyCardone">
     <!-- Date Section -->
@@ -611,42 +611,68 @@
 
 
     <div class="sticky-card-left desktop-view-ui" id="stickyPrivate" style=" height: 30vh; overflow-y: scroll;">
-    <div style="    display: flex;
-     justify-content: end;
-     margin-top: -8px;
-     margin-bottom: 7px;">
-      <button style="    border: 1px solid black;
-      padding: 5px;
-      border-radius: 26px;
-      padding-top: 0;
-      padding-bottom: 0;
-      font-size: 14px;
-      font-weight: bold;" id="closeCardPrivate">x</button>
-    </div>
+            <div style="    display: flex;
+                      justify-content: end;
+                      margin-top: -8px;
+                      margin-bottom: 7px;">
+                 <button style="    border: 1px solid black;
+                   padding: 5px;
+                   border-radius: 26px;
+                   padding-top: 0;
+                   padding-bottom: 0;
+                   font-size: 14px;
+                   font-weight: bold;" id="closeCardPrivate">x</button>
+             </div>
                 <li style="margin-left: auto;">
-                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
-                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
+                   <div class="input-box" style="padding-top: 0px !important;">
+                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your Private Coupon</label>
                    </div>
                 </li>
-
+<!--
               <div *ngIf="isPopupOpen" class="popup-overlay">
                   <div class="popup-content">
                   <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
                 </div>
                 <div class="popup-buttons" id="closeCardPrivateCopuon">
-                   <!-- <button (click)="onYesClick(privateOffers)" [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">
-                       {{ enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon !== validCouponCode ? 'Invalid coupon code' : 'Valid coupon code.' }}
-                   </button> -->
+
                    <button
-  (click)="onYesClick(); validateAndCloseCard()"
-  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">
-  {{ enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon !== validCouponCode
-      ? 'Invalid coupon code'
-      : 'Valid coupon code.' }}
-</button>
+                     (click)="onYesClick(); validateAndCloseCard()"
+                     [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">
+                     {{ enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon !== validCouponCode
+                         ? 'Invalid coupon code'
+                         : 'Valid coupon code.' }}
+                  </button>
 
                 </div>
-             </div>
+             </div> -->
+             <div *ngIf="isPopupOpen" class="popup-overlay">
+  <div class="popup-content">
+    <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here">
+  </div>
+  <div class="popup-buttons" id="closeCardPrivateCopuon">
+
+    <!-- Validation message -->
+    <div style="margin-top: 10px; color: red;" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon !== validCouponCode">
+      Invalid coupon code
+    </div>
+    <div style="margin-top: 10px; color: green;" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon === validCouponCode">
+      Valid coupon code.
+    </div>
+
+    <!-- Apply button -->
+    <button
+      style="margin-top: 10px;"
+      (click)="onYesClick(); validateAndCloseCard()"
+      [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">
+      Apply
+    </button>
+
+<div *ngIf="couponApplied" class="success-banner">
+  Coupon applied successfully!
+</div>
+  </div>
+</div>
+
   </div>
 
 
