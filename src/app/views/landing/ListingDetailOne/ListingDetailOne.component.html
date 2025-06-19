@@ -100,6 +100,11 @@
       Valid coupon code.
     </div>
 
+    <div style="margin-top: 10px; color: blue;"
+     *ngIf="couponSuccessApplied">
+  {{ successMessagePrivate }}
+</div>
+
     <div class="popup-buttons">
     <!-- <button
   (click)="onYesClick()"
@@ -128,7 +133,6 @@
     </div>
   </div>
 </div>
-
 
 
 
