@@ -357,10 +357,16 @@
             <!-- Add more rows dynamically based on your data -->
             <tr>
               <td class="p-1" style="color: black !important;">Total Net Amount :</td>
-              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+              <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+                {{
+              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+              | currency: currency:"symbol":"1.2-2"
+               }}
+                <!-- {{
                 booking.netAmount
                 | currency: currency:"symbol":"1.2-2"
-                }}</td>
+                }} -->
+                </td>
             </tr>
 
             <tr *ngIf="booking.taxPercentage">
@@ -547,10 +553,16 @@
           </tr>
           <tr>
             <td class="p-1" style="color: black !important;">Total Net Amount :</td>
-            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">{{
+            <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
+              {{
+              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+              | currency: currency:"symbol":"1.2-2"
+            }}
+              <!-- {{
               booking.netAmount
               | currency: currency:"symbol":"1.2-2"
-              }}</td>
+              }} -->
+              </td>
           </tr>
 
           <tr *ngIf="booking.taxPercentage">
