@@ -997,7 +997,6 @@ this.selectedServices =[]
     // //console.log("sdfgh"+this.city)
 
     this.booking.createdDate = new Date();
-
     this.extraPersonChargee = this.token.getExtraPersonCharge();
     this.extraChildChargee = this.token.getChildCharge();
   }
@@ -1659,7 +1658,6 @@ if (this.city != null && this.city != undefined) {
     );
     this.booking.noOfRooms = this.noOfrooms;
     this.booking.noOfPersons = this.adults;
-
     this.token.saveBookingData(this.booking);
 
     this.hotelBookingService
@@ -2763,7 +2761,6 @@ checkValidCouponOrNot(couponList?){
   }
 
   onPlanSelected(plan, room) {
-
     this.availableRooms?.forEach((room) => {
       room.ratesAndAvailabilityDtos?.forEach(ele => {
         ele.roomRatePlans?.forEach(ele1 =>{
@@ -2842,7 +2839,6 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       plan.amount * this.DiffDate * this.noOfrooms +
       this.booking.extraPersonCharge +
       this.booking.extraChildCharge;
-      console.log(" this.booking.netAmount", this.booking.netAmount)
     if (this.businessUser.taxDetails.length > 0) {
       this.businessUser.taxDetails.forEach((element) => {
         if(element.name === 'GST'){
@@ -2960,6 +2956,7 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     document.getElementById("contentOne")?.scrollIntoView();
     Logger.log(JSON.stringify(this.booking));
     Logger.log(JSON.stringify(this.checkAvailabilityStatusHide));
+    this.token.saveBookingData(this.booking);
     this.changeDetectorRefs.detectChanges();
     // this.checkingAvailability1();
   }
@@ -4093,7 +4090,7 @@ clicked(){
 
                  this.booking.roomPrice = this.totalplanPrice;
 
-                 this.booking.netAmount = this.booking.roomPrice * this.noOfrooms +
+                 this.booking.netAmount = this.booking.roomPrice +
                  this.booking.extraPersonCharge +
                  this.booking.extraChildCharge;
                  this.token.saveBookingData(this.booking);
