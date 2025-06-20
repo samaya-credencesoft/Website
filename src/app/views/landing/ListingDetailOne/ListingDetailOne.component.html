@@ -73,50 +73,47 @@
 </div>
 
 <div class="coupon-popup" *ngIf="isPopupOpen">
-  <div class="coupon-content">
-    <h3>Apply Your Coupon</h3>
-    <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code" />
-
-       <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"
-            style="margin-left: 10px; color: green; font-size: 20px;">
-        ✔
-      </span>
-
-      <!-- Cross Icon -->
-      <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
-        (click)="clearEnteredCoupon()"
-            style="margin-left: 10px; color: red; font-size: 20px;">
-        ✖
-      </span>
-
-    <!-- <div style="margin-top: 10px; color: red;"
-         *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()">
-      Invalid coupon code
-    </div>
-
-    <div style="margin-top: 10px; color: green;"
-         *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()">
-      Valid coupon code.
-    </div> -->
-
-    <!-- <div style="margin-top: 10px; color: blue;"
-     *ngIf="couponSuccessApplied">
-  {{ successMessagePrivate }}
-</div> -->
-
-    <div class="popup-buttons">
-<button
-  (click)="onYesClick()"
-  [ngClass]="{
-    'apply-btn': true,
-    'disabled-btn': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
-  }"
->
-    {{ couponSuccessApplied ? 'Applied' : 'Apply' }}
-</button>
-      <button class="close-btn" (click)="closePopup()">Close</button>
+  <!-- If coupon already applied and user clicked "Get Private Coupon" -->
+  <div class="coupon-content" *ngIf="showSuccessContent; else showCouponForm">
+     <span
+      (click)="closePopup()"
+      style="position: absolute; top: 5px; right: 10px; cursor: pointer; font-size: 20px; color: red;"
+      title="Close"
+    >✖</span>
+    <div style="font-size: 24px; color: green;" >Copuon already applied</div>
+     <div class="popup-buttons" style="margin-top: 15px;">
+      <button class="reset-btn" (click)="resetButtonPrivate()">Reset</button>
     </div>
   </div>
+
+  <!-- Coupon form -->
+  <ng-template #showCouponForm>
+    <div class="coupon-content">
+      <h3>Apply Your Coupon</h3>
+      <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code" />
+
+      <!-- ✔ icon -->
+      <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"
+            style="margin-left: 10px; color: green; font-size: 20px;">✔</span>
+
+      <!-- ✖ icon -->
+      <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
+            (click)="clearEnteredCoupon()" style="margin-left: 10px; color: red; font-size: 20px;">✖</span>
+
+      <div class="popup-buttons">
+        <button
+          (click)="onYesClick()"
+          [ngClass]="{
+            'apply-btn': true,
+            'disabled-btn': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
+          }"
+        >
+          {{ couponSuccessApplied ? 'Applied' : 'Apply' }}
+        </button>
+        <button class="close-btn" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </ng-template>
 </div>
 
 
