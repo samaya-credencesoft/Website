@@ -3585,7 +3585,7 @@ clicked(){
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
                 if(element2.otaName ==='GHC'){
-                  this.planPrice.push((element2.price) * this.booking.noOfRooms);
+                  this.planPrice.push(element2.price);
 
 
 
@@ -3605,13 +3605,11 @@ clicked(){
                     this.taxArray.push(this.taxAmount);
                   }
 
+
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
                 );
-                if(this.activeForGoogleHotelCenter === true && element.otaPlanList.length > 0){
-                  this.token.saveLandingPrice(this.totalplanPrice);
-                  }
                 }
                 // //console.log(
                 //   'ota price is equa;' + JSON.stringify(this.planPrice)
@@ -3724,7 +3722,7 @@ clicked(){
     let taxAmount = params.get('taxAmount');
     let totaltax: number;
 
-     if (taxAmount !== null && this.isSuccess === false) {
+    if (taxAmount !== null && this.allTaxAmount === false) {
       totaltax = Number(taxAmount);
     } else {
       if (!this.taxArray || !this.taxArray.length) return 0;
@@ -4084,7 +4082,7 @@ clicked(){
               e.roomRatePlans.forEach((element) => {
                 element.otaPlanList.forEach((element2) => {
                   if(element2.otaName ==='GHC'){
-                  this.planPrice.push((element2.price) * this.booking.noOfRooms);
+                  this.planPrice.push(element2.price);
                   this.totalplanPrice = this.planPrice.reduce(
                     (accumulator, currentValue) => accumulator + currentValue,
                     0
