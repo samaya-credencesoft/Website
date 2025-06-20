@@ -116,6 +116,7 @@ export class ListingDetailOneComponent implements OnInit {
   isCardVisible: boolean;
   couponApplied: boolean;
   couponSuccessApplied: boolean = false;
+  showSuccessContent: boolean = false;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -4303,6 +4304,17 @@ validateAndCloseCard(){
       card.style.display = 'none'; // hide the card
     }
   }
+
+   if (this.couponSuccessApplied) {
+    this.showSuccessContent = true;
+  }
+}
+
+
+resetButtonPrivate(){
+ this.enteredCoupon = '';
+  this.showSuccessContent = false;
+  this.couponSuccessApplied = false;
 }
 
 clearEnteredCoupon(){
