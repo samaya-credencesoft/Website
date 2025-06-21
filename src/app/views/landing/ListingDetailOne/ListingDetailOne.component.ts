@@ -117,6 +117,7 @@ export class ListingDetailOneComponent implements OnInit {
   couponApplied: boolean;
   couponSuccessApplied: boolean = false;
   showSuccessContent: boolean = false;
+  isAfterCheckAvilability: boolean;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -740,7 +741,7 @@ export class ListingDetailOneComponent implements OnInit {
   taxAmountParam: any;
   googleUrl: string;
   extraPersonChargee: any;
-  extraChildChargee: string;
+  extraChildChargee: any;
   taxArray: any[];
   allExtraPersonCharge: any;
   allExtraChildCharge: number;
@@ -988,17 +989,16 @@ this.selectedServices =[]
     this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
     this.token.saveChildCharge(this.allExtraChildCharge);
 
-    let url = new URL(this.googleUrl);
-    let params = new URLSearchParams(url.search);
-
-    // Get the taxAmount value if it exists
-    let taxAmount = params.get('taxAmount');
-    let totaltax: number;
-    // //console.log("sdfgh"+this.city)
 
     this.booking.createdDate = new Date();
     this.extraPersonChargee = this.token.getExtraPersonCharge();
+    if(this.extraPersonChargee === 'NaN' || this.extraPersonChargee === null || this.extraPersonChargee === undefined){
+       this.extraPersonChargee = 0;
+    }
     this.extraChildChargee = this.token.getChildCharge();
+      if(this.extraChildChargee === 'NaN' || this.extraChildChargee === null || this.extraChildChargee === undefined){
+       this.extraChildChargee = 0;
+    }
   }
   blogPosts$: Observable<any> | undefined;
   responsiveOptions: any[];
@@ -1525,7 +1525,6 @@ if (this.city != null && this.city != undefined) {
         behavior: 'smooth'
       });
     }, 100);
-     this.getTotalTaxFee();
    }
 
   backClicked() {
@@ -3401,6 +3400,7 @@ clicked(){
       }
 
     this.isSuccess = true;
+    this.isAfterCheckAvilability = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
 
@@ -3583,9 +3583,20 @@ clicked(){
                   this.planPrice.push((element2.price) * this.booking.noOfRooms);
 
 
+                  let extraPerson = Number(this.extraPersonChargee);
 
-          let extraPerson = Number(this.extraPersonChargee);
-          let extraChild = Number(this.extraChildChargee);
+                  if (isNaN(extraPerson)) {
+                     extraPerson = 0;
+                   }
+
+
+                 let extraChild = Number(this.extraChildChargee);
+
+                if (isNaN(extraChild)) {
+                   extraChild = 0;
+                   }
+
+
           let noOfNights = Number(this.booking.noOfNights);
 
           let totalPrice = Number(element2.price) + ((extraPerson + extraChild) / noOfNights);
@@ -3734,7 +3745,7 @@ clicked(){
   landingTaxAmount(){
     this.allTaxAmount = true;
     this.token.clearLandingPrice();
-    this.getTotalTaxFee();
+    // this.getTotalTaxFee();
   }
   goToEnquiry() {
     this.router.navigate(['/enquiry']);
@@ -3816,7 +3827,8 @@ clicked(){
     this.booking.noOfChildren = this.children;
     // this.booking.netAmount =
     this.changeDetectorRefs.detectChanges();
-
+    this.extraPersonChargee = this.token.getExtraPersonCharge();
+    this.extraChildChargee = this.token.getChildCharge();
     this.token.saveProperty(this.businessUser);
     this.token.saveBookingData(this.booking);
   }
