@@ -876,7 +876,7 @@ public saveSelectedCountry(countryCode: string) {
 //   return localStorage.getItem(ALL_TAXARRAY);
 // }
 
-clearAllTaxArray() {
-  localStorage.removeItem(ALL_TAXARRAY);
-  }
+// clearAllTaxArray() {
+//   localStorage.removeItem(ALL_TAXARRAY);
+//   }
 }
