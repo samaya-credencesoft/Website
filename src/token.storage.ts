@@ -340,10 +340,6 @@ export class TokenStorage {
         return localStorage.getItem(Save_Child_Charge);
       }
 
-      clearAllTaxArray() {
-      localStorage.removeItem(ALL_TAXARRAY);
-      }
-
        public saveLandingPrice(landingrice: any){
     localStorage.removeItem(CHECK_LANDING_PRICE);
     if (landingrice !== null || landingrice !== undefined) {
@@ -880,7 +876,4 @@ public saveSelectedCountry(countryCode: string) {
 //   return localStorage.getItem(ALL_TAXARRAY);
 // }
 
-// clearAllTaxArray() {
-//   localStorage.removeItem(ALL_TAXARRAY);
-//   }
 }
