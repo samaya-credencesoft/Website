@@ -4565,7 +4565,7 @@ font-size: 23px !important;
 }
 
 .private-coupon-button {
-  padding: 4px 15px !important;
+  padding: 4px 13px !important;
   font-size: 16px;
   height: auto;
   align-items: center;
@@ -4601,6 +4601,13 @@ font-size: 23px !important;
     letter-spacing: 0% !important;
     text-align: left;
  }
+
+ .disabled-button {
+  background-color: #ccc !important;
+  color: #666;
+  cursor: not-allowed;
+  border: 1px solid #aaa;
+}
 
 /* CSS Styles */
 .apply-btn {

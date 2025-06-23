@@ -118,6 +118,7 @@ export class ListingDetailOneComponent implements OnInit {
   couponSuccessApplied: boolean = false;
   showSuccessContent: boolean = false;
   isAfterCheckAvilability: boolean;
+  primaryColorProperty: any;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -2558,24 +2559,6 @@ this.isHeaderVisible = true;
     });
 }
 
-
-  // onYesClick(){
-  //   const hasPrivateOffer = this.offersList?.some(
-  //   (offer) => offer.promotionAppliedFor === 'Private'
-  // );
-  // console.log('hasPrivateOffer is',hasPrivateOffer);
-
-  //  const offerSection = document.getElementById("accmdOne");
-  //     if (offerSection) {
-  //       offerSection.scrollIntoView({
-  //           behavior: "smooth",
-  //           block: "start"
-  //       });
-  //     }
-  //     this.isPopupOpen = false;
-  // }
-
-  // Used For handled to check coupons are valid ot not.
 checkValidCouponOrNot(couponList?){
   try{
     const currentDate = new Date();
@@ -3474,6 +3457,7 @@ clicked(){
         (response) => {
           this.loaderHotelBooking = false;
           this.availableRooms = response.body.roomList;
+         this.primaryColorProperty = response.body.primaryColor;
           this.shortrooms =  response.body.roomList;
           let facilities = this.businessUser.propertyServicesList;
           if (
@@ -4235,40 +4219,15 @@ clicked(){
   }
 }
 
-//   onYesClick() {
+onCouponInputChange($event){
+    const privateOffers = this.offersList.filter(
+    (offer) => offer.promotionAppliedFor === 'Private'
+  );
 
-//      this.privateOffers2 = this.offersList.filter(
-//     (offer) => offer.promotionAppliedFor === 'Private'
-//   );
-//   this.privateOffers2.forEach(item1=>{
-//      this.privatePromotionData = item1;
-//      this.privateOffersMinimumAmount = item1.minimumOrderAmount;
-//   })
-//   this.successMessagePrivate = 'Coupon applied successfully!';
-
-//   const offerSection23 = document.getElementById("accmdOne");
-//       if (offerSection23) {
-//         offerSection23.scrollIntoView({
-//             behavior: "smooth",
-//             block: "start"
-//         });
-//       }
-
-//       this.selectedPromotion = true;
-//       localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
-//       localStorage.setItem('selectPromo', 'true');
-
-//        if (this.enteredCoupon === this.validCouponCode) {
-//     this.isValidPrivateCoupon = true;
-//       this.couponApplied = true;
-//      localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
-//       localStorage.setItem('selectPromo', 'true');
-//     this.isPopupOpen = false;
-//   } else {
-//     // alert('Invalid coupon code. Please try again.');
-//   }
-//   this.isPopupOpen = false;
-// }
+   if (privateOffers.length > 0) {
+     this.validCouponCode = privateOffers[0].couponCode;
+  }
+}
 
 onYesClick() {
   this.privateOffers2 = this.offersList.filter(
