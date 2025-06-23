@@ -4258,56 +4258,50 @@ clicked(){
   }
 }
 
-onCouponInputChange(event:string){
-   this.enteredCoupon = event;
-    const privateOffers = this.offersList.filter(
-    (offer) => offer.promotionAppliedFor === 'Private'
-  );
-
-   if (privateOffers.length > 0) {
-     this.validCouponCode = privateOffers[0].couponCode;
-  }
-}
-
-// onYesClick() {
-//   console.log('enteredCoupon is',this.enteredCoupon);
-//   this.privateOffers2 = this.offersList.filter(
+// onCouponInputChange(event:string){
+//    this.enteredCoupon = event;
+//     const privateOffers = this.offersList.filter(
 //     (offer) => offer.promotionAppliedFor === 'Private'
 //   );
+//   console.log('privateOffers is',privateOffers);
 
-//   this.privateOffers2.forEach(item1 => {
-//     console.log('item1 is',item1);
-//     this.privatePromotionData = item1;
-//     this.privateOffersMinimumAmount = item1.minimumOrderAmount;
-//   });
+//   privateOffers.forEach(item2 =>{
+//     console.log('item2 is',item2);
+//   })
 
-//   if (this.enteredCoupon.trim().toUpperCase() === this.validCouponCode.toUpperCase()) {
-//     this.successMessagePrivate = 'Applied';
-//     this.selectedPromotion = true;
-//     this.isValidPrivateCoupon = true;
-//     this.couponApplied = true;
-//     this.couponSuccessApplied = true;
 
-//     localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
-//     localStorage.setItem('selectPromo', 'true');
-
-//     // Optional: delay scroll and close
-//     setTimeout(() => {
-//       this.isPopupOpen = false;
-//       const offerSection23 = document.getElementById("accmdOne");
-//       console.log('offerSection23 is',offerSection23)
-//       if (offerSection23) {
-//         offerSection23.scrollIntoView({
-//           behavior: "smooth",
-//           block: "start"
-//         });
-//       }
-//     }, 1500);
+//    if (privateOffers.length > 0) {
+//      this.validCouponCode = privateOffers[0].couponCode;
 //   }
 // }
 
+onCouponInputChange(event: string) {
+  this.enteredCoupon = event.trim();
+
+  // Filter Private offers
+  const privateOffers = this.offersList.filter(
+    (offer) => offer.promotionAppliedFor === 'Private'
+  );
+
+
+  // Check if enteredCoupon matches any couponCode (case-insensitive)
+  const matchedOffer = privateOffers.find(
+    (offer) => offer.couponCode?.trim().toUpperCase() === this.enteredCoupon.toUpperCase()
+  );
+
+  // If match found, store it as valid
+  if (matchedOffer) {
+    this.validCouponCode = matchedOffer.couponCode;
+    this.privatePromotionData = matchedOffer; // optional, if you need it later
+  } else {
+    this.validCouponCode = ''; // reset if not matched
+    this.privatePromotionData = null;
+  }
+}
+
+
+
 onYesClick() {
-  console.log('enteredCoupon is', this.enteredCoupon);
 
   this.privateOffers2 = this.offersList.filter(
     (offer) => offer.promotionAppliedFor === 'Private'
@@ -4316,7 +4310,6 @@ onYesClick() {
   const matchingOffer = this.privateOffers2.find(
     item => item.couponCode?.trim().toUpperCase() === this.enteredCoupon?.trim().toUpperCase()
   );
-  console.log('matchingOffer is',matchingOffer);
 
   if (matchingOffer) {
     this.privatePromotionData = matchingOffer;
