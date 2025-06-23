@@ -111,7 +111,7 @@ export class ListingDetailOneComponent implements OnInit {
   enteredCoupon: any;
   isValidPrivateCoupon: boolean;
   validCoupon: ' ';
-  validCouponCode: any;
+  validCouponCode: string = '';
   privateOffers2: any[];
   privateOffersMinimumAmount: any;
   privatePromotionData: any;
@@ -2568,6 +2568,7 @@ this.isHeaderVisible = true;
 
       //  this.showAllTheOfferList.push(publicOffers);
        this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
+       console.log('showAllTheOfferList is',this.showAllTheOfferList);
       // // Filter private offers (where user must enter the coupon)
       // const privateOffers = allOffers.filter(
       //   (offer) => offer.promotionAppliedFor === 'Private'
@@ -3399,6 +3400,7 @@ resetForm(){
     this.isPopupOpen = false;
     this.enteredCoupon = '';
     this.isCardVisible = false;
+    this.token.clearAllTaxArray();
 }
 clicked(){
   this.checkAvailabilityDisabled = true;
@@ -3592,8 +3594,7 @@ clicked(){
             e.roomRatePlans.forEach((element) => {
               element.otaPlanList.forEach((element2) => {
                 if(element2.otaName ==='GHC'){
-                  this.planPrice.push(element2.price);
-
+                  this.planPrice.push((element2.price)* this.booking.noOfRooms);
 
                   let extraPerson = Number(this.extraPersonChargee);
 
@@ -3608,17 +3609,16 @@ clicked(){
                    extraChild = 0;
                    }
 
-
           let noOfNights = Number(this.booking.noOfNights);
-          let totalPrice = Number((element2.price * (noOfNights * this.booking.noOfRooms))) + ((extraPerson + extraChild) / noOfNights);
+          let totalPrice = Number((element2.price)) + ((extraPerson + extraChild) / noOfNights);
           // let totalPrice = Number(element2.price) + Number((this.extraPersonChargee) + Number(this.extraChildChargee) / (this.booking.noOfNights));
                   if(totalPrice <= 7500){
-                    this.taxAmount = ((totalPrice) * 12) / 100;
+                    this.taxAmount = ((totalPrice * this.booking.noOfRooms) * 12) / 100;
                     this.taxArray.push(this.taxAmount);
                   }
 
                   if(totalPrice > 7501){
-                    this.taxAmount = ((totalPrice) * 18) / 100;
+                    this.taxAmount = ((totalPrice * this.booking.noOfRooms) * 18) / 100;
                     this.taxArray.push(this.taxAmount);
                   }
 
@@ -4258,7 +4258,8 @@ clicked(){
   }
 }
 
-onCouponInputChange($event){
+onCouponInputChange(event:string){
+   this.enteredCoupon = event;
     const privateOffers = this.offersList.filter(
     (offer) => offer.promotionAppliedFor === 'Private'
   );
@@ -4268,7 +4269,87 @@ onCouponInputChange($event){
   }
 }
 
+// onYesClick() {
+//   console.log('enteredCoupon is',this.enteredCoupon);
+//   this.privateOffers2 = this.offersList.filter(
+//     (offer) => offer.promotionAppliedFor === 'Private'
+//   );
+
+//   this.privateOffers2.forEach(item1 => {
+//     console.log('item1 is',item1);
+//     this.privatePromotionData = item1;
+//     this.privateOffersMinimumAmount = item1.minimumOrderAmount;
+//   });
+
+//   if (this.enteredCoupon.trim().toUpperCase() === this.validCouponCode.toUpperCase()) {
+//     this.successMessagePrivate = 'Applied';
+//     this.selectedPromotion = true;
+//     this.isValidPrivateCoupon = true;
+//     this.couponApplied = true;
+//     this.couponSuccessApplied = true;
+
+//     localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+//     localStorage.setItem('selectPromo', 'true');
+
+//     // Optional: delay scroll and close
+//     setTimeout(() => {
+//       this.isPopupOpen = false;
+//       const offerSection23 = document.getElementById("accmdOne");
+//       console.log('offerSection23 is',offerSection23)
+//       if (offerSection23) {
+//         offerSection23.scrollIntoView({
+//           behavior: "smooth",
+//           block: "start"
+//         });
+//       }
+//     }, 1500);
+//   }
+// }
+
 onYesClick() {
+  console.log('enteredCoupon is', this.enteredCoupon);
+
+  this.privateOffers2 = this.offersList.filter(
+    (offer) => offer.promotionAppliedFor === 'Private'
+  );
+
+  const matchingOffer = this.privateOffers2.find(
+    item => item.couponCode?.trim().toUpperCase() === this.enteredCoupon?.trim().toUpperCase()
+  );
+  console.log('matchingOffer is',matchingOffer);
+
+  if (matchingOffer) {
+    this.privatePromotionData = matchingOffer;
+    this.privateOffersMinimumAmount = matchingOffer.minimumOrderAmount;
+
+    this.successMessagePrivate = 'Applied';
+    this.selectedPromotion = true;
+    this.isValidPrivateCoupon = true;
+    this.couponApplied = true;
+    this.couponSuccessApplied = true;
+
+    localStorage.setItem('selectedPromoData', JSON.stringify(this.privatePromotionData));
+    localStorage.setItem('selectPromo', 'true');
+
+    // Optional: delay scroll and close
+    setTimeout(() => {
+      this.isPopupOpen = false;
+      const offerSection23 = document.getElementById("accmdOne");
+      if (offerSection23) {
+        offerSection23.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }, 1500);
+  } else {
+    console.log('No matching coupon found.');
+    // Optionally show error state or feedback here
+  }
+}
+
+
+onYesClickMobileView() {
   this.privateOffers2 = this.offersList.filter(
     (offer) => offer.promotionAppliedFor === 'Private'
   );
@@ -4291,7 +4372,7 @@ onYesClick() {
     // Optional: delay scroll and close
     setTimeout(() => {
       this.isPopupOpen = false;
-      const offerSection23 = document.getElementById("accmdOne");
+      const offerSection23 = document.getElementById("accmdtwo");
       if (offerSection23) {
         offerSection23.scrollIntoView({
           behavior: "smooth",
