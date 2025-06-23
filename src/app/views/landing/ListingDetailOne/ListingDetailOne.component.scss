@@ -4141,6 +4141,73 @@ body {
     font-size: 14px;
     margin-top: -7px;
   }
+  .private-coupon-mobile-view{
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  font-size: 0.9rem;
+  max-width: 95%;
+  height: 12vh;
+}
+.sticky-button-right-mobile-view{
+ margin-left: auto;
+  display: flow;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+}
+
+.sticky-button-right-mobile-view input {
+border-radius: 10px;
+    width: 180px;
+    height: 36px;
+    font-size: 12px;
+    color: #D9D9D9;
+    text-align: center;
+    margin-left:10px;
+}
+.private-coupon-button-mobile-view{
+padding: 4px 13px !important;
+  font-size: 16px;
+  height: auto;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 3px;
+  margin-left: 118px;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 19.51px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+.coupon-text-heading-mobile-view{
+  font-family: Nunito Sans;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 44px;
+    letter-spacing: 0% !important;
+    text-align: left;
+}
+.coupon-text-mobile-view{
+ color:#000000;
+  font-family: Nunito Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0% !important;
+  margin-left:15px;
+}
 }
 
 @media (min-width:401px) and (max-width:469px) {
@@ -4383,6 +4450,74 @@ body {
     margin-bottom: 5px;
     margin-top: 2px;
   }
+
+  .private-coupon-mobile-view{
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  font-size: 0.9rem;
+  max-width: 95%;
+  height:12vh;
+}
+.sticky-button-right-mobile-view{
+ margin-left: auto;
+  display: flow;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+}
+
+.sticky-button-right-mobile-view input{
+border-radius: 10px;
+    width: 180px;
+    height: 36px;
+    font-size: 12px;
+    color: #D9D9D9;
+    text-align: center;
+    margin-left:10px;
+}
+.private-coupon-button-mobile-view{
+padding: 4px 13px !important;
+  font-size: 16px;
+  height: auto;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 3px;
+  margin-left: 118px;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 19.51px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+.coupon-text-heading-mobile-view{
+  font-family: Nunito Sans;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 44px;
+    letter-spacing: 0% !important;
+    text-align: left;
+}
+.coupon-text-mobile-view{
+ color:#000000;
+  font-family: Nunito Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0% !important;
+  margin-left:15px;
+}
 }
 
 
@@ -4491,6 +4626,73 @@ body {
   .customized-subcard {
     margin-bottom: 11px;
   }
+
+  .private-coupon-mobile-view{
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  font-size: 0.9rem;
+  max-width: 95%;
+  height:12vh;
+}
+.sticky-button-right-mobile-view{
+ margin-left: auto;
+  display: flow;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+}
+.sticky-button-right-mobile-view input{
+  border-radius: 10px;
+    width: 180px;
+    height: 36px;
+    font-size: 12px;
+    color: #D9D9D9;
+    text-align: center;
+    margin-left:10px;
+}
+.private-coupon-button-mobile-view{
+padding: 4px 13px !important;
+  font-size: 16px;
+  height: auto;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 3px;
+  margin-left: 118px;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 19.51px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+.coupon-text-heading-mobile-view{
+  font-family: Nunito Sans;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 44px;
+    letter-spacing: 0% !important;
+    text-align: left;
+}
+.coupon-text-mobile-view{
+   color:#000000;
+  font-family: Nunito Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0% !important;
+  margin-left:15px;
+}
 }
 
 
@@ -4778,7 +4980,6 @@ font-size: 23px !important;
 .scroll-bar-review::-webkit-scrollbar-thumb:hover {
   background-color: #555;       /* Darker color on hover */
 }
-
 
 
 // ::-webkit-scrollbar-track {

@@ -308,6 +308,10 @@ export class TokenStorage {
       return localStorage.getItem(ALL_TAXARRAY);
     }
 
+     clearAllTaxArray() {
+     localStorage.removeItem(ALL_TAXARRAY);
+      }
+
        public saveExtraPersonCharge(saveExtraPersonCharge:any){
         localStorage.removeItem(Save_Extra_PersonCharge);
         if (saveExtraPersonCharge !== null || saveExtraPersonCharge !== undefined) {
