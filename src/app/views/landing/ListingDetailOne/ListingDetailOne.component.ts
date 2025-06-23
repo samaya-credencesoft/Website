@@ -3566,7 +3566,6 @@ clicked(){
               element.otaPlanList.forEach((element2) => {
                 if(element2.otaName ==='GHC'){
                   this.planPrice.push((element2.price)* this.booking.noOfRooms);
-                  console.log('planPrice isasdfgh',this.planPrice);
 
                   let extraPerson = Number(this.extraPersonChargee);
 
@@ -3583,19 +3582,15 @@ clicked(){
 
           let noOfNights = Number(this.booking.noOfNights);
           let totalPrice = Number((element2.price)) + ((extraPerson + extraChild) / noOfNights);
-          console.log('totalPrice is',totalPrice);
           // let totalPrice = Number(element2.price) + Number((this.extraPersonChargee) + Number(this.extraChildChargee) / (this.booking.noOfNights));
                   if(totalPrice <= 7500){
                     this.taxAmount = ((totalPrice * this.booking.noOfRooms) * 12) / 100;
-                      console.log('taxAmount is',this.taxAmount);
                     this.taxArray.push(this.taxAmount);
-                     console.log('taxArray is',this.taxArray);
                   }
 
                   if(totalPrice > 7501){
                     this.taxAmount = ((totalPrice * this.booking.noOfRooms) * 18) / 100;
                     this.taxArray.push(this.taxAmount);
-                     console.log('taxArray is',this.taxArray);
                   }
 
                 this.totalplanPrice = this.planPrice.reduce(
@@ -4225,7 +4220,6 @@ clicked(){
 
 onCouponInputChange(event:string){
    this.enteredCoupon = event;
-   console.log('enteredCoupon is',this.enteredCoupon);
     const privateOffers = this.offersList.filter(
     (offer) => offer.promotionAppliedFor === 'Private'
   );
@@ -4244,7 +4238,6 @@ onCouponInputChange(event:string){
 //   this.privateOffers2.forEach(item1 => {
 //     console.log('item1 is',item1);
 //     this.privatePromotionData = item1;
-//     console.log('privatePromotionData is',this.privatePromotionData);
 //     this.privateOffersMinimumAmount = item1.minimumOrderAmount;
 //   });
 
@@ -4286,9 +4279,7 @@ onYesClick() {
   console.log('matchingOffer is',matchingOffer);
 
   if (matchingOffer) {
-    console.log('Matching offer found:', matchingOffer);
     this.privatePromotionData = matchingOffer;
-     console.log('privatePromotionData is',this.privatePromotionData);
     this.privateOffersMinimumAmount = matchingOffer.minimumOrderAmount;
 
     this.successMessagePrivate = 'Applied';
@@ -4304,7 +4295,6 @@ onYesClick() {
     setTimeout(() => {
       this.isPopupOpen = false;
       const offerSection23 = document.getElementById("accmdOne");
-      console.log('offerSection23 is', offerSection23);
       if (offerSection23) {
         offerSection23.scrollIntoView({
           behavior: "smooth",
@@ -4326,7 +4316,6 @@ onYesClickMobileView() {
 
   this.privateOffers2.forEach(item1 => {
     this.privatePromotionData = item1;
-    console.log('privatePromotionData is',this.privatePromotionData);
     this.privateOffersMinimumAmount = item1.minimumOrderAmount;
   });
 
@@ -4344,7 +4333,6 @@ onYesClickMobileView() {
     setTimeout(() => {
       this.isPopupOpen = false;
       const offerSection23 = document.getElementById("accmdtwo");
-       console.log('offerSection23 is',offerSection23)
       if (offerSection23) {
         offerSection23.scrollIntoView({
           behavior: "smooth",
