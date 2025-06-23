@@ -59,12 +59,8 @@
       style="font-size: 23px;background-color: black;color:white;font-weight: bold;">Booking Summary</button>
   </div>
 
-    <!-- <div class="sticky-button-left ">
-    <button class="btn desktop-view-ui" id="toggleCardPrivate"
-      style="font-size: 23px;background-color: black;color:white;font-weight: bold;" (click)="validateAndCloseCard() ; isCardVisible = true ; isPopupOpen = true ; privtePromotion()">Get Private Coupon</button>
-  </div> -->
-  <!-- Sticky Button -->
-<div class="sticky-button-left">
+
+  <!-- <div class="sticky-button-left">
   <button class="btn desktop-view-ui" id="toggleCardPrivate"
     style="font-size: 23px; background-color: black; color: white; font-weight: bold;"
     (click)="validateAndCloseCard(); isCardVisible = true; isPopupOpen = true; privtePromotion()">
@@ -73,7 +69,6 @@
 </div>
 
 <div class="coupon-popup" *ngIf="isPopupOpen">
-  <!-- If coupon already applied and user clicked "Get Private Coupon" -->
   <div class="coupon-content" *ngIf="showSuccessContent; else showCouponForm">
      <span
       (click)="closePopup()"
@@ -86,17 +81,14 @@
     </div>
   </div>
 
-  <!-- Coupon form -->
   <ng-template #showCouponForm>
     <div class="coupon-content">
       <h3>Apply Your Coupon</h3>
       <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code" />
 
-      <!-- ✔ icon -->
       <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"
             style="margin-left: 10px; color: green; font-size: 20px;">✔</span>
 
-      <!-- ✖ icon -->
       <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
             (click)="clearEnteredCoupon()" style="margin-left: 10px; color: red; font-size: 20px;">✖</span>
 
@@ -114,7 +106,7 @@
       </div>
     </div>
   </ng-template>
-</div>
+</div> -->
 
 
 
@@ -359,14 +351,15 @@
               <td class="p-1" style="color: black !important;">Total Net Amount :</td>
               <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
                 {{
-              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
-              | currency: currency:"symbol":"1.2-2"
-               }}
+                (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice +
+                booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+                | currency: currency:"symbol":"1.2-2"
+                }}
                 <!-- {{
                 booking.netAmount
                 | currency: currency:"symbol":"1.2-2"
                 }} -->
-                </td>
+              </td>
             </tr>
 
             <tr *ngIf="booking.taxPercentage">
@@ -377,13 +370,13 @@
                 this.booking.taxPercentage) /
                 100 | currency: currency:"symbol":"1.2-2"
                 }} -->
-          {{
-                  activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                 ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
-                  : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
-          }}
+                {{
+                activeForGoogleHotelCenter && booking.planCode === 'GHC'
+                ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
+                : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
+                }}
 
-                </td>
+              </td>
             </tr>
 
             <tr>
@@ -397,11 +390,12 @@
                 }} -->
                 {{
                 activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                  ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
-                  : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
+                ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )|
+                currency: currency:"symbol":"1.2-2")
+                : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
                 | currency: currency:"symbol":"1.2-2")
-              }}
-                </td>
+                }}
+              </td>
             </tr>
             <ng-container *ngIf="selectedServicesOne?.length > 0" style="background-color: #fff; font-weight: bold; padding-top: 15px; padding-bottom: 10px; margin-top: 15px;
           border-radius: 10px;">
@@ -555,14 +549,15 @@
             <td class="p-1" style="color: black !important;">Total Net Amount :</td>
             <td class="p-1" colspan="2" style="color: black !important; text-align: right;">
               {{
-              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
+              (activeForGoogleHotelCenter && booking.planCode === 'GHC' ? (this.totalplanPrice +
+              booking.extraPersonCharge + booking.extraChildCharge) : booking.netAmount)
               | currency: currency:"symbol":"1.2-2"
-            }}
+              }}
               <!-- {{
               booking.netAmount
               | currency: currency:"symbol":"1.2-2"
               }} -->
-              </td>
+            </td>
           </tr>
 
           <tr *ngIf="booking.taxPercentage">
@@ -573,16 +568,16 @@
               this.booking.taxPercentage) /
               100 | currency: currency:"symbol":"1.2-2"
               }} -->
-               <!-- {{taxAmountParam}}
+              <!-- {{taxAmountParam}}
                 {{(booking.netAmount * booking.taxPercentage) / 100}}
                 {{booking.planCode}} -->
-             {{
-                  activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                  ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
-                  : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
+              {{
+              activeForGoogleHotelCenter && booking.planCode === 'GHC'
+              ? (getTotalTaxFee() | currency: currency:"symbol":"1.2-2")
+              : (((booking.netAmount * this.booking.taxPercentage) / 100) | currency: currency:"symbol":"1.2-2")
               }}
 
-              </td>
+            </td>
           </tr>
 
           <tr>
@@ -595,12 +590,13 @@
               | currency: currency:"symbol":"1.2-2"
               }} -->
               {{
-                activeForGoogleHotelCenter && booking.planCode === 'GHC'
-                  ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )| currency: currency:"symbol":"1.2-2")
-                  : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
-                | currency: currency:"symbol":"1.2-2")
+              activeForGoogleHotelCenter && booking.planCode === 'GHC'
+              ? (((this.totalplanPrice + booking.extraPersonCharge + booking.extraChildCharge) + getTotalTaxFee() )|
+              currency: currency:"symbol":"1.2-2")
+              : (booking.netAmount + ((booking.netAmount * this.booking.taxPercentage) / 100) + totalExtraAmount
+              | currency: currency:"symbol":"1.2-2")
               }}
-              </td>
+            </td>
           </tr>
           <!-- Add more rows dynamically based on your data -->
           <ng-container class="addon-services" *ngIf="selectedServicesOne?.length >0" style="font-weight: bold;">
@@ -643,14 +639,17 @@
       </div>
     </div>
 
-    <span *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
+    <span
+      *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The coupon code will take effect on the next page*
     </span>
 
     <span *ngIf="((selectedPromotion && booking?.netAmount <= selectedPromotionCouponData?.minimumOrderAmount))"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is
+      {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is
+      {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;">
@@ -676,7 +675,7 @@
   </div>
 
 
-<!--
+  <!--
     <div class="sticky-card-left desktop-view-ui" id="stickyPrivate" style=" height: 30vh; overflow-y: scroll;">
             <div style="    display: flex;
                       justify-content: end;
@@ -916,7 +915,7 @@
     <div class="container" style="max-width: 1500px !important;">
       <div class="row mr-0 ml-0">
 
-        <div class="col-lg-12 pl-0 pr-0">
+        <div class="col-8 p-0">
           <h2 class="hero-heading" style="font-weight: bold;">{{businessUser?.name}}</h2>
           <p class="hero-subheading" style="font-weight: bold !important;">{{businessUser.address?.streetName}},
             {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
@@ -927,21 +926,76 @@
                   <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
             </li>
 
-                 <!-- <li style="margin-left: auto;">
-                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
-                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
-                   </div>
-                </li>
-
-                <div *ngIf="isPopupOpen" class="popup-overlay">
-  <div class="popup-content">
-  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
-  </div>
-    <div class="popup-buttons">
-      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
-    </div>
-</div> -->
           </ul>
+        </div>
+
+        <div class="col-4 private-coupon-section">
+          <div class="col-6">
+            <p class="coupon-text-heading">
+              <img src="assets/images/Vector.png" alt="Promo Icon" style="width: 12px; height: 17px;" />
+              Special Promo
+            </p>
+            <p class="coupon-text">Have a private code?</p>
+            <p class="coupon-text" style="white-space: nowrap;">Enter & redem your special your</p>
+          </div>
+
+          <div class="col-6">
+            <div class="sticky-button-right">
+              <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter valid coupon code"/>
+              <button class="private-coupon-button">
+                Apply
+              </button>
+            </div>
+          </div>
+
+          <!-- <div class="col-6">
+
+            <div class="sticky-button-right"
+              style="display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
+              <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code"
+                style="width: 100%; padding: 8px;" />
+              <button style="padding: 8px 16px;">
+                Apply
+              </button>
+            </div>
+
+
+            <div class="coupon-popup" *ngIf="isPopupOpen">
+              <div class="coupon-content" *ngIf="showSuccessContent; else showCouponForm">
+                <span (click)="closePopup()"
+                  style="position: absolute; top: 5px; right: 10px; cursor: pointer; font-size: 20px; color: red;"
+                  title="Close">✖</span>
+                <div style="font-size: 24px; color: green;">Copuon already applied</div>
+                <div class="popup-buttons" style="margin-top: 15px;">
+                  <button class="reset-btn" (click)="resetButtonPrivate()">Reset</button>
+                </div>
+              </div>
+
+              <ng-template #showCouponForm>
+                <div class="coupon-content">
+                  <h3>Apply Your Coupon</h3>
+                  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code" />
+
+                  <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"
+                    style="margin-left: 10px; color: green; font-size: 20px;">✔</span>
+
+                  <span
+                    *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
+                    (click)="clearEnteredCoupon()" style="margin-left: 10px; color: red; font-size: 20px;">✖</span>
+
+                  <div class="popup-buttons">
+                    <button (click)="onYesClick()" [ngClass]="{
+            'apply-btn': true,
+            'disabled-btn': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
+          }">
+                      {{ couponSuccessApplied ? 'Applied' : 'Apply' }}
+                    </button>
+                    <button class="close-btn" (click)="closePopup()">Close</button>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -1305,7 +1359,8 @@
 
                               </div>
 
-                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold;margin-top:35px;">
+                              <div *ngIf="room.description" class=" col-12 desktopone"
+                                style="font-weight: bold;margin-top:35px;">
                                 <div class="mt-2" [innerHTML]="room.description">
                                 </div>
                               </div>
@@ -1428,7 +1483,8 @@
                                           <div class="card-header"
                                             style=" padding-top: 5px;  padding-bottom: 1px; background-color: #4A4A4A !important; white-space: normal;">
                                             <h4 *ngIf="plan.name !== 'GHC'" class="planname"
-                                              style=" font-size: 15px; color: #fff !important;    white-space: normal;">{{plan.name}}</h4>
+                                              style=" font-size: 15px; color: #fff !important;    white-space: normal;">
+                                              {{plan.name}}</h4>
                                             <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                             <h4 *ngIf="plan.name === 'GHC'"
                                               style=" font-size: 15px; color: #fff !important;">Economy</h4>
@@ -1452,8 +1508,7 @@
                                       font-style: normal;
                                       font-weight: 400;
                                       font-size: 20px;color: #808080; text-decoration: line-through;"
-                                              class="line-on-text"
-                                              *ngIf="room.roomOnlyPrice >plan.amount">{{
+                                              class="line-on-text" *ngIf="room.roomOnlyPrice >plan.amount">{{
                                               room.roomOnlyPrice * DiffDate * noOfrooms | currency
                                               : currency
                                               : "symbol"
@@ -1461,19 +1516,19 @@
                                           </div>
 
                                           <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                          *ngIf="
+                                            *ngIf="
                                 hasPercentage(
                                   room.roomOnlyPrice,
                                   plan.amount
                                 ) == true
                               ">
-                                          ({{
-                                          ((room.roomOnlyPrice -
-                                          plan.amount) /
-                                          room.roomOnlyPrice) *
-                                          100 | number: "1.2-2"
-                                          }}% Discount)
-                                        </div>
+                                            ({{
+                                            ((room.roomOnlyPrice -
+                                            plan.amount) /
+                                            room.roomOnlyPrice) *
+                                            100 | number: "1.2-2"
+                                            }}% Discount)
+                                          </div>
 
 
                                           <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
@@ -1744,7 +1799,7 @@
                           *ngIf="room.id === rates.roomId && r < 1 &&   (rates.stopSellOBE === false || rates.stopSellOBE === null)">
                           <div class="row mb-4">
                             <div class="col-6">
-                              <div  style="padding: 0px;">
+                              <div style="padding: 0px;">
                                 <!-- <div class="cardSold">
                         <p class="Soldheading">Sold Out!</p>
                         <p class="Soldpara">Sorry, this room is not available for the selected dates.</p>
@@ -1767,7 +1822,8 @@
                                   src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"
                                   alt="" width="100%" />
                                 <div id="carouselExampleIndicators" class="carousel slide" (click)="openRoomCarousel()"
-                                  data-ride="carousel" *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
+                                  data-ride="carousel"
+                                  *ngIf="room.imageList.length === 1 || room.imageList.length === 2">
                                   <!-- <ol class="carousel-indicators">
                           <li *ngFor="let image of room?.imageList; let i = index" [class.active]="i === 0" data-target="#carouselExampleIndicators" [attr.data-slide-to]="i"></li>
                         </ol> -->
@@ -1781,8 +1837,8 @@
 
                                 </div>
 
-                                <div class="col-12 mainimage" style="margin-top: 16px;height: 300px;" *ngIf="room.imageList.length >= 3"
-                                  (click)="openRoomCarousel()">
+                                <div class="col-12 mainimage" style="margin-top: 16px;height: 300px;"
+                                  *ngIf="room.imageList.length >= 3" (click)="openRoomCarousel()">
 
                                   <div aria-hidden="true" *ngIf="room.imageList[0]">
                                     <img
@@ -1837,7 +1893,8 @@
                                 </div>
 
                               </div>
-                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold;margin-top:35px;">
+                              <div *ngIf="room.description" class=" col-12 desktopone"
+                                style="font-weight: bold;margin-top:35px;">
                                 <div class="mt-2" [innerHTML]="room.description">
                                 </div>
                               </div>
@@ -1927,7 +1984,8 @@
                                         <div class="card-header"
                                           style=" padding-top: 5px; padding-bottom: 1px; background-color: #4A4A4A !important; white-space: normal;">
                                           <h5 *ngIf="plan.name !== 'GHC'"
-                                            style=" font-size: 15px; color: #fff !important;    white-space: normal;" class="planname">
+                                            style=" font-size: 15px; color: #fff !important;    white-space: normal;"
+                                            class="planname">
                                             {{plan.name}}</h5>
                                           <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                           <h5 *ngIf="plan.name === 'GHC'"
@@ -1958,19 +2016,19 @@
                                             : "1.2-2"}}</span>
                                         </div>
                                         <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                        *ngIf="
+                                          *ngIf="
                               hasPercentage(
                                 room.roomOnlyPrice,
                                 plan.amount
                               ) == true
                             ">
-                                        ({{
-                                        ((room.roomOnlyPrice -
-                                        plan.amount) /
-                                        room.roomOnlyPrice) *
-                                        100 | number: "1.2-2"
-                                        }}% Discount)
-                                      </div>
+                                          ({{
+                                          ((room.roomOnlyPrice -
+                                          plan.amount) /
+                                          room.roomOnlyPrice) *
+                                          100 | number: "1.2-2"
+                                          }}% Discount)
+                                        </div>
                                         <div style="margin-left: 7px;" *ngIf="plan.showDetails">
 
                                           <li *ngIf=" plan.extraChargePerPerson >0">
@@ -2043,7 +2101,8 @@
                                           <ng-container *ngIf="rates.roomRatePlans.length > 2 && plan.amount > 0">
                                             <div
                                               style="background-color: #343a40;  padding: 10px;  white-space: normal;">
-                                              <h5 style="margin: 0; color: #fff !important;    white-space: normal;">{{ plan.name }}</h5>
+                                              <h5 style="margin: 0; color: #fff !important;    white-space: normal;">{{
+                                                plan.name }}</h5>
                                             </div>
                                             <div style="padding-top: 10px;margin-left: 6px;">
                                               <span style="
@@ -2067,20 +2126,20 @@
                                                 : "1.2-2"}}</span>
                                             </div>
                                             <div
-                                            style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; "
-                                            *ngIf="
+                                              style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; "
+                                              *ngIf="
                                   hasPercentage(
                                     room.roomOnlyPrice,
                                     plan.amount
                                   ) == true
                                 ">
-                                            ({{
-                                            ((room.roomOnlyPrice -
-                                            plan.amount) /
-                                            room.roomOnlyPrice) *
-                                            100 | number: "1.2-2"
-                                            }}% Discount)
-                                          </div>
+                                              ({{
+                                              ((room.roomOnlyPrice -
+                                              plan.amount) /
+                                              room.roomOnlyPrice) *
+                                              100 | number: "1.2-2"
+                                              }}% Discount)
+                                            </div>
 
                                             <div style="margin-left: 6px;">
 
@@ -2159,7 +2218,8 @@
                             <!-- Add on service Start -->
                             <div class="col-12" *ngIf="selectedRoomIndex === i  && viewAddon">
                               <div *ngIf="viewAddon">
-                                <h3 class="servicetitle" style="margin-left: 162px; margin-top: 25px;">Add-On Services</h3>
+                                <h3 class="servicetitle" style="margin-left: 162px; margin-top: 25px;">Add-On Services
+                                </h3>
 
                                 <div class="row facrow1 ammmmi"
                                   style="flex-wrap: wrap; justify-content: left; margin-left: 30px; margin-right: 30px;">
@@ -2338,7 +2398,8 @@
                               </div>
 
 
-                              <div *ngIf="room.description" class=" col-12 desktopone" style="font-weight: bold; margin-top:35px;">
+                              <div *ngIf="room.description" class=" col-12 desktopone"
+                                style="font-weight: bold; margin-top:35px;">
                                 <div class="mt-2" [innerHTML]="room.description">
                                 </div>
                               </div>
@@ -2432,7 +2493,8 @@
                             padding-bottom: 1px;
                             background-color: #4A4A4A !important;">
                                           <h4 *ngIf="plan.name !== 'GHC'" class="planname"
-                                            style=" font-size: 15px; color: #fff !important;    white-space: normal;">{{plan.name}}</h4>
+                                            style=" font-size: 15px; color: #fff !important;    white-space: normal;">
+                                            {{plan.name}}</h4>
                                           <!--Used white-space: nowrap so that long title doesnt affect the card size-->
                                           <h4 *ngIf="plan.name === 'GHC'"
                                             style=" font-size: 15px; color: #fff !important;">Economy</h4>
@@ -2462,19 +2524,19 @@
                                         </div>
 
                                         <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                        *ngIf="
+                                          *ngIf="
                               hasPercentage(
                                 room.roomOnlyPrice,
                                 plan.amount
                               ) == true
                             ">
-                                        ({{
-                                        ((room.roomOnlyPrice -
-                                        plan.amount) /
-                                        room.roomOnlyPrice) *
-                                        100 | number: "1.2-2"
-                                        }}% Discount)
-                                      </div>
+                                          ({{
+                                          ((room.roomOnlyPrice -
+                                          plan.amount) /
+                                          room.roomOnlyPrice) *
+                                          100 | number: "1.2-2"
+                                          }}% Discount)
+                                        </div>
 
                                         <div style="margin-left: 7px;">
 
@@ -2556,7 +2618,8 @@
                                         onmouseout="this.style.transform='scale(1)'">
                                         <ng-container *ngIf="rates.roomRatePlans.length > 2 && plan.amount > 0">
                                           <div style="background-color: #343a40;  padding: 10px; white-space: normal;">
-                                            <h5 style="margin: 0;color: #fff !important;    white-space: normal;">{{ plan.name }}</h5>
+                                            <h5 style="margin: 0;color: #fff !important;    white-space: normal;">{{
+                                              plan.name }}</h5>
                                           </div>
 
                                           <div style="padding-top: 10px; margin-left: 6px;">
@@ -2797,8 +2860,8 @@
 
                               </div>
 
-                              <div class="col-12 mainimage" style="margin-top: 16px;height: 300px" *ngIf="room.imageList.length >= 3"
-                                (click)="openRoomCarousel()">
+                              <div class="col-12 mainimage" style="margin-top: 16px;height: 300px"
+                                *ngIf="room.imageList.length >= 3" (click)="openRoomCarousel()">
 
                                 <div aria-hidden="true" *ngIf="room.imageList[0]">
                                   <img
@@ -3149,21 +3212,24 @@
             <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
       </li>
 
-         <li style="margin-left: auto;">
-                   <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
-                   <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private Coupon</label>
-                   </div>
-                </li>
+      <li style="margin-left: auto;">
+        <div class="input-box" (click)="privtePromotion()" style="padding-top: 0px !important;">
+          <label for="" style="padding-top: 0px !important; cursor: pointer;font-weight:bold;">Choose Your <br>Private
+            Coupon</label>
+        </div>
+      </li>
 
 
-                <div *ngIf="isPopupOpen" class="popup-overlay">
-  <div class="popup-content">
-  <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here" >
-  </div>
-    <div class="popup-buttons">
-      <button (click)="onYesClick(privateOffers)"  [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the code.</button>
-    </div>
-</div>
+      <div *ngIf="isPopupOpen" class="popup-overlay">
+        <div class="popup-content">
+          <input type="text" [(ngModel)]="enteredCoupon" placeholder="Enter coupon code here">
+        </div>
+        <div class="popup-buttons">
+          <button (click)="onYesClick(privateOffers)"
+            [disabled]="!enteredCoupon || enteredCoupon.trim() === '' || enteredCoupon !== validCouponCode">Verify the
+            code.</button>
+        </div>
+      </div>
 
       <!-- <li class="property-number-sectiontwo"><a href="tel:+917608935904"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
@@ -3220,7 +3286,8 @@
             <div class="col-4 pl-0 pr-0 float-right filter-card">
               <div class="container">
                 <div class="row">
-                  <div class="col-12 mb-3 adjustRoomContainerSection" *ngIf="this.activeForGoogleHotelCenter == true && !isLoading">
+                  <div class="col-12 mb-3 adjustRoomContainerSection"
+                    *ngIf="this.activeForGoogleHotelCenter == true && !isLoading">
                     <div class="card shadow customized-subcard" *ngFor="let room of sortedRooms">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length >= 0">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
@@ -3229,7 +3296,8 @@
                     </div>
                   </div>
 
-                  <div class="col-12 mb-3 adjustRoomContainerSection" *ngIf="!isLoading && this.activeForGoogleHotelCenter == false">
+                  <div class="col-12 mb-3 adjustRoomContainerSection"
+                    *ngIf="!isLoading && this.activeForGoogleHotelCenter == false">
                     <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
@@ -3453,7 +3521,8 @@
               </div>
             </div>
 
-            <div class="col-12 my-2 button-container adjustButtonContainerSection" style="display: flex; justify-content: center; gap:20px">
+            <div class="col-12 my-2 button-container adjustButtonContainerSection"
+              style="display: flex; justify-content: center; gap:20px">
               <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"
                 [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
                 (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked(); landingTaxAmount()">
@@ -3784,20 +3853,19 @@
                                     : "1.2-2"}}</span>
                                 </div>
 
-                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                *ngIf="
+                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
                       hasPercentage(
                         room.roomOnlyPrice,
                         plan.amount
                       ) == true
                     ">
-                                ({{
-                                ((room.roomOnlyPrice -
-                                plan.amount) /
-                                room.roomOnlyPrice) *
-                                100 | number: "1.2-2"
-                                }}% Discount)
-                              </div>
+                                  ({{
+                                  ((room.roomOnlyPrice -
+                                  plan.amount) /
+                                  room.roomOnlyPrice) *
+                                  100 | number: "1.2-2"
+                                  }}% Discount)
+                                </div>
 
                                 <div style="margin-left: 7px;margin-top: 5px;" *ngIf="showFullDescriptionOne">
 
@@ -3855,15 +3923,16 @@
                                 </div>
 
                               </div>
-                              <div *ngIf="room.description" class="desktopone" style="font-weight: bold; margin-top:35px;">
-                              <div class="mt-2" [innerHTML]="room.description">
+                              <div *ngIf="room.description" class="desktopone"
+                                style="font-weight: bold; margin-top:35px;">
+                                <div class="mt-2" [innerHTML]="room.description">
+                                </div>
                               </div>
-                            </div>
 
-                            <div *ngIf="room.description" class="mobile-one" style="font-weight: bold;">
-                              <div class="mt-2" [innerHTML]="room.description">
+                              <div *ngIf="room.description" class="mobile-one" style="font-weight: bold;">
+                                <div class="mt-2" [innerHTML]="room.description">
+                                </div>
                               </div>
-                            </div>
                             </div>
                           </div>
                         </div>
@@ -3913,21 +3982,19 @@
                                     : "1.2-2"}}</span>
                                 </div>
 
-                                <div
-                                            style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; "
-                                            *ngIf="
+                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                                   hasPercentage(
                                     room.roomOnlyPrice,
                                     plan.amount
                                   ) == true
                                 ">
-                                            ({{
-                                            ((room.roomOnlyPrice -
-                                            plan.amount) /
-                                            room.roomOnlyPrice) *
-                                            100 | number: "1.2-2"
-                                            }}% Discount)
-                                          </div>
+                                  ({{
+                                  ((room.roomOnlyPrice -
+                                  plan.amount) /
+                                  room.roomOnlyPrice) *
+                                  100 | number: "1.2-2"
+                                  }}% Discount)
+                                </div>
 
                                 <div style="margin-left: 7px;">
 
@@ -4212,20 +4279,19 @@
                                     : "1.2-2"}}</span>
                                 </div>
 
-                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                *ngIf="
+                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
                       hasPercentage(
                         room.roomOnlyPrice,
                         plan.amount
                       ) == true
                     ">
-                                ({{
-                                ((room.roomOnlyPrice -
-                                plan.amount) /
-                                room.roomOnlyPrice) *
-                                100 | number: "1.2-2"
-                                }}% Discount)
-                              </div>
+                                  ({{
+                                  ((room.roomOnlyPrice -
+                                  plan.amount) /
+                                  room.roomOnlyPrice) *
+                                  100 | number: "1.2-2"
+                                  }}% Discount)
+                                </div>
 
                                 <div style="margin-left: 7px;" *ngIf="plan.showDetails">
 
@@ -4322,21 +4388,19 @@
                                   : "1.2-2"}}</span>
                               </div>
 
-                              <div
-                                            style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; "
-                                            *ngIf="
+                              <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px; " *ngIf="
                                   hasPercentage(
                                     room.roomOnlyPrice,
                                     plan.amount
                                   ) == true
                                 ">
-                                            ({{
-                                            ((room.roomOnlyPrice -
-                                            plan.amount) /
-                                            room.roomOnlyPrice) *
-                                            100 | number: "1.2-2"
-                                            }}% Discount)
-                                          </div>
+                                ({{
+                                ((room.roomOnlyPrice -
+                                plan.amount) /
+                                room.roomOnlyPrice) *
+                                100 | number: "1.2-2"
+                                }}% Discount)
+                              </div>
 
                               <div style="margin-left: 6px;">
 
@@ -4780,20 +4844,19 @@
                                       : "1.2-2"}}</span>
                                   </div>
 
-                                  <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                  *ngIf="
+                                  <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
                         hasPercentage(
                           room.roomOnlyPrice,
                           plan.amount
                         ) == true
                       ">
-                                  ({{
-                                  ((room.roomOnlyPrice -
-                                  plan.amount) /
-                                  room.roomOnlyPrice) *
-                                  100 | number: "1.2-2"
-                                  }}% Discount)
-                                </div>
+                                    ({{
+                                    ((room.roomOnlyPrice -
+                                    plan.amount) /
+                                    room.roomOnlyPrice) *
+                                    100 | number: "1.2-2"
+                                    }}% Discount)
+                                  </div>
 
                                   <div style="margin-left: 7px;">
 
@@ -4898,20 +4961,19 @@
                                     : "1.2-2"}}</span>
                                 </div>
 
-                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;"
-                                *ngIf="
+                                <div style="color: #271a55;font-weight: 600;margin-left: 6px;font-size: 11px;" *ngIf="
                       hasPercentage(
                         room.roomOnlyPrice,
                         plan.amount
                       ) == true
                     ">
-                                ({{
-                                ((room.roomOnlyPrice -
-                                plan.amount) /
-                                room.roomOnlyPrice) *
-                                100 | number: "1.2-2"
-                                }}% Discount)
-                              </div>
+                                  ({{
+                                  ((room.roomOnlyPrice -
+                                  plan.amount) /
+                                  room.roomOnlyPrice) *
+                                  100 | number: "1.2-2"
+                                  }}% Discount)
+                                </div>
                                 <div style="margin-left: 6px;">
 
 
@@ -5071,7 +5133,8 @@ padding-right: 10px;
     </div>
 
     <!-- Add on service end -->
-    <span *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
+    <span
+      *ngIf="((selectedPromotion && booking?.netAmount >= selectedPromotionCouponData?.minimumOrderAmount) || (isValidPrivateCoupon && booking?.netAmount >= privatePromotionData?.minimumOrderAmount))"
       style="background-color: #c8e6c9; color: #388e3c; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #388e3c; display: flex;">
       The coupon code will take effect on the next page*
     </span>
@@ -5080,7 +5143,9 @@ padding-right: 10px;
 
     <span *ngIf="((selectedPromotion && booking?.netAmount <= selectedPromotionCouponData?.minimumOrderAmount))"
       style="background-color: #ffebee; color: #d32f2f; padding: 10px 15px; border-radius: 8px; font-weight: bold; font-size: 14px; border: 1px solid #d32f2f; display: flex;">
-      The coupon will not be applied because your price is below the minimum order requirement. Your price is {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
+      The coupon will not be applied because your price is below the minimum order requirement. Your price is
+      {{this.booking?.netAmount | currency : currency : "symbol" : "1.2-2"}} and the minimum amount is
+      {{selectedPromotionCouponData?.minimumOrderAmount | currency : currency : "symbol" : "1.2-2"}}.
     </span>
 
     <!-- review section button starts -->
@@ -5253,19 +5318,18 @@ padding-right: 10px;
     margin: auto;">
       <div class="modal-content">
         <div class="modal-header" style="justify-content: center !important;">
-          <h5 class="modal-title" id="errorModalLabel" style=" font-weight: bold; font-size: 23px;">Choose a Different Plan</h5>
+          <h5 class="modal-title" id="errorModalLabel" style=" font-weight: bold; font-size: 23px;">Choose a Different
+            Plan</h5>
           <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>{{ errorMessage }}</p>
         </div>
         <div class="modal-footer" style="justify-content: center !important;">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"
-          style="width: 100px;
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100px;
           color: #fff !important;
           background-color: black !important;
-          font-weight: bold;"
-          >Close</button>
+          font-weight: bold;">Close</button>
         </div>
       </div>
     </div>

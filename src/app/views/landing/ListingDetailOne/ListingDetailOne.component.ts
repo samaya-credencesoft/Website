@@ -1028,7 +1028,7 @@ this.selectedServices =[]
     const closeCardPrivate = document.getElementById('closeCardPrivate');
     const stickyPrivate = document.getElementById('stickyPrivate');
 
-    toggleCardPrivate.addEventListener('click', function() {
+    toggleCardPrivate?.addEventListener('click', function() {
       stickyPrivate.classList.toggle('show');
     });
 
