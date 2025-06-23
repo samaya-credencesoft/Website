@@ -4528,23 +4528,85 @@ font-size: 23px !important;
   z-index: 9999;
 }
 
-// .sticky-button-left {
-//   position: fixed;
-//   top: 60%;
-//   left:-210px;
-//   font-size: 23px !important;
-//   transform: translateY(-50%) rotate(270deg); /* Rotate button vertically */
-//   transform-origin: right center;
-//   z-index: 9999;
-// }
 /* Sticky Button Left */
-.sticky-button-left {
-  position: fixed;
-  top: 60%;
-  left: -210px;
-  transform: translateY(-50%) rotate(270deg);
-  transform-origin: right center;
-  z-index: 9999;
+.sticky-button-right {
+  margin-left: auto;
+  display: flow;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+}
+
+.sticky-button-right input {
+    border-radius: 10px;
+    width: 180px;
+    height: 36px;
+    font-size: 12px;
+    color: #D9D9D9;
+    text-align: center;
+    margin-left:10px;
+}
+
+.private-coupon-section {
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  left: -10px;
+  bottom: 10px;
+  margin: 0;
+  font-size: 0.9rem;
+  max-width: 90%;
+}
+
+.private-coupon-button {
+  padding: 4px 13px !important;
+  font-size: 16px;
+  height: auto;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 3px;
+  margin-left: 118px;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 19.51px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+ .coupon-text{
+  color:#000000;
+  font-family: Nunito Sans;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0% !important;
+  margin-left:15px;
+ }
+
+ .coupon-text-heading{
+    font-family: Nunito Sans;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 44px;
+    letter-spacing: 0% !important;
+    text-align: left;
+ }
+
+ .disabled-button {
+  background-color: #ccc !important;
+  color: #666;
+  cursor: not-allowed;
+  border: 1px solid #aaa;
 }
 
 /* CSS Styles */
