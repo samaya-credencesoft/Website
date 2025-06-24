@@ -820,7 +820,6 @@ a.fancybox.tcClick.mngroominfo {
       position: relative;
       display: inline-block;
       zoom: 1;
-      *display: inline;
       vertical-align: middle;
   }
   a.tcClick {
@@ -840,7 +839,6 @@ a.fancybox.tcClick.mngroominfo {
       position: relative;
       display: inline-block;
       zoom: 1;
-      *display: inline;
       vertical-align: middle;
   }
   .select2-container .select2-choice .select2-arrow b {
@@ -1692,7 +1690,6 @@ a.fancybox.tcClick.mngroominfo {
       position: relative;
       display: inline-block;
       zoom: 1;
-      *display: inline;
       vertical-align: middle;
   }
   a.tcClick {
@@ -1712,7 +1709,6 @@ a.fancybox.tcClick.mngroominfo {
       position: relative;
       display: inline-block;
       zoom: 1;
-      *display: inline;
       vertical-align: middle;
   }
   .select2-container .select2-choice .select2-arrow b {
@@ -3164,7 +3160,7 @@ textarea {
 
 p-dialog .p-dialog-header .p-dialog-title{
   text-align: center;
-  color: #f44336; 
+  color: #f44336;
   position: relative;
   -webkit-background-clip: text;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
