@@ -4166,7 +4166,7 @@ body {
     margin: 10px;
     font-size: 0.9rem;
     max-width: 95%;
-    height: 12vh;
+    height: 14vh;
   }
 
   .sticky-button-right-mobile-view {
@@ -4229,6 +4229,21 @@ body {
     letter-spacing: 0% !important;
     margin-left: 15px;
   }
+
+  .coupon-status {
+  position: relative;
+  right: -145px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.coupon-status.valid {
+  color: green;
+}
+
+.coupon-status.invalid {
+  color: red;
+}
 }
 
 @media (min-width:401px) and (max-width:469px) {
@@ -4544,6 +4559,20 @@ body {
     letter-spacing: 0% !important;
     margin-left: 15px;
   }
+   .coupon-status {
+  position: relative;
+  right: -145px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.coupon-status.valid {
+  color: green;
+}
+
+.coupon-status.invalid {
+  color: red;
+}
 }
 
 
@@ -4661,7 +4690,7 @@ body {
     margin: 10px;
     font-size: 0.9rem;
     max-width: 98%;
-    height: 9vh;
+    height: 10vh;
   }
 
   .sticky-button-right-mobile-view {
@@ -4725,6 +4754,20 @@ body {
     letter-spacing: 0% !important;
     margin-left: 15px;
   }
+   .coupon-status {
+  position: relative;
+  right: -145px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.coupon-status.valid {
+  color: green;
+}
+
+.coupon-status.invalid {
+  color: red;
+}
 }
 
 

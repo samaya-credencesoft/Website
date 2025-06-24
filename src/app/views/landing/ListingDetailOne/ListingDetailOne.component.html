@@ -3081,9 +3081,9 @@
           <div class="col-6">
             <div class="sticky-button-right-mobile-view">
               <input type="text" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/>
-               <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()">Valid</span>
+               <span class="coupon-status valid" *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()">Valid</span>
 
-               <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
+               <span class="coupon-status invalid" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
                     >Invalid</span>
               <button class="private-coupon-button-mobile-view"
                   [disabled]="!enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
