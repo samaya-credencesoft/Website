@@ -847,10 +847,10 @@
           <div class="col-6">
             <div class="sticky-button-right">
               <input type="text" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/>
-               <span class="validation-message" *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()">Valid Code</span>
+               <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"></span>
 
-               <span class="validation-message" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
-                   >Invalid Code</span>
+               <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
+                   ></span>
               <button class="private-coupon-button"
                   [disabled]="!enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
            [ngClass]="{'disabled-button': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()}"
@@ -3061,7 +3061,13 @@
   <!-- mobile and tab view design starts -->
   <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined"
     style="position: relative; top: 25px;">
-   <div class="col-12 private-coupon-mobile-view" style="top:55px;"
+   <div class="col-12 private-coupon-mobile-view" style="top: 55px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
+    background-color: rgb(255, 188, 15);
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    position: relative;"
      [ngStyle]="{ 'background-color': primaryColorProperty, 'box-shadow': '0 1px 4px rgba(0, 0, 0, 0.1)' }">
             <div class="col-6">
             <p class="coupon-text-heading-mobile-view">
