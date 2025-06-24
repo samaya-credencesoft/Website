@@ -3061,7 +3061,13 @@
   <!-- mobile and tab view design starts -->
   <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined"
     style="position: relative; top: 25px;">
-   <div class="col-12 private-coupon-mobile-view" style="top:55px;"
+   <div class="col-12 private-coupon-mobile-view" style="top: 55px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
+    background-color: rgb(255, 188, 15);
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    position: relative;"
      [ngStyle]="{ 'background-color': primaryColorProperty, 'box-shadow': '0 1px 4px rgba(0, 0, 0, 0.1)' }">
             <div class="col-6">
             <p class="coupon-text-heading-mobile-view">
