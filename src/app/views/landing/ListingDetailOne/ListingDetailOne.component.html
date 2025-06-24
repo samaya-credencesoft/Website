@@ -3071,16 +3071,10 @@
 
   <!-- mobile and tab view design starts -->
   <div class="main-wrapper mobile-view-ui" *ngIf="businessUser != null || businessUser != undefined"
-    style="position: relative; top: 25px;">
-   <div class="col-12 private-coupon-mobile-view" style="top: 55px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
-    background-color: rgb(255, 188, 15);
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100%;
-    position: relative;"
+    style="position: relative; top: 75px;">
+   <div class="private-coupon-mobile-view" style="display: flex; justify-content: space-between;    align-items: center;"
      [ngStyle]="{ 'background-color': primaryColorProperty, 'box-shadow': '0 1px 4px rgba(0, 0, 0, 0.1)' }">
-            <div class="col-6">
+            <div >
             <p class="coupon-text-heading-mobile-view">
               <img src="assets/images/Vector.png" alt="Promo Icon" style="width: 12px; height: 17px;" />
               Special Promo
@@ -3089,7 +3083,7 @@
             <p class="coupon-text-mobile-view" style="white-space: nowrap;">Enter & redem your special offer</p>
           </div>
 
-          <div class="col-6">
+          <div >
             <div class="sticky-button-right-mobile-view">
               <!-- <input type="text" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/> -->
                 <input
@@ -3106,12 +3100,15 @@
 
                <span class="coupon-status invalid" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
                     ></span>
-              <button class="private-coupon-button-mobile-view"
+                <div style="display: flex; justify-content: center">
+                    <button class="private-coupon-button-mobile-view"
                   [disabled]="!enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
            [ngClass]="{'disabled-button': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()}"
                    (click)="onYesClickMobileView()">
                 Apply
               </button>
+                </div>
+
             </div>
           </div>
     </div>

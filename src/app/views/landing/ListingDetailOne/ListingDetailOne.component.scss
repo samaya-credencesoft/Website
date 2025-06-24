@@ -4159,36 +4159,27 @@ body {
   }
 
   .private-coupon-mobile-view {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    font-size: 0.9rem;
-    max-width: 95%;
-    height: 14vh;
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        font-size: 0.9rem;
+        max-width: 95%;
+        /* height: 14vh; */
+        padding-top: 10px;
+        padding-bottom: 10px;
   }
 
-  .sticky-button-right-mobile-view {
-    margin-left: auto;
-    display: flow;
-    align-items: center;
-    justify-content: flex-end;
-    flex: 1;
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 10px;
-  }
+
 
   .sticky-button-right-mobile-view input {
-    border-radius: 10px;
-    width: 180px;
-    height: 36px;
-    font-size: 12px;
-    color: #D9D9D9;
-    text-align: center;
-    margin-left: 10px;
+        border-radius: 10px;
+        height: 36px;
+        font-size: 10px;
+        color: #D9D9D9;
+        text-align: center;
+        margin-right: 10px;
   }
 
   .private-coupon-button-mobile-view {
@@ -4202,7 +4193,6 @@ body {
     border: none;
     border-radius: 4px;
     margin-top: 3px;
-    margin-left: 118px;
     font-family: Nunito;
     font-weight: 700;
     line-height: 19.51px;
@@ -4212,12 +4202,13 @@ body {
   }
 
   .coupon-text-heading-mobile-view {
-    font-family: Nunito Sans;
-    font-weight: 600;
-    font-size: 19px;
-    line-height: 44px;
-    letter-spacing: 0% !important;
-    text-align: left;
+font-family: Nunito Sans;
+        font-weight: 600;
+        font-size: 19px;
+        line-height: 44px;
+        letter-spacing: 0% !important;
+        text-align: left;
+        margin-left: 10px;
   }
 
   .coupon-text-mobile-view {
@@ -4715,13 +4706,12 @@ body {
     margin-left: auto;
     display: flow;
     align-items: center;
-    justify-content: flex-end;
-    flex: 1;
-    position: absolute;
+    justify-content: flex-end !important;
+    flex: 1 !important;
+    // position: absolute;
     right: 0px;
     top: 0;
     padding: 10px;
-    left: 157px;
   }
 
   .sticky-button-right-mobile-view input {
@@ -4735,23 +4725,23 @@ body {
   }
 
   .private-coupon-button-mobile-view {
-    padding: 4px 13px !important;
-    font-size: 16px;
-    height: auto;
-    align-items: center;
-    justify-content: flex-end;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-top: 3px;
-    margin-left: 118px;
-    font-family: Nunito;
-    font-weight: 700;
-    line-height: 19.51px;
-    letter-spacing: 0%;
-    text-align: center;
-    vertical-align: middle;
+   padding: 4px 13px !important;
+        font-size: 16px;
+        height: auto;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin-top: 3px;
+        /* margin-left: 115px; */
+        font-family: Nunito;
+        font-weight: 700;
+        line-height: 19.51px;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
   }
 
   .coupon-text-heading-mobile-view {
