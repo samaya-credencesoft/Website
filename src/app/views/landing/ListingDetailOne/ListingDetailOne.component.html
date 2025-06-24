@@ -798,7 +798,7 @@
 
                 <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"
                   [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
-                  (click)="checkingAvailability(); scrollToAccommodationDash();clicked() ; landingTaxAmount()">
+                  (click)="checkingAvailability(); scrollToAccommodationDash();clicked() ; landingTaxAmount() ; checkavailabilityCall()">
                   <!-- {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }} -->
                   Check Availability
                 </button>
@@ -924,7 +924,10 @@
                           <div class="col-6" style="border-right: 1px solid gray;">
                             <h4 class="card-title customized-title">{{room.name}}</h4>
                             <p class="customized-p" style="font-size: 23px; font-weight: bold; padding-bottom: 0px;">
-                              {{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}
+                              <!-- {{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}} -->
+                               <ng-container *ngIf="roomLowestPrices[room.id || room.name] as lowestPrice">
+  {{ lowestPrice | currency: currency:"symbol":"1.2-2" }}
+  </ng-container>
                               <b style="font-size: 13px;">per night</b>
                             </p>
                           </div>
@@ -3184,7 +3187,10 @@
                     <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
-                        <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
+                        <!-- <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p> -->
+                          <ng-container *ngIf="roomLowestPrices[room.id || room.name] as lowestPrice">
+                          <p class="customized-p">{{lowestPrice}}</p>
+</ng-container>
 
                       </div>
                     </div>
@@ -3408,7 +3414,7 @@
               style="display: flex; justify-content: center; gap:20px">
               <button class="CA1" type="button mt-4" [disabled]="checkAvailabilityDisabled"
                 [ngClass]="{ 'disabled-btn': checkAvailabilityDisabled }"
-                (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked(); landingTaxAmount()">
+                (click)="checkingAvailability(); scrollToAccommodationDashmobile();clicked(); landingTaxAmount() ; checkavailabilityCall()">
                 <!-- {{ checkAvailabilityDisabled ? 'Modify Search' : 'Check Availability' }} -->
                 Check Availability
               </button>
