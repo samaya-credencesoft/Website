@@ -2710,17 +2710,27 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.couponCode;
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
       this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = " ";
+     this.parametertype2.text = " ";
     this.parameterss2.push(this.parametertype2);
 
-    this.parametertype2 = new Para();
+     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = " ";
+      this.parametertype2.text = this.booking.totalAmount.toFixed(2);
+    this.parameterss2.push(this.parametertype2);
+
+     this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text =  " ";
     this.parameterss2.push(this.parametertype2);
 
     this.componentstype2.parameters = this.parameterss2;
@@ -2978,7 +2988,12 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.totalAmount.toFixed(2);
+      this.parametertype2.text = this.booking.couponCode;
+    this.parameterss2.push(this.parametertype2);
+
+    this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+     this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2987,6 +3002,11 @@ export class BookingComponent implements OnInit {
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+ this.parametertype2.text = this.booking.totalAmount.toFixed(2);
+    this.parameterss2.push(this.parametertype2);
+
+     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
       this.parametertype2.text = " ";
     this.parameterss2.push(this.parametertype2);
@@ -3110,9 +3130,14 @@ export class BookingComponent implements OnInit {
     this.parametertype2.text = String(this.booking.noOfChildren);
     this.parameterss2.push(this.parametertype2);
 
+      this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.couponCode;
+    this.parameterss2.push(this.parametertype2);
+
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.totalAmount.toFixed(2);
+     this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3120,7 +3145,12 @@ export class BookingComponent implements OnInit {
       this.parametertype2.text = " ";
     this.parameterss2.push(this.parametertype2);
 
-    this.parametertype2 = new Para();
+     this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.totalAmount.toFixed(2);;
+    this.parameterss2.push(this.parametertype2);
+
+     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
       this.parametertype2.text = " ";
     this.parameterss2.push(this.parametertype2);
@@ -3244,9 +3274,14 @@ export class BookingComponent implements OnInit {
     this.parametertype2.text = String(this.booking.noOfChildren);
     this.parameterss2.push(this.parametertype2);
 
+      this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.couponCode;
+    this.parameterss2.push(this.parametertype2);
+
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.totalAmount.toFixed(2);
+     this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3254,7 +3289,12 @@ export class BookingComponent implements OnInit {
       this.parametertype2.text = " ";
     this.parameterss2.push(this.parametertype2);
 
-    this.parametertype2 = new Para();
+     this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.totalAmount.toFixed(2);;
+    this.parameterss2.push(this.parametertype2);
+
+     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
       this.parametertype2.text = " ";
     this.parameterss2.push(this.parametertype2);
@@ -3379,6 +3419,11 @@ export class BookingComponent implements OnInit {
     this.parametertype2.text = String(this.booking.noOfChildren);
     this.parameterss2.push(this.parametertype2);
 
+      this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.couponCode;
+    this.parameterss2.push(this.parametertype2);
+
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
       this.parametertype2.text = this.booking.totalAmount.toFixed(2);
@@ -3387,6 +3432,11 @@ export class BookingComponent implements OnInit {
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
       this.parametertype2.text = " ";
+    this.parameterss2.push(this.parametertype2);
+
+     this.parametertype2 = new Para();
+    this.parametertype2.type = 'text',
+      this.parametertype2.text = this.booking.totalAmount.toFixed(2);
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();

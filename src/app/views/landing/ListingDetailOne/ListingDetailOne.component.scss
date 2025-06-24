@@ -4177,10 +4177,15 @@ body {
         border-radius: 10px;
         height: 36px;
         font-size: 7px;
-        color: #D9D9D9;
+        color: #000000;
         text-align: center;
         margin-right: 10px;
   }
+  .sticky-button-right-mobile-view input::placeholder {
+  font-size: 8px;
+  font-weight: 500;
+}
+
 
   .private-coupon-button-mobile-view {
     padding: 4px 13px !important;
@@ -4202,7 +4207,7 @@ body {
   }
 
   .coupon-text-heading-mobile-view {
-font-family: Nunito Sans;
+font-family: 'Nunito Sans';
         font-weight: 600;
         font-size: 19px;
         line-height: 44px;
@@ -4213,7 +4218,7 @@ font-family: Nunito Sans;
 
   .coupon-text-mobile-view {
     color: #000000;
-    font-family: Nunito Sans;
+    font-family: 'Nunito Sans';
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -4516,10 +4521,16 @@ font-family: Nunito Sans;
     width: 180px;
     height: 36px;
     font-size: 12px;
-    color: #D9D9D9;
+    color: #000000;
     text-align: center;
     margin-left: 10px;
   }
+
+  .sticky-button-right-mobile-view input::placeholder {
+  font-size: 8px;
+  font-weight: 500;
+}
+
 
   .private-coupon-button-mobile-view {
     padding: 4px 13px !important;
@@ -4542,7 +4553,7 @@ font-family: Nunito Sans;
   }
 
   .coupon-text-heading-mobile-view {
-    font-family: Nunito Sans;
+    font-family: 'Nunito Sans';
     font-weight: 600;
     font-size: 19px;
     line-height: 44px;
@@ -4552,7 +4563,7 @@ font-family: Nunito Sans;
 
   .coupon-text-mobile-view {
     color: #000000;
-    font-family: Nunito Sans;
+    font-family: 'Nunito Sans';
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -4719,10 +4730,16 @@ font-family: Nunito Sans;
     width: 180px;
     height: 36px;
     font-size: 12px;
-    color: #D9D9D9;
+    color: #000000;
     text-align: center;
     margin-left: 10px;
   }
+
+  .sticky-button-right-mobile-view input::placeholder {
+  font-size: 8px;
+  font-weight: 500;
+}
+
 
   .private-coupon-button-mobile-view {
    padding: 4px 13px !important;
@@ -4745,7 +4762,7 @@ font-family: Nunito Sans;
   }
 
   .coupon-text-heading-mobile-view {
-    font-family: Nunito Sans;
+    font-family: 'Nunito Sans';
     font-weight: 600;
     font-size: 19px;
     line-height: 44px;
@@ -4755,7 +4772,7 @@ font-family: Nunito Sans;
 
   .coupon-text-mobile-view {
     color: #000000;
-    font-family: Nunito Sans;
+    font-family: 'Nunito Sans';
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
@@ -4881,7 +4898,7 @@ font-family: Nunito Sans;
 
 .coupon-text {
   color: #000000;
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -4890,7 +4907,7 @@ font-family: Nunito Sans;
 }
 
 .coupon-text-heading {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-weight: 600;
   font-size: 19px;
   line-height: 44px;
@@ -5369,9 +5386,14 @@ font-family: Nunito Sans;
 }
 
 .checkAva8 {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
+   display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    background-color: black;
+    color: white;
+    width: 100px;
+    margin-left: 80px;
+    border-radius: 10px;
 }
 
 .checkAva9 {
