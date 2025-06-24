@@ -4294,7 +4294,7 @@ onYesClick() {
           block: "start"
         });
       }
-    }, 1500);
+    }, 1000);
   } else {
     console.log('No matching coupon found.');
     // Optionally show error state or feedback here
@@ -4332,7 +4332,7 @@ onYesClickMobileView() {
           block: "start"
         });
       }
-    }, 1500);
+    }, 1000);
   }
 }
 
