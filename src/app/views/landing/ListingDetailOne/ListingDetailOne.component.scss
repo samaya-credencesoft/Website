@@ -5369,9 +5369,14 @@ font-family: Nunito Sans;
 }
 
 .checkAva8 {
-  display: flex;
-  justify-content: center;
-  margin-top: 5px;
+   display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    background-color: black;
+    color: white;
+    width: 100px;
+    margin-left: 80px;
+    border-radius: 10px;
 }
 
 .checkAva9 {
