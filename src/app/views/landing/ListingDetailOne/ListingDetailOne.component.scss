@@ -4244,6 +4244,15 @@ body {
 .coupon-status.invalid {
   color: red;
 }
+.valid-input {
+  border: 2px solid green;
+  outline: none;
+}
+
+.invalid-input {
+  border: 2px solid red;
+  outline: none;
+}
 }
 
 @media (min-width:401px) and (max-width:469px) {
@@ -4573,6 +4582,15 @@ body {
 .coupon-status.invalid {
   color: red;
 }
+.valid-input {
+  border: 2px solid green;
+  outline: none;
+}
+
+.invalid-input {
+  border: 2px solid red;
+  outline: none;
+}
 }
 
 
@@ -4768,6 +4786,15 @@ body {
 .coupon-status.invalid {
   color: red;
 }
+.valid-input {
+  border: 2px solid green;
+  outline: none;
+}
+
+.invalid-input {
+  border: 2px solid red;
+  outline: none;
+}
 }
 
 
@@ -4880,6 +4907,17 @@ body {
   letter-spacing: 0% !important;
   text-align: left;
 }
+
+.valid-input {
+  border: 2px solid green;
+  outline: none;
+}
+
+.invalid-input {
+  border: 2px solid red;
+  outline: none;
+}
+
 
 .disabled-button {
   background-color: #ccc !important;
