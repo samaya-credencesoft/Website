@@ -4708,7 +4708,7 @@ font-family: Nunito Sans;
     align-items: center;
     justify-content: flex-end !important;
     flex: 1 !important;
-    position: absolute;
+    // position: absolute;
     right: 0px;
     top: 0;
     padding: 10px;
@@ -4725,23 +4725,23 @@ font-family: Nunito Sans;
   }
 
   .private-coupon-button-mobile-view {
-    padding: 4px 13px !important;
-    font-size: 16px;
-    height: auto;
-    align-items: center;
-    justify-content: flex-end;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    margin-top: 3px;
-    margin-left: 118px;
-    font-family: Nunito;
-    font-weight: 700;
-    line-height: 19.51px;
-    letter-spacing: 0%;
-    text-align: center;
-    vertical-align: middle;
+   padding: 4px 13px !important;
+        font-size: 16px;
+        height: auto;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin-top: 3px;
+        /* margin-left: 115px; */
+        font-family: Nunito;
+        font-weight: 700;
+        line-height: 19.51px;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
   }
 
   .coupon-text-heading-mobile-view {
