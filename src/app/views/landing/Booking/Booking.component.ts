@@ -2710,7 +2710,7 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.couponCode;
+    this.parametertype2.text = this.booking.promotionName ? this.booking.promotionName : ' ';
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -2988,7 +2988,7 @@ export class BookingComponent implements OnInit {
 
     this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.couponCode;
+     this.parametertype2.text = this.booking.promotionName ? this.booking.promotionName : ' ';
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3132,7 +3132,7 @@ export class BookingComponent implements OnInit {
 
       this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.couponCode;
+     this.parametertype2.text = this.booking.promotionName ? this.booking.promotionName : ' ';
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3276,7 +3276,7 @@ export class BookingComponent implements OnInit {
 
       this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.couponCode;
+     this.parametertype2.text = this.booking.promotionName ? this.booking.promotionName : ' ';
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
@@ -3421,7 +3421,7 @@ export class BookingComponent implements OnInit {
 
       this.parametertype2 = new Para();
     this.parametertype2.type = 'text',
-      this.parametertype2.text = this.booking.couponCode;
+    this.parametertype2.text = this.booking.promotionName ? this.booking.promotionName : ' ';
     this.parameterss2.push(this.parametertype2);
 
     this.parametertype2 = new Para();
