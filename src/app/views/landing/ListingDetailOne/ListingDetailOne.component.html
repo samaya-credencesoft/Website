@@ -846,10 +846,21 @@
 
           <div class="col-6">
             <div class="sticky-button-right">
-              <input type="text" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/>
+              <!-- <input type="text" class="coupon-status-desktop valid" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/> -->
+               <input
+  type="text"
+  [(ngModel)]="enteredCoupon"
+  (ngModelChange)="onCouponInputChange($event)"
+  placeholder="Enter valid coupon code"
+  [ngClass]="{
+    'valid-input': enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase(),
+    'invalid-input': enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
+  }"
+/>
+
                <span *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"></span>
 
-               <span *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
+               <span class="coupon-status-desktop valid" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
                    ></span>
               <button class="private-coupon-button"
                   [disabled]="!enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
@@ -3080,11 +3091,21 @@
 
           <div class="col-6">
             <div class="sticky-button-right-mobile-view">
-              <input type="text" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/>
-               <span class="coupon-status valid" *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()">Valid</span>
+              <!-- <input type="text" [(ngModel)]="enteredCoupon" (ngModelChange)="onCouponInputChange($event)" placeholder="Enter valid coupon code"/> -->
+                <input
+  type="text"
+  [(ngModel)]="enteredCoupon"
+  (ngModelChange)="onCouponInputChange($event)"
+  placeholder="Enter valid coupon code"
+  [ngClass]="{
+    'valid-input': enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase(),
+    'invalid-input': enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()
+  }"
+/>
+               <span class="coupon-status valid" *ngIf="enteredCoupon && enteredCoupon.trim().toUpperCase() === validCouponCode.toUpperCase()"></span>
 
                <span class="coupon-status invalid" *ngIf="enteredCoupon && enteredCoupon.trim() !== '' && enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
-                    >Invalid</span>
+                    ></span>
               <button class="private-coupon-button-mobile-view"
                   [disabled]="!enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()"
            [ngClass]="{'disabled-button': !enteredCoupon || enteredCoupon.trim().toUpperCase() !== validCouponCode.toUpperCase()}"
