@@ -4181,6 +4181,11 @@ body {
         text-align: center;
         margin-right: 10px;
   }
+  .sticky-button-right-mobile-view input::placeholder {
+  font-size: 8px;
+  font-weight: 500;
+}
+
 
   .private-coupon-button-mobile-view {
     padding: 4px 13px !important;
@@ -4521,6 +4526,12 @@ font-family: 'Nunito Sans';
     margin-left: 10px;
   }
 
+  .sticky-button-right-mobile-view input::placeholder {
+  font-size: 8px;
+  font-weight: 500;
+}
+
+
   .private-coupon-button-mobile-view {
     padding: 4px 13px !important;
     font-size: 16px;
@@ -4723,6 +4734,12 @@ font-family: 'Nunito Sans';
     text-align: center;
     margin-left: 10px;
   }
+
+  .sticky-button-right-mobile-view input::placeholder {
+  font-size: 8px;
+  font-weight: 500;
+}
+
 
   .private-coupon-button-mobile-view {
    padding: 4px 13px !important;
