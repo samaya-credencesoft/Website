@@ -79,8 +79,6 @@ export interface Email {
   encapsulation: ViewEncapsulation.None,
 })
 export class ListingDetailOneComponent implements OnInit {
-  roomLowestPrices: { [roomId: string]: number | null } = {};
-
   @ViewChild('accmd') accmdSection!: ElementRef;
   // @Output() bookNowClicked = new EventEmitter<void>();
   showFullDescription: boolean[] = [];
@@ -797,7 +795,6 @@ export class ListingDetailOneComponent implements OnInit {
     this.bookingMinDate = calendar.getToday();
     this.bookingengineurl = this.token.getwebsitebookingURL()
     sessionStorage.removeItem('enquiryNo');
-    this.totalAmountPrice = this.token.getRoomPrice();
 
 this.selectedServicesOne = this.token?.getSelectedServices();
 setTimeout(() => {
@@ -1240,32 +1237,8 @@ if (this.city != null && this.city != undefined) {
 
       // Assign the total available rooms to the room object
       room.roomsAvailable = totalAvailableRooms;
-       let planPrices: number[] = [];
-
-    room?.ratesAndAvailabilityDtos?.forEach(rate => {
-      rate?.roomRatePlans?.forEach(plan => {
-        if (typeof plan?.amount === 'number') {
-          planPrices.push(plan.amount);
-        }
-      });
     });
-    this.roomLowestPrices = {}
-  // Store lowest price by room ID or room.name
-    const lowestPrice = this.getLowestPrice(room);
-    this.roomLowestPrices[room.id || room.name] = lowestPrice;
-    });
-    this.isLoading=false
   }
-
-  getLowestPrice(room: any): number | null {
-
-  const allPlans = room?.ratesAndAvailabilityDtos
-    ?.flatMap((availability: any) => availability?.roomRatePlans || [])
-    .map((plan: any) => plan?.amount);
-
-  return allPlans?.length ? Math.min(...allPlans) : null;
-}
-
 
   getDynamicNameFromUrl(url: string): string | null {
     const fullUrl = this.locationBack.prepareExternalUrl(this.locationBack.path(true));
@@ -2568,7 +2541,6 @@ this.isHeaderVisible = true;
 
       //  this.showAllTheOfferList.push(publicOffers);
        this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
-       console.log('showAllTheOfferList is',this.showAllTheOfferList);
       // // Filter private offers (where user must enter the coupon)
       // const privateOffers = allOffers.filter(
       //   (offer) => offer.promotionAppliedFor === 'Private'
@@ -3415,7 +3387,6 @@ clicked(){
     this.isAfterCheckAvilability = true;
     this.headerTitle = 'Success!';
     this.bodyMessage = 'CheckAvailability Clicked ';
-    this.ghcOverrideClicked = true;
 
     this.showSuccess(this.contentDialog);
     setTimeout(() => {
@@ -3622,11 +3593,13 @@ clicked(){
                     this.taxArray.push(this.taxAmount);
                   }
 
-
                 this.totalplanPrice = this.planPrice.reduce(
                   (accumulator, currentValue) => accumulator + currentValue,
                   0
                 );
+                if(this.activeForGoogleHotelCenter === true && element.otaPlanList.length > 0){
+                  this.token.saveLandingPrice(this.totalplanPrice);
+                  }
                 }
                 // //console.log(
                 //   'ota price is equa;' + JSON.stringify(this.planPrice)
@@ -3728,15 +3701,6 @@ clicked(){
           }
         }
       );
-        setTimeout(() => {
-      if(this.activeForGoogleHotelCenter == true){
-        this.fetchAndProcessRoomsDataOne();
-      } else if (this.activeForGoogleHotelCenter == false){
-        this.fetchAndProcessRoomsData();
-      }
-    }, 3000);
-        this.sortAndLimitRoomsOne();
-        this.token.clearAllTaxArray();
       this.getTotalTaxFee();
   }
 
@@ -3748,7 +3712,7 @@ clicked(){
     let taxAmount = params.get('taxAmount');
     let totaltax: number;
 
-    if (taxAmount !== null && this.allTaxAmount === false) {
+     if (taxAmount !== null && this.isSuccess === false) {
       totaltax = Number(taxAmount);
     } else {
       if (!this.taxArray || !this.taxArray.length) return 0;
@@ -3759,10 +3723,6 @@ clicked(){
 
     return totaltax;
   }
-
-  checkavailabilityCall(){
-  this.isLoading = true;
-}
 
   landingTaxAmount(){
     this.allTaxAmount = true;
@@ -4113,7 +4073,7 @@ clicked(){
               e.roomRatePlans.forEach((element) => {
                 element.otaPlanList.forEach((element2) => {
                   if(element2.otaName ==='GHC'){
-                  this.planPrice.push(element2.price);
+                  this.planPrice.push((element2.price) * this.booking.noOfRooms);
                   this.totalplanPrice = this.planPrice.reduce(
                     (accumulator, currentValue) => accumulator + currentValue,
                     0
@@ -4419,6 +4379,3 @@ onNo() {
 }
 
 }
-
-
-
