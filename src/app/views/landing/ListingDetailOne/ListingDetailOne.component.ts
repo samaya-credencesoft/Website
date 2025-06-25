@@ -2323,6 +2323,11 @@ this.isHeaderVisible = true;
                 localStorage.removeItem('selectPromo');
               }
               this.token.saveBookingRoomPrice(this.booking.roomPrice);
+               if (this.booking.planCode === 'GHC') {
+                  this.token.saveLandingPrice(this.totalplanPrice + this.booking.extraPersonCharge + this.booking.extraChildCharge);
+                } else {
+                  this.token.saveLandingPrice(this.booking.netAmount)
+                }
               this.router.navigate(['/booking']);
             }
           }
@@ -2568,8 +2573,7 @@ this.isHeaderVisible = true;
 
       //  this.showAllTheOfferList.push(publicOffers);
        this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
-
-           const publicOffersPrivate = this.offersList.filter(
+         const publicOffersPrivate = this.offersList.filter(
         (offer) => offer.promotionAppliedFor === 'Private'
       );
 
@@ -3406,6 +3410,8 @@ resetForm(){
     this.enteredCoupon = '';
     this.isCardVisible = false;
     this.token.clearAllTaxArray();
+    this.token.clearExtraPersonCharge();
+    this.token.clearExtraChildCharge();
 }
 clicked(){
   this.checkAvailabilityDisabled = true;
@@ -3600,13 +3606,14 @@ clicked(){
                 if(element2.otaName ==='GHC'){
                   this.planPrice.push((element2.price)* this.booking.noOfRooms);
 
+                  this.extraPersonChargee = this.token.getExtraPersonCharge();
                   let extraPerson = Number(this.extraPersonChargee);
 
                   if (isNaN(extraPerson)) {
                      extraPerson = 0;
                    }
 
-
+                 this.extraChildChargee = this.token.getChildCharge();
                  let extraChild = Number(this.extraChildChargee);
 
                 if (isNaN(extraChild)) {
