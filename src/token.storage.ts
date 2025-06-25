@@ -327,6 +327,10 @@ export class TokenStorage {
         return localStorage.getItem(Save_Extra_PersonCharge);
       }
 
+      clearExtraPersonCharge(){
+         localStorage.removeItem(Save_Extra_PersonCharge);
+      }
+
        public saveChildCharge(saveChildCharge:any){
         localStorage.removeItem(Save_Child_Charge);
         if (saveChildCharge !== null || saveChildCharge !== undefined) {
@@ -338,6 +342,11 @@ export class TokenStorage {
 
       public getChildCharge(){
         return localStorage.getItem(Save_Child_Charge);
+      }
+
+
+      clearExtraChildCharge(){
+         localStorage.removeItem(Save_Child_Charge);
       }
 
        public saveLandingPrice(landingrice: any){
@@ -386,10 +395,6 @@ export class TokenStorage {
   //   return localStorage.getItem(Save_Extra_PersonCharge);
   // }
 
-  clearExtraPersonCharge() {
-    localStorage.removeItem(Save_Extra_PersonCharge);
-    }
-
   // public saveChildCharge(saveChildCharge:any){
   //   localStorage.removeItem(Save_Child_Charge);
   //   if (saveChildCharge !== null || saveChildCharge !== undefined) {
@@ -402,10 +407,6 @@ export class TokenStorage {
   // public getChildCharge(){
   //   return localStorage.getItem(Save_Child_Charge);
   // }
-
- clearExtraChildCharge() {
-    localStorage.removeItem(Save_Child_Charge);
-    }
 
   // public getPropertyData(): BusinessUser {
   //   return JSON.parse(localStorage.getItem(PROPERTY) as string);
