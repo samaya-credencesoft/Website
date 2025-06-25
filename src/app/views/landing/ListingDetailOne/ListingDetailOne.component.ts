@@ -1036,7 +1036,7 @@ this.selectedServices =[]
       stickyPrivate.classList.toggle('show');
     });
 
-     closeCardPrivate.addEventListener('click', function() {
+     closeCardPrivate?.addEventListener('click', function() {
       stickyPrivate.classList.remove('show');
     });
 
