@@ -2958,6 +2958,10 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       });
 
     this.token.saveServiceData(anotherServiceList);
+     this.allExtraPersonCharge = this.booking.extraPersonCharge;
+    this.allExtraChildCharge = this.booking.extraChildCharge;
+    this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
+    this.token.saveChildCharge(this.allExtraChildCharge);
 
     // if (
     //   serviceList.length > 0 &&
@@ -2977,6 +2981,7 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     Logger.log(JSON.stringify(this.checkAvailabilityStatusHide));
     this.token.saveBookingData(this.booking);
     this.changeDetectorRefs.detectChanges();
+    this.checkingAvailability();
     // this.checkingAvailability1();
   }
 
