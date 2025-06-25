@@ -121,6 +121,7 @@ export class ListingDetailOneComponent implements OnInit {
   showSuccessContent: boolean = false;
   isAfterCheckAvilability: boolean;
   primaryColorProperty: any;
+  privateCouponPresent: any[];
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -2567,6 +2568,12 @@ this.isHeaderVisible = true;
 
       //  this.showAllTheOfferList.push(publicOffers);
        this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
+
+           const publicOffersPrivate = this.offersList.filter(
+        (offer) => offer.promotionAppliedFor === 'Private'
+      );
+
+      this.privateCouponPresent = publicOffersPrivate;
       // // Filter private offers (where user must enter the coupon)
       // const privateOffers = allOffers.filter(
       //   (offer) => offer.promotionAppliedFor === 'Private'
