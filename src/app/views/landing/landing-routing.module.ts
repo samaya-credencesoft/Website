@@ -48,6 +48,7 @@ import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp
 import { WhatappPaylaterTemplateComponent } from './whatapp-paylater-template/whatapp-paylater-template.component';
 import { CheckoutPhonepeComponentComponent } from './CheckoutPhonepeComponent/CheckoutPhonepeComponent.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { CheckoutRazorpayComponent } from './checkout-razorpay/checkout-razorpay.component';
 // import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 // import { BookingComponent } from './Booking/Booking.component';
 const routes: Routes = [
@@ -143,6 +144,10 @@ const routes: Routes = [
   {
     path:'booking-confirm',
     component:BookingConfirmComponent
+  },
+   {
+    path:'checkout-rayzorpay',
+    component:CheckoutRazorpayComponent,
   },
   {
     path:'booking-confirmation-page',

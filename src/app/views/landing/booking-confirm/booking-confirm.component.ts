@@ -223,6 +223,7 @@ textToCopyOne: string = 'This is some text to copy';
     if (this.token.getPaymentData() != null && this.token.getPaymentData() != undefined)
     {
       this.payment = this.token.getPaymentData();
+      console.log("this.payment"+JSON.stringify(this.payment))
     }
 
     if (this.token.getPayment2Data() != null && this.token.getPayment2Data() != undefined)
@@ -993,7 +994,7 @@ this.externalReservationdto =res.body
     this.booking.available = true;
     this.booking.payableAmount = this.booking.totalAmount;
     this.booking.currency = this.businessUser.localCurrency;
-    this.booking.paymentId = this.payment.id;
+    this.booking.paymentId = this.payment?.id;
 
     //Logger.log('createBooking ', JSON.stringify(this.booking));
 
@@ -1043,7 +1044,7 @@ this.externalReservationdto =res.body
       this.enquiryForm.extraChildCharge = this.booking.extraChildCharge;
       this.enquiryForm.roomTariffBeforeDiscount = this.booking.roomTariffBeforeDiscount;
       this.enquiryForm.totalBookingAmount = this.booking.totalBookingAmount;
-      this.enquiryForm.paymentStatus = this.payment.status;
+      this.enquiryForm.paymentStatus = this.payment?.status;
       this.enquiryForm.totalRoomTariffBeforeDiscount = this.booking.totalRoomTariffBeforeDiscount;
       this.enquiryForm.discountAmount = this.booking.discountAmount;
       this.enquiryForm.taxAmount = (this.booking.netAmount * this.booking.taxPercentage) / 100

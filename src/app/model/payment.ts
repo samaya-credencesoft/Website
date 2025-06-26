@@ -14,6 +14,7 @@ export class Payment {
     state: string;
     date: string;
     token: string;
+    razorpayOrderId:number;
     expYear: string;
     callBackUrl: void;
   callbackUrl: string;
