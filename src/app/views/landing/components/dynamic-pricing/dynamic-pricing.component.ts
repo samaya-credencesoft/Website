@@ -14,12 +14,12 @@ import { FormControl, Validators } from '@angular/forms';
   animations: [SharedAnimations]
 })
 export class DynamicPricingComponent implements OnInit {
-  currency = '$';
-  country = 'US';
+  currency = '₹';
+  country = 'IN';
   propertySize = 2;
   noOfRoom = 1;
   rates = [];
-  symbol = '$';
+  symbol = '₹';
   cRate = 1;
 
 
@@ -83,6 +83,7 @@ export class DynamicPricingComponent implements OnInit {
 
   ngOnInit() {
     this.viewPrice();
+    this.onCountryChange()
 // this.setCurrencyRate();
   }
 
