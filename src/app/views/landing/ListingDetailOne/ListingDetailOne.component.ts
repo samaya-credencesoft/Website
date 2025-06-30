@@ -3741,7 +3741,8 @@ clicked(){
 
           let currentUrl = window.location.href;
 
-        this.phoneNumberBookingEngine = currentUrl.includes("bookingEngine") ? this.businessUser.mobile : "9040785705";
+          this.phoneNumberBookingEngine =  currentUrl.includes("BookingEngine") || currentUrl.includes("bookingEngine")
+                ? this.businessUser.mobile : "9040785705";
 
           // Logger.log('checkAvailability ' + JSON.stringify(response.body));
         },
