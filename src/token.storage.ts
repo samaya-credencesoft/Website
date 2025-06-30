@@ -327,9 +327,10 @@ export class TokenStorage {
         return localStorage.getItem(Save_Extra_PersonCharge);
       }
 
-      clearExtraPersonCharge(){
-         localStorage.removeItem(Save_Extra_PersonCharge);
-      }
+    clearExtraPersonCharge(){
+      localStorage.removeItem(Save_Extra_PersonCharge);
+    }
+
 
        public saveChildCharge(saveChildCharge:any){
         localStorage.removeItem(Save_Child_Charge);
@@ -348,12 +349,10 @@ export class TokenStorage {
       clearExtraChildCharge(){
          localStorage.removeItem(Save_Child_Charge);
       }
-
        public saveLandingPrice(landingrice: any){
     localStorage.removeItem(CHECK_LANDING_PRICE);
     if (landingrice !== null || landingrice !== undefined) {
       localStorage.setItem(CHECK_LANDING_PRICE, landingrice);
-    } else {
       localStorage.setItem(CHECK_LANDING_PRICE, '{}');
     }
   }

@@ -123,6 +123,7 @@ import { BookingConfirmComponent } from './booking-confirm/booking-confirm.compo
 import { WhatsappRedirectPageComponent } from './whatsapp-redirect-page/whatsapp-redirect-page.component';
 import { WhatappPaylaterTemplateComponent } from './whatapp-paylater-template/whatapp-paylater-template.component';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { CheckoutRazorpayComponent } from './checkout-razorpay/checkout-razorpay.component';
 
 
 @NgModule({
@@ -202,6 +203,7 @@ import { ErrorpageComponent } from './errorpage/errorpage.component';
     OnboardingThankyouFormComponent,
     NotificationHandlingComponent,
     HeaderWhiteComponent,
+    CheckoutRazorpayComponent,
     IntroNineComponent,
     LandingV9Component,
 EnquiryComponent,

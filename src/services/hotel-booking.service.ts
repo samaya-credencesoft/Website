@@ -265,7 +265,7 @@ export class HotelBookingService {
   }
   paymentIntentRayzorpay(paymentDetails: Payment) {
     return this.http.post<Payment>(
-      'https://payment.bookone.io/razorpay/api/razorpay/paymentIntent',
+      'https://razorpay.bookonepms.com/api/razorpay/paymentIntentHotelmate',
       paymentDetails,
       { observe: 'response' }
     );

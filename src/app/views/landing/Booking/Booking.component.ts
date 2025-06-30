@@ -1506,7 +1506,7 @@ export class BookingComponent implements OnInit {
       this.payment.referenceNumber = new Date().getTime().toString();
       this.payment.deliveryChargeAmount = 0;
       this.payment.date = this.datePipe.transform(new Date().getTime(), "yyyy-MM-dd");
-      Logger.log("this.payment " + JSON.stringify(this.payment));
+      // Logger.log("this.payment " + JSON.stringify(this.payment));
       // this.token.saveBookingData(this.booking);
       // this.token.savePaymentData(this.payment);
 
@@ -1635,7 +1635,127 @@ export class BookingComponent implements OnInit {
       this.processPaymentPhonepe(this.payment);
 
       this.cardPaymentAvailable = true;
+    }  else if (this.businessUser.paymentGateway === "razorpay") {
+      this.payment.paymentMode = "UPI";
+      this.payment.status = "NotPaid";
+      this.payment.businessServiceName = "Accommodation";
+      this.payment.firstName = this.booking.firstName;
+      this.payment.lastName = this.booking.lastName;
+      this.payment.name = this.booking.firstName + " " + this.booking.lastName;
+
+      this.payment.email = this.booking.email;
+      this.payment.businessEmail = this.businessUser.email;
+      this.payment.currency = "INR";
+      this.payment.propertyId = this.businessUser.id;
+     this.booking.taxAmount = ((this.booking.netAmount * this.booking.taxPercentage) / 100);
+      if (this.businessServiceDto.advanceAmountPercentage === 100) {
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount)).toFixed(2)) + Number(((this.totalTaxAmount)).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount).toFixed(2))) + Number(((this.totalBeforeTaxAmount)).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount)).toFixed(2))));
+      }
+      else if(this.businessServiceDto.advanceAmountPercentage === 50) {
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 50).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 50).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100)* 50).toFixed(2)) + Number(((this.totalBeforeTaxAmount  / 100) * 50).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 50).toFixed(2))));
+       }
+      else {
+        this.payment.taxAmount = Number((Number(((this.booking.taxAmount / 100) * 20).toFixed(2)) + Number(((this.totalTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+        this.payment.netReceivableAmount = Number((Number(((this.booking.netAmount / 100) * 20).toFixed(2)) + Number(((this.totalBeforeTaxAmount / 100) * 20).toFixed(2))).toFixed(2));
+        this.payment.transactionAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+        this.payment.amount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+
+        this.booking.advanceAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+        this.payment.transactionChargeAmount = Number((Number(((this.booking.totalAmount / 100) * 20).toFixed(2))));
+      }
+
+      this.payment.referenceNumber = new Date().getTime().toString();
+      this.payment.deliveryChargeAmount = 0;
+      this.payment.date = this.datePipe.transform(
+        new Date().getTime(),
+        "yyyy-MM-dd"
+      );
+      Logger.log("this.payment " + JSON.stringify(this.payment));
+      // this.token.saveBookingData(this.booking);
+      // this.token.savePaymentData(this.payment);
+
+      // this.createBookingAtom();
+      this.processPaymentRazorpay(this.payment);
+
+      this.cardPaymentAvailable = true;
     }
+  }
+     processPaymentRazorpay(payment: Payment) {
+    this.paymentLoader = true;
+    this.changeDetectorRefs.detectChanges();
+
+    this.hotelBookingService.processPayment(payment).subscribe(
+      (response) => {
+        if (response.status === 200) {
+          if (response.body.failureMessage !== null) {
+            this.paymentLoader = false;
+            this.isSuccess = false;
+            this.headerTitle = "Error!";
+            this.bodyMessage =
+              "Unable to process payment" +
+              " Code: " +
+              response.body.failureMessage;
+            this.showDanger(this.contentDialog);
+
+            this.changeDetectorRefs.detectChanges();
+          } else {
+            this.paymentLoader = false;
+            this.payment = response.body;
+
+            //for post booking create
+
+            this.paymentIntentRayzorpay(this.payment);
+
+            // for pre booking create
+
+            // this.addServiceToBooking(this.booking.id,this.savedServices);
+          }
+        } else {
+          this.paymentLoader = false;
+          this.isSuccess = false;
+          this.headerTitle = "Error!";
+          this.bodyMessage = "Payment Failed! Code: " + response.status;
+          this.showDanger(this.contentDialog);
+          this.changeDetectorRefs.detectChanges();
+        }
+      },
+      (error) => {
+        this.paymentLoader = false;
+        this.isSuccess = false;
+        this.headerTitle = "Error!";
+        this.bodyMessage = "Payment Failed! Code: " + error.status;
+        this.showDanger(this.contentDialog);
+        this.changeDetectorRefs.detectChanges();
+      }
+    );
+  }
+  paymentIntentRayzorpay(payment: Payment) {
+    this.paymentLoader = true;
+
+    this.hotelBookingService.paymentIntentRayzorpay(payment).subscribe((response) => {
+      this.paymentLoader = false;
+      if (response.status === 200) {
+        this.payment = response.body;
+
+this.token.saveBookingData(this.booking);
+        this.token.savePaymentData(this.payment);
+        this.token.savePropertyData(this.businessUser);
+
+
+        this.router.navigate(["/checkout-rayzorpay"]);
+      }
+    });
   }
   processPaymentPayTM(payment: Payment) {
     this.paymentLoader = true;

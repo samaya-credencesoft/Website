@@ -122,6 +122,7 @@ export class ListingDetailOneComponent implements OnInit {
   isAfterCheckAvilability: boolean;
   primaryColorProperty: any;
   privateCouponPresent: any[];
+  phoneNumberBookingEngine: string;
   toggleListingDetails() {
     this.showListingDetails = !this.showListingDetails;
 
@@ -783,6 +784,7 @@ export class ListingDetailOneComponent implements OnInit {
     this.minDateForCheckIn = new NgbDate(today.getFullYear(), today.getMonth() + 1, today.getDate());
     // this.checkAvailabilityDisabled = true;
     let currenturl = window.location.href
+    let flag = currenturl.includes("bookingEngine");
     this.token.savePropertyUrl(currenturl);
     //console.log (currenturl)
     this.serviceDto = new PropertyServiceDTO();
@@ -2104,7 +2106,6 @@ this.isHeaderVisible = true;
         this.booking.propertyId = this.businessUser.id;
         this.lat = parseFloat(this.businessUser.latitude);
         this.lng = parseFloat(this.businessUser.longitude);
-
         this.loader = false;
         this.changeDetectorRefs.detectChanges();
       } else {
@@ -2573,8 +2574,7 @@ this.isHeaderVisible = true;
 
       //  this.showAllTheOfferList.push(publicOffers);
        this.showAllTheOfferList = this.checkValidCouponOrNot(publicOffers);
-
-           const publicOffersPrivate = this.offersList.filter(
+         const publicOffersPrivate = this.offersList.filter(
         (offer) => offer.promotionAppliedFor === 'Private'
       );
 
@@ -2959,6 +2959,10 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
       });
 
     this.token.saveServiceData(anotherServiceList);
+     this.allExtraPersonCharge = this.booking.extraPersonCharge;
+    this.allExtraChildCharge = this.booking.extraChildCharge;
+    this.token.saveExtraPersonCharge(this.allExtraPersonCharge);
+    this.token.saveChildCharge(this.allExtraChildCharge);
 
     // if (
     //   serviceList.length > 0 &&
@@ -2978,6 +2982,7 @@ let elementsone = document.getElementsByClassName("sticky-buttonmobile");
     Logger.log(JSON.stringify(this.checkAvailabilityStatusHide));
     this.token.saveBookingData(this.booking);
     this.changeDetectorRefs.detectChanges();
+    this.checkingAvailability();
     // this.checkingAvailability1();
   }
 
@@ -3733,6 +3738,10 @@ clicked(){
           } else {
             this.checkAvailabilityStatusName = 'Not Available';
           }
+
+          let currentUrl = window.location.href;
+
+        this.phoneNumberBookingEngine = currentUrl.includes("bookingEngine") ? this.businessUser.mobile : "9040785705";
 
           // Logger.log('checkAvailability ' + JSON.stringify(response.body));
         },

@@ -828,9 +828,9 @@
             {{businessUser.address?.city}}, {{businessUser.address?.state}}, {{businessUser.address?.country}}</p>
           <ul style="display: flex; flex-wrap: wrap; margin-left: -3rem; margin-top: 5px;"
             *ngIf="showHideFlag === false ">
-            <li class="property-number-section"><a href="tel:+919040785705"><span
+            <li class="property-number-section"><a href="tel:+91{{phoneNumberBookingEngine}}"><span
                   style="color: #484848; text-decoration: underline; font-weight: bold;">
-                  <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
+                  <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-{{phoneNumberBookingEngine}}</span></a>
             </li>
 
           </ul>
@@ -3128,9 +3128,9 @@
     margin-left: -1rem;
     margin-top: 5px;
     gap: 9px;" *ngIf="showHideFlag === false ">
-      <li class="property-number-section"><a href="tel:+919040785705"><span
+      <li class="property-number-section"><a href="tel:+91{{phoneNumberBookingEngine}}"><span
             style="color: #484848; text-decoration: underline; font-weight: bold;">
-            <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-9040785705</span></a>
+            <img src=" assets/images/phone-dark.png" alt="" height="20px" width="25px">+91-{{phoneNumberBookingEngine}}</span></a>
       </li>
 
     </ul>
@@ -3180,7 +3180,10 @@
                     <div class="card shadow customized-subcard" *ngFor="let room of sortedRooms">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length >= 0">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
-                        <p class="customized-p">{{room.roomOnlyPrice}}</p>
+                        <!-- <p class="customized-p">{{room.roomOnlyPrice}}</p> -->
+                          <ng-container *ngIf="roomLowestPrices[room.id || room.name] as lowestPrice">
+  {{ lowestPrice | currency: currency:"symbol":"1.2-2" }}
+  </ng-container>
                       </div>
                     </div>
                   </div>
@@ -3190,10 +3193,11 @@
                     <div class="card shadow  customized-subcard" *ngFor="let room of sortedRoomsOne">
                       <div class="card-body customised-card" *ngIf="room.ratesAndAvailabilityDtos?.length>=0 ">
                         <h5 class="card-title customized-title">{{room.name}}</h5>
-                        <!-- <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p> -->
-                          <ng-container *ngIf="roomLowestPrices[room.id || room.name] as lowestPrice">
+                        <p class="customized-p">{{room.roomOnlyPrice | currency: currency:"symbol":"1.2-2"}}</p>
+                          <!-- <ng-container *ngIf="roomLowestPrices[room.id || room.name] as lowestPrice">
+                            {{lowestPrice}}
                           <p class="customized-p">{{lowestPrice}}</p>
-</ng-container>
+</ng-container> -->
 
                       </div>
                     </div>
