@@ -3217,7 +3217,7 @@
                     Loading...
                   </div>
 
-                  <div *ngIf="!isLoading" style="margin-left: 15px;">
+                  <!-- <div *ngIf="!isLoading" style="margin-left: 15px;">
                     <button class="shadow button-section"
                       *ngIf="this.activeForGoogleHotelCenter == false || this.activeForGoogleHotelCenter == true "
                       (click)="scrollToAccommodationDashmobile()" style="background-color: black;
@@ -3228,7 +3228,7 @@
                 padding-left: 14px;
                 padding-right: 14px;">
                       Book Now</button>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -4145,11 +4145,12 @@
                       <div>
                         <!-- <h3 *ngIf="rates.roomRatePlans.length > 0 " class=" room-text-edit plan1"> Plans & Packages</h3> -->
                         <div class="row col-lg-12 card_body_styl" *ngIf="rates.roomRatePlans.length <= 2">
-                          <div *ngFor="
+                          <ng-container *ngFor="
                         let plan of rates.roomRatePlans;
                         let p = index
                       ">
-                            <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0">
+                            <div >
+                            <div class="col-md-4 plan_card_style" *ngIf="plan.amount >0 && plan.name !== 'Economy'">
                               <div class="card plan_cards hello_card" *ngIf="rates.roomRatePlans.length <= 2">
                                 <div class="card-header" style="padding-left: 7px;
                           padding-top: 5px;
@@ -4249,14 +4250,16 @@
                               </div>
                             </div>
                           </div>
+                          </ng-container>
                         </div>
 
                         <div #scrollContainerFour class="custom-scroll-container" *ngIf="rates.roomRatePlans.length > 2"
                           style="scroll-behavior: smooth; overflow-x: auto;overflow-y: hidden; white-space: nowrap; display: flex; padding-bottom: 16px;">
-                          <div *ngFor="
+                         <ng-container *ngFor="
                   let plan of rates.roomRatePlans;
                   let p = index
-                " style="
+                " >
+                           <div *ngIf="plan.name !== 'Economy'" style="
                       min-width: 250px;
                       background-color: #fff !important;
                         margin: 0 8px;
@@ -4368,6 +4371,7 @@
                             </ng-container>
 
                           </div>
+                         </ng-container>
                         </div>
 
                       </div>

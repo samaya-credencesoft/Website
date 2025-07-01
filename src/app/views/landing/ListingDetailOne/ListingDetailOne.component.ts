@@ -1312,8 +1312,7 @@ if (roomKey) {
   getLowestPriceBookingEngine(room: any): number | null{
  const allPlans = room?.ratesAndAvailabilityDtos
     ?.flatMap((availability: any) => availability?.roomRatePlans || [])
-    .filter((plan: any) => typeof plan?.amount === 'number' && !isNaN(plan.amount));
-
+    .filter((plan: any) => typeof plan?.amount === 'number' && !isNaN(plan.amount) && plan?.code?.toLowerCase() !== 'ghc');
 
   if (!allPlans.length) return null;
 
