@@ -92,7 +92,18 @@ initiatePayment() {
     },
     theme: {
       color: '#61CE70'
+    },
+    modal: {
+  ondismiss: () => {
+    console.warn('Payment popup closed by user.');
+    const redirectUrl = sessionStorage?.getItem('PropertyUrl');
+    // Redirect to external URL if it's full path
+
+
+      this.router.navigate([redirectUrl]); // For internal route
     }
+}
+
   };
 
   const razorpayObject = new Razorpay(options);
