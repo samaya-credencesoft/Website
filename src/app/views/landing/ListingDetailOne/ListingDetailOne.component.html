@@ -5251,20 +5251,27 @@ padding-right: 10px;
       </div>
       <div class="col-md-4 col-sm-12 custom-footer-col text-center">
         <ul class="footer-socials">
-          <li class="me-3">
-            <i class="fab fa-whatsapp"></i>
-          </li>
-          <li class="me-3">
-            <i class="fab fa-facebook"></i>
-          </li>
-          <li class="me-3">
-            <i class="fab fa-instagram"></i>
-          </li>
-        </ul>
+  <li class="me-3">
+    <a [href]="'https://wa.me/' + businessUser?.whatsApp" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </li>
+  <li class="me-3">
+    <a [href]="socialmedialist?.facebook" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-facebook"></i>
+    </a>
+  </li>
+  <li class="me-3">
+    <a [href]="socialmedialist?.instagram" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </li>
+</ul>
+
       </div>
       <div class="col-md-4 col-sm-12 custom-footer-col text-center">
         <a href="tel:{{this.businessUser.mobile}}" class="contact-us-link">
-          <i class="fas fa-phone-alt contact-icon"></i> Contact Us - {{this.businessUser.mobile}}
+          <i class="fas fa-phone-alt contact-icon" style="transform: scaleX(1) rotate(110deg);"></i> Contact Us - {{this.businessUser.mobile}}
         </a>
       </div>
     </div>
