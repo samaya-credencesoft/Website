@@ -24,7 +24,7 @@ env:
 
   BRANCH: release-india-prod-bookine-engine
 
-  CLOUDFRONT_DIST_ID: E2SNHJK2QY5BJC
+  CLOUDFRONT_DIST_ID: E1QQJOM9U7RFEO
   
   # generated do not touch
   # IDENTITY_PROVIDER: projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/${{ env.GCP_IDENTITY_POOL_NAME }}/providers/${GCP_IDENTITY_PROVIDER_NAME}
