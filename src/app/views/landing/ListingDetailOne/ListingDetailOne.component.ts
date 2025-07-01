@@ -1314,7 +1314,7 @@ if (roomKey) {
     ?.flatMap((availability: any) => availability?.roomRatePlans || [])
     .filter((plan: any) => typeof plan?.amount === 'number' && !isNaN(plan.amount) && plan?.code?.toLowerCase() !== 'ghc');
 
-  if (!allPlans.length) return null;
+  if (!allPlans?.length) return null;
 
   const lowestPlan = allPlans.reduce((min, curr) => curr.amount < min.amount ? curr : min);
 
