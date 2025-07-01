@@ -80,6 +80,7 @@ export interface Email {
 })
 export class ListingDetailOneComponent implements OnInit {
   roomLowestPrices: { [roomId: string]: number | null } = {};
+  roomLowestPricesBookingEngine: { [roomId: string]: number | null } = {};
 
   @ViewChild('accmd') accmdSection!: ElementRef;
   // @Output() bookNowClicked = new EventEmitter<void>();
@@ -1268,7 +1269,6 @@ if (this.city != null && this.city != undefined) {
   return allPlans?.length ? Math.min(...allPlans) : null;
 }
 
-
   getDynamicNameFromUrl(url: string): string | null {
     const fullUrl = this.locationBack.prepareExternalUrl(this.locationBack.path(true));
 
@@ -1294,8 +1294,35 @@ if (this.city != null && this.city != undefined) {
 
       // Assign the total available rooms to the room object
       room.roomsAvailable = totalAvailableRooms;
+
+      this.roomLowestPricesBookingEngine = this.roomLowestPricesBookingEngine || {}; // Ensure object is initialized
+
+const lowestPlan = this.getLowestPriceBookingEngine(room); // This returns a number or null
+
+const roomKey = room.id || room.name;
+
+if (roomKey) {
+  this.roomLowestPricesBookingEngine[roomKey] = lowestPlan;
+}
+
+
     });
   }
+
+  getLowestPriceBookingEngine(room: any): number | null{
+ const allPlans = room?.ratesAndAvailabilityDtos
+    ?.flatMap((availability: any) => availability?.roomRatePlans || [])
+    .filter((plan: any) => typeof plan?.amount === 'number' && !isNaN(plan.amount));
+
+
+  if (!allPlans.length) return null;
+
+  const lowestPlan = allPlans.reduce((min, curr) => curr.amount < min.amount ? curr : min);
+
+
+  return lowestPlan;
+}
+
 
   toggleView() {
     this.isExpanded = !this.isExpanded;
