@@ -85,6 +85,7 @@ export class ListingDetailOneComponent implements OnInit {
   @ViewChild('accmd') accmdSection!: ElementRef;
   // @Output() bookNowClicked = new EventEmitter<void>();
   showFullDescription: boolean[] = [];
+  hasServiceWithPrice:boolean = false;
   showListingDetails: boolean = false;
   website: string;
   currentUrl: string;
@@ -2002,6 +2003,9 @@ this.isHeaderVisible = true;
         });
 
         this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
+         this.hasServiceWithPrice = this.propertyServiceListDataOne?.some(
+  val => val?.servicePrice != null && val?.servicePrice > 0
+);
           if(this.selectedServices != null &&  this.selectedServices != undefined ){
             this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
               this.propertyServiceListDataOne.forEach(val => {
@@ -2010,6 +2014,7 @@ this.isHeaderVisible = true;
                   this.viewAddon = true;
                 val.quantity = ele.quantity;
                 }
+
               })
 
             console.log("val.quantity", this.propertyServiceListDataOne)
@@ -2462,6 +2467,9 @@ this.isHeaderVisible = true;
             this.checkingAvailability();
           }
           this.propertyServiceListDataOne = this.businessUser.propertyServicesList;
+          this.hasServiceWithPrice = this.propertyServiceListDataOne?.some(
+  val => val?.servicePrice != null && val?.servicePrice > 0
+);
           if(this.selectedServices != null &&  this.selectedServices != undefined ){
           this.savedServices = this.token?.getSelectedServices()?.forEach(ele => {
             this.propertyServiceListDataOne?.forEach(val => {
