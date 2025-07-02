@@ -28,6 +28,24 @@
       </a>
     </li>
     <hr *ngIf="businessUser?.website && socialmedialist?.aboutUs">
+    <li class="nav-item">
+      <a *ngIf="businessUser?.website && socialmedialist?.blogPageUrl" href="{{socialmedialist?.blogPageUrl}}" class="nav-link">
+        <i class="fas fa-info-circle"></i> Blog
+      </a>
+    </li>
+    <hr *ngIf="businessUser?.website && socialmedialist?.blogPageUrl">
+     <li class="nav-item">
+      <a *ngIf="businessUser?.website && socialmedialist?.csr" href="{{socialmedialist?.csr}}" class="nav-link">
+        <i class="fas fa-info-circle"></i> CSR
+      </a>
+    </li>
+    <hr *ngIf="businessUser?.website && socialmedialist?.csr">
+     <li class="nav-item">
+      <a *ngIf="businessUser?.website && socialmedialist?.contact" href="{{socialmedialist?.contact}}" class="nav-link">
+        <i class="fas fa-info-circle"></i> Contact
+      </a>
+    </li>
+    <hr *ngIf="businessUser?.website && socialmedialist?.contact">
 
     <li class="nav-item">
       <a *ngIf="businessUser?.website && socialmedialist?.termsAndConditions" href="{{socialmedialist?.termsAndConditions}}" class="nav-link">
@@ -68,13 +86,22 @@
 
     <!-- Middle Section: Navigation Links -->
     <div style="display: flex;
-    gap: 58px;
+    gap: 48px;
     color: white;">
       <div>
         <a *ngIf="businessUser?.website" href="{{ businessUser.website }}" style="color: white;">Home</a>
       </div>
       <div>
         <a *ngIf="businessUser?.website && socialmedialist?.aboutUs" href="{{ socialmedialist?.aboutUs }}" style="color: white;">About Us</a>
+      </div>
+       <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.blogPageUrl" href="{{ socialmedialist?.blogPageUrl }}" style="color: white;">Blog</a>
+      </div>
+       <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.csr" href="{{ socialmedialist?.csr }}" style="color: white;">CSR</a>
+      </div>
+       <div>
+        <a *ngIf="businessUser?.website && socialmedialist?.contact" href="{{ socialmedialist?.contact }}" style="color: white;">Contact</a>
       </div>
       <div>
         <a *ngIf="businessUser?.website && socialmedialist?.termsAndConditions" href="{{ socialmedialist?.termsAndConditions }}" style="color: white;">Terms & Conditions</a>
