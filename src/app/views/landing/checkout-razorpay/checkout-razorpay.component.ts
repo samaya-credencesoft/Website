@@ -100,7 +100,7 @@ initiatePayment() {
     // Redirect to external URL if it's full path
 
 
-      this.router.navigate([redirectUrl]); // For internal route
+    window.location.href = redirectUrl;
     }
 }
 
