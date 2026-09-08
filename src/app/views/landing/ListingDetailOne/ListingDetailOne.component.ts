@@ -264,6 +264,7 @@ export class ListingDetailOneComponent implements OnInit {
   errorMessagePrivate: string;
   smartRecommendationsBoolean: any;
   showSmartRecommendations: boolean = false;
+  smartStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle';
   taxTotalSingle: number;
   utmMedium: any;
   utmSource: any;
@@ -2043,25 +2044,26 @@ sendWhatsappMessage() {
   this.errorMessagewhatsapp = '';
   this.isLoadingWhatsapp = false;
   }
-  nextPage() {
-  if (this.currentPage < this.totalPages - 1) {
+currentCategoriesList: any[] = [];
+totalPagesCount: number = 0;
+
+updatePagination() {
+  this.totalPagesCount = Math.ceil(this.categories.length / 2);
+  const start = this.currentPage * 2;
+  this.currentCategoriesList = this.categories.slice(start, start + 2);
+}
+
+nextPage() {
+  if (this.currentPage < this.totalPagesCount - 1) {
     this.currentPage++;
+    this.updatePagination();
   }
 }
 prevPage() {
   if (this.currentPage > 0) {
     this.currentPage--;
+    this.updatePagination();
   }
-}
-
-get totalPages() {
-  // 2 categories per page
-  return Math.ceil(this.categories.length / 2);
-}
-
-get currentCategories() {
-  const start = this.currentPage * 2;
-  return this.categories.slice(start, start + 2);
 }
 restoreGuestSelectionsFromSummary() {
   // ✅ Restore selectedPlansSummary
@@ -2217,7 +2219,7 @@ showSliderPopup() {
 
 getBookingButtonText(): string {
   if (!this.isBookingAllowed()) {
-    return 'Book Now';
+    return 'Check Now';
   }
 
   const hasEnquiryRoom = this.selectedPlansSummary?.some(plan => plan.isEnquire === true);
@@ -2662,6 +2664,155 @@ onRoomSelect(roomIdentifier: string | number, planCode: string, count: number | 
     setTimeout(() => {
       this.openGalleryModal();
     }, 200);
+  }
+  getRoomImage(roomId: string | number, roomName: string, existingRoomsList: any[]) {
+    // 1. Match by ID (loose comparison in case of string vs number mismatch)
+    const byId = existingRoomsList.find(r => String(r.roomId) === String(roomId) || String(r.id) === String(roomId));
+    if (byId?.imageList?.[0]?.url) return byId.imageList[0].url;
+
+    // 2. Match by Name (case insensitive, trimmed)
+    if (roomName) {
+      const byName = existingRoomsList.find(
+        r => r.roomName?.trim().toLowerCase() === roomName.trim().toLowerCase() ||
+             r.name?.trim().toLowerCase() === roomName.trim().toLowerCase()
+      );
+      if (byName?.imageList?.[0]?.url) return byName.imageList[0].url;
+    }
+
+    // 3. Fallback: just return the first available room's image if all else fails, 
+    // to avoid the placeholder if we DO have images for the property
+    const fallbackRoom = existingRoomsList.find(r => r?.imageList?.[0]?.url);
+    if (fallbackRoom) return fallbackRoom.imageList[0].url;
+
+    // 4. Ultimate fallback
+    return 'media-be/images/default-room.png';
+  }
+
+  handleGetRecommendations() {
+    if (this.smartStatus === 'loading') return;
+
+    if (this.showSmartRecommendations && this.smartStatus === 'success') {
+      return;
+    }
+
+    this.showSmartRecommendations = true;
+
+    this.smartStatus = 'loading';
+    this.smartLoading = true;
+    this.smartRecommendations = null;
+
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+
+    setTimeout(() => {
+      const desktopEl = document.getElementById('desktopRecommendationSection');
+      const mobileEl = document.getElementById('recommendationSection');
+      
+      if (desktopEl && desktopEl.offsetWidth > 0) {
+        desktopEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (mobileEl && mobileEl.offsetWidth > 0) {
+        mobileEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+
+    const safetyTimeout = setTimeout(() => {
+      if (this.smartStatus === 'loading') {
+        this.smartStatus = 'error';
+        this.smartLoading = false;
+        this.changeDetectorRefs.detectChanges();
+      }
+    }, 15000);
+
+    const queryParams = {
+      noOfChildren: this.booking.noOfChildren,
+      noOfAdults: this.booking.noOfPersons,
+      checkInDate: this.booking.fromDate,
+      checkOutDate: this.booking.toDate,
+      noOfRooms: this.booking.noOfRooms,
+    };
+    
+    const roomList = this.SubAvailableRooms || [];
+
+    this.hotelBookingService.getRecommendations(queryParams, roomList).subscribe({
+      next: (res) => {
+        clearTimeout(safetyTimeout);
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        try {
+          this.smartRecommendations = res;
+          this.categories = [];
+          
+          ['bestFitOptions', 'luxuryOptions', 'comfortOptions', 'budgetOptions'].forEach(cat => {
+            if (this.smartRecommendations?.[cat]) {
+              this.smartRecommendations[cat].forEach((room: any) => {
+                if (room.plans && Array.isArray(room.plans)) {
+                  room.plans.sort((a: any, b: any) => (a.totalPrice || 0) - (b.totalPrice || 0));
+                }
+                room.imageUrl = this.getRoomImage(room.roomId, room.roomName, this.availableRooms);
+              });
+            }
+          });
+
+          const tempCategories: { key: string; label: string; minPrice: number }[] = [];
+
+          if (this.smartRecommendations?.bestFitOptions?.length) {
+            tempCategories.push({
+              key: 'bestFitOptions',
+              label: 'Best-Fit',
+              minPrice: this.getCategoryMinPrice(this.smartRecommendations.bestFitOptions)
+            });
+          }
+          if (this.smartRecommendations?.luxuryOptions?.length) {
+            tempCategories.push({
+              key: 'luxuryOptions',
+              label: 'Luxury',
+              minPrice: this.getCategoryMinPrice(this.smartRecommendations.luxuryOptions)
+            });
+          }
+          if (this.smartRecommendations?.comfortOptions?.length) {
+            tempCategories.push({
+              key: 'comfortOptions',
+              label: 'Comfort',
+              minPrice: this.getCategoryMinPrice(this.smartRecommendations.comfortOptions)
+            });
+          }
+          if (this.smartRecommendations?.budgetOptions?.length) {
+            tempCategories.push({
+              key: 'budgetOptions',
+              label: 'Budget',
+              minPrice: this.getCategoryMinPrice(this.smartRecommendations.budgetOptions)
+            });
+          }
+          
+          this.categories = tempCategories.sort((a, b) => b.minPrice - a.minPrice);
+          this.cheapestPlans = {};
+          this.categories.forEach(cat => {
+            this.cheapestPlans[cat.key] = this.calculateCheapestPlan(cat.key);
+          });
+          this.currentPage = 0;
+          this.updatePagination();
+          this.smartStatus = 'success';
+          this.smartLoading = false;
+          this.changeDetectorRefs.detectChanges();
+        } catch (err) {
+          console.error("Recommendation processing failed:", err);
+          document.body.style.overflow = "";
+          document.documentElement.style.overflow = "";
+          this.smartStatus = 'error';
+          this.smartLoading = false;
+          this.changeDetectorRefs.detectChanges();
+        }
+      },
+      error: (err) => {
+        console.error("Recommendation fetch failed:", err);
+        clearTimeout(safetyTimeout);
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        this.smartLoading = false;
+        this.smartStatus = 'error';
+        this.changeDetectorRefs.detectChanges();
+      }
+    });
   }
 
   // Open Smart Recommendations section
@@ -8123,62 +8274,6 @@ this.token.savePropertyUrl(currentUrl);
 
           const roomList = response.body.roomList;
 
-          if (this.smartRecommendationsBoolean) {
-            this.hotelBookingService.getRecommendations(queryParams, roomList).subscribe({
-              next: (res) => {
-                this.smartLoading = false;
-                this.smartRecommendations = res;
-                this.categories = [];
-                ['bestFitOptions', 'luxuryOptions', 'comfortOptions', 'budgetOptions'].forEach(cat => {
-                  if (this.smartRecommendations?.[cat]) {
-                    this.smartRecommendations[cat].forEach((room: any) => {
-                      room.plans.sort((a: any, b: any) => a.totalPrice - b.totalPrice);
-                    });
-                  }
-                });
-
-                // Build and sort categories
-                const tempCategories: { key: string; label: string; minPrice: number }[] = [];
-
-                if (this.smartRecommendations?.bestFitOptions?.length) {
-                  tempCategories.push({
-                    key: 'bestFitOptions',
-                    label: 'Best-Fit',
-                    minPrice: this.getCategoryMinPrice(this.smartRecommendations.bestFitOptions)
-                  });
-                }
-                if (this.smartRecommendations?.luxuryOptions?.length) {
-                  tempCategories.push({
-                    key: 'luxuryOptions',
-                    label: 'Luxury',
-                    minPrice: this.getCategoryMinPrice(this.smartRecommendations.luxuryOptions)
-                  });
-                }
-                if (this.smartRecommendations?.comfortOptions?.length) {
-                  tempCategories.push({
-                    key: 'comfortOptions',
-                    label: 'Comfort',
-                    minPrice: this.getCategoryMinPrice(this.smartRecommendations.comfortOptions)
-                  });
-                }
-                if (this.smartRecommendations?.budgetOptions?.length) {
-                  tempCategories.push({
-                    key: 'budgetOptions',
-                    label: 'Budget',
-                    minPrice: this.getCategoryMinPrice(this.smartRecommendations.budgetOptions)
-                  });
-                }
-                this.changeDetectorRefs.detectChanges();
-                this.categories = tempCategories.sort((a, b) => b.minPrice - a.minPrice);
-              },
-              error: (err) => {
-                this.smartLoading = false;
-                Logger.log('Error fetching recommendations: ' + err);
-              }
-            });
-          } else {
-            this.smartLoading = false;
-          }
 
 
           // Sort the rooms so that rooms with the "Economy" rate plan come first
@@ -8486,21 +8581,26 @@ this.token.savePropertyUrl(currentUrl);
     return min;
   }
 
+  cheapestPlans: { [key: string]: any } = {};
+
   // get cheapest plan from a category
-  getCheapestPlan(categoryKey: string) {
+  calculateCheapestPlan(categoryKey: string) {
     const rooms = this.smartRecommendations[categoryKey] || [];
     let cheapestPlan: any = null;
 
-    rooms.forEach(room => {
-      room.plans.forEach((plan: any) => {
-        if (!cheapestPlan || plan.totalPrice < cheapestPlan.totalPrice) {
-          cheapestPlan = {
-            ...plan,
-            roomName: room.roomName,
-            availableCount: room.availableCount
-          };
-        }
-      });
+    rooms.forEach((room: any) => {
+      if (room.plans) {
+        room.plans.forEach((plan: any) => {
+          if (!cheapestPlan || plan.totalPrice < cheapestPlan.totalPrice) {
+            cheapestPlan = {
+              ...plan,
+              roomName: room.roomName,
+              availableCount: room.availableCount,
+              imageUrl: room.imageUrl
+            };
+          }
+        });
+      }
     });
 
     return cheapestPlan;

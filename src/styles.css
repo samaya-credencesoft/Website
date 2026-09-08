@@ -13,3 +13,7 @@
 .item{
   display: block !important;
 }
+
+body, html, * {
+  font-family: "Poppins", sans-serif !important;
+}
