@@ -8281,9 +8281,13 @@ this.token.savePropertyUrl(currentUrl);
                   this.daterangefilter = Array.from(
                     new Set(this.daterangefilter)
                   );
+                  const economyPlan = event2.roomRatePlans.find((p: any) => p.name?.trim().toLowerCase() === 'economy');
                   event2.roomRatePlans = [];
                   ghcPlan = plan;
                   event2.roomRatePlans.push(ghcPlan);
+                  if (economyPlan && economyPlan.code !== 'GHC') {
+                    event2.roomRatePlans.push(economyPlan);
+                  }
                   this.roomWithGHCPlan?.push(event);
                 }
               });
@@ -9190,9 +9194,13 @@ isRoomTooSmall(room: any): boolean {
                       }
                     });
                   }
+                  const economyPlan = event2.roomRatePlans.find((p: any) => p.name?.trim().toLowerCase() === 'economy');
                   event2.roomRatePlans = [];
                   ghcPlan = plan;
                   event2.roomRatePlans.push(ghcPlan);
+                  if (economyPlan && economyPlan.code !== 'GHC') {
+                    event2.roomRatePlans.push(economyPlan);
+                  }
                   this.roomWithGHCPlan?.push(event);
                 }
               });
@@ -9342,6 +9350,10 @@ getAvailableRoomsForGHC(availableRooms: any[]) {
             adults: this.adults,
             children: this.childno,
           };
+          
+          if (!this.expandedRooms.includes(room.name)) {
+            this.expandedRooms.push(room.name);
+          }
           
           this.onPlanSelect(planCode, rate, room);
           this.isPanelOpen = false;
