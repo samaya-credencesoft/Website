@@ -2285,7 +2285,7 @@ h3 .day-trip-badge {
   height: 100%;
   width: 500px;
   background: var(--tertiary) !important;;
-  transform: translateY(-100%);
+  transform: translateX(100%);
   transition: transform 0.4s ease-in-out;
   z-index: 1050;
   overflow-y: auto;
@@ -2293,7 +2293,7 @@ h3 .day-trip-badge {
 }
 
 .right-popup.show {
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .popup-header {

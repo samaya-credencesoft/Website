@@ -3073,170 +3073,6 @@
           <div class="maiiin">
         <div *ngFor="let room of availableRooms; let i = index; trackBy: trackByRoomId">
           <ng-container *ngIf="hasVisiblePlans(room)">
-            <div class="right-popup" *ngIf="isPanelOpen && selectedRoom === room" [class.show]="isPanelOpen">
-            <div class="popup-header">
-              <div
-                style="
-                  display: flex;
-                  align-items: flex-start;
-                  justify-content: space-between;
-                "
-              >
-                <p class="popup-heading">
-                  {{ selectedRoom?.name }}
-                </p>
-
-                <i
-                  style="cursor: pointer; font-size: larger"
-                  (click)="togglePanel(selectedRoom, i)"
-                  class="fa-solid fa-xmark"
-                ></i>
-              </div>
-
-              <div *ngIf="selectedRoom?.imageList?.length">
-                <p-carousel
-                  [value]="selectedRoom?.imageList"
-                  [numVisible]="1"
-                  [numScroll]="1"
-                  [circular]="true"
-                  [autoplayInterval]="4000"
-                  [responsiveOptions]="responsiveOptions"
-                >
-                  <ng-template let-image pTemplate="item">
-                    <div
-                      class="border-1 surface-border border-round border-radius-20px"
-                    >
-                      <div>
-                        <div class="relative mx-auto">
-                          <img
-                            [src]="image.url"
-                            [alt]="image.caption || 'Room Image'"
-                            class="w-full border-round border-radius-20px"
-                            style="
-                              width: 100%;
-                              height: 300px;
-                              object-fit: cover;
-                            "
-                          />
-                          <div
-                            *ngIf="image.caption"
-                            class="text-center mt-2 text-sm text-gray-600"
-                          >
-                            {{ image.caption }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-carousel>
-              </div>
-              <div class="popup-body">
-                <div
-                  class="margin-top-20px selected-text"
-                  [innerHTML]="selectedRoom?.description"
-                ></div>
-                <div
-                  class="row"
-                  *ngIf="selectedRoom?.roomFacilities?.length > 0"
-                >
-                  <div
-                    class="col-6"
-                    *ngFor="let item of selectedRoom?.roomFacilities"
-                  >
-                    <div class="alignment-items-one margin-top-10px">
-                      <i
-                        [ngClass]="getAmenityIcon(item.name)"
-                        class="fa-solid"
-                      ></i>
-                      <div class="small mt-1">{{ item.name }}</div>
-                    </div>
-                  </div>
-                </div>
-                <hr
-                  style="border: 1px solid #e5e7eb; margin-top: 10px !important"
-                />
-                <div class="d-flex justify-content-between margin-bottom-10px">
-                  <div>Available Plans</div>
-
-                  <div class="aminities-highlights-ones">
-                    <img src="media-be/images/max-ocuupancy.svg" alt="" />
-                    Max Occupancy: {{ selectedRoom?.maximumOccupancy }}
-                  </div>
-                </div>
-
-                <ng-container *ngIf="this.availableRooms?.length > 0">
-                  <ng-container
-                    *ngFor="
-                      let rates of selectedRoom?.ratesAndAvailabilityDtos
-                        | slice: 0 : 1;
-                      let r = index
-                    "
-                  >
-                    <ng-container
-                      *ngFor="
-                        let plan of getFilteredPlans(rates?.roomRatePlans);
-                        let p = index
-                      "
-                    >
-                      <div class="popup-card">
-                        <h4 class="popup-plan">{{ plan.name }}</h4>
-
-                        <div
-                          class="d-flex justify-content-between margin-top-20px"
-                        >
-                          <h4 class="popup-plan font-weight-bold">
-                            {{
-                              getRoomPlanDisplayAmount(selectedRoom, plan)
-                                | convertCurrency : businessUser?.localCurrency : currency : exchangeRates | currency : currency : "symbol" : "1.2-2"
-                            }}
-                          </h4>
-                          <p style="font-size: smaller">{{ getRoomPlanPriceLabel(selectedRoom, plan) }}</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                          <div
-                            *ngIf="plan?.extraChargePerPerson"
-                            class="d-flex"
-                            style="align-items: center; gap: 10px"
-                          >
-                            <img src=" media-be/images/adult-img.svg" alt="" />
-                            <p style="font-size: smaller; margin-bottom: 0px">
-                              Extra Adult Charge:
-                              {{
-                                plan?.extraChargePerPerson
-                                  | convertCurrency : businessUser?.localCurrency : currency : exchangeRates | currency : currency : "symbol" : "1.2-2"
-                              }}
-                            </p>
-                          </div>
-                          <div
-                            *ngIf="plan?.extraChargePerChild"
-                            class="d-flex"
-                            style="align-items: center; gap: 10px"
-                          >
-                            <img src=" media-be/images/child-img.svg" alt="" />
-                            <p style="font-size: smaller; margin-bottom: 0px">
-                              Extra Child Charge:
-                              {{
-                                plan?.extraChargePerChild
-                                  | convertCurrency : businessUser?.localCurrency : currency : exchangeRates | currency : currency : "symbol" : "1.2-2"
-                              }}
-                            </p>
-                          </div>
-                        </div>
-                        <div class="margin-top-10px">
-                          <button
-                            class="btn select-plan"
-                            (click)="onSelectPlanFromPopup(plan)"
-                          >
-                            Select Plan
-                          </button>
-                        </div>
-                      </div>
-                    </ng-container>
-                  </ng-container>
-                </ng-container>
-              </div>
-            </div>
-          </div>
 
           <div class="card-rooms card margin-top-20px" *ngIf="availableRooms?.length > 0">
             <div
@@ -3963,120 +3799,6 @@
         </div>
 
         <div *ngFor="let room of soldOutRooms; let i = index; trackBy: trackByRoomId">
-          <div class="right-popup" *ngIf="isPanelOpenOne && selectedRoom === room" [class.show]="isPanelOpenOne">
-            <div class="popup-header">
-              <div
-                style="
-                  display: flex;
-                  align-items: flex-start;
-                  justify-content: space-between;
-                "
-              >
-                <p class="popup-heading">
-                  {{ selectedRoom?.name }}
-                </p>
-
-                <i
-                  style="cursor: pointer; font-size: larger"
-                  (click)="togglePanelOne(selectedRoom, i)"
-                  class="fa-solid fa-xmark"
-                ></i>
-              </div>
-
-              <div *ngIf="selectedRoom?.imageList?.length">
-                <p-carousel
-                  [value]="selectedRoom?.imageList"
-                  [numVisible]="1"
-                  [numScroll]="1"
-                  [circular]="true"
-                  [autoplayInterval]="4000"
-                  [responsiveOptions]="responsiveOptions"
-                >
-                  <ng-template let-image pTemplate="item">
-                    <div
-                      class="border-1 surface-border border-round border-radius-20px"
-                    >
-                      <div>
-                        <div class="relative mx-auto">
-                          <img
-                            [src]="image.url"
-                            [alt]="image.caption || 'Room Image'"
-                            class="w-full border-round border-radius-20px"
-                            style="
-                              width: 100%;
-                              height: 300px;
-                              object-fit: cover;
-                            "
-                          />
-                          <div
-                            *ngIf="image.caption"
-                            class="text-center mt-2 text-sm text-gray-600"
-                          >
-                            {{ image.caption }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-carousel>
-              </div>
-              <div class="popup-body">
-                <div
-                  class="margin-top-20px selected-text"
-                  [innerHTML]="selectedRoom?.description"
-                ></div>
-                <div
-                  class="row"
-                  *ngIf="selectedRoom?.roomFacilities?.length > 0"
-                >
-                  <div
-                    class="col-6"
-                    *ngFor="let item of selectedRoom?.roomFacilities"
-                  >
-                    <div class="alignment-items-one margin-top-10px">
-                      <i
-                        [ngClass]="getAmenityIcon(item.name)"
-                        class="fa-solid"
-                      ></i>
-                      <div class="small mt-1">{{ item.name }}</div>
-                    </div>
-                  </div>
-                </div>
-                <hr
-                  style="border: 1px solid #e5e7eb; margin-top: 10px !important"
-                />
-
-                <div class="d-flex justify-content-between margin-bottom-10px">
-                  <div>Available Plans</div>
-
-                  <div class="aminities-highlights-ones">
-                    <img src="media-be/images/max-ocuupancy.svg" alt="" />
-                    Max Occupancy: {{ selectedRoom?.maximumOccupancy }}
-                  </div>
-                </div>
-
-                <ng-container
-                  *ngIf="selectedRoom?.ratesAndAvailabilityDtos === null"
-                >
-                  <h4 class="not-available">No Plans Available</h4>
-                </ng-container>
-                <ng-container
-                  *ngIf="
-                    (selectedRoom?.ratesAndAvailabilityDtos?.[0]?.stopSellOBE !=
-                      null &&
-                      selectedRoom?.ratesAndAvailabilityDtos?.[0]
-                        ?.stopSellOBE !== false) ||
-                    (selectedRoom?.ratesAndAvailabilityDtos?.[0]?.stopSellOTA !=
-                      null &&
-                      selectedRoom?.ratesAndAvailabilityDtos?.[0]
-                        ?.stopSellOTA !== false)
-                  "
-                >
-                  <h4 class="not-available">No Plans Available</h4>
-                </ng-container>
-              </div>
-            </div>
-          </div>
           <div
             class="card-rooms card margin-top-20px"
             *ngIf="soldOutRooms.length > 0"
@@ -5132,3 +4854,281 @@
   <div class="loader-overlay" *ngIf="isLoadingProperty">
   <span class="loader-booking"></span>
 </div>
+            <div class="right-popup" *ngIf="isPanelOpen && selectedRoom" [class.show]="isPanelOpen">
+            <div class="popup-header">
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: space-between;
+                "
+              >
+                <p class="popup-heading">
+                  {{ selectedRoom?.name }}
+                </p>
+
+                <i
+                  style="cursor: pointer; font-size: larger"
+                  (click)="togglePanel(selectedRoom, i)"
+                  class="fa-solid fa-xmark"
+                ></i>
+              </div>
+
+              <div *ngIf="selectedRoom?.imageList?.length">
+                <p-carousel
+                  [value]="selectedRoom?.imageList"
+                  [numVisible]="1"
+                  [numScroll]="1"
+                  [circular]="true"
+                  [autoplayInterval]="4000"
+                  [responsiveOptions]="responsiveOptions"
+                >
+                  <ng-template let-image pTemplate="item">
+                    <div
+                      class="border-1 surface-border border-round border-radius-20px"
+                    >
+                      <div>
+                        <div class="relative mx-auto">
+                          <img
+                            [src]="image.url"
+                            [alt]="image.caption || 'Room Image'"
+                            class="w-full border-round border-radius-20px"
+                            style="
+                              width: 100%;
+                              height: 300px;
+                              object-fit: cover;
+                            "
+                          />
+                          <div
+                            *ngIf="image.caption"
+                            class="text-center mt-2 text-sm text-gray-600"
+                          >
+                            {{ image.caption }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+              <div class="popup-body">
+                <div
+                  class="margin-top-20px selected-text"
+                  [innerHTML]="selectedRoom?.description"
+                ></div>
+                <div
+                  class="row"
+                  *ngIf="selectedRoom?.roomFacilities?.length > 0"
+                >
+                  <div
+                    class="col-6"
+                    *ngFor="let item of selectedRoom?.roomFacilities"
+                  >
+                    <div class="alignment-items-one margin-top-10px">
+                      <i
+                        [ngClass]="getAmenityIcon(item.name)"
+                        class="fa-solid"
+                      ></i>
+                      <div class="small mt-1">{{ item.name }}</div>
+                    </div>
+                  </div>
+                </div>
+                <hr
+                  style="border: 1px solid #e5e7eb; margin-top: 10px !important"
+                />
+                <div class="d-flex justify-content-between margin-bottom-10px">
+                  <div>Available Plans</div>
+
+                  <div class="aminities-highlights-ones">
+                    <img src="media-be/images/max-ocuupancy.svg" alt="" />
+                    Max Occupancy: {{ selectedRoom?.maximumOccupancy }}
+                  </div>
+                </div>
+
+                <ng-container *ngIf="this.availableRooms?.length > 0">
+                  <ng-container
+                    *ngFor="
+                      let rates of selectedRoom?.ratesAndAvailabilityDtos
+                        | slice: 0 : 1;
+                      let r = index
+                    "
+                  >
+                    <ng-container
+                      *ngFor="
+                        let plan of getFilteredPlans(rates?.roomRatePlans);
+                        let p = index
+                      "
+                    >
+                      <div class="popup-card">
+                        <h4 class="popup-plan">{{ plan.name }}</h4>
+
+                        <div
+                          class="d-flex justify-content-between margin-top-20px"
+                        >
+                          <h4 class="popup-plan font-weight-bold">
+                            {{
+                              getRoomPlanDisplayAmount(selectedRoom, plan)
+                                | convertCurrency : businessUser?.localCurrency : currency : exchangeRates | currency : currency : "symbol" : "1.2-2"
+                            }}
+                          </h4>
+                          <p style="font-size: smaller">{{ getRoomPlanPriceLabel(selectedRoom, plan) }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <div
+                            *ngIf="plan?.extraChargePerPerson"
+                            class="d-flex"
+                            style="align-items: center; gap: 10px"
+                          >
+                            <img src=" media-be/images/adult-img.svg" alt="" />
+                            <p style="font-size: smaller; margin-bottom: 0px">
+                              Extra Adult Charge:
+                              {{
+                                plan?.extraChargePerPerson
+                                  | convertCurrency : businessUser?.localCurrency : currency : exchangeRates | currency : currency : "symbol" : "1.2-2"
+                              }}
+                            </p>
+                          </div>
+                          <div
+                            *ngIf="plan?.extraChargePerChild"
+                            class="d-flex"
+                            style="align-items: center; gap: 10px"
+                          >
+                            <img src=" media-be/images/child-img.svg" alt="" />
+                            <p style="font-size: smaller; margin-bottom: 0px">
+                              Extra Child Charge:
+                              {{
+                                plan?.extraChargePerChild
+                                  | convertCurrency : businessUser?.localCurrency : currency : exchangeRates | currency : currency : "symbol" : "1.2-2"
+                              }}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="margin-top-10px">
+                          <button
+                            class="btn select-plan"
+                            (click)="onSelectPlanFromPopup(plan)"
+                          >
+                            Select Plan
+                          </button>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="right-popup" *ngIf="isPanelOpenOne && selectedRoom" [class.show]="isPanelOpenOne">
+            <div class="popup-header">
+              <div
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: space-between;
+                "
+              >
+                <p class="popup-heading">
+                  {{ selectedRoom?.name }}
+                </p>
+
+                <i
+                  style="cursor: pointer; font-size: larger"
+                  (click)="togglePanelOne(selectedRoom, i)"
+                  class="fa-solid fa-xmark"
+                ></i>
+              </div>
+
+              <div *ngIf="selectedRoom?.imageList?.length">
+                <p-carousel
+                  [value]="selectedRoom?.imageList"
+                  [numVisible]="1"
+                  [numScroll]="1"
+                  [circular]="true"
+                  [autoplayInterval]="4000"
+                  [responsiveOptions]="responsiveOptions"
+                >
+                  <ng-template let-image pTemplate="item">
+                    <div
+                      class="border-1 surface-border border-round border-radius-20px"
+                    >
+                      <div>
+                        <div class="relative mx-auto">
+                          <img
+                            [src]="image.url"
+                            [alt]="image.caption || 'Room Image'"
+                            class="w-full border-round border-radius-20px"
+                            style="
+                              width: 100%;
+                              height: 300px;
+                              object-fit: cover;
+                            "
+                          />
+                          <div
+                            *ngIf="image.caption"
+                            class="text-center mt-2 text-sm text-gray-600"
+                          >
+                            {{ image.caption }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+              <div class="popup-body">
+                <div
+                  class="margin-top-20px selected-text"
+                  [innerHTML]="selectedRoom?.description"
+                ></div>
+                <div
+                  class="row"
+                  *ngIf="selectedRoom?.roomFacilities?.length > 0"
+                >
+                  <div
+                    class="col-6"
+                    *ngFor="let item of selectedRoom?.roomFacilities"
+                  >
+                    <div class="alignment-items-one margin-top-10px">
+                      <i
+                        [ngClass]="getAmenityIcon(item.name)"
+                        class="fa-solid"
+                      ></i>
+                      <div class="small mt-1">{{ item.name }}</div>
+                    </div>
+                  </div>
+                </div>
+                <hr
+                  style="border: 1px solid #e5e7eb; margin-top: 10px !important"
+                />
+
+                <div class="d-flex justify-content-between margin-bottom-10px">
+                  <div>Available Plans</div>
+
+                  <div class="aminities-highlights-ones">
+                    <img src="media-be/images/max-ocuupancy.svg" alt="" />
+                    Max Occupancy: {{ selectedRoom?.maximumOccupancy }}
+                  </div>
+                </div>
+
+                <ng-container
+                  *ngIf="selectedRoom?.ratesAndAvailabilityDtos === null"
+                >
+                  <h4 class="not-available">No Plans Available</h4>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    (selectedRoom?.ratesAndAvailabilityDtos?.[0]?.stopSellOBE !=
+                      null &&
+                      selectedRoom?.ratesAndAvailabilityDtos?.[0]
+                        ?.stopSellOBE !== false) ||
+                    (selectedRoom?.ratesAndAvailabilityDtos?.[0]?.stopSellOTA !=
+                      null &&
+                      selectedRoom?.ratesAndAvailabilityDtos?.[0]
+                        ?.stopSellOTA !== false)
+                  "
+                >
+                  <h4 class="not-available">No Plans Available</h4>
+                </ng-container>
+              </div>
+            </div>
+          </div>
