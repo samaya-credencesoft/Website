@@ -1874,31 +1874,43 @@ getTotalAdults(): number {
   return this.selectedPlansSummary.reduce((sum, plan) => sum + (plan.adults || 0), 0);
 }
 
-  isPlanWithinDateRange(plan: any): boolean {
+  isPlanWithinDateRange(plan: any, targetDate?: string): boolean {
     if (!plan) return false;
+
+    // If a specific date (e.g., rate.date) is provided, check if that date is within [effectiveDate, expiryDate]
+    if (targetDate) {
+      if (plan.expiryDate && targetDate > plan.expiryDate) {
+        return false;
+      }
+      if (plan.effectiveDate && targetDate < plan.effectiveDate) {
+        return false;
+      }
+      return true;
+    }
+
     const todayStr = new Date().toISOString().split('T')[0];
     const checkInDate = this.booking?.fromDate || todayStr;
     const checkOutDate = this.booking?.toDate;
 
-    // Check-in must be within [effectiveDate, expiryDate]
+    // Check-in must not be after plan's expiry date
     if (plan.expiryDate && checkInDate > plan.expiryDate) {
       return false;
     }
-    if (plan.effectiveDate && checkInDate < plan.effectiveDate) {
+
+    // Last night of stay must not be before plan's effective date
+    if (checkOutDate && plan.effectiveDate) {
+      const lastNight = this.addDaysToDateString(checkOutDate, -1);
+      if (lastNight < plan.effectiveDate) {
+        return false;
+      }
+    } else if (plan.effectiveDate && checkInDate < plan.effectiveDate) {
       return false;
     }
 
-    // Check-out (last night of stay) must not exceed expiryDate
-    if (checkOutDate && plan.expiryDate) {
-      const lastNight = this.addDaysToDateString(checkOutDate, -1);
-      if (lastNight > plan.expiryDate) {
-        return false;
-      }
-    }
     return true;
   }
 
-  getFilteredPlans(plans: any[], room?: any) {
+  getFilteredPlans(plans: any[], room?: any, targetDate?: string) {
     try {
       if (!plans) return [];
       let filtered = this.websiteUrlBookingEngine
@@ -1906,7 +1918,7 @@ getTotalAdults(): number {
         : plans;
 
       // Filter by plan validity (effective date to expiry date)
-      filtered = filtered.filter((plan: any) => this.isPlanWithinDateRange(plan));
+      filtered = filtered.filter((plan: any) => this.isPlanWithinDateRange(plan, targetDate));
 
       if (isPlatformBrowser(this.platformId)) {
         const searchAdults = Number(this.booking?.noOfPersons || this.adults || 1);
@@ -8916,13 +8928,14 @@ isPlanVisible(filteredPlans: any[], roomName: string, room?: any) {
     : filteredPlans;
 
   // Filter by plan validity (effective date to expiry date)
-  plans = plans.filter((plan: any) => this.isPlanWithinDateRange(plan));
+  const firstDate = room?.ratesAndAvailabilityDtos?.[0]?.date;
+  plans = plans.filter((plan: any) => this.isPlanWithinDateRange(plan, firstDate));
   // Filter out plans that are not available on all nights of the selected stay period
   if (room?.ratesAndAvailabilityDtos && room.ratesAndAvailabilityDtos.length > 0) {
     const totalNights = room.ratesAndAvailabilityDtos.length;
     plans = plans.filter((plan: any) => {
       const occurrences = room.ratesAndAvailabilityDtos.filter((rate: any) =>
-        rate?.roomRatePlans?.some((p: any) => p.code === plan.code)
+        rate?.roomRatePlans?.some((p: any) => p.code === plan.code && this.isPlanWithinDateRange(p, rate.date))
       ).length;
       return occurrences === totalNights;
     });
@@ -9360,12 +9373,22 @@ getAvailableRoomsForGHC(availableRooms: any[]) {
           selected = true;
           
           setTimeout(() => {
-            const el = document.getElementById('plan-' + planCode);
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              el.classList.add('scroll-highlight');
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            } else {
+              const summaryEl = document.querySelector('.booking-card.sticky-card');
+              if (summaryEl) {
+                summaryEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              } else {
+                const el = document.getElementById('plan-' + planCode);
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  el.classList.add('scroll-highlight');
+                }
+              }
             }
-          }, 100);
+          }, 500);
         }
       });
     }
